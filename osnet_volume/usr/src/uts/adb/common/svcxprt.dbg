@@ -1,0 +1,50 @@
+\
+\ Copyright (c) 1999 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)svcxprt.dbg	1.2	99/08/23 SMI"
+
+\       arg             : address of an SVCXPRT structure
+\       registers       : z, x
+\       description     : prints the contents of SVCXPRT structure
+\
+
+#include <sys/types.h>
+#include <rpc/types.h>
+#include <rpc/xdr.h>
+#include <rpc/auth.h>
+#include <rpc/svc.h>
+#include "dummy.h"
+
+\
+\
+__svcxprt xp_  svcxprt
+{adb_inline_begin}
+.>z
+<z+0=""
+{adb_inline_end}
+	master			hex	"master (SVCMASTERXPRT)"
+{adb_inline_begin}
+<z+{OFFSET,xp_xpc.xpc_wq}=""
+{adb_inline_end}
+	xpc.xpc_wq		hex	"wq (queue_t)"
+	xpc.xpc_cred		hex	"cred (cred_t)"
+	xpc.xpc_type		decimal	"type (2=T_COTS_ORD. 3=T_CLTS)"
+	xpc.xpc_msg_size	decimal	"msg_size"
+{adb_inline_begin}
+<z+{OFFSET,xp_reserved}=""
+*(.)>/i/x
+#ifdef __i386
+(<x&0x3)="flags (reserved=1, detached=2)"nX
+#else
+(<x%0x40000000)="flags (reserved=2, detached=1)"nX
+#endif
+{adb_inline_end}
+{adb_inline_begin}
+<z+{OFFSET,xp_cookie}=""
+{adb_inline_end}
+	cookie			hex
+	xid			hex
+{adb_inline_begin}
+<z+{SIZEOF}=""
+{adb_inline_end}

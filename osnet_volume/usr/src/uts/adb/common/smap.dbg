@@ -1,0 +1,23 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)smap.dbg	1.8	98/01/14 SMI"
+
+#include <sys/param.h>
+#include <sys/types.h>
+#include <sys/t_lock.h>
+#include <vm/seg.h>
+#include <vm/seg_map.h>
+#include "dummy.h"
+
+\
+\
+smap                    sm_
+        vp                      hex             vnode
+        off                     hex
+        bitmap                  hex
+        refcnt                  hex
+        hash                    hex
+        next                    hex
+        prev                    hex

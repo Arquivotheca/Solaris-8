@@ -1,0 +1,106 @@
+.\" @(#)ld_support.3l 1.2 95/03/08 SMI
+.\" Copyright (c) 1995 by Sun Microsystems, Inc.
+.\" All rights reserved.
+.\"
+.TH linker support library interface 3l "4 April 1994"
+.SH NAME
+ld_start, ld_atexit, ld_file, ld_section \- sgs support library functions
+.SH SYNOPSIS
+.LP
+.B
+#include <libelf.h>
+.LP
+.B
+#include <link.h>
+.LP
+.BI "void ld_start(const " "char *" "out_name" ,
+.BI "const " "Elf32_Half " "etype" ,
+.BI "const " "char *" "caller" );
+.LP
+.BI "void ld_atexit(const " "int " "exit_code" );
+.LP
+.BI "void ld_file(const char *" "fname" , 
+.BI "const " "ELf_Kind " "ekind" ,
+.BI "int " "flags" ,
+.BI "Elf *" "elf" );
+.LP
+.BI "void ld_section(const *" "name" , "Elf32_Shdr *" "shdr",
+.BI "Elf32_Word" "scnndx" ,
+.BI "Elf_Data *" "s_data" ,
+.BI "Elf *" "elf" );
+.LP
+.SH MT-LEVEL
+.LP
+Unsafe
+.SH DESCRIPTION
+These are the interfaces that the link editor supports 
+in the SGS support library.
+If a shared object is passed to the linker editor 
+with any of the above interfaces present,
+those that are present will be called durring the link edit process.
+.LP
+ld_start() will be called after the initial pass
+over the link editors argument line.  
+The argument out_name will be the value
+of the file that is being created and etype will be the type of
+that file.  The argument
+etype will contain one of the following values:
+.sp
+.TP 16
+.SB ET_DYN
+link editor is producing a shared object.
+.sp
+.TP
+.SB ET_REL
+link editor is producing a relocatable object.
+.sp
+.TP
+.SB ET_EXEC
+link editor is producing a executable.
+.sp
+.PP
+and the last arguement caller will be the name of the command who
+has called the ld_start library (ie: /usr/ccs/bin/ld).
+.LP
+ld_atexit() is called when the link editer is terminating
+and the argument exit_code is the
+value that it is exiting with.  You can use
+this interface if you need to take any action as the link editor 
+terminates.
+.LP
+ld_file() is called once for every file that the link editor
+links against.  This includes relocatable files, shared objects, and
+archive libraries.  The argument
+fname is the name of the file being referenced, ekind
+is the type of the elf file, flags contains information about the file,
+and elf is a pointer to the Elf structure
+representing the file.  Flags can have the following values set:
+.sp
+.TP 16
+.SB LD_SUP_DERIVED
+ pathname to file was derived
+.sp
+.TP
+.SB LD_SUP_INHERITED
+file was specified through a DT_NEEDED field of
+a shared object
+.sp
+.TP
+.SB LD_SUP_EXTRACTED
+file was extracted from a archive
+.sp
+.PP
+ld_section() is called for every input elf section that becomes
+part of the output file, if an input section does not become
+part of the output file then ld_section will not be called for it.
+The argument name and scnndx are the name and and index of the
+input section.  The arguments shdr,
+s_data, and elf are pointers to the Elf Section header, Elf Data, and Elf
+structure respectively for the current section being processed.
+ld_section() is called before the output file has been created.  If you
+modify the fields of the s_data structure you will be directly effecting
+the output file.  Note that the s_data->d_buf buffer is initially
+in read-only memory.  If you wish to modify it's contents you must allocate
+a new buffer and point s_data->d_buf to it.
+.SH "SEE ALSO"
+.BR elf(3e)

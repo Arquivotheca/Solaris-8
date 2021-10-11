@@ -1,0 +1,14 @@
+#! /bin/sh
+#
+# ident "@(#)preremove 1.5	99/05/27 SMI"
+#
+# Copyright (c) 1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+
+PATH="/usr/bin:/usr/sbin:${PATH}"
+export PATH
+
+rem_drv -b ${BASEDIR} pcata
+
+exit 0

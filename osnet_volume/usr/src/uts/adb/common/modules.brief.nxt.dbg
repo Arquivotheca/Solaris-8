@@ -1,0 +1,24 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)modules.brief.nxt.dbg	1.3	98/01/19 SMI"
+
+\       arg             : address of a struct modctl
+\       uses            : modctl.brief
+\       registers       : e, m
+\       description     : uses modctl.brief to do the work, then loops
+\                         to the next module in the list
+
+#include <sys/modctl.h>
+#include "dummy.h"
+
+\
+\
+modctl  ""      modules.brief.nxt
+{adb_inline_begin}
+<m$<<modctl.brief
+*(<m+{OFFSET, mod_next})>m
+,#(#(<m-<e))$<modules.brief.nxt
+,#(<m-<e)$<
+{adb_inline_end}

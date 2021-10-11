@@ -1,0 +1,28 @@
+#ident	"@(#)protocols	1.5	99/03/21 SMI"	/* SVr4.0 1.1	*/
+
+#
+# Internet (IP) protocols
+#
+ip		0	IP		# internet protocol, pseudo protocol number
+icmp		1	ICMP		# internet control message protocol
+ggp		3	GGP		# gateway-gateway protocol
+tcp		6	TCP		# transmission control protocol
+egp		8	EGP		# exterior gateway protocol
+pup		12	PUP		# PARC universal packet protocol
+udp		17	UDP		# user datagram protocol
+hmp		20	HMP		# host monitoring protocol
+xns-idp		22	XNS-IDP		# Xerox NS IDP
+rdp		27	RDP		# "reliable datagram" protocol
+
+#
+# Internet (IPv6) extension headers
+#
+hopopt		0	HOPOPT		# Hop-by-hop options for IPv6
+ipv6		41	IPv6		# IPv6 in IP encapsulation
+ipv6-route	43	IPv6-Route	# Routing header for IPv6
+ipv6-frag	44	IPv6-Frag	# Fragment header for IPv6
+esp		50	ESP		# Encap Security Payload for IPv6
+ah		51	AH		# Authentication Header for IPv6
+ipv6-icmp	58	IPv6-ICMP	# IPv6 internet control message protocol
+ipv6-nonxt	59	IPv6-NoNxt	# No next header extension header for IPv6
+ipv6-opts	60	IPv6-Opts	# Destination Options for IPv6

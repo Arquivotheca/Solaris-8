@@ -1,0 +1,244 @@
+<!--
+  -- ident	"@(#)dhcp_macros_about.html	1.2	99/06/10 SMI"
+  --
+  -- Copyright (c) 1998-1999 by Sun Microsystems, Inc.
+  -- All rights reserved.
+  -->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+
+<head>
+<title>DHCP Manager Help: About Macros and Options</title>
+<meta NAME="AUTHOR" CONTENT="Electra Coumou">
+<meta NAME="KEYWORDS" CONTENT="DHCP">
+
+</head>
+<body bgcolor="#FFFFFF">
+
+<a name="top"></a>
+
+<table border=0 cellspacing=0 cellpadding=0 width=645>
+
+<!-- Start navigation banner -->
+
+<tr><td colspan=4  WIDTH="615" align="center" valign="top"><IMG SRC="art/bannersmc.gif" WIDTH=615 BORDER=0 ALIGN="LEFT" ALT="DHCP Manager Help">
+
+	</td>
+	</tr>
+
+<!-- End navigation banner -->
+
+
+<tr>
+
+<!-- Start contents block -->
+
+	<td colspan=1 valign="top" width=105>
+	<P>&nbsp;</P>
+	<A HREF="dhcp_main_top.html"><STRONG>Overview</STRONG></A><BR>
+	&nbsp;&nbsp;<A HREF="dhcp_solaris_about.html">Solaris DHCP</A><BR>
+	<IMG SRC="art/tip2.gif" WIDTH=12 HEIGHT=10 BORDER=0 ALT="">About Macros<BR>
+	&nbsp;&nbsp;<A HREF="dhcp_main_hlp.html">Getting Help</A><P>
+	<A HREF="dhcp_relay_ref.html"><STRONG>Servers and Relays</STRONG></A><P>
+	<A HREF="dhcp_net_ref.html"><STRONG>Networks</STRONG></A><P>
+	<A HREF="dhcp_addr_ref.html"><STRONG>Addresses</STRONG></A><P>
+	<A HREF="dhcp_macro_ref.html"><STRONG>Macros</STRONG></A><P>
+	<A HREF="dhcp_option_ref.html"><STRONG>Options</STRONG></A><P>		
+	<A HREF="dhcp_main_how.html"><STRONG>How To..</STRONG></A><P>
+	<A HREF="dhcp_main_idx.html"><STRONG>Index</STRONG></A>
+	
+		</td>
+	
+<!-- End contents block -->
+
+<!-- Start column rule -->
+
+	<td colspan=1 width=5 bgcolor="#CCCCCC">&nbsp;</td>
+
+<!-- End column spacer -->
+
+<!-- Start column spacer -->
+
+	<td colspan=1 width=10 bgcolor="#FFFFFF">&nbsp;</td>
+
+<!-- End column spacer -->
+
+
+
+<!-- Start topic block -->
+
+<td colspan=1 valign="top" bgcolor="#ffffff" width=495>
+
+
+	
+<P>&nbsp;</P>
+
+<h1>About Macros and Options</H1>
+
+
+In a DHCP environment, <em>macros</em> are containers for <em>option values</em> that are
+passed as configuration parameters from the DHCP server to the DHCP client. For example,
+you might define a macro that contains options specifying a DNS server and print server
+to be used by all clients using IP addresses owned by a particular DHCP server.<p>
+
+<em>Options</em> specify the format in which option values are 
+defined in the DHCP server's <tt>dhcptab</tt> database (in which all DHCP 
+options and macros are stored). For example, option category, data type, vendor, and granularity all determine the <em>shape</em> of the options 
+contained in your macros. Creating and modifying options is described 
+further in the help pages for <a href="dhcp_option_create.html">Create Option</a> and
+<a href="dhcp_option_mod.html">Modify Option</a>.<p>
+
+The Solaris<small><sup>TM</sup></small> operating environment provides extremely robust and flexible DHCP macro and option
+capabilities. Specifically, you can define sets of macros and options that provide client
+configuration parameters based on the following categories.<p>
+
+
+
+		<table border=0 cellspacing=3 cellpadding=3>
+		
+	<tr> <th valign="middle" align="left"><a name="macrocat"><U>Category</U></a></th> <th valign="middle" align="left"><U>Description</U></th>
+		</tr>
+
+	<tr>
+	<td width=105 valign="top"><a name="class"><STRONG>Client Class</STRONG></a></td> 
+	<td valign="top">An ASCII string representing the client 
+	machine type and/or operating system; for example, 
+	<tt>SUNW.Javastation</tt>. This type of macro makes it possible to 
+	define configuration parameters that are passed to all clients of 
+	the same class.</td>
+	</tr>
+
+	<tr>
+	<td width=105 valign="top"><a name="net"><STRONG>Network</STRONG></a></td>
+	<td valign="top">A numeric string in dotted IP format 
+	indicating the client's network; for example <tt>10.0.0.0</tt>. 
+	This type of macro makes it possible to define configuration parameters 
+	that are passed to all clients on the same network.</td> 	
+	</tr>
+
+	<tr>
+	<td width=105 valign="top"><a name="ip"><STRONG>IP Address</STRONG></a></td>
+	<td valign="top">A client or server DNS name, or a numeric 
+	string in dotted IP format associated with the client or a particular 
+	server; for example <tt>bigfiles</tt> or <tt>125.53.224.45</tt>. This 
+	type of macro can be used to pass configuration parameters to clients 
+	using a particular IP address. More commonly, however, it is used to 
+	pass server-specific parameters to all clients using IP addresses that 
+	are owned by a particular server.</td>
+	</tr>
+
+	<tr>
+	<td width=105 valign="top"><a name="cid"><STRONG>Client ID</STRONG></a></td>
+	<td valign="top">An ASCII string representing some unique 
+	identifier for the client; for example, an Ethernet or MAC ID. This type 
+	of macro makes it possible to pass client-specific configuration 
+	parameters.</td>
+	</tr>
+
+	</table>
+
+
+<H3>Using Macros and Options</H3>
+
+You want to remember three things when defining DHCP macros and options:<p>
+
+	<ol type=1>
+
+	<li><strong>Macro categories</strong> -- and hence the order in which 
+	the macros are processed -- are determined entirely by macro name. 
+	Therefore, be sure to make your macro names the <strong>same as the 
+	names of the resources or devices</strong> you want the macros to 
+	control. For example:<p>
+
+	<table border=0 cellspacing=3 cellpadding=3>
+
+	<tr> <th valign="middle" align="left"><U>To Control</U></th>
+	<th valign="middle" align="left"><U>Name Your Macro</U></th>
+		</tr>
+
+		<tr>
+		<td width=105 valign="top"><a href="#class">Client 
+		Class</a></td> 
+		<td valign="top">Same name as the DHCP client's client 
+		class; for example, name your macro 
+		<tt>SUNW.Javastation</tt>.</td>
+		</tr>
+
+		<tr>
+		<td width=105 valign="top"><a href="#net">Network</a></td>
+		<td valign="top">Same as the IP address of the network 
+		through which the client is connecting; for example, name your 
+		macro <tt>10.0.0.0</tt>.</td> 	
+		</tr>
+
+		<tr>
+		<td width=105 valign="top"><a href="#ip">IP 
+		Address</a></td>
+		<td valign="top">Same as the DHCP client or DHCP 
+		server DNS name or IP address; for example, name your macro 
+		<tt>bigfiles</tt> or <tt>125.53.224.45</tt>.</td>
+		</tr>
+
+		<tr>
+		<td width=105 valign="top"><a href="#cid">Client 
+		ID</a></td>
+		<td valign="top">Hexadecimal representation of the 
+		Ethernet address, MAC, or other unique client identifier; for 
+		example, name your macro <tt>010800201112B7</tt>.</td>
+		</tr>
+
+	</table>
+	<p></li>
+
+	<li><strong>Order is important.</strong> The order in which 
+	macros and options are processed is significant, with macros and options 
+	processed last, superseding those that came before them. Macros and 
+	options are processed in the order shown in the illustration.<p>
+
+
+ <img src="art/macroflow.gif" border=0>
+ <P>
+
+<A NAME="nest"></A>
+	As shown in the illustration, macro processing progresses from the 
+	general to the specific.<p>
+
+	<ul TYPE="DISC">
+
+		<li>Client Class macros are processed first.</li>
+
+		<li>Network macros are processed second, superseding any 
+		competing settings in Client Class macros.</li>
+
+		<li>IP Address macros are processed third, superseding any 
+		competing settings in previous macros.</li>
+
+		<li>Client ID macros are processed last, superseding any 
+		competing settings in all previous macros.<p></li>
+
+	</ul>
+
+	<li><strong>Macros can be nested.</strong> Regardless of the category in 
+	which you create your macros, you can nest macros so that, for example, 
+	a client class macro could be called from an IP Address macro.</li>
+
+	</ol>
+	&nbsp;&nbsp;&nbsp;<A HREF="#top"><FONT size=2>return to top</FONT></A>
+
+<p>&nbsp;</p>
+	
+
+<!-- Don't go past this line! -->
+
+	</td>
+
+<!-- End topic block -->
+
+</tr>
+
+</table>
+
+<!-- End topic table -->
+
+</body>
+</html>

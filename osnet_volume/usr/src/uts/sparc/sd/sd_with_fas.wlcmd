@@ -1,0 +1,35 @@
+#
+# Copyright (c) 1998 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#pragma ident	"@(#)sd_with_fas.wlcmd 1.7	98/10/11 SMI"
+
+add scsi_watch_request::swr_callback targets \
+	sd.c:sd_mhd_watch_cb \
+	sd.c:sd_media_watch_cb
+
+add scsi_pkt::pkt_comp targets \
+	sd.c:sd_mhd_watch_cb \
+	sd.c:sd_media_watch_cb \
+	sd.c:sd_mhd_watch_cb \
+	scsi_watch.c:scsi_watch_request_intr \
+	sd.c:sd_restart_unit_callback \
+	sd.c:sdintr \
+	fas.c:fas_scsi_destroy_pkt \
+	fas.c:fas_scsi_init_pkt \
+	fas.c:fas_scsi_start \
+	fas.c:fas_scsi_abort \
+	fas.c:fas_scsi_reset \
+	fas.c:fas_scsi_setcap \
+	fas.c:fas_scsi_getcap \
+	fas.c:fas_scsi_dmafree \
+	fas.c:fas_scsi_reset_notify \
+	fas.c:fas_scsi_sync_pkt
+
+one scsi_device
+one fas
+
+add 	notify_entry::callback target  sd_mhd_reset_notify_cb
+
+assert order scsi_device::sd_mutex  fas::f_mutex
+root fas_kmem_cache_constructor fas_kmem_cache_destructor

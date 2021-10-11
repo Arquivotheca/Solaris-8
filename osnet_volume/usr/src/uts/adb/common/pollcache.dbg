@@ -1,0 +1,48 @@
+\
+\ Copyright (c) 1998 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+
+\"@(#)pollcache.dbg	1.2	98/11/23 SMI"
+
+\ arg             : address of pollcache struct
+\ uses            :
+\ registers       : z
+\ description     : prints the contents of pollcache structure
+
+#include <sys/poll_impl.h>
+#include "dummy.h"
+
+\
+\
+pollcache	pc_
+{adb_inline_begin}
+.>z
+<z+{OFFSET, pc_lock}=""
+{adb_inline_end}
+	lock			.mutex
+{adb_inline_begin}
+<z+{OFFSET, pc_bitmap}=""
+{adb_inline_end}
+	bitmap			hex
+	hash			hex
+	mapend			sdecimal
+	mapsize			sdecimal
+	hashsize		sdecimal
+	fdcount			sdecimal
+	flag			hex
+	busy			sdecimal
+	no_exit			.mutex
+{adb_inline_begin}
+<z+{OFFSET, pc_busy_cv}=""
+{adb_inline_end}
+	busy_cv			hex
+	cv			hex
+{adb_inline_begin}
+<z+{OFFSET, pc_pid}=""
+{adb_inline_end}
+	pid			decimal
+	mapstart		sdecimal
+{adb_inline_begin}
+<z+{SIZEOF}=""
+{adb_inline_end}

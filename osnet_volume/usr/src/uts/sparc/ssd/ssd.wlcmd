@@ -1,0 +1,17 @@
+# Copyright (c) 1996, by Sun Microsystems, Inc.
+#
+# All rights reserved.
+#ident  "@(#)ssd.wlcmd 1.5     98/06/15 SMI"
+
+one scsi_device
+root ssd_mhd_reset_notify_cb ssd_event_callback
+root scsi_hba_post_event scsi_hba_remove_eventcall scsi_hba_add_eventcall scsi_hba_get_eventcookie
+
+### Give warlock a dummy target for each of the function
+### pointers in the scsi_hba_tran structure.
+for ptr in `funcptrs | grep '^scsi_hba_tran::'`
+do
+	add $ptr target warlock_dummy
+done
+
+add scsi_watch_request::swr_callback targets ssd_mhd_watch_cb

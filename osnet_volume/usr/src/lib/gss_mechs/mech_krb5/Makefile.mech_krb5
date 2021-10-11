@@ -1,0 +1,34 @@
+#
+# Copyright (c) 1998,1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#pragma ident	"@(#)Makefile.mech_krb5	1.1	99/07/18 SMI"
+#
+# Makefile.mech_krb5, global definitions for dealing with Kerberos V5
+# plug in.
+
+# 32 bit library directories
+KLIBDIR = /usr/lib/gss
+KLIBDIR_DO = $(KLIBDIR)/do
+KLIBDIR_GL = $(KLIBDIR)/gl
+ROOT_KLIBDIR_DO = $(ROOT)/$(KLIBDIR_DO)
+
+# 64 bit library directories
+KLIBDIR_DO64 = $(KLIBDIR_DO)/sparcv9
+KLIBDIR_GL64 = $(KLIBDIR_GL)/sparcv9
+ROOT_KLIBDIR_DO64 = $(ROOT_KLIBDIR_DO)/sparcv9
+
+# Kerberos V GSS-API Mechanism library
+KMECHLIB = $(ROOT)$(KLIBDIR_GL)/mech_krb5.so
+KLIB = $(KMECHLIB)
+KMECHLIB64 = $(ROOT)$(KLIBDIR_GL64)/mech_krb5.so
+
+# KADM5 client library
+KERBLIBDIR = /usr/lib/krb5
+KERBLIBDIR64 = /usr/lib/krb5/sparcv9
+KCLNTLIB = $(ROOT)$(KERBLIBDIR)/libkadm5clnt.so
+KCLNTLIB64 = $(ROOT)$(KERBLIBDIR64)/libkadm5clnt.so
+
+# Run-time library seach path
+KRUNPATH = $(KLIBDIR_DO):$(KLIBDIR_GL):$(KERBLIBDIR)
+KRUNPATH64 = $(KLIBDIR_DO64):$(KLIBDIR_GL64):$(KERBLIBDIR64)

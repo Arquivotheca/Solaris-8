@@ -1,0 +1,19 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)cpus.nxt.dbg	1.3	98/01/19 SMI"
+
+#include <sys/cpuvar.h>
+#include "dummy.h"
+
+\
+\
+cpu     ""      cpus.nxt
+{adb_inline_begin}
+.>c
+*(<c+{OFFSET, cpu_next})>n
+<c$<<cpu
+0,#(#(<n))&#(#(<n-<e))=nn
+<n,#(#(<n))&#(#(<n-<e))$<cpus.nxt
+{adb_inline_end}

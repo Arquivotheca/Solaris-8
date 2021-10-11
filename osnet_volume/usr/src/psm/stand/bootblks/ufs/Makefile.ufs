@@ -1,0 +1,37 @@
+#
+#ident	"@(#)Makefile.ufs	1.4	94/12/22 SMI"
+#
+# Copyright (c) 1994, by Sun Microsystems, Inc.
+# All rights reserved.
+#
+# psm/stand/bootblks/ufs/Makefile.ufs
+#
+
+include $(BASEDIR)/Makefile.com
+include $(BASEDIR)/ufs/common/Makefile.com
+
+#
+# This program is used to install the boot block
+#
+INSTALLBOOT		= installboot
+
+#
+# Where and how stuff gets installed
+#
+USR_PSM_BOOTBLOCK	= $(USR_PSM_LIB_UFS_DIR)/$(PROG)
+
+USR			= $(ROOT)/usr
+USR_SBIN		= $(USR)/sbin
+USR_SBIN_INSTALLBOOT	= $(USR_SBIN)/$(INSTALLBOOT)
+
+#
+# Overrides for installing installboot.
+#
+INS.file.555		= $(RM) $@; $(INS) -s -m 555 -f $(@D) $<
+$(CH)INS.file.555	= $(INS) -s -m 555 -u $(OWNER) -g $(GROUP) -f $(@D) $<
+
+#
+# install rules
+#
+$(USR_SBIN)/%:	% $(USR_SBIN)
+	$(INS.file.555)

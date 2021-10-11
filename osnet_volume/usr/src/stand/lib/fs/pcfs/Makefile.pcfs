@@ -1,0 +1,25 @@
+#ident	"@(#)Makefile.pcfs	1.6	96/03/22 SMI"
+#
+# Copyright (c) 1993-1994 Sun Microsystems, Inc.  All Rights Reserved.
+#
+
+#
+# stand/lib/fs/pcfs/Makefile.pcfs
+#
+# Standalone Library PCFS makefile
+#
+# This Makefile is included by ../../[sun,i386]/Makefile and is used
+# when building $(LIBPCFS).  The library is built in ../../[sun,i386].
+#
+
+PCFSOBJ=		dosops.o
+PCFSOBJ_L=		dosops.ln
+PCFSSRC=		$(PCFSOBJ:%.o=$(PCFSDIR)/%.c)
+
+$(LIBPCFS) :=		FS_OBJECTS=	$(PCFSOBJ)
+$(LIBPCFS_L) :=		FS_OBJECTS_L=	$(PCFSOBJ_L)
+$(LIBPCFS_L) :=		FS_SOURCES=	$(PCFSSRC)
+
+.PARALLEL:      	$(PCFSOBJ:%=objs/%) $(PCFSOBJ_L:%=objs/%)
+.PARALLEL:      	$(PCFSOBJ:%=kadbobjs/%)
+

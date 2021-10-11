@@ -1,0 +1,24 @@
+\
+\ Copyright (c) 1999 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)cyclic.dbg	1.1	99/06/05 SMI"
+
+#include <sys/cyclic_impl.h>
+#include "dummy.h"
+
+cyclic	cy_
+{adb_inline_begin}
+.>z
+<z=""
+{adb_inline_end}
+	expire			hex
+	interval		decimal
+	handler			symbolic
+	arg			hex
+	pend			decimal
+	flags			hex
+	level			decimal
+{adb_inline_begin}
+<z+{SIZEOF}=""
+{adb_inline_end}

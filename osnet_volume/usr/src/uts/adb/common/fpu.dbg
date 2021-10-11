@@ -1,0 +1,27 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)fpu.dbg	1.8	98/01/19 SMI"
+
+#include <sys/param.h>
+#include <sys/types.h>
+#include <sys/reg.h>
+#include "dummy.h"
+
+\
+\
+fpu
+{adb_inline_begin}
+.>z
+<z+{OFFSET, fpu_fr.fpu_regs}/n"fp regs"n32X
+<z+{OFFSET, fpu_q}=""
+{adb_inline_end}
+       fpu_q                   hex
+       fpu_fsr                 hex
+       fpu_qcnt                hex
+       fpu_q_entrysize         hex
+       fpu_en                  hex
+{adb_inline_begin}
+<z+{SIZEOF}=""
+{adb_inline_end}

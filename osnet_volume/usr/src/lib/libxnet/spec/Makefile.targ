@@ -1,0 +1,15 @@
+#ident	"@(#)Makefile.targ	1.1	99/01/25 SMI"
+#
+# Copyright (c) 1998-1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+# lib/libxnet/spec/Makefile.targ
+
+LIBRARY	=	libxnet.a
+VERS	=	.1
+
+OBJECTS	=	xnet.o \
+		xnetmsg.o
+
+TRANSCPP=	-F
+SPECCPP =	-I$(SRC)/lib/libsocket/spec

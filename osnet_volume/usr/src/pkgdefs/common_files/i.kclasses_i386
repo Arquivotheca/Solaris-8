@@ -1,0 +1,66 @@
+#!/bin/sh
+#
+#ident	"@(#)i.kclasses_i386	1.7	99/07/02 SMI"
+#
+# Copyright (c) 1993-1994, by Sun Microsystems, Inc.
+# All rights reserved.
+#
+
+PATH="/usr/bin:/usr/sbin:${PATH}"
+export PATH
+
+while read src dest
+do
+	if [ ! -f $dest ] ; then
+		cp $src $dest
+	else
+		grep '^#pragma' $src > /tmp/newident.$$ 2>/dev/null
+		sed -e '/^aha[	].*scsi/d' \
+		    -e '/^aic[	].*scsi/d' \
+		    -e '/^blogic[	].*scsi/d' \
+		    -e '/^csa[	].*dada/d' \
+		    -e '/^csa[	].*scsi/d' \
+		    -e '/^dsa[	].*dada/d' \
+		    -e '/^[ 	]*dsa[	].*scsi/d' \
+		    -e '/^esa[	].*scsi/d' \
+		    -e '/^eha[	].*scsi/d' \
+		    -e '/^iss[ 	].*scsi/d' \
+		    -e '/^mc[ 	].*sysbus/d' \
+		    -e '/^mcis[	].*scsi/d' \
+		    -e '/^trantor[	].*scsi/d' \
+		    -e '/^corvette[	].*scsi/d' \
+		$dest > /tmp/c.$$
+		if cmp -s /tmp/c.$$ $dest  > /dev/null 2>&1
+		then
+			:
+		else
+			cat /tmp/newident.$$ > /tmp/rest.$$
+			sed '/^#pragma.*/d' /tmp/c.$$ >> /tmp/rest.$$
+			cp /tmp/rest.$$ $dest
+		fi
+		rm -f /tmp/rest.$$ /tmp/newident.$$ /tmp/c.$$
+
+		grep '^pci[ 	].*pci' $dest > /dev/null 2>&1
+		if [ $? != 0 ] ; then
+			echo 'pci	pci' >> $dest
+		fi
+		grep '^pci_pci[ 	].*pci' $dest > /dev/null 2>&1
+		if [ $? != 0 ] ; then
+			echo 'pci_pci pci' >> $dest
+		fi
+		grep '^mscsi[ 	].*scsi' $dest > /dev/null 2>&1
+		if [ $? != 0 ] ; then
+			echo 'mscsi scsi' >> $dest
+		fi
+		grep '^pci_to_i2o[ 	].*i2o' $dest > /dev/null 2>&1
+		if [ $? != 0 ] ; then
+			echo 'pci_to_i2o i2o' >> $dest
+		fi
+		grep '^i2o_scsi[ 	].*scsi' $dest > /dev/null 2>&1
+		if [ $? != 0 ] ; then
+			echo 'i2o_scsi scsi' >> $dest
+		fi
+	fi
+done
+
+exit 0

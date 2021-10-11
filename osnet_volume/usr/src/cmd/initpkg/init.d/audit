@@ -1,0 +1,28 @@
+#!/sbin/sh
+#
+# Copyright (c) 1997 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#ident	"@(#)audit	1.5	97/12/08 SMI"
+
+case "$1" in
+'start')
+	if [ -f /etc/security/audit_startup ]; then
+		echo 'starting audit daemon'
+		/etc/security/audit_startup
+		/usr/sbin/auditd &
+	fi
+	;;
+ 
+'stop')
+	if [ -f /etc/security/audit_startup ]; then
+		/usr/sbin/audit -T
+	fi
+	;;
+
+*)
+        echo "Usage: $0 { start | stop }"
+        exit 1
+        ;;
+esac
+exit 0

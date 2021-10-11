@@ -1,0 +1,17 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)u.sizeof.dbg	1.3	98/01/19 SMI"
+
+#include <sys/param.h>
+#include <sys/types.h>
+#include <sys/proc.h>
+#include "dummy.h"
+
+\
+\
+user            ""      	u.sizeof
+{adb_inline_begin}
+{SIZEOF}>U
+{adb_inline_end}

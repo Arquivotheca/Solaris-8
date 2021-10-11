@@ -1,0 +1,27 @@
+\
+\ Copyright (c) 1998-1999 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)usb_mid_power.dbg        1.2     99/10/22 SMI"
+
+#include <sys/usb/usba.h>
+#include <sys/usb/usba/usba_types.h>
+#include <sys/usb/usba/usba_impl.h>
+#include <sys/usb/usb_mid/usb_midvar.h>
+#include "dummy.h"
+
+usb_mid_power_struct	mip_	usb_mid_power
+{adb_inline_begin}
+.>z
+<z+{OFFSET, mip_usb_mid}=""
+{adb_inline_end}
+	usb_mid			hex	usb_mid
+	wakeup_enabled		hex	wakeup_enabled
+	pwr_states		hex	pwr_states
+	pm_capabilities		hex	pmcap
+	raise_power		hex	raise_power
+	current_power		hex	current_power
+	child_pwrstate		hex	child_pwrstate
+{adb_inline_begin}
+<z+{SIZEOF}=""
+{adb_inline_end}

@@ -1,0 +1,18 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)threadlist.dbg	1.4	98/01/19 SMI"
+
+#include "dummy.h"
+
+\ changed from using allthreads to t0, 'cos allthreads seems to be
+\ inaccessible from kadb.
+\
+__dummy         ""      threadlist
+{adb_inline_begin}
+t0>t
+<t>e
+<t,#(#(<t))$<threadlist.nxt
+t0={HEX}"(allthreads ptr is NULL)"n
+{adb_inline_end}

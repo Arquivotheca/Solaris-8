@@ -1,0 +1,16 @@
+#
+#ident	"@(#)Makefile.lib	1.2	96/07/08 SMI"
+#
+# Copyright (c) 1996 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+# cmd/cmd-inet/usr.lib/Makefile.lib
+
+ROOTLIBINET=		$(ROOTLIB)/inet
+ROOTLIBINETPROG=	$(PROG:%=$(ROOTLIBINET)/%)
+
+$(ROOTLIBINET)/%: % $(ROOTLIBINET)
+	$(INS.file)
+
+$(ROOTLIBINET):
+	$(INS.dir)

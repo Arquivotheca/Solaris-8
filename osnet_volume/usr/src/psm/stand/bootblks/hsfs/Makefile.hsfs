@@ -1,0 +1,14 @@
+#
+#ident	"@(#)Makefile.hsfs	1.3	94/12/22 SMI"
+#
+# Copyright (c) 1994, by Sun Microsystems, Inc.
+#
+# psm/stand/bootblks/hsfs/Makefile.hsfs
+#
+include $(BASEDIR)/Makefile.com
+include $(BASEDIR)/hsfs/common/Makefile.com
+
+#
+# Where stuff gets installed
+#
+USR_PSM_BOOTBLOCK	= $(USR_PSM_LIB_HSFS_DIR)/$(PROG)

@@ -1,0 +1,19 @@
+#
+# Copyright 1990,1991,1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#
+#ident	"@(#)tune.med	1.9	99/04/14 SMI"
+#
+# Tune list for level med 
+#
+# The original list was largely obsoleted by the
+# "Safe Default File Permissions" project.
+#
+# Format:
+#       pathname mode owner group type
+
+/.cshrc 0640 root ? file
+/.login  0640 root ? file
+/.profile 0640 root ? file
+/.logout 0640 root ? file

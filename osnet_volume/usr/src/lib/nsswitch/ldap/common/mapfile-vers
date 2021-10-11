@@ -1,0 +1,37 @@
+# Generic interface definition for usr/src/lib/nsswitch/ldap.
+#
+# For information regarding the establishment of versioned definitions see:
+#       The Linker and Libraries Manual (version 2.5 or greater)
+# This is part of the Developers Guide in the Answerbook.  Specifically refer
+# to Chapter 2 under section "Defining Additional Symbols" through section
+# "Reducing Symbol Scope", and Chapter 5 "Versioning".
+#
+# For specific OSNET rules for the modification (evolution) of these version
+# definitions see:
+#       Policy for Shared Library Version Names and Interface Definitions
+
+
+SUNWprivate_1.1 {
+	global:
+		_nss_ldap_audit_user_constr;
+		_nss_ldap_auth_attr_constr;
+		_nss_ldap_bootparams_constr;
+		_nss_ldap_ethers_constr;
+		_nss_ldap_exec_attr_constr;
+		_nss_ldap_group_constr;
+		_nss_ldap_hosts_constr;
+		_nss_ldap_ipnodes_constr;
+		_nss_ldap_netgroup_constr;
+		_nss_ldap_netmasks_constr;
+		_nss_ldap_networks_constr;
+		_nss_ldap_passwd_constr;
+		_nss_ldap_prof_attr_constr;
+		_nss_ldap_protocols_constr;
+		_nss_ldap_rpc_constr;
+		_nss_ldap_services_constr;
+		_nss_ldap_shadow_constr;
+		_nss_ldap_publickey_constr;
+		_nss_ldap_user_attr_constr;
+	local:
+		*;
+};

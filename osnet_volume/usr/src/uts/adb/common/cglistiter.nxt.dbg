@@ -1,0 +1,22 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)cglistiter.nxt.dbg	1.6	98/07/19 SMI"
+
+#include <sys/types.h>
+#include <sys/buf.h>
+#include "dummy.h"
+
+\ b_flags is a 32-bit access.
+\
+buf	""	cglistiter.nxt
+{adb_inline_begin}
+*(<S+{OFFSET, b_flags})>/i/F
+*(<S+{OFFSET, b_edev})>D
+*(<S+{OFFSET, b_un.b_addr})>C
+*(<S+{OFFSET, b_forw})>S
+,#(#(<F&8))$<cglistchk.nxt
+,#(#(<B-<S))$<cglistiter.nxt
+$<cglist.nxt
+{adb_inline_end}

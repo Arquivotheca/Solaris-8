@@ -1,0 +1,39 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)intrspec.dbg	1.1	98/10/27 SMI"
+
+#include <sys/types.h>
+#include <sys/sunddi.h>
+#include <sys/ddi_impldefs.h>
+#include <sys/ddidmareq.h>
+#include <os/sunddi.c>
+#include "dummy.h"
+
+\
+\
+i_ddi_soft_state
+
+intrspec
+
+ddi_dma_impl
+	dmai_mapping	hex
+	dmai_size	hex
+	dmai_offset	hex
+	dmai_minxfer	hex
+	dmai_burstsizes	hex
+	dmai_ndvmapages	hex
+	dmai_pool	hex
+	dmai_rflags	hex
+	dmai_inuse	hex
+	dmai_nwin	hex
+	dmai_winsize	hex
+	dmai_nexus_private	hex
+	dmai_iopte	hex
+	dmai_sbi	hex
+	dmai_minfo	hex
+	dmai_rdip	hex
+	dmai_object	hex
+	dmai_attr	hex
+	dmai_cookie	hex

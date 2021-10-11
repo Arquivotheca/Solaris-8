@@ -1,0 +1,83 @@
+#
+#ident	"@(#)Makefile.paths	1.2	99/11/10 SMI"
+#
+# Copyright (c) 1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+# The following pathnames are for installation on Solaris
+#
+# These paths are absolute paths, compiled into the daemon and
+# entered into the configuration file. The leading slash is missing
+# because we also use these pathnames to create the build-time
+# installation paths below.  However, we add leading slashes
+# to these pathnames when building the daemon.
+#
+# There are 3 basic top-level paths.  The executables, the configuration,
+# and the runtime.
+#
+# PREFIX is the top level directory where executables are installed.
+# Normally this is usr/apache or usr/httpd
+
+PREFIX=		usr/apache
+EXEC_PREFIX=	$(PREFIX)
+
+# BINDIR is where the daemon and control programs are installed
+
+BINDIR=		$(EXEC_PREFIX)/bin
+
+# LIBEXECDIR is where "DSO" (dynamically linked modules) are installed
+
+LIBEXECDIR=	$(EXEC_PREFIX)/libexec
+
+# DATADIR is the top level directory where the runtime data
+# (i.e documents, cgi scripts, etc) are located - usually /var/apache
+# or /var/httpd
+
+DATADIR=	var/apache
+
+# SYSCONFDIR is where the server config files are installed
+
+SYSCONFTOP=	etc/apache
+SYSCONFDIR=	$(SYSCONFTOP)
+
+# INCDIR is where the apache headers are installed
+
+INCDIR=		$(PREFIX)/include
+
+# CGIDIR is the cgi-bin directory
+
+CGIDIR=		$(DATADIR)/cgi-bin
+
+# DOCROOT is the document root directory for the server
+
+DOCROOT=	$(DATADIR)/htdocs
+
+USRDOCROOT=	$(PREFIX)/htdocs
+
+# ICONDIR is where the default server icons are located
+
+ICONDIR=	$(DATADIR)/icons
+
+LOCALSTATEDIR=	$(DATADIR)
+
+RUNTIMEDIR=	var/run
+
+LOGFILEDIR=	$(LOCALSTATEDIR)/logs
+
+PROXYCACHEDIR=	$(LOCALSTATEDIR)/proxy
+
+#
+# These paths are the build-time installation paths
+#
+ROOTPREFIXDIR=		$(ROOT)/$(PREFIX)
+ROOTHTTPDBINDIR=	$(ROOT)/$(BINDIR)
+ROOTHTTPDCONFDIR=	$(ROOT)/$(SYSCONFDIR)
+ROOTHTTPDLIBEXECDIR=	$(ROOT)/$(LIBEXECDIR)
+ROOTHTTPDCGIDIR=	$(ROOT)/$(CGIDIR)
+ROOTHTTPDDOCROOT=	$(ROOT)/$(DOCROOT)
+USRHTTPDDOCROOT=	$(ROOT)/$(USRDOCROOT)
+ROOTHTTPDICONDIR=	$(ROOT)/$(ICONDIR)
+ROOTHTTPDINCDIR=	$(ROOT)/$(INCDIR)
+ROOTHTTPDLOGFILEDIR=	$(ROOT)/$(LOGFILEDIR)
+ROOTHTTPDPROXYCACHEDIR=	$(ROOT)/$(PROXYCACHEDIR)
+

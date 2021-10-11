@@ -1,0 +1,16 @@
+#
+#ident	"@(#)mapfile_profile	1.1	98/02/25 SMI"
+#
+# Copyright (c) 1998 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+
+#
+# Generic library linker mapfile for allowing mcount to be undefined
+# for profiled libraries.  mcount is provided by the crt files.
+#
+
+SUNW_1.1 {
+	global:
+		_mcount = function parent;
+};

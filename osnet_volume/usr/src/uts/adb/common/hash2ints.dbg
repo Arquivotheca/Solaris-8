@@ -1,0 +1,36 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)hash2ints.dbg	1.3	98/01/19 SMI"
+
+\ arg             : int (and a second int as the count)
+\ uses            :
+\ registers       : h, x, z
+\ description     : does the calculation of hash2ints() for buffer
+\                   hashing. needs a dummy structure name
+
+#include "dummy.h"
+
+\
+\
+__dummy         ""      hash2ints
+{adb_inline_begin}
+.>x
+<9>z
+<x-1>h
+(<x&~ff)%100>x
+(<h*7)+<x-1>h
+(<x&~ff)%100>x
+(<h*7)+<x-1>h
+(<x&~ff)%100>x
+(<h*7)+<x-1>h
+(<h*7)+<z-1>h
+(<z&~ff)%100>z
+(<h*7)+<z-1>h
+(<z&~ff)%100>z
+(<h*7)+<z-1>h
+(<z&~ff)%100>z
+(<h*7)+<z-1>h
+<h=X
+{adb_inline_end}

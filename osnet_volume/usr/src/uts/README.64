@@ -1,0 +1,230 @@
+Welcome to Wyoming (@(#)README.64	1.5 97/11/12)!
+-------------------
+
+The directory layout is still under construction.
+
+But the basic idea for the moment it to build the sun4u kernel in
+both 32-bit and 64-bit variants from completely shared source.
+
+This has been done for the kernel, but not yet for stand or
+the user files.  They still use sparcv9 and sun64 to hold the
+makefiles for the 64b objects.
+
+There's an 'Install' script which has been quickly hacked to
+make it possible to create a tar file of kernel objects.
+
+Handling Data Structures from User-mode
+---------------------------------------
+
+Under ILP32 ints, longs and pointers are 32-bit data items, under LP64
+ints stay 32-bit but longs and pointers become 64-bit quantities.  In C
+all simple and complex data items (types, arrays, structures, unions
+and combinations of them) are derived from the fundamental types.  When a
+C data item is, is derived from, or contains a long or a pointer, then it
+is going to have a different size and layout in memory depending on
+whether it was compiled for ILP32 or LP64.
+
+Under Wyoming most user-mode programs will be compiled ILP32, while the
+kernel will often be compiled LP64.  Programs in user-mode exchange
+information with the kernel by systems calls or memory mapping.  Each data
+item they exchange falls into one of three categories:
+
+1)	The information is exchanged in a system call parameter.
+
+2)	It is not a long or pointer, and contains nothing which is.
+
+3)	It is a long, or contains a long, but only 32-bits is required.
+
+4)	It is or contains a long which needs to be 32-bit under ILP32 and
+	needs to be 64-bits under LP64; or it is or contains a pointer.
+
+In 1) The work will have been done in the system call interface; either
+in the system call wrappers (in libc), or in the kernel.
+
+In 2) there is no special work to do.  The data item has the same size and
+semantics under ILP32 and LP64 and can simply be used as is.
+
+In 3) the long (or type derived from a long) can be changed to an int
+(or a type derived from an int), thus putting it in category 1).
+
+In 4) work needs to be done to interpret the two flavours of the data
+item: the ILP32 flavour and the LP64 flavour.  Mostly this will be done
+inside the kernel.
+
+Handling a Case 4) Data Item.
+-----------------------------
+
+You need to provide a special ILP32 definition of the structure for use
+in the LP64 environment.  The structure name of the special definition must
+be the same as the original structure plus "32".  e.g.
+
+	struct foo {
+		size_t	len;
+		caddr_t	buf;
+	};
+
+	#if defined(_SYSCALL32)
+	struct foo32 {
+		size32_t	len;
+		caddr32_t	buf;
+	};
+	#endif
+
+Types have been provided (see <sys/types.h>) specifically for this kind
+of interoperability.  Note that caddr32_t is not a 32-bit pointer type
+because there is no mechanism to declare such a thing in C, instead it
+is a 32-bit unsigned integer type -- a fact which necessitates some of
+of the design of the macros below (see the description of the
+STRUCT_FGETP() macro below).
+
+Note also the use of the _SYSCALL32 define to protect the declaration
+of the ILP32 form.  This will be set whenever the kernel is LP64, and
+hence the ILP32 system call interface is also present.  Special user
+mode code might also use this for shared memory or similar
+communications.  There is a second define _SYSCALL32_IMPL which should
+be used to protect any code which is specifically and only part of the
+ILP32 system call interface under LP64 -- in general, that define and the
+following macros should not be mixed.
+
+A suite of macros has been created to ease the work needed in many case
+4) situations.  They assist in copying in/out or otherwise interpreting
+a data item according to its user-mode data model (ILP32 or LP64).
+
+You need to decide on one of two approaches to each case 4) data structure.
+
++	Will you convert the ILP32 version into its equivalent LP64 form
+	and then continue from there?  You would need to convert it back
+	into ILP32 form to copy it back to user mode if that is done.  If
+	you do this you will probably not benefit from using the macros
+	below (although you still would need the ILP32 definition).
+
++	Will you use the macros described below to make in-place references
+	to the fields of the data item?
+
+To use the macros you must identify the code which makes reference to
+the data structure.  If the data item crosses the user/kernel boundary
+(usually via copyin() or copyout()), then at least all of the kernel
+code which can be compiled for LP64 needs to be changed to use the
+macros.
+
+When compiled under LP64, these macros do all that is necessary to use
+the same piece of memory as the contents of a native form structure
+(i.e. the LP64 form), and as an ILP32 form of the same structure.  When
+compiled under ILP32, there is only one form, and the macros just
+access that form.
+
+The macros below often take arguments such as:
+
+	struct_type	the structure name (as would appear _after_ the
+			C keyword `struct') of the native form:  `foo'
+			in the example above.
+
+	umodel		a bit field containing either the ILP32 model bit
+			(DATAMODEL_ILP32), or the LP64 model bit
+			(DATAMODEL_LP64).  Non model bits will be ignored.
+			In an ioctl() these bits will be present in the
+			flag parameter.
+
+	handle		the variable name used to refer to a particular
+			instance of a structure which is handled by
+			these macros.  Do not use a name which would
+			clash with another variable name.  In all cases
+			the simple name is required, no '&' operator is
+			needed.
+
+	field		simply the field name within the structures, e.g.
+			`len' or `buf' from `struct foo' above.  If the
+			structures contain substructures, unions, or arrays,
+			then <field> can be whatever complex expression could
+			occur after the first `.' or `->'.  Be cautious when
+			dealing with complex field references that there are no
+			structure assignments, etc. which are not model safe.
+
+These macros declare and/or initialize structure handles.  Structure
+handles are declared on the stack and should be treated like any other
+automatic variable.
+
+STRUCT_DECL(struct_type, handle)
+
+	declares a "structure handle" for a "struct <struct_type>" and
+	allocates an instance of its native form on the stack.  It is
+	assumed that the native form is larger than the ILP32 form.
+
+void STRUCT_INIT(handle, model_t umodel)
+
+	initializes <handle> to point to the instance allocated by
+	STRUCT_DECL(), it also sets data model for <handle> to <umodel>,
+	and must be called before any access is made through the rest of
+	these macros.
+
+--- OR ---
+
+STRUCT_HANDLE(struct_type, handle)
+
+	declares a structure <handle> but unlike STRUCT_DECL() does not
+	allocate an instance of "struct <struct_type>". It is used in
+	functions where the user data has already been copied in,
+	e.g. ioctls within a STREAMS module or driver.
+
+void STRUCT_SET_HANDLE(handle, model_t umodel, void *addr)
+
+	initializes <handle> to point to the native form instance at <addr>,
+	it also sets the data model for <handle> to <umodel>. This is
+	intended for handles created with STRUCT_HANDLE(). Fields cannot
+	be referenced via the <handle> until this macro has been invoked.
+
+Macros for operating on structures.
+
+size_t STRUCT_SIZE(handle)
+
+	returns size of the structure referred to by <handle>.  It
+	will return the size of the ILP32 form if the datamodel was
+	DATAMODEL_ILP32, otherwise the size of the native form.
+
+STRUCT_FGET(handle, field)
+
+	references <field> in the structure described by <handle> according
+	to the stored model.  This should be used for rvalues not for lvalues.
+
+STRUCT_FGETP(handle, field)
+
+	is the same as STRUCT_FGET() except that the <field> in question
+	is a pointer of some kind.  Because the compilers make it impossible
+	to declare a 32-bit pointer in a 64-bit program, the type caddr32_t
+	is actually an integer type.  This macros will the caddr32_t to a
+	(void *) when it is accessed.  Failure to use this macros for a
+	pointer will lead to compiler warnings or failures.
+
+STRUCT_FSET(handle, field, val)
+
+	assigns <val> to the (non pointer) <field> in the structure
+	described by <handle>.  It should not be used as an rvalue, i.e.
+	within any other expression, but rather only as a statement.
+
+STRUCT_FSETP(handle, field, val)
+
+	is the equivalent for STRUCT_FSET() of STRUCT_FGETP() for
+	STRUCT_FGET() and the same reasons apply as there.  The
+	necessities of ANSI/ISO-C make it impossible to use this
+	as an rvalue.
+
+<typeof field> *STRUCT_FADDR(handle, field)
+
+	returns a pointer to the <field> in the structure described by
+	<handle>.
+
+struct struct_type *STRUCT_BUF(handle)
+
+	returns a pointer to the native mode instance of the structure
+	described by <handle>.
+
+Miscellaneous macros that do not use handles.
+
+size_t SIZEOF_STRUCT(struct_type, umodel)
+
+	returns sizeof <struct_type> based on <umodel>.  As always, both
+	structure types must be declared as in the the example above.
+
+size_t SIZEOF_PTR(umodel)
+
+	returns the size of a pointer based on "umodel".

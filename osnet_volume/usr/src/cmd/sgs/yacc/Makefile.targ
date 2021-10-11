@@ -1,0 +1,89 @@
+#
+#ident	"@(#)Makefile.targ	1.3	98/02/06 SMI"
+#
+# Copyright (c) 1993,1997 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+# cmd/sgs/yacc/Makefile.targ
+#
+
+$(PROG): objs .WAIT $(POBJS)
+	$(LINK.c) $(POBJS) -o $@ $(LDLIBS)
+	$(POST_PROCESS)
+
+$(ROOTCCSBIN)/%: ../common/%
+	$(INS.file)
+
+# conditional assignment of default permissions for the installed
+# DYNLIB/DYNLIBCCC.  Set here and in Makefile.mach, instead of Makefile.lib,
+# because ROOTLIBDIR may be changed in the including makefile after it has
+# included Makefile.lib.
+#
+$(ROOTLIBDIR)/$(DYNLIB) :=	FILEMODE= 755
+$(ROOTLIBDIR)/$(DYNLIBCCC) :=	FILEMODE= 755
+
+$(ROOTLIBDIR64)/$(DYNLIB) :=	FILEMODE= 755
+$(ROOTLIBDIR64)/$(DYNLIBCCC) :=	FILEMODE= 755
+
+# library install rules
+$(ROOTLIBDIR)/%: %
+	$(INS.file)
+$(ROOTLIBDIR64)/%: %
+	$(INS.file)
+
+$(ROOTLIBDIR)/$(LIBLINKS): $(ROOTLIBDIR)/$(LIBLINKS)$(VERS)
+	$(INS.liblink)
+$(ROOTLIBDIR64)/$(LIBLINKS): $(ROOTLIBDIR64)/$(LIBLINKS)$(VERS)
+	$(INS.liblink64)
+
+$(ROOTLIBDIR)/$(LIBLINKSCCC): $(ROOTLIBDIR)/$(LIBLINKSCCC)$(VERS)
+	$(INS.liblinkccc)
+$(ROOTLIBDIR64)/$(LIBLINKSCCC): $(ROOTLIBDIR64)/$(LIBLINKSCCC)$(VERS)
+	$(INS.liblinkccc64)
+
+objs pics:
+	-@mkdir -p $@
+
+$(LIBRARY): objs .WAIT $$(OBJS)
+	$(BUILD.AR)
+	$(POST_PROCESS_A)
+
+$(DYNLIB): $(MAPFILE) pics .WAIT $$(PICS)
+	$(BUILD.SO)
+	$(POST_PROCESS_SO)
+
+$(DYNLIBCCC): pics .WAIT $$(PICS)
+	$(BUILDCCC.SO)
+	$(POST_PROCESS_SO)
+
+objs/%.o pics/%.o:	../common/%.c
+	$(COMPILE.c) -o $@ $<
+	$(POST_PROCESS_O)
+
+objs/%.o pics/%.o:	../../whatdir/common/%.c
+	$(COMPILE.c) -o $@ $<
+
+# install rule for lint library target
+$(ROOTLINTDIR)/%: ../common/%
+	$(INS.file)
+
+# install rule for 32-bit liby.a
+$(STATICLIBDIR)/%: %
+	$(INS.file)
+
+# install rules for 32-bit liby.so in /usr/ccs/lib
+#$(DYNLINKLIBDIR)/% :=	INS.liblink= -$(RM) $@; cd $(ROOTCCSLIBDIR); $(SYMLINK) ../../lib/$(LIBLINKS)$(VERS) $(LIBLINKS)
+
+$(DYNLINKLIBDIR)/%: %$(VERS)
+	$(INS.liblink)
+
+clean:
+		$(RM) $(POBJS) $(OBJS) $(PICS) $(CLEANFILES)
+
+lint:		$(LINTPOUT) $(LINTLIB)
+
+$(LINTPOUT):	$(SRCS)
+		$(LINT.c) $(SRCS) > $(LINTPOUT) 2>&1
+
+$(LINTLIB):	$(LINTSRCS)
+		$(LINT.c) -o $(LIBNAME) $(LINTSRCS) > $(LINTOUT) 2>&1

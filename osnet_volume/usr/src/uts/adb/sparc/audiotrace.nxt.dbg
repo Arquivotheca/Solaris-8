@@ -1,0 +1,26 @@
+\
+\ Copyright (c) 1999 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)audiotrace.nxt.dbg	1.1	99/05/26 SMI"
+\
+\ Registers:	M, S, T
+\ Desc:		Prints all the entries in the audio trace buffer
+
+#include <sys/audio_impl.h>
+#include "dummy.h"
+
+audio_trace_buf		""	audiotrace.nxt
+{adb_inline_begin}
+.>T
+#if defined(__sparcv9)
+./"seq = "D"data = "12+J
+*(<T+0t8)/s
+#else
+./"seq = "D"data = "4+X
+*(<T+0t4)/s
+#endif
+<T+<M>T
+<S-1>S
+<T,<S$<audiotrace.nxt
+{adb_inline_end}

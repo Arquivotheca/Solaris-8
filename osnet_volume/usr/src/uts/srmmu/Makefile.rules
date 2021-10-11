@@ -1,0 +1,52 @@
+#
+# uts/srmmu/Makefile.rules
+# Copyright (c) 1991 by Sun Microsystems, Inc.
+#
+#ident	"@(#)Makefile.rules	1.7	92/07/14 SMI"
+#
+#	This Makefile defines all build rules for the directory uts/srmmu and
+# it's children. These are the source files which are common to all srmmu
+# implementations.
+#
+
+#
+#	This was implemented by pattern matching rules of the form:
+#
+# $(OBJS_DIR)/%.o:	 $(UTSBASE)/common/os/%.c
+#	$(COMPILE.c) -o $@ $<
+#
+# $(LINTS_DIR)/%.ln:	$(UTSBASE)/common/os/%.c
+#	@($(LHEAD) $(LINT.c) $< $(LTAIL))
+#
+#	For each directory containing source. This proved to slow under
+#	Nse because it caused a significant additional number of stats
+#	and stats are real slow under TFS. If TFS performance should
+#	improve, one might consider returning to the former implementation.
+#	In the former implementation, this file (Makefile.rules) was not
+#	needed and the pattern matching rules were in Makefile.files.
+#
+
+#
+#	C object build rules
+#
+#	The following are alphabetized by source file path. Please maintain
+# this ordering.
+#
+$(OBJS_DIR)/overflow.o:		$(UTSBASE)/srmmu/ml/overflow.s
+	$(COMPILE.s) -o $@ $(UTSBASE)/srmmu/ml/overflow.s
+
+$(OBJS_DIR)/underflow.o:	$(UTSBASE)/srmmu/ml/underflow.s
+	$(COMPILE.s) -o $@ $(UTSBASE)/srmmu/ml/underflow.s
+
+
+#
+#	Lint `object' build rules
+#
+#	The following are alphabetized by source file path. Please maintain
+# this ordering.
+#
+$(LINTS_DIR)/overflow.ln:	$(UTSBASE)/srmmu/ml/overflow.s
+	@($(LHEAD) $(LINT.s) $(UTSBASE)/srmmu/ml/overflow.s $(LTAIL))
+
+$(LINTS_DIR)/underflow.ln:	$(UTSBASE)/srmmu/ml/underflow.s
+	@($(LHEAD) $(LINT.s) $(UTSBASE)/srmmu/ml/underflow.s $(LTAIL))

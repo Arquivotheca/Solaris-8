@@ -1,0 +1,22 @@
+#
+# Copyright (c) 1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#pragma ident	"@(#)mapfile-interceptors	1.1	99/05/14 SMI"
+#
+
+SUNWabi_1.1 {
+	global:
+		__abi_libc_exit;
+		__abi_libc_fork;
+		__abi_libc_fprintf;
+		__abi_libc_fwprintf;
+		__abi_libc_printf;
+		__abi_libc_snprintf;
+		__abi_libc_sprintf;
+		__abi_libc_swprintf;
+		__abi_libc_wprintf;
+
+	local:
+		*;
+};

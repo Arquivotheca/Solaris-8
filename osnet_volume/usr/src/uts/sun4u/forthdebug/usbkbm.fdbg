@@ -1,0 +1,31 @@
+\ Copyright 1998 Sun Microsystems, Inc.
+\ All rights reserved.
+
+#ident	"@(#)usbkbm.fdbg	1.3	99/08/19 SMI"
+
+#include <sys/usb/usba.h>
+#include <sys/usb/usba/usba_types.h>
+#include <sys/usb/clients/hid/hid.h>
+#include <sys/usb/clients/hid/hid_polled.h>
+#include <sys/usb/clients/hidparser/hidparser.h>
+
+#include <sys/stropts.h>
+
+#include <sys/vuid_event.h>
+#include <sys/termios.h>
+#include <sys/termio.h>
+#include <sys/strtty.h>
+#include <sys/msreg.h>
+#include <sys/msio.h>
+
+#include <sys/consdev.h>
+#include <sys/kbd.h>
+#include <sys/kbtrans.h>
+#include <sys/usb/clients/usbkbm/usbkbm.h>
+
+
+poll_keystate
+
+usbkbm_state_struct
+
+

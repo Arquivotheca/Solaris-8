@@ -1,0 +1,128 @@
+#
+#pragma ident	"@(#)Makefile.common	1.19	99/01/25 SMI"
+#
+# Copyright (c) 1994-1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+# lib/libthread_db/sparc/Makefile
+#
+
+.SUFFIXES:
+.SUFFIXES: 	.extdcl.h .pubdcl.h .stadcl.h .i $(SUFFIXES)
+
+LIBTHREAD_DBDIR=$(SRC)/lib/libthread_db
+LIBTHREAD_DIR=$(SRC)/lib/libthread
+
+COMMONDIR=$(LIBTHREAD_DBDIR)/common
+ARCHDIR=$(LIBTHREAD_DBDIR)/$(MACH)
+ROOTSYS_DIR=$(ROOT)/usr/include/sys
+
+PROD=	td
+VERS= .1
+SCCS=sccs
+
+LIBRARY= libthread_db.a
+
+COBJECTS= td.o		\
+	td_po.o		\
+	td_to.o		\
+	td_so.o		\
+	td_error.o	\
+	td_event.o	
+
+XOBJECTS= xtd_po.o xtd_to.o
+
+OBJECTS= $(COBJECTS) $(XOBJECTS) 
+
+SRCS=	$(OBJECTS:%.o=%.c)
+
+MAPDIR=		../spec/$(MACH)
+MAPFILE=	$(MAPDIR)/mapfile.1
+MAPOPTS=	$(MAPFILE:%=-M %)
+CLOBBERFILES += $(MAPFILE)
+
+CSRCS=	$(COBJECTS:%.o=$(COMMONDIR)/%.c)
+CHDRS=	$(COBJECTS:%.o=$(COMMONDIR)/%.h)
+CLOCHDRS=	$(COMMONDIR)/td_impl.h        $(COMMONDIR)/td_po_impl.h     \
+		$(COMMONDIR)/td_to_impl.h
+
+XSRCS=	$(XOBJECTS:%.o=%.c)
+XHDRS=	$(XOBJECTS:%.o=%.h)
+
+LOCHDRS=	$(CLOCHDRS) $(XLOCHDRS)
+
+LIBTHREADHDRS=	$(LIBTHREAD_DIR)/common/libthread.h 		\
+		$(LIBTHREAD_DIR)/common/debug.h			\
+		$(ROOTSYS_DIR)/synch32.h			\
+		$(LIBTHREAD_DIR)/inc/utrace.h			\
+		$(LIBTHREAD_DIR)/$(MACH)/ml/machlibthread.h
+
+HDRS=	$(CHDRS) $(XHDRS) $(LOCHDRS) $(LIBTHREADHDRS)
+
+CEXTERNS=	$(COMMONDIR)/$(PROD).extdcl.h
+CPUBLICS=	$(COMMONDIR)/$(PROD).pubdcl.h
+CDCLHDRS=	$(CEXTERNS) $(CPUBLICS) $(CSTATICS)
+
+XEXTERNS=	x$(PROD).extdcl.h
+XPUBLICS=	x$(PROD).pubdcl.h
+XDCLHDRS=	$(XEXTERNS) $(XPUBLICS) $(XSTATICS)
+
+DCLHDRS=	$(CDCLHDRS) $(XDCLHDRS)
+
+# libsocket build rules
+#objs/%.o profs/%.o pics/%.o: inet/%.c
+#	$(COMPILE.c) -o $@ $<
+#	$(POST_PROCESS_O)
+#
+#objs/%.o profs/%.o pics/%.o: socket/%.c
+#	$(COMPILE.c) -o $@ $<
+#	$(POST_PROCESS_O)
+
+objs/%.o pics/%.o:	${COMMONDIR}/%.c  $(HDRS) $(DCLHDRS)
+	$(COMPILE.c) -o $@ $<
+	$(POST_PROCESS_O)
+
+objs/%.o pics/%.o:	%.c $(HDRS) $(DCLHDRS)
+	$(COMPILE.c) -o $@ $<
+	$(POST_PROCESS_O)
+
+# include library definitions
+include ../../Makefile.lib
+
+CPPFLAGS += -I$(LIBTHREAD_DIR)/inc -I$(LIBTHREAD_DIR)/common 		\
+	-I$(LIBTHREAD_DIR)/$(MACH) -I$(LIBTHREAD_DIR)/$(MACH)/ml 	\
+	-I$(LIBTHREAD_DIR)/sys/inc -I$(COMMONDIR) -I.			
+
+#	-DTEST_PS_CALLS
+
+DYNFLAGS +=	$(MAPOPTS)
+LIBS += $(DYNLIB)
+LDLIBS += -ldl -lc
+ZDEFS=
+
+$(DYNLIB): $(MAPFILE)
+
+$(MAPFILE):
+	@cd $(MAPDIR); $(MAKE) `basename $@`
+
+.KEEP_STATE:
+
+all:  $(DYNLIB) 
+
+install: all $(ROOTLIBS) $(ROOTLINKS)
+
+# include library targets
+include ../../Makefile.targ
+
+lint: 		
+	$(LINT.c) -o llib-l$(LIBNAME).ln $(CSRCS) $(XSRCS) > $(LINTOUT) 2>&1
+
+llib-l%.ln:	%.c
+	lint -o $@ $<
+
+.c.i	:
+	$(COMPILE.cpp) $<  > $@
+
+clean_all:	clean
+	rm -f $(XSTATICS) $(XEXTERNS) $(XEXTERNS) 
+

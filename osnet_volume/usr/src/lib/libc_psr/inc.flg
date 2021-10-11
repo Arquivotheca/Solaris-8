@@ -1,0 +1,10 @@
+#!/bin/sh
+#
+#ident	"@(#)inc.flg	1.1	94/11/28 SMI"
+#
+# Copyright (c) 1994 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+# File-list generator (flg) for included source not in this directory
+#
+echo_file usr/src/lib/libc/inc/synonyms.h

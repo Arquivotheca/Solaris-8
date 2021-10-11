@@ -1,0 +1,14 @@
+#
+# Copyright (c) 1998 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#ident	"@(#)Makefile.cmd-inet	1.1	99/03/21 SMI"
+#
+# cmd-inet/Makefile.cmd-inet
+#
+# Definitions common to cmd-inet source.
+#
+
+CMDINETSRC=		$(SRC)/cmd/cmd-inet
+CMDINETCOMMONDIR=	$(CMDINETSRC)/common
+

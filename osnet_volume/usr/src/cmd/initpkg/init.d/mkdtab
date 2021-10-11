@@ -1,0 +1,18 @@
+#!/sbin/sh
+#
+# Copyright (c) 1994-1997 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#ident	"@(#)mkdtab	1.11	98/11/18 SMI"
+
+#
+# Update device.tab and dgroup.tab files to reflect configuration.
+# Script runs once at installation time and then removes itself.
+#
+
+if [ -x /usr/sadm/sysadm/bin/mkdtab ]; then
+	/usr/sadm/sysadm/bin/mkdtab
+	/usr/bin/rm -f /etc/rc2.d/S82mkdtab
+	/usr/sbin/removef SUNWcsr /etc/rc2.d/S82mkdtab > /dev/null 2>&1
+	/usr/sbin/removef -f SUNWcsr > /dev/null 2>&1
+fi

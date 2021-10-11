@@ -1,0 +1,88 @@
+
+#ident	"@(#)sparc.fdbg	1.7	99/04/05 SMI"
+
+#include <sys/param.h>
+#include <sys/types.h>
+#include <sys/user.h>
+#include <sys/cred.h>
+#include <sys/proc.h>
+#include <sys/cpuvar.h>
+#include <sys/thread.h>
+#include <sys/sysinfo.h>
+#include <sys/vfs.h>
+#include <sys/time.h>
+#include <sys/vnode.h>
+#include <sys/disp.h>
+#include <sys/var.h>
+#include <sys/ts.h>
+#include <sys/kstat.h>
+#if defined(sun4) || defined(sun4c) || defined(sun4e)
+#include <vm/hat_sunm.h>
+#endif
+#if defined(sun4m) || defined(sun4d)
+#include <vm/hat_srmmu.h>
+#endif
+#if defined(sun4u)
+#include <vm/hat_sfmmu.h>
+#endif
+#include <sys/ivintr.h>
+#include <sys/intr.h>
+#include <sys/machcpuvar.h>
+#include <sys/sysiosbus.h>
+#include <sys/iommu.h>
+#include <sys/iocache.h>
+#include <vm/anon.h>
+#include <vm/as.h>
+#include <vm/hat.h>
+#include <vm/page.h>
+#include <vm/pvn.h>
+#include <vm/seg.h>
+#include <vm/seg_dev.h>
+#include <vm/seg_enum.h>
+#include <vm/seg_kp.h>
+#include <vm/seg_map.h>
+#include <vm/seg_vn.h>
+#include <sys/mutex_impl.h>
+#include <sys/rwlock_impl.h>
+#include <sys/callo.h>
+#include <sys/ddi_impldefs.h>
+#include <sys/kmem_impl.h>
+#include <sys/siginfo.h>
+#include <sys/memlist.h>
+#include <sys/modctl.h>
+#include <sys/kobj.h>
+#include <sys/privregs.h>
+#include <sys/machpcb.h>
+#include <sys/traptrace.h>
+#include <sys/nexusintr.h>
+#include <sys/nexusintr_impl.h>
+
+
+\
+\ regs information
+\
+
+regs
+
+v9_fpu.fpu_fr
+	fpu_dregs	x
+
+v9_fpu
+	fpu_fr		.v9_fpu.fpu_fr
+	fpu_fsr		x
+	fpu_fprs	x
+	fpu_q		x
+	fpu_qcnt	d
+	fpu_q_entrysize	d
+	fpu_en		x
+
+ddi_ispec_t
+
+ddi_intr_info_t
+	ii_inum			d
+	ii_kind			d
+	ii_int_handler_arg	x
+	ii_int_handler		x
+	ii_idevice_cookiep	x
+	ii_iblock_cookiep	x
+	ii_ispec		.ddi_ispec_t

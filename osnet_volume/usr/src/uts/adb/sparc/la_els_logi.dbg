@@ -1,0 +1,57 @@
+\
+\ Copyright (c) 1999 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)la_els_logi.dbg	1.1	99/07/21 SMI"
+\
+#include <sys/isa_defs.h>
+#include <sys/types.h>
+#include <sys/dditypes.h>
+#include <sys/ddidmareq.h>
+#include <sys/mutex.h>
+#include <sys/semaphore.h>
+#include <sys/condvar.h>
+#include <sys/thread.h>
+#include <sys/devops.h>
+#include <sys/fibre-channel/fc.h>
+#include "dummy.h"
+\
+\
+la_els_logi
+{adb_inline_begin}
+.>c
+<c+{OFFSET, ls_code}=""
+{adb_inline_end}
+	ls_code			.ls_code
+{adb_inline_begin}
+<c+{OFFSET, common_service}=""
+{adb_inline_end}
+	common_service		.common_service
+{adb_inline_begin}
+<c+{OFFSET, nport_ww_name}=""
+{adb_inline_end}
+	nport_ww_name		.la_wwn
+{adb_inline_begin}
+<c+{OFFSET, node_ww_name}=""
+{adb_inline_end}
+	node_ww_name		.la_wwn	
+{adb_inline_begin}
+<c+{OFFSET, class_1}=""
+{adb_inline_end}
+	class_1			.service_param
+{adb_inline_begin}
+<c+{OFFSET, class_2}=""
+{adb_inline_end}
+	class_2			.service_param
+{adb_inline_begin}
+<c+{OFFSET, class_3}=""
+{adb_inline_end}
+	class_3			.service_param
+{adb_inline_begin}
+<c+{OFFSET, reserved}=""
+{adb_inline_end}
+	reserved		hex
+	vendor_version		hex
+{adb_inline_begin}
+<c+{SIZEOF}=""
+{adb_inline_end}

@@ -1,0 +1,16 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)systemdump.dbg	1.3	98/01/19 SMI"
+
+#include "dummy.h"
+
+\
+\
+__dummy                 ""              systemdump
+{adb_inline_begin}
+0>eip
+nopanicdebug/W 1
+:c
+{adb_inline_end}

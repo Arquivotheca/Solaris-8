@@ -1,0 +1,48 @@
+# Copyright (c) 1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#pragma ident	"@(#)prototype_i386	1.28	99/05/06 SMI"
+#
+# This required package information file contains a list of package contents.
+# The 'pkgmk' command uses this file to identify the contents of a package
+# and their location on the development machine when building the package.
+# Can be created via a text editor or through use of the 'pkgproto' command.
+
+#!search <pathname pathname ...>	# where to find pkg objects
+#!include <filename>			# include another 'prototype' file
+#!default <mode> <owner> <group>	# default used if not specified on entry
+#!<param>=<value>			# puts parameter in pkg environment
+
+#
+# Include ISA independent files (prototype_com)
+#
+!include prototype_com
+#
+#
+#
+# List files which are I386 specific here
+#
+# source locations relative to the prototype file
+#
+#
+# SUNWcsr
+#
+f none kernel/drv/pci_to_i2o 755 root sys
+f none kernel/drv/pci_to_i2o.conf 644 root sys
+f none kernel/drv/i2o_bs 755 root sys
+f none kernel/drv/i2o_bs.conf 644 root sys
+f none kernel/drv/i2o_scsi 755 root sys
+f none kernel/drv/i2o_scsi.conf 644 root sys
+f none kernel/misc/gld 755 root sys
+f none kernel/misc/kbtrans 755 root sys
+f none kernel/misc/i2o_msg 755 root sys
+f none kernel/misc/terminal-emulator 755 root sys
+f none kernel/misc/hpcsvc 755 root sys
+f none kernel/misc/pcicfg 755 root sys
+f none kernel/misc/pcihp 755 root sys
+f none sbin/fdisk 555 root bin
+d none usr/kernel 755 root sys
+d none usr/kernel/fs 755 root sys
+f none usr/kernel/fs/xmemfs 755 root sys
+e initd etc/init.d/initpcihpc 744 root sys
+l initd etc/rcS.d/S15initpcihpc=../../etc/init.d/initpcihpc

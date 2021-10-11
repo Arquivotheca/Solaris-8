@@ -1,0 +1,21 @@
+\
+\ Copyright (c) 1999 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)cyclic_id.dbg	1.1	99/06/05 SMI"
+
+#include <sys/cyclic_impl.h>
+#include "dummy.h"
+
+cyc_id	cyi_	cyclic_id
+{adb_inline_begin}
+.>z
+<z=""
+{adb_inline_end}
+	cpu			hex		cyc_cpu
+	ndx			decimal		index
+	prev			hex
+	next			hex
+{adb_inline_begin}
+<z+{SIZEOF}=""
+{adb_inline_end}

@@ -1,0 +1,55 @@
+\
+\ Copyright (c) 1999 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)ssfcp_tgt.dbg	1.1	99/07/21 SMI"
+\
+#include <sys/isa_defs.h>
+#include <sys/types.h>
+#include <sys/dditypes.h>
+#include <sys/ddidmareq.h>
+#include <sys/mutex.h>
+#include <sys/semaphore.h>
+#include <sys/condvar.h>
+#include <sys/thread.h>
+#include <sys/devops.h>
+#include <sys/scsi/scsi.h>
+#include <sys/fibre-channel/fc.h>
+#include <sys/fibre-channel/impl/fc_ulpif.h>
+#include <sys/fibre-channel/ulp/fcp.h>
+#include <sys/fibre-channel/ulp/fcpvar.h>
+#include "dummy.h"
+\
+\
+ssfcp_tgt			tgt_
+{adb_inline_begin}
+.>z
+<z+{OFFSET, tgt_next}=""
+{adb_inline_end}
+	next			hex
+	port			hex
+	state			hex
+	mutex			.mutex
+{adb_inline_begin}
+<z+{OFFSET, tgt_lun}=""
+{adb_inline_end}
+	lun			hex
+	lun_cnt			hex
+	tmp_cnt			hex
+	pd_handle		hex
+	node_wwn		.la_wwn		node_wwn
+{adb_inline_begin}
+<z+{OFFSET, tgt_port_wwn}=""
+{adb_inline_end}
+	port_wwn		.la_wwn		port_wwn
+{adb_inline_begin}
+<z+{OFFSET, tgt_d_id}=""
+{adb_inline_end}
+	d_id			hex
+	hard_addr		hex
+	device_created		hex
+	change_cnt		hex
+	decremented		hex
+{adb_inline_begin}
+<z+{SIZEOF}=""
+{adb_inline_end}

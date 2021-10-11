@@ -1,0 +1,51 @@
+# "@(#)mailx.rc 1.6 95/07/25"
+# The following 3 settings produce the familiar Solaris behavior.
+set appenddeadletter
+unset pipeignore
+unset replyall
+set append dot showname
+if t
+	# mailx-only defaults here
+	#
+	# automatically incorporate new messages as they arrive.
+	# would be nice if mailtool supported this as well.
+	set autoinc
+else
+	# mailtool-only defaults here
+	#
+	# this should probably not be mailtool-only, but for
+	# compatibility we only put it here.
+	set hold
+	# following so hierarchical menu is the default
+	set LISTER="ls -LF"
+	# default is to allow editing of message windows
+	set editmessagewindow
+	# have to allow ~ escapes even though not using tty
+	set escapeok
+endif
+
+# most mail headers are uninteresting to most people.  here we ignore all
+# the uninteresting headers that are at all common.  a better approach
+# might've been to retain only the interesting headers...
+
+# ignore uninteresting headers
+ignore apparently-to default-options errors-to in-reply-to precedence priority
+ignore received reply-to return-path return-receipt-to sender status via
+
+# ignore headers from news
+ignore approved company confirmed-by distribution expires followup-to keywords
+ignore lines message-id newsgroups organization path posted-date posting-number
+ignore references submitted-by summary
+
+# ignore strange headers from other mail systems
+ignore auto-forward-count auto-forwarded-from email-version
+ignore end-of-header end-of-protocol message-protocol message-service
+ignore message-type message-version mts-message-id report-version sent-by
+ignore transport-options ua-content-id ua-message-id
+
+# ignore content headers, but they'll still be saved
+ignore content-length content-type content-charset
+
+# ignore common non-standard headers
+ignore x-lines x-mailer x-postmark x-sequence x-zippy
+ignore x-sun-charset

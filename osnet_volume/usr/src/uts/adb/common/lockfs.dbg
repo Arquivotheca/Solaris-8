@@ -1,0 +1,31 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)lockfs.dbg	1.4	98/01/19 SMI"
+
+\ arg             : address of lockfs struct
+\ uses            :
+\ registers       : o (this is a second-level-submacro, the
+\                   callers are using 'z' and 'w')
+\ description     : prints the contents of lockfs structure
+
+#include <sys/types.h>
+#include <sys/lockfs.h>
+#include "dummy.h"
+
+\
+\
+lockfs                  lf_
+{adb_inline_begin}
+.>o
+<o+{OFFSET, lf_lock}=""
+{adb_inline_end}
+        lock                    hex
+        flags                   hex
+        key                     hex
+        comlen                  decimal
+        comment                 hex
+{adb_inline_begin}
+<o+{SIZEOF}=""
+{adb_inline_end}

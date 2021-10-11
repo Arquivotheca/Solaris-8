@@ -1,0 +1,12 @@
+#!/bin/sh
+#
+#pragma ident "@(#)req.flg	1.1 99/07/11 SMI"
+#
+
+echo_file usr/src/Makefile.master
+echo_file usr/src/lib/Makefile.lib
+echo_file usr/src/lib/Makefile.lib.64
+echo_file usr/src/lib/Makefile.targ
+echo_file usr/src/lib/Makefile.spec
+echo_file usr/src/lib/Makefile.spec.arch
+echo_file usr/src/lib/Makefile.mach

@@ -1,0 +1,38 @@
+#
+#ident	"@(#)Makefile.targ	1.2	98/10/09 SMI"
+#
+# Copyright (c) 1998 by Sun Microsystems, Inc.
+# All rights reserved.
+
+%.o:		../common/%.c
+		$(COMPILE.c) $<
+		$(POST_PROCESS_O)
+
+all:		$(PROG)
+
+clean:
+		$(RM) $(CLEANFILES)
+
+delete:
+		$(RM) $(PROG)
+
+install \
+package:	all $(ROOTCCSBINPROG) $(ROOTLINKS)
+
+lint:		$(LINTOUT)
+
+$(PROG):	$(OBJS)
+		$(LINK.c) -o $@ $(OBJS) $(LDLIBS)
+		$(POST_PROCESS)
+
+$(ROOTLINKS):	$(ROOTCCSBINPROG)
+		$(RM) $@
+		$(LN) $(ROOTCCSBINPROG) $@
+
+$(LINTOUT):	$(SRCS)
+		$(LINT.c) $(SRCS) > $(LINTOUT) 2>&1
+
+$(ROOTCCSBIN64)/%: %
+	$(INS.file)
+
+include		$(SRC)/cmd/Makefile.targ

@@ -1,0 +1,93 @@
+#
+# Copyright (c) 1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#pragma ident "@(#)bsafe.objs	1.1 99/07/11 SMI"
+#
+#	BSAFE 3.0 objects
+#
+
+ALGAE_OBJS = \
+  algerr.o berdecod.o berencod.o bsshare.o\
+  cmparith.o cmpbits.o cmpcnv.o cmpmem.o cmpmod.o\
+  cmpspprt.o\
+  crt.o des.o descbd.o descbe.o\
+  desedec.o deseded.o desedee.o\
+  desxcbc.o desxcbd.o desxcbe.o dhagree.o\
+  digrand.o digrandx.o dsakg.o dsas.o dsav.o\
+  findexpo.o intbits.o macpisub.o md.o\
+  md2.o md2rand.o md5rand.o pqggen.o prime.o\
+  rc4.o rc4mac.o rc4macd.o rc4mace.o\
+  rc5cbd.o rc5cbe.o rc5init.o rsa.o rsakeygn.o\
+  seccbcd.o seccbce.o secrcbc.o\
+  sha.o shacomm.o surrendr.o uint4.o
+
+ALGAE_OBJS_C = \
+  cmpmontg.o cmpmdexp.o cmpmuldv.o cmpvectr.o\
+  mac.o md5.o rc2.o rc2cbd.o rc2cbe.o rc5.o
+
+BSAFE_OBJS = \
+  ah1113.o ahbs1enc.o ahbshare.o ahcbc.o\
+  ahcbcpad.o ahcbcpbe.o ahchdig.o ahchdsa.o ahchencr.o\
+  ahchgen.o\
+  ahchkeya.o ahchrand.o ahdesbs1.o\
+  ahdespbe.o ahdigest.o ahdsagen.o ahdsasha.o\
+  ahencode.o ahencryp.o ahgen.o ahkagree.o ahrandom.o\
+  ahrc2bs1.o ahrc2pbe.o ahrsabs1.o\
+  ahrsaenc.o ahrsaepr.o ahrsaepu.o ahrsanop.o\
+  ahrsasig.o ahsigver.o ahxorpbe.o\
+  ai1113.o aiber.o aibshare.o aicbciv8.o aichdig.o\
+  aichenc8.o aichencn.o\
+  aichencr.o aicherc2.o aicherc5.o aichgen.o aichrand.o\
+  aidesber.o aidesbs1.o aidescbc.o aidescbp.o\
+  aidespbe.o aidespbr.o aidespem.o\
+  aidhber.o aidhgen.o aidhkeya.o\
+  aids3ber.o aids3cbc.o aids3cbp.o\
+  aidsa.o aidsagen.o aidsakgn.o aidsasha.o aidssber.o\
+  aidsxber.o aidsxbs1.o aidsxcbc.o aidsxcbp.o\
+  aihexstr.o aiiv8ber.o aim2dpbe.o\
+  aim2rber.o aim2rpbe.o aim5dpbe.o\
+  aim5rber.o aim5rpbe.o aim5xpbe.o\
+  aimac.o aimd.o aimd2.o\
+  aimd2ber.o aimd2des.o aimd2pem.o\
+  aimd2ran.o aimd2rc2.o aimd2rsa.o\
+  aimd5.o aimd5ber.o aimd5des.o\
+  aimd5pem.o aimd5ran.o aimd5rc2.o aimd5rsa.o\
+  aimd5xor.o ainfotyp.o\
+  ainulber.o ainull.o ainulpem.o aipbe.o aipem.o\
+  air4mber.o airc2ber.o airc2bs1.o\
+  airc2cbc.o airc2cbp.o\
+  airc2pbe.o airc2pbr.o airc2pem.o airc4.o\
+  airc4ber.o airc5cbc.o airc5cbp.o\
+  airc4mac.o airprber.o airprbs1.o\
+  airprpem.o airpuber.o airpubs1.o airpupem.o\
+  airsaepr.o airsaepu.o\
+  airsakgn.o airsaprv.o airsapub.o airsasig.o aixorpbe.o\
+  aisha.o aishaber.o aishades.o aisharsa.o ais1rber.o\
+  aishdpbe.o algchoic.o algobj.o\
+  amcrte.o amcrtex.o amdescbd.o amdescbe.o\
+  amdhka.o amdhpg.o\
+  amds3cbd.o amds3cbe.o amdigest.o\
+  amdsa.o amdsakg.o amdsapg.o amdsas.o amdsav.o\
+  amdsxcbd.o amdsxcbe.o\
+  amencdec.o amgen.o amkagree.o ammac.o ammd.o\
+  ammd2.o ammd2r.o ammd2rx.o ammd5.o ammd5r.o ammd5rx.o\
+  amrandom.o amrc2cbd.o amrc2cbe.o\
+  amrc4.o amrc4mac.o amrc4mcd.o amrc4mce.o\
+  amrc5cbd.o amrc5cbe.o amrkg.o amrsae.o amsha.o\
+  balg.o balgmeth.o ber.o ber2.o\
+  beralloc.o berfixed.o berstrem.o binfocsh.o\
+  bkey.o bmempoo2.o bmempool.o bsf1int.o\
+  bsf1key.o bversion.o desparit.o\
+  digest.o diginfo.o encode.o\
+  encrypt.o generate.o intitem.o keyagree.o keyobj.o\
+  ki24byte.o ki8byte.o\
+  kibs1sec.o kides8.o kides8s.o kides24s.o\
+  kidesbs1.o kidesx.o kidesxb1.o\
+  kidprber.o kidpuber.o kidsapar.o kidsaprv.o kidsapub.o\
+  kiitem.o kinfotyp.o kifulprv.o\
+  kipkcrpr.o kirc2bs1.o kirprber.o kirprbs1.o kirpuber.o\
+  kirpubs1.o kirsacrt.o kirsaprv.o kirsapub.o\
+  pbeber.o pubkyber.o random.o rc2vers.o signver.o
+
+BSAFEOBJS=	$(BSAFE_OBJS) $(ALGAE_OBJS) $(ALGAE_OBJS_C)

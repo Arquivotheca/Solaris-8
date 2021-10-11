@@ -1,0 +1,34 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)scsi_pkt.dbg	1.5	98/01/19 SMI"
+
+#include <sys/scsi/scsi.h>
+#include "dummy.h"
+
+\
+\
+scsi_pkt                pkt_
+{adb_inline_begin}
+.>w
+<w+{OFFSET, pkt_ha_private}=""
+{adb_inline_end}
+        ha_private              hex
+        address                 .scsi_addr
+{adb_inline_begin}
+<w+{OFFSET, pkt_private}=""
+{adb_inline_end}
+        private                 hex
+        comp                    hex
+        flags                   hex
+        time                    hex
+        scbp                    hex
+        cdbp                    hex
+        resid                   hex
+        state                   hex
+        statistics              hex
+        reason                  hex
+{adb_inline_begin}
+<w+{SIZEOF}=""
+{adb_inline_end}

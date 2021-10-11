@@ -1,0 +1,34 @@
+#!/bin/sh
+#
+#ident	"@(#)i.definit 1.5 99/05/26 SMI"
+#
+# Copyright (c) 1993 by Sun Microsystems, Inc.
+#
+
+PATH="/usr/bin:/usr/sbin:${PATH}"
+export PATH
+
+while read src dest
+do
+	if [ "$UPDATE" != "yes" ] ; then
+		cp $src $dest
+	else
+		if [ ! -f $dest ] ; then
+			if [ -f $BASEDIR/etc/TIMEZONE.temp ] ; then
+				zone=`sed -n 's/TZ=\([^ 	;#]*\).*$/\1/p' $BASEDIR/etc/TIMEZONE.temp`
+				sed '/^TZ[ 	]*=/d' $src > $dest
+				echo "TZ=$zone" >> $dest
+				rm -f $BASEDIR/etc/TIMEZONE.temp
+			else
+				cp $src $dest
+			fi
+		else
+			grep CMASK $dest > /dev/null 2>&1
+			if [ $? != 0 ]; then
+				echo "CMASK=022" >> $dest
+			fi
+		fi
+	fi
+done
+
+exit 0

@@ -1,0 +1,13 @@
+# Copyright (c) 1992 by Sun Microsystems, Inc.
+
+#ident	"@(#)mapfile	1.11	93/07/03 SMI" /* from SunOS 4.1 */  
+ 
+text    = LOAD ?RX V0xf5100000;
+text    : $PROGBITS ?A!W;
+ 
+data    = LOAD ?RWX;
+data    : $PROGBITS ?AW;
+data    : $NOBITS ?AW;
+ 
+note    = NOTE;
+note    : $NOTE;

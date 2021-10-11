@@ -1,0 +1,50 @@
+\
+\ Copyright (c) 1997-1998 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)nce.dbg	1.2	99/08/19 SMI"
+
+#include <sys/types.h>
+#include <sys/stropts.h>
+#include <sys/socket.h>
+#include <netinet/in_systm.h>
+#include <netinet/in.h>
+#include <netinet/ip.h>
+#include <netinet/ip6.h>
+#include <netinet/icmp6.h>
+#include <net/if.h>
+#include <sys/stream.h>
+#include <inet/common.h>
+#include <inet/led.h>
+#include <inet/ip.h>
+#include <inet/ip6.h>
+#include <inet/ip_ndp.h>
+#include "dummy.h"
+
+nce_s                ""              nce
+{adb_inline_begin}
+.>n
+<n+{OFFSET, nce_next}=""
+{adb_inline_end}
+	nce_next		hex	nce_next
+	nce_ptpn		hex	nce_ptpn
+	nce_ill			hex	nce_ill
+	nce_flags		hex	nce_flags
+	nce_state		decimal	nce_state
+	nce_pcnt		decimal	nce_pcnt
+	nce_rcnt		decimal	nce_rcnt
+	nce_addr		.in6_addr
+	nce_mask		.in6_addr
+	nce_extract_mask	.in6_addr
+	nce_ll_extract_start	decimal	nce_ll_extract_start
+	nce_fp_mp		hex	nce_fp_mp
+	nce_res_mp		hex	nce_res_mp
+	nce_qd_mp		hex	nce_qd_mp
+	nce_timer_mp		hex	nce_timer_mp
+	nce_mp			hex	nce_mp
+	nce_last		hex	nce_last
+	nce_refcnt		decimal	nce_refcnt
+	nce_lock		.mutex
+{adb_inline_begin}
+<n+{SIZEOF}=""
+{adb_inline_end}

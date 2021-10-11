@@ -1,0 +1,72 @@
+#
+# Copyright (c) 1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#pragma ident "@(#)ami.objs	1.2 99/07/11 SMI"
+#
+#	AMI objects
+#
+
+COMMONOBJS=	ami_error.o ami_init.o ami_rand.o
+
+KEYGENOBJS=	java_keygen.o
+
+KEYGENINTLOBJS= ami_genkey.o ami_genkeypair.o ami_genkey_util.o
+
+SIGNOBJS=	ami_sign.o ami_verify.o java_sign.o java_verify.o
+
+ENCRYPTOBJS=	java_crypto.o
+
+ENCRINTLOBJS=	ami_encrypt.o ami_decrypt.o ami_wrap.o ami_unwrap.o
+
+CERTOBJS=	ami_get_cert.o ami_verify_cert.o ami_dn_str.o \
+	ami_tkey.o ami_time.o
+
+CRYPTOKIOBJS= c_attribute.o c_cryptoki_init.o c_decrypt.o c_digest.o \
+	c_encrypt.o c_genkey.o c_object.o c_random.o c_session.o c_sign.o \
+	c_verify.o c_wrap.o
+
+UTILSOBJS= bsafe_util.o chooser.o cmp.o conversion.o \
+	copy.o free.o io.o retval.o surrender.o table.o template.o \
+	tstdlib.o utils.o
+
+UTILSINTLOBJS=	table_init.o
+
+KEYMGNTOBJS= fns_keymgnt.o ami_keymgnt_common.o
+
+DIGESTOBJS= ami_digest.o java_digest.o
+
+AMISERVOBJS= ami_client.o ami_java_client.o
+
+AMISERV_RPC_STUS= ami_prot_xdr.o ami_prot_clnt.o 
+
+ASN1OBJS=	ami_asn1.o
+
+#
+#	Should not be adding any more objects beyond this
+#
+
+# BSAFE Objects
+include $(SRC)/lib/ami/libami/bsafe.objs
+
+# Global objects
+GLOOBJS=	$(COMMONOBJS) $(KEYGENOBJS) $(SIGNOBJS) $(ENCRYPTOBJS) \
+	$(CERTOBJS) $(CRYPTOKIOBJS) $(UTILSOBJS) $(KEYMGNTOBJS) \
+	$(DIGESTOBJS) $(AMISERVOBJS) $(ASN1OBJS) $(BSAFEOBJS) \
+	$(AMISERV_RPC_STUS)
+
+# Export restricted objects
+INTLOBJS=	$(KEYGENINTLOBJS) $(ENCRINTLOBJS) $(UTILSINTLOBJS)
+
+# object for cstyling
+CSTYLESRCS = $(COMMONOBJS:%.o=common/%.c) \
+	$(KEYGENOBJS:%.o=keygen/%.c) $(KEYGENINTLOBJS:%.o=keygen/%.c) \
+	$(SIGNOBJS:%.o=sign/%.c) $(ENCRYPTOBJS:%.o=encrypt/%.c) \
+	$(ENCRINTLOBJS:%.o=encrypt/%.c) $(CERTOBJS:%.o=cert/%.c) \
+	$(CRYPTOKIOBJS:%.o=cryptoki/%.c) $(UTILSOBJS:%.o=utils/%.c) \
+	$(UTILSINTLOBJS:%.o=utils/%.c) $(KEYMGNTOBJS:%.o=keymgnt/%.c) \
+	$(DIGESTOBJS:%.o=digest/%.c) $(AMISERVOBJS:%.o=amiserv/%.c) \
+	$(ASN1OBJS:%.o=asn1/%.c)
+#	$(BSAFE_OBJS:%.o=bsafe/bsource/algs/%.c) \
+#	$(ALGAE_OBJS:%.o=bsafe/bsource/keys/%.c) \
+#	$(ALGAE_OBJS_C:%.o=bsafe/bsource/support/%.c)

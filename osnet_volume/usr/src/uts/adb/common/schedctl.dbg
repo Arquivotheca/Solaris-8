@@ -1,0 +1,24 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)schedctl.dbg	1.4	98/01/19 SMI"
+
+#include <sys/schedctl.h>
+#include "dummy.h"
+
+\
+\
+sc_data                 sc_             schedctl
+{adb_inline_begin}
+.>z
+<z+{OFFSET, sc_flags}=""
+{adb_inline_end}
+        flags                   hex
+        shared                  hex
+        caller                  hex
+        tag                     sdecimal
+        uaddr                   hex
+{adb_inline_begin}
+<z+{SIZEOF}=""
+{adb_inline_end}

@@ -1,0 +1,72 @@
+#
+# Copyright (c) 1995-1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#       @(#)prototype_com	1.11	99/11/18 (c) Sun Microsystems, Inc.
+#
+# This required package information file contains a list of package contents.
+# The 'pkgmk' command uses this file to identify the contents of a package
+# and their location on the development machine when building the package.
+# Can be created via a text editor or through use of the 'pkgproto' command.
+
+#!search <pathname pathname ...>	# where to find pkg objects
+#!include <filename>			# include another 'prototype' file
+#!default <mode> <owner> <group>	# default used if not specified on entry
+#!<param>=<value>			# puts parameter in pkg environment
+
+# packaging files
+
+i pkginfo
+i copyright
+i depend
+
+#
+# source locations relative to the prototype file
+#
+# SUNWxcu4
+#
+d none usr 755 root sys
+d none usr/xpg4 755 root bin
+d none usr/xpg4/bin 755 root bin
+f none usr/xpg4/bin/ar 555 root bin
+f none usr/xpg4/bin/awk 555 root bin
+f none usr/xpg4/bin/basename 555 root bin
+f none usr/xpg4/bin/cp 555 root bin
+f none usr/xpg4/bin/ctags 555 root bin
+f none usr/xpg4/bin/date 555 root bin
+f none usr/xpg4/bin/df 555 root bin
+f none usr/xpg4/bin/du 555 root bin
+f none usr/xpg4/bin/ed 555 root bin
+f none usr/xpg4/bin/edit 555 root bin
+l none usr/xpg4/bin/egrep=../../../usr/xpg4/bin/grep
+f none usr/xpg4/bin/env 555 root bin
+l none usr/xpg4/bin/ex=../../../usr/xpg4/bin/edit
+f none usr/xpg4/bin/expr 555 root bin
+f none usr/xpg4/bin/find 555 root bin
+l none usr/xpg4/bin/fgrep=../../../usr/xpg4/bin/grep
+f none usr/xpg4/bin/grep 555 root bin
+f none usr/xpg4/bin/id 555 root bin
+l none usr/xpg4/bin/ipcs=../../../usr/lib/isaexec
+f none usr/xpg4/bin/link 555 root bin
+l none usr/xpg4/bin/ln=../../../usr/xpg4/bin/cp
+f none usr/xpg4/bin/ls 555 root bin
+f none usr/xpg4/bin/m4 0555 root bin
+f none usr/xpg4/bin/more 555 root bin
+l none usr/xpg4/bin/mv=../../../usr/xpg4/bin/cp
+f none usr/xpg4/bin/nice 555 root bin
+f none usr/xpg4/bin/nl 555 root bin
+f none usr/xpg4/bin/nm 555 root bin
+f none usr/xpg4/bin/nohup 555 root bin
+f none usr/xpg4/bin/od 555 root bin
+f none usr/xpg4/bin/pr 555 root bin
+f none usr/xpg4/bin/rm 555 root bin
+f none usr/xpg4/bin/sed 555 root bin
+s none usr/xpg4/bin/sh=../../bin/ksh
+f none usr/xpg4/bin/sort 555 root bin
+f none usr/xpg4/bin/stty 555 root bin
+f none usr/xpg4/bin/tail 555 root bin
+f none usr/xpg4/bin/tr 555 root bin
+l none usr/xpg4/bin/vedit=../../../usr/xpg4/bin/edit
+l none usr/xpg4/bin/vi=../../../usr/xpg4/bin/edit
+l none usr/xpg4/bin/view=../../../usr/xpg4/bin/edit
+f none usr/xpg4/bin/who 555 root bin

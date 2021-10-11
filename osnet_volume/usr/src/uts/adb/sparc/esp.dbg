@@ -1,0 +1,124 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)esp.dbg	1.27	98/12/21 SMI"
+
+#include <sys/kmem.h>
+#include <sys/kmem_impl.h>
+#include <sys/scsi/adapters/espvar.h>
+#include "dummy.h"
+
+
+\
+\
+esp			e_
+{adb_inline_begin}
+.>z
+<z+{OFFSET, e_tran}=""
+{adb_inline_end}
+	tran
+	dev
+	mutex			.mutex
+{adb_inline_begin}
+<z+{OFFSET, e_iblock}=""
+{adb_inline_end}
+	iblock			
+	next
+	type
+	idcode
+	dma_rev
+	espconf
+	espconf2
+	espconf3
+	espconf3_fastscsi
+	espconf3_last
+	clock_conv
+	clock_cycle
+	stval
+	sdtr
+	stat
+	intr
+	step
+	abort
+	reset
+	last_cmd
+	state
+	laststate
+	suspended
+	cur_msgout
+	last_msgout
+	omsglen
+	imsgarea
+	imsglen
+	imsgindex
+	last_msgin
+	offset
+	period
+	neg_period
+	backoff
+	default_period
+	req_ack_delay
+	offset_last
+	period_last
+	sync_known
+	force_async
+	nodisc
+	weak
+	notag
+	target_scsi_options_defined
+	polled_intr
+	props_update
+	scsi_options
+	options
+	scsi_tag_age_limit
+	scsi_reset_delay
+	cmdarea
+	dmaga_csr
+{adb_inline_begin}
+<z+{OFFSET, e_dmacookie}/n"dmacookie"16tnJKX
+<z+{OFFSET, e_dmahandle}=""
+{adb_inline_end}
+	dmahandle
+	dma_attr
+	ncmds
+	ndisc
+	reg
+	dma
+	lastdma
+	lastcount
+	esc_read_count
+	dslot
+	last_slot
+	cur_slot
+	next_slot
+	slots
+	readyf
+	readyb
+	tagQ
+	throttle
+	tcmds
+	reset_delay
+	arq_pkt
+	rq_sense_data
+	save_pkt
+	callback_signal_needed
+	callback_info
+	startQ_mutex		.mutex
+{adb_inline_begin}
+<z+{OFFSET, e_startf}=""
+{adb_inline_end}
+	startf
+	startb
+	kmem_cache
+	reset_notify_listf
+	restart_cmd_timeid
+	qfull_retries
+	qfull_retry_interval
+	regs_acc_handle
+	cmdarea_acc_handle
+	flags
+	intr_kstat
+{adb_inline_begin}
+<z+{SIZEOF}=""
+{adb_inline_end}

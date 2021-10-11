@@ -1,0 +1,16 @@
+#
+#  Copyright (c) 1997, by Sun Microsystems, Inc.
+#  All rights reserved.
+#
+# @(#)asy.itu        1.4     98/04/02 SMI
+#
+interface_version = 1.0
+itu_type=partial
+name = asy
+patchid=105617-02
+legacy_device=true
+bef_name=com.bef
+realmode_path=/platform/i86pc/boot/solaris/drivers/isa.025
+driverpkg=SUNWpsdcr
+driverpkgvers="1.1.0,REV=1997.06.13.11.51"
+driverpkgdesc="Platform Support, OS Functionality (Root)"

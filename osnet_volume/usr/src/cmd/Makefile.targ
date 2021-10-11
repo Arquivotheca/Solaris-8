@@ -1,0 +1,35 @@
+#
+#ident	"@(#)Makefile.targ	1.17	99/07/22 SMI"
+#
+# Copyright (c) 1994-1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+# cmd/Makefile.targ
+# common target definitions for command builds
+#
+
+clobber: clean
+	-$(RM) $(PROG) $(CLOBBERFILES)
+
+lint_PROG:
+	$(LINT.c) $(PROG).c $(LDLIBS)
+
+lint_SRCS:
+	$(LINT.c) $(SRCS) $(LDLIBS)
+
+#
+# For message catalogue files
+#
+_msg: $(MSGDOMAIN) $(POFILE)
+	$(RM) $(MSGDOMAIN)/$(POFILE)
+	$(CP) $(POFILE) $(MSGDOMAIN)
+
+# the build of the $(DCFILE) should be defined locally
+# its .dc extension gets renamed to .po upon installation
+#
+_dc: $(DCMSGDOMAIN) $(DCFILE)
+	$(RM) $(DCMSGDOMAIN)/$(DCFILE)
+	$(CP) $(DCFILE) $(DCMSGDOMAIN)/$(DCFILE:.dc=.po)
+
+$(MSGDOMAIN) $(DCMSGDOMAIN):
+	$(INS.dir)

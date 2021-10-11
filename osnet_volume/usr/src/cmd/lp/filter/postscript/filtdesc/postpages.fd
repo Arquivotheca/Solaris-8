@@ -1,0 +1,9 @@
+#ident	"@(#)postpages.fd	1.4	95/07/13 SunSoft"
+
+Input types: postscript
+Output types: postscript
+Printer types: any
+Printers: any
+Filter type: slow
+Command: /usr/lib/lp/postscript/postreverse -r
+Options: PAGES * = -o*

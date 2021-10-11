@@ -1,0 +1,63 @@
+.\" @(#)whocalls.man 1.2 97/07/28 SMI;
+.\" Copyright (c) 1996, Sun Microsystems, Inc.
+.\" All Rights Reserved
+.if n .tr \--
+.TH whocalls 1 "18 Nov 1996"
+.SH NAME
+whocalls \- trace the amount of time spent in each function call
+.SH SYNOPSIS
+.B whocalls
+[
+.B -s
+] [
+.B -l
+.I wholib
+] 
+.I funcnamelist
+executable [executable arguements ...]
+.SH AVAILABILITY
+.LP
+SUNWosdem
+.SH DESCRIPTION
+.B whocalls
+is a simple example of a
+.I Link-Auditing
+library which permits the tracking of the calling of a given function.
+.B funcnamelist
+is a is a colon sperated list of function of function names.  The
+.I executable
+is run as normal and each time a procedure in the
+.I funcnamelist 
+is called the arguements to that procedure and a stack trace
+are displayed on standard output.
+.SH OPTIONS
+.TP 10
+.BI \-s
+when available also examine the .symtab for local symbols
+when displaying a stack trace.  While more detailed this is
+a much more expensive operation.
+.BI \-l " wholib"
+specify an alternate who.so 
+.I Link-Auditing
+library to use.
+.SH EXAMPLES
+This examples tracks the calls to
+.I printf()
+made by a simple
+.B hello_world
+program
+.LP
+.nf
+.ft 3
+% whocalls printf hello 
+printf(0x106e4, 0xef625310, 0xef621ba8)
+        hello:main+0x10
+        hello:_start+0x5c
+hello
+% 
+.ft
+.fi
+.SH SEE ALSO
+.BR ld.so.1 (1)
+.br
+.TZ LLM

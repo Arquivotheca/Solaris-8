@@ -1,0 +1,83 @@
+#
+#pragma ident	"@(#)mapfile	1.10	99/08/26 SMI"
+#
+# Copyright (c) 1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#
+# Generic interface definition for usr/src/lib/storage/libg_fc.
+#
+# For information regarding the establishment of versioned definitions see:
+#       The Linker and Libraries Manual (version 2.5 or greater)
+# This is part of the Developers Guide in the Answerbook.  Specifically refer
+# to Chapter 2 under section "Defining Additional Symbols" through section
+# "Reducing Symbol Scope", and Chapter 5 "Versioning".
+#
+# For Sun's specific rules for the modification (evolution) of these version
+# definitions see:
+#    "Policy for Shared Library Version Names and Interface Definitions"
+#    in /shared/ON/general_docs/scoping_rules.ps
+#
+SUNWprivate_gfc_2.0 {
+	global:
+		g_free_multipath;
+		g_free_wwn_list;
+		g_get_dev_map;
+		g_get_inquiry;
+		g_get_limited_map;
+		g_get_multipath;
+		g_get_nexus_path;
+		g_get_wwn;
+		g_get_wwn_list;
+		g_rdls;
+		g_dev_start;
+		g_dev_stop;
+		g_force_lip;
+		g_forcelip_all;
+		g_offline_drive;
+		g_online_drive;
+		g_get_errString;
+		g_get_physical_name;
+		g_get_physical_name_from_link;
+		g_get_dev_or_bus_phys_name;
+		g_switch_to_alpa;
+		g_sf_alpa_to_switch;
+		g_i18n_catopen;
+		g_port_offline;
+		g_port_online;
+	local:
+		*;
+};
+
+SUNWprivate_gfcp_2.0 {
+	global:
+		g_device_in_map;
+		g_reserve;
+		g_release;
+		g_start;
+		g_stop;
+		g_string_to_wwn;
+		g_ll_to_str;
+		g_get_port_multipath;
+		g_destroy_data;
+		g_dump;
+		g_get_machineArch;
+		g_object_open;
+		g_zalloc;
+		g_alloc_string;
+		g_scsi_log_sense_cmd;
+		g_scsi_mode_select_cmd;
+		g_scsi_mode_sense_cmd;
+		g_scsi_read_capacity_cmd;
+		g_scsi_readbuffer_cmd;
+		g_scsi_rec_diag_cmd;
+		g_scsi_reset;
+		g_scsi_send_diag_cmd;
+		g_scsi_tur;
+		g_scsi_writebuffer_cmd;
+		g_scsi_inquiry_cmd;
+		g_scsi_persistent_reserve_in_cmd;
+		g_get_path_type;
+		g_get_host_params;
+		l_catd;
+} SUNWprivate_gfc_2.0;

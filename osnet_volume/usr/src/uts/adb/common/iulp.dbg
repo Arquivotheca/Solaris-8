@@ -1,0 +1,49 @@
+\
+\ Copyright (c) 1999 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)iulp.dbg	1.1	99/10/01 SMI"
+
+#include <sys/types.h>
+#include <sys/stropts.h>
+#include <sys/socket.h>
+#include <netinet/in_systm.h>
+#include <netinet/in.h>
+#include <netinet/ip.h>
+#include <netinet/ip6.h>
+#include <netinet/icmp6.h>
+#include <net/if.h>
+#include <sys/stream.h>
+#include <inet/common.h>
+#include <inet/led.h>
+#include <inet/ip.h>
+#include <inet/ip6.h>
+#include "dummy.h"
+
+iulp_s                ""              iulp
+{adb_inline_begin}
+.>z
+<z+{OFFSET, iulp_set}=""
+{adb_inline_end}
+	iulp_set		decimal	iulp_set
+	iulp_ssthresh		decimal	ssthresh
+	iulp_rtt		decimal	rtt
+	iulp_rtt_sd		decimal	rtt_sd
+	iulp_spipe		decimal	spipe
+	iulp_rpipe		decimal	rpipe
+	iulp_rtomax		decimal	rtomax
+	iulp_sack		decimal	sack
+{adb_inline_begin}
+*(<z+{OFFSET, iulp_tstamp_ok})>/i/t
+#if defined(_BIG_ENDIAN)
+(##(<t&0x80000000))="tstamp_ok"8tB
+(##(<t&0x40000000))="wscale_ok"8tB
+(##(<t&0x20000000))="ecn_ok"16tB
+(##(<t&0x10000000))="pmtod_ok"8tB
+#elif defined(_LITTLE_ENDIAN)
+(##(<t&0x00000001))="tstamp_ok"8tB
+(##(<t&0x00000002))="wscale_ok"8tB
+(##(<t&0x00000004))="ecn_ok"16tB
+(##(<t&0x00000008))="pmtud_ok"8tB
+#endif
+{adb_inline_end}

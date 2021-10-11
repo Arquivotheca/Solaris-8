@@ -1,0 +1,37 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)kmem_log.dbg	1.6	98/07/19 SMI"
+
+#include <sys/kmem.h>
+#include <sys/kmem_impl.h>
+#include "dummy.h"
+
+\       '*ncpus' is a 32-bit access
+\
+\
+kmem_log_header         lh_             kmem_log
+{adb_inline_begin}
+.>z
+<_>U;1>_
+<z+{OFFSET, lh_lock}=""
+{adb_inline_end}
+        lock                    .mutex
+{adb_inline_begin}
+<z+{OFFSET, lh_base}=""
+{adb_inline_end}
+        base                    hex
+        free                    hex
+        chunksize               sdecimal
+        nchunks                 sdecimal
+        head                    sdecimal
+        tail                    sdecimal
+        hits                    sdecimal
+{adb_inline_begin}
+(<z+{OFFSET, lh_cpu})>z
+*ncpus>/i/n
+<z$<kmem_cpu_log.nxt
+<U>_
+{adb_inline_end}
+

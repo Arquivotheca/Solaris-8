@@ -1,0 +1,16 @@
+#
+#ident	"@(#)mapfile-vers	1.1	97/09/11 SMI"
+#
+# Copyright (c) 1997 by Sun Microsystems, Inc.
+# All rights reserved.
+
+# Specify what global symbols we export (none).  Note that we're not
+# interested in declaring a version, simply scoping the file is sufficient.
+
+{
+	global:
+		dbg_print;
+		main;			# debuggers seem to like this.
+	local:
+		*;
+};

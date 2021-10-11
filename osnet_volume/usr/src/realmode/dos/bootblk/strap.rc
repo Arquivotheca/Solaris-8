@@ -1,0 +1,4 @@
+Options default=1 load=0.8000
+Options title="\Sc\Sp0.0Solaris DCB"
+Options timeout=10
+"Solaris Boot"		/solaris/boot.bin

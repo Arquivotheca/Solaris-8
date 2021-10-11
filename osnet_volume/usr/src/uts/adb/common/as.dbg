@@ -1,0 +1,51 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)as.dbg	1.10	98/01/19 SMI"
+
+#include <sys/param.h>
+#include <sys/types.h>
+#include <sys/regset.h>
+#include <vm/as.h>
+#include "dummy.h"
+
+\
+\
+as      a_
+{adb_inline_begin}
+.>z
+<_>U;1>_
+<z+{OFFSET, a_contents}=""
+{adb_inline_end}
+        contents        .mutex          "contents (mutex)"
+{adb_inline_begin}
+<z+{OFFSET, a_flags}=""
+{adb_inline_end}
+        flags           hex
+        vbits           hex
+        cv              hex
+        hat             hex
+        hrm             hex
+        cache.seglast   hex             seglast
+        lock            .rwlock         "lock (rwlock)"
+{adb_inline_begin}
+<z+{OFFSET, a_segs}=""
+{adb_inline_end}
+        segs            hex
+        size            hex
+        tail            hex
+        nsegs           sdecimal
+        lrep            octal
+        hilevel         octal
+        unused          hex
+        updatedir       octal
+        objectdir       hex
+        sizedir         sdecimal
+        wpage           hex
+        nwpage          sdecimal
+        userlimit       hex
+{adb_inline_begin}
+<U>_
+<z+{SIZEOF}=""
+{adb_inline_end}

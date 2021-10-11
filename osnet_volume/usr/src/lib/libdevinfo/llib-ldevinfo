@@ -1,0 +1,78 @@
+/*LINTLIBRARY*/
+/*PROTOLIB1*/
+/*
+ * Copyright (c) 1999 by Sun Microsystems, Inc.
+ * All rights reserved.
+ * 
+ * usr/src/lib/libdevinfo/llib-ldevinfo
+ */
+
+#pragma ident	"@(#)llib-ldevinfo	1.2	99/03/31 SMI"
+
+#include "libdevinfo.h"
+
+di_node_t di_init(const char *phys_path, uint_t flag);
+void di_fini(di_node_t root);
+di_node_t di_parent_node(di_node_t node);
+di_node_t di_sibling_node(di_node_t node);
+di_node_t di_child_node(di_node_t node);
+di_node_t di_drv_first_node(const char *drv_name, di_node_t root);
+di_node_t di_drv_next_node(di_node_t node);
+int di_walk_node(di_node_t root, uint_t flag, void *arg,
+    int (*node_callback)(di_node_t node, void *arg));
+int di_walk_minor(di_node_t root, const char *minortype, uint_t flag,
+    void *arg, int (*minor_callback)(di_node_t node, di_minor_t minor,
+	void *arg));
+char *di_node_name(di_node_t node);
+char *di_bus_addr(di_node_t node);
+char *di_binding_name(di_node_t node);
+int di_compatible_names(di_node_t, char **names);
+int di_instance(di_node_t node);
+int di_nodeid(di_node_t node);
+uint_t di_state(di_node_t node);
+ddi_devid_t di_devid(di_node_t node);
+char *di_driver_name(di_node_t node);
+uint_t di_driver_ops(di_node_t node);
+char *di_devfs_path(di_node_t node);
+void di_devfs_path_free(char *path_buf);
+di_minor_t di_minor_next(di_node_t node, di_minor_t minor);
+ddi_minor_type di_minor_type(di_minor_t minor);
+char *di_minor_name(di_minor_t minor);
+dev_t di_minor_devt(di_minor_t minor);
+int di_minor_spectype(di_minor_t minor);
+char *di_minor_nodetype(di_minor_t node);
+unsigned int di_minor_class(di_minor_t minor);
+di_prop_t di_prop_next(di_node_t node, di_prop_t prop);
+dev_t di_prop_devt(di_prop_t prop);
+char *di_prop_name(di_prop_t prop);
+int di_prop_type(di_prop_t prop);
+int di_prop_strings(di_prop_t prop, char **prop_data);
+int di_prop_bytes(di_prop_t prop, uchar_t **prop_data);
+int di_prop_lookup_ints(dev_t dev, di_node_t node, const char *prop_name,
+    int **prop_data);
+int di_prop_lookup_strings(dev_t dev, di_node_t node, const char *prop_name,
+    char **prop_data);
+int di_prop_lookup_bytes(dev_t dev, di_node_t node, const char *prop_name,
+    uchar_t **prop_data);
+di_prom_handle_t di_prom_init();
+void di_prom_fini(di_prom_handle_t ph);
+di_prom_prop_t di_prom_prop_next(di_prom_handle_t ph, di_node_t node,
+    di_prom_prop_t prom_prop);
+char *di_prom_prop_name(di_prom_prop_t prom_prop);
+int di_prom_prop_data(di_prom_prop_t prop, uchar_t **prom_prop_data);
+int di_prom_prop_lookup_ints(di_prom_handle_t prom, di_node_t node,
+    const char *prom_prop_name, int **prom_prop_data);
+int di_prom_prop_lookup_strings(di_prom_handle_t prom, di_node_t node,
+    const char *prom_prop_name, char **prom_prop_data);
+int di_prom_prop_lookup_bytes(di_prom_handle_t prom, di_node_t node,
+    const char *prom_prop_name, uchar_t **prom_prop_data);
+di_node_t di_init_driver(const char *drv_name, uint_t flag);
+di_node_t di_init_impl(const char *phys_path, uint_t flag,
+    struct di_priv_data *priv_data);
+di_prop_t di_prop_drv_next(di_node_t node, di_prop_t prop);
+di_prop_t di_prop_sys_next(di_node_t node, di_prop_t prop);
+di_prop_t di_prop_global_next(di_node_t node, di_prop_t prop);
+di_prop_t di_prop_hw_next(di_node_t node, di_prop_t prop);
+int di_prop_rawdata(di_prop_t prop, uchar_t **prop_data);
+void *di_parent_private_data(di_node_t node);
+void *di_driver_private_data(di_node_t node);

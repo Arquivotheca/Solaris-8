@@ -1,0 +1,100 @@
+/* LINTLIBRARY */
+/* PROTOLIB1 */
+
+/*
+ *		Copyright Notice
+ *
+ * Notice of copyright on this source code product does not indicate
+ * publication.
+ *
+ *	(c) 1996  Sun Microsystems, Inc
+ *	All rights reserved.
+ *
+ */
+
+
+#pragma ident	"@(#)llib-lxnet	1.2	98/04/19 SMI"
+
+#include <sys/types.h>
+#include <sys/feature_tests.h>
+#include <sys/socket.h>
+#include <net/if.h>
+#include <netinet/in.h>
+#include <sys/isa_defs.h>
+#include <netdb.h>
+
+#ifdef	_XPG4_2
+/*
+ *	Sockets Interfaces
+ *	X/OPEN CAE Specification (1994)
+ */
+int accept(int, struct sockaddr *, socklen_t *);
+int bind(int, const struct sockaddr *, socklen_t);
+int connect(int, const struct sockaddr *, socklen_t);
+int getpeername(int, struct sockaddr *, socklen_t *);
+int getsockname(int, struct sockaddr *, socklen_t *);
+int getsockopt(int, int, int, void *, socklen_t *);
+int listen(int, int);
+ssize_t recv(int, void *, size_t, int);
+ssize_t recvfrom(int, void *, size_t, int, struct sockaddr *, socklen_t *);
+ssize_t recvmsg(int, struct msghdr *, int);
+ssize_t send(int, const void *, size_t, int);
+ssize_t sendmsg(int, const struct msghdr *, int);
+ssize_t sendto(int, const void *, size_t, int, const struct sockaddr *,
+    socklen_t);
+int setsockopt(int, int, int, const void *, socklen_t);
+int shutdown(int, int);
+int socket(int, int, int);
+int socketpair(int, int, int, int *);
+
+/*
+ *	IP Address Resolution Interfaces
+ *	X/OPEN CAE Specification (1994)
+ */
+extern int	h_errno;
+
+void endhostent(void);
+struct hostent	*gethostbyaddr(const void *, size_t, int);
+struct hostent	*gethostbyname(const char *);
+struct hostent	*gethostent(void);
+void sethostent(int);
+
+void endnetent(void);
+struct netent	*getnetbyaddr(in_addr_t, int);
+struct netent	*getnetbyname(const char *);
+struct netent	*getnetent(void);
+void setnetent(int);
+
+void endprotoent(void);
+struct protoent	*getprotobyname(const char *);
+struct protoent	*getprotobynumber(int);
+struct protoent	*getprotoent(void);
+void setprotoent(int);
+
+void endservent(void);
+struct servent	*getservbyname(const char *, const char *);
+struct servent	*getservbyport(int, const char *);
+struct servent	*getservent(void);
+void setservent(int);
+
+int gethostname(char *, size_t);
+
+#if defined(_XPG5)
+uint32_t htonl(uint32_t);
+uint16_t htons(uint16_t);
+uint32_t ntohl(uint32_t);
+uint16_t ntohs(uint16_t);
+#else
+in_addr_t htonl(in_addr_t);
+in_port_t htons(in_port_t);
+in_addr_t ntohl(in_addr_t);
+in_port_t ntohs(in_port_t);
+#endif /* _XPG5 */
+
+in_addr_t inet_addr(const char *);
+in_addr_t inet_lnaof(struct in_addr);
+struct in_addr inet_makeaddr(in_addr_t, in_addr_t);
+in_addr_t inet_netof(struct in_addr);
+in_addr_t inet_network(const char *);
+char *inet_ntoa(struct in_addr);
+#endif	/* _XPG4_2 */

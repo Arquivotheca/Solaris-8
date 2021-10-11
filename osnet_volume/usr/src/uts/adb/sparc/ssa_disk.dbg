@@ -1,0 +1,92 @@
+\
+\ Copyright (c) 1999, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)ssa_disk.dbg	1.16	99/10/22 SMI"
+
+#include <sys/scsi/scsi.h>
+#include <sys/dkio.h>
+#include <sys/scsi/targets/ssddef.h>
+#include "dummy.h"
+
+\
+\
+ssa_disk		un_
+{adb_inline_begin}
+.>z
+<z+{OFFSET, un_sd}=""
+{adb_inline_end}
+	sd			hex
+	rqs			hex
+	rqs_bp			hex
+	rqs_sema		.sema
+{adb_inline_begin}
+<z+{OFFSET, un_sbufp}=""
+{adb_inline_end}
+	sbufp			hex
+	srqbufp			hex
+	sbuf_cv			hex
+{adb_inline_begin}
+<z+{OFFSET, un_ocmap}/n"ocmap"n36Bn
+<z+{OFFSET, un_map}=""
+{adb_inline_end}
+	map			hex
+	offset			hex
+	g			.dk_geom
+{adb_inline_begin}
+<z+{OFFSET, un_last_pkt_reason}=""
+{adb_inline_end}
+	last_pkt_reason	hex
+	exclopen		hex
+	vtoc			.dk_vtoc
+{adb_inline_begin}
+<z+{OFFSET, un_utab}=""
+{adb_inline_end}
+	utab.b_flags		hex		"diskhd.flags"
+	utab.b_forw		hex		"diskhd.forw"
+	utab.b_back		hex		"diskhd.back"
+	utab.av_forw		hex		"diskhd.av_forw"
+	utab.av_back		hex		"diskhd.av_back"
+	utab.b_bcount		hex		"diskhd.bcount"
+	stats			hex
+	pstats			hex
+	semoclose		.sema		oclose_sema
+	err_blkno		hex
+	capacity		hex
+	gvalid			hex
+	state			hex
+	last_state		hex
+	format_in_progress	hex		format_progress
+	start_stop_issued	hex
+	asciilabel		char
+	throttle		hex
+	save_throttle		hex
+	ncmds			hex
+	tagflags		hex
+	sbuf_busy		hex
+	resvd_status		hex
+	mhd_token		hex
+	resvd_timeid		hex
+	reset_throttle_timeid	hex
+	restart_timeid		hex
+	reissued_timeid		hex
+	reservation_type	hex
+	devid			hex		device_id
+	max_xfer_size		hex
+	errstats		hex
+	insert_event		hex
+	remove_event		hex
+	suspend_cv		hex
+	disk_busy_cv		hex
+	notready_retry_count	hex
+	busy_retry_count	hex
+	start_stop_cycle_page 	hex
+	power_level		hex
+	pm_timeid		hex
+	flag_busy		hex
+	detach_count		hex
+	layer_count		hex
+	opens_in_progress	hex
+{adb_inline_begin}
+<z+{SIZEOF}=""
+{adb_inline_end}

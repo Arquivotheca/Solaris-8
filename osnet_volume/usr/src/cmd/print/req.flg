@@ -1,0 +1,8 @@
+#!/bin/sh
+#
+# Copyright (c) 1994 by SunSoft, Inc.
+#
+#pragma ident "@(#)%M 1.1     95/02/13 SunSoft"
+
+echo_file usr/src/cmd/Makefile.cmd
+echo_file usr/src/cmd/Makefile.targ

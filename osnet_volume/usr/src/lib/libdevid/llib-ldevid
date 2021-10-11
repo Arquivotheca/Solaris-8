@@ -1,0 +1,23 @@
+/* LINTLIBRARY */
+/* PROTOLIB1 */
+
+/*
+ * Copyright (c) 1997 by Sun Microsystems, Inc.
+ * All rights reserved.
+ */
+#pragma ident	"@(#)llib-ldevid	1.1	97/11/09 SMI"
+
+#include <sys/sunddi.h>
+
+/*
+ * usr/src/lib/libdevid
+ */
+
+/* deviceid.c */
+int devid_get(int fd, ddi_devid_t *devid);
+int devid_get_minor_name(int fd, char **minor_name);
+size_t devid_sizeof(ddi_devid_t devid);
+int devid_compare(ddi_devid_t devid1, ddi_devid_t devid2);
+int devid_deviceid_to_nmlist(char *search_path, ddi_devid_t devid,
+	char *minor_name, devid_nmlist_t **retlist);
+void devid_free_nmlist(devid_nmlist_t *list);

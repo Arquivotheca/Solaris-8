@@ -1,0 +1,119 @@
+#! /bin/sh
+#
+# ident "@(#)postinstall 1.16	99/06/08 SMI"
+#
+# Copyright (c) 1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+
+PATH="/bin:/usr/bin:/usr/sbin:${PATH}"
+export PATH
+
+TMP=/tmp/$$.pcmemvold
+
+EXIT=0
+
+#
+# manipulate the vold.conf and rmmount.conf configurations file
+#
+
+add_to_file()
+{
+
+    cp $1 $TMP
+
+    (	echo "/$2"
+	echo 'a'
+	echo "$3"
+	echo '.'
+	echo 'w'
+	echo 'q'
+    ) | ed -s $TMP >/dev/null
+
+    cp $TMP $1
+    rm -f $TMP
+}
+
+add_token()
+{
+
+    cp $1 $TMP
+
+    (	echo "/$2"
+	echo 'a'
+	echo "$3"
+	echo '.'
+	echo '-1,.j'
+	echo 'w'
+	echo 'q'
+    ) | ed -s $TMP >/dev/null
+
+    cp $TMP $1
+    rm -f $TMP
+}
+
+#
+# vold.conf processing
+#
+FILE="$BASEDIR/etc/vold.conf"
+
+if test -f $FILE ; then
+
+  #
+  # add the entries to vold.conf
+  #
+  #     label dos label_dos.so floppy pcmem     <--- NEW ADD
+  #     label cdrom label_cdrom.so cdrom
+  #     label sun label_sun.so floppy pcmem     <--- NEW ADD
+  #
+  add_token "$FILE" 'label_dos.so' ' pcmem'
+  add_token "$FILE" 'label_sun.so' ' pcmem'
+
+  #
+  # add the line of "use pcmem drive ..." after following lines:
+  #
+  #     "use cdrom drive ..."
+  #     "use floppy drive ..."
+  #
+  # Default adding after this line
+  USELINE="Devices to use"
+
+  if (fgrep -s "use cdrom" $FILE) then
+        USELINE="use cdrom"
+  fi
+ 
+  if (fgrep -s "use floppy" $FILE) then
+        USELINE="use floppy"
+  fi
+ 
+  add_to_file "$FILE" "$USELINE"  \
+        'use pcmem drive /dev/rdsk/c*s2 dev_pcmem.so pcmem%d forceload=true'
+
+fi
+
+#
+# rmmount.conf processing
+#
+FILE="$BASEDIR/etc/rmmount.conf"
+
+if test -f $FILE ; then
+    #
+    # add the new pcmem entries to rmmount.conf
+    #	Note the spaces in here --v
+    add_token "$FILE" 'ident_ufs.so' ' pcmem'
+    add_token "$FILE" 'ident_pcfs.so' ' pcmem'
+
+fi
+
+grep '^pcmem\>' ${BASEDIR}/etc/name_to_major > /dev/null && \
+rem_drv -b ${BASEDIR} pcmem
+add_drv -b ${BASEDIR} -n -m '* 0666 bin bin' \
+			-i '"pccard,memory" "pccard1c,40"' pcmem \
+|| EXIT=1
+
+grep '^pcram\>' ${BASEDIR}/etc/name_to_major > /dev/null && \
+rem_drv -b ${BASEDIR} pcram
+add_drv -b ${BASEDIR} -n -m '* 0666 bin bin' pcram \
+|| EXIT=1
+
+exit ${EXIT}

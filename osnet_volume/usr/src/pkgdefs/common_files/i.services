@@ -1,0 +1,47 @@
+#!/bin/sh
+#
+#ident  "@(#)i.services 1.1 99/11/20 SMI"
+#
+# Copyright (c) 1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+
+write_comment() {
+cat > /tmp/services.cmt.$$ << EOF
+#
+# The following customer-specific entries were found in the services file
+# prior to an upgrade.  Note that service names and their corresponding
+# port numbers must be registered with IANA, http://www/iana.org, and
+# entries not registered as such may not be preserved automatically by
+# future upgrades.
+#
+EOF
+}
+
+while read src dest
+do
+	if [ ! -f $dest ] ; then
+		cp $src $dest
+	else
+		grep -v "^#" $dest | \
+		while read service port rest_of_line; do
+			grep "^$service[ 	]*$port[ 	]*" \
+			    $src > /dev/null 2>&1
+			if [ $? != 0 ]; then
+				grep "^$service[ 	]*$port[ 	]*" \
+				    $dest >> /tmp/services.$$
+			fi
+		done
+		cat $src > /tmp/d.$$
+		if [ -f /tmp/services.$$ ]; then
+			write_comment
+			cat /tmp/services.cmt.$$ >> /tmp/d.$$
+			cat /tmp/services.$$ >> /tmp/d.$$
+			rm -f /tmp/services.$$ /tmp/services.cmt.$$
+		fi
+		cp /tmp/d.$$ $dest
+		rm -f /tmp/d.$$
+	fi
+done
+
+exit 0

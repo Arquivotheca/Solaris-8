@@ -1,0 +1,44 @@
+\
+\ Copyright (c) 1999 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)sf.dbg	1.1	99/05/28 SMI"
+\
+
+#define RAID_LUNS
+#include <sys/scsi/scsi.h>
+#include <sys/fc4/fcal.h>
+#include <sys/fc4/fcp.h>
+#include <sys/fc4/fcal_linkapp.h>
+#include <sys/socal_cq_defs.h>
+#include <sys/fc4/fcal_transport.h>
+#include <sys/fc4/fcio.h>
+#include <sys/scsi/adapters/sfvar.h>
+#include "dummy.h"
+
+format kcondvar_t	hex
+
+\ Macro for sf_stats
+sf_stats
+	^{tstats,drvr_name}
+
+\ Print the sf structure minus target pointers
+sf			sf_
+	^{wwn_lists,targets,*event*,*hp_*,*cookie,*stats}
+
+\ Now a macro to dump the target pointers
+sf	sf_	sftargets
+	targets
+	wwn_lists
+
+\ Now the sf_reset_list
+rename sf_reset_list sfreset
+
+\ Macro to display sf_target
+sf_target	sft_	sftarget
+	^*_ev
+	
+\ Macro to display sf_pkt
+sf_pkt	cmd_	sfpkt
+	^*cookie
+

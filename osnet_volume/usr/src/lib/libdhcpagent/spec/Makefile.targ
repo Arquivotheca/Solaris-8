@@ -1,0 +1,14 @@
+#
+# Copyright (c) 1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#ident	"@(#)Makefile.targ	1.1	99/01/29 SMI"
+#
+# lib/libdhcpagent/spec/Makefile.targ
+
+LIBRARY =       libdhcpagent.a
+VERS    =       .1
+
+OBJECTS =       dhcpagent.o
+
+SPECCPP =       -I../..

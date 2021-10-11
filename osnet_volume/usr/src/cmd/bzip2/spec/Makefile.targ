@@ -1,0 +1,10 @@
+#
+#ident	"@(#)Makefile.targ	1.1	99/10/08 SMI"
+#
+# cmd/bzip2/spec/Makefile.targ
+
+LIBRARY	=	libbz2.a
+VERS	=	.1
+
+OBJECTS	=	bz2.o
+

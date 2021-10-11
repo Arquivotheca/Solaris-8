@@ -1,0 +1,18 @@
+\
+\ Copyright (c) 1999 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)audiotrace.dbg	1.1	99/05/26 SMI"
+\
+\ Registers:	M, S
+\ Desc:		Begins printing the audio trace buffer
+
+#include <sys/audio_impl.h>
+#include "dummy.h"
+
+audio_trace_buf		""	audiotrace
+{adb_inline_begin}
+{SIZEOF}>M
+*audio_tb_siz>S
+audio_trace_buffer,<S$<audiotrace.nxt
+{adb_inline_end}

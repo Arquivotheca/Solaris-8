@@ -1,0 +1,167 @@
+/*
+ *	Copyright (c) 1996,1999 by Sun Microsystems, Inc.
+ *	All rights reserved.
+ */
+#pragma ident	"@(#)relocate_ia64.c	1.2	99/07/19 SMI"
+
+/* LINTLIBRARY */
+
+/*
+ * String conversion routine for relocation types.
+ */
+#include	<stdio.h>
+#include	<sys/elf_ia64.h>
+#include	"_conv.h"
+#include	"relocate_ia64_msg.h"
+
+/*
+ * IA64 specific relocations.
+ */
+
+#define	INVALID_RELENTRY	(const Msg)-1
+static const Msg rels[] = {
+	MSG_R_IA64_NONE,		/* 0x00 */
+	INVALID_RELENTRY,		/* 0x01 */
+	INVALID_RELENTRY,		/* 0x02 */
+	INVALID_RELENTRY,		/* 0x03 */
+	INVALID_RELENTRY,		/* 0x04 */
+	INVALID_RELENTRY,		/* 0x05 */
+	INVALID_RELENTRY,		/* 0x06 */
+	INVALID_RELENTRY,		/* 0x07 */
+	INVALID_RELENTRY,		/* 0x08 */
+	INVALID_RELENTRY,		/* 0x09 */
+	INVALID_RELENTRY,		/* 0x0a */
+	INVALID_RELENTRY,		/* 0x0b */
+	INVALID_RELENTRY,		/* 0x0c */
+	INVALID_RELENTRY,		/* 0x0d */
+	INVALID_RELENTRY,		/* 0x0e */
+	INVALID_RELENTRY,		/* 0x0f */
+	INVALID_RELENTRY,		/* 0x10 */
+	INVALID_RELENTRY,		/* 0x11 */
+	INVALID_RELENTRY,		/* 0x12 */
+	INVALID_RELENTRY,		/* 0x13 */
+	INVALID_RELENTRY,		/* 0x14 */
+	INVALID_RELENTRY,		/* 0x15 */
+	INVALID_RELENTRY,		/* 0x16 */
+	INVALID_RELENTRY,		/* 0x17 */
+	INVALID_RELENTRY,		/* 0x18 */
+	INVALID_RELENTRY,		/* 0x19 */
+	INVALID_RELENTRY,		/* 0x1a */
+	INVALID_RELENTRY,		/* 0x1b */
+	INVALID_RELENTRY,		/* 0x1c */
+	INVALID_RELENTRY,		/* 0x1d */
+	INVALID_RELENTRY,		/* 0x1e */
+	INVALID_RELENTRY,		/* 0x1f */
+	INVALID_RELENTRY,		/* 0x20 */
+	MSG_R_IA64_IMM14,		/* 0x21 */
+	MSG_R_IA64_IMM22,		/* 0x22 */
+	MSG_R_IA64_IMM64,		/* 0x23 */
+	MSG_R_IA64_DIR32MSB,		/* 0x24 */
+	MSG_R_IA64_DIR32LSB,		/* 0x25 */
+	MSG_R_IA64_DIR64MSB,		/* 0x26 */
+	MSG_R_IA64_DIR64LSB,		/* 0x27 */
+	INVALID_RELENTRY,		/* 0x28 */
+	INVALID_RELENTRY,		/* 0x29 */
+	MSG_R_IA64_GPREL22,		/* 0x2a */
+	MSG_R_IA64_GPREL64I,		/* 0x2b */
+	INVALID_RELENTRY,		/* 0x2c */
+	INVALID_RELENTRY,		/* 0x2d */
+	MSG_R_IA64_GPREL64MSB,		/* 0x2e */
+	MSG_R_IA64_GPREL64LSB,		/* 0x2f */
+	INVALID_RELENTRY,		/* 0x30 */
+	INVALID_RELENTRY,		/* 0x31 */
+	MSG_R_IA64_LTOFF22,		/* 0x32 */
+	MSG_R_IA64_LTOFF64I,		/* 0x33 */
+	INVALID_RELENTRY,		/* 0x34 */
+	INVALID_RELENTRY,		/* 0x35 */
+	INVALID_RELENTRY,		/* 0x36 */
+	INVALID_RELENTRY,		/* 0x37 */
+	INVALID_RELENTRY,		/* 0x38 */
+	INVALID_RELENTRY,		/* 0x39 */
+	MSG_R_IA64_PLTOFF22,		/* 0x3a */
+	MSG_R_IA64_PLTOFF64I,		/* 0x3b */
+	INVALID_RELENTRY,		/* 0x3c */
+	INVALID_RELENTRY,		/* 0x3d */
+	MSG_R_IA64_PLTOFF64MSB,		/* 0x3e */
+	MSG_R_IA64_PLTOFF64LSB,		/* 0x3f */
+	INVALID_RELENTRY,		/* 0x40 */
+	INVALID_RELENTRY,		/* 0x41 */
+	INVALID_RELENTRY,		/* 0x42 */
+	MSG_R_IA64_FPTR64I,		/* 0x43 */
+	MSG_R_IA64_FPTR32MSB,		/* 0x44 */
+	MSG_R_IA64_FPTR32LSB,		/* 0x45 */
+	MSG_R_IA64_FPTR64MSB,		/* 0x46 */
+	MSG_R_IA64_FPTR64LSB,		/* 0x47 */
+	INVALID_RELENTRY,		/* 0x48 */
+	MSG_R_IA64_PCREL21B,		/* 0x49 */
+	MSG_R_IA64_PCREL21M,		/* 0x4a */
+	MSG_R_IA64_PCREL21F,		/* 0x4b */
+	MSG_R_IA64_PCREL32MSB,		/* 0x4c */
+	MSG_R_IA64_PCREL32LSB,		/* 0x4d */
+	MSG_R_IA64_PCREL64MSB,		/* 0x4e */
+	MSG_R_IA64_PCREL64LSB,		/* 0x4f */
+	INVALID_RELENTRY,		/* 0x50 */
+	INVALID_RELENTRY,		/* 0x51 */
+	MSG_R_IA64_LTOFF_FPTR22,	/* 0x52 */
+	MSG_R_IA64_LTOFF_FPTR64I,	/* 0x53 */
+	INVALID_RELENTRY,		/* 0x54 */
+	INVALID_RELENTRY,		/* 0x55 */
+	INVALID_RELENTRY,		/* 0x56 */
+	INVALID_RELENTRY,		/* 0x57 */
+	INVALID_RELENTRY,		/* 0x58 */
+	INVALID_RELENTRY,		/* 0x59 */
+	INVALID_RELENTRY,		/* 0x5a */
+	INVALID_RELENTRY,		/* 0x5b */
+	MSG_R_IA64_SEGREL32MSB,		/* 0x5c */
+	MSG_R_IA64_SEGREL32LSB,		/* 0x5d */
+	MSG_R_IA64_SEGREL64MSB,		/* 0x5e */
+	MSG_R_IA64_SEGREL64LSB,		/* 0x5f */
+	INVALID_RELENTRY,		/* 0x60 */
+	INVALID_RELENTRY,		/* 0x61 */
+	INVALID_RELENTRY,		/* 0x62 */
+	INVALID_RELENTRY,		/* 0x63 */
+	MSG_R_IA64_SECREL32MSB,		/* 0x64 */
+	MSG_R_IA64_SECREL32LSB,		/* 0x65 */
+	MSG_R_IA64_SECREL64MSB,		/* 0x66 */
+	MSG_R_IA64_SECREL64LSB,		/* 0x67 */
+	INVALID_RELENTRY,		/* 0x68 */
+	INVALID_RELENTRY,		/* 0x69 */
+	INVALID_RELENTRY,		/* 0x6a */
+	INVALID_RELENTRY,		/* 0x6b */
+	MSG_R_IA64_REL32MSB,		/* 0x6c */
+	MSG_R_IA64_REL32LSB,		/* 0x6d */
+	MSG_R_IA64_REL64MSB,		/* 0x6e */
+	MSG_R_IA64_REL64LSB,		/* 0x6f */
+	MSG_R_IA64_LTV32MSB,		/* 0x70 */
+	MSG_R_IA64_LTV32LSB,		/* 0x71 */
+	MSG_R_IA64_LTV64MSB,		/* 0x72 */
+	MSG_R_IA64_LTV64LSB,		/* 0x73 */
+	INVALID_RELENTRY,		/* 0x74 */
+	INVALID_RELENTRY,		/* 0x75 */
+	INVALID_RELENTRY,		/* 0x76 */
+	INVALID_RELENTRY,		/* 0x77 */
+	INVALID_RELENTRY,		/* 0x78 */
+	INVALID_RELENTRY,		/* 0x79 */
+	INVALID_RELENTRY,		/* 0x7a */
+	INVALID_RELENTRY,		/* 0x7b */
+	INVALID_RELENTRY,		/* 0x7c */
+	INVALID_RELENTRY,		/* 0x7d */
+	INVALID_RELENTRY,		/* 0x7e */
+	INVALID_RELENTRY,		/* 0x7f */
+	MSG_R_IA64_IPLTMSB,		/* 0x80 */
+	MSG_R_IA64_IPLTLSB		/* 0x81 */
+};
+
+const char *
+conv_reloc_ia64_type_str(uint_t rel)
+{
+	static char	string[STRSIZE] = { '\0' };
+	/* LINTED */
+	if (((int)rel >= R_IA_64_NONE) && (rel <= R_IA_64_IPLTLSB) &&
+	    (rels[rel] != INVALID_RELENTRY)) {
+		return (MSG_ORIG(rels[rel]));
+	}
+
+	/* LINTED */
+	return (conv_invalid_str(string, (int)rel, 0));
+}

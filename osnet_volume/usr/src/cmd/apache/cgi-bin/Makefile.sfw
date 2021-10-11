@@ -1,0 +1,34 @@
+#
+#ident	"@(#)Makefile.sfw	1.2	99/12/06 SMI"
+#
+# Copyright (c) 1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+
+include ../Makefile.paths
+include ../../Makefile.cmd
+
+FILEMODE=	0555
+
+CGIFILES=	printenv \
+		test-cgi
+
+ROOTCGIFILES=$(CGIFILES:%=$(ROOTHTTPDCGIDIR)/%)
+
+.KEEP_STATE:
+
+all:	$(CGIFILES)
+
+install: all .WAIT $(ROOTHTTPDCGIDIR) $(ROOTCGIFILES)
+
+$(ROOTHTTPDCGIDIR):
+	$(INS.dir)
+
+$(ROOTHTTPDCGIDIR)/%:	%
+	$(INS.file)
+
+clean:
+
+lint:
+
+include ../../Makefile.targ

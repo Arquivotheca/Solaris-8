@@ -1,0 +1,15 @@
+#
+# Copyright (c) 1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#pragma ident "@(#)Makefile.targ 1.1	99/09/21 SMI"
+#
+# ucblib/libtermcap/spec/Makefile.targ
+
+LIBRARY	=	libtermcap.a
+VERS	=	.1
+
+OBJECTS	=	termcap.o
+
+TRANSCPP =
+SPECCPP =	-I$(ROOT)/usr/ucbinclude

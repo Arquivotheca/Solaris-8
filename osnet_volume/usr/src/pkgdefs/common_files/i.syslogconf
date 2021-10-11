@@ -1,0 +1,63 @@
+#!/bin/sh
+#
+#ident	"@(#)i.syslogconf	1.3	98/12/14 SMI"
+#
+# Copyright (c) 1993, by Sun Microsystems, Inc.
+#
+
+PATH="/usr/bin:/usr/sbin:${PATH}"
+export PATH
+
+while read src dest
+do
+	if [ ! -f $dest ] ; then
+		cp $src $dest
+	else
+		grep '^#ident[ 	]*\"@(#)syslog.conf' $src \
+		    > /tmp/newident.$$ 2>/dev/null
+		grep -v '^#ident[ 	]*\"@(#)syslog.conf' $dest \
+		    > /tmp/rest.$$ 2>/dev/null
+		cat /tmp/newident.$$ /tmp/rest.$$ > $dest
+
+		newline=`grep '^# Copyright.*Sun Microsystems, Inc.$' $src \
+		    2>/dev/null`
+		if [ $? != 0 ]; then
+			echo $0: missing copyright in $src
+			exit 1
+		fi
+		sed "s|^# Copyright.*Sun Microsystems, Inc.$|$newline|" \
+		    $dest > /tmp/work.$$
+		cp /tmp/work.$$ $dest
+
+		# In 2.3, we stopped logging auth.notice messages
+		# into /var/adm/messages
+
+		newline=`grep '.*;daemon.notice;.*/var/adm/messages$' $src \
+		    2>/dev/null`
+		if [ $? != 0 ]; then
+			echo $0: missing entry in $src for /var/adm/messages
+			exit 1
+		fi
+		sed "s|.*;daemon,auth.notice;.*/var/adm/messages$|$newline|" \
+		    $dest > /tmp/work.$$
+		cp /tmp/work.$$ $dest
+
+		#
+		# in 2.4, we don't put kern.debug messages on the console.
+		#
+		sed '\:/dev/console: s/kern\.debug/kern.notice/' \
+		    $dest > /tmp/work.$$
+		cp /tmp/work.$$ $dest
+
+		#
+		# in 2.8, we don't put messages on the console,
+		# but to sysmsg instead.
+		#
+		sed '\:/dev/console: s,/dev/console,/dev/sysmsg,' \
+		    $dest > /tmp/work.$$
+		cp /tmp/work.$$ $dest
+	fi
+done
+rm -f /tmp/newident.$$ /tmp/rest.$$ /tmp/work.$$
+
+exit 0

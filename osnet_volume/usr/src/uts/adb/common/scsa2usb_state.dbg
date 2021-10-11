@@ -1,0 +1,77 @@
+\
+\ Copyright (c) 1999 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)scsa2usb_state.dbg	1.1	99/10/07 SMI"
+
+#include <sys/usb/usba.h>
+#include <sys/usb/usba/usba_types.h>
+#include <sys/usb/usba/usba_impl.h>
+
+#include <sys/scsi/scsi.h>
+#include <sys/callb.h>
+#include <sys/usb/scsa2usb/scsa2usb.h>
+#include "dummy.h"
+
+\
+\
+
+scsa2usb_state	scsa2usb_	
+{adb_inline_begin}
+.>x
+<x+{OFFSET, scsa2usb_instance}=""
+{adb_inline_end}
+	instance		hex
+	dip			hex
+	dev_state		hex
+	pm			hex
+	flags			hex
+	intfc_num		hex
+	mutex			.mutex
+	tran			hex
+	cur_pkt			hex
+	serial_no		hex	serial_no
+	target_dip		hex	target_dip	
+	intr_ept		.usb_endpoint_descr
+{adb_inline_begin}
+<x+{OFFSET, scsa2usb_bulkin_ept}=""
+{adb_inline_end}
+	bulkin_ept		.usb_endpoint_descr
+{adb_inline_begin}
+<x+{OFFSET, scsa2usb_bulkout_ept}=""
+{adb_inline_end}
+	bulkout_ept		.usb_endpoint_descr
+{adb_inline_begin}
+<x+{OFFSET, scsa2usb_default_pipe}=""
+{adb_inline_end}
+	default_pipe		hex	default_ph
+	bulkin_pipe		hex	bulkin_ph
+	bulkout_pipe		hex	bulkout_ph
+	pipe_policy		.usb_pipe_policy
+{adb_inline_begin}
+<x+{OFFSET, scsa2usb_intfc_descr}=""
+{adb_inline_end}
+	intfc_descr		.usb_interface_descr
+{adb_inline_begin}
+<x+{OFFSET, scsa2usb_pipe_state}=""
+{adb_inline_end}
+	pipe_state		hex	pipe_state
+	dma_attr		hex	dma_attr
+	log_handle		hex	log_handle
+	tag			hex	tag
+	pkt_state		hex	pkt_state
+	dump_ops		hex	dump_ops
+	max_bulk_xfer_size	hex 	max_bulk_xfer_size
+	remove_cookie		hex	remove
+	insert_cookie		hex	insert
+	lbasize			hex	lba
+	n_luns			hex	n_luns
+	reset_delay		hex	delay
+	cpr_info		hex	cpr_info
+	panic_info		hex	panic_info
+	totalsec		hex	totalsec
+	secsz			hex	secsz
+	msg_count		hex	msg_count
+{adb_inline_begin}
+<x+{SIZEOF}=""
+{adb_inline_end}

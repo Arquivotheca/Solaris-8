@@ -1,0 +1,38 @@
+\
+\ Copyright (c) 1998-1999 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)ohci_pipe_private.dbg	1.2	99/11/18 SMI"
+
+#include <sys/usb/usba.h>
+#include <sys/usb/usba/usba_types.h>
+#include <sys/usb/hcd/openhci/ohci.h>
+#include <sys/usb/usba/usba_impl.h>
+#include <sys/usb/hcd/openhci/ohcid.h>
+#include "dummy.h"
+
+\
+\
+
+ohci_pipe_private	pp_	
+{adb_inline_begin}
+.>z
+<z+{OFFSET, pp_pipe_handle}=""
+{adb_inline_end}
+	pipe_handle		hex
+	ept			hex
+	state			hex
+	policy			hex
+	node			hex
+	mutex			.mutex
+{adb_inline_begin}
+<z+{OFFSET, pp_tw_head}=""
+{adb_inline_end}
+	tw_head			hex
+	tw_tail			hex
+	next			hex
+	count_done_tds		hex
+	flag			hex
+{adb_inline_begin}
+<z+{SIZEOF}=""
+{adb_inline_end}

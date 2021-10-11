@@ -1,0 +1,56 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)esp_cmd.dbg	1.15	98/03/30 SMI"
+
+#include <sys/scsi/scsi.h>
+#include <sys/kmem.h>
+#include <sys/kmem_impl.h>
+#include <sys/scsi/adapters/espvar.h>
+#include <sys/scsi/adapters/espreg.h>
+#include <sys/scsi/adapters/espcmd.h>
+#include "dummy.h"
+
+\
+\
+esp_cmd		cmd_
+{adb_inline_begin}
+.>z
+<z+{OFFSET, cmd_pkt}=""
+{adb_inline_end}
+        pkt                 .scsi_pkt
+{adb_inline_begin}
+<z+{OFFSET, cmd_forw}=""
+{adb_inline_end}
+        forw                hex
+        cdbp                hex
+        scbp                hex
+        flags               hex
+        data_count          hex
+        cur_addr            hex
+        nwin                hex
+        cur_win             hex
+        saved_win           hex
+        saved_data_count    hex
+        saved_cur_addr      hex
+        dmahandle           hex
+{adb_inline_begin}
+<z+{OFFSET, cmd_dmacookie}=n"<dmacookie>"n{HEX}
+<z+{OFFSET, cmd_dmacount}=""
+{adb_inline_end}
+        dmacount            hex
+        timeout             hex
+        cdb                 hex
+        pkt_private         hex
+        cdblen              hex
+        cdblen_alloc        hex
+        qfull_retries       hex
+        scblen              hex
+        privlen             hex
+	scb                 hex
+        age                 hex
+        tag                 hex
+{adb_inline_begin}
+<z+{SIZEOF}=""
+{adb_inline_end}

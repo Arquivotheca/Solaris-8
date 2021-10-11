@@ -1,0 +1,50 @@
+/* LINTLIBRARY */
+/* PROTOLIB1 */
+
+/*
+ * Copyright (c) 1999 by Sun Microsystems, Inc. 
+ * All rights reserved. 
+ */ 
+
+#pragma ident	"@(#)llib-lconv	1.6	99/07/19 SMI"
+
+#include	<stdlib.h>
+#include	<libelf.h>
+#include	<machelf.h>
+#include	"sgs.h"
+
+
+const char *	conv_arch64_name;
+
+void		conv_check_native(char **, char **, char *);
+const char *	conv_d_type_str(Elf_Type);
+const char *	conv_deftag_str(int);
+const char *	conv_dlflag_str(int);
+const char *	conv_dlmode_str(int);
+const char *	conv_dyntag_str(int, Half);
+const char *	conv_dynflag_1_str(uint_t);
+const char *	conv_dynposflag_1_str(uint_t);
+const char *	conv_dynfeature_1_str(uint_t);
+const char *	conv_eclass_str(Byte);
+const char *	conv_edata_str(Byte);
+const char *	conv_emach_str(Half);
+const char *	conv_ever_str(uint_t);
+const char *	conv_etype_str(Half);
+const char *	conv_eflags_str(Half, uint_t);
+const char *	conv_info_bind_str(unsigned char);
+const char *	conv_info_type_str(Half, unsigned char);
+Isa_desc *	conv_isalist(void);
+const char *	conv_phdrflg_str(unsigned int);
+const char *	conv_phdrtyp_str(Half, unsigned int);
+const char *	conv_reloc_type_str(Half, uint_t);
+const char *	conv_reloc_ia64_type_str(uint_t);
+const char *	conv_reloc_SPARC_type_str(uint_t);
+const char *	conv_reloc_386_type_str(uint_t);
+const char *	conv_sym_value_str(Half, uint_t, Lword);
+const char *	conv_sym_SPARC_value_str(Lword);
+const char *	conv_secflg_str(Half, unsigned int);
+const char *	conv_sectyp_str(Half, unsigned int);
+const char *	conv_segaflg_str(unsigned int);
+const char *	conv_shndx_str(Half);
+int		conv_sys_eclass(void);
+const char *	conv_verflg_str(Half);

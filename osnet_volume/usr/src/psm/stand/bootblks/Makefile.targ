@@ -1,0 +1,18 @@
+#
+#ident	"@(#)Makefile.targ	1.4	94/12/22 SMI"
+#
+# Copyright (c) 1994, by Sun Microsystems, Inc.
+# All rights reserved.
+#
+# psm/stand/bootblks/Makefile.targ
+#
+
+#
+# Targets common to all versions.
+#
+install: all $(USR_PSM_BOOTBLOCK) $(USR_PSM_UFS_DIR_LINKS)
+
+#
+# Install rules
+#
+include $(TOPDIR)/Makefile.psm.targ

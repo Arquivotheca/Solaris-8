@@ -1,0 +1,87 @@
+#
+# Copyright (c) 1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#ident	"@(#)prototype_i386	1.9	99/12/06 SMI"
+#
+# This required package information file contains a list of package contents.
+# The 'pkgmk' command uses this file to identify the contents of a package
+# and their location on the development machine when building the package.
+# Can be created via a text editor or through use of the 'pkgproto' command.
+
+#!search <pathname pathname ...>	# where to find pkg objects
+#!include <filename>			# include another 'prototype' file
+#!default <mode> <owner> <group>	# default used if not specified on entry
+#!<param>=<value>			# puts parameter in pkg environment
+
+#
+# Include ISA independent files (prototype_com)
+#
+!include prototype_com
+#
+# List files which are I386 specific here
+#
+# source locations relative to the prototype file
+#
+# packaging files
+i copyright
+i depend
+i pkginfo
+i postinstall
+i i.bootenvrc
+i i.master
+#
+# SUNWrmodr
+#
+d none boot 755 root sys
+f none boot/mdboot 644 root sys
+f none boot/mdbootbp 644 root sys
+d none boot/rc.d 0755 root sys
+f none boot/rc.d/icdinst9.sh 644 root sys
+f none boot/rc.d/inst9.sh 644 root sys
+f none boot/rc.d/rcs3.sh 644 root sys
+f none boot/rc.d/rcs9.sh 644 root sys
+d none boot/solaris 755 root sys
+f none boot/solaris/boot.rc 644 root sys
+v none boot/solaris/bootargs.rc 644 root sys
+f none boot/solaris/bootconf.exe 644 root sys
+f none boot/solaris/bootconf.txt 644 root sys
+e bootenvrc boot/solaris/bootenv.rc 644 root sys
+d none boot/solaris/devicedb 755 root sys
+e master boot/solaris/devicedb/master 644 root sys
+d none boot/solaris/drivers 755 root sys
+d none boot/solaris/drivers/isa.025 755 root sys
+f none boot/solaris/drivers/isa.025/com.bef 644 root sys
+f none boot/solaris/drivers/isa.025/fdc.bef 644 root sys
+f none boot/solaris/drivers/isa.025/joyst.bef 644 root sys
+f none boot/solaris/drivers/isa.025/key.bef 644 root sys
+f none boot/solaris/drivers/isa.025/logi.bef 644 root sys
+f none boot/solaris/drivers/isa.025/lpt.bef 644 root sys
+f none boot/solaris/drivers/isa.025/msm.bef 644 root sys
+f none boot/solaris/drivers/isa.025/ps2ms.bef 644 root sys
+d none boot/solaris/drivers/isa.125 755 root sys
+f none boot/solaris/drivers/isa.125/ata.bef 644 root sys
+f none boot/solaris/drivers/isa.125/dpt.bef 644 root sys
+f none boot/solaris/drivers/isa.125/pcic.bef 644 root sys
+d none boot/solaris/drivers/isa.150 755 root sys
+f none boot/solaris/drivers/isa.150/pcn.bef 644 root sys
+d none boot/solaris/drivers/isa.162 755 root sys
+f none boot/solaris/drivers/isa.162/boca.bef 644 root sys
+d none boot/solaris/drivers/isa.175 755 root sys
+f none boot/solaris/drivers/isa.175/elx.bef 644 root sys
+f none boot/solaris/drivers/isa.175/mwss.bef 644 root sys
+f none boot/solaris/drivers/isa.175/sbpro.bef 644 root sys
+d none boot/solaris/drivers/notisa.010 755 root sys
+f none boot/solaris/drivers/notisa.010/dnet.bef 644 root sys
+f none boot/solaris/drivers/notisa.010/elxl.bef 644 root sys
+f none boot/solaris/drivers/notisa.010/ieef.bef 644 root sys
+f none boot/solaris/drivers/notisa.010/ncrs.bef 644 root sys
+f none boot/solaris/drivers/notisa.010/pcscsi.bef 644 root sys
+f none boot/solaris/drivers/notisa.010/spwr.bef 644 root sys
+d none boot/solaris/drivers/notisa.020 755 root sys
+f none boot/solaris/drivers/notisa.020/chs.bef 644 root sys
+f none boot/solaris/drivers/notisa.020/iprb.bef 644 root sys
+f none boot/solaris/itup2.exe 644 root sys
+d none boot/solaris/machines 755 root sys
+f none boot/solaris/strap.rc 644 root sys
+f none boot/strap.com 644 root sys

@@ -1,0 +1,34 @@
+#!/sbin/sh
+#
+# Copyright (c) 1996-1997 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#ident	"@(#)spc	1.9	97/12/08 SMI"
+
+PATH=/usr/bin:/usr/sbin; export PATH
+
+case "$1" in
+'start')
+	[ -f /usr/lib/print/printd ] || exit 0
+
+        if [ -z "$_INIT_PREV_LEVEL" ]; then
+                set -- `/usr/bin/who -r`
+                _INIT_PREV_LEVEL="$9"
+        fi
+
+	if [ $_INIT_PREV_LEVEL != 2 -a $_INIT_PREV_LEVEL != 3 ]; then
+		rm -f /var/spool/print/tf* >/dev/null 2>&1
+		/usr/lib/print/printd &
+	fi
+	;;
+
+'stop')
+	/usr/bin/pkill -x -u 0 printd
+	;;
+
+*)
+	echo "Usage: $0 { start | stop }"
+	exit 1
+	;;
+esac
+exit 0

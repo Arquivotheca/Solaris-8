@@ -1,0 +1,71 @@
+#
+#pragma ident	"@(#)Makefile.targ	1.2	99/07/30 SMI"
+#
+# Copyright (c) 1995-1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+
+$(PICDIR)/%.o:	%.c
+		$(COMPILE.c) $< -o $@
+		$(POST_PROCESS_O)
+
+$(PICDIR)/%.o:	../common/%.c
+		$(COMPILE.c) $< -o $@
+		$(POST_PROCESS_O)
+
+$(OBJDIR)/%.o:	%.c
+		$(COMPILE.c) $< -o $@
+		$(POST_PROCESS_O)
+
+$(OBJDIR)/%.o: ../common/%.c
+		$(COMPILE.c) $< -o $@
+		$(POST_PROCESS_O)
+
+$(APPTRACELIB): $(APPTRACEPICS)
+		$(BUILD.SO)
+		$(POST_PROCESS_SO)
+
+$(INTCPTLIB): $(INTCPTPICS) $(INTCPTMAP)
+		$(BUILD.SO)
+		$(MCS) -d -n .symtab $@
+		$(POST_PROCESS_SO)
+
+$(APPTRACEPROG): $(APPTRACEPROGOBJ)
+		$(LINK.c) -o $@ $(APPTRACEPROGOBJ)
+		$(POST_PROCESS)
+
+$(ROOTUSRBIN)/%: %
+		$(INS.file)
+
+$(ROOTUSRINCLUDE)/%: ../common/%
+		$(INS.file)
+
+$(ROOTLIBABI)/%: %
+		$(INS.file)
+
+$(ROOTLIBABI64)/%: %
+		$(INS.file)
+
+$(ROOTLIBABI):
+	$(INS.dir)
+
+$(ROOTLIBABI64):
+	$(INS.dir)
+
+include		../../../../lib/Makefile.targ
+
+APPTRACE_LINTOUT=	$(APPTRACELIBNAME)-$(LINTOUT)
+INTCPT_LINTOUT=		$(INTCPTLIBNAME)-$(LINTOUT)
+
+CLOBBERFILES +=	$(APPTRACE_LINTOUT) $(INTCPT_LINTOUT)
+
+lint:	$(APPTRACEPROG)_lint $(APPTRACE_LINTLIB) $(INTCPT_LINTLIB)
+
+$(APPTRACEPROG)_lint:	$(APPTRACEPROG_LINTSRC)
+	$(LINT.c) $(APPTRACEPROG_LINTSRC)
+
+$(APPTRACE_LINTLIB):	$(APPTRACE_LINTSRC)
+	$(LINT.c) -o $(APPTRACELIBNAME) $(APPTRACE_LINTSRC) > $(APPTRACE_LINTOUT) 2>&1 
+
+$(INTCPT_LINTLIB):	$(INTCPT_LINTSRC)
+	$(LINT.c) -o $(INTCPTLIBNAME) $(INTCPT_LINTSRC) > $(INTCPT_LINTOUT) 2>&1

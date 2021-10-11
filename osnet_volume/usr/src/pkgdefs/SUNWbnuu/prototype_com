@@ -1,0 +1,56 @@
+#
+# Copyright (c) 1990-1998 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#ident	"@(#)prototype_com	1.16	99/03/30 SMI"
+#
+# This required package information file contains a list of package contents.
+# The 'pkgmk' command uses this file to identify the contents of a package
+# and their location on the development machine when building the package.
+# Can be created via a text editor or through use of the 'pkgproto' command.
+
+#!search <pathname pathname ...>	# where to find pkg objects
+#!include <filename>			# include another 'prototype' file
+#!default <mode> <owner> <group>	# default used if not specified on entry
+#!<param>=<value>			# puts parameter in pkg environment
+
+# packaging files
+i pkginfo
+i copyright
+i depend
+i preremove
+i postinstall
+#
+# source locations relative to the prototype file
+#
+# SUNWbnuu
+#
+d none usr 755 root sys
+d none usr/bin 755 root bin
+f none usr/bin/ct 4111 root uucp
+f none usr/bin/cu 4111 uucp uucp
+f none usr/bin/uucp 4111 uucp uucp
+f none usr/bin/uuglist 4111 uucp uucp
+f none usr/bin/uulog 555 root uucp
+f none usr/bin/uuname 4111 uucp uucp
+f none usr/bin/uupick 555 root uucp
+f none usr/bin/uustat 4111 uucp uucp
+f none usr/bin/uuto 555 root uucp
+f none usr/bin/uux 4111 uucp uucp
+d none usr/lib 755 root bin
+d none usr/lib/uucp 755 uucp uucp
+f none usr/lib/uucp/Uutry 555 root uucp
+f none usr/lib/uucp/bnuconvert 110 uucp uucp
+f none usr/lib/uucp/remote.unknown 4111 uucp uucp
+f none usr/lib/uucp/uucheck 110 uucp uucp
+f none usr/lib/uucp/uucico 4111 uucp uucp
+f none usr/lib/uucp/uucleanup 110 uucp uucp
+f none usr/lib/uucp/uudemon.admin 555 root uucp
+f none usr/lib/uucp/uudemon.cleanup 555 root uucp
+f none usr/lib/uucp/uudemon.crontab 444 root uucp
+f none usr/lib/uucp/uudemon.hour 555 root uucp
+f none usr/lib/uucp/uudemon.poll 555 root uucp
+f none usr/lib/uucp/uusched 4111 uucp uucp
+f none usr/lib/uucp/uuxqt 4111 uucp uucp
+d none usr/sbin 755 root bin
+f none usr/sbin/in.uucpd 555 root uucp

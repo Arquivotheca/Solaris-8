@@ -1,0 +1,93 @@
+<TITLE> To Modify Printer Properties </TITLE> 
+<!-- Tag=ToModify --> 
+
+<CONTENT>
+
+<p>
+
+Do the following to modify the properties of an installed printer.
+
+<p> 
+
+1. Double-click the printer in the Solaris Print Manager main window
+<p> 
+   OR
+<p> 
+   Select the printer in the Solaris Print Manager main window and choose
+   Modify Printer Properties from the Printer menu. 
+<p> 
+   The Modify Printer Properties dialog is displayed. 
+
+<p> 
+2. Modify the printer configuration, as needed.
+<p> 
+
+If this is an attached printer (one installed on the computer on which
+you are running Solaris Print Manager) you can modify the Description,
+Printer Port, Printer Type, File Contents, Fault Notification,
+Options, and User Access List.
+
+<p>
+
+If this is not an attached printer, only the Description field can be
+modified. You can also check or uncheck the Default Printer box. 
+
+<p> 
+3. Click OK.
+<p> 
+
+The changes you made are saved and the Modify Printer Properties
+dialog is dismissed.
+
+<p> 
+
+   If you modified the Description field, the new description is
+displayed in the Solaris Print Manager main window.
+
+<p> 
+
+<b> Note:</b> If you are using the NIS naming service, you have to know
+the root password for the NIS master; you will be prompted for the
+password when you click Apply or OK. Enter the password and click OK.
+
+<p> 
+
+<b> Note:</b> To modify the Printer Name or Printer Server field,
+delete the printer and add it with a new printer and/or server name.
+
+<p>
+
+<b>OK:</b> Apply changes and dismiss the window.
+<br>
+<b>Apply:</b> Apply the changes and leave the window displayed.
+<br>
+<b>Reset:</b> Reset all fields to last Apply
+<br>
+<b>Cancel:</b> Dismiss the window.
+<br>
+<b>Help:</b> Display help for the current window or dialog. 
+
+<p>
+</CONTENT>
+
+<KEYWORDS>
+modify "Printer menu" "local printer" nis "nis master" "naming service"
+attached "network printer" local network
+</KEYWORDS>
+
+<p>
+
+<SEEALSO>
+Modify
+ModifyFailed
+InstallLocal
+InstallNetwork
+ToInstallLocal
+ToInstallNetwork
+ToAddAccess
+ToDelete
+AddAccess
+MainWindow
+Overview
+HelpOnHelp
+</SEEALSO>

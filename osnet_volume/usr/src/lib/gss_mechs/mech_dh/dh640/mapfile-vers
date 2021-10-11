@@ -1,0 +1,35 @@
+#
+#ident	"@(#)mapfile-vers	1.2	98/12/04 SMI"
+#
+# Copyright (c) 1997 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#
+# Generic interface definition for:
+# 	usr/src/lib/gss_mechs/mech_dh/backend/mech_dh.so.1
+#
+# For information regarding the establishment of versioned definitions see:
+#	The Linker and Libraries Manual (version 2.5 or greater)
+# This is part of the Developers Guide in the Answerbook.  Specifically refer
+# to Chapter 2 under section "Defining Additional Symbols" through section
+# "Reducing Symbol Scope", and Chapter 5 "Versioning".
+#
+# For specific OSNET rules for the modification (evolution) of these version
+# definitions see:
+#	Policy for Shared Library Version Names and Interface Definitions
+
+SUNW_1.1 {
+	global:
+		SUNW_1.1;
+};
+
+SUNWprivate_1.1 {
+	global:
+		gss_mech_initialize;  # Entry point for libgss
+
+	# Entry points for libnsl
+		__dl_gen_common_dhkeys; 
+		__dl_gen_dhkeys;
+	local:
+		*;
+};

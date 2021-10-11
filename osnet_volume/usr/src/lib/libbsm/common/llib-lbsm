@@ -1,0 +1,365 @@
+/* LINTLIBRARY */
+/* PROTOLIB1 */
+
+/*
+ * Copyright (c) 1997 by Sun Microsystems, Inc. 
+ * All rights reserved. 
+ */ 
+#pragma ident	"@(#)llib-lbsm	1.11	99/10/14 SMI"
+
+#include <stdio.h>
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <sys/sockio.h>
+#include <netinet/in.h>
+#include <pwd.h>
+#include <bsm/audit.h>
+#include <bsm/libbsm.h>
+#include <bsm/audit_record.h>
+#include <bsm/audit_uevents.h>
+#include <bsm/devices.h>
+
+/*
+ * usr/src/lib/libsm
+ */
+
+/* adr.c */
+void adr_start(adr_t *adr, char *p);
+int adr_count(adr_t *adr);
+void adr_char(adr_t *adr, char *cp, int count);
+void adr_short(adr_t *adr, short *sp, int count);
+void adr_int32(adr_t *adr, int32_t *lp, int count);
+void adr_int64(adr_t *adr, int64_t *lp, int count);
+void adr_long(adr_t *adr, int32_t *lp, int count);
+
+/* adrf.c */
+void adrf_start(adr_t *adr, FILE *fp);
+int adrf_char(adr_t *adr, char *cp, int count);
+int adrf_short(adr_t *adr, short *sp, int count);
+int adrf_string(adr_t *adr, char *p);
+int adrf_int32(adr_t *adr, int32_t *cp, int count);
+int adrf_int(adr_t *adr, int32_t *cp, int count);
+int adrf_long(adr_t *adr, int32_t *cp, int count);
+int adrf_int64(adr_t *adr, int64_t *lp, int count);
+int adrf_u_int32(adr_t *adr, uint32_t *cp, int count);
+int adrf_u_int(adr_t *adr, uint32_t *cp, int count);
+int adrf_u_long(adr_t *adr, uint32_t *cp, int count);
+int adrf_u_int64(adr_t *adr, uint64_t *lp, int count);
+int adrf_opaque(adr_t *adr, char *p);
+int adrf_u_char(adr_t *adr, uchar_t *cp, int count);
+int adrf_u_short(adr_t *adr, ushort_t *sp, int count);
+int adrf_peek(adr_t *adr);
+
+/* adrm.c */
+void adrm_start(adr_t *adr, char *p);
+void adrm_char(adr_t *adr, char *cp, int count);
+void adrm_short(adr_t *adr, short *sp, int count);
+void adrm_string(adr_t *adr, char *p);
+void adrm_int32(adr_t *adr, int32_t *cp, int count);
+void adrm_int(adr_t *adr, int32_t *cp, int count);
+void adrm_long(adr_t *adr, int32_t *cp, int count);
+void adrm_int64(adr_t *adr, int64_t *lp, int count);
+void adrm_u_int32(adr_t *adr, uint32_t *cp, int count);
+void adrm_u_int(adr_t *adr, uint32_t *cp, int count);
+void adrm_u_long(adr_t *adr, uint32_t *cp, int count);
+void adrm_u_int64(adr_t *adr, uint64_t *cp, int count);
+void adrm_opaque(adr_t *adr, char *p);
+void adrm_u_char(adr_t *adr, uchar_t *cp, int count);
+void adrm_u_short(adr_t *adr, ushort_t *sp, int count);
+
+/* au_open.c */
+int au_open(void);
+int au_write(int d, token_t *m);
+int au_close(int d, int right, short e_type);
+
+/* au_preselect.c */
+int au_preselect(au_event_t au_event, au_mask_t *au_mask_p, int sorf, int flag);
+
+/* au_to.c */
+token_t *au_to_header(au_event_t e_type, au_emod_t e_mod);
+token_t *au_to_trailer(void);
+token_t *au_to_arg32(char n, char *text, uint32_t v);
+token_t *au_to_arg(char n, char *text, uint32_t v);
+token_t *au_to_arg64(char n, char *text, uint64_t v);
+token_t *au_to_attr(struct vattr *attr);
+token_t *au_to_data(char unit_print, char unit_type, char unit_count, char *p);
+token_t *au_to_process(au_id_t auid, uid_t euid, gid_t egid, uid_t ruid,
+		gid_t rgid, pid_t pid, au_asid_t sid, au_tid_t *tid);
+token_t *au_to_seq(int audit_count);
+token_t *au_to_socket(struct oldsocket *so);
+token_t *au_to_subject(au_id_t auid, uid_t euid, gid_t egid, uid_t ruid,
+		gid_t rgid, pid_t pid, au_asid_t sid, au_tid_t *tid);
+token_t *au_to_subject_ex(au_id_t auid, uid_t euid, gid_t egid, uid_t ruid,
+		gid_t rgid, pid_t pid, au_asid_t sid, au_tid_addr_t *tid);
+token_t *au_to_me(void);
+token_t *au_to_text(char *text);
+token_t *au_to_path(char *path);
+token_t *au_to_cmd(uint_t argc, char **argv, char **envp);
+token_t *au_to_exit(int retval, int err);
+token_t *au_to_return32(char number, uint32_t value);
+token_t *au_to_return(char number, uint32_t value);
+token_t *au_to_return64(char number, uint64_t value);
+token_t *au_to_opaque(char *opaque, short bytes);
+token_t *au_to_in_addr(struct in_addr *internet_addr);
+token_t *au_to_iport(ushort_t iport);
+token_t *au_to_ipc(int id);
+token_t *au_to_groups(int *groups);
+token_t *au_to_newgroups(int n, gid_t *groups);
+token_t *au_to_exec_args(char **argv);
+token_t *au_to_exec_env(char **envp);
+token_t *au_to_xatom(ushort_t len, char *atom);
+token_t *au_to_xproto(pid_t pid);
+token_t *au_to_xobj(int oid, int xid, int cuid);
+token_t *au_to_xselect(char *pstring, char *type, short dlen, char *data);
+
+/* au_usermask.c */
+int au_user_mask(char *username, au_mask_t *p_mask);
+
+/* audit_allocate.c */
+int audit_allocate_argv(int flg, int argc, char *argv[]);
+int audit_allocate_device(char *path);
+int audit_allocate_record(char status);
+int audit_allocate_list(char *list);
+
+/* audit_at.c */
+int audit_at_create(char *path);
+void audit_at_delete(char *name, char *path, int sorf);
+
+/* audit_class.c */
+int setauclassfile(char *fname);
+void setauclass(void);
+void endauclass(void);
+au_class_ent_t *getauclassent(void);
+au_class_ent_t *getauclassent_r(au_class_ent_t *au_class_entry);
+au_class_ent_t *getauclassnam(char *name);
+au_class_ent_t *getauclassnam_r(au_class_ent_t *e, char *name);
+int cacheauclass(au_class_ent_t **result, au_class_t class_no);
+int cacheauclassnam(au_class_ent_t **result, char *class_name);
+
+/* audit_cron.c */
+int audit_cron_create_anc_file(char *name, char *path, char *uname, uid_t uid);
+int audit_cron_delete_anc_file(char *name, char *path);
+void audit_cron_user_acct_expired(char *name);
+void audit_cron_bad_user(char *name);
+void audit_cron_new_job(char *cmd, int type, void *event);
+int audit_cron_is_anc_name(char *name);
+int audit_cron_setinfo(char *fname, struct auditinfo *info);
+int audit_cron_session(char *name, char *path, uid_t uid, gid_t gid, char *at_jobname);
+int audit_cron_mode();
+
+/* audit_crontab.c */
+int audit_crontab_modify(char *path, char *diffs, int create);
+void audit_crontab_delete(char *path, int sorf);
+
+/* audit_event.c */
+int setaueventfile(char *fname);
+void setauevent(void);
+void endauevent(void);
+au_event_ent_t *getauevent(void);
+au_event_ent_t *getauevent_r(au_event_ent_t *au_event_entry);
+au_event_ent_t *getauevnam(char *name);
+au_event_ent_t *getauevnam_r(au_event_ent_t *e, char *name);
+au_event_ent_t *getauevnum_r(au_event_ent_t *e, au_event_t event_number);
+au_event_ent_t *getauevnum(au_event_t event_number);
+au_event_t getauevnonam(char *event_name);
+int cacheauevent(au_event_ent_t **result, au_event_t event_number);
+
+/* audit_ftpd.c */
+void audit_ftpd_sav_data(struct sockaddr_in *sin, int port);
+void audit_ftpd_bad_pw(char *uname);
+void audit_ftpd_unknown(char *uname);
+void audit_ftpd_excluded(char *uname);
+void audit_ftpd_no_anon(void);
+void audit_ftpd_failure(char *uname);
+void audit_ftpd_success(char *uname);
+
+/* audit_halt.c */
+int audit_halt_setup(int argc, char **argv);
+int audit_halt_fail(void);
+int audit_halt_success(void);
+
+/* audit_inetd.c */
+int audit_inetd_config(void);
+int audit_inetd_termid(int);
+int audit_inetd_service(char *service_name, struct passwd *pwd);
+
+/* audit_init.c */
+int audit_init_fail(void);
+int audit_init_setup(int argc, char **argv);
+int audit_init_success(void);
+
+/* audit_login.c */
+int audit_login_save_flags(int rflag, int hflag);
+int audit_login_save_host(char *host);
+int audit_login_save_ttyn(char *ttyn);
+int audit_login_save_port(void);
+int audit_login_save_machine(void);
+int audit_login_save_pw(struct passwd *pwd);
+int audit_login_maxtrys(void);
+int audit_login_not_console(void);
+int audit_login_bad_pw(void);
+int audit_login_bad_dialup(void);
+int audit_login_success(void);
+
+/* audit_settid.c */
+int audit_settid(int fd);
+
+/* audit_mountd.c */
+void audit_mountd_setup(void);
+void audit_mountd_mount(char *clname, char *path, int success);
+void audit_mountd_umount(char *clname, char *path);
+
+/* audit_passwd.c */
+void audit_passwd_sorf(int retval);
+void audit_passwd_attributes_sorf(int retval);
+void audit_passwd_init_id(void);
+
+/* audit_reboot.c */
+int audit_reboot_setup(void);
+int audit_reboot_fail(void);
+int audit_reboot_success(void);
+
+/* audit_rexd.c */
+void audit_rexd_setup(void);
+void audit_rexd_fail(char *msg, char *hostname, char *user,
+			uid_t uid, gid_t gid, char *shell, char **cmdbuf);
+void audit_rexd_success(char *hostname, char *user,
+			uid_t uid, gid_t gid, char *shell, char **cmdbuf);
+
+/* audit_rexecd.c */
+void audit_rexecd_setup(void);
+void audit_rexecd_fail(char *msg, char *hostname, char *user, char *cmdbuf);
+void audit_rexecd_success(char *hostname, char *user, char *cmdbuf);
+
+/* audit_rshd.c */
+int audit_rshd_setup(void);
+int audit_rshd_fail(char *msg, char *hostname, char *remuser, char *locuser,
+			char *cmdbuf);
+int audit_rshd_success(char *hostname, char *remuser, char *locuser,
+			char *cmdbuf);
+
+/* audit_shutdown.c */
+int audit_shutdown_fail(void);
+int audit_shutdown_setup(int argc, char **argv);
+int audit_shutdown_success(void);
+
+/* audit_su.c */
+void audit_su_init_info(char *username, char *ttyn);
+int audit_su_reset_ai(void);
+void audit_su_success(void);
+void audit_su_bad_username(void);
+void audit_su_bad_authentication(void);
+void audit_su_bad_uid(void);
+void audit_su_unknown_failure(void);
+
+/* audit_mgrs.c */
+int audit_delete_user_fail(void);
+int audit_delete_user_success(void);
+int audit_user_modify_event(char *uid_p, char *username_p, char *gid_p,
+				char *groups_p, char *shell_p, char *min_p,
+				char *max_p, char *inactive_p, char *expire_p,
+				char *warn_p, char *home_path_p,
+				char *home_server_p, int  passwd_type_code,
+				int  ac_disabled, int  status);
+int audit_user_create_event(char *uid_p, char *username_p, char *gid_p,
+				char *groups_p, char *shell_p, char *min_p,
+				char *max_p, char *inactive_p, char *expire_p,
+				char *warn_p, char *home_path_p,
+				char *home_server_p, char *home_mode_p,
+				int  passwd_type_code, int  ac_disabled,
+				int  status);
+int audit_user_dde_event_setup(char *uid_p);
+int audit_users_modified_by_group_success(char *unique_members, char *ID);
+int audit_users_modified_by_group_fail(char *members, char *ID);
+
+/* audit_uadmin.c */
+int audit_uadmin_setup(int argc, char **argv);
+int audit_uadmin_success(void);
+
+/* audit_user.c */
+int setauuserfile(char *fname);
+void setauuser(void);
+void endauuser(void);
+au_user_ent_t *getauuserent(void);
+au_user_ent_t *getauuserent_r(au_user_ent_t *au_user_entry);
+au_user_ent_t *getauusernam(char *name);
+au_user_ent_t *getauusernam_r(au_user_ent_t *u, char *name);
+
+/* bsm.c */
+int auditsvc(int fd, int limit);
+int audit(char *record, int length);
+int getauid(au_id_t *auid);
+int setauid(au_id_t *auid);
+int getaudit(auditinfo_t *ai);
+int getaudit_addr(auditinfo_addr_t *ai, int len);
+int setaudit(auditinfo_t *ai);
+int setaudit_addr(auditinfo_addr_t *ai, int len);
+int auditon(int cmd, caddr_t data, int length);
+
+/* generic.c */
+int cannot_audit(int force);
+void aug_init(void);
+dev_t aug_get_port(void);
+int aug_get_machine(char *hostname, uint32_t *, uint32_t *);
+void aug_save_auid(au_id_t id);
+void aug_save_uid(uid_t id);
+void aug_save_euid(uid_t id);
+void aug_save_gid(gid_t id);
+void aug_save_egid(gid_t id);
+void aug_save_pid(pid_t id);
+void aug_save_asid(au_asid_t id);
+void aug_save_afunc(int (*afunc)());
+void aug_save_tid(dev_t port, uint_t machine);
+void aug_save_tid_ex(dev_t port, uint32_t *machine, uint32_t type);
+int aug_save_me(void);
+int aug_save_namask(void);
+void aug_save_event(au_event_t id);
+void aug_save_sorf(int sorf);
+void aug_save_text(char *s);
+void aug_save_na(int flag);
+void aug_save_user(char *s);
+void aug_save_path(char *s);
+int aug_save_policy(void);
+int aug_audit(void);
+int aug_na_selected(void);
+int aug_selected(void);
+
+/* getacinfo.c */
+int getacdir(char *dir, int len);
+int getacmin(int *min_val);
+int getacflg(char *auditstring, int len);
+int getacna(char *auditstring, int len);
+void setac(void);
+void endac(void);
+int testac(void);
+
+/* getauditflags.c */
+int getauditflagschar(char *auditstring, au_mask_t *masks, int verbose);
+int getauditflagsbin(char *auditstring, au_mask_t *masks);
+
+/* getdaent.c */
+char *getdafield(char *ptr);
+char *getdadfield(char *ptr);
+devalloc_t *getdanam(char *name);
+void setdaent(void);
+void enddaent(void);
+void setdafile(char *file);
+devalloc_t *getdatype(char *tp);
+devalloc_t *getdaent(void);
+
+/* getdment.c */
+char *getdmapfield(char *ptr);
+char *getdmapdfield(char *ptr);
+devmap_t *getdmapdev(char *name);
+devmap_t *getdmapnam(char *name);
+void setdmapent(void);
+void enddmapent(void);
+void setdmapfile(char *file);
+devmap_t *getdmaptype(char *tp);
+devmap_t *getdmapent(void);
+
+/* getfaudflgs.c */
+int getfauditflags(au_mask_t *usremasks, au_mask_t *usrdmasks,
+			au_mask_t *lastmasks);
+
+/* token.c */

@@ -1,0 +1,32 @@
+#
+#ident	"@(#)postremove	1.1	97/10/27 SMI"
+#
+# Copyright (c) 1995 by Sun Microsystems, Inc.
+# All rights reserved.
+
+SUNWldv9_files="\
+	usr/ccs/lib/libld.so.3 \
+	usr/ccs/lib/sparcv9/libld.so.3 \
+	usr/ccs/lib/sparcv9/liblddbg.so.4 \
+	usr/lib/sparcv9/libelf.so.1 \
+	usr/lib/sparcv9/librtld.so.1 \
+	usr/lib/sparcv9/librtld_db.so.1 \
+	usr/lib/sparcv9/ld.so.1 \
+	usr/lib/sparcv9/lddstub
+	"
+
+MV="/usr/sbin/static/mv"
+RM="/usr/bin/rm -f"
+
+for F in $SUNWldv9_files
+do
+	if [ -f ${BASEDIR}/$F.orig ]
+	then
+		${MV} ${BASEDIR}/$F.orig ${BASEDIR}/$F
+		installf SUNWldv9 ${BASEDIR}/$F
+	fi
+done
+
+
+installf -f SUNWldv9
+

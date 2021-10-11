@@ -1,0 +1,24 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)inodelist.dbg	1.6	98/07/19 SMI"
+
+#include <sys/types.h>
+#include <sys/t_lock.h>
+#include <sys/time.h>
+#include <sys/vnode.h>
+#include <vm/seg.h>
+#include <sys/fs/ufs_inode.h>
+#include "dummy.h"
+
+\ inohsz is a 32-bit access.
+\
+__dummy   	""      	inodelist
+{adb_inline_begin}
+*inohsz>/i/N
+*ihead>H
+0>I
+<N="Hash chains:"D
+$<inodelist.nxt
+{adb_inline_end}

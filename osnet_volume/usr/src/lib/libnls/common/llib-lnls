@@ -1,0 +1,13 @@
+/* LINTLIBRARY */
+/* PROTOLIB1 */
+
+/*
+ * Copyright (c) 1997 by Sun Microsystems, Inc. 
+ * All rights reserved. 
+ */ 
+#pragma ident  "@(#)llib-lnls 1.1     97/08/12 SMI" 
+
+
+/*
+ * usr/src/lib/libnls
+ */

@@ -1,0 +1,24 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)session.dbg	1.3	98/01/14 SMI"
+
+#include <sys/types.h>
+#include <sys/vnode.h>
+#include <sys/proc.h>
+#include <sys/session.h>
+#include "dummy.h"
+
+\
+\
+sess                    s_              session
+        ref                     sdecimal
+        mode                    hex
+        uid                     sdecimal
+        gid                     sdecimal
+        ctime                   hex
+        dev                     hex
+        vp                      hex
+        sidp                    hex
+        cred                    hex

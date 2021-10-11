@@ -1,0 +1,18 @@
+#
+# postremove script for SUNWpsdcr package.
+#
+# Copyright (c) 1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#ident "@(#)postremove 1.3 99/03/02"
+#
+
+# 
+# Unload and remove nolonger present drivers
+#
+
+# Platform-specific drivers
+case "${ARCH}" in
+i386)
+	;;
+esac

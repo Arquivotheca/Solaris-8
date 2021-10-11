@@ -1,0 +1,53 @@
+\ Copyright 1999 Sun Microsystems, Inc.
+\ All rights reserved.
+
+#ident	"@(#)fcimpl.fdbg	1.2	99/07/29 SMI"
+
+\
+\ Fibre Channel implementation macros
+\
+
+#include <sys/fibre-channel/fcio.h>
+#include <sys/fibre-channel/fc.h>
+#include <sys/fibre-channel/impl/fc_ulpif.h>
+#include <sys/fibre-channel/impl/fc_portif.h>
+#include <sys/fibre-channel/impl/fp.h>
+
+common_service
+ct_header
+d_id_hash
+fc_dataseg
+fc_device
+fc_fca_bind
+fc_fca_port_info
+fc_lilpmap
+fc_packet
+fc_port
+fc_port_clist
+fc_port_dev
+fc_portmap
+fca_port
+fca_tran
+fcio
+fp_cmd
+frame_header
+hard_addr
+job_request
+la_els_adisc
+la_els_logi
+la_els_logo
+la_wwn
+ls_code
+ns_resp_gan
+nwwn_elem
+nwwn_list
+port_device
+port_id
+port_type
+pwwn_hash
+service_param
+soft_attach
+ulp_modinfo
+ulp_module
+ulp_port_info
+unsolicited_buffer

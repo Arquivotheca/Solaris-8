@@ -1,0 +1,9 @@
+#ident	"@(#)catv.fd	1.2	96/02/21 SunSoft"
+
+Input types: simple,postscript
+Output types: simple
+Printer types: any
+Printers: any
+Filter type: slow
+Command: /usr/bin/cat
+Options: MODES catv_filter = -v

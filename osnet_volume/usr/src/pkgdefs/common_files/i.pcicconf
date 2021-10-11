@@ -1,0 +1,64 @@
+#!/bin/sh
+#
+#       @(#)i.pcicconf	1.1     97/03/10 SMI
+#
+# Copyright (c) 1993-1997 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+# SUNWpcmci i.pcicconf script
+#
+
+while read src dest
+do
+  if [ "`basename $src`" = "pcic.conf" ]
+    then
+	TMP=/tmp/SUNWpcmci.pcic.$$
+
+	#
+	# strip out all the old cruft in pcic.conf and add any
+	#       user-supplied lines to the new pcic.conf
+	# be careful about the egrep [  ] regexp - it should be
+	#	[<SAPCE><TAB>]
+	#
+	if [ -f $dest ] && egrep -s 'res-*=|ioaddr=|the "smi" prop' $dest
+	  then
+	    OLD_CMT1="all resources that could be used by the PCIC"
+	    OLD_CMT2="property is the index into the management"
+	    OLD_CMT3="interrupt level\."
+	    egrep -iv 'Copyright|ident |name=|intr=|reg=|res-' $dest | \
+		egrep -v "$OLD_CMT1|$OLD_CMT2|$OLD_CMT3" | \
+		egrep -v '^[ 	]*$|^[ 	]*#[ 	]*$|^[ 	]*;[ 	]*$' | \
+		nawk '{print "# "$0}' > $TMP
+	    PCIC_WCL="`cat $TMP | wc -l`"
+	    if [ "$PCIC_WCL" -gt 0 ]
+	      then
+		PCIC_WCL="`expr $PCIC_WCL`"
+		( cat $src
+		  echo '#'
+		  echo "# The following $PCIC_WCL lines were\c"
+		  echo ' extracted from your old /kernel/drv/pcic.conf'
+		  echo '# file. Please edit your new pcic.conf file\c'
+		  echo ' if necessary to include some or'
+		  echo '# all of these lines.'
+		  echo '#'
+		  echo '# ======== start of extracted lines from\c'
+		  echo ' old /kernel/drv/pcic.conf ========'
+		  cat $TMP
+		  echo '# ========= end of extracted lines from\c'
+		  echo ' old /kernel/drv/pcic.conf =========' ) >$dest
+	      fi
+	    rm -f $TMP
+	  else
+	    if [ ! -f $dest ]
+	      then
+		cp $src $dest
+	      fi
+	  fi
+    else
+      if [ ! -f $dest ]
+	then
+	  cp $src $dest
+	fi
+    fi
+done
+exit 0

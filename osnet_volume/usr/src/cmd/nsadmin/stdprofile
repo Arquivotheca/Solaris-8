@@ -1,0 +1,29 @@
+#ident	"@(#)stdprofile	1.8	98/10/03 SMI"	/* SVr4.0 1.1	*/
+#	This is the default standard profile provided to a user.
+#	They are expected to edit it to meet their own needs.
+
+MAIL=/usr/mail/${LOGNAME:?}
+
+#
+# If possible, start the windows system
+#
+if [ `tty` = "/dev/console" ] ; then
+	if [ "$TERM" = "sun" -o "$TERM" = "sun-color" -o "$TERM" = "AT386" ]
+	then
+
+		if [ ${OPENWINHOME:-""} = "" ] ; then
+			OPENWINHOME=/usr/openwin
+			export OPENWINHOME
+		fi
+
+		echo ""
+		echo "Starting OpenWindows in 5 seconds (type Control-C to interrupt)"
+		sleep 5
+		echo ""
+		$OPENWINHOME/bin/openwin
+
+		clear		# get rid of annoying cursor rectangle
+		exit		# logout after leaving windows system
+	fi
+fi
+

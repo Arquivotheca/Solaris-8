@@ -1,0 +1,28 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)kmem_cpu.dbg	1.4	98/01/19 SMI"
+
+#include <sys/kmem.h>
+#include <sys/kmem_impl.h>
+#include "dummy.h"
+
+\
+\
+kmem_cpu_cache          cc_     	kmem_cpu
+{adb_inline_begin}
+.>z
+<z+{OFFSET, cc_lock}=""
+{adb_inline_end}
+        lock                    .mutex
+{adb_inline_begin}
+<z+{OFFSET, cc_alloc}=""
+{adb_inline_end}
+        alloc                   sdecimal
+        free                    sdecimal
+        rounds                  sdecimal
+        magsize                 sdecimal
+        loaded_mag              hex
+        full_mag                hex
+        empty_mag               hex

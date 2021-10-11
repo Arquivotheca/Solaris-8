@@ -1,0 +1,113 @@
+#!/sbin/sh
+#
+# Copyright (c) 1997-1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#ident	"@(#)rpc	1.46	99/09/22 SMI"
+
+[ ! -d /usr/bin ] && exit
+
+case "$1" in
+'start'|'rpcstart')
+	if [ "$1" = start ]; then
+		if [ -z "$_INIT_PREV_LEVEL" ]; then
+			set -- `/usr/bin/who -r`
+			_INIT_PREV_LEVEL="$9"
+		fi
+
+		if [ $_INIT_PREV_LEVEL != S -a $_INIT_PREV_LEVEL != 1 \
+		    -a $_INIT_PREV_LEVEL != '?' ]; then
+			exit 0
+		fi
+
+		[ -x /usr/sbin/rpcbind ] || exit 0
+	fi
+
+	echo "starting rpc services:\c"
+	/usr/bin/mkdir -p -m 1777 /var/run/rpc_door
+	/usr/sbin/rpcbind >/dev/msglog 2>&1
+	echo " rpcbind\c"
+	
+	# Configure NIS or NIS+
+
+	if [ -f /etc/.UNCONFIGURED -a -x /usr/sbin/sysidns ]; then
+		/usr/sbin/sysidns >/dev/msglog 2>&1
+	fi
+
+	# Start the key service but only if the domain has been set
+
+	if [ -x /usr/sbin/keyserv -a \
+	    -n "`/usr/bin/domainname 2>/dev/null`" ]; then
+		/usr/sbin/keyserv >/dev/msglog 2>&1
+		echo " keyserv\c"
+	fi
+
+	# Start NIS+. Note this needs to be done after keyserv
+	# has started because NIS+ uses the keyserver for authentication.
+
+	if [ -d /var/nis -a -x /usr/sbin/rpc.nisd ]; then
+		if [ -f /var/nis/NIS_COLD_START ]; then
+			if [ -x /usr/sbin/nis_cachemgr ]; then
+				/usr/sbin/nis_cachemgr
+				echo " nis_cachemgr\c"
+			fi
+		fi
+
+		# Uncomment the following line setting EMULYP if you want
+		# rpc.nisd to emulate the NIS (YP) service
+
+		#EMULYP="-Y"
+
+		# We always start the NIS+ Password Update Daemon.  If it
+		# finds the NIS+ server is not a Master it will just exit.
+		# It also determines if the server is running in NIS (YP)
+		# compat mode and automatically registers a yppasswdd so NIS
+		# (YP) clients can change their passwords.
+
+		[ -z "$_INIT_UTS_NODENAME" ] && \
+		    _INIT_UTS_NODENAME=`/usr/bin/uname -n`
+		
+		hostname=`echo "$_INIT_UTS_NODENAME" | /usr/bin/cut -d. -f1 | \
+		    /usr/bin/tr '[A-Z]' '[a-z]'`
+
+		if [ -d /var/nis/data -o -d /var/nis/$hostname ]; then
+			/usr/sbin/rpc.nisd $EMULYP
+			echo " rpc.nisd \c"
+			/usr/sbin/rpc.nispasswdd
+		fi
+	fi
+
+	# Start NIS (YP) services.  The ypstart script handles both client
+	# and server startup, whichever is appropriate.
+
+	if [ -x /usr/lib/netsvc/yp/ypstart ]; then
+		/usr/lib/netsvc/yp/ypstart rpcstart
+	fi
+
+	echo " done."
+	;;
+
+'stop')
+	# Bring all of the RPC service daemons to a halt.  Note that the 
+	# daemons are stopped in a particular order.  Further note that rpcbind
+	# is special in that it needs to be killed with -9 to prevent it from
+	# saving its state and sending a message to syslog.
+
+	for daemon in rpc.nisd nis_cachemgr keyserv rpc.nispasswdd; do
+		/usr/bin/pkill -x -u 0 $daemon
+	done
+
+	if [ -x /usr/lib/netsvc/yp/ypstop ]; then
+		/usr/lib/netsvc/yp/ypstop
+	fi
+
+	/usr/bin/pkill -9 -x -u 0 rpcbind
+	/usr/bin/rm -rf /var/run/rpc_door
+	;;
+
+*)
+	echo "Usage: $0 { rpcstart | start | stop }"
+	exit 1
+	;;
+esac
+exit 0

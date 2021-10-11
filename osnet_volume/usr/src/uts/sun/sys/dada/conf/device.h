@@ -1,0 +1,87 @@
+/*
+ * Copyright (c) 1996, by Sun Microsystems, Inc.
+ * All rights reserved.
+ */
+
+/*
+ * DCD device structure.
+ *
+ *	All DCD target drivers will have one of these per target/lun.
+ *	It will be created by a parent device and stored as driver private
+ *	data in that device's dev_info_t (and thus can be retrieved by
+ *	the function ddi_get_driver_private).
+ */
+
+#ifndef	_SYS_DCD_CONF_DEVICE_H
+#define	_SYS_DCD_CONF_DEVICE_H
+
+#pragma ident	"@(#)device.h	1.4	98/02/25 SMI"
+
+#include <sys/dada/dada_types.h>
+
+#ifdef	__cplusplus
+extern "C" {
+#endif
+
+struct dcd_device {
+	/*
+	 * Routing info for this device.
+	 */
+
+	struct dcd_address	*dcd_address;
+
+	/*
+	 * Cross-reference to our dev_info_t.
+	 */
+
+	dev_info_t		*dcd_dev;
+
+	/*
+	 * Mutex for this device, initialized by
+	 * parent prior to calling probe or attach
+	 * routine.
+	 */
+
+	kmutex_t		dcd_mutex;
+
+	/*
+	 * Reserved, do not use.
+	 */
+
+	void			*dcd_reserved;
+
+
+	/*
+	 * If dcd_probe is used to probe out this device,
+	 * a dcd_identify data structure will be allocated
+	 * and an IDENTIFY command will be run to fill it in.
+	 *
+	 */
+
+	struct dcd_identify	*dcd_ident;
+
+	/*
+	 * More detailed information is 'private' information, i.e., is
+	 * only pertinent to Target drivers.
+	 */
+
+	caddr_t			dcd_private;
+
+};
+
+
+#ifdef	_KERNEL
+#ifdef	__STDC__
+extern int dcd_probe(struct dcd_device *devp, int (*callback)());
+extern void dcd_unprobe(struct dcd_device *devp);
+#else	/* __STDC__ */
+extern int dcd_probe();
+extern void dcd_unprobe();
+#endif	/* __STDC__ */
+#endif	/* _KERNEL */
+
+#ifdef	__cplusplus
+}
+#endif
+
+#endif	/* _SYS_DCD_CONF_DEVICE_H */

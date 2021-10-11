@@ -1,0 +1,13 @@
+#!/sbin/sh
+#
+# Copyright (c) 1997 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#ident	"@(#)PRESERVE	1.7	97/12/08 SMI"
+
+#
+# Move editing files into /usr/preserve
+#
+
+exfiles=`echo /var/tmp/Ex*`
+[ "$exfiles" != '/var/tmp/Ex*' ] && /usr/lib/expreserve -

@@ -1,0 +1,44 @@
+Date: Wed, 6 Jul 1994 16:58:23 +0800
+Subject: Re: promif questions
+
+All sun4c machines have both 1.x and 2.x proms available for them.
+The SS1, SS1+, IPC and SLC all shipped initially with 1.x only PROMs.
+Upgrades are available for 2.x PROMs for these machines, so several
+customers have them.
+
+SS2, IPX, ELC all shipped with 2.x PROMs.  No 1.x proms are available
+for these machines.
+
+Then there's a hybrid prom, one that can behave in both 1.x and 2.x mode,
+depending on an nvram variable.  I think it's 1.7 proms that have
+this feature.
+
+All sun4e machines have 1.x only proms.
+All sun4m's and sun4d's have 2.x only proms.
+
+>   If so, it seems we're stuck with the run-time switching unless we
+>   have some sort of front-end program that figures out which type of
+>   proms you have and loads the correct program (doubt it's worth it).
+
+Yes, I think we're stuck with run-time switching for sun4c's until
+we can EOL the early 1.x only sun4c's.  Don't hold your breath. :-)
+
+>3) What is OBP_V0? Does it go away?
+
+There are two notions of OBP version.  OBP 1.x, 2.x and 3.x.  These
+numbers are the OBP version numbers visible to the user, that the user
+sees using the banner command.  There is also a way to get at the
+version number, programatically.
+
+The other version number is the romvec version number, the version
+number in the romvec, exported by the PROM giving the version number
+of the client interface.  Currently we have 3:
+
+romvec_version == 0; Is equivalent to a sun4c or sun4e 1.x prom.
+romvec_version == 2; Is equivalent to a sun4c 2.x prom
+romvec_version == 3; Is equivalent to a sun4m or sun4d 2.x prom.
+
+romvec_version 3 proms have all non-sun4c specific client interfaces
+plus the MP interfaces defined.  romvec_version 2 proms have a
+sun4c/4e specific client interface (set_cxsegmap, I think) without any
+MP interfaces.

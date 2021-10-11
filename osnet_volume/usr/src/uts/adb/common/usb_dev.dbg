@@ -1,0 +1,27 @@
+\
+\ Copyright (c) 1998-1999 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)usb_dev.dbg	1.2	99/11/18 SMI"
+
+#include <sys/usb/usba.h>
+#include <sys/usb/usba/usba_types.h>
+#include <sys/usb/usba/usba_impl.h>
+#include <sys/usb/hcd/openhci/ohci.h>
+#include <sys/usb/hcd/openhci/ohcid.h>
+#include "dummy.h"
+
+\
+\
+
+usb_dev	usb_	
+{adb_inline_begin}
+.>z
+<z+{OFFSET, usb_dev_device_impl}=""
+{adb_inline_end}
+	dev_device_impl		hex		usb_device
+	dev_pipe_list		hex		pipe_private_list
+	dev_mutex		.mutex
+{adb_inline_begin}
+<z+{SIZEOF}=""
+{adb_inline_end}

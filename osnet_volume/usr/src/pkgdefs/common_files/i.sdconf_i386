@@ -1,0 +1,62 @@
+#!/bin/sh
+#
+#ident	"@(#)i.sdconf_i386	1.1	99/07/10 SMI"
+#
+# Copyright (c) 1999 by Sun Microsystems, Inc.
+# All Rights Reserved.
+
+PATH="/usr/bin:/usr/sbin:${PATH}"
+export PATH
+
+while read src dest
+do
+	if [ ! -f $dest ] ; then
+		cp $src $dest
+	else
+		# update the SCCS id
+		grep '^#pragma ident[	]*"@(#)sd.conf' $src \
+		    > /tmp/newident.$$ 2>/dev/null
+		egrep -v '^#(pragma ident|ident)[	]*"@\(#\)sd.conf' \
+			$dest  > /tmp/rest.$$ 2>/dev/null
+		cat /tmp/newident.$$ /tmp/rest.$$ > /tmp/d.$$
+
+		#
+		# remove entries for eol'ed blogic driver
+		#
+		sed -e '/^name="sd" parent="blogic"$/N'	\
+		-e '/^name="sd" parent="blogic" target=0 lun=0;$/d' \
+		-e '/^name="sd" parent="blogic" target=1 lun=0;$/d' \
+		-e '/^name="sd" parent="blogic" target=2 lun=0;$/d' \
+		-e '/^name="sd" parent="blogic" target=3 lun=0;$/d' \
+		-e '/^name="sd" parent="blogic" target=4 lun=0;$/d' \
+		-e '/^name="sd" parent="blogic" target=5 lun=0;$/d' \
+		-e '/^name="sd" parent="blogic" target=6 lun=0;$/d' \
+		-e '/^name="sd" parent="blogic"\n	target=0 lun=0;$/N' \
+		-e '/^name="sd" parent="blogic"\n	target=1 lun=0;$/N' \
+		-e '/^name="sd" parent="blogic"\n	target=2 lun=0;$/N' \
+		-e '/^name="sd" parent="blogic"\n	target=3 lun=0;$/N' \
+		-e '/^name="sd" parent="blogic"\n	target=4 lun=0;$/N' \
+		-e '/^name="sd" parent="blogic"\n	target=5 lun=0;$/N' \
+		-e '/^name="sd" parent="blogic"\n	target=6 lun=0;$/N' \
+		-e '/^name="sd" parent="blogic"\n	target=0 lun=0;\n$/d' \
+		-e '/^name="sd" parent="blogic"\n	target=1 lun=0;\n$/d' \
+		-e '/^name="sd" parent="blogic"\n	target=2 lun=0;\n$/d' \
+		-e '/^name="sd" parent="blogic"\n	target=3 lun=0;\n$/d' \
+		-e '/^name="sd" parent="blogic"\n	target=4 lun=0;\n$/d' \
+		-e '/^name="sd" parent="blogic"\n	target=5 lun=0;\n$/d' \
+		-e '/^name="sd" parent="blogic"\n	target=6 lun=0;\n$/d' \
+			/tmp/d.$$ > /tmp/d2.$$
+
+		if cmp -s /tmp/d.$$ /tmp/d2.$$  > /dev/null 2>&1
+		then
+			: # Do not modify file unless changes are required.
+		else
+			cp /tmp/d2.$$ $dest
+		fi
+
+		# remove temporary files
+		rm -f /tmp/d.$$ /tmp/d2.$$ /tmp/newident.$$ /tmp/rest.$$
+	fi
+done
+
+exit 0

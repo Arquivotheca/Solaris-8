@@ -1,0 +1,35 @@
+\
+\ Copyright (c) 1998 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)ghd_cmd.dbg	1.3	98/07/19 SMI"
+
+#include <sys/dada/adapters/ghd/ghd.h>
+#include "dummy.h"
+
+ghd_cmd		cmd_
+{adb_inline_begin}
+.>z
+<z+{OFFSET, cmd_q}/n"cmd_q"n3Kn
+<z+{OFFSET, cmd_state}=""
+{adb_inline_end}
+	state		hex
+	waitq_level	hex
+{adb_inline_begin}
+<z+{OFFSET, cmd_timer_link}/n"timer_link"n3Kn
+<z+{OFFSET, cmd_start_time}=""
+{adb_inline_end}
+	start_time	hex
+	timeout		hex
+	private		hex
+	pktp		hex
+	gtgtp		hex
+	dma_handle	hex
+	dmawin		hex
+	dmaseg		hex
+	dma_flags	hex
+	totxfer		hex
+	resid		hex
+{adb_inline_begin}
+<o+{SIZEOF}=""
+{adb_inline_end}

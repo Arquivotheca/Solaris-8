@@ -1,0 +1,252 @@
+
+#pragma ident	"@(#)README	1.2	99/10/13 SMI"
+
+
+There are some missing info and errors in the Copperhead spec version 1.4
+Here are some excerpts from  messages from IBM that describes them.
+
+
+To: shidokht
+From: Chris Fore
+Date: 24 Apr 96 11:04:21 
+Subject: SunSoft's Copperhead Questions (follow-up)
+Mime-Version: 1.0
+
+Shidokht,
+
+ Here is a first cut at answering the questions you gave me in our
+ phone conversation on April 17.  Hopefully this will be of some
+ help to you while I work to answer some of your more comprehensive questions.
+
+(Discussion follows).
+
+ - R. Chris.
+
+-----
+
+ 1) Q: What Cylinder/Head/Sector (CHS) geometry does Copperhead (CH) support?
+
+    A: CH supports two CHS geometries: a default mode (capable of handling
+       drives of up to 8 GB), and a "compatibility mode" which can handle
+       drives of 2GB or less.
+
+       The Default Mode ( drives greater than 2GB ) uses the following
+       geometry:
+           63 Sectors/track
+           254 heads
+
+       The Compatibility Mode (up to 2GB) uses the following geometry:
+           32 sectors/track
+           128 Heads
+
+       The "2GB" boundary point is defined to be at LBA 0x400000.
+
+       There are several ways that a driver can detect which mode
+       the adapter is configured to use.  One such method is through the
+       Adapter Enquiry data provided by the Get Adapter Status command (05H).
+       Specifically, bit 3 of the ucMiscFlag field of the ENQCMD structure
+       (pg 93) reflects the configured geometry (if bit 3 is set, then
+       the card is in the compatibility mode, otherwise the default mode
+       is used).
+
+
+...
+ 5) There is a hardware bug in the Command Channel Control Register's
+    "Semaphore" bit which renders it ineffective for semaphore operation.
+    If more than one entity can attempt to talk to CopperHead at the same
+    time in your environment, then you will need to establish some other
+    resource-locking mechanism to prevent conflicts.
+
+    Our drivers use the "Start/Stop" bit to determine when new command
+    blocks can be added to the command channel (I will try to send you a
+    code excerpt soon, but basically we detect an idle command channel
+    by waiting for Start/Stop to go to zero, then set it to "one" after
+    we add any new requests to the queue).
+
+    Our implementation would not prevent other driver instances from
+    attempting to access the command channel simultaneously (this turns
+    out not to be a problem under our driver architecture).
+
+
+
+ 7) Q: When issuing a Get Adapter Status (05H) command and requesting
+       mulitple data structures (some combination of adp_enquiry, VPD, and
+       Device State), what order are the data structures returned in?
+
+    A: I'll have to get back to you with a full response on this
+       question, but here's what I have managed to gather thus far:
+
+         *) When requesting multiple structures, they are returned in
+            the order shown on pg 93.
+
+         *) The Adapter Enquiry data structure (ENQCMD) has been revised.
+            I will send you an updated version of the structure definition.
+
+         *) The "get VPD only" option may not work correctly.
+
+
+
+
+
+ 8) Page 151 of the CH spec lists the following logical drive states:
+       OKY , CRT , OFL , FRE , LDM , SYS
+    but the Logical Drive State discussion on page (on page 33) only
+    gives definitions for OKY, CRT, OFL, and FRE drives.
+
+    Q: Where are LDM and SYS drives defined?
+
+    A: You will find a brief description of LDM and SYS drives in the
+       section discussing the Logical Drive Migration (BBH) command
+       (pp 120-123).
+
+       In brief, you can treat drives in either the LDM or SYS state
+       as reserved logical drives.
+
+
+
+
+
+To: Shidokht Yadegari
+Cc: gdavi
+From: Chris Fore
+Date:  2 May 96 16:14:11 
+Subject: More Copperhead Info.
+Mime-Version: 1.0
+
+
+...
+Here is a written summary of what we discussed in out last phone call:
+
+Q: What CHS geometry does CopperHead support?
+
+A: When the adapter is in default mode, it checks the Logical Drive capacity to 
+determine if the "greater than 2 GB" mapping should be used.  When the adapter 
+is in "Compatibility Mode," the 2GB mapping is used (regardless of the drive's 
+maximum capacity).  Here is pseudo-code for the algorithm:
+
+ if ( Adapter is in "BIOS Compatibility" mode )
+   {
+   use "2 GB" mapping: ( 32 sectors/track , 128 heads )
+   }
+ else
+   {
+   if ( logical drive capacity > 2 GB )
+     use "8 GB" mapping ( 63 sectors/track, 254 heads )
+   else
+     use "2 GB" mapping: ( 32 sectors/track , 128 heads )
+   }
+  
+
+...
+ - Chris.
+
+
+
+To: Shidokht Yadegari
+Cc: gdavi
+From: Chris Fore
+Date: 23 May 96 17:26:06 
+Subject: Repaired Copperhead
+Mime-Version: 1.0
+
+Shidokht,
+
+Here is some more of the information I owe you:
+
+First, I would like to address status-queue element
+byte-ordering.  As you have no doubt done by now,
+I checked the source code for our drivers, and your
+observations (attached below) appear to be correct--
+the byte order shown in the spec is wrong.
+
+
+>  As I talked to you on the phone previously, I experimented a similar
+>  ordering problem on the format of the status, The documentation
+>  on page 54 shows the status format to be
+>
+>  byte0  ESB,
+>  byte1  BSB,
+>  byte2  command id
+>  byte3  reserved
+>
+>  but in practice I found that the order was reversed as:
+>
+>  byte3  ESB,
+>  byte2  BSB,
+>  byte1  command id
+>  byte0  reserved
+
+
+---------------------------------------------
+
+
+I also looked into the question about the ordering of
+bytes within the "additional 8 bytes" appended to each
+command block in the command queue.  As you wrote in
+your previous note:
+
+>  According to the Copperhead's version 1.4 spec, page 47,
+>  the additional eight  bytes in command block need to be
+>  31        0
+>  -----------
+>  00 00 00 00
+>  00 00 10 1A
+>  -----------
+>  With the above setting I had the problem of getting two
+>  statuses for each command, when CCCR's byte count was 0x10.
+>
+>
+>  I just experimented with this additional bytes field assuming
+>  that the documentation may have had a typo in byte ordering
+>  indicated. When I changed it to:
+>
+>  31        0
+>  -----------
+>  00 00 00 00
+>  1A 10 00 00
+>  -----------
+>
+>  everything started working just fine with CCCR's byte count=0x10.
+
+Consulting the source code for our drivers shows that the spec
+is also in error here.  By looking at the source for some
+of the other device drivers, it became apparent that Figure
+34 on page 47 is not correct.
+
+In the device drivers written in-house, the following
+eight bytes are appended:
+
+   31        0
+   -----------
+   00 00 00 00
+   00 00 00 10
+   -----------
+
+I suspect that when you swapped the bytes in you "0x101A"
+string, you were just moving some of the offending bits
+up into reserved portions of the CCCR register.
+
+I recommend that you try chaining the solaris driver
+to append the eight bytes shown in the above figure.
+
+
+----------------------------------------------
+
+In response to your inquires about "reserved" fields
+in the command blocks:  we do NOT recommend placing
+anything other than zeros in the reserved portions
+of the command block structures.
+
+
+----------------------------------------------
+
+I will forward more information to you as I obtain it.
+
+Feel free to call or e-mail me if you encounter any other
+difficulties.
+
+Thanks,
+
+ - Chris.
+
+

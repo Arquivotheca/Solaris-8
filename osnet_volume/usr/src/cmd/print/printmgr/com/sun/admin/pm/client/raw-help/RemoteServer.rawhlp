@@ -1,0 +1,27 @@
+<TITLE> Specify Remote Server </TITLE>
+<!-- Tag=RemoteServer -->
+
+<CONTENT>
+
+<p>
+
+A printer server must be specified; the printer server is the computer
+on which the software for the remote printer is installed. 
+
+<p>
+
+</CONTENT>
+
+<KEYWORDS>
+remote "remote printer" server "printer server" fail failure
+</KEYWORDS>
+
+<p>
+
+<SEEALSO>
+AddAccess
+ToAddAccess
+Overview
+MainWindow 
+HelpOnHelp
+</SEEALSO>

@@ -1,0 +1,24 @@
+\
+\ Copyright (c) 1999 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\ "@(#)cpc_event.dbg	1.1	99/08/15 SMI"
+
+#include <sys/cpc_event.h>
+
+#include "dummy.h"
+
+_cpc_event	ce_	cpc_event
+	cpuver	sdecimal
+	hrt	hex
+#if defined(__sparc) || defined(__sparcv9)
+	tick	hex
+	pic	hex
+	pcr	hex
+#elif defined(__i386)
+	tsc	hex
+	pic	hex
+	pes	hex
+#else
+#error	"Unknown ISA"
+#endif

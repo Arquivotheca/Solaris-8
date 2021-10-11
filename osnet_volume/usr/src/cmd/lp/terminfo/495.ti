@@ -1,0 +1,60 @@
+#	Copyright (c) 1984, 1986, 1987, 1988, 1989 AT&T
+#	  All Rights Reserved
+
+#	THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF AT&T
+#	The copyright notice above does not evidence any
+#	actual or intended publication of such source code.
+
+#ident	"@(#)495.ti	1.2	89/11/27 SMI"	/* SVr4.0 1.1	*/
+
+######################################################################
+#
+# Entries for the AT&T 495 printer
+#
+
+495ibm|att495ibm|AT&T 495 IBM Graphics emulation,
+
+	bufsz#1024,
+	cps#800,
+
+
+	orc#12,
+	orhi#120,
+
+	lines#63,
+
+	cpi=%?%p1%{10}%=%t^R%e%p1%{17}%=%t^O%;,
+
+#   Reset defaults, enter IBM Graphics emulation mode
+	is2=\E[0~\E[12~,
+
+	use=Gibmg+basic, use=Gibmg+low,
+
+495qume|att495qume|AT&T 495 Qume emulation,
+
+	daisy@,
+
+	bufsz#1024,
+	cps#800,
+
+	cols#80,
+	lines#63,
+
+
+	chr=%?%p1%{0}%>%p1%{127}%<%&%t\E^_%p1%{1}%+%c%;,
+	cvr=%?%p1%{0}%>%p1%{127}%<%&%t\E^^%p1%{1}%+%c%;,
+
+	is2=\E[0~\E[11~\E^_\r,
+
+	u9=%?%p1%{128}%<%t\EF%p1%02d%;,
+
+	use=Gdaisy+basic, use=Gdaisy+lowres,
+
+495hp|att495hp|AT&T 495 HP Laserjet I emulation,
+
+	bufsz#1024,
+	cps#800,
+
+	is2=\E[0~\E[10~\E&k0S,
+	
+	use=Ghplaser+basic, use=Ghplaser+high,

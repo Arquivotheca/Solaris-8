@@ -1,0 +1,40 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)modctl.dbg	1.13	98/01/19 SMI"
+
+#include <sys/modctl.h>
+#include "dummy.h"
+
+\
+\
+modctl			mod_
+{adb_inline_begin}
+.>m
+*(<m+{OFFSET, mod_modname})>f
+./n"module"16t"`"s"'"
+*(<m+{OFFSET, mod_filename})/n"file "16t"`"s"'"
+<m+{OFFSET, mod_next}=""
+{adb_inline_end}
+	next			hex
+	prev			hex
+	id			hex
+	mp			hex
+	inprogress_thread	hex		thread
+	modinfo			hex
+	linkage			hex
+	filename		hex
+	modname			hex
+	busy			hex
+	stub			hex
+	loaded			hex
+	installed		hex
+	loadflags		hex
+	want			hex
+	requisites		hex
+	dependents		hex
+	loadcnt			sdecimal
+{adb_inline_begin}
+<m+{SIZEOF}=""
+{adb_inline_end}

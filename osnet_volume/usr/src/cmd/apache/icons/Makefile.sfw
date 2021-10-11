@@ -1,0 +1,153 @@
+#
+#ident	"@(#)Makefile.sfw	1.1	99/10/20 SMI"
+#
+# Copyright (c) 1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#
+
+include ../Makefile.paths
+include ../../Makefile.cmd
+
+FILEMODE=	0644
+
+ICONS=	\
+	README 			\
+	a.gif 			\
+	alert.black.gif		\
+	alert.red.gif		\
+	apache_pb.gif		\
+	back.gif		\
+	ball.gray.gif		\
+	ball.red.gif		\
+	binary.gif		\
+	binhex.gif		\
+	blank.gif		\
+	bomb.gif		\
+	box1.gif		\
+	box2.gif		\
+	broken.gif		\
+	burst.gif		\
+	c.gif			\
+	comp.blue.gif		\
+	comp.gray.gif		\
+	compressed.gif		\
+	continued.gif		\
+	dir.gif			\
+	down.gif		\
+	dvi.gif			\
+	f.gif			\
+	folder.gif		\
+	folder.open.gif		\
+	folder.sec.gif		\
+	forward.gif		\
+	generic.gif		\
+	generic.red.gif		\
+	generic.sec.gif		\
+	hand.right.gif		\
+	hand.up.gif		\
+	icon.sheet.gif		\
+	image1.gif		\
+	image2.gif		\
+	image3.gif		\
+	index.gif		\
+	layout.gif		\
+	left.gif		\
+	link.gif		\
+	movie.gif		\
+	p.gif			\
+	patch.gif		\
+	pdf.gif			\
+	pie0.gif		\
+	pie1.gif		\
+	pie2.gif		\
+	pie3.gif		\
+	pie4.gif		\
+	pie5.gif		\
+	pie6.gif		\
+	pie7.gif		\
+	pie8.gif		\
+	portal.gif		\
+	ps.gif			\
+	quill.gif		\
+	right.gif		\
+	screw1.gif		\
+	screw2.gif		\
+	script.gif		\
+	sound1.gif		\
+	sound2.gif		\
+	sphere1.gif		\
+	sphere2.gif		\
+	tar.gif			\
+	tex.gif			\
+	text.gif		\
+	transfer.gif		\
+	unknown.gif		\
+	up.gif			\
+	uu.gif			\
+	uuencoded.gif		\
+	world1.gif		\
+	world2.gif
+
+ROOTICONS=$(ICONS:%=$(ROOTHTTPDICONDIR)/%)
+
+SMALLICONS=			\
+	small/README.txt	\
+	small/back.gif		\
+	small/binary.gif	\
+	small/binhex.gif	\
+	small/blank.gif		\
+	small/broken.gif	\
+	small/burst.gif		\
+	small/comp1.gif		\
+	small/comp2.gif		\
+	small/compressed.gif	\
+	small/continued.gif	\
+	small/dir.gif		\
+	small/dir2.gif		\
+	small/doc.gif		\
+	small/forward.gif	\
+	small/generic.gif	\
+	small/generic2.gif	\
+	small/generic3.gif	\
+	small/image.gif		\
+	small/image2.gif	\
+	small/index.gif		\
+	small/key.gif		\
+	small/movie.gif		\
+	small/patch.gif		\
+	small/ps.gif		\
+	small/rainbow.gif	\
+	small/sound.gif		\
+	small/sound2.gif	\
+	small/tar.gif		\
+	small/text.gif		\
+	small/transfer.gif	\
+	small/unknown.gif	\
+	small/uu.gif
+
+ROOTSMALLICONDIR=$(ROOTHTTPDICONDIR)/small
+
+ROOTSMALLICONS=$(SMALLICONS:%=$(ROOTHTTPDICONDIR)/%)
+
+.KEEP_STATE:
+
+all:
+
+install: all .WAIT $(ROOTHTTPDICONDIR) $(ROOTICONS)  $(ROOTSMALLICONDIR)  $(ROOTSMALLICONS)
+
+$(ROOTHTTPDICONDIR):
+	$(INS.dir)
+
+$(ROOTSMALLICONDIR):
+	$(INS.dir)
+
+$(ROOTHTTPDICONDIR)/%: %
+	$(INS.file)
+
+$(ROOTSMALLICONDIR)/%: %
+	$(INS.file)
+
+clean lint:
+
+include ../../Makefile.targ

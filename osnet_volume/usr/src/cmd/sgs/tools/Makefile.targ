@@ -1,0 +1,39 @@
+#
+#ident	"@(#)Makefile.targ	1.11	97/10/21 SMI"
+#
+# Copyright (c) 1995 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+# cmd/sgs/tools/Makefile.targ
+
+$(ROOTDIR)/bin/%:	%
+		$(INS.file)
+
+$(ROOTDIR)/lib/%:	%
+		$(INS.file)
+
+sgsmsg:		../common/sgsmsg.c 
+		$(NATIVECC) -O -o $@ ../common/sgsmsg.c
+
+jive:		../common/jive.l 
+		$(LEX) -n ../common/jive.l
+		$(NATIVECC) -o $@ lex.yy.c -ll
+		$(RM) lex.yy.c
+
+%:		%.o
+		$(LINK.c) -o $@ $<
+
+%.o:		../common/%.c
+		$(COMPILE.c) -o $@ $<
+		$(POST_PROCESS_O)
+
+catalog:	sgsmsg
+
+clobber:	clean
+		$(RM) $(PROGS) $(NATIVE) $(CLOBBERFILES) jive
+
+clean:
+		$(RM) $(OBJECTS) $(CLEANFILES)
+
+lint:
+		$(LINT.c) ../common/sgsmsg.c -lc	   >> $(LINTOUT) 2>&1

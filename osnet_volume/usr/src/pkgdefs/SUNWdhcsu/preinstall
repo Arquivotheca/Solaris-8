@@ -1,0 +1,11 @@
+#!/bin/sh
+#
+#ident	"@(#)preinstall	1.4	99/09/20 SMI"
+#
+# Copyright (c) 1996-1999 Sun Microsystems Inc. All rights reserved.
+#
+
+# Stop in.dhcpd if it is if root is PKG_INSTALL_ROOT.
+[ "${PKG_INSTALL_ROOT:-/}" = "/" ] && /usr/bin/pkill -x -u 0 in.dhcpd
+
+exit 0

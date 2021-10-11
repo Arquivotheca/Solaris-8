@@ -1,0 +1,21 @@
+#ident	"@(#)Menu.spell	1.2	92/07/14 SMI"	/* SVr4.0 1.1	*/
+
+menu=Spell Checker Administration
+
+help=OPEN TEXT $INTFBASE/Text.oamhelp $!LININFO 
+
+lifetime=permanent
+
+
+
+name=add
+description=Add Spell Checker to Programs Menu
+lininfo="/usr/sadm/sysadm/add-ons/face/applmgmt/FACE/spell_services/add \"Add Spell Checker to Programs Menu\"" add
+action=OPEN TEXT $INTFBASE/Text.interface /usr/sadm/sysadm/add-ons/face/applmgmt/FACE/spell_services/add Text.aspell
+
+
+name=remove
+description=Remove Spell Checker from Programs Menu
+lininfo="/usr/sadm/sysadm/add-ons/face/applmgmt/FACE/spell_services/remove \"Remove Spell Checker from Programs Menu\"" remove
+action=OPEN TEXT $INTFBASE/Text.interface /usr/sadm/sysadm/add-ons/face/applmgmt/FACE/spell_services/remove Text.dspell
+

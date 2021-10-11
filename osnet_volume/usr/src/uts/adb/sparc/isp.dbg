@@ -1,0 +1,127 @@
+\
+\ Copyright (c) 1997-1999 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)isp.dbg	1.24	99/11/23 SMI"
+
+#include <sys/types.h>
+#include <sys/scsi/scsi.h>
+#include <sys/scsi/adapters/ispmail.h>
+#include <sys/scsi/adapters/ispvar.h>
+#include "dummy.h"
+
+\
+\
+isp			isp_
+{adb_inline_begin}
+.>z
+<z+{OFFSET, isp_tran}=""
+{adb_inline_end}
+	tran			hex
+	dip			hex		dev		
+	bus			hex
+	clock_frequency		hex
+	iblock			hex
+	next			hex
+	maj_min_rev		hex
+	subminor_rev		hex
+	cust_prod		hex
+	target_scsi_options_defined	hex
+	scsi_options		hex
+	target_scsi_options	hex
+	scsi_tag_age_limit	hex		tag_limit
+	scsi_reset_delay	hex		reset_delay
+	initiator_id		hex		hostid
+	suspended		hex
+	cap			hex
+	synch			hex
+	biu_reg			hex
+	mbox_reg		hex
+	sxp_reg			hex
+	risc_reg		hex
+	reg_number		hex
+	mbox.mbox_sema		hex		mbox_sema
+	mbox.mbox_flags		hex		mbox_flags
+	mbox.mbox_cmd.timeout	hex		mbox_cmd_timeout
+	mbox.mbox_cmd.retry_cnt	hex		mbox_retry_count
+	mbox.mbox_cmd.n_mbox_out	hex	n_mbox_out
+	mbox.mbox_cmd.n_mbox_in	hex		n_mbox_in
+{adb_inline_begin}
+<z+{OFFSET, isp_mbox.mbox_cmd.mbox_out}/n"mbox_out"n8xn
+<z+{OFFSET, isp_mbox.mbox_cmd.mbox_in}/n"mbox_in"n8xn
+<z+{OFFSET, isp_shutdown}=""
+{adb_inline_end}
+	shutdown		hex
+	prop_update		hex
+	cmdarea			hex
+{adb_inline_begin}
+<z+{OFFSET, isp_dmacookie}/n"dmacookie"nJKXn
+<z+{OFFSET, isp_dmahandle}=""
+{adb_inline_end}
+	dmahandle		hex
+	dma_acc_handle		hex
+	request_dvma		hex
+	response_dvma		hex
+	pci_config_acc_handle	hex
+	biu_acc_handle		hex
+	mbox_acc_handle		hex
+	sxp_acc_handle		hex
+	risc_acc_handle		hex
+	queue_space		hex
+	request_mutex		.mutex
+{adb_inline_begin}
+<z+{OFFSET, isp_response_mutex}=""
+{adb_inline_end}
+	response_mutex		.mutex
+{adb_inline_begin}
+<z+{OFFSET, isp_request_in}=""
+{adb_inline_end}
+	request_in		hex
+	request_out		hex
+	response_in		hex
+	response_out		hex
+	request_ptr		hex
+	request_base		hex
+	response_ptr		hex
+	response_base		hex
+	waitq_mutex		.mutex
+{adb_inline_begin}
+<z+{OFFSET, isp_waitf}=""
+{adb_inline_end}
+	waitf			hex
+	waitb			hex
+	waitq_timeout		hex
+	burst_size		hex
+	conf1_fifo		hex
+	free_slot		hex
+	alive			hex
+	reset_notify_listf	hex		reset_list
+	kmem_cache		hex
+	backoff			hex
+	softstate		hex
+	hotplug_waiting		hex
+	cv			hex
+	hotplug_mutex		.mutex
+	kstat			hex
+	slots			hex
+{adb_inline_begin}
+<z+{OFFSET, isp_max_lun}=""
+{adb_inline_end}
+	max_lun			hex
+{adb_inline_begin}
+<z+{OFFSET, isp_marker_in}=""
+{adb_inline_end}
+	marker_in		hex
+	marker_out		hex
+	marker_free		hex
+	markers			hex
+{adb_inline_begin}
+<z+{OFFSET, isp_intr_mutex}=""
+{adb_inline_end}
+	intr_mutex		.mutex
+	intr_cv			hex
+	in_intr			hex
+	in_reset		hex
+{adb_inline_begin}
+<z+{SIZEOF}=""
+{adb_inline_end}

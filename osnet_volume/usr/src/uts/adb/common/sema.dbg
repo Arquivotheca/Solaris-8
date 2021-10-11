@@ -1,0 +1,17 @@
+\
+\ Copyright (c) 1997-1999 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)sema.dbg	1.10	99/06/05 SMI"
+
+#include <sys/machtypes.h>
+#include <sys/t_lock.h>
+#include <sys/mutex_impl.h>
+#include <sys/sema_impl.h>
+#include "dummy.h"
+
+\
+\
+_sema_impl              ""              sema
+        s_slpq                  hex             sleepq
+        s_count                 sdecimal        count

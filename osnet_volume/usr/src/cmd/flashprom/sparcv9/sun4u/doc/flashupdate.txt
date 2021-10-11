@@ -1,0 +1,109 @@
+# Copyright (c) 1998 by Sun Microsystem, Inc.
+# All Rights Reserved.
+
+#pragma ident	"@(#)flashupdate.txt	1.2	98/06/25 SMI"
+
+This document contains some information about the flash PROM update
+required on certain platforms in order to run the 64-bit packages.
+
+Certain UltraSPARC (tm) based SMCC computer systems shipped with firmware that
+is not 64-bit ready.  If you install 64-bit packages on these systems, only
+the 32-bit packages will run until you upgrade the firmware. It is NOT
+necessary to update the system firmware to run the 32-bit packages.
+
+The following table lists the hardware family platform name (/usr/bin/uname -i)
+and the required minimum version of the firmware (/usr/sbin/prtconf -V).
+
+Please check your platform family name using uname(1), since many platforms
+are marketed and sold in different configurations using different names.
+
+SMCC computer systems not in this list ship with firmware that is 64-bit ready.
+If your firmware version is higher than what's shown in the following
+table, your firmware is already 64-bit ready.
+
+Note that the timestamp portion of the version string is not shown in the
+following table, however it is included in the output of /usr/sbin/prtconf -V.
+
+	# Platform Name			Min. firmware version for 64-bit
+	# (/usr/bin/uname -i)		(/usr/sbin/prtconf -V)
+	#
+	# SUNW,Ultra-1			OBP 3.11.1
+	# SUNW,Ultra-2			OBP 3.11.2
+	# SUNW,Ultra-4			OBP 3.7.107
+	# SUNW,Ultra-Enterprise		OBP 3.2.16
+
+SUNW,Ultra-1 and SUNW,Ultra-2 platforms ship with a flash PROM write protect
+jumper in the 'write-disabled' position.  In order to update the flash PROM
+on these platforms, you must power off the machine, disconnect the power
+source, make sure you take adequate static protection (ie: use a wrist strap),
+open the cover and find and change the jumper in the jumper block shown in
+the following table.
+
+	# Platform Name			Jumper Block
+	#
+	# SUNW,Ultra-1 			J2003
+	# SUNW,Ultra-2			J2003
+	# SUNW,Ultra-4 (*)		J3103
+	# SUNW,Ultra-Enterprise	(**)	P0601	(clock board)
+
+	*  SUNW,Ultra-4 (Ultra 450) ships with jumper J3103 connecting
+	   pins 2-3, which is the "write-enabled" position.
+	   The key switch also protects the device and must not be
+	   in the LOCKED position.
+
+	** SUNW,Ultra-Enterprise ships with Jumper P0601 (located
+	   on the "clock board") installed.  If the jumper is installed,
+	   the device is "write-enabled". If the jumper is removed,
+	   the device is "write-protected".
+	   The key switch also protects the device and must not be
+	   in the LOCKED position.
+
+The jumper block number is etched into the motherboard next to the
+jumper block.
+
+The Ultra-1 and Ultra-2 systems ship with the flash PROM write-protected
+with the jumper on pins 1-2, the 'write-protect' position.
+
+The jumper must be moved to pins 2-3 on these systems, to write-enable
+the device allowing it to be reprogrammed.
+
+Pin 1 is usually marked with a dot.
+
+On some systems, the jumper may be located under a plug-in card.
+
+SUNW,Ultra-4 (Ultra 450) and SUNW,Ultra-Enterprise systems ship with the
+write protect jumper in the 'write-enabled' position, however, on these
+systems, the front panel keyswitch must NOT be in the SECURE or LOCKED
+position while running the flash PROM update program.
+
+If you've previously changed the jumpers to 'write-disabled', you must
+change them to the 'write-enabled' position.  For information on the
+jumper locations on these systems, refer to the hardware documentation
+for your system.
+
+If desired, once reprogramming is complete, you may restore the jumpers
+to their original positions.
+
+For more information, including diagrams of the jumper locations
+and power fail scenarios please refer to the following documentation.
+
+For Ultra-1, Ultra-2 and Ultra-4 (Ultra-450) systems:
+
+	Ultra (tm) Systems Flash Programming Guide
+	Sun Part Number: 802-3233-17
+
+For Ultra-Enterprise systems:
+
+	Ultra (tm) Enterprise (tm) 6000/5000/4000/3000 System Flash
+	Programming Guide
+	Sun Part Number: 802-5579-11
+
+These documents and additional versions of the flash PROM update
+software are available in "patch" form on the World Wide Web at the
+following URL in the public area on SunSolve:
+
+	http://sunsolve.sun.com/sunsolve/pubpatches/patches.html#Hardware-rec
+
+The "Workstations and Servers" section of http://docs.sun.com contains
+jumper diagrams and more information about the system flash PROM.
+

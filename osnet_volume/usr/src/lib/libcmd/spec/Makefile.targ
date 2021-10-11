@@ -1,0 +1,14 @@
+#
+#pragma ident	"@(#)Makefile.targ	1.1	99/01/25 SMI"
+#
+# Copyright (c) 1997-1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+# lib/libcmd/spec/Makefile.targ
+
+LIBRARY	=	libcmd.a
+VERS	=	.1
+
+OBJECTS	=	cmd.o
+
+SPECCPP =

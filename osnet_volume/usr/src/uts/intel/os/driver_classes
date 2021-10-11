@@ -1,0 +1,16 @@
+#
+# Copyright (c) 1992-1994,1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#pragma ident	"@(#)driver_classes	1.20	99/07/02 SMI"
+
+ata	scsi
+mlx	scsi
+mscsi	scsi
+dpt	scsi
+isa	sysbus
+eisa	sysbus
+pci	pci
+pci_pci	pci
+pci_to_i2o i2o
+i2o_scsi scsi

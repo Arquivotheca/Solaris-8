@@ -1,0 +1,29 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)rpctimer.dbg	1.4	98/01/19 SMI"
+
+\       this macro is a submacro used by other macros that (possibly)
+\       use the "z" register. Use 'w'.
+
+#include <sys/types.h>
+#include <rpc/types.h>
+#include <rpc/auth.h>
+#include <sys/t_lock.h>
+#include <rpc/clnt.h>
+#include "dummy.h"
+
+\
+\
+rpc_timers              rt_             rpctimer
+{adb_inline_begin}
+.>w
+<w+{OFFSET, rt_srtt}=""
+{adb_inline_end}
+        srtt                    hex
+        deviate                 hex
+        rtxcur                  hex
+{adb_inline_begin}
+<w+{SIZEOF}=""
+{adb_inline_end}

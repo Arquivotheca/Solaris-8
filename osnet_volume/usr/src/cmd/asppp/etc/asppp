@@ -1,0 +1,60 @@
+#!/sbin/sh
+#
+# Copyright (c) 1993, 1997 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#ident	"@(#)asppp	1.18	98/01/28 SMI"
+
+PATH=/sbin:/usr/bin:/usr/sbin; export PATH
+
+case "$1" in
+'start')
+	if [ -f /etc/asppp.cf ]; then
+		# If the configuration file is empty (consists of lines which
+		# contain only blanks, or have a leading '#') then exit
+		egrep -v '^[ 	]*(#|$)' /etc/asppp.cf >/dev/null 2>&1 || exit 0
+
+		# Check for required files
+		for file in /usr/sbin/aspppd /usr/sbin/aspppls; do
+
+			[ -f $file ] && continue
+
+			echo "$0: Asynchronous PPP has been installed but"
+			echo "not configured correctly"
+			echo "$0: $file not found"
+			echo "$0: Please refer to the PPP documentation"
+
+			exit 1
+		done
+
+		# Execute the ifconfig lines
+        	nawk '/^[ \t]*ifconfig/ { system($0) }' < /etc/asppp.cf
+
+		# Start the aspppd daemon
+		/usr/sbin/aspppd -d 1 || \
+			echo "aspppd not started, see /var/adm/log/asppp.log"
+	fi
+       	;; 
+           
+'stop')
+	if [ -f /etc/asppp.cf ]; then
+
+		# Stop the aspppd daemon if it's running
+
+		/usr/bin/pkill -x -u 0 aspppd
+
+		# Use ifconfig to make the interfaces down just in case
+
+        	nawk '/^[ \t]*ifconfig/ { \
+			system("ifconfig " $2 " down"); \
+			system("ifconfig " $2 " unplumb")
+				}' < /etc/asppp.cf
+	fi
+       	;; 
+
+*)
+        echo "Usage: $0 { start | stop }"
+        exit 1
+        ;;
+esac
+exit 0

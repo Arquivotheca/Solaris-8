@@ -1,0 +1,51 @@
+\
+\ Copyright (c) 1999 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)usb_device.dbg	1.3	99/09/24 SMI"
+
+#include <sys/usb/usba.h>
+#include <sys/usb/usba/usba_types.h>
+#include <sys/usb/usba/usba_impl.h>
+#include "dummy.h"
+
+\
+\
+usb_device	usb_
+{adb_inline_begin}
+.>x
+<x+{OFFSET, usb_device_list}=""
+{adb_inline_end}
+	device_list		.usba_list_entry
+{adb_inline_begin}
+<x+{OFFSET, usb_mutex}=""
+{adb_inline_end}
+	mutex			.mutex
+{adb_inline_begin}
+<x+{OFFSET, usb_hcdi_ops}=""
+{adb_inline_end}
+	hcdi_ops		hex	hops
+	parent_hubdi_ops	hex	pops
+	hubdi			hex
+	addr			hex
+	root_hub_dip		hex	dip
+	root_hubd		hex	root hubd
+	dev_descr		hex	dev-descr
+	config			hex
+	config_length		hex	length
+	string_descr		hex	string
+	port_status		hex 	status
+	port			hex
+	hcd_private		hex	hcd
+	endp_open		hex	ep-open
+	endp_excl_open		hex	excl-open
+	pipe_reserved		hex	reserved
+	cv_resrvd		hex	cv
+	resvrd_callback_id	hex	cbid
+	configuration_value 	hex	cfg-value
+	ref_count		hex
+	n_configs		hex	#configs
+	n_interfaces		hex	#interfaces
+{adb_inline_begin}
+<x+{SIZEOF}=""   
+{adb_inline_end}	

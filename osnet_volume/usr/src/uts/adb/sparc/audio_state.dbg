@@ -1,0 +1,16 @@
+\
+\ Copyright (c) 1999 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)audio_state.dbg	1.1	99/05/26 SMI"
+
+#include <sys/audio_impl.h>
+#include "dummy.h"
+
+\
+\
+audio_state	as_
+	max_chs		decimal
+	dev_instance	decimal
+	ch_inuse	decimal
+	apm_info_list	hex

@@ -1,0 +1,71 @@
+#! /bin/sh
+#
+# ident "@(#)preremove 1.11	99/06/08 SMI"
+#
+# Copyright (c) 1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+
+PATH="/bin:/usr/bin:/usr/sbin:${PATH}"
+export PATH
+
+TMP=/tmp/$$.pcmemvold
+
+#
+# manipulate the vold.conf and rmmount.conf configuration file
+#
+
+remove_token()
+{
+
+    cp $1 $TMP
+
+    (	echo "g/$2/s///g"
+	echo 'g/ $/s///g'
+	echo 'w'
+	echo 'q'
+    ) | ed -s $TMP >/dev/null
+
+    cp $TMP $1
+    rm -f $TMP
+}
+
+#
+# vold.conf processing
+#
+FILE="$BASEDIR/etc/vold.conf"
+
+if test -f $FILE ; then
+
+    #
+    # clear out any old pcmem lines in vold.conf
+    #
+    fgrep -v "use pcmem" $FILE >$TMP
+    cp $TMP $FILE
+    rm -f $TMP
+
+    #
+    # clear out any old pcmem entries in vold.conf
+    #
+    remove_token "$FILE" 'pcmem'
+
+fi
+
+#
+# rmmount.conf processing
+#
+FILE="$BASEDIR/etc/rmmount.conf"
+
+if test -f $FILE ; then
+
+    #
+    # clear out any old pcmem entries in rmmount.conf
+    #
+    remove_token "$FILE" 'pcmem'
+
+fi
+
+rem_drv -b ${BASEDIR} pcmem
+rem_drv -b ${BASEDIR} pcram
+
+exit 0

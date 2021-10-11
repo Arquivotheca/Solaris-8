@@ -1,0 +1,90 @@
+#
+# Copyright (c) 1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#ident	"@(#)prototype_i386	1.1	99/10/20 SMI"
+#
+# This required package information file contains a list of package contents.
+# The 'pkgmk' command uses this file to identify the contents of a package
+# and their location on the development machine when building the package.
+# Can be created via a text editor or through use of the 'pkgproto' command.
+
+#!search <pathname pathname ...>	# where to find pkg objects
+#!include <filename>			# include another 'prototype' file
+#!default <mode> <owner> <group>	# default used if not specified on entry
+#!<param>=<value>			# puts parameter in pkg environment
+
+#
+# Include ISA independent files (prototype_com)
+#
+!include prototype_com
+#
+# List files which are i86pc specific here
+#
+# source locations relative to the prototype file
+#
+# SUNWapchu
+#
+d none usr/apache/perl5/5.005 755 root bin
+d none usr/apache/perl5/5.005/i86pc-solaris 755 root bin
+d none usr/apache/perl5/5.005/i86pc-solaris/Apache 755 root bin
+d none usr/apache/perl5/5.005/i86pc-solaris/Apache/Constants 755 root bin
+d none usr/apache/perl5/5.005/i86pc-solaris/Bundle 755 root bin
+d none usr/apache/perl5/5.005/i86pc-solaris/auto 755 root bin
+d none usr/apache/perl5/5.005/i86pc-solaris/auto/Apache 755 root bin
+d none usr/apache/perl5/5.005/i86pc-solaris/auto/mod_perl 755 root bin
+d none usr/apache/perl5/5.005/i86pc-solaris/auto/Apache/Leak 755 root bin
+d none usr/apache/perl5/5.005/i86pc-solaris/auto/Apache/Symbol 755 root bin
+f none usr/apache/perl5/5.005/i86pc-solaris/Apache.pm 555 root bin
+f none usr/apache/perl5/5.005/i86pc-solaris/cgi_to_mod_perl.pod 555 root bin
+f none usr/apache/perl5/5.005/i86pc-solaris/mod_perl.pm 555 root bin
+f none usr/apache/perl5/5.005/i86pc-solaris/mod_perl.pod 555 root bin
+f none usr/apache/perl5/5.005/i86pc-solaris/mod_perl_cvs.pod 555 root bin
+f none usr/apache/perl5/5.005/i86pc-solaris/mod_perl_hooks.pm 555 root bin
+f none usr/apache/perl5/5.005/i86pc-solaris/mod_perl_hooks.pm.PL 555 root bin
+f none usr/apache/perl5/5.005/i86pc-solaris/mod_perl_method_handlers.pod 555 root bin
+f none usr/apache/perl5/5.005/i86pc-solaris/mod_perl_traps.pod 555 root bin
+f none usr/apache/perl5/5.005/i86pc-solaris/mod_perl_tuning.pod 555 root bin
+f none usr/apache/perl5/5.005/i86pc-solaris/perllocal.pod 555 root bin
+f none usr/apache/perl5/5.005/i86pc-solaris/Apache/Connection.pm 555 root bin
+f none usr/apache/perl5/5.005/i86pc-solaris/Apache/Constants.pm 555 root bin
+f none usr/apache/perl5/5.005/i86pc-solaris/Apache/Debug.pm 555 root bin
+f none usr/apache/perl5/5.005/i86pc-solaris/Apache/ExtUtils.pm 555 root bin
+f none usr/apache/perl5/5.005/i86pc-solaris/Apache/FakeRequest.pm 555 root bin
+f none usr/apache/perl5/5.005/i86pc-solaris/Apache/File.pm 555 root bin
+f none usr/apache/perl5/5.005/i86pc-solaris/Apache/Include.pm 555 root bin
+f none usr/apache/perl5/5.005/i86pc-solaris/Apache/Leak.pm 555 root bin
+f none usr/apache/perl5/5.005/i86pc-solaris/Apache/Log.pm 555 root bin
+f none usr/apache/perl5/5.005/i86pc-solaris/Apache/ModuleConfig.pm 555 root bin
+f none usr/apache/perl5/5.005/i86pc-solaris/Apache/MyConfig.pm 555 root bin
+f none usr/apache/perl5/5.005/i86pc-solaris/Apache/Opcode.pm 555 root bin
+f none usr/apache/perl5/5.005/i86pc-solaris/Apache/Options.pm 555 root bin
+f none usr/apache/perl5/5.005/i86pc-solaris/Apache/PerlRun.pm 555 root bin
+f none usr/apache/perl5/5.005/i86pc-solaris/Apache/PerlRunXS.pm 555 root bin
+f none usr/apache/perl5/5.005/i86pc-solaris/Apache/PerlSections.pm 555 root bin
+f none usr/apache/perl5/5.005/i86pc-solaris/Apache/RedirectLogFix.pm 555 root bin
+f none usr/apache/perl5/5.005/i86pc-solaris/Apache/Registry.pm 555 root bin
+f none usr/apache/perl5/5.005/i86pc-solaris/Apache/RegistryBB.pm 555 root bin
+f none usr/apache/perl5/5.005/i86pc-solaris/Apache/RegistryLoader.pm 555 root bin
+f none usr/apache/perl5/5.005/i86pc-solaris/Apache/RegistryNG.pm 555 root bin
+f none usr/apache/perl5/5.005/i86pc-solaris/Apache/Resource.pm 555 root bin
+f none usr/apache/perl5/5.005/i86pc-solaris/Apache/SIG.pm 555 root bin
+f none usr/apache/perl5/5.005/i86pc-solaris/Apache/Server.pm 555 root bin
+f none usr/apache/perl5/5.005/i86pc-solaris/Apache/SizeLimit.pm 555 root bin
+f none usr/apache/perl5/5.005/i86pc-solaris/Apache/StatINC.pm 555 root bin
+f none usr/apache/perl5/5.005/i86pc-solaris/Apache/Status.pm 555 root bin
+f none usr/apache/perl5/5.005/i86pc-solaris/Apache/Symbol.pm 555 root bin
+f none usr/apache/perl5/5.005/i86pc-solaris/Apache/Symdump.pm 555 root bin
+f none usr/apache/perl5/5.005/i86pc-solaris/Apache/Table.pm 555 root bin
+f none usr/apache/perl5/5.005/i86pc-solaris/Apache/URI.pm 555 root bin
+f none usr/apache/perl5/5.005/i86pc-solaris/Apache/Util.pm 555 root bin
+f none usr/apache/perl5/5.005/i86pc-solaris/Apache/httpd_conf.pm 555 root bin
+f none usr/apache/perl5/5.005/i86pc-solaris/Apache/src.pm 555 root bin
+f none usr/apache/perl5/5.005/i86pc-solaris/Apache/test.pm 555 root bin
+f none usr/apache/perl5/5.005/i86pc-solaris/Apache/Constants/Exports.pm 555 root bin
+f none usr/apache/perl5/5.005/i86pc-solaris/Bundle/Apache.pm 555 root bin
+f none usr/apache/perl5/5.005/i86pc-solaris/auto/Apache/Leak/Leak.bs 555 root bin
+f none usr/apache/perl5/5.005/i86pc-solaris/auto/Apache/Leak/Leak.so 555 root bin
+f none usr/apache/perl5/5.005/i86pc-solaris/auto/Apache/Symbol/Symbol.bs 555 root bin
+f none usr/apache/perl5/5.005/i86pc-solaris/auto/Apache/Symbol/Symbol.so 555 root bin
+f none usr/apache/perl5/5.005/i86pc-solaris/auto/mod_perl/.packlist 555 root bin

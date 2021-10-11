@@ -1,0 +1,19 @@
+\
+\ Copyright (c) 1997-1999 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)kmastat.dbg	1.4	99/04/14 SMI"
+
+#include <sys/kmem.h>
+#include <sys/kmem_impl.h>
+#include "dummy.h"
+
+\
+\
+kmem_cache	""	kmastat
+{adb_inline_begin}
+kmem_null_cache>k
+<k>e
+*(<k+{OFFSET, cache_next})>k
+<k,#(#(<k))$<kmastat.nxt
+{adb_inline_end}

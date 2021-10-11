@@ -1,0 +1,15 @@
+#
+# Copyright (c) 1997-1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#pragma ident	"@(#)Makefile.targ	1.2	99/05/14 SMI"
+#
+# lib/libplot/plot/spec/Makefile.targ
+
+LIBRARY	=	watchmalloc.a
+VERS	=	.1
+
+OBJECTS	=	watchmalloc.o
+
+TRANSCPP =
+SPECCPP =

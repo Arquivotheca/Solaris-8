@@ -1,0 +1,80 @@
+\
+\ Copyright (c) 1998, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)ud_vfs.dbg	1.8	98/11/13 SMI"
+
+#include <sys/types.h>
+#include <sys/mutex.h>
+#include <sys/vnode.h>
+#include <vm/page.h>
+#include <sys/fbuf.h>
+#include <sys/fs/udf_volume.h>
+#include <sys/fs/udf_inode.h>
+#include "dummy.h"
+
+\
+\
+udf_vfs		udf_	ud_vfs
+{adb_inline_begin}
+.>x
+{adb_inline_end}
+	vfs		hex
+	next		hex
+	wnext		hex
+	vds		hex
+	iseq		hex
+	root		hex
+	devvp		hex
+	fsmnt		hex
+	flags		hex
+	mtype		hex
+	rdclustsz	hex
+	wrclustsz	hex
+	maxfsize	hex
+	maxfbits	hex
+	volid		char
+	tsno		hex
+	lbsize		hex
+	lbmask		hex
+	l2b_shift	hex
+	l2d_shift	hex
+	npart		hex
+	parts		hex
+	nmaps		hex
+	maps		hex
+	fragmented	hex
+	mark_bad	hex
+	freeblks	hex
+	totalblks	hex
+	maxuniq		hex
+	maxfbits	hex
+	nfiles		hex
+	ndirs		hex
+	miread		hex
+	miwrite		hex
+	mawrite		hex
+	time		hex
+	mod		hex
+	clean		hex
+	lock		.mutex
+	rename_lck	.mutex
+	pvd		hex
+	lvd		hex
+	lvid	hex
+	mvds_loc	hex
+	mvds_len	hex
+	rvds_loc	hex
+	rvds_len	hex
+	iseq_loc	hex
+	iseq_len	hex
+	fsd_prn		hex
+	fsd_loc		hex
+	fsd_len		hex
+	ricb_prn	hex
+	ricb_loc	hex
+	ricb_len	hex
+	root_blkno	hex
+{adb_inline_begin}
+<x+{SIZEOF}=""
+{adb_inline_end}

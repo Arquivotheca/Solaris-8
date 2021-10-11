@@ -1,0 +1,103 @@
+#
+#
+# Copyright (c) 1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#ident	"@(#)prototype_com	1.1	99/10/08 SMI"
+#
+# This required package information file contains a list of package contents.
+# The 'pkgmk' command uses this file to identify the contents of a package
+# and their location on the development machine when building the package.
+# Can be created via a text editor or through use of the 'pkgproto' command.
+
+#!search <pathname pathname ...>	# where to find pkg objects
+#!include <filename>			# include another 'prototype' file
+#!default <mode> <owner> <group>	# default used if not specified on entry
+#!<param>=<value>			# puts parameter in pkg environment
+
+# packaging files
+i pkginfo
+i copyright
+i depend
+#
+# source locations relative to the prototype file
+#
+# SUNWgpchS
+#
+d none usr 755 root sys
+d none usr/share 755 root sys
+d none usr/share/src 755 root sys
+d none usr/share/src/gpatch 755 root bin
+d none usr/share/src/gpatch/m4 755 root bin
+f none usr/share/src/gpatch/m4/ccstdc.m4 444 root bin
+f none usr/share/src/gpatch/m4/d-ino.m4 444 root bin
+f none usr/share/src/gpatch/m4/inttypes_h.m4 444 root bin
+f none usr/share/src/gpatch/m4/largefile.m4 444 root bin
+f none usr/share/src/gpatch/m4/malloc.m4 444 root bin
+f none usr/share/src/gpatch/m4/protos.m4 444 root bin
+f none usr/share/src/gpatch/m4/realloc.m4 444 root bin
+f none usr/share/src/gpatch/m4/utimbuf.m4 444 root bin
+d none usr/share/src/gpatch/pc 755 root bin
+d none usr/share/src/gpatch/pc/djgpp 755 root bin
+f none usr/share/src/gpatch/pc/djgpp/README 444 root bin
+f none usr/share/src/gpatch/pc/djgpp/config.sed 444 root bin
+f none usr/share/src/gpatch/pc/djgpp/configure.bat 444 root bin
+f none usr/share/src/gpatch/pc/djgpp/configure.sed 444 root bin
+f none usr/share/src/gpatch/pc/chdirsaf.c 444 root bin
+f none usr/share/src/gpatch/AUTHORS 444 root bin
+f none usr/share/src/gpatch/COPYING 444 root bin
+f none usr/share/src/gpatch/ChangeLog 444 root bin
+f none usr/share/src/gpatch/INSTALL 444 root bin
+f none usr/share/src/gpatch/Makefile.in 444 root bin
+f none usr/share/src/gpatch/NEWS 444 root bin
+f none usr/share/src/gpatch/README 444 root bin
+f none usr/share/src/gpatch/aclocal.m4 444 root bin
+f none usr/share/src/gpatch/ansi2knr.1 444 root bin
+f none usr/share/src/gpatch/ansi2knr.c 444 root bin
+f none usr/share/src/gpatch/config.guess 444 root bin
+f none usr/share/src/gpatch/config.hin 444 root bin
+f none usr/share/src/gpatch/config.sub 444 root bin
+f none usr/share/src/gpatch/configure 555 root bin
+f none usr/share/src/gpatch/configure.in 444 root bin
+f none usr/share/src/gpatch/install-sh 444 root bin
+f none usr/share/src/gpatch/mkinstalldirs 444 root bin
+f none usr/share/src/gpatch/patch.man 444 root bin
+f none usr/share/src/gpatch/addext.c 444 root bin
+f none usr/share/src/gpatch/argmatch.c 444 root bin
+f none usr/share/src/gpatch/backupfile.c 444 root bin
+f none usr/share/src/gpatch/basename.c 444 root bin
+f none usr/share/src/gpatch/error.c 444 root bin
+f none usr/share/src/gpatch/inp.c 444 root bin
+f none usr/share/src/gpatch/maketime.c 444 root bin
+f none usr/share/src/gpatch/mkdir.c 444 root bin
+f none usr/share/src/gpatch/partime.c 444 root bin
+f none usr/share/src/gpatch/patch.c 444 root bin
+f none usr/share/src/gpatch/pch.c 444 root bin
+f none usr/share/src/gpatch/quotearg.c 444 root bin
+f none usr/share/src/gpatch/quotesys.c 444 root bin
+f none usr/share/src/gpatch/rmdir.c 444 root bin
+f none usr/share/src/gpatch/util.c 444 root bin
+f none usr/share/src/gpatch/version.c 444 root bin
+f none usr/share/src/gpatch/xmalloc.c 444 root bin
+f none usr/share/src/gpatch/getopt.c 444 root bin
+f none usr/share/src/gpatch/getopt1.c 444 root bin
+f none usr/share/src/gpatch/malloc.c 444 root bin
+f none usr/share/src/gpatch/memchr.c 444 root bin
+f none usr/share/src/gpatch/realloc.c 444 root bin
+f none usr/share/src/gpatch/rename.c 444 root bin
+f none usr/share/src/gpatch/argmatch.h 444 root bin
+f none usr/share/src/gpatch/backupfile.h 444 root bin
+f none usr/share/src/gpatch/basename.h 444 root bin
+f none usr/share/src/gpatch/common.h 444 root bin
+f none usr/share/src/gpatch/error.h 444 root bin
+f none usr/share/src/gpatch/getopt.h 444 root bin
+f none usr/share/src/gpatch/inp.h 444 root bin
+f none usr/share/src/gpatch/maketime.h 444 root bin
+f none usr/share/src/gpatch/partime.h 444 root bin
+f none usr/share/src/gpatch/patchlevel.h 444 root bin
+f none usr/share/src/gpatch/pch.h 444 root bin
+f none usr/share/src/gpatch/quotearg.h 444 root bin
+f none usr/share/src/gpatch/quotesys.h 444 root bin
+f none usr/share/src/gpatch/util.h 444 root bin
+f none usr/share/src/gpatch/version.h 444 root bin
+f none usr/share/src/gpatch/xalloc.h 444 root bin

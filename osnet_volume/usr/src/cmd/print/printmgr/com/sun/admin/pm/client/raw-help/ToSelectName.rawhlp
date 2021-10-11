@@ -1,0 +1,60 @@
+<TITLE> To Select a Naming Service </TITLE>
+<!-- Tag=ToSelectName -->
+
+<CONTENT>
+
+<p>
+
+Do the following to select a naming service for Solaris Print Manager or
+to change from using a naming service to using no naming service. 
+
+<p> 
+
+When you select a naming service you are specifying where Solaris
+Print Manager will retrieve printer information from, and where
+changes made in Print Manager will be made. If a naming service is
+selected, additions and deletions will be made in the printing
+configuration database for the selected naming service. If you choose
+"files," the /etc/printers.conf file will be used to determine which
+printers are available, and changes will be made there.
+
+<p>
+
+1. Choose Select Naming Service from the Print Manager menu.
+
+<p>
+
+A dialog is displayed, asking you to choose a naming service. 
+
+<p>
+
+2. Choose a naming service (or "files," if no naming service is to be
+used) and click OK.
+
+<p>
+
+The Solaris Print Manager main window is displayed, listing all the
+accessible printers, which includes all printers in the selected
+naming service's printer configuration database. 
+
+
+<p>
+
+See the man page for printers.conf(4) for more information.
+
+</CONTENT>
+
+<KEYWORDS>
+select "name service" "naming service" name naming service
+</KEYWORDS>
+
+<p>
+
+<SEEALSO>
+NameService
+ToStart
+Overview
+MainWindow 
+HelpOnHelp
+</SEEALSO>
+

@@ -1,0 +1,15 @@
+#ident	"@(#)publickey	1.3	93/05/05 SMI"	/* SVr4.0 1.2	*/
+# Public Key Database
+#
+# To add an entry to this file, an administrator should use the command
+# newkey(1M) on the local machine.
+# Non root users are not allowed to change their key-pair in this file.
+# Entries in this file are only available to services on the local host
+# and can be compromised. Hence, we recommend that Users store their
+# secure rpc keys in NIS or NIS+.
+#
+# The syntax is:
+# netname	public_key:encrypted_private_key
+#
+nobody c3d91f44568fbbefada50d336d9bd67b16e7016f987bb607:7675cd9b8753b5db09dabf12da759c2bd1331c927bb322861fffb54be13f55e9
+#

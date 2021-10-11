@@ -1,0 +1,28 @@
+#!/usr/bin/sh
+#
+#ident	"@(#)i.fstypes	1.1	99/05/24 SMI"
+#
+# Copyright (c) 1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+
+PATH=/usr/bin:/usr/sbin:$PATH; export PATH
+
+while read src dest
+do
+	if [ ! -f $dest -o ! -s $dest ]; then
+		cp $src $dest
+	else
+			# use existing default fstypes entry
+		head -1 $dest > /tmp/i.fstypes.$$
+			# find entries in src and dest which don't duplicate
+			# the existing default fstype on the first line;
+			# get all entries with unique fstypes and
+			# append this to the existing default fstypes entry
+		cat $dest $src | awk 'NR==1 { fstype=$1 }; \
+		    $1!=fstype { print $0 }' | \
+		    sort -u -k 1,1 >> /tmp/i.fstypes.$$
+		cp /tmp/i.fstypes.$$ $dest
+		rm -f /tmp/i.fstypes.$$
+	fi
+done

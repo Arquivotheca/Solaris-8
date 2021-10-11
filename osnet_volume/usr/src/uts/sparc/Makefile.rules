@@ -1,0 +1,208 @@
+#
+# uts/sparc/Makefile.rules
+# Copyright (c) 1991-1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#pragma ident	"@(#)Makefile.rules	1.51	99/07/26 SMI"
+#
+#	This Makefile defines all file modules and build rules for the
+# directory uts/sparc and it's children. These are the source files which
+# are specific to the sparc processor.
+#
+
+#
+#	This was implemented by pattern matching rules of the form:
+#
+# $(OBJS_DIR)/%.o:	 $(UTSBASE)/common/os/%.c
+#	$(COMPILE.c) -o $@ $<
+#
+# $(LINTS_DIR)/%.ln:	$(UTSBASE)/common/os/%.c
+#	@($(LHEAD) $(LINT.c) $< $(LTAIL))
+#
+#	For each directory containing source. This proved to slow under
+#	Nse because it caused a significant additional number of stats
+#	and stats are real slow under TFS. If TFS performance should
+#	improve, one might consider returning to the former implementation.
+#	In the former implementation, this file (Makefile.rules) was not
+#	needed and the pattern matching rules were in Makefile.files.
+#
+
+#
+#	C object build rules
+#
+#	The following are alphabetized by source file path. Please maintain
+# this ordering.
+#
+$(OBJS_DIR)/prmachdep.o:	$(UTSBASE)/sparc/fs/proc/prmachdep.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sparc/fs/proc/prmachdep.c
+
+$(OBJS_DIR)/doreloc.o:		$(UTSBASE)/sparc/krtld/doreloc.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sparc/krtld/doreloc.c
+
+$(OBJS_DIR)/kobj_boot.o:	$(UTSBASE)/sparc/krtld/kobj_boot.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sparc/krtld/kobj_boot.c
+
+$(OBJS_DIR)/bootops.o:		$(UTSBASE)/sparc/os/bootops.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sparc/os/bootops.c
+
+$(OBJS_DIR)/ddi_arch.o:		$(UTSBASE)/sparc/os/ddi_arch.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sparc/os/ddi_arch.c
+
+$(OBJS_DIR)/kobj_convrelstr.o:	$(UTSBASE)/sparc/krtld/kobj_convrelstr.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sparc/krtld/kobj_convrelstr.c
+
+$(OBJS_DIR)/kobj_crt.o:		$(UTSBASE)/sparc/krtld/kobj_crt.s
+	$(COMPILE.s) -o $@ $(UTSBASE)/sparc/krtld/kobj_crt.s
+
+$(OBJS_DIR)/kobj_reloc.o:	$(UTSBASE)/sparc/krtld/kobj_reloc.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sparc/krtld/kobj_reloc.c
+
+$(OBJS_DIR)/kobj_isa.o:		$(UTSBASE)/sparc/krtld/kobj_isa.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sparc/krtld/kobj_isa.c
+
+$(OBJS_DIR)/audio_79C30_intr.o:	$(UTSBASE)/sparc/ml/audio_79C30_intr.s
+	$(COMPILE.s) -o $@ $(UTSBASE)/sparc/ml/audio_79C30_intr.s
+
+$(OBJS_DIR)/cpr_sparc.o:        $(UTSBASE)/sparc/os/cpr_sparc.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sparc/os/cpr_sparc.c
+
+$(OBJS_DIR)/fd_asm.o:		$(UTSBASE)/sparc/ml/fd_asm.s
+	$(COMPILE.s) -o $@ $(UTSBASE)/sparc/ml/fd_asm.s
+
+$(OBJS_DIR)/addsub.o:		$(UTSBASE)/sparc/fpu/addsub.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sparc/fpu/addsub.c
+
+$(OBJS_DIR)/compare.o:		$(UTSBASE)/sparc/fpu/compare.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sparc/fpu/compare.c
+
+$(OBJS_DIR)/div.o:		$(UTSBASE)/sparc/fpu/div.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sparc/fpu/div.c
+
+$(OBJS_DIR)/fpu_simulator.o:	$(UTSBASE)/sparc/fpu/fpu_simulator.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sparc/fpu/fpu_simulator.c
+
+$(OBJS_DIR)/iu_simulator.o:	$(UTSBASE)/sparc/fpu/iu_simulator.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sparc/fpu/iu_simulator.c
+
+$(OBJS_DIR)/mul.o:		$(UTSBASE)/sparc/fpu/mul.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sparc/fpu/mul.c
+
+$(OBJS_DIR)/pack.o:		$(UTSBASE)/sparc/fpu/pack.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sparc/fpu/pack.c
+
+$(OBJS_DIR)/sundep.o:           $(UTSBASE)/sparc/os/sundep.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sparc/os/sundep.c
+
+$(OBJS_DIR)/unpack.o:		$(UTSBASE)/sparc/fpu/unpack.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sparc/fpu/unpack.c
+
+$(OBJS_DIR)/utility.o:		$(UTSBASE)/sparc/fpu/utility.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sparc/fpu/utility.c
+
+$(OBJS_DIR)/asm_putnext.o:	$(UTSBASE)/sparc/ml/asm_putnext.s
+	$(COMPILE.s) -o $@ $(UTSBASE)/sparc/ml/asm_putnext.s
+
+$(OBJS_DIR)/sparc_ddi.o:	$(UTSBASE)/sparc/ml/sparc_ddi.s
+	$(COMPILE.s) -o $@ $(UTSBASE)/sparc/ml/sparc_ddi.s
+
+$(OBJS_DIR)/archdep.o:		$(UTSBASE)/sparc/os/archdep.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sparc/os/archdep.c
+
+$(OBJS_DIR)/getcontext.o:	$(UTSBASE)/sparc/syscall/getcontext.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sparc/syscall/getcontext.c
+
+$(OBJS_DIR)/lwp_private.o:	$(UTSBASE)/sparc/syscall/lwp_private.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sparc/syscall/lwp_private.c
+
+$(OBJS_DIR)/syscall.o:		$(UTSBASE)/sparc/os/syscall.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sparc/os/syscall.c
+
+#
+#	Lint `object' build rules.
+#
+#	The following are alphabetized by source file path. Please maintain
+# this ordering.
+#
+$(LINTS_DIR)/prmachdep.ln:	$(UTSBASE)/sparc/fs/proc/prmachdep.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sparc/fs/proc/prmachdep.c $(LTAIL))
+
+$(LINTS_DIR)/doreloc.ln:	$(UTSBASE)/sparc/krtld/doreloc.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sparc/krtld/doreloc.c $(LTAIL))
+
+$(LINTS_DIR)/kobj_boot.ln:	$(UTSBASE)/sparc/krtld/kobj_boot.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sparc/krtld/kobj_boot.c $(LTAIL))
+
+$(LINTS_DIR)/ddi_arch.ln:	$(UTSBASE)/sparc/os/ddi_arch.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sparc/os/ddi_arch.c $(LTAIL))
+
+$(LINTS_DIR)/bootops.ln:	$(UTSBASE)/sparc/os/bootops.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sparc/os/bootops.c $(LTAIL))
+
+$(LINTS_DIR)/kobj_convrelstr.ln:	$(UTSBASE)/sparc/krtld/kobj_convrelstr.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sparc/krtld/kobj_convrelstr.c $(LTAIL))
+
+$(LINTS_DIR)/kobj_crt.ln:	$(UTSBASE)/sparc/krtld/kobj_crt.s
+	@($(LHEAD) $(LINT.s) $(UTSBASE)/sparc/krtld/kobj_crt.s $(LTAIL))
+
+$(LINTS_DIR)/kobj_reloc.ln:	$(UTSBASE)/sparc/krtld/kobj_reloc.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sparc/krtld/kobj_reloc.c $(LTAIL))
+
+$(LINTS_DIR)/kobj_isa.ln:	$(UTSBASE)/sparc/krtld/kobj_isa.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sparc/krtld/kobj_isa.c $(LTAIL))
+
+$(LINTS_DIR)/audio_79C30_intr.ln:	$(UTSBASE)/sparc/ml/audio_79C30_intr.s
+	@($(LHEAD) $(LINT.s) $(UTSBASE)/sparc/ml/audio_79C30_intr.s $(LTAIL))
+
+$(LINTS_DIR)/cpr_sparc.ln:   $(UTSBASE)/sparc/os/cpr_sparc.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sparc/os/cpr_sparc.c $(LTAIL))
+
+$(LINTS_DIR)/fd_asm.ln:		$(UTSBASE)/sparc/ml/fd_asm.s
+	@($(LHEAD) $(LINT.s) $(UTSBASE)/sparc/ml/fd_asm.s $(LTAIL))
+
+$(LINTS_DIR)/addsub.ln:		$(UTSBASE)/sparc/fpu/addsub.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sparc/fpu/addsub.c $(LTAIL))
+
+$(LINTS_DIR)/compare.ln:	$(UTSBASE)/sparc/fpu/compare.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sparc/fpu/compare.c $(LTAIL))
+
+$(LINTS_DIR)/div.ln:		$(UTSBASE)/sparc/fpu/div.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sparc/fpu/div.c $(LTAIL))
+
+$(LINTS_DIR)/fpu_simulator.ln:	$(UTSBASE)/sparc/fpu/fpu_simulator.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sparc/fpu/fpu_simulator.c $(LTAIL))
+
+$(LINTS_DIR)/iu_simulator.ln:	$(UTSBASE)/sparc/fpu/iu_simulator.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sparc/fpu/iu_simulator.c $(LTAIL))
+
+$(LINTS_DIR)/mul.ln:		$(UTSBASE)/sparc/fpu/mul.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sparc/fpu/mul.c $(LTAIL))
+
+$(LINTS_DIR)/pack.ln:		$(UTSBASE)/sparc/fpu/pack.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sparc/fpu/pack.c $(LTAIL))
+
+$(LINTS_DIR)/sundep.ln:         $(UTSBASE)/sparc/os/sundep.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sparc/os/sundep.c $(LTAIL))
+
+$(LINTS_DIR)/unpack.ln:		$(UTSBASE)/sparc/fpu/unpack.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sparc/fpu/unpack.c $(LTAIL))
+
+$(LINTS_DIR)/utility.ln:	$(UTSBASE)/sparc/fpu/utility.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sparc/fpu/utility.c $(LTAIL))
+
+$(LINTS_DIR)/asm_putnext.ln:	$(UTSBASE)/sparc/ml/asm_putnext.s
+	@($(LHEAD) $(LINT.s) $(UTSBASE)/sparc/ml/asm_putnext.s $(LTAIL))
+
+$(LINTS_DIR)/sparc_ddi.ln:	$(UTSBASE)/sparc/ml/sparc_ddi.s
+	@($(LHEAD) $(LINT.s) $(UTSBASE)/sparc/ml/sparc_ddi.s $(LTAIL))
+
+$(LINTS_DIR)/archdep.ln:	$(UTSBASE)/sparc/os/archdep.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sparc/os/archdep.c $(LTAIL))
+
+$(LINTS_DIR)/getcontext.ln:	$(UTSBASE)/sparc/syscall/getcontext.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sparc/syscall/getcontext.c $(LTAIL))
+
+$(LINTS_DIR)/lwp_private.ln:	$(UTSBASE)/sparc/syscall/lwp_private.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sparc/syscall/lwp_private.c $(LTAIL))
+
+$(LINTS_DIR)/syscall.ln:	$(UTSBASE)/sparc/os/syscall.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sparc/os/syscall.c $(LTAIL))

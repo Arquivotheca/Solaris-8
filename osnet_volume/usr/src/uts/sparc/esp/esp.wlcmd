@@ -1,0 +1,22 @@
+# Copyright (c) 1998 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#ident	"@(#)esp.wlcmd 1.5	98/10/11 SMI"
+
+one esp 
+
+add esp_cmd::cmd_pkt.pkt_comp targets \
+	esp_scsi_destroy_pkt \
+	esp_scsi_init_pkt \
+	esp_start \
+	esp_abort \
+	esp_reset \
+	esp_setcap \
+	esp_getcap \
+	esp_scsi_dmafree \
+	esp_scsi_reset_notify \
+	esp_scsi_sync_pkt
+
+add notify_entry::callback target warlock_dummy
+
+root esp_kmem_cache_constructor esp_kmem_cache_destructor

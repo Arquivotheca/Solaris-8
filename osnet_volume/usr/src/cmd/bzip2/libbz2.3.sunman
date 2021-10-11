@@ -1,0 +1,92 @@
+.\" "@(#)libbz2.3.sunman     1.1     99/10/08 SMI"
+.TH libbz2 3 "8 Oct 1999"
+.SH NAME
+libbz2 \- library for block-sorting data compression
+.SH SYNOPSIS
+.LP
+.B cc
+.RI "[ " "flag " \|.\|.\|. ] " "file \|.\|.\|."
+.B \-lbz2
+.RI "[ " "library" " \|.\|.\|. ]"
+.sp 1n
+.nf
+.ft 3
+#include <stdio.h>
+#include <bzlib.h>
+.ft
+.fi
+.SH DESCRIPTION
+Interfaces in this library provide the ability to compress (and
+decompress) files using the Burrows-Wheeler blocksorting text compression
+algorithm, and  Huffman  coding. It is provided along with the
+.BR bzip2(1)
+utility.
+See
+.BR bzip2(1)
+for more information.
+.LP
+The source distribution of bzip2 contains a description of how to
+use this library in HTML form.
+.LP
+For additional information on shared object interfaces,  see
+.BR intro(3).
+.SH INTERFACES
+.nf
+bzCompressInit
+bzCompress
+bzCompressEnd
+bzDecompressInit
+bzDecompress
+bzDecompressEnd
+bzReadOpen
+bzReadClose
+bzReadGetUnused
+bzRead
+bzWriteOpen
+bzWrite
+bzWriteClose
+bzBuffToBuffCompress
+bzBuffToBuffDecompress
+bzlibVersion
+bzopen
+bzdopen
+bzread
+bzwrite
+bzflush
+bzclose
+.fi
+.SH FILES
+.PD 0
+.TP 20
+/usr/lib/libbz2.so.1
+shared object
+.TP
+/usr/lib/sparcv9/libbz2.so.1
+64-bit shared object
+.PD
+.SH "SEE ALSO"
+bzip2(1), intro(3)
+.SH AUTHOR
+Julian Seward, jseward@acm.org.
+
+http://www.muraroa.demon.co.uk
+
+The ideas embodied in bzip2 are due to (at least) the fol-
+lowing people: Michael Burrows and David Wheeler (for  the
+block  sorting  transformation), David Wheeler (again, for
+the Huffman coder), Peter Fenwick (for the structured cod-
+ing model in the original bzip, and many refinements), and
+Alistair Moffat, Radford Neal  and  Ian  Witten  (for  the
+arithmetic  coder  in  the  original  bzip).   I  am  much
+indebted for their help, support and advice.  See the man-
+ual  in the source distribution for pointers to sources of
+documentation.  Christian von Roques encouraged me to look
+for  faster sorting algorithms, so as to speed up compres-
+sion.  Bela Lubkin encouraged me to improve the worst-case
+compression performance.  Many people sent patches, helped
+with portability problems, lent machines, gave advice  and
+were generally helpful.
+.SH NOTES
+Source for libbz is available in the SUNWbzipS package.
+.LP
+Bare manual page by mike_s@Sun.COM.

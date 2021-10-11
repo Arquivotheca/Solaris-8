@@ -1,0 +1,48 @@
+#
+# Copyright (c) 1998-1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#	@(#)prototype_com	1.18	99/06/21 SMI
+#
+# This required package information file contains a list of package contents.
+# The 'pkgmk' command uses this file to identify the contents of a package
+# and their location on the development machine when building the package.
+# Can be created via a text editor or through use of the 'pkgproto' command.
+
+#!search <pathname pathname ...>	# where to find pkg objects
+#!include <filename>			# include another 'prototype' file
+#!default <mode> <owner> <group>	# default used if not specified on entry
+#!<param>=<value>			# puts parameter in pkg environment
+
+# packaging files
+i pkginfo
+i copyright
+i depend
+
+#
+# source locations relative to the prototype file
+#
+# SUNWllc
+#
+
+d none	usr 755 root sys
+d none	usr/kernel 755 root sys
+d none	usr/kernel/drv 755 root sys
+d none	usr/lib 755 root bin
+d none  usr/lib/llc2 755 root bin
+d none  usr/include 755 root bin
+d none  usr/include/sys 755 root bin
+
+f none	usr/kernel/drv/llc2 755 root sys
+f none	usr/kernel/drv/llc2.conf 644 root sys
+
+f none  usr/include/sys/llc2.h 644 root bin
+
+f none  usr/lib/llc2/llc2_autoconfig 555 root bin
+f none  usr/lib/llc2/llc2_config 555 root bin
+f none  usr/lib/llc2/llc2_stats 555 root bin
+f none  usr/lib/llc2/llc2_loop2 555 root bin
+f none  usr/lib/llc2/llc2_loop3 555 root bin
+f none  usr/lib/llc2/llc2_loop4 555 root bin
+f none  usr/lib/llc2/llc2_tcap 555 root bin
+f none  usr/lib/llc2/llc2_tparser 555 root bin

@@ -1,0 +1,97 @@
+#
+#ident	"@(#)Makefile.lib	1.2	94/10/26 SMI"
+#
+# Copyright (c) 1993 by Sun Microsystems, Inc.
+#
+# lib/Makefile.lib
+# Definitions common to libraries.
+#
+# include global definitions; SRC should be defined in the shell.
+# SRC is needed until RFE 1026993 is implemented.
+#
+# Note that the building of profiled libraries is toggled under
+# the $(BUILD_PROFS) flag which defaults to $(CH) in Makefile.master.
+
+include $(SRC)/Makefile.master
+
+LORDER=		lorder
+TSORT=		tsort
+AWK=		awk
+LN=		ln
+CAT=		cat
+
+LIBS=		$(LIBRARY)
+MACHLIBS=	$(LIBS:%=$(MACH)/%)
+PLIB=
+$(BUILD_PROFS)PLIB=	libp/$(LIBRARY)
+DYNLIB=		$(LIBRARY:.a=.so$(VERS))
+LIBLINKS=	$(LIBRARY:.a=.so)
+LIBNAME=	$(LIBRARY:lib%.a=%)
+LIBLINKPATH=
+MACHPLIB=	$(MACH)/$(PLIB)
+ROOTLIBDIR=	$(ROOT)/usr/lib
+ROOTLIBS=	$(LIBS:%=$(ROOTLIBDIR)/%)
+ROOTLINKS=	$(ROOTLIBDIR)/$(LIBLINKS)
+ROOTPLIB=
+$(BUILD_PROFS)ROOTPLIB=	$(ROOTLIBDIR)/$(PLIB)
+LINTLIB=	llib-l$(LIBNAME).ln
+LINTFLAGS=	-uax
+LINTOUT=	lint.out
+ARFLAGS=	r
+SONAME=		$(DYNLIB)
+DYNFLAGS=	-ztext -h $(SONAME)
+
+# LDLIBS.lib functions similarly to LDLIBS.cmd in cmd/Makefile.cmd.
+# It provides a mechanism for passing -L options to the linker from
+# variables in the shell environment.
+LDLIBS.lib=	$(ENVLDLIBS1) $(ENVLDLIBS2) $(ENVLDLIBS3)
+LDLIBS=	$(LDLIBS.lib)
+
+OBJS=	$(OBJECTS:%=objs/%)
+PROFS=	$(OBJECTS:%=profs/%)
+PICS=	$(OBJECTS:%=pics/%)
+
+# Declare that all library .o's can all be made in parallel.
+# The DUMMY target is for those instances where OBJS, PROFS and PICS
+# are empty (to avoid an unconditional .PARALLEL declaration).
+.PARALLEL:	$(OBJS) $(PROFS) $(PICS) DUMMY
+
+# default value for "portable" source
+SRCS=	$(OBJECTS:.o=.c)
+
+# default build of an archive,
+# overridden locally when extra processing is needed
+BUILD.AR=	$(AR) $(ARFLAGS) $@ $(AROBJS)
+
+# default dynamic library symlink
+INS.liblink=		-$(RM) $@; $(LN) $(ROOTLIBDIR)/$(LIBLINKS)$(VERS) $@
+$(CH)INS.liblink=	-$(RM) $@; $(SYMLINK) $(LIBLINKPATH)$(LIBLINKS)$(VERS) $@
+
+
+# conditional assignments
+$(PROFS) :=	CFLAGS += -p
+$(PICS)  :=	CFLAGS += -K pic
+# should be -K pic but the CC driver is currently broken
+$(PICS)  :=	CCFLAGS += -pic
+$(PICS)  :=	CPPFLAGS += -DPIC -D_TS_ERRNO
+$(LINTLIB):=	LOG = -DLOGGING
+$(LIBRARY):=	AROBJS = $(OBJS)
+$(BUILD_PROFS)$(PLIB):=	AROBJS = $(PROFS)
+$(LIBRARY):=	DIR = objs
+$(BUILD_PROFS)$(PLIB):=	DIR = profs
+$(DYNLIB):=	DIR = pics
+
+# build rule for "portable" source
+objs/%.o profs/%.o pics/%.o: %.c
+	$(COMPILE.c) -o $@ $<
+	$(POST_PROCESS_O)
+
+.PRECIOUS: $(LIBS) $(PLIB)
+
+# Define the majority text domain in this directory.
+TEXT_DOMAIN= SUNW_OST_OSLIB
+
+# Make the temp installation directories for headers and libs required to
+# build the entire "install" side of the PS consolidation source tree.
+tmp_dirs:
+	@mkdir -p $(INCDESTDIR) $(LIBDESTDIR)

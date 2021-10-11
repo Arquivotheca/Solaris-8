@@ -1,0 +1,18 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)iovec.dbg	1.4	98/01/19 SMI"
+
+#include <sys/types.h>
+#include <sys/uio.h>
+#include "dummy.h"
+
+\
+\
+iovec           iov_
+        base                    hex
+        len                     sdecimal
+{adb_inline_begin}
++,<9-1$<iovec
+{adb_inline_end}

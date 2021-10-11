@@ -1,0 +1,38 @@
+#
+# Copyright (c) 1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#ident	"@(#)prototype_com	1.4	99/09/23 SMI"
+#
+i pkginfo
+i copyright
+i depend
+#
+# SUNWonmdb
+#
+d none usr 755 root sys
+d none usr/bin 755 root bin
+l none usr/bin/mdb=../../usr/lib/isaexec
+d none usr/lib 755 root bin
+d none usr/lib/mdb 755 root sys
+d none usr/lib/mdb/kvm 755 root sys
+f none usr/lib/mdb/kvm/genunix.so 555 root sys
+f none usr/lib/mdb/kvm/ip.so 555 root sys
+f none usr/lib/mdb/kvm/ipc.so 555 root sys
+f none usr/lib/mdb/kvm/krtld.so 555 root sys
+f none usr/lib/mdb/kvm/lofs.so 555 root sys
+f none usr/lib/mdb/kvm/logindmux.so 555 root sys
+f none usr/lib/mdb/kvm/mdb_ks.so 555 root sys
+f none usr/lib/mdb/kvm/nfs.so 555 root sys
+f none usr/lib/mdb/kvm/ptm.so 555 root sys
+d none usr/lib/mdb/proc 755 root sys
+f none usr/lib/mdb/proc/mdb_ds.so 555 root sys
+f none usr/lib/mdb/proc/mdb_test.so 555 root sys
+d none usr/platform 755 root sys
+d none opt 755 root sys
+d none opt/SUNWonmdb 755 root sys
+d none opt/SUNWonmdb/bin 755 root bin
+f none opt/SUNWonmdb/bin/mdb 555 root bin
+f none opt/SUNWonmdb/bin/mkmodules 555 root bin
+f none opt/SUNWonmdb/bin/mkroot 555 root bin
+f none opt/SUNWonmdb/SUNWonmdb-README 444 root bin

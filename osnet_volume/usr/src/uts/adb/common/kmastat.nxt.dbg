@@ -1,0 +1,28 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)kmastat.nxt.dbg	1.3	98/01/19 SMI"
+
+#include <sys/kmem.h>
+#include <sys/kmem_impl.h>
+#include "dummy.h"
+
+\
+\
+kmem_cache	""	kmastat.nxt
+{adb_inline_begin}
+.>k
+*(<k+{OFFSET, cache_next})>n
+<_>U;1>_
+<k+{OFFSET, cache_buftotal}=""
+{adb_inline_end}
+	cache_buftotal		sdecimal	buftotal
+	cache_alloc_fail	sdecimal	allocfail
+	cache_name		char		"cache name"
+{adb_inline_begin}
+<U>_
+,#(<n-<e)$<
+<n>k
+<k$<kmastat.nxt
+{adb_inline_end}

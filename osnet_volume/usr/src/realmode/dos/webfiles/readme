@@ -1,0 +1,28 @@
+
+	Copyright (c) 1997 by Sun Microsystems, Inc.
+	All Rights Reserved.
+
+	@(#)readme	1.1	97/03/04 SMI
+
+
+	This directory is the home of the README files that are posted
+	to the DDK web site for describing the ZIP files that contain
+	the realmode DDK files.  This directory is also where the ZIP
+	files are placed when generated from files in the workspace.
+	The ZIP files are created by running:
+
+		make -f Makefile.webfiles
+
+	from the parent of this directory, under Solaris.
+
+	The files to be posted to the web are:
+
+		basic.zip		readme.bas
+		source.zip		readme.src
+		debug.zip		readme.dbg
+
+	For more details of the ZIP files, see the corresponding
+	README files.
+
+	This file should not be posted to the web.
+

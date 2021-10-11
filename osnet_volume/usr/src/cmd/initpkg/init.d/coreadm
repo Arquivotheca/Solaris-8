@@ -1,0 +1,18 @@
+#!/sbin/sh
+#
+# Copyright (c) 1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#ident	"@(#)coreadm	1.2	99/09/06 SMI"
+#
+# Restore the core file configuration that was in effect before reboot.
+# This is the first opportunity to do this since 'coreadm -u' rewrites
+# /etc/coreadm.conf and only now is the root file system mounted read/write.
+#
+if [ -x /usr/bin/coreadm ]; then
+	/usr/bin/coreadm -u
+	if [ -f /etc/coreadm.conf ]; then
+		. /etc/coreadm.conf
+		/usr/bin/coreadm -p "$COREADM_INIT_PATTERN" -- -1
+	fi
+fi

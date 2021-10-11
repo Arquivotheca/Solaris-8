@@ -1,0 +1,12 @@
+# Copyright (c) 1996 Sun Microsystems, Inc.
+# All rights reserved.
+#
+#ident "@(#)du_env 1.11 96/01/16"
+#
+# Template environment file sourced (dotted) by drvud script.
+#
+# Location of patches, official or otherwise.  This is a space-separated 
+# list of all paths that contain patches mentioned in ./database.
+PATCH_LOCS="/net/on495-patch.eng/on495/patches/i386 /net/on495-patch.eng/on495/patches/i386/pending /net/apache/2.5/patches/archive/spool/dnet /net/apache/2.5/patches/archive/spool/pcplusmp /net/apache/2.5/patches/archive/spool/syspro /net/apache/2.5/patches/archive/spool/man"
+# Location of patch installation/deinstallation tools.
+PATCH_TOOLS=/net/gemini/integration/newpatchtools.sss/PatchTools

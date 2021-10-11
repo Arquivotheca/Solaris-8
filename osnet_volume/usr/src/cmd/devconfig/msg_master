@@ -1,0 +1,101 @@
+#
+#ident "@(#)msg_master 1.5 93/09/28 SMI"
+#
+# Copyright (c) 1991 by Sun Microsystems, Inc.
+#
+
+# This is the master message file for devconfig.  Any time you create a new
+# message or edit the text for an existing message, you must do it here.
+# see the file `mkmsgs.c' for details on the format for this file.
+# Running the tool on this file will generate 3 files:
+#	devcfg_msgs.h
+#	devcfg_msgs.c
+#	devcfg_message.po
+
+# We don't export any of these codes to the world, so ordering is not important
+# here, and we can let the tool automatically generate the msg codes simply by
+# specifying msg codes of zero.
+
+# Don't worry about format in this file.  All text retrieved from gettext() is
+# automatically formatted for the specific terminal's column width, although
+# you can insert \n & \t whereever you like to override the formatter.
+
+CFILE	DEVCFG_MSGS
+
+PREFIX	DEVCFG
+BASE	0	DEVCFG
+
+USAGE 0  "Usage: devconfig [-v] [-f]"
+
+RUNASROOT 0  "You must run this program as root."
+
+NO 0  "No"
+
+YES 0  "Yes"
+
+NOWINDOWS 0  " You have not configured the keyboard pointing device and screen "
+"devices needed for the operation of the windowing system. The windowing "
+"system will not work unless all three devices are configured. Do you still "
+"wish to exit?"
+
+CANCELMSG 0  " No modifications will be saved when exiting this program with "
+"the Cancel option.  Do you wish to exit?"
+
+OKMSG 0  "OK"
+
+OVERFLOW 0  "display stack overflow"
+
+BADVALUE 0  "Incorrect value for "
+
+ATTRIBS 0  " attributes"
+
+APPLY 0  "Apply"
+
+RESET 0  "Reset"
+
+CANCEL 0  "Cancel"
+
+HELP 0  "Help..."
+
+NOCONFIG 0  "This device has no user configurable attributes."
+
+DEVCFG 0  "Device Configuration"
+
+DONE 0  "Done"
+
+SELECT 0  "Select the device you want to add:"
+
+CATEGORIES 0  "Device categories"
+
+SELTYPE 0  "Select the type of device you want to add:"
+
+MSG0 0 " Now it is time to configure your system's required devices."
+"   "
+
+MSG1 0 " The main window contains a list of devices that Solaris has identified as currently "
+"installed in your system.  If you have a device that does not appear on this "
+"list, you may need to include it with the (Add...) button."
+
+MSG2 0  "To delete (unconfigure) a device that has been incorrectly "
+"identified, or to view the configuration of a device, use the arrow keys to "
+"select the device, and press Return for a menu of choices."
+
+MSG3 0  "Note that you MUST configure a pointing device and display if you "
+"intend to run Open Windows. Select the (Help...) button for more information."
+
+CONTINUE 0  "Continue Install..."
+
+ADD 0  "Add..."
+
+CFGDEVS 0  "Configured devices"
+
+SHOWATTR 0  "Show attributes"
+
+UNCFG 0  "Unconfigure"
+
+OVERVIEW	0	"Overview"
+
+COMMENT This message translated length cannot exceed 45 characters.
+OVER_LABEL	0	"Press to revisit help overview: "
+  
+OVRV_TITLE	0	"Help Overview"

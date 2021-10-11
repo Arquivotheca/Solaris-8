@@ -1,0 +1,63 @@
+#!/bin/sh
+#
+# Copyright (c) 1993 - 1996, by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#ident	"@(#)postremove	1.4	98/06/08 SMI"
+#
+# SUNWvygdr.m postremove script
+
+
+if /usr/sbin/prtconf -vp | /bin/fgrep -s "SUNW,Sherman"; then
+	if [ "$BASEDIR" = "/" ] ; then
+		/usr/sbin/autopush -r -M 29 -m 0 > /dev/null
+		/usr/sbin/autopush -r -M 29 -m 1 > /dev/null
+	fi
+	cp $BASEDIR/etc/iu.ap /tmp/iu.ap
+	( echo "/	zs	0	0	ldterm ttcompat"
+	  echo "d"
+	  echo "/	zs	1	0	battery"
+	  echo "d"
+	  echo "i"
+	  echo "	zs	0	1	ldterm ttcompat"
+	  echo "." ; echo "w" ; echo "q"
+	) | ed -s $BASEDIR/etc/iu.ap > /dev/null
+	if [ $? != 0 ] ; then
+		echo "$BASEDIR/etc/iu.ap file changing failed"
+		mv /tmp/iu.ap $BASEDIR/etc/iu.ap
+	else
+		rm $BASEDIR/dev/battery
+	fi
+	if [ "$BASEDIR" = "/" ] ; then
+	  	echo "	zs	0	1	ldterm ttcompat" > /tmp/zs.ap
+		/usr/sbin/autopush -f /tmp/zs.ap > /dev/null
+	fi
+fi
+
+if /usr/sbin/prtconf -vp | /bin/fgrep -s "SUNW,S240"; then
+	if [ "$BASEDIR" = "/" ] ; then
+		/usr/sbin/autopush -r -M 29 -m 0 > /dev/null
+		/usr/sbin/autopush -r -M 29 -m 1 > /dev/null
+	fi
+	cp $BASEDIR/etc/iu.ap /tmp/iu.ap
+	( echo "/	zs	0	0	ldterm ttcompat"
+	  echo "d"
+	  echo "/	zs	1	0	battery"
+	  echo "d"
+	  echo "i"
+	  echo "	zs	0	1	ldterm ttcompat"
+	  echo "." ; echo "w" ; echo "q"
+	) | ed -s $BASEDIR/etc/iu.ap > /dev/null
+	if [ $? != 0 ] ; then
+		echo "$BASEDIR/etc/iu.ap file changing failed"
+		mv /tmp/iu.ap $BASEDIR/etc/iu.ap
+	else
+		rm $BASEDIR/dev/battery
+	fi
+	if [ "$BASEDIR" = "/" ] ; then
+	  	echo "	zs	0	1	ldterm ttcompat" > /tmp/zs.ap
+		/usr/sbin/autopush -f /tmp/zs.ap > /dev/null
+	fi
+fi
+
+exit 0

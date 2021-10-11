@@ -1,0 +1,27 @@
+\
+\ Copyright (c) 1999 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)itimer.dbg	1.1	99/06/05 SMI"
+
+#include <sys/timer.h>
+#include "dummy.h"
+
+itimer	it_
+{adb_inline_begin}
+.>z
+<z+{OFFSET, it_itime}$<<itimerspec
+<z+{OFFSET, it_flags}=""
+{adb_inline_end}
+	flags			hex
+	lock			hex
+	sigq			hex
+	lwp			hex
+	proc			hex
+	blockers		decimal
+	pending			decimal
+	overrun			decimal
+	backend			hex
+{adb_inline_begin}
+<z+{SIZEOF}=""
+{adb_inline_end}

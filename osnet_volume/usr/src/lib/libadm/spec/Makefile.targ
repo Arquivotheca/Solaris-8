@@ -1,0 +1,13 @@
+#ident	"@(#)Makefile.targ	1.1	99/01/25 SMI"
+#
+# Copyright (c) 1998-1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+# lib/libadm/spec/Makefile.targ
+
+LIBRARY	=	libadm.a
+VERS	=	.1
+
+OBJECTS	=	adm.o
+
+SPECCPP =

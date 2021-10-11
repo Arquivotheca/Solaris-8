@@ -1,0 +1,27 @@
+#
+# ident	"@(#)Makefile.targ	1.1	99/07/02 SMI"
+#
+# Copyright (c) 1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+# lib/libmd5_psr/Makefile.targ
+#
+
+#
+# This makefile defines common targets. Other makefiles should
+# include this after defining default targets.
+#
+
+include $(SRC)/lib/Makefile.targ
+include $(SRC)/Makefile.psm.targ
+
+INLINES= $(COMMON)/$(MACH)/$(PLATFORM)/byteswap.il
+
+$(MAPFILE):
+	@cd $(MAPDIR); pwd; $(MAKE) $(TARGET)
+
+pics/%.o: $(COMMON)/%.c $(INLINES)
+	$(COMPILE.c) $(INLINES) -o $@ $<
+	$(POST_PROCESS_O)
+
+$(DYNLIB):	$(MAPFILE)

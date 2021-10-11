@@ -1,0 +1,9 @@
+#ident	"@(#)download.fd	1.4	92/07/14 SMI"	/* SVr4.0 1.1	*/
+
+Input types: postscript
+Output types: postdown
+Printer types: PS,PSR,PS-b,PS-r,PS-br
+Printers: any
+Filter type: fast
+Command: /usr/lib/lp/postscript/download
+Options: PRINTER * = -p*

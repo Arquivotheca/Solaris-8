@@ -1,0 +1,6 @@
+#
+# Copyright (c) 1995 Sun Microsystems, Inc.
+#
+#pragma ident "@(#)alias.add 1.3 95/11/06 - Solaris Driver Update"
+#
+mlx "pci1069,1"

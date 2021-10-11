@@ -1,0 +1,68 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)fnnode.dbg	1.11	98/01/28 SMI"
+
+#include <rpc/types.h>
+#include <sys/time.h>
+#include <sys/t_lock.h>
+#include <sys/vfs.h>
+#include <rpc/types.h>
+#include <rpc/xdr.h>
+#include <rpc/auth.h>
+#include <rpc/clnt.h>
+#include <sys/tiuser.h>
+#include <sys/vnode.h>
+#include <sys/fs/autofs.h>
+#include "dummy.h"
+
+\
+\
+fnnode
+{adb_inline_begin}
+.>z
+<z+{OFFSET, fn_name}=""
+{adb_inline_end}
+        fn_name                 hex
+        fn_symlink              hex
+        fn_namelen              sdecimal
+        fn_symlinklen           sdecimal
+        fn_linkcnt              decimal
+        fn_mode                 octal
+        fn_uid                  decimal
+        fn_gid                  decimal
+        fn_error                sdecimal
+        fn_nodeid               sdecimal
+        fn_offset               hex
+        fn_flags                hex
+        fn_size                 decimal
+        fn_vnode                .vnode
+{adb_inline_begin}
+<z+{OFFSET, fn_parent}=""
+{adb_inline_end}
+        fn_parent               hex
+        fn_next                 hex
+        fn_dirents              hex
+        fn_trigger              hex
+        fn_alp                  hex
+        fn_cred                 hex
+        fn_rwlock               .rwlock
+{adb_inline_begin}
+<z+{OFFSET, fn_lock}=""
+{adb_inline_end}
+        fn_lock                 .mutex
+{adb_inline_begin}
+<z+{OFFSET, fn_atime}=""
+{adb_inline_end}
+        fn_atime.tv_sec         hex		atime_sec
+        fn_atime.tv_nsec        hex		atime_nsec
+        fn_mtime.tv_sec         hex		mtime_sec
+        fn_mtime.tv_nsec        hex		mtime_nsec
+        fn_ctime.tv_sec         hex		ctime_sec
+        fn_ctime.tv_nsec        hex		ctime_nsec
+        fn_seen                 hex
+        fn_thread               hex
+{adb_inline_begin}
+<z+{SIZEOF}=""
+{adb_inline_end}

@@ -1,0 +1,33 @@
+#
+# Copyright (c) 1999 by Sun Microsystems, Inc. All rights reserved.
+#
+# /etc/security/exec_attr
+#
+# execution attributes for profiles. see exec_attr(4)
+#
+#pragma ident	"@(#)exec_attr	1.2	99/07/12 SMI"
+#
+#
+All:suser:cmd:::*:
+Audit Control:suser:cmd:::/etc/init.d/audit:euid=0;egid=3
+Audit Control:suser:cmd:::/etc/security/bsmconv:uid=0
+Audit Control:suser:cmd:::/etc/security/bsmunconv:uid=0
+Audit Control:suser:cmd:::/usr/sbin/audit:euid=0
+Audit Control:suser:cmd:::/usr/sbin/auditconfig:euid=0
+Audit Control:suser:cmd:::/usr/sbin/auditd:uid=0
+Audit Review:suser:cmd:::/usr/sbin/auditreduce:euid=0
+Audit Review:suser:cmd:::/usr/sbin/praudit:euid=0
+Audit Review:suser:cmd:::/usr/sbin/auditstat:euid=0
+Printer Management:suser:cmd:::/etc/init.d/lp:euid=0
+Printer Management:suser:cmd:::/usr/bin/cancel:euid=0
+Printer Management:suser:cmd:::/usr/bin/lpset:egid=14
+Printer Management:suser:cmd:::/usr/bin/enable:euid=lp
+Printer Management:suser:cmd:::/usr/bin/disable:euid=lp
+Printer Management:suser:cmd:::/usr/sbin/accept:euid=lp
+Printer Management:suser:cmd:::/usr/sbin/reject:euid=lp
+Printer Management:suser:cmd:::/usr/sbin/lpadmin:egid=14
+Printer Management:suser:cmd:::/usr/sbin/lpfilter:euid=lp
+Printer Management:suser:cmd:::/usr/sbin/lpforms:euid=lp
+Printer Management:suser:cmd:::/usr/sbin/lpmove:euid=lp
+Printer Management:suser:cmd:::/usr/sbin/lpshut:euid=lp
+Printer Management:suser:cmd:::/usr/sbin/lpusers:euid=lp

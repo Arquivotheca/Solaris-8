@@ -1,0 +1,6 @@
+break main
+cont
+step 10
+break printf
+cont
+step

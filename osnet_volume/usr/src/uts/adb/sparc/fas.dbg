@@ -1,0 +1,137 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)fas.dbg	1.25	98/12/09 SMI"
+
+#define FASDEBUG
+#include <sys/note.h>
+#include <sys/scsi/scsi.h>
+#include <sys/scsi/adapters/fasreg.h>
+#include <sys/scsi/adapters/fasvar.h>
+#include "dummy.h"
+
+\
+\
+fas			f_
+{adb_inline_begin}
+.>z
+<z+{OFFSET, f_instance}=""
+{adb_inline_end}
+	instance
+	tran
+	dev
+	mutex			.mutex		"fas mutex"
+{adb_inline_begin}
+<z+{OFFSET, f_iblock}=""
+{adb_inline_end}
+	iblock
+	next
+	type
+	hm_rev
+	fasconf
+	fasconf2
+	fasconf3
+	fasconf3_reg_last
+	clock_conv
+	clock_cycle
+	stval
+	sdtr_sent
+	wdtr_sent
+	stat
+	stat2
+	intr
+	step
+	abort_msg_sent
+	reset_msg_sent
+	last_cmd
+	state
+	laststate
+	suspended
+	dslot
+	idcode
+	polled_intr
+	cur_msgout
+	last_msgout
+	omsglen
+	imsgarea
+	imsglen
+	imsgindex
+	last_msgin
+	next_slot
+	resel_slot
+	offset
+	sync_period
+	neg_period
+	backoff
+	req_ack_delay
+	offset_reg_last
+	period_reg_last
+	fifolen
+	fifo
+	wide_known
+	nowide
+	wide_enabled
+	sync_known
+	nosync
+	sync_enabled
+	force_async
+	notag
+	props_update
+	target_scsi_options_defined
+	scsi_options
+	target_scsi_options
+	scsi_tag_age_limit
+	scsi_reset_delay
+	cmdarea
+	dma_csr
+{adb_inline_begin}
+<z+{OFFSET, f_dmacookie}/n"dma cookie"16tnJKX
+<z+{OFFSET, f_dmahandle}=""
+{adb_inline_end}
+	dmahandle
+	dma_attr
+	ncmds
+	ndisc
+	reg
+	dma
+	lastdma
+	lastcount
+	current_sp
+	active
+	readyf
+	readyb
+	throttle
+	tcmds
+	reset_delay
+	arq_pkt
+	c_qf
+	c_qb
+	c_mutex			.mutex		"callback mutex"
+{adb_inline_begin}
+<z+{OFFSET, f_c_in_callback}=""
+{adb_inline_end}
+	c_in_callback
+	waitQ_mutex		.mutex		"waitQ mutex"
+{adb_inline_begin}
+<z+{OFFSET, f_waitf}=""
+{adb_inline_end}
+	waitf
+	waitb
+	reset_notify_listf
+	qfull_retries
+	restart_cmd_timeid
+	kmem_cache
+	regs_acc_handle
+	cmdarea_acc_handle
+	dmar_acc_handle
+	flags
+	cv			hex
+	softstate
+	quiesce_timeid
+	intr_kstat
+	reg_trace_index
+	reg_trace
+{adb_inline_begin}
+<z+{SIZEOF}=""
+{adb_inline_end}

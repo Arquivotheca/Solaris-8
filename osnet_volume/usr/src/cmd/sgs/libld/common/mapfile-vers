@@ -1,0 +1,62 @@
+#
+#ident	"@(#)mapfile-vers	1.31	99/07/09 SMI"
+#
+# Copyright (c) 1999 by Sun Microsystems, Inc.
+# All rights reserved.
+
+# Generic interface definition for usr/src/cmd/sgs/libld.
+#
+# For information regarding the establishment of versioned definitions see:
+# 	The Linker and Libraries Manual (version 2.5 or greater)
+# This is part of the Developers Guide in the Answerbook.  Specifically refer
+# to Chapter 2 under section "Defining Additional Symbols" through section
+# "Reducing Symbol Scope", and Chapter 5 "Versioning".
+#
+# For specific OSNET rules for the modification (evolution) of these version
+# definitions see:
+#	Policy for Shared Library Version Names and Interface Definitions
+
+{
+	global:
+		dbg_print =	FUNCTION extern;
+		dbg_mask =	COMMON extern;
+		eprintf =	FUNCTION extern;
+};
+
+SUNWprivate_2.9 {
+	global:
+		add_string;
+		calloc;
+		create_outfile;
+		ent_setup;
+		finish_libs;
+		free;
+		ld_main;
+		ld_support_loadso;
+		libld_malloc;
+		list_appendc;
+		list_insertc;
+		list_prependc;
+		list_where;
+		make_sections;
+		malloc;
+		ofl_cleanup;
+		open_outfile;
+		process_open;
+		reloc_init;
+		reloc_process;
+		sdf_add;
+		sdf_find;
+		sec_validate;
+		sym_add_u;
+		sym_enter;
+		sym_find;
+		sym_validate;
+		update_outfile;
+		vers_base;
+		vers_check_defs;
+		vers_desc;
+		vers_find;
+	local:
+		*;
+};

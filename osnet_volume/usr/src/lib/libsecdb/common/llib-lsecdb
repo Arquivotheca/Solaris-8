@@ -1,0 +1,69 @@
+/*
+ * Copyright (c) 1999 by Sun Microsystems, Inc. All rights reserved.
+ */
+
+#pragma ident	"@(#)llib-lsecdb	1.1	99/04/08 SMI"
+
+#include <auth_attr.h>
+#include <exec_attr.h>
+#include <nss_dbdefs.h>
+#include <prof_attr.h>
+#include <pwd.h>
+#include <secdb.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <strings.h>
+#include <sys/mman.h>
+#include <sys/types.h>
+#include <user_attr.h>
+#include <getxby_door.h>
+
+/* chkauthattr.c */
+int chkauthattr(const char *, const char *);
+
+/* getauthattr.c */
+authattr_t *getauthattr();
+authattr_t *getauthnam(const char *);
+void setauthattr();
+void endauthattr();
+void free_authattr(authattr_t *);
+
+/* getexecattr.c */
+execattr_t *getexecattr();
+execattr_t *getexecprof(const char *, const char *, const char *, int);
+execattr_t *getexecuser(const char *, const char *, const char *, int);
+execattr_t * match_execattr(execattr_t *, const char *, const char *,\
+    const char *);
+void setexecattr();
+void endexecattr();
+void free_execattr(execattr_t *);
+
+/* getprofattr.c */
+profattr_t *getprofattr();
+profattr_t *getprofnam(const char *);
+void setprofattr();
+void endprofattr();
+void free_profattr(profattr_t *);
+
+/* getuserattr.c */
+userattr_t *getuserattr();
+userattr_t *getusernam(const char *);
+userattr_t *getuseruid(uid_t);
+void setuserattr();
+void enduserattr();
+void free_userattr(userattr_t *);
+
+/* secdb.c */
+char *kva_match(kva_t *, char *);
+
+char *argv_to_csl(char **);
+char **csl_to_argv(char *);
+char *_do_unescape(char *);
+void free_argv(char **);
+int _insert2kva(kva_t *, char *, char *);
+int _kva2str(kva_t *, char *, int, char *, char *);
+kva_t *kva_dup(kva_t *);
+void _kva_free(kva_t *);
+kva_t  *_new_kva();
+kva_t  *_str2kva(char *, char *, char *);

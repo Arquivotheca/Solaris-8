@@ -1,0 +1,200 @@
+/* LINTLIBRARY */
+/* PROTOLIB1 */
+
+/*
+ * Copyright (c) 1997 by Sun Microsystems, Inc. 
+ * All rights reserved. 
+ */ 
+#pragma ident	"@(#)llib-ladm	1.2	97/08/26 SMI"
+
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+#include <grp.h>
+#include <valtools.h>
+#include <devmgmt.h>
+#include <sys/vtoc.h>
+#include <pkginfo.h>
+
+/*
+ * usr/src/lib/libadm
+ */
+
+/* ckdate.c */
+int ckdate_err(char *fmt, char *error);
+int ckdate_hlp(char *fmt, char *help);
+int ckdate_val(char *fmt, char *input);
+int ckdate(char *date, char *fmt, char *defstr, char *error, char *help,
+			char *prompt);
+
+
+/* ckgid.c */
+int ckgid_dsp(void);
+int ckgid_val(char *grpnm);
+void ckgid_err(int disp, char *error);
+void ckgid_hlp(int disp, char *help);
+int ckgid(char *gid, short disp, char *defstr, char *error, char *help,
+			char *prompt);
+
+/* ckint.c */
+int ckint_val(char *value, short base);
+void ckint_err(short base, char *error);
+void ckint_hlp(short base, char *help);
+int ckint(long *intval, short base, char *defstr, char *error, char *help,
+			char *prompt);
+
+/* ckitem.c */
+CKMENU *allocmenu(char *label, int attr);
+void ckitem_err(CKMENU *menup, char *error);
+void ckitem_hlp(CKMENU *menup, char *help);
+int ckitem(CKMENU *menup, char *item[], short max, char *defstr, char *error,
+			char *help, char *prompt);
+int setitem(CKMENU *menup, char *choice);
+int setinvis(CKMENU *menup, char *choice);
+void printmenu(CKMENU *menup);
+
+/* ckkeywd.c */
+int ckkeywd(char *strval, char *keyword[], char *defstr, char *error,
+			char *help, char *prompt);
+
+/* ckpath.c */
+int ckpath_stx(int pflags);
+int ckpath_val(char *path, int pflags);
+void ckpath_err(int pflags, char *error, char *input);
+void ckpath_hlp(int pflags, char *help);
+int ckpath(char *pathval, int pflags, char *defstr, char *error,
+			char *help, char *prompt);
+
+/* ckrange.c */
+void ckrange_err(long lower, long upper, int base, char *error);
+void ckrange_hlp(long lower, long upper, int base, char *help);
+int ckrange_val(long lower, long upper, int base, char *input);
+int ckrange(long *rngval, long lower, long upper, int base, char *defstr,
+			char *error, char *help, char *prompt);
+
+/* ckstr.c */
+int ckstr_val(char *regexp[], int length, char *input);
+void ckstr_err(char *regexp[], int length, char *error, char *input);
+void ckstr_hlp(char *regexp[], int length, char *help);
+int ckstr(char *strval, char *regexp[], int length, char *defstr,
+			char *error, char *help, char *prompt);
+
+/* cktime.c */
+int cktime_val(char *fmt, char *input);
+int cktime_err(char *fmt, char *error);
+int cktime_hlp(char *fmt, char *help);
+int cktime(char *tod, char *fmt, char *defstr, char *error,
+			char *help, char *prompt);
+
+/* ckuid.c */
+int ckuid_dsp(void);
+int ckuid_val(char *usrnm);
+void ckuid_err(short disp, char *error);
+void ckuid_hlp(int disp, char *help);
+int ckuid(char *uid, short disp, char *defstr, char *error,
+			char *help, char *prompt);
+
+/* ckyorn.c */
+int ckyorn_val(char *str);
+void ckyorn_err(char *error);
+void ckyorn_hlp(char *help);
+int ckyorn(char *yorn, char *defstr, char *error, char *help, char *prompt);
+
+/* data.c */
+
+/* devattr.c */
+char *devattr(char *device, char *attribute);
+
+/* devreserv.c */
+char *_rsvtabpath(void);
+char **devreserv(int key, char **rsvlst[]);
+int devfree(int key, char *device);
+struct reservdev **reservdev(void);
+
+/* devtab.c */
+void _enddevtab(void);
+char *_devtabpath(void);
+int _opendevtab(char *mode);
+int _validalias(char *alias);
+
+/* dgrpent.c */
+char *_dgrptabpath(void);
+int _opendgrptab(char *mode);
+
+/* fulldevnm.c */
+char *getfullblkname(char *cp);
+char *getfullrawname(char *cp);
+
+/* getdev.c */
+char  **getdev(char **devices, char **criteria, int options);
+
+/* getdgrp.c */
+char **getdgrp(char **dgroups, char **criteria, int options);
+
+/* getinput.c */
+int getinput(char *s);
+
+/* getvol.c */
+int getvol(char *device, char *label, int options, char *prompt);
+int _getvol(char *device, char *label, int options, char *prompt,
+							char *norewind);
+
+/* listdev.c */
+char **listdev(char *device);
+
+/* listdgrp.c */
+char  **listdgrp(char *dgroup);
+
+/* memory.c */
+long sysmem(void);
+long asysmem(void);
+
+/* pkginfo.c */
+int pkginfo(struct pkginfo *info, char *pkginst, ...);
+int fpkginfo(struct pkginfo *info, char *pkginst);
+char *fpkginst(char *pkg, ...);
+
+/* pkgnmchk.c */
+int pkgnmchk(char *pkg, char *spec, int presvr4flg);
+
+/* pkgparam.c */
+int pkginfofind(char *path, char *pkg_dir, char *pkginst);
+char *fpkgparam(FILE *fp, char *param);
+char *pkgparam(char *pkg, char *param);
+void set_PKGpaths(char *path);
+char *get_PKGLOC(void);
+char *get_PKGOLD(void);
+char *get_PKGADM(void);
+void set_PKGADM(char *newpath);
+void set_PKGLOC(char *newpath);
+
+/* putdev.c */
+int _adddevtabrec(char *alias, char **attrval);
+int _moddevtabrec(char *device, char **attrval);
+int _rmdevtabrec(char *device);
+int _rmdevtabattrs(char *device, char **attributes, char ***notfounds);
+
+/* putdgrp.c */
+int _adddgrptabrec(char *dgrp, char **members);
+int _rmdgrptabrec(char *dgrp);
+int _rmdgrpmems(char *dgrp, char **mems, char ***notfounds);
+
+/* puterror.c */
+void puterror(FILE *fp, char *defmesg, char *error);
+
+/* puthelp.c */
+void puthelp(FILE *fp, char *defmesg, char *help);
+
+/* putprmpt.c */
+void putprmpt(FILE *fp, char *prompt, char *choices[], char *defstr);
+
+/* puttext.c */
+int puttext(FILE *fp, char *str, int lmarg, int rmarg);
+
+/* rdwr_vtoc.c */
+int read_vtoc(int fd, struct vtoc *vtoc);
+int write_vtoc(int fd, struct vtoc *vtoc);
+
+/* regexp.c */
+
+/* space.c */

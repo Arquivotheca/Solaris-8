@@ -1,0 +1,172 @@
+#
+#pragma ident	"@(#)Makefile.targ.64	1.7	99/05/04 SMI"
+#
+# Copyright (c) 1997-1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+# psm/stand/kadb/common/Makefile.targ.64
+#
+# kernel debugger (kadb) included common Makefile targets
+# included by kernel-architecture specific makefiles
+#
+
+.KEEP_STATE:
+
+.PARALLEL:	$(OBJ) $(ARCHOBJ) $(MACHOBJ)
+
+#
+# XXX -- This is a hack to get the ia64 kadb to compile properly.
+# XXX -- The basic problem is that this Makefile was constructed under
+# XXX -- the assumption that there is one kadb for both 32-bit and 64-bit.
+# XXX -- This assumption is violated by the ia64 build.
+# XXX -- The kadb Makefiles should be cleaned up.
+#
+$(SPARC_BLD)MULDEFS= -z muldefs
+$(SPARC_BLD)LDFLAGS = -dn -M $(MAPFILE) $(MULDEFS)
+$(SPARC_BLD)PF32_O = pf32.o
+$(SPARC_BLD)SIM_LIBS =
+
+kadb:	ukadb.o pf.o $(PF32_O) $(MAPFILE) $$(LIBS) $$(OTHERLIBS)
+	${LD} $(LDFLAGS) -e start -Bstatic -o $@ \
+		ukadb.o $(PF32_O) pf.o $(LDLIBS) $(OTHERLIBS) $(SIM_LIBS)
+
+standalloc.o: $(TOPDIR)/stand/lib/common/standalloc.c
+	${CC} -I${STANDDIR} ${CPPOPTS} -c \
+		$(TOPDIR)/stand/lib/common/standalloc.c
+
+# ukadb.o is the a.out for all of kadb except the macro file pf.o,
+# this makes it is easier to drop in a different set of macros.
+
+ukadb.o: ${AOBJ} ${OBJ} $(ADBOBJ)
+	${LD} -r $(MULDEFS) -o $@ ${AOBJ} ${OBJ} $(ADBOBJ)
+
+$(ADBOBJ): FRC
+	@cd $(@D); pwd; $(MAKE) -e "ARCHOPTS=$(ARCHOPTS)" $(@F); pwd
+
+$(LIBSA) $(LIBBOOT) $(LIBNAMES) $(KADBPROMLIB) $(PLATLIB) $(LIBNFS): FRC
+	@cd $(@D); pwd; $(MAKE) $(@F)
+
+$(L_LIBSA) $(L_LIBBOOT) $(L_LIBNAMES) $(L_PROMLIB) $(L_PLATLIB) \
+$(L_LIBNFS): FRC
+	@cd $(@D); pwd; $(MAKE) $(@F)
+
+$(AOBJ): $(ARCHOBJ) $(MACHOBJ)
+	$(LD) -r -o $@ $(ARCHOBJ) $(MACHOBJ)
+
+$(OBJSDIR):
+	-@[ -d $@ ] || mkdir $@
+
+#
+# Lint
+#
+L_OBJS=	$(OBJ:%.o=%.ln) $(ARCHOBJ:%.o=%.ln) $(MACHOBJ:%.o=%.ln)
+
+$(PROG)_lint: $(OBJSDIR) .WAIT $(L_OBJS) $$(L_LIBS) $$(L_OTHERLIBS)
+	@$(ECHO) "\nlint library construction:"
+	@$(LINT) $(LINTFLAGS.lib) -o kadb $(L_OBJS)
+	$(LINT.2) $(CFLAGS) $(L_OBJS) $(L_LDLIBS) $(L_OTHERLIBS)
+
+$(ROOTDIR):
+	$(INS.dir)
+
+pf.o:	pf.c
+	$(COMPILE.c) pf.c
+
+pf32.o:	pf32.c
+	$(COMPILE.c) pf32.c
+
+# pf.c is separately dependent upon MACDIR source and genpf.
+# genpf need not be rebuilt when MACDIR source is touched.
+# hence, first a target then a further dependency.
+#
+pf.c:	FRC
+	@cd ${MACDIR}/$(MACH64); pwd; $(MAKE)
+	@cd ${MACDIR}/platform/$(MACH64); pwd; \
+	$(MAKE) "ARCHOPTS=$(ARCHOPTS)" $(ARCH); pwd
+	$(RM) $@; ./genpf ${MACLIST}
+
+pf32.c:	FRC
+	@cd ${MACDIR}; pwd; $(MAKE) $(MACH)
+	@cd ${MACDIR}/platform/$(MACH); pwd;	\
+	$(MAKE) $(ARCH); pwd
+	$(RM) $@; ./genpf32 ${MACLIST32}
+	
+
+pf.c:	genpf
+
+pf32.c:	genpf32
+
+genpf32:	${COMDIR}/genpf32.c
+	(unset LD_LIBRARY_PATH; \
+	$(NATIVECC) -o $@ $(NATIVE_CFLAGS) $(NATIVECPPFLAGS) ${COMDIR}/genpf32.c)
+
+genpf:	${COMDIR}/genpf.c
+	(unset LD_LIBRARY_PATH; \
+	$(NATIVECC) -o $@ $(NATIVE_CFLAGS) $(NATIVECPPFLAGS) ${COMDIR}/genpf.c)
+
+
+#
+# The cscope.out file is made in the current directory and spans
+# all architectures.
+# Things to note:
+#	1. We use relative names for cscope and tags.
+#	2. We *don't* remove the old cscope.out file, because cscope is
+#	   smart enough to only build what has changed.  It can be
+#	   confused, however, if files are renamed or removed, so it may
+#	   be necessary to manually remove cscope.out if a lot of
+#	   reorganization has occured.
+#	3. We deliberately avoid names that include '.del' in their names
+#	   as these are usually files that have been 'deleted' by nsefile.
+#
+CSDIR	= .
+
+CSDIRS	= $(MACH_CSDIRS) $(COMDIR) . \
+	$(TOPDIR)/cmd/adb/$(CSMACH) $(TOPDIR)/cmd/adb/common \
+	$(TOPDIR)/stand/lib/common \
+	$(TOPDIR)/stand/lib/fs \
+	$(TOPDIR)/stand/lib/$(CSMACH) \
+	$(TOPDIR)/stand/sys
+
+CSPATHS	= $(CSDIRS:%=$(CSDIR)/%)
+
+CSENVS	= $(ENVCPPFLAGS1) $(ENVCPPFLAGS2) $(ENVCPPFLAGS3) $(ENVCPPFLAGS4)
+
+CSINCS	= $(CPPINCS:%$(MACH)=%$(CSMACH)) \
+	  $(CSENVS:%$(TARG_MACH)/usr/include=%$(CSMACH)/usr/include)
+
+CSCOPE	= cscope
+CSFLAGS	= -b
+CTAGS	= ctags
+
+.PRECIOUS:	cscope.out
+
+cscope.out: cscope.files
+	${CSCOPE} ${CSFLAGS}
+
+cscope.files:   FRC
+	@-$(RM) cscope.files
+	echo $(CSINCS) > cscope.files
+	find $(CSPATHS) -name SCCS -prune -o \
+	    \( -type d -name '.del*' \) -prune -o -type f \
+	    \( -name '*.[chs]' -o -name 'Makefile*' -o -name '*.il' \) \
+	    -a ! -name '.del*' -print >> cscope.files
+	@wc -l cscope.files
+
+#
+# Create a tags data base, similar to above.
+# Since assembler files now contain C fragments for lint,
+# the lint fragments will allow ctags to "work" on assembler.
+#
+# Things to note:
+#	1. We put plain files before headers, and .c before .s (because
+#	   ctags doesn't understand assembly comments).
+#	2. We *don't* sort the output of find, as we want functions in
+#	   architecture directories to take precedence over those in
+#	   sun, and those over those in common.
+#
+tags:	cscope.files
+	$(CTAGS) -wt `sed 1d cscope.files`
+
+FRC:
+
+include $(TOPDIR)/Makefile.psm.targ

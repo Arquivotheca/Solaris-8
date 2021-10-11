@@ -1,0 +1,43 @@
+<TITLE> To Confirm All Actions </TITLE>
+<!-- Tag=ToConfirmActions -->
+
+<CONTENT>
+
+<p>
+
+Do the following to require that all Solaris Print Manager actions be
+confirmed before being executed, or to turn off this option. 
+
+<p>
+
+1. Choose Confirm All Actions from the Print Manager menu. 
+
+<p>
+
+If the Confirm All Actions box was not checked, it will be checked 
+and all subsequent Solaris Print Manager actions will require
+confirmation before being performed. 
+
+<p>
+
+If the Confirm All Actions box was checked, it will no longer be checked 
+and subsequent Solaris Print Manager actions will NOT require
+confirmation before being performed. Note that some actions, such as
+Delete Printer, require confirmation regardless of the setting of the
+Confirm All Actions box. 
+
+<p>
+
+</CONTENT>
+
+<KEYWORDS>
+confirm action
+</KEYWORDS>
+
+<p>
+
+<SEEALSO>
+Overview
+MainWindow 
+HelpOnHelp
+</SEEALSO>

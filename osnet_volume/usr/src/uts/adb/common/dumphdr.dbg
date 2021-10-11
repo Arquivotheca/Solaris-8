@@ -1,0 +1,31 @@
+\
+\ Copyright (c) 1997-1998 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)dumphdr.dbg	1.6	98/06/03 SMI"
+
+#include <sys/param.h>
+#include <sys/types.h>
+#include <sys/time.h>
+#include <sys/dumphdr.h>
+#include "dummy.h"
+
+dumphdr         dump_
+        magic			hex
+        version			hex
+        flags			hex
+	wordsize		decimal
+	pageshift		decimal
+        pagesize		hex
+	hashmask		hex
+	nvtop			decimal
+	npages			decimal
+	ksyms_size		decimal
+	ksyms_csize		decimal
+	start			hex
+	ksyms			hex
+	pfn			hex
+	map			hex
+	data			hex
+	crashtime		date
+        panicstring		char

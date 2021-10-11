@@ -1,0 +1,24 @@
+#
+#ident	"@(#)Makefile.cachefs	1.1	96/04/01 SMI"
+#
+# Copyright (c) 1996 by Sun Microsystems, Inc.
+# 
+# stand/lib/fs/cachefs/Makefile.cachefs
+#
+# Standalone Library CACHEFS makefile
+#
+# This Makefile is included by ../../[sparc,i386]/Makefile and is used
+# to build $(LIBCACHEFS).  The library is built in ../../[sparc,i386].
+#
+
+CACHEFSOBJ=		cachefsops.o cachefs_subr.o
+CACHEFSOBJ_L=		cachefsops.ln cachefs_subr.ln
+CACHEFSSRC=		$(CACHEFSOBJ:%.o=$(CACHEFSDIR)/%.c)
+
+$(LIBCACHEFS) :=	FS_OBJECTS=	$(CACHEFSOBJ)
+$(LIBCACHEFS_L) :=	FS_OBJECTS_L=	$(CACHEFSOBJ_L)
+$(LIBCACHEFS_L) :=	FS_SOURCES=	$(CACHEFSSRC)
+
+.PARALLEL:      	$(CACHEFSOBJ:%=objs/%) $(CACHEFSOBJ_L:%=objs/%)
+.PARALLEL:      	$(CACHEFSOBJ:%=kadbobjs/%)
+

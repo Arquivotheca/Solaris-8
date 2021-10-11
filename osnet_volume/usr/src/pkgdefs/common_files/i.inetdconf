@@ -1,0 +1,590 @@
+#!/bin/sh
+#
+# Copyright (c) 1993-1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#ident   "@(#)i.inetdconf 1.42     99/12/16 SMI"
+#
+
+PATH="/usr/bin:/usr/sbin:${PATH}"
+export PATH
+
+#
+# write_nawk_script:
+#
+# Will parse the inetd.conf file for specific patterns and perform the
+# correct upgrade on the lines.
+#
+write_nawk_script()
+{
+#
+# The entire inetd.conf file will be scanned and each line upgraded as it
+# is read.  There are several cases whereby the upgrade must wait until 
+# after the entire file is scanned because those changes depend on the presence 
+# of more than a single inetd.conf line.  As such, we store the upgraded
+# inetd.conf file in the array "inetd_line".  We increment the index "indi" as
+# we scan each line.
+#
+	nawk '
+		{
+			inetd_line[++indi] = $0
+		}
+		/^100068\/2-3/ {
+			sub("2-3", "2-4", inetd_line[indi])
+			next
+		}
+		/rpc.rexd/ {
+			sub("stream", "tli", inetd_line[indi])
+			next
+		}
+		/^# Kerbd Daemon/ {
+			delete inetd_line[indi]
+			next
+		}
+		/^#?kerbd\/4[ \t]*tli/ {
+			delete inetd_line[indi]
+			next
+		}
+		{
+			sub("/usr/openwin/bin/rpc.ttdbserver", "/usr/dt/bin/rpc.ttdbserver", inetd_line[indi])
+			sub("inetd(8).  See inetd.conf(5)", "inetd(1M).  See inetd.conf(4)", inetd_line[indi])
+			sub("100999", "ufsd", inetd_line[indi])
+		}
+		$0~/^rusersd/ && $0 !~ /circuit_v/ {
+			sub("datagram_v", "&,circuit_v", inetd_line[indi])
+			next
+		}
+		/^100087[^0-9]/ {
+			inetd_line[indi] = "100232/10   tli     rpc/udp wait root /usr/sbin/sadmind     sadmind"
+			next
+		}
+#
+# The following patterns deal with previous experimentations of having telnet
+# and login use "tli".  If these cases are matched, the entries
+# will be upgraded to use "stream".  Checks will continue to be made to 
+# determine if telnet and login need to be changed for IPv6
+# (thus, the reason why there is no "next").
+#
+		/^#?telnet[ \t]?tli/ {
+			sub("tli", "stream", inetd_line[indi])
+		}
+		/^#?login[ \t]?tli/ {
+			sub("tli", "stream", inetd_line[indi])
+		}
+#
+# Patterns that change the rpc.ttdbserverd and cachefsd to use "tli"
+#
+		/rpc.ttdbserverd/ {
+			sub("stream", "tli", inetd_line[indi])
+			next
+		}
+		/cachefsd/ {
+			sub("stream", "tli", inetd_line[indi])
+			next
+		}
+#
+# The following patterns deal with the ftp service.
+# 
+		/^#?ftp[ \t]+stream[ \t]+tcp[ \t]+nowait[ \t]+root[ \t]+\/usr\/sbin\/in\.ftpd[ \t]+in\.ftpd/ {
+			sub("tcp", "tcp6", inetd_line[indi])
+			next
+		}
+		/^#?ftp[ \t]+stream[ \t]+tcp6[ \t]+nowait[ \t]+root[ \t]+\/usr\/lib\/inet\/in\.ftpd[ \t]+in\.ftpd -w 240/ {
+			sub("/usr/lib/inet/in.ftpd", "/usr/sbin/in.ftpd", inetd_line[indi])
+			sub("in.ftpd -w 240", "in.ftpd", inetd_line[indi])
+			next
+		}
+		/^#?ftp[ \t]+stream[ \t]+tcp6[ \t]+wait[ \t]+root[ \t]+\/usr\/lib\/inet\/in\.ftpd[ \t]+in\.ftpd -w 240/ {
+			sub("wait", "nowait", inetd_line[indi])
+			sub("/usr/lib/inet/in.ftpd", "/usr/sbin/in.ftpd", inetd_line[indi])
+			sub("in.ftpd -w 240", "in.ftpd", inetd_line[indi])
+			next
+		}
+#
+# If we find that the ftp inetd service entry has "tcp" as its <proto> value
+# and the server path or args fields are not the standard location and names,
+# then the service entry may be using tcp wrappers or a non-Solaris
+# ftp server that may not have IPv6 support.  As such, we provide the standard
+# Solaris line for ftp that is commented out.
+#
+		/^#?ftp[ \t]+stream[ \t]+tcp[ \t].*wait[ \t]+root[ \t].*/ {
+			inetd_line[++indi] = "#ftp	stream	tcp6	nowait	root	/usr/sbin/in.ftpd	in.ftpd"
+			dupftp = indi
+			next
+		}
+#
+# If we find that a commented line already exists in inetd.conf, we do not want
+# to add another one.  So if we added a commented out line already, this
+# block of code will now delete it.
+#
+		/^#?ftp[ \t]+stream[ \t]+tcp6[ \t].*/ && dupftp > 0 {
+			delete inetd_line[dupftp]
+			next
+		}
+#
+# The following patterns deal with the telnet service.
+# 
+		inetd_line[indi]~/^#?telnet[ \t]+stream[ \t]+tcp[ \t].*\/usr\/sbin\/in\.telnetd[ \t]+in\.telnetd/ {
+			sub("tcp", "tcp6", inetd_line[indi])
+			next
+		}
+#
+# If we find that the telnet inetd service entry has "tcp" as its <proto> value
+# and the server path or args fields are not the standard location and names,
+# this indicates that they may be using tcp wrappers or a non-Solaris
+# in.telnetd which may not have IPv6 support.  As such, we provide the standard
+# Solaris line for telnet that is commented out.
+#
+		/^#?telnet[ \t]+stream[ \t]+tcp[ \t].*/ {
+			inetd_line[++indi] = "#telnet	stream	tcp6	nowait	root	/usr/sbin/in.telnetd	in.telnetd"
+			duptelnet = indi
+			next
+		}
+		/^#?telnet[ \t]+stream[ \t]+tcp6[ \t].*/ && duptelnet > 0 {
+			delete inetd_line[duptelnet]
+			next
+		}
+#
+# The following patterns deal with the login service.
+#
+		inetd_line[indi]~/^#?login[ \t]+stream[ \t]+tcp[ \t].*\/usr\/sbin\/in\.rlogind[ \t]+in\.rlogind/ {
+			sub("tcp", "tcp6", inetd_line[indi])
+			next
+		}
+#
+# If we find that the login inetd service entry has "tcp" as its <proto> value
+# and the server path or args fields are not the standard location and names,
+# this indicates that they may be using tcp wrappers or a non-Solaris
+# in.rlogind which may not have IPv6 support.  As such, we provide the standard
+# Solaris line for in.rlogind but that is commented out.
+#
+		/^#?login[ \t]+stream[ \t]+tcp[ \t].*/ {
+			inetd_line[++indi] = "#login	stream	tcp6	nowait	root	/usr/sbin/in.rlogind	in.rlogind"
+			duplogin = indi
+			next
+		}
+		/^#?login[ \t]+stream[ \t]+tcp6[ \t].*/  && duplogin > 0 {
+			delete inetd_line[duplogin]
+			next
+		}
+#
+# The following patterns deal with the tftp service.
+#
+		/^#?tftp[ \t]+dgram[ \t]+udp[ \t].*\/usr\/sbin\/in\.tftpd[ \t]+in\.tftpd/ {
+			sub("udp", "udp6", inetd_line[indi])
+			next
+		}
+#
+# If we find that the tftp inetd service entry has "tcp" as its <proto> value
+# and the server path or args fields are not the standard location and names,
+# this indicates that they may be using tcp wrappers or a non-Solaris
+# in.tftpd which may not have IPv6 support.  As such, we provide the standard
+# Solaris line for tftp that is commented out.
+#
+		/^#?tftp[ \t]+dgram[ \t]+udp[ \t].*/ {
+			inetd_line[++indi] = "#tftp	dgram	udp6	wait	root	/usr/sbin/in.tftpd	in.tftpd -s /tftpboot"
+			duptftp = indi
+			next
+		}
+		/^#?tftp[ \t]+dgram[ \t]+udp6[ \t].*/ && duptftp > 0 {
+			delete inetd_line[duptftp]
+			next
+		}
+#
+# The following patterns deal with the finger service.
+#
+		/^#?finger[ \t]+stream[ \t]+tcp[ \t].*\/usr\/sbin\/in\.fingerd[ \t]+in\.fingerd/ {
+			sub("tcp", "tcp6", inetd_line[indi])
+			next
+		}
+		/^#?finger[ \t]+stream[ \t]+tcp[ \t].*/ {
+			inetd_line[++indi] = "#finger	stream	tcp6	nowait	nobody	/usr/sbin/in.fingerd	in.fingerd"
+			dupfinger = indi
+			next
+		}
+		/^#?finger[ \t]+stream[ \t]+tcp6[ \t].*/ && dupfinger > 0 {
+			delete inetd_line[dupfinger]
+			next
+		}
+#
+# The following patterns deal with the "shell" and "exec" service.
+# It is a requirement that there be two entries for the "shell"
+# and "exec" service - one for "tcp" and for "tcp6" <proto> values.
+# Because there may be more than one "shell" ("exec") service line,
+# we will simply scan the entire inetd.conf file and track
+# the various "shell" ("exec") inetd entry cases. We will deal with
+# changing or adding appropriate lines in post-processing.
+#
+
+#
+# Case whereby the "shell" ("exec") service entry is in the standard 
+# location and has standard <args> value and is listed with "tcp" <proto> value.
+# We keep track of this entry by setting rshdtcp (execdtcp) variable. 
+# Similarly, if the "tcp6" <proto> value is used for this case, rshdtcp6 
+# (execdtcp6) is set.
+#
+		/^shell[ \t]+stream[ \t]+tcp[ \t].*\/usr\/sbin\/in\.rshd[ \t]+in\.rshd/ {
+			rshdtcp = indi
+			next
+		}
+		/^shell[ \t]+stream[ \t]+tcp6[ \t].*\/usr\/sbin\/in\.rshd[ \t]+in\.rshd/ {
+			rshdtcp6 = indi
+			next
+		}
+		/^exec[ \t]+stream[ \t]+tcp[ \t].*\/usr\/sbin\/in\.rexecd[ \t]+in\.rexecd/ {
+			execdtcp = indi
+			next
+		}
+		/^exec[ \t]+stream[ \t]+tcp6[ \t].*\/usr\/sbin\/in\.rexecd[ \t]+in\.rexecd/ {
+			execdtcp6 = indi
+			next
+		}
+#
+# If the "shell" ("exec") service entry is using "tcp" <proto> value  and 
+# in.rshd (in.rexecd) is not specified in the standard location or specifies
+# the standard <args> value, this indicates that tcp wrappers or a non-Solaris
+# in.rshd (in.rexecd) is being used.  We record this entry by setting 
+# nonsolrshdtcp (nonsolexecdtcp).  Similarly, if "shell" ("exec") is using
+# "tcp6" <proto> value, nonsolrshdtcp6 (nonsolexecdtcp6) is set.
+#
+		/^shell[ \t]+stream[ \t]+tcp[ \t].*/ {
+			nonsolrshdtcp = indi
+			next
+		}
+		/^shell[ \t]+stream[ \t]+tcp6[ \t].*/ {
+			nonsolrshdtcp6 = indi
+			next
+		}
+		/^exec[ \t]+stream[ \t]+tcp[ \t].*/ {
+			nonsolexecdtcp = indi
+			next
+		}
+		/^exec[ \t]+stream[ \t]+tcp6[ \t].*/ {
+			nonsolexecdtcp6 = indi
+			next
+		}
+#
+# A standard comment will be added if the "shell" entry specifies a non-standard
+# <pathname> or <args> value.  If the comment already exists, then we will
+# keep track of this fact so that we do not add the comment again when
+# upgrading.
+#
+		/^# not contain a standard entry for \"shell\".*/ {
+			rshdcomment = indi
+			next
+		}
+#
+# A similar comment will also be added for "exec" if the same conditions
+# described for shell above exists.
+#
+		/^# not contain a standard entry for \"exec\".*/ {
+			execdcomment = indi
+			next
+		}
+#
+# The following patterns deal with inetds built-in commands.
+# All inetd built-in commands will be upgraded to tcp6.
+#
+		/^#?time[ \t]+stream[ \t]+tcp[ \t]/ {
+			sub("tcp", "tcp6", inetd_line[indi])
+			next
+		}
+		/^#?time[ \t]+dgram[ \t]+udp[ \t]/ {
+			sub("udp", "udp6", inetd_line[indi])
+			next
+		}
+		/^#?echo[ \t]+stream[ \t]+tcp[ \t]/ {
+			sub("tcp", "tcp6", inetd_line[indi])
+			next
+		}
+		/^#?echo[ \t]+dgram[ \t]+udp[ \t]/ {
+			sub("udp", "udp6", inetd_line[indi])
+			next
+		}
+		/^#?discard[ \t]+stream[ \t]+tcp[ \t]/ {
+			sub("tcp", "tcp6", inetd_line[indi])
+			next
+		}
+		/^#?discard[ \t]+dgram[ \t]+udp[ \t]/ {
+			sub("udp", "udp6", inetd_line[indi])
+			next
+		}
+		/^#?daytime[ \t]+stream[ \t]+tcp[ \t]/ {
+			sub("tcp", "tcp6", inetd_line[indi])
+			next
+		}
+		/^#?daytime[ \t]+dgram[ \t]+udp[ \t]/ {
+			sub("udp", "udp6", inetd_line[indi])
+			next
+		}
+		/^#?chargen[ \t]+stream[ \t]+tcp[ \t]/ {
+			sub("tcp", "tcp6", inetd_line[indi])
+			next
+		}
+		/^#?chargen[ \t]+dgram[ \t]+udp[ \t]/ {
+			sub("udp", "udp6", inetd_line[indi])
+			next
+		}
+		/^#?printer[ \t]+stream[ \t]+tcp[ \t]/ {
+			sub("tcp", "tcp6", inetd_line[indi])
+			next
+		}
+#
+# Check to see if the IPv6 comment is present in the inetd.conf
+# file.  If present, set the variable ipv6commentpresent. During
+# post-processing we will add the IPv6 comment if it does not exist
+# and do nothing if the comment is already present.
+#
+		/IPv6 and inetd\.conf/ {
+			ipv6commentpresent = indi
+			next
+		}
+	END {
+
+#
+# During scanning of the inetd.conf file various variables for
+# in.rshd and in.rexecd were set.  This was done because upgrade
+# action for these services depends on the specification of
+# multiple lines.  The meaning of these variables becomes
+# clear in the various cases described below.
+#
+
+#
+# Case 1: if there only exists a "shell" ("exec") line that has the <proto>
+# value set to "tcp" and the <server_pathname> and <args> are standard Solaris, 
+# add the following line for "shell":
+#    shell	stream	tcp6	nowait	root	/usr/sbin/in.rshd	in.rshd
+# in the case of "exec" the following line will be added:
+#    exec	stream	tcp6	nowait	root	/usr/sbin/in.rexecd in.rexecd
+#
+# In this case rshdcaseone (execdcaseone) would be set.
+#
+		if (rshdtcp > 0 && rshdtcp6 == 0 && rshdcomment == 0)
+			rshdcaseone = 1
+		if (execdtcp > 0 && execdtcp6 == 0 && execdcomment == 0)
+			execdcaseone = 1
+#
+# Case 2: if there only exists a "shell" ("exec") line that has the <proto>
+# value set to "tcp6" and the <server_pathname> and <args> are standard Solaris,
+# add the following line for "shell":
+#    shell	stream	tcp	nowait	root	/usr/sbin/in.rshd	in.rshd
+# in the case of "exec" the following line will be added:
+#    exec	stream	tcp	nowait	root	/usr/sbin/in.rexecd in.rexecd
+# 
+# In this case rshdcasetwo (execdcasetwo) would be set.
+#
+		if (rshdtcp == 0 && rshdtcp6 > 1 && rshdcomment == 0)
+			rshdcasetwo = 1
+		if (execdtcp == 0 && execdtcp6 > 0 && execdcomment == 0)
+			execdcasetwo = 1
+#
+# Case 3: if there exists a "shell" ("exec") line that specifies a
+# <server_pathname> or <args> value different from the standard and the <proto>
+# value is "tcp" (and no "tcp6" line exists) add a comment providing details on
+# the new correct specification for "shell" ("exec") services when run with
+# IPv6.  (Make sure not to add that comment if it is already present in
+# inetd.conf).
+# 
+# In this case rshdcasethree (execdcasethree) would be set.
+#
+		if (nonsolrshdtcp > 0 && nonsolrshdtcp6 == 0 && rshdcomment == 0)
+			rshdcasethree = 1
+		if (nonsolexecdtcp > 0 && nonsolexecdtcp6 == 0 && execdcomment == 0)
+			execdcasethree = 1
+#
+# Case 4: if there exists a "shell" ("exec") line that specifies a
+# <server_pathname> or <args> value different from the standard and the <proto>
+# value is "tcp6" (and no "tcp" line exists) add a comment providing details on
+# the new correct specification for "shell" ("exec") services when run with
+# IPv6.   (Make sure not to add that comment if it is already present in
+# inetd.conf).
+# 
+# In this case rshdcasefour (execdcasefour) would be set.
+#
+		if (nonsolrshdtcp == 0 && nonsolrshdtcp6 > 0 && rshdcomment == 0)
+			rshdcasefour = 1
+		if (nonsolexecdtcp == 0 && nonsolexecdtcp6 > 0 && execdcomment == 0)
+			execdcasefour = 1
+#
+# NOTE: If there exists two "shell" inetd entries that specify a
+# <server_pathname> or <args> value different from the standard and one line has
+# the <proto> as "tcp" and the other line specifies <proto> as "tcp6", do
+# nothing.  This means that the user is using a non-Solaris "shell" and it
+# supports both IPv4 and IPv6.  The analogous is true for "exec" as well.
+#
+
+		for (i = 1; i <= indi; ++i) {
+			if (i in inetd_line) {
+				if (inetd_line[i]~/^#?shell/ && rshdcomment == 0) {
+					if (rshdcaseone > 0) {
+						print inetd_line[i]
+						print "shell	stream	tcp6	nowait	root	/usr/sbin/in.rshd	in.rshd"
+					}
+					if (rshdcasetwo > 0) {
+						print "shell	stream	tcp	nowait	root	/usr/sbin/in.rshd	in.rshd"
+						print inetd_line[i]
+					}
+					if (rshdcasethree > 0 || rshdcasefour > 0) {
+						print "#"
+						print "# During the upgrade process, it was noted that the previous inetd.conf did"
+						print "# not contain a standard entry for \"shell\".  This conflict has been resolved"
+						print "# by copying your previous inetd.conf entry.  New \(commented-out\) lines for"
+						print "# using this service with IPv6-based transports were added.  If you wish to"
+						print "# change this, you should change either this line,"
+						print inetd_line[i]
+						print "# or both of the following two lines,"
+						print "#shell	stream	tcp	nowait	root	/usr/sbin/in.rshd	in.rshd"
+						print "#shell	stream	tcp6	nowait	root	/usr/sbin/in.rshd	in.rshd"
+						print "#"
+					}
+					if (rshdcaseone == 0 && rshdcasetwo == 0 && rshdcasethree == 0 && rshdcasefour == 0) {
+						print inetd_line[i]
+					}
+					rshdcaseone = rshdcasetwo = rshdcasethree = rshdcasefour = 0
+				} else
+					if (inetd_line[i]~/^#?exec/ && execdcomment == 0) {
+						if (execdcaseone > 0) {
+							print inetd_line[i]
+							print "exec\tstream\ttcp6\tnowait\troot\t/usr/sbin/in.rexecd\tin.rexecd"
+						}
+						if (execdcasetwo > 0) {
+							print "exec\tstream\ttcp\tnowait\troot\t/usr/sbin/in.rexecd\tin.rexecd"
+							print inetd_line[i]
+						}
+						if (execdcasethree > 0 || execdcasefour > 0) {
+							print "#"
+							print "# During the upgrade process, it was noted that the previous inetd.conf did"
+							print "# not contain a standard entry for \"exec\".  This conflict has been resolved"
+							print "# by copying your previous inetd.conf entry.  New \(commented-out\) lines for"
+							print "# using this service with IPv6-based transports were added.  If you wish to"
+							print "# change this, you should change either this line,"
+							print inetd_line[i]
+							print "# or both of the following two lines,"
+							print "#exec\tstream\ttcp\tnowait\troot\t/usr/sbin/in.rexecd\tin.rexecd"
+							print "#exec\tstream\ttcp6\tnowait\troot\t/usr/sbin/in.rexecd\tin.rexecd"
+							print "#"
+						}
+						if (execdcaseone == 0 && execdcasetwo == 0 && execdcasethree == 0 && execdcasefour == 0) {
+							print inetd_line[i]
+						}
+						execdcaseone = execdcasetwo = execdcasethree = execdcasefour = 0
+					} else
+						print inetd_line[i]
+#
+# Add text in inetd.conf describing the new <proto> values for IPv6
+# Do not add this line if it already exists (ipv6commentpresent is set)
+#
+				if (inetd_line[i]~/^#[ \t]+<service_name>[ \t]+tli[ \t]+<proto>.*/ && ipv6commentpresent == 0) {
+					print "#\n# IPv6 and inetd.conf"
+					print "# By specifying a <proto> value of tcp6 or udp6 for a service, inetd will"
+					print "# pass the given daemon an AF_INET6 socket.  The following daemons have"
+					print "# been modified to be able to accept AF_INET6 sockets"
+					print "#"
+					print "#	ftp telnet shell login exec tftp finger printer"
+					print "#"
+					print "# and service connection requests coming from either IPv4 or IPv6-based"
+					print "# transports.  Such modified services do not normally require separate"
+					print "# configuration lines for tcp or udp.  For documentation on how to do this"
+					print "# for other services, see the Solaris System Administration Guide."
+					print "#"
+					print "# You must verify that a service supports IPv6 before specifying <proto> as"
+					print "# tcp6 or udp6.  Also, all inetd built-in commands \(time, echo, discard,"
+					print "# daytime, chargen\) require the specification of <proto> as tcp6 or udp6"
+					print "#"
+					print "# The remote shell server \(shell\) and the remote execution server"
+					print "# \(exec\) must have an entry for both the \"tcp\" and \"tcp6\" <proto> values."
+				}
+			}	
+		}
+
+	}
+		' $dest  > /tmp/d.$$
+
+}
+
+while read src dest
+do
+	if [ ! -f $dest ] ; then
+		cp $src $dest
+	else
+		if [ -f $BASEDIR/etc/inetd.conf.temp ] ; then
+			cp $BASEDIR/etc/inetd.conf.temp $dest
+			rm -f $BASEDIR/etc/inetd.conf.temp
+		fi
+		grep '^#ident[ 	]*\"@(#)inetd.conf' $src \
+		    > /tmp/newident.$$ 2>/dev/null
+		egrep -v '^#(pragma ident|ident)[ 	]*"@\(#\)inetd.conf' \
+		    $dest > /tmp/rest.$$ 2>/dev/null
+		cat /tmp/newident.$$ /tmp/rest.$$ > $dest
+		write_nawk_script
+		grep -s "^# Print Protocol Adaptor - BSD listener$" /tmp/d.$$ > /dev/null 2>&1
+		if [ $? -ne 0 ]
+		then
+			echo "#\n# Print Protocol Adaptor - BSD listener\n#" >> /tmp/d.$$
+			echo "printer   stream  tcp6     nowait  root    /usr/lib/print/in.lpd   in.lpd" >> /tmp/d.$$
+		fi
+		grep -s "^# UFS-aware service daemon$" /tmp/d.$$ > /dev/null 2>&1
+		if [ $? -ne 0 ]
+		then
+			echo "#\n# UFS-aware service daemon\n#" >> /tmp/d.$$
+			echo "#ufsd/1	tli	rpc/*	wait	root	/usr/lib/fs/ufs/ufsd	ufsd -p" >> /tmp/d.$$
+		fi
+		grep -s "^[#	 ]*100221\/1[ 	]" /tmp/d.$$ > /dev/null 2>&1
+		if [ $? -ne 0 ]
+		then
+			echo "#\n# Sun KCMS Profile Server\n#" >> /tmp/d.$$
+			echo "100221/1\ttli\trpc/tcp\twait root /usr/openwin/bin/kcms_server\tkcms_server" >> /tmp/d.$$
+		fi
+		grep -s "^[#	 ]*fs[ 	]" /tmp/d.$$ > /dev/null 2>&1
+		if [ $? -ne 0 ]
+		then
+			echo "#\n# Sun Font Server\n#" >> /tmp/d.$$
+			echo "fs\t\tstream\ttcp\twait nobody /usr/openwin/lib/fs.auto\tfs" >> /tmp/d.$$
+		fi
+		grep -s "^[#	 ]*100235/1[ 	]" /tmp/d.$$ >/dev/null 2>&1
+		if [ $? -ne 0 ]
+		then
+			echo "#\n# CacheFS Daemon\n#" >> /tmp/d.$$
+			echo "100235/1 tli rpc/tcp wait root /usr/lib/fs/cachefs/cachefsd cachefsd" >> /tmp/d.$$
+		fi
+		grep -s "^[#	 ]*100134\/1[	 ]" /tmp/d.$$ >/dev/null 2>&1
+		if [ $? -ne 0 ]
+		then
+			echo "#\n# Kerberos V5 Warning Message Daemon\n#" >> /tmp/d.$$
+			echo "100134/1	tli	rpc/ticotsord	wait	root	/usr/lib/krb5/ktkt_warnd ktkt_warnd" >> /tmp/d.$$
+		fi
+
+		grep -s "^[#	 ]*100234\/1[	 ]" /tmp/d.$$ >/dev/null 2>&1
+		if [ $? -ne 0 ]
+		then
+			echo "#\n# GSS Daemon\n#" >> /tmp/d.$$
+			echo "100234/1	tli	rpc/ticotsord	wait	root	/usr/lib/gss/gssd gssd" >> /tmp/d.$$
+		fi
+
+		grep -s "^[#	 ]*100146\/1[	 ]" /tmp/d.$$ >/dev/null 2>&1
+		if [ $? -ne 0 ]
+		then
+			echo "#\n# AMI Daemon\n#" >> /tmp/d.$$
+			echo "100146/1	tli	rpc/ticotsord	wait	root	/usr/lib/security/amiserv	amiserv" >> /tmp/d.$$
+		fi
+
+		grep -s "^[#	 ]*100147\/1[	 ]" /tmp/d.$$ >/dev/null 2>&1
+		if [ $? -ne 0 ]
+		then
+			echo "100147/1	tli	rpc/ticotsord	wait	root	/usr/lib/security/amiserv	amiserv" >> /tmp/d.$$
+		fi
+
+		grep -s "^[#	 ]*100150\/1[	 ]" /tmp/d.$$ >/dev/null 2>&1
+		if [ $? -ne 0 ]
+		then
+			echo "#\n# OCF (Smart card) Daemon\n#" >> /tmp/d.$$
+			echo "100150/1	tli	rpc/ticotsord	wait	root	/usr/sbin/ocfserv	ocfserv" >> /tmp/d.$$
+		fi
+		cp /tmp/d.$$ $dest
+		rm -f $BASEDIR/etc/inetd.conf
+		ln -s ./inet/inetd.conf $BASEDIR/etc/inetd.conf
+		rm -f /tmp/d.$$ /tmp/newident.$$ /tmp/rest.$$
+	fi
+done
+
+exit 0

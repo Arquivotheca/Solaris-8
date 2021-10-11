@@ -1,0 +1,46 @@
+#
+# Copyright (c) 1990-1993,1998 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#ident	"@(#)prototype_com	1.13	99/03/30 SMI"
+#
+# This required package information file contains a list of package contents.
+# The 'pkgmk' command uses this file to identify the contents of a package
+# and their location on the development machine when building the package.
+# Can be created via a text editor or through use of the 'pkgproto' command.
+
+#!search <pathname pathname ...>	# where to find pkg objects
+#!include <filename>			# include another 'prototype' file
+#!default <mode> <owner> <group>	# default used if not specified on entry
+#!<param>=<value>			# puts parameter in pkg environment
+
+# packaging files
+i pkginfo
+i copyright
+i depend
+#
+# source locations relative to the prototype file
+#
+# SUNWypu
+#
+d none usr 0755 root sys
+d none usr/lib 0755 root bin
+d none usr/lib/netsvc 0755 root sys
+d none usr/lib/netsvc/yp 0755 root bin
+f none usr/lib/netsvc/yp/mkalias 0555 root bin
+f none usr/lib/netsvc/yp/multi 0555 root bin
+f none usr/lib/netsvc/yp/multi.awk 0555 root bin
+f none usr/lib/netsvc/yp/rpc.yppasswdd 0555 root bin
+f none usr/lib/netsvc/yp/rpc.ypupdated 0555 root bin
+f none usr/lib/netsvc/yp/stdethers 0555 root bin
+f none usr/lib/netsvc/yp/stdhosts 0555 root bin
+f none usr/lib/netsvc/yp/udpublickey 0555 root bin
+f none usr/lib/netsvc/yp/yppush 0555 root bin
+f none usr/lib/netsvc/yp/ypserv 0555 root bin
+f none usr/lib/netsvc/yp/ypxfr_1perday 0555 root bin
+f none usr/lib/netsvc/yp/ypxfr_1perhour 0555 root bin
+f none usr/lib/netsvc/yp/ypxfr_2perday 0555 root bin
+f none usr/lib/netsvc/yp/ypxfrd 0555 root bin
+d none usr/sbin 0755 root bin
+f none usr/sbin/mknetid 0555 root bin
+f none usr/sbin/revnetgroup 0555 root bin

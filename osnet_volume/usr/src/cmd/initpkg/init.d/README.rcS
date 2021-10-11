@@ -1,0 +1,53 @@
+#ident	"@(#)README.rcS	1.4	99/04/09 SMI"
+Copyright (c) 1993-1999, by Sun Microsystems, Inc.
+All rights reserved.
+
+This README file hopes to provide guidance for developers who need to provide
+scripts to start up their product as the init state changes to single user
+mode (run level S).  Only limited definition is provided at this time.
+
+For a general discussion of the mechanism used to invoke these scripts see
+the file /etc/init.d/README.
+
+Note that the sequencing is unstable at this time. As such, only minimal
+definitions are provided.  SunSoft reserves the right to change these
+definitions in a minor release.  However, SunSoft will make every effort
+to preserve the minimal definitions presented; they were chosen in a hope
+to fulfill the goal of not changing them.  In the future, it is intended
+that a stronger commitment will be made to these interface definitions
+which will guarantee them across minor releases.  It is also planned that
+additional points in the sequence will be defined.
+
+The following sequence points are defined for the transition to single user
+mode:
+
+	After the S30 scripts have executed, the / and /usr (if
+	present) file systems are mounted read-only.  Enough network
+	plumbing has been established to perform an NFS mount of /usr.
+	The sequence range S31-S39 can depend upon these file systems
+	being read-only.  No other file systems are mounted by the
+	Solaris product.
+
+	After the S60 scripts have executed, all system supplied device
+	file names have been established.  Therefore, the preferred
+	range for the creation of file names for third party devices is
+	the range S61-S79, however, they may be done anywhere in the
+	S61-S99 range.  The environment symbol _INIT_RECONFIG is the
+	key to a reconfiguration boot. Also, the base system mounts
+	have been performed and those file systems are read/write if so
+	specified.  The base system mounts are:
+ 
+                /
+                /usr
+                /proc
+                /dev/fd
+ 
+        The following file systems may be assumed to be writable:
+ 
+                /dev            (for logical name creation)
+                /devices        (for physical name creation)
+                /etc            (for mnttab and file administration)
+ 
+	After the S80 scripts have executed, any other file systems to
+	be mounted in single user mode are mounted.  Currently these
+	are /var, /var/adm and /var/run.

@@ -1,0 +1,32 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)glm_dsa.dbg	1.7	98/01/19 SMI"
+
+#include <sys/note.h>
+#include <sys/scsi/scsi.h>
+#include <sys/scsi/adapters/glmreg.h>
+#include <sys/scsi/adapters/glmvar.h>
+#include "dummy.h"
+
+\
+\
+glm_dsa		nt_
+{adb_inline_begin}
+.>z
++/n"selectparm"16t"sendmsg"16t"rcvmsg"16tn4B2X2X
++/n"cmd"16t"status"16t"extmsg"16tn2X2X2X
++/n"syncin"16t"errmsg"16t"widein"16tn2X2X2X
+<z+{OFFSET, nt_msgoutbuf}=""
+{adb_inline_end}
+	msgoutbuf
+	msginbuf
+	extmsgbuf
+	syncibuf
+	statbuf
+	errmsgbuf
+	wideibuf
+{adb_inline_begin}
+<z+{SIZEOF}=""
+{adb_inline_end}

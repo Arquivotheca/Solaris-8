@@ -1,0 +1,37 @@
+\
+\ Copyright (c) 1997-1998 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)turnstile.dbg	1.6	98/02/10 SMI"
+
+\ arg             : address of a struct turnstile (turnstile_t)
+\ uses            : sleepq
+\ registers       : t
+\ description     : prints the contents of a turnstile_t structure
+
+#include <sys/types.h>
+#include <sys/thread.h>
+#include <sys/sleepq.h>
+#include <sys/turnstile.h>
+#include "dummy.h"
+
+\
+\
+turnstile		ts_
+{adb_inline_begin}
+.>t
+<t+{OFFSET, ts_next}=""
+{adb_inline_end}
+	next			hex
+	free			hex
+	sobj			hex
+	waiters			sdecimal
+	epri			sdecimal
+	inheritor		hex
+	prioinv			hex
+{adb_inline_begin}
+<t+{OFFSET, ts_sleepq[0]}/n"sleepq[0]"
+.$<<sleepq
+<t+{OFFSET, ts_sleepq[1]}/n"sleepq[1]"
+.$<<sleepq
+{adb_inline_end}

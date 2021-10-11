@@ -1,0 +1,29 @@
+\
+\ Copyright (c) 1999 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)cqe.dbg	1.1	99/07/21 SMI"
+#include <sys/isa_defs.h>
+#include <sys/types.h>
+#include <sys/dditypes.h>
+#include <sys/ddidmareq.h>
+#include <sys/mutex.h>
+#include <sys/semaphore.h>
+#include <sys/condvar.h>
+#include <sys/thread.h>
+#include <sys/devops.h>
+#include <sys/fibre-channel/fc.h>
+#include <sys/fibre-channel/fca/usoc_cq_defs.h>
+#include "dummy.h"
+\
+\
+cqe			cqe_
+{adb_inline_begin}
+.>w
+<w+{OFFSET, cqe_payload}=""
+{adb_inline_end}
+	payload		hex
+	hdr		.cq_hdr
+{adb_inline_begin}
+<w+{SIZEOF}=""
+{adb_inline_end}

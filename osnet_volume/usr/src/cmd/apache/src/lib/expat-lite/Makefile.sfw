@@ -1,0 +1,47 @@
+#
+#ident	"@(#)Makefile.sfw	1.1	99/10/20 SMI"
+#
+# Copyright (c) 1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+
+# This makefile simply installs header files. The actual
+# library build occurs under the src Makefile
+
+include ../../../Makefile.paths
+include ../../../../Makefile.cmd
+
+FILEMODE=0644
+
+HDRS= \
+	asciitab.h	\
+	hashtable.h	\
+	iasciitab.h	\
+	latin1tab.h	\
+	nametab.h	\
+	utf8tab.h	\
+	xmldef.h	\
+	xmlparse.h	\
+	xmlrole.h	\
+	xmltok.h	\
+	xmltok_impl.h
+
+ROOTXMLINCDIR=$(ROOTHTTPDINCDIR)/xml
+ROOTHDRS=$(HDRS:%=$(ROOTXMLINCDIR)/%)
+
+.KEEP_STATE:
+
+all clean clobber lint:
+
+install: $(ROOTXMLINCDIR) .WAIT $(ROOTHDRS)
+
+$(ROOTXMLINCDIR):
+	$(INS.dir)
+
+$(ROOTXMLINCDIR)/%: %
+	$(INS.file)
+
+include ../../../../Makefile.targ
+
+FRC:
+

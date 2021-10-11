@@ -1,0 +1,42 @@
+#
+# uts/sfmmu/Makefile.rules
+# Copyright (c) 1991 by Sun Microsystems, Inc.
+#
+#ident	"@(#)Makefile.rules	1.2	93/09/01 SMI"
+#
+#	This Makefile defines all build rules for the directory uts/sfmmu and
+# it's children. These are the source files which are common to all sfmmu
+# implementations.
+#
+
+#
+#	This was implemented by pattern matching rules of the form:
+#
+# $(OBJS_DIR)/%.o:	 $(UTSBASE)/common/os/%.c
+#	$(COMPILE.c) -o $@ $<
+#
+# $(LINTS_DIR)/%.ln:	$(UTSBASE)/common/os/%.c
+#	@($(LHEAD) $(LINT.c) $< $(LTAIL))
+#
+#	For each directory containing source. This proved to slow under
+#	Nse because it caused a significant additional number of stats
+#	and stats are real slow under TFS. If TFS performance should
+#	improve, one might consider returning to the former implementation.
+#	In the former implementation, this file (Makefile.rules) was not
+#	needed and the pattern matching rules were in Makefile.files.
+#
+
+#
+#	C object build rules
+#
+#	The following are alphabetized by source file path. Please maintain
+# this ordering.
+#
+
+
+#
+#	Lint `object' build rules
+#
+#	The following are alphabetized by source file path. Please maintain
+# this ordering.
+#

@@ -1,0 +1,22 @@
+#! /bin/sh
+#
+# ident "@(#)postremove	1.3	96/04/10 SMI"
+# SUNWx86bt postremove script
+
+PATH="/usr/bin:/usr/sbin:${PATH}"
+export PATH
+
+PLATPATH="platform/i86pc"
+
+#
+#  Remove any boot.bin we installed.  If in the future we remove ufsboot
+#  during postinstall, we should remember to copy it back here.
+#
+NEWBOOTER="boot/solaris/boot.bin"
+BOOTERDST=${BASEDIR}"/"${PLATPATH}"/"${NEWBOOTER}
+
+if test -f ${BOOTERDST}; then
+	rm -f ${BOOTERDST}
+fi
+
+exit 0

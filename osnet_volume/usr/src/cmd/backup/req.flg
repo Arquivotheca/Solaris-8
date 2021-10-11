@@ -1,0 +1,17 @@
+#!/bin/sh
+#
+# Copyright (c) 1998 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#ident "@(#)req.flg 1.4 98/09/01 SMI"
+
+echo_file usr/src/lib/Makefile.lib
+echo_file usr/src/lib/Makefile.targ
+echo_file usr/src/head/protocols/dumprestore.h
+echo_file usr/src/cmd/fs.d/Makefile.fstype
+#
+# Assumes we're in usr/src/cmd/backup.  Filter out the architecture
+# directories, since all they get are object files, and cloning from
+# an active tree will generate complaints about them.
+(cd ../../../..; dodir usr/src/cmd/fs.d/ufs/roll_log) 2>&1 | \
+	egrep -v 'i386|sparc'

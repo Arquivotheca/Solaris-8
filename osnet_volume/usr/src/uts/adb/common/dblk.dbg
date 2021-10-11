@@ -1,0 +1,38 @@
+\
+\ Copyright (c) 1997-1999 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)dblk.dbg	1.13	99/08/19 SMI"
+
+#include <sys/types.h>
+#include <sys/stream.h>
+#include "dummy.h"
+
+\
+\
+datab   	db_     	dblk
+{adb_inline_begin}
+.>z
+<z+{OFFSET, db_frtnp}=""
+{adb_inline_end}
+        frtnp                   hex
+        base                    hex
+        lim                     hex             limit
+        ref                     hex
+        type                    hex
+        flags                   hex
+        struioflag              hex             uioflag
+        cache                   hex
+        mblk                    hex
+        free                    symbolic        freefunc
+        lastfree                symbolic        lastfreefunc
+        struiobase              hex             uiobase
+        struiolim               hex             uiolim
+        struioptr               hex             uioptr
+        fthdr                   hex
+        ftflw                   hex
+        uid                     hex
+        lid                     hex
+{adb_inline_begin}
+<z+{SIZEOF}=""
+{adb_inline_end}

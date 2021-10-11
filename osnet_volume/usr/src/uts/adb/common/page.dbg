@@ -1,0 +1,36 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)page.dbg	1.16	98/01/19 SMI"
+
+#include <sys/types.h>
+#include <sys/t_lock.h>
+#include <vm/page.h>
+#include "dummy.h"
+
+\
+\
+page            p_
+{adb_inline_begin}
+.>z
+<z+{OFFSET, p_vnode}=""
+{adb_inline_end}
+        vnode                   hex
+        hash                    hex
+        vpnext                  hex
+        vpprev                  hex
+        next                    hex
+        prev                    hex
+        offset                  hex
+        selock                  hex
+        lckcnt                  hex
+        cowcnt                  hex
+        cv                      hex
+        io_cv                   hex
+        iolock_state            hex
+        fsdata                  hex
+        state                   hex
+{adb_inline_begin}
+<z+{SIZEOF}=""
+{adb_inline_end}

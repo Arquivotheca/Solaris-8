@@ -1,0 +1,33 @@
+#
+# Copyright (c) 1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#ident	"@(#)prototype_com	1.5	99/11/19 SMI"
+#
+i pkginfo
+i copyright
+i depend
+#
+# SUNWmdb
+#
+d none usr 755 root sys
+d none usr/bin 755 root bin
+l none usr/bin/mdb=../../usr/lib/isaexec
+d none usr/include 755 root bin
+d none usr/include/sys 755 root bin
+f none usr/include/sys/mdb_modapi.h 644 root bin
+d none usr/lib 755 root bin
+d none usr/lib/mdb 755 root sys
+d none usr/lib/mdb/kvm 755 root sys
+f none usr/lib/mdb/kvm/genunix.so 555 root sys
+f none usr/lib/mdb/kvm/ip.so 555 root sys
+f none usr/lib/mdb/kvm/ipc.so 555 root sys
+f none usr/lib/mdb/kvm/krtld.so 555 root sys
+f none usr/lib/mdb/kvm/lofs.so 555 root sys
+f none usr/lib/mdb/kvm/logindmux.so 555 root sys
+f none usr/lib/mdb/kvm/mdb_ks.so 555 root sys
+f none usr/lib/mdb/kvm/nfs.so 555 root sys
+f none usr/lib/mdb/kvm/ptm.so 555 root sys
+d none usr/lib/mdb/proc 755 root sys
+f none usr/lib/mdb/proc/mdb_ds.so 555 root sys
+d none usr/platform 755 root sys

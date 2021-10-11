@@ -1,0 +1,43 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)dk_label.dbg	1.4	98/01/19 SMI"
+
+#include <sys/scsi/scsi.h>
+#include <sys/dklabel.h>
+#include "dummy.h"
+
+\
+\
+dk_label        	dkl_
+{adb_inline_begin}
+.>z
+<z+{OFFSET, dkl_asciilabel}=""
+{adb_inline_end}
+        asciilabel              char
+        vtoc                    .dk_vtoc
+{adb_inline_begin}
+<z+{OFFSET, dkl_write_reinstruct}=""
+{adb_inline_end}
+        write_reinstruct        hex
+        read_reinstruct         hex
+        pad                     hex
+        rpm                     hex
+        pcyl                    hex
+        apc                     hex
+        obs1                    hex             gap1
+        obs2                    hex             gap2
+        intrlv                  hex
+        ncyl                    hex
+        acyl                    hex
+        nhead                   hex
+        nsect                   hex
+        obs3                    hex             bhead
+        obs4                    hex             ppart
+        map                     hex
+        magic                   hex
+        cksum                   hex
+{adb_inline_begin}
+<z+{SIZEOF}=""
+{adb_inline_end}

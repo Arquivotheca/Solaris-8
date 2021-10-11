@@ -1,0 +1,62 @@
+\
+\ Copyright (c) 1998 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)ata_drive.dbg	1.4	98/06/08 SMI"
+
+#include <sys/types.h>
+#include <sys/dada/adapters/ata_common.h>
+#include <sys/dada/adapters/ghd/ghd.h>
+#include "dummy.h"
+
+ata_drive	ad_
+{adb_inline_begin}
+.>z
+<z+{OFFSET, ad_ctlp}=""
+{adb_inline_end}
+	ctlp		hex
+	gtgtp		hex
+	id		.dcd_identify
+{adb_inline_begin}
+<z+{OFFSET, ad_flags}=""
+{adb_inline_end}
+	flags		hex
+	channel		hex
+	targ		hex
+	lun		hex
+	drive_bits	hex
+	cdb_len		hex
+#if defined(DSC_OVERLAP_SUPPORT)
+	tur_pkt		hex
+#endif
+	device		.dcd_device
+{adb_inline_begin}
+<z+{OFFSET, ad_address}=""
+{adb_inline_end}
+	address		.dcd_address
+{adb_inline_begin}
+<z+{OFFSET, ad_inquiry}=""
+{adb_inline_end}
+	inquiry		.dcd_identify
+{adb_inline_begin}
+<z+{OFFSET, ad_dcd_options}=""
+{adb_inline_end}
+	dcd_options	hex
+	dmamode		hex
+	piomode		hex
+	rd_cmd		hex
+	wr_cmd		hex
+	acyl		hex
+	bioscyl		hex
+	bioshd		hex
+	biossec		hex
+	phhd		hex
+	phsec		hex
+	block_factor	hex
+	bytes_per_block	hex
+	cur_disk_mode	hex
+	run_ultra	hex
+	invalid		hex
+{adb_inline_begin}
+<z+{SIZEOF}=""
+{adb_inline_end}

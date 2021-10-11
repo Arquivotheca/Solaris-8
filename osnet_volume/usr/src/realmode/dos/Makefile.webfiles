@@ -1,0 +1,136 @@
+#
+# Copyright (c) 1997 Sun Microsystems, Inc.
+# All rights reserved.
+#
+# @(#)Makefile.webfiles	1.10	99/07/20 SMI
+#
+# This Makefile is intended to be run under Solaris to
+# create the ZIP files for delivering the realmode DDK
+# components for the DDK web site.  Build the full
+# realmode workspace, or just run NMAKE under MS-DOS
+# from the drivers directory.  Then run
+#		make -f Makefile.webfiles
+# from this directory to create the ZIP files.  Deliver
+# the 3 ZIP files and corresponding README files to the
+# person responsible for maintaining the DDK web site.
+# 
+
+default: webfiles/basic.zip webfiles/source.zip webfiles/debug.zip
+
+#
+# The basic file set should include everything necessary for building
+# a new driver, plus the sample driver sources.
+#
+BASICFILES=\
+	drivers/halfbefs/joyst.c \
+	drivers/halfbefs/makefile \
+	drivers/include/bef.h \
+	drivers/include/rmsc.h \
+	drivers/include/rmscnet.h \
+	drivers/include/rmscscsi.h \
+	drivers/include/stdarg.h \
+	drivers/include/stdio.h \
+	drivers/include/stdlib.h \
+	drivers/include/string.h \
+	drivers/include/types.h \
+	drivers/lib/oldnames.lib \
+	drivers/lib/slibce.lib \
+	drivers/lib/common.lib \
+	drivers/lib/crt0.obj \
+	drivers/makefile.inc \
+	drivers/makefile.sub \
+	drivers/main.obj \
+	drivers/network/network.obj \
+	drivers/network/pcn/makefile \
+	drivers/network/pcn/pcn.c \
+	drivers/network/pcn/pcn.h \
+	drivers/proto/makefile \
+	drivers/proto/proto.c \
+	drivers/proto/proto.h \
+	drivers/scsi/aha1540/makefile \
+	drivers/scsi/aha1540/aha1540.c \
+	drivers/scsi/aha1540/aha1540.h \
+	drivers/scsi/scsi.obj \
+	inc/befext.h \
+	inc/dostypes.h \
+	inc/dev_info.h
+
+#
+# The source file set should include the sources for the items that
+# are supplied only as object files in the basic set i.e. the library
+# sources and makefiles and the framework sources and makefiles.
+#
+SOURCEFILES=\
+	drivers/lib/makefile \
+	drivers/lib/src/makefile \
+	drivers/lib/src/crt0.s \
+	drivers/lib/src/delay.c \
+	drivers/lib/src/ll_shift.s \
+	drivers/lib/src/ul_mul.s \
+	drivers/lib/src/us_div.s \
+	drivers/lib/src/us_mod.s \
+	drivers/lib/src/low.s \
+	drivers/lib/src/intsubs.s \
+	drivers/lib/src/util.s \
+	drivers/lib/src/pciconf.s \
+	drivers/lib/src/__ntohs.s \
+	drivers/lib/src/netsubs.s \
+	drivers/lib/src/rl_shift.s \
+	drivers/lib/src/get_conf.s \
+	drivers/lib/src/ra_shift.s \
+	drivers/lib/src/dbgcrt0.s \
+	drivers/lib/src/scsisubs.s \
+	drivers/lib/src/callback.c \
+	drivers/lib/src/fsprintf.c \
+	drivers/lib/src/ldiv.c \
+	drivers/lib/src/memcmp.c \
+	drivers/lib/src/memcpy.c \
+	drivers/lib/src/memset.c \
+	drivers/lib/src/printf.c \
+	drivers/lib/src/putc.c \
+	drivers/lib/src/strchr.c \
+	drivers/lib/src/strcmp.c \
+	drivers/lib/src/strcpy.c \
+	drivers/lib/src/strlen.c \
+	drivers/lib/src/strncpy.c \
+	drivers/lib/src/vfprintf.c \
+	drivers/lib/src/irq_mask.c \
+	drivers/lib/src/is_eisa.c \
+	drivers/lib/src/repio.s \
+	drivers/main.c \
+	drivers/makefile \
+	drivers/network/makefile \
+	drivers/network/network.c \
+	drivers/scsi/makefile \
+	drivers/scsi/scsi.c
+
+#
+# The debug file set should include the sources and objects for the
+# BEFDEBUG package.
+#
+DEBUGFILES=\
+	drivers/lib/dbgcrt0.obj \
+	drivers/main.dbj \
+	drivers/network/network.dbj \
+	drivers/scsi/scsi.dbj \
+	drivers/befdebug/befdebug.c \
+	drivers/befdebug/befdebug.exe \
+	drivers/befdebug/befdebug.h \
+	drivers/befdebug/doswrap.c \
+	drivers/befdebug/exercise.c \
+	drivers/befdebug/netex.c \
+	drivers/befdebug/netex.h \
+	drivers/befdebug/node.c \
+	drivers/befdebug/makefile
+
+webfiles/basic.zip: $(BASICFILES)
+	rm -f $@
+	zip $@ $(BASICFILES)
+
+webfiles/source.zip: $(SOURCEFILES)
+	rm -f $@
+	zip $@ $(SOURCEFILES)
+
+webfiles/debug.zip: $(DEBUGFILES)
+	rm -f $@
+	zip $@ $(DEBUGFILES)

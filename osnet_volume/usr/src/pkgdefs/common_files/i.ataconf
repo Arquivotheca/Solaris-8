@@ -1,0 +1,120 @@
+#!/bin/sh
+#
+#ident	"@(#)i.ataconf	1.2	99/07/06 SMI"
+#
+# Copyright (c) 1999 by Sun Microsystems, Inc.
+# All Rights Reserved.
+#
+
+# Get parameter value from old ata.conf file.
+# Syntax: file parameter-name
+getval()
+{
+	sed -n "/^[ 	]*[^#]/s/.*$2[ 	]*=[ 	]*\([^ 	]*\).*/\1/p" $1 \
+		| head -1
+}
+
+# Put old parameter value into new ata.conf file.
+# Syntax: file parameter-name value
+putval()
+{
+	# If new parameter-value pair, append it to the file.
+	grep "^[ 	]*$2" $1 >/dev/null
+	if [ $? -eq 0 ]
+	then
+		sed "/^[ 	]*[^#]/s/\($2[ 	]*=[ 	]*\)[^ 	]*/\1$3;/" \
+			$1 > /tmp/tmp.$$
+		mv /tmp/tmp.$$ $1
+	else
+		echo "$2=$3;" >>$1
+	fi
+}
+
+while read src dest
+do
+	#
+	# First preserve any existing version, excepting the SCCS
+	# ident and copyright, which we'll take from the new version.
+	#
+	if [ ! -f $dest ] ; then
+		# no existing version, just copy in new one
+		cp $src $dest
+	else
+		standby=`getval $dest standby`
+		drive0_block_factor=`getval $dest drive0_block_factor`
+		drive1_block_factor=`getval $dest drive1_block_factor`
+		timing_flags=`getval $dest timing_flags`
+		cp $src $dest
+
+		if [ -n "$standby" ]
+		then
+			putval $dest standby $standby
+		fi
+		if [ -n "$drive0_block_factor" ]
+		then
+			putval $dest drive0_block_factor $drive0_block_factor
+		fi
+		if [ -n "$drive1_block_factor" ]
+		then
+			putval $dest drive1_block_factor $drive1_block_factor
+		fi
+		if [ -n "$timing_flags" ]
+		then
+			putval $dest timing_flags $timing_flags
+		fi
+
+		# update the SCCS id and copyright line(s)
+		newident=`grep '^#ident[ 	]*"@(#)' $src`
+		newcr=`grep '^#[ 	]*Copyright (c)' $src`
+		newall=`grep '^#[ 	]*All Rights Reserved' $src`
+		d=`basename $dest`
+
+		while read line
+		do
+			case "$line" in
+			"#ident"*)
+				echo "$newident"
+				;;
+
+			"#pragma ident"*)
+				echo "$newident"
+				;;
+
+			"# Copyright"*)
+				echo "$newcr"
+				echo "$newall"
+				;;
+
+			"# All Rights"*)
+				;;
+
+			*)
+				echo "$line"
+				;;
+			esac
+		done < $dest > /tmp/tmp.$d.$$
+		mv /tmp/tmp.$d.$$ $dest
+	fi
+
+	# Remove 'ignore-hardware-nodes' line, if necessary
+	grep 'ignore-hardware-nodes' $dest > /dev/null
+	if [ $? -ne 0 ]
+	then
+		sed -e \
+		'/^# This is an old-style, non-conformant, driver.conf file.$/,/^ignore-hardware-nodes=1;$/d' \
+		$dest > /tmp/tmp.$d.$$
+		mv /tmp/tmp.$d.$$ $dest
+	fi
+
+	# Remove the special PCI-IDE instances specifications from ata.conf.
+	grep 'parent="pci-ide"' $dest >/dev/null
+	if [ $? -eq 0 ]
+	then
+		sed -e \
+		'/^# The PCI-IDE.*$/,/^name="ata" parent="pci-ide" reg=1;$/d' \
+		$dest > /tmp/tmp.$d.$$
+		mv /tmp/tmp.$d.$$ $dest
+	fi
+
+done
+exit 0

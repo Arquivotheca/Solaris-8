@@ -1,0 +1,64 @@
+#
+# Copyright (c) 1989-1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#pragma ident	"@(#)Makefile	1.4	99/01/25 SMI"
+#
+# ucblib/libdbm/Makefile
+#
+# The builds occur in isa subdirectories.
+#
+
+include ../../lib/Makefile.lib
+
+SUBDIRS = spec .WAIT $(MACH) $(BUILD64) $(MACH64)
+
+# conditional assignments
+install :=	TARGET= install
+clean :=	TARGET= clean
+clobber :=	TARGET= clobber
+lint :=		TARGET= lint
+
+.KEEP_STATE:
+
+all install clean clobber lint : $(SUBDIRS)
+
+$(MACH) $(MACH64) spec: FRC
+	@cd $@; pwd; $(MAKE) $(TARGET)
+
+#
+# The cscope.out file is made in the current directory and spans all
+# supported architectures.
+#
+CSCOPE			= cscope
+CTAGS			= ctags
+CSDIR			= .
+CSINCS			= -I$(ROOT)/usr/ucbinclude -I$(ROOT)/usr/include
+CSPATHS			= $(CSDIR)
+
+.PRECIOUS:	cscope.out
+
+cscope.out: cscope.files FRC
+	${CSCOPE} -b -f `pwd`/cscope.out
+
+cscope.files: FRC
+	@-$(RM) cscope.files
+	echo "$(CSINCS)" > cscope.files
+	find $(CSPATHS) -name SCCS -prune -o \
+	    -type d -name '.del-*' -prune -o -type f \
+	    \( -name '*.[csh]' -o -name 'Makefile*' \) \
+	    -print >> cscope.files
+	echo "../../Makefile.master" >> cscope.files
+	echo "../../Makefile.master.64" >> cscope.files
+	echo "../../lib/Makefile.lib" >> cscope.files
+	echo "../../lib/Makefile.lib.64" >> cscope.files
+	echo "../../lib/Makefile.targ" >> cscope.files
+	@wc -l cscope.files
+
+tags: tags.list FRC
+	${CTAGS} -wt `cat tags.list`
+
+tags.list: cscope.files
+	@$(RM) tags.list
+	grep '\.c$$' cscope.files > tags.list
+FRC:

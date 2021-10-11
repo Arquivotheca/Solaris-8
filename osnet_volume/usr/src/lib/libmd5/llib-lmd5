@@ -1,0 +1,17 @@
+/* LINTLIBRARY */
+/* PROTOLIB1 */
+
+/*
+ * Copyright (c) 1999 by Sun Microsystems, Inc.
+ * All rights reserved.
+ */
+
+#pragma ident	"@(#)llib-lmd5	1.1	99/07/02 SMI"
+
+#include <sys/types.h>
+#include <md5.h>
+
+void MD5Init(MD5_CTX *);
+void MD5Update(MD5_CTX *, unsigned char *, unsigned int);
+void MD5Final(unsigned char [16], MD5_CTX *);
+void md5_calc(unsigned char *, unsigned char *, unsigned int);

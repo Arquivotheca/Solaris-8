@@ -1,0 +1,77 @@
+#
+#ident	"@(#)Makefile.sfw	1.5	99/12/06 SMI"
+#
+# Copyright (c) 1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+
+include ../Makefile.paths
+include ../../Makefile.cmd
+
+FILEMODE = 0644
+
+CONFFILE=	httpd.conf-example \
+		mime.types \
+		access.conf \
+		srm.conf \
+		magic
+
+ROOTCONFFILE=	$(CONFFILE:%=$(ROOTHTTPDCONFDIR)/%)
+
+LOGS=		access_log \
+		error_log \
+		suexec_log
+
+ROOTHTTPDLOGS=	$(LOGS:%=$(ROOTHTTPDLOGFILEDIR)/%)
+
+
+$(ROOTHTTPDLOGFILEDIR):= OWNER=nobody
+$(ROOTHTTPDLOGS):=	OWNER=nobody
+
+CLOBBERFILES += $(LOGS)
+
+.KEEP_STATE:
+
+all: $(CONFFILE) $(LOGS)
+
+install: all .WAIT $(ROOTHTTPDCONFDIR) $(ROOTHTTPDLOGFILEDIR) \
+	$(ROOTHTTPDPROXYCACHEDIR) .WAIT $(ROOTCONFFILE) $(ROOTHTTPDLOGS)
+
+httpd.conf-example:	httpd.conf-dist.solaris
+	@sed	-e 's;@@ServerRoot@@/htdocs;/$(DOCROOT);g' \
+		-e 's;@@ServerRoot@@/icons;/$(ICONDIR);g' \
+		-e 's;@@ServerRoot@@/cgi-bin;/$(CGIDIR);g' \
+		-e 's;@@ServerRoot@@/proxy;/$(PROXYCACHEDIR);g' \
+		-e 's;@@ServerRoot@@;/$(DATADIR);g' \
+		-e 's;@@LOGFILEDIR@@;/$(LOGFILEDIR);g' \
+		-e 's;@@CONFDIR@@;/$(SYSCONFDIR);g' \
+		-e 's;@@EXECDIR@@;/$(LIBEXECDIR);g' \
+		-e 's;@@UsrDocRoot@@;/$(USRDOCROOT);g' \
+	httpd.conf-dist.solaris >$@
+
+access.conf:	access.conf-dist
+	@cat  access.conf-dist > $@
+
+srm.conf:	srm.conf-dist
+	@cat  srm.conf-dist > $@
+
+$(LOGS):
+	touch $@
+
+clean:
+	-$(RM) httpd.conf-example access.conf srm.conf
+
+lint:
+
+$(ROOTHTTPDCONFDIR) $(ROOTHTTPDLOGFILEDIR) $(ROOTHTTPDPROXYCACHEDIR):
+	$(INS.dir)
+
+$(ROOTHTTPDCONFDIR)/%: %
+	$(INS.file)
+
+$(ROOTHTTPDLOGFILEDIR)/%: %
+	$(INS.file)
+
+include ../../Makefile.targ
+
+FRC:

@@ -1,0 +1,111 @@
+#
+# Copyright (c) 1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#ident	"@(#)prototype_com	1.2	99/11/02 SMI"
+#
+# SUNWapchu
+#
+# packaging files
+i pkginfo
+i depend
+i copyright
+#
+d none usr 755 root sys
+d none usr/sbin 755 root bin
+d none usr/bin 755 root bin
+d none usr/apache 755 root bin
+d none usr/apache/bin 755 root bin
+d none usr/apache/include 755 root bin
+d none usr/apache/libexec 755 root bin
+d none usr/apache/perl5 755 root bin
+f none usr/apache/libexec/libproxy.so 555 root bin
+f none usr/apache/libexec/libperl.so 555 root bin
+f none usr/apache/libexec/mod_access.so 555 root bin
+f none usr/apache/libexec/mod_actions.so 555 root bin
+f none usr/apache/libexec/mod_alias.so 555 root bin
+f none usr/apache/libexec/mod_asis.so 555 root bin
+f none usr/apache/libexec/mod_auth.so 555 root bin
+f none usr/apache/libexec/mod_auth_anon.so 555 root bin
+f none usr/apache/libexec/mod_auth_dbm.so 555 root bin
+f none usr/apache/libexec/mod_autoindex.so 555 root bin
+f none usr/apache/libexec/mod_cern_meta.so 555 root bin
+f none usr/apache/libexec/mod_cgi.so 555 root bin
+f none usr/apache/libexec/mod_digest.so 555 root bin
+f none usr/apache/libexec/mod_dir.so 555 root bin
+f none usr/apache/libexec/mod_env.so 555 root bin
+f none usr/apache/libexec/mod_expires.so 555 root bin
+f none usr/apache/libexec/mod_headers.so 555 root bin
+f none usr/apache/libexec/mod_imap.so 555 root bin
+f none usr/apache/libexec/mod_include.so 555 root bin
+f none usr/apache/libexec/mod_info.so 555 root bin
+f none usr/apache/libexec/mod_log_config.so 555 root bin
+f none usr/apache/libexec/mod_mime.so 555 root bin
+f none usr/apache/libexec/mod_mime_magic.so 555 root bin
+f none usr/apache/libexec/mod_negotiation.so 555 root bin
+f none usr/apache/libexec/mod_rewrite.so 555 root bin
+f none usr/apache/libexec/mod_setenvif.so 555 root bin
+f none usr/apache/libexec/mod_speling.so 555 root bin
+f none usr/apache/libexec/mod_status.so 555 root bin
+f none usr/apache/libexec/mod_unique_id.so 555 root bin
+f none usr/apache/libexec/mod_userdir.so 555 root bin
+f none usr/apache/libexec/mod_usertrack.so 555 root bin
+f none usr/apache/libexec/mod_vhost_alias.so 555 root bin
+f none usr/apache/bin/ab 555 root bin
+f none usr/apache/bin/apachectl 555 root bin
+f none usr/apache/bin/apxs 555 root bin
+f none usr/apache/bin/dbmmanage 555 root bin
+f none usr/apache/bin/htdigest 555 root bin
+f none usr/apache/bin/htpasswd 555 root bin
+f none usr/apache/bin/httpd 555 root bin
+f none usr/apache/bin/logresolve 555 root bin
+f none usr/apache/bin/rotatelogs 555 root bin
+f none usr/apache/bin/suexec.disabled 700 root bin
+f none usr/apache/include/alloc.h 644 root bin
+f none usr/apache/include/ap.h 644 root bin
+f none usr/apache/include/ap_compat.h 644 root bin
+f none usr/apache/include/ap_config.h 644 root bin
+f none usr/apache/include/ap_config_auto.h 644 root bin
+f none usr/apache/include/ap_ctype.h 644 root bin
+f none usr/apache/include/ap_md5.h 644 root bin
+f none usr/apache/include/ap_mmn.h 644 root bin
+f none usr/apache/include/ap_sha1.h 644 root bin
+f none usr/apache/include/ap_ctx.h 644 root bin
+f none usr/apache/include/ap_hook.h 644 root bin
+f none usr/apache/include/ap_mm.h 644 root bin
+f none usr/apache/include/buff.h 644 root bin
+f none usr/apache/include/compat.h 644 root bin
+f none usr/apache/include/conf.h 644 root bin
+f none usr/apache/include/explain.h 644 root bin
+f none usr/apache/include/fnmatch.h 644 root bin
+f none usr/apache/include/hsregex.h 644 root bin
+f none usr/apache/include/http_conf_globals.h 644 root bin
+f none usr/apache/include/http_config.h 644 root bin
+f none usr/apache/include/http_core.h 644 root bin
+f none usr/apache/include/http_log.h 644 root bin
+f none usr/apache/include/http_main.h 644 root bin
+f none usr/apache/include/http_protocol.h 644 root bin
+f none usr/apache/include/http_request.h 644 root bin
+f none usr/apache/include/http_vhost.h 644 root bin
+f none usr/apache/include/httpd.h 644 root bin
+f none usr/apache/include/multithread.h 644 root bin
+f none usr/apache/include/os-inline.c 644 root bin
+f none usr/apache/include/os.h 644 root bin
+f none usr/apache/include/rfc1413.h 644 root bin
+f none usr/apache/include/scoreboard.h 644 root bin
+f none usr/apache/include/util_date.h 644 root bin
+f none usr/apache/include/util_md5.h 644 root bin
+f none usr/apache/include/util_script.h 644 root bin
+f none usr/apache/include/util_uri.h 644 root bin
+d none usr/apache/include/xml 755 root bin
+f none usr/apache/include/xml/asciitab.h 644 root bin
+f none usr/apache/include/xml/hashtable.h 644 root bin
+f none usr/apache/include/xml/iasciitab.h 644 root bin
+f none usr/apache/include/xml/latin1tab.h 644 root bin
+f none usr/apache/include/xml/nametab.h 644 root bin
+f none usr/apache/include/xml/utf8tab.h 644 root bin
+f none usr/apache/include/xml/xmldef.h 644 root bin
+f none usr/apache/include/xml/xmlparse.h 644 root bin
+f none usr/apache/include/xml/xmlrole.h 644 root bin
+f none usr/apache/include/xml/xmltok.h 644 root bin
+f none usr/apache/include/xml/xmltok_impl.h 644 root bin

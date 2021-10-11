@@ -1,0 +1,132 @@
+#
+# uts/i86pc/Makefile.files
+# Copyright (c) 1992-1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#pragma ident	"@(#)Makefile.files	1.91	99/08/05 SMI"
+#
+#	This Makefile defines all file modules in the directory uts/i86pc
+#	and it's children. These are the source files which i86pc
+#	"implementation architecture" dependent.
+#
+
+#
+#	object lists
+#
+CORE_OBJS +=			\
+	acpi_stub.o		\
+	atomic.o		\
+	beeper.o		\
+	cbe.o			\
+	confunix.o		\
+	ddi_impl.o		\
+	dvma.o			\
+	hrtimers.o		\
+	instr_size.o		\
+	mach_sysconfig.o	\
+	machdep.o		\
+	mem_config_stubs.o	\
+	mlsetup.o		\
+	mp_call.o		\
+	mp_implfuncs.o		\
+	mp_machdep.o		\
+	mp_startup.o		\
+	memscrub.o		\
+	mpcore.o		\
+	notes.o			\
+	ppage.o			\
+	startup.o		\
+	timestamp.o		\
+	trap.o			\
+	x_call.o
+
+#
+#	locore.o is special. It must be the first file relocated so that it
+#	it is relocated just where its name implies.
+#
+SPECIAL_OBJS +=	locore.o
+
+#
+#			driver modules
+#
+ROOTNEX_OBJS += rootnex.o
+EISANEXUS_OBJS += eisa.o dma_engine.o i8237A.o
+ISANEXUS_OBJS += isa.o dma_engine.o i8237A.o
+MCANEXUS_OBJS += dma_engine.o i8237A.o
+PCINEXUS_OBJS +=	\
+	pci.o		\
+	pci_mech1.o	\
+	pci_mech2.o	\
+	pci_neptune.o	\
+	pci_orion.o
+
+TCIC_OBJS +=	tcic.o
+
+ATA_OBJS +=	$(GHD_OBJS) ata_blacklist.o ata_common.o ata_disk.o \
+		ata_dma.o atapi.o atapi_fsm.o ata_debug.o
+
+CHS_OBJS	+= chs.o chs_busops.o chs_conf.o chs_dac.o	\
+		   chs_devops.o chs_hba.o chs_interrupt.o	\
+		   chs_intr.o chs_queue.o chs_raid.o		\
+		   chs_transport.o chs_viper.o chs_viperconf.o
+
+DPT_OBJS	+= $(GHD_OBJS) dpt.o dpt_eisa.o dpt_send.o
+ELX_OBJS	+= elx.o elx_media.o elx_pci.o elx_xfr.o
+NCRS_OBJS	+= glm.o
+ELXL_OBJS	+= elxl.o elxl_cmn.o mii.o
+
+FD_OBJS		+= fd.o
+
+PCSCSI_OBJS	+= ggmini.o ggmini_solaris.o pcscsi.o		\
+		   pcscsi_dma_impl.o portability.o
+
+PCN_OBJS	+= mii.o
+SBPRO_OBJS	+= sbpro.o
+
+DNET_OBJS	+= dnet.o mii.o
+IEEF_OBJS	+= ieef.o
+IPRB_OBJS	+= iprb.o mii.o
+LOGI_OBJS	+= logi.o
+MSCSI_OBJS	+= mscsi.o
+MSMOUSE_OBJS	+= msm.o
+PCPLUSMP_OBJS	+= apic_c.o apic_s.o 
+SPWR_OBJS	+= spwr.o 9432.o lm9432.o lm9432cf.o
+
+#
+#	platform specific modules 
+#
+UPPC_OBJS += uppc.o uppc_ml.o
+PCI_AUTOCONFIG_OBJS += pci_autoconfig.o
+
+#
+#	mmu modules
+#
+MMU_OBJ		+= mmu_module.o
+MMU32_OBJS	+= hat_i86.o mach_i86mmu.o vm_machdep.o 
+MMU36_OBJS	+= hat_i86.o mach_i86mmu.o vm_machdep.o 
+
+#
+#	Build up defines and paths.
+#
+ALL_DEFS	+= -Di86pc
+INC_PATH	+= -I$(UTSBASE)/i86pc
+
+#
+# Since assym.h is a derived file, the dependency must be explicit for
+# all files including this file. (This is only actually required in the
+# instance when the .nse_depinfo file does not exist.) It may seem that
+# the lint targets should also have a similar dependency, but they don't
+# since only C headers are included when #defined(lint) is true.
+#
+ASSYM_DEPS      += 	\
+	copy.o		\
+	ddi_i86_asm.o	\
+	float.o		\
+	i86_subr.o	\
+	int_entry.o	\
+	lock_prim.o	\
+	locore.o	\
+	mpcore.o	\
+	swtch.o		\
+	uppc_ml.o
+

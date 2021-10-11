@@ -1,0 +1,29 @@
+#
+#ident	"@(#)Makefile.rules	1.1	94/12/10 SMI"
+#
+# Copyright (c) 1994, by Sun Microsystems, Inc.
+# All rights reserved.
+#
+# psm/stand/lib/Makefile.rules
+
+#
+# Pattern matching rules to compile the source into the OBJSDIR directory
+#
+$(OBJSDIR)/%.o: $(SRCSDIR)/%.c
+	$(COMPILE.c) -o $@ $<
+	$(POST_PROCESS_O)
+
+$(OBJSDIR)/%.o: $(SRCSDIR)/%.s
+	$(COMPILE.s) -o $@ $<
+	$(POST_PROCESS_O)
+
+#
+# Pattern matching rules to lint the source into the OBJSDIR directory
+#
+$(OBJSDIR)/%.ln: $(SRCSDIR)/%.c
+	@($(LHEAD) $(LINT.c) -c $< $(LTAIL))
+	@$(MV) $(@F) $@
+
+$(OBJSDIR)/%.ln: $(SRCSDIR)/%.s
+	@($(LHEAD) $(LINT.s) -c $< $(LTAIL))
+	@$(MV) $(@F) $@

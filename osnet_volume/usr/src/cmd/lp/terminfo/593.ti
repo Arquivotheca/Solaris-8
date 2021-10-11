@@ -1,0 +1,55 @@
+#	Copyright (c) 1984, 1986, 1987, 1988, 1989 AT&T
+#	  All Rights Reserved
+
+#	THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF AT&T
+#	The copyright notice above does not evidence any
+#	actual or intended publication of such source code.
+
+#ident	"@(#)593.ti	1.2	89/11/27 SMI"	/* SVr4.0 1.2	*/
+
+######################################################################
+#
+# Entries for the AT&T 593 printer
+#
+
+593eps|att593eps|AT&T 593 Epson FX86e emulation,
+
+	bufsz#2000,
+	cps#480,
+	cols#80,
+	lines#62,
+	orl#36,
+	orvi#216,
+
+# Only letter quality for laser printer
+	snlq@,
+	snrmq@,
+	sdrfq@,
+
+	use=Gep2500+basic,
+	use=Gepson+low,
+
+593ibm|att593ibm|AT&T 593 IBM ProPrinter XL emulation,
+
+	bufsz#2000,
+	cps#480,
+
+	lines#62,
+
+# Only letter quality for laser printer
+	snlq@,
+	sdrfq@,
+
+	smglp=\EX%p1%{1}%+%c%p2%{1}%+%c,
+
+	use=Gibmxl+basic,
+	use=Gibmxl+low+1x1,
+
+
+593hp|att593hp|AT&T 593 HP Laserjet II emulation,
+
+	bufsz#2000,
+	cps#480,
+
+	
+	use=Ghplaser+II,

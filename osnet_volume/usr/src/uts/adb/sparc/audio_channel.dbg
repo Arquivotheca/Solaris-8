@@ -1,0 +1,17 @@
+\
+\ Copyright (c) 1999 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)audio_channel.dbg	1.1	99/05/26 SMI"
+
+#include <sys/audio_impl.h>
+#include "dummy.h"
+
+\
+\
+audio_channel	""
+	pid		decimal
+	ch_number	decimal
+	dev_type	decimal
+	info_size	decimal
+	info		hex

@@ -1,0 +1,28 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)ifnet.dbg	1.4	98/01/14 SMI"
+
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <sys/time.h>
+#include <net/if.h>
+#include "dummy.h"
+
+\
+\
+ifnet                   if_
+        unit                    sdecimal
+        mtu                     sdecimal
+        flags                   hex
+        addrlist                hex
+        next                    hex
+        snd.ifq_head            hex
+        snd.ifq_tail            hex
+        snd.ifq_len             sdecimal
+        snd.ifq_drops           sdecimal
+        ipackets                sdecimal
+        ierrors                 sdecimal
+        opackets                sdecimal
+        oerrors                 sdecimal

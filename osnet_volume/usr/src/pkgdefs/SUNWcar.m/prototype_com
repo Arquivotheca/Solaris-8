@@ -1,0 +1,71 @@
+#
+# Copyright (c) 1990-1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#ident	"@(#)prototype_com	1.75	99/08/06 SMI"
+#
+# This required package information file contains a list of package contents.
+# The 'pkgmk' command uses this file to identify the contents of a package
+# and their location on the development machine when building the package.
+# Can be created via a text editor or through use of the 'pkgproto' command.
+
+#!search <pathname pathname ...>	# where to find pkg objects
+#!include <filename>			# include another 'prototype' file
+#!default <mode> <owner> <group>	# default used if not specified on entry
+#!<param>=<value>			# puts parameter in pkg environment
+
+# packaging files
+i pkginfo
+i copyright
+#
+# source locations relative to the prototype file
+#
+# SUNWcar.m
+#
+d none platform 755 root sys
+d none platform/sun4m 755 root sys
+f none platform/sun4m/ufsboot 644 root sys
+f none platform/sun4m/kadb 644 root sys
+d none platform/sun4m/kernel 755 root sys
+d none platform/sun4m/kernel/cpu 755 root sys
+f none platform/sun4m/kernel/cpu/FMI,MB86904 755 root sys
+s none platform/sun4m/kernel/cpu/FMI,MB86907=FMI,MB86904
+f none platform/sun4m/kernel/cpu/Ross,RT625 755 root sys
+s none platform/sun4m/kernel/cpu/Ross,RT623=Ross,RT625
+s none platform/sun4m/kernel/cpu/Ross,RT626=Ross,RT625
+f none platform/sun4m/kernel/cpu/TI,TMS390S10 755 root sys
+f none platform/sun4m/kernel/cpu/TI,TMS390Z55 755 root sys
+s none platform/sun4m/kernel/cpu/TI,TMS390Z50=TI,TMS390Z55
+f none platform/sun4m/kernel/cpu/default 755 root sys
+d none platform/sun4m/kernel/drv 755 root sys
+f none platform/sun4m/kernel/drv/dma 755 root sys
+f none platform/sun4m/kernel/drv/fd 755 root sys
+f none platform/sun4m/kernel/drv/iommu 755 root sys
+f none platform/sun4m/kernel/drv/ledma 755 root sys
+f none platform/sun4m/kernel/drv/obio 755 root sys
+f none platform/sun4m/kernel/drv/rootnex 755 root sys
+f none platform/sun4m/kernel/drv/sbus 755 root sys
+f none platform/sun4m/kernel/drv/sbusmem 755 root sys
+f none platform/sun4m/kernel/drv/sbusmem.conf 644 root sys
+f none platform/sun4m/kernel/drv/stc 755 root sys
+f none platform/sun4m/kernel/drv/stc.conf 644 root sys
+f none platform/sun4m/kernel/drv/zs 755 root sys
+f none platform/sun4m/kernel/drv/zsh 755 root sys
+f none platform/sun4m/kernel/drv/zsh.conf 644 root sys
+d none platform/sun4m/kernel/misc 755 root sys
+f none platform/sun4m/kernel/misc/obpsym 755 root sys
+f none platform/sun4m/kernel/misc/bootdev 755 root sys
+f none platform/sun4m/kernel/misc/pcmcia 755 root sys
+d none platform/sun4m/kernel/strmod 755 root sys
+f none platform/sun4m/kernel/strmod/kb 755 root sys
+f none platform/sun4m/kernel/unix 755 root sys
+s none platform/SUNW,SPARCstation-4=sun4m
+s none platform/SUNW,SPARCstation-5=sun4m
+s none platform/SUNW,SPARCstation-10=sun4m
+s none platform/SUNW,SPARCstation-10,SX=sun4m
+s none platform/SUNW,SPARCstation-20=sun4m
+s none platform/SUNW,SPARCstation-LX=sun4m
+s none platform/SUNW,SPARCstation-LX+=sun4m
+s none platform/SUNW,SPARCclassic=sun4m
+s none platform/SUNW,SPARCclassic-X=sun4m
+s none platform/SUNW,SPARCengine-EC-3=sun4m

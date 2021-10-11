@@ -1,0 +1,31 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)buflistiter.nxt.dbg	1.4	98/07/19 SMI"
+
+#include <sys/types.h>
+#include <sys/buf.h>
+#include "dummy.h"
+
+\
+\
+buf	""	buflistiter.nxt
+{adb_inline_begin}
+<S+{OFFSET, b_edev}=""
+{adb_inline_end}
+	b_edev		hex	""
+#if defined(_LP64)
+	_b_blkno._f	hex	""
+#else
+	_b_blkno._p._l	hex	""
+#endif
+	b_un.b_addr	hex	""
+	b_flags		hex	""
+{adb_inline_begin}
+*(<S+{OFFSET, b_forw})>S
+<C+1>C
+,#((<C#10)-<C)=2n"edev"16t"blkno"16t"addr"n"flags"n
+,#(#(<B-<S))$<buflistiter.nxt
+$<buflist.nxt
+{adb_inline_end}

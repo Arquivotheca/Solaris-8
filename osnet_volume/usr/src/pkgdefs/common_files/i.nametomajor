@@ -1,0 +1,283 @@
+#!/bin/sh
+#
+# Copyright (c) 1998-1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#ident	"@(#)i.nametomajor	1.12	99/10/22 SMI"
+
+PATH=/usr/bin:/usr/sbin:$PATH; export PATH
+
+#
+# add_major - adds new major numbers to system for device drivers on older
+# Solaris systems where add_drv -b was not available or had bugs.  This 
+# code will be removed when doing a server_upgrade on systems with missing
+# or broken add_drv is eventually EOL'd.  DO NOT COPY THIS CODE TO OTHER
+# PACKAGE SCRIPTS!
+#
+add_major()
+{
+	tmpfile=/tmp/nm.$$.tmp
+
+	if [ -f $BASEDIR/etc/rem_name_to_major ]; then
+		rem_file="$BASEDIR/etc/rem_name_to_major"
+	fi
+
+	sort +1 -2n $dest $rem_file | nawk '#
+BEGIN	{oldmajor = -1}
+NR == 1	{n=split(namelist,x)
+	 if (n < 1)
+	    exit(1)
+	 for (i=1; i<=n; i++)
+	    chklist[x[i]]++
+	}
+	{for (name in chklist)
+	 {
+	    if ($1 == name)
+		delete chklist[name]
+	 }
+	 if (($2 - oldmajor) > 1)
+	 {
+	    gap++
+	    gaplist[gap] = oldmajor " " $2;
+	 }
+	 oldmajor = $2;
+	}
+END	{addsize=1
+	 for (name in chklist)
+	    addlist[addsize++] = name
+	
+	 addidx = 1
+	 for (i=1; i<=gap && addidx < addsize; i++)
+	 {
+	    split(gaplist[i],x)
+	    begmajor = x[1]
+	    endmajor = x[2]
+	    for (begmajor++;begmajor < endmajor && addidx < addsize;)
+	    {
+		printf "%s %d\n",addlist[addidx],begmajor
+		addidx++
+		begmajor++
+	    }
+	 }
+	 for (; addidx < addsize; addidx++)
+	 {
+	    oldmajor++
+	    printf "%s %d\n",addlist[addidx],oldmajor
+	 }
+	}
+' namelist="$*" - > $tmpfile
+
+	if [ -s $tmpfile ]; then
+		echo "Adding the following devices to $dest :"
+		cat $tmpfile
+		sort +1 -2n $dest $tmpfile -o $dest
+	fi
+
+	rm -f $tmpfile
+}
+
+#
+# obsolete_sparc - Filter function to remove obsolete SPARC driver entries.
+# We define an associative array of bad driver names, and then nawk out
+# lines where the first token is defined in our array.
+#
+obsolete_sparc()
+{
+	nawk 'BEGIN {
+		obs["rip"] = 1;
+		obs["svloop"] = 1;
+		obs["tcl"] = 1;
+		obs["tco"] = 1;
+		obs["tcoo"] = 1;
+		obs["sp"] = 1;
+		obs["consfb"] = 1;
+		obs["XXunusedXX"] = 1;
+		obs["sw"] = 1;
+		obs["cgtwo"] = 1;
+		obs["xy"] = 1;
+		obs["xd"] = 1;
+		obs["pc"] = 1;
+		obs["app"] = 1;
+		obs["evq"] = 1;
+		obs["win"] = 1;
+		obs["svarp"] = 1;
+		obs["svip"] = 1;
+		obs["svrip"] = 1;
+		obs["svicmp"] = 1;
+		obs["svudp"] = 1;
+		obs["svtcp"] = 1;
+		obs["vme"] = 1;
+		obs["ie"] = 1;
+		obs["ncr"] = 1;
+		obs["xt"] = 1;
+		obs["id"] = 1;
+		obs["vmemem"] = 1;
+		obs["pn"] = 1;
+		obs["kmac"] = 1;
+		obs["ipi3sc"] = 1;
+		obs["cgfour"] = 1;
+		obs["cgeight-p4"] = 1;
+		obs["xdc"] = 1;
+		obs["xyc"] = 1;
+		obs["mcp"] = 1;
+		obs["mcpzsa"] = 1;
+		obs["mcpp"] = 1;
+		obs["be"] = 1;
+		obs["p9000"] = 1;
+		obs["p9100"] = 1;
+		obs["pci"] = 1;
+		obs["profile"] = 1;
+		obs["eeprom"] = 1;
+	} !($1 in obs) { print $1, $2 }'
+}
+
+#
+# obsolete_i386 - Filter function to remove obsolete i386 driver entries.
+# We define an associative array of bad driver names, and then nawk out
+# lines where the first token is defined in our array.
+#
+obsolete_i386()
+{
+	nawk 'BEGIN {
+		obs["aha"] = 1;
+		obs["aic"] = 1;
+		obs["app"] = 1;
+		obs["audiocs"] = 1;
+		obs["blogic"] = 1;
+		obs["chanmux"] = 1;
+		obs["cmtp"] = 1;
+		obs["corvette"] = 1;
+		obs["csa"] = 1;
+		obs["dsa"] = 1;
+		obs["eepro"] = 1;
+		obs["eha"] = 1;
+		obs["el"] = 1;
+		obs["elink"] = 1;
+		obs["envm"] = 1;
+		obs["esa"] = 1;
+		obs["esa"] = 1;
+		obs["iee"] = 1;
+		obs["iss"] = 1;
+		obs["kd"] = 1;
+		obs["kdmouse"] = 1;
+		obs["mc"] = 1;
+		obs["mcis"] = 1;
+		obs["nee"] = 1;
+		obs["nei"] = 1;
+		obs["nfe"] = 1;
+		obs["p9000"] = 1;
+		obs["p9100"] = 1;
+		obs["pcaic"] = 1;
+		obs["profile"] = 1;
+		obs["riles"] = 1;
+		obs["rip"] = 1;
+		obs["smc"] = 1;
+		obs["smce"] = 1;
+		obs["smceu"] = 1;
+		obs["smcf"] = 1;
+		obs["sp"] = 1;
+		obs["svarp"] = 1;
+		obs["svicmp"] = 1;
+		obs["svip"] = 1;
+		obs["svloop"] = 1;
+		obs["svrip"] = 1;
+		obs["svtcp"] = 1;
+		obs["svudp"] = 1;
+		obs["tcl"] = 1;
+		obs["tco"] = 1;
+		obs["tcoo"] = 1;
+		obs["tiqmouse"] = 1;
+		obs["tr"] = 1;
+		obs["trantor"] = 1;
+	} !($1 in obs) { print $1, $2 }'
+}
+
+#
+# Useful debugging which is reasonable to include in a production system:
+# we copy the salient driver files to the package undo directory before
+# doing any work.  This will help diagnose add_drv errors before the system
+# becomes an unbootable smoldering ruin.
+#
+for file in driver_aliases driver_classes minor_perm name_to_major; do
+	cp $BASEDIR/etc/$file $PKGSAV/$file.orig >/dev/null 2>&1
+done
+
+#
+# Add_drv needs /etc/driver_aliases in order to work properly; if for
+# some reason it has been removed, create an empty one at this time.
+# Recall that in SUNWcsr's pkginfo.tmpl, the driver_aliases class-action
+# script is invoked *after* this class-action script.  This is critical
+# because if we are going to add_drv a new driver 'foo', and 'foo' has
+# an alias 'bar', the add_drv of 'foo' will fail if the alias is already
+# present.  Thus new aliases must be added *after* new driver major entries.
+# The driver_aliases class-action script will add the complete set of aliases
+# if we create an empty file here, so this code allows us to continue and
+# get a correct upgrade in the face of a missing driver_aliases file.
+#
+if [ ! -f $BASEDIR/etc/driver_aliases ]; then
+        touch $BASEDIR/etc/driver_aliases
+        chmod 0644 $BASEDIR/etc/driver_aliases
+	chown root $BASEDIR/etc/driver_aliases
+        chgrp sys $BASEDIR/etc/driver_aliases
+fi
+
+while read src dest; do
+	if [ -f $dest ]; then
+		#
+		# Strip obsolete entries from the existing name_to_major
+		#
+		if [ $ARCH = sparc ]; then
+			obsolete_sparc < $dest > /tmp/onm.$$.tmp
+		else
+			obsolete_i386  < $dest > /tmp/onm.$$.tmp
+		fi
+
+		cp /tmp/onm.$$.tmp $dest
+		rm -f /tmp/onm.$$.tmp
+		os_rev=`uname -r`
+
+		while read name major; do
+			#
+			# If the driver is already present in name_to_major,
+			# leave the existing number and continue
+			#
+			grep -w $name $dest >/dev/null 2>&1 && continue
+
+			#
+			# Otherwise add the driver to name_to_major using
+			# add_major or add_drv:
+			#
+			case $os_rev in
+			  "5.3") add_major $name;;
+			  "5.4") add_major $name;; 
+			  "5.5") add_major $name;; 
+			"5.5.1") add_major $name;; 
+			      *)
+				#
+				# add_drv produces spurious output even on
+				# success, so save its output in a temporary
+				# file in case an error occurs.
+				#
+				if add_drv -b $BASEDIR $name \
+				    >/tmp/ad.$$.tmp 2>&1; then
+					echo "added $name to $dest"
+				else
+					echo "$PKG: failed to add $name to " \
+					    "$dest:" >& 2
+					cat /tmp/ad.$$.tmp >& 2
+				fi
+				;;
+			esac
+		done < $src
+		rm -f /tmp/ad.$$.tmp
+	else
+		#
+		# If no name_to_major is present on the target system,
+		# just copy over the one from the package.
+		#
+		cp -p $src $dest
+	fi
+
+    	sort +1 -2n -o $dest $dest
+done
+exit 0

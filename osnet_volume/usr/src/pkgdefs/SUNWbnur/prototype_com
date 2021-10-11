@@ -1,0 +1,68 @@
+#
+# Copyright (c) 1990-1993, 1998 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#ident	"@(#)prototype_com	1.22	99/03/30 SMI"
+#
+# This required package information file contains a list of package contents.
+# The 'pkgmk' command uses this file to identify the contents of a package
+# and their location on the development machine when building the package.
+# Can be created via a text editor or through use of the 'pkgproto' command.
+
+#!search <pathname pathname ...>	# where to find pkg objects
+#!include <filename>			# include another 'prototype' file
+#!default <mode> <owner> <group>	# default used if not specified on entry
+#!<param>=<value>			# puts parameter in pkg environment
+
+# packaging files
+i pkginfo
+i copyright
+i depend
+i i.preserve
+i i.dialers
+i i.initd
+#
+# source locations relative to the prototype file
+#
+# SUNWbnur
+#
+d none etc 755 root sys
+d none etc/init.d 755 root sys
+e initd etc/init.d/uucp 744 root sys
+d none etc/rc2.d 755 root sys
+l initd etc/rc2.d/S70uucp=../../etc/init.d/uucp
+d none etc/uucp 755 uucp uucp
+e preserve etc/uucp/Config 644 uucp uucp
+e preserve etc/uucp/Devconfig 644 uucp uucp
+e preserve etc/uucp/Devices 644 uucp uucp
+e preserve etc/uucp/Dialcodes 644 uucp uucp
+e dialers etc/uucp/Dialers 644 uucp uucp
+e preserve etc/uucp/Grades 644 uucp uucp
+e preserve etc/uucp/Limits 644 uucp uucp
+e preserve etc/uucp/Permissions 600 uucp uucp
+e preserve etc/uucp/Poll 644 uucp uucp
+e preserve etc/uucp/Sysfiles 644 uucp uucp
+e preserve etc/uucp/Systems 600 uucp uucp
+s none etc/uucp/remote.unknown=../../usr/lib/uucp/remote.unknown
+d none var 755 root sys
+d none var/spool 755 root bin
+d none var/spool/uucp 755 uucp uucp
+s none var/spool/uucp/.Admin=../../uucp/.Admin
+d none var/spool/uucp/.Corrupt 755 uucp uucp
+s none var/spool/uucp/.Log=../../uucp/.Log
+s none var/spool/uucp/.Old=../../uucp/.Old
+s none var/spool/uucp/.Sequence=../../uucp/.Sequence
+s none var/spool/uucp/.Status=../../uucp/.Status
+d none var/spool/uucp/.Workspace 755 uucp uucp
+d none var/spool/uucp/.Xqtdir 755 uucp uucp
+d none var/spool/uucppublic 1777 uucp uucp
+d none var/uucp 755 uucp uucp
+d none var/uucp/.Admin 755 uucp uucp
+d none var/uucp/.Log 755 uucp uucp
+d none var/uucp/.Log/uucico 755 uucp uucp
+d none var/uucp/.Log/uucp 755 uucp uucp
+d none var/uucp/.Log/uux 755 uucp uucp
+d none var/uucp/.Log/uuxqt 755 uucp uucp
+d none var/uucp/.Old 755 uucp uucp
+d none var/uucp/.Sequence 755 uucp uucp
+d none var/uucp/.Status 755 uucp uucp

@@ -1,0 +1,32 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)kmem_cpu.nxt.dbg	1.7	98/07/19 SMI"
+
+#include <sys/kmem.h>
+#include <sys/kmem_impl.h>
+#include "dummy.h"
+
+\ '*ncpus' is a 32-bit access
+\
+kmem_cpu_cache  cc_     kmem_cpu.nxt
+{adb_inline_begin}
+.>w
+*ncpus>/i/N
+<N-<n=n"cpu_cache_"D
+<w$<<mutex
+<w+{OFFSET, cc_alloc}=""
+{adb_inline_end}
+        alloc           sdecimal
+        free            sdecimal
+        rounds          sdecimal
+        magsize         sdecimal
+        loaded_mag      hex
+        full_mag        hex
+        empty_mag       hex
+{adb_inline_begin}
+<w+0t64>w
+<n-1>n
+<w,#(#(<n))$<kmem_cpu.nxt
+{adb_inline_end}

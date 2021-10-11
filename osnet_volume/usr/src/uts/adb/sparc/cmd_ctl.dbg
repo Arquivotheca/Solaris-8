@@ -1,0 +1,58 @@
+\
+\ Copyright (c) 1998 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)cmd_ctl.dbg	1.4	98/07/19 SMI"
+
+#include <sys/dada/adapters/ghd/ghd.h>
+#include "dummy.h"
+
+cmd_ctl		ccc_
+{adb_inline_begin}
+.>z
+<z+{OFFSET, ccc_nextp}=""
+{adb_inline_end}
+	nextp		hex
+	tmrp		hex
+	label		hex
+	chno		hex
+	activel_mutex	.mutex
+{adb_inline_begin}
+<z+{OFFSET, ccc_activel}/n"activel"n3Kn
+<z+{OFFSET, ccc_hba_dip}=""
+{adb_inline_end}
+	hba_dip		hex
+	iblock		hex
+	soft_id		hex
+	hba_mutex	.mutex
+{adb_inline_begin}
+<z+{OFFSET, ccc_hba_pollmode}=""
+{adb_inline_end}
+	hba_pollmode	hex
+{adb_inline_begin}
+<z+{OFFSET, ccc_devs}/n"devs"n2Kn
+<z+{OFFSET, ccc_waitq_mutex}=""
+{adb_inline_end}
+	waitq_mutex	.mutex
+{adb_inline_begin}
+<z+{OFFSET, ccc_waitq}/n"waitq"n6Kn
+<z+{OFFSET, ccc_doneq_softid}=""
+{adb_inline_end}
+	doneq_softid	hex
+	doneq_mutex	.mutex
+{adb_inline_begin}
+<z+{OFFSET, ccc_doneq}/n"doneq"n3Kn
+<z+{OFFSET, ccc_hba_handle}=""
+{adb_inline_end}
+	hba_handle	hex
+	ccballoc	hex
+	ccbfree		hex
+	sg_func		hex
+	hba_start	hex
+	hba_complete	hex
+	process_intr	hex
+	get_status	hex
+	timeout_func	hex
+{adb_inline_begin}
+<z+{SIZEOF}=""
+{adb_inline_end}

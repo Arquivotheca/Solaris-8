@@ -1,0 +1,11 @@
+#ident "@(#)mapfile	1.7	99/10/07 SMI"
+
+lowtext = LOAD ?RX V0x8000;
+lowtext	: $PROGBITS ?A!W : *srt0.o *a20enable.o *endsrt0.o;
+
+hightext = LOAD ?RX V0x110000;
+hightext : $PROGBITS ?A!W;
+
+data    = LOAD ?RWX A0x1;
+data    : $PROGBITS ?AW;
+data    : $NOBITS ?AW;

@@ -1,0 +1,117 @@
+befext.c:
+befinst.c:
+bios.c:
+biosprim.c:
+boards.c:
+boot.c:
+bop.c:
+bus.c:
+cfname.c:
+config.c:
+debug.c:
+devdb.c:
+dir.c:
+eisa.c:
+enum.c:
+eprintf.c:
+err.c:
+escd.c:
+fprintf.c:
+gettext.c:
+help.c:
+isa1275.c:
+kbd.c:
+main.c:
+menu.c:
+mount.c:
+names.c:
+open.c:
+pci.c:
+pci1275.c:
+pciutil.c:
+pnp.c:
+pnp1275.c:
+pnpbios.c:
+"pnpbios.c", line 108: warning: conversion of pointer loses bits
+printf.c:
+probe.c:
+prop.c:
+resmgmt.c:
+sprintf.c:
+tree.c:
+tty_in.c:
+tty_out.c:
+ur.c:
+version.c:
+vfprintf.c:
+vgaprobe.c:
+vsprintf.c:
+tty_out.c", line 741: warning: name defined but never used: console_tty in tty_out.c(741)
+befext.c", line 328: warning: name used but not defined: _fstat in befext.c(328)
+config.c", line 656: warning: name used but not defined: _ctype in config.c(656)
+befext.c", line 351: warning: name used but not defined: tolower in befext.c(351)
+befext.c", line 600: warning: name used but not defined: errno in befext.c(600)
+boards.c", line 84: warning: name used but not defined: calloc in boards.c(84)
+biosprim.c", line 252: warning: name used but not defined: free in biosprim.c(252)
+biosprim.c", line 95: warning: name used but not defined: malloc in biosprim.c(95)
+boards.c", line 98: warning: name used but not defined: realloc in boards.c(98)
+err.c", line 194: warning: name used but not defined: _iob in err.c(194)
+vfprintf.c", line 26: warning: name used but not defined: _flsbuf in vfprintf.c(26)
+cfname.c", line 307: warning: name used but not defined: fclose in cfname.c(307)
+err.c", line 104: warning: name used but not defined: fflush in err.c(104)
+bop.c", line 60: warning: name used but not defined: fgets in bop.c(60)
+bop.c", line 31: warning: name used but not defined: fopen in bop.c(31)
+err.c", line 103: warning: name used but not defined: fputc in err.c(103)
+bop.c", line 54: warning: name used but not defined: fputs in bop.c(54)
+prop.c", line 108: warning: name used but not defined: fread in prop.c(108)
+escd.c", line 505: warning: name used but not defined: fwrite in escd.c(505)
+devdb.c", line 1026: warning: name used but not defined: rewind in devdb.c(1026)
+tty_out.c", line 159: warning: name used but not defined: setbuf in tty_out.c(159)
+bop.c", line 38: warning: name used but not defined: setvbuf in bop.c(38)
+biosprim.c", line 86: warning: name used but not defined: sscanf in biosprim.c(86)
+boot.c", line 1683: warning: name used but not defined: _osmajor in boot.c(1683)
+boot.c", line 1683: warning: name used but not defined: _osminor in boot.c(1683)
+probe.c", line 989: warning: name used but not defined: abs in probe.c(989)
+cfname.c", line 96: warning: name used but not defined: atoi in cfname.c(96)
+boot.c", line 625: warning: name used but not defined: atol in boot.c(625)
+err.c", line 151: warning: name used but not defined: exit in err.c(151)
+boards.c", line 128: warning: name used but not defined: qsort in boards.c(128)
+boot.c", line 1270: warning: name used but not defined: strtol in boot.c(1270)
+main.c", line 184: warning: name used but not defined: strtoul in main.c(184)
+biosprim.c", line 360: warning: name used but not defined: memcmp in biosprim.c(360)
+boards.c", line 165: warning: name used but not defined: memcpy in boards.c(165)
+cfname.c", line 714: warning: name used but not defined: memset in cfname.c(714)
+befext.c", line 577: warning: name used but not defined: strcat in befext.c(577)
+befinst.c", line 342: warning: name used but not defined: strchr in befinst.c(342)
+befext.c", line 558: warning: name used but not defined: strcmp in befext.c(558)
+befext.c", line 540: warning: name used but not defined: strcpy in befext.c(540)
+eprintf.c", line 450: warning: name used but not defined: strerror in eprintf.c(450)
+befinst.c", line 343: warning: name used but not defined: strlen in befinst.c(343)
+boot.c", line 418: warning: name used but not defined: strncmp in boot.c(418)
+kbd.c", line 129: warning: name used but not defined: _strnicmp in kbd.c(129)
+boot.c", line 835: warning: name used but not defined: strncpy in boot.c(835)
+befext.c", line 347: warning: name used but not defined: strrchr in befext.c(347)
+boards.c", line 49: warning: name used but not defined: strstr in boards.c(49)
+befext.c", line 393: warning: name used but not defined: _close in befext.c(393)
+befext.c", line 288: warning: name used but not defined: _lseek in befext.c(288)
+befext.c", line 327: warning: name used but not defined: _open in befext.c(327)
+befext.c", line 287: warning: name used but not defined: _read in befext.c(287)
+cfname.c", line 342: warning: name used but not defined: _write in cfname.c(342)
+dir.c", line 95: warning: name used but not defined: _dos_findfirst in dir.c(95)
+dir.c", line 103: warning: name used but not defined: _dos_findnext in dir.c(103)
+befinst.c", line 65: warning: name used but not defined: _dos_getvect in befinst.c(65)
+befinst.c", line 97: warning: name used but not defined: _dos_setvect in befinst.c(97)
+vgaprobe.c", line 814: warning: name used but not defined: _int86 in vgaprobe.c(814)
+biosprim.c", line 181: warning: name used but not defined: _int86x in biosprim.c(181)
+biosprim.c", line 170: warning: name used but not defined: _segread in biosprim.c(170)
+tty_in.c", line 47: warning: name used but not defined: _getch in tty_in.c(47)
+vgaprobe.c", line 355: warning: name used but not defined: _inpw in vgaprobe.c(355)
+boot.c", line 593: warning: name used but not defined: _kbhit in boot.c(593)
+vgaprobe.c", line 356: warning: name used but not defined: _outpw in vgaprobe.c(356)
+boot.c", line 634: warning: name used but not defined: time in boot.c(634)
+main.c", line 150: warning: name used but not defined: menu_adv in main.c(150)
+boot.c", line 407: warning: name used but not defined: boot_tasks_adv in boot.c(407)
+cfname.c", line 152: warning: name used but not defined: close in cfname.c(152)
+open.c", line 40: warning: name used but not defined: _chdir in open.c(40)
+probe.c", line 696: warning: name used but not defined: setjmp in probe.c(696)
+probe.c", line 152: warning: name used but not defined: longjmp in probe.c(152)

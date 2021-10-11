@@ -1,0 +1,264 @@
+#
+# Copyright (c) 1992-1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#pragma ident	"@(#)Makefile.rules	1.82	99/06/05 SMI"
+
+#	This Makefile defines the build rules for the directory uts/sun4d
+#	and it's children. These are the source files which sun4d
+#	"implementation architecture" dependent.
+
+ARCH_BASE=$(UTSBASE)/sun4d
+
+SUN4D_IL=$(OBJS_DIR)/sun4d.il
+HAT_IL=$(OBJS_DIR)/hat_srmmu.il
+
+# CPPFLAGS has a -Y that confuses cpp, use INC_PATH rather than INCLUDE_PATH
+IL_CPP=$(CPP) -P -DINLINE -D_ASM $(INC_PATH) \
+	$(ALWAYS_DEFS) $(ALL_DEFS) $(CONFIG_DEFS)
+
+#
+#	C object build rules
+#
+
+# conf
+$(OBJS_DIR)/confunix.o:		$(ARCH_BASE)/conf/confunix.c
+	$(COMPILE.c) -o $@ $(ARCH_BASE)/conf/confunix.c
+$(OBJS_DIR)/genalign.o:         $(ARCH_BASE)/conf/genalign.s
+	$(COMPILE.s) -o $@ $(ARCH_BASE)/conf/genalign.s
+
+# io
+$(OBJS_DIR)/bootbus.o:		$(ARCH_BASE)/io/bootbus.c $(SUN4D_IL)
+	$(COMPILE.c) -o $@ $(ARCH_BASE)/io/bootbus.c $(SUN4D_IL)
+$(OBJS_DIR)/cbe.o:		$(ARCH_BASE)/io/cbe.c $(SUN4D_IL)
+	$(COMPILE.c) -o $@ $(ARCH_BASE)/io/cbe.c $(SUN4D_IL)
+$(OBJS_DIR)/decode_xdb.o:	$(ARCH_BASE)/io/decode_xdb.c
+	$(COMPILE.c) -o $@ $(ARCH_BASE)/io/decode_xdb.c
+$(OBJS_DIR)/hardclk.o:		$(ARCH_BASE)/io/hardclk.c
+	$(COMPILE.c) -o $@ $(ARCH_BASE)/io/hardclk.c
+$(OBJS_DIR)/rootnex.o:		$(ARCH_BASE)/io/rootnex.c
+	$(COMPILE.c) -o $@ $(ARCH_BASE)/io/rootnex.c
+$(OBJS_DIR)/sbusnex.o:		$(ARCH_BASE)/io/sbusnex.c $(SUN4D_IL)
+	$(COMPILE.c) -o $@ $(ARCH_BASE)/io/sbusnex.c $(SUN4D_IL)
+# ml
+$(OBJS_DIR)/copy.o:		$(ARCH_BASE)/ml/copy.s
+	$(COMPILE.s) -o $@ $(ARCH_BASE)/ml/copy.s
+$(OBJS_DIR)/intr_misc.o:	$(ARCH_BASE)/ml/intr_misc.s
+	$(COMPILE.s) -o $@ $(ARCH_BASE)/ml/intr_misc.s
+$(OBJS_DIR)/ip_ocsum.o:		$(ARCH_BASE)/ml/ip_ocsum.s
+	$(COMPILE.s) -o $@ $(ARCH_BASE)/ml/ip_ocsum.s
+$(OBJS_DIR)/locore.o:		$(ARCH_BASE)/ml/locore.s
+	$(COMPILE.s) -o $@ $(ARCH_BASE)/ml/locore.s
+$(OBJS_DIR)/mmu_asi.o:		$(ARCH_BASE)/ml/mmu_asi.s
+	$(COMPILE.s) -o $@ $(ARCH_BASE)/ml/mmu_asi.s
+$(OBJS_DIR)/proc_init.o:	$(ARCH_BASE)/ml/proc_init.s
+	$(COMPILE.s) -o $@ $(ARCH_BASE)/ml/proc_init.s
+$(OBJS_DIR)/subr_4d.o:		$(ARCH_BASE)/ml/subr_4d.s
+	$(COMPILE.s) -o $@ $(ARCH_BASE)/ml/subr_4d.s
+$(OBJS_DIR)/swtch.o:		$(ARCH_BASE)/ml/swtch.s
+	$(COMPILE.s) -o $@ $(ARCH_BASE)/ml/swtch.s
+# os
+$(OBJS_DIR)/aflt.o:		$(ARCH_BASE)/os/aflt.c
+	$(COMPILE.c) -o $@ $(ARCH_BASE)/os/aflt.c
+$(OBJS_DIR)/cpu_driver.o:	$(ARCH_BASE)/os/cpu_driver.c $(SUN4D_IL)
+	$(COMPILE.c) $(SUN4D_IL) -o $@ $(ARCH_BASE)/os/cpu_driver.c
+$(OBJS_DIR)/cpu_wrapper.o:	$(ARCH_BASE)/os/cpu_wrapper.c
+	$(COMPILE.c) -o $@ $(ARCH_BASE)/os/cpu_wrapper.c
+$(OBJS_DIR)/cpudelay.o:		$(ARCH_BASE)/os/cpudelay.c
+	$(COMPILE.c) -o $@ $(ARCH_BASE)/os/cpudelay.c
+$(OBJS_DIR)/ddi_impl.o:		$(ARCH_BASE)/os/ddi_impl.c
+	$(COMPILE.c) -o $@ $(ARCH_BASE)/os/ddi_impl.c
+$(OBJS_DIR)/dvma.o:		$(ARCH_BASE)/os/dvma.c
+	$(COMPILE.c) -o $@ $(ARCH_BASE)/os/dvma.c
+$(OBJS_DIR)/fillsysinfo.o:	$(ARCH_BASE)/os/fillsysinfo.c
+	$(COMPILE.c) -o $@ $(ARCH_BASE)/os/fillsysinfo.c
+$(OBJS_DIR)/hwbcopy.o:		$(ARCH_BASE)/os/hwbcopy.c $(SUN4D_IL)
+	$(COMPILE.c) $(SUN4D_IL) -o $@ $(ARCH_BASE)/os/hwbcopy.c
+$(OBJS_DIR)/intr.o:		$(ARCH_BASE)/os/intr.c $(SUN4D_IL)
+	$(COMPILE.c) $(SUN4D_IL) -o $@ $(ARCH_BASE)/os/intr.c
+$(OBJS_DIR)/intr15.o:		$(ARCH_BASE)/os/intr15.c $(SUN4D_IL)
+	$(COMPILE.c) $(SUN4D_IL) -o $@ $(ARCH_BASE)/os/intr15.c
+$(OBJS_DIR)/ioc.o:		$(ARCH_BASE)/os/ioc.c
+	$(COMPILE.c) -o $@ $(ARCH_BASE)/os/ioc.c
+$(OBJS_DIR)/iommu.o:		$(ARCH_BASE)/os/iommu.c
+	$(COMPILE.c) -o $@ $(ARCH_BASE)/os/iommu.c
+$(OBJS_DIR)/led.o:		$(ARCH_BASE)/os/led.c
+	$(COMPILE.c) -o $@ $(ARCH_BASE)/os/led.c
+$(OBJS_DIR)/machdep.o:		$(ARCH_BASE)/os/machdep.c $(SUN4D_IL)
+	$(COMPILE.c) $(SUN4D_IL) -o $@ $(ARCH_BASE)/os/machdep.c
+$(OBJS_DIR)/mach_sysconfig.o:	$(ARCH_BASE)/os/mach_sysconfig.c $(SUN4D_IL)
+	$(COMPILE.c) $(SUN4D_IL) -o $@ $(ARCH_BASE)/os/mach_sysconfig.c
+$(OBJS_DIR)/memerr.o:		$(ARCH_BASE)/os/memerr.c $(SUN4D_IL)
+	$(COMPILE.c) $(SUN4D_IL) -o $@ $(ARCH_BASE)/os/memerr.c
+$(OBJS_DIR)/memlist.o:		$(UTSBASE)/sparc/os/memlist.c $(SUN4D_IL)
+	$(COMPILE.c) $(SUN4D_IL) -o $@ $(UTSBASE)/sparc/os/memlist.c
+$(OBJS_DIR)/memscrub.o:		$(ARCH_BASE)/os/memscrub.c
+	$(COMPILE.c) -o $@ $(ARCH_BASE)/os/memscrub.c
+$(OBJS_DIR)/mlsetup.o:		$(ARCH_BASE)/os/mlsetup.c $(HAT_IL)
+	$(COMPILE.c) $(HAT_IL) -o $@ $(ARCH_BASE)/os/mlsetup.c
+$(OBJS_DIR)/power_off.o:	$(ARCH_BASE)/os/power_off.c
+	$(COMPILE.c) -o $@ $(ARCH_BASE)/os/power_off.c
+$(OBJS_DIR)/ppage.o:		$(ARCH_BASE)/os/ppage.c
+	$(COMPILE.c) -o $@ $(ARCH_BASE)/os/ppage.c
+$(OBJS_DIR)/startup.o:		$(ARCH_BASE)/os/startup.c $(SUN4D_IL)
+	$(COMPILE.c) $(SUN4D_IL) -o $@ $(ARCH_BASE)/os/startup.c
+$(OBJS_DIR)/trap.o:		$(ARCH_BASE)/os/trap.c
+	$(COMPILE.c) -o $@ $(ARCH_BASE)/os/trap.c
+# vm
+$(OBJS_DIR)/hat_srmmu.o:	$(UTSBASE)/srmmu/vm/hat_srmmu.c $(HAT_IL)
+	$(COMPILE.c) $(HAT_IL) -o $@ $(UTSBASE)/srmmu/vm/hat_srmmu.c
+$(OBJS_DIR)/mhat.o:		$(UTSBASE)/srmmu/vm/mhat.c $(HAT_IL)
+	$(COMPILE.c) $(HAT_IL) -o $@ $(UTSBASE)/srmmu/vm/mhat.c
+$(OBJS_DIR)/hat_conf.o:		$(ARCH_BASE)/vm/hat_conf.c
+	$(COMPILE.c) -o $@ $(ARCH_BASE)/vm/hat_conf.c
+$(OBJS_DIR)/mach_srmmu.o:	$(ARCH_BASE)/vm/mach_srmmu.c $(HAT_IL)
+	$(COMPILE.c) $(HAT_IL) -o $@ $(ARCH_BASE)/vm/mach_srmmu.c
+$(OBJS_DIR)/mmu.o:		$(ARCH_BASE)/vm/mmu.c
+	$(COMPILE.c) -o $@ $(ARCH_BASE)/vm/mmu.c
+$(OBJS_DIR)/vm_machdep.o:	$(ARCH_BASE)/vm/vm_machdep.c
+	$(COMPILE.c) -o $@ $(ARCH_BASE)/vm/vm_machdep.c
+# misc
+$(OBJS_DIR)/obpsym.o:		$(UTSBASE)/sparc/os/obpsym.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sparc/os/obpsym.c
+
+$(OBJS_DIR)/obpsym_obp.o:	$(UTSBASE)/sparc/os/obpsym_obp.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sparc/os/obpsym_obp.c
+
+$(OBJS_DIR)/bootdev.o:		$(UTSBASE)/sparc/os/bootdev.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sparc/os/bootdev.c
+
+$(OBJS_DIR)/mem_config_stubs.o:	$(UTSBASE)/common/os/mem_config_stubs.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/os/mem_config_stubs.c
+
+#
+#	Lint `object' build rules
+#
+
+# conf
+$(LINTS_DIR)/confunix.ln:	$(ARCH_BASE)/conf/confunix.c
+	@($(LHEAD) $(LINT.c) $(ARCH_BASE)/conf/confunix.c $(LTAIL))
+$(LINTS_DIR)/genalign.ln:         $(ARCH_BASE)/conf/genalign.s
+	@($(LHEAD) $(LINT.s) $(ARCH_BASE)/conf/genalign.s $(LTAIL))
+$(LINTS_DIR)/memlist.ln:	$(UTSBASE)/sparc/os/memlist.c 
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sparc/os/memlist.c $(LTAIL))
+
+# io
+$(LINTS_DIR)/bootbus.ln:	$(ARCH_BASE)/io/bootbus.c
+	@($(LHEAD) $(LINT.c) $(ARCH_BASE)/io/bootbus.c $(LTAIL))
+$(LINTS_DIR)/cbe.ln:		$(ARCH_BASE)/io/cbe.c
+	@($(LHEAD) $(LINT.c) $(ARCH_BASE)/io/cbe.c $(LTAIL))
+$(LINTS_DIR)/decode_xdb.ln:	$(ARCH_BASE)/io/decode_xdb.c
+	@($(LHEAD) $(LINT.c) $(ARCH_BASE)/io/decode_xdb.c $(LTAIL))
+$(LINTS_DIR)/hardclk.ln:	$(ARCH_BASE)/io/hardclk.c
+	@($(LHEAD) $(LINT.c) $(ARCH_BASE)/io/hardclk.c $(LTAIL))
+$(LINTS_DIR)/rootnex.ln:	$(ARCH_BASE)/io/rootnex.c
+	@($(LHEAD) $(LINT.c) $(ARCH_BASE)/io/rootnex.c $(LTAIL))
+$(LINTS_DIR)/sbusnex.ln:	$(ARCH_BASE)/io/sbusnex.c
+	@($(LHEAD) $(LINT.c) $(ARCH_BASE)/io/sbusnex.c $(LTAIL))
+# ml
+$(LINTS_DIR)/copy.ln:		$(ARCH_BASE)/ml/copy.s
+	@($(LHEAD) $(LINT.s) $(ARCH_BASE)/ml/copy.s $(LTAIL))
+$(LINTS_DIR)/intr_misc.ln:	$(ARCH_BASE)/ml/intr_misc.s
+	@($(LHEAD) $(LINT.s) $(ARCH_BASE)/ml/intr_misc.s $(LTAIL))
+$(LINTS_DIR)/ip_ocsum.ln:	$(ARCH_BASE)/ml/ip_ocsum.s
+	@($(LHEAD) $(LINT.s) $(ARCH_BASE)/ml/ip_ocsum.s $(LTAIL))
+$(LINTS_DIR)/locore.ln:		$(ARCH_BASE)/ml/locore.s
+	@($(LHEAD) $(LINT.s) $(ARCH_BASE)/ml/locore.s $(LTAIL))
+$(LINTS_DIR)/mmu_asi.ln:	$(ARCH_BASE)/ml/mmu_asi.s
+	@($(LHEAD) $(LINT.s) $(ARCH_BASE)/ml/mmu_asi.s $(LTAIL))
+$(LINTS_DIR)/proc_init.ln:	$(ARCH_BASE)/ml/proc_init.s
+	@($(LHEAD) $(LINT.s) $(ARCH_BASE)/ml/proc_init.s $(LTAIL))
+$(LINTS_DIR)/subr_4d.ln:	$(ARCH_BASE)/ml/subr_4d.s
+	@($(LHEAD) $(LINT.s) $(ARCH_BASE)/ml/subr_4d.s $(LTAIL))
+$(LINTS_DIR)/swtch.ln:		$(ARCH_BASE)/ml/swtch.s
+	@($(LHEAD) $(LINT.s) $(ARCH_BASE)/ml/swtch.s $(LTAIL))
+# os
+$(LINTS_DIR)/aflt.ln:		$(ARCH_BASE)/os/aflt.c
+	@($(LHEAD) $(LINT.c) $(ARCH_BASE)/os/aflt.c $(LTAIL))
+$(LINTS_DIR)/cpu_driver.ln:	$(ARCH_BASE)/os/cpu_driver.c
+	@($(LHEAD) $(LINT.c) $(ARCH_BASE)/os/cpu_driver.c $(LTAIL))
+$(LINTS_DIR)/cpu_wrapper.ln:	$(ARCH_BASE)/os/cpu_wrapper.c
+	@($(LHEAD) $(LINT.c) $(ARCH_BASE)/os/cpu_wrapper.c $(LTAIL))
+$(LINTS_DIR)/cpudelay.ln:	$(ARCH_BASE)/os/cpudelay.c
+	@($(LHEAD) $(LINT.c) $(ARCH_BASE)/os/cpudelay.c $(LTAIL))
+$(LINTS_DIR)/ddi_impl.ln:	$(ARCH_BASE)/os/ddi_impl.c
+	@($(LHEAD) $(LINT.c) $(ARCH_BASE)/os/ddi_impl.c $(LTAIL))
+$(LINTS_DIR)/dvma.ln:		$(ARCH_BASE)/os/dvma.c
+	@($(LHEAD) $(LINT.c) $(ARCH_BASE)/os/dvma.c $(LTAIL))
+$(LINTS_DIR)/fillsysinfo.ln:	$(ARCH_BASE)/os/fillsysinfo.c
+	@($(LHEAD) $(LINT.c) $(ARCH_BASE)/os/fillsysinfo.c $(LTAIL))
+$(LINTS_DIR)/hwbcopy.ln:	$(ARCH_BASE)/os/hwbcopy.c
+	@($(LHEAD) $(LINT.c) $(ARCH_BASE)/os/hwbcopy.c $(LTAIL))
+$(LINTS_DIR)/intr.ln:		$(ARCH_BASE)/os/intr.c
+	@($(LHEAD) $(LINT.c) $(ARCH_BASE)/os/intr.c $(LTAIL))
+$(LINTS_DIR)/intr15.ln:		$(ARCH_BASE)/os/intr15.c
+	@($(LHEAD) $(LINT.c) $(ARCH_BASE)/os/intr15.c $(LTAIL))
+$(LINTS_DIR)/ioc.ln:		$(ARCH_BASE)/os/ioc.c
+	@($(LHEAD) $(LINT.c) $(ARCH_BASE)/os/ioc.c $(LTAIL))
+$(LINTS_DIR)/iommu.ln:		$(ARCH_BASE)/os/iommu.c
+	@($(LHEAD) $(LINT.c) $(ARCH_BASE)/os/iommu.c $(LTAIL))
+$(LINTS_DIR)/led.ln:		$(ARCH_BASE)/os/led.c
+	@($(LHEAD) $(LINT.c) $(ARCH_BASE)/os/led.c $(LTAIL))
+$(LINTS_DIR)/machdep.ln:	$(ARCH_BASE)/os/machdep.c
+	@($(LHEAD) $(LINT.c) $(ARCH_BASE)/os/machdep.c $(LTAIL))
+$(LINTS_DIR)/mach_sysconfig.ln:	$(ARCH_BASE)/os/mach_sysconfig.c
+	@($(LHEAD) $(LINT.c) $(ARCH_BASE)/os/mach_sysconfig.c $(LTAIL))
+$(LINTS_DIR)/memerr.ln:		$(ARCH_BASE)/os/memerr.c
+	@($(LHEAD) $(LINT.c) $(ARCH_BASE)/os/memerr.c $(LTAIL))
+$(LINTS_DIR)/memscrub.ln:	$(ARCH_BASE)/os/memscrub.c
+	@($(LHEAD) $(LINT.c) $(ARCH_BASE)/os/memscrub.c $(LTAIL))
+$(LINTS_DIR)/mlsetup.ln:	$(ARCH_BASE)/os/mlsetup.c
+	@($(LHEAD) $(LINT.c) $(ARCH_BASE)/os/mlsetup.c $(LTAIL))
+$(LINTS_DIR)/power_off.ln:	$(ARCH_BASE)/os/power_off.c
+	@($(LHEAD) $(LINT.c) $(ARCH_BASE)/os/power_off.c $(LTAIL))
+$(LINTS_DIR)/ppage.ln:		$(ARCH_BASE)/os/ppage.c
+	@($(LHEAD) $(LINT.c) $(ARCH_BASE)/os/ppage.c $(LTAIL))
+$(LINTS_DIR)/startup.ln:	$(ARCH_BASE)/os/startup.c
+	@($(LHEAD) $(LINT.c) $(ARCH_BASE)/os/startup.c $(LTAIL))
+$(LINTS_DIR)/trap.ln:		$(ARCH_BASE)/os/trap.c
+	@($(LHEAD) $(LINT.c) $(ARCH_BASE)/os/trap.c $(LTAIL))
+# vm
+$(LINTS_DIR)/hat_conf.ln:	$(ARCH_BASE)/vm/hat_conf.c
+	@($(LHEAD) $(LINT.c) $(ARCH_BASE)/vm/hat_conf.c $(LTAIL))
+$(LINTS_DIR)/mach_srmmu.ln:	$(ARCH_BASE)/vm/mach_srmmu.c
+	@($(LHEAD) $(LINT.c) $(ARCH_BASE)/vm/mach_srmmu.c $(LTAIL))
+$(LINTS_DIR)/mmu.ln:		$(ARCH_BASE)/vm/mmu.c
+	@($(LHEAD) $(LINT.c) $(ARCH_BASE)/vm/mmu.c $(LTAIL))
+$(LINTS_DIR)/vm_machdep.ln:	$(ARCH_BASE)/vm/vm_machdep.c
+	@($(LHEAD) $(LINT.c) $(ARCH_BASE)/vm/vm_machdep.c $(LTAIL))
+# srmmu
+$(LINTS_DIR)/hat_srmmu.ln:	$(UTSBASE)/srmmu/vm/hat_srmmu.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/srmmu/vm/hat_srmmu.c $(LTAIL))
+
+$(LINTS_DIR)/mhat.ln:	$(UTSBASE)/srmmu/vm/mhat.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/srmmu/vm/mhat.c $(LTAIL))
+# misc
+$(LINTS_DIR)/obpsym.ln:		$(UTSBASE)/sparc/os/obpsym.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sparc/os/obpsym.c $(LTAIL))
+ 
+$(LINTS_DIR)/obpsym_obp.ln:	$(UTSBASE)/sparc/os/obpsym_obp.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sparc/os/obpsym_obp.c $(LTAIL))
+ 
+$(LINTS_DIR)/bootdev.ln:		$(UTSBASE)/sparc/os/bootdev.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sparc/os/bootdev.c $(LTAIL))
+ 
+$(LINTS_DIR)/mem_config_stubs.ln:	$(UTSBASE)/common/os/mem_config_stubs.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/os/mem_config_stubs.c $(LTAIL))
+
+# inline crud
+
+CLEANFILES += $(SUN4D_IL) $(HAT_IL)
+
+$(SUN4D_IL):	$(ARCH_BASE)/ml/sun4d.il.cpp
+		$(IL_CPP) $(ARCH_BASE)/ml/sun4d.il.cpp > $(SUN4D_IL)
+
+$(HAT_IL):	$(ARCH_BASE)/ml/hat_srmmu.il.cpp
+		$(IL_CPP) $(ARCH_BASE)/ml/hat_srmmu.il.cpp > $(HAT_IL)
+
+# temporary stuff
+
+$(OBJS_DIR)/hard_init.o:	$(ARCH_BASE)/sas_support/hard_init.c $(SUN4D_IL)
+	$(COMPILE.c) $(SUN4D_IL) -o $@ hard_init.c
+
+$(LINTS_DIR)/hard_init.ln:	$(ARCH_BASE)/sas_support/hard_init.c
+	@($(LHEAD) $(LINT.c) $(ARCH_BASE)/sas_support/hard_init.c $(LTAIL))

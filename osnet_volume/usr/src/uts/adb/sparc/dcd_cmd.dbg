@@ -1,0 +1,24 @@
+\
+\ Copyright (c) 1998 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)dcd_cmd.dbg	1.2	98/02/07 SMI"
+
+#include <sys/dada/dada.h>
+#include "dummy.h"
+
+dcd_cmd		""
+{adb_inline_begin}
+.>z
+<z+{OFFSET, cmd}=""
+{adb_inline_end}
+	cmd			hex
+	address_mode		hex
+	direction		hex
+	features		hex
+	size			hex
+	version			hex
+	sector_num.lba_num	hex	lba_num
+{adb_inline_begin}
+<z+{SIZEOF}=""
+{adb_inline_end}

@@ -1,0 +1,71 @@
+#
+#ident	"@(#)Makefile.demo	1.3	97/07/28 SMI"
+#
+# Copyright (c) 1997 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+
+KSHSRC=		sotruss.ksh symbindrep.ksh perfcnt.ksh whocalls.ksh
+
+PROGS=		dumpbind
+LIBS=		truss.so.1 symbindrep.so.1 perfcnt.so.1 who.so.1 \
+		bindings.so.1
+SCRIPTS=	$(KSHSRC:%.ksh=%)
+DIRS=		objs pics
+
+$(LIBS):=		CFLAGS +=	-Kpic
+
+LDFLAGS=		-zdefs -ztext
+CLEANFILES=		core pics/*.o objs/*.o
+CLOBBERFILES=		$(LIBS) $(SCRIPTS) $(PROGS)
+
+
+.KEEP_STATE:
+
+all: $(DIRS) .WAIT $(LIBS) $(SCRIPTS) $(PROGS)
+
+%:	src/%.ksh
+	rm -f $@
+	cat $< > $@
+	chmod a+x $@
+
+objs/%.o: src/%.c
+	$(COMPILE.c) -c $< -o $@
+
+pics/%.o: src/%.c
+	$(COMPILE.c) -c $< -o $@
+
+dumpbind: objs/dumpbind.o
+	$(LINK.c) objs/dumpbind.o -o $@
+
+bindings.so.1: pics/bindings.o pics/env.o
+	$(LINK.c) -G pics/bindings.o pics/env.o -o $@ -lmapmalloc -lc
+
+perfcnt.so.1: pics/perfcnt.o pics/hash.o pics/env.o
+	$(LINK.c) -G pics/perfcnt.o pics/hash.o pics/env.o \
+		-o $@ -lmapmalloc -lc
+
+symbindrep.so.1: pics/symbindrep.o pics/env.o
+	$(LINK.c) -G pics/symbindrep.o pics/env.o -o $@ -lmapmalloc -lc
+
+truss.so.1: pics/truss.o pics/env.o
+	$(LINK.c) -G pics/truss.o pics/env.o -o $@ -lmapmalloc -lc
+
+who.so.1: pics/who.o pics/env.o
+	$(LINK.c) -G pics/who.o pics/env.o \
+		-o $@ -lelf -lmapmalloc -ldl -lc
+
+objs:	
+	-@mkdir objs
+
+pics:
+	-@mkdir pics
+
+clean: FRC
+	rm -f $(CLEANFILES)
+
+clobber: clean FRC
+	rm -f $(CLOBBERFILES)
+	rm -rf $(DIRS)
+
+FRC:

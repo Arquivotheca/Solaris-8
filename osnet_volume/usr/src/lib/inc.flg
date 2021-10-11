@@ -1,0 +1,14 @@
+#!/bin/sh
+#
+#pragma ident   "@(#)inc.flg 1.1     96/04/09 SMI"
+#
+# Note: although this file will instigate the propagation of the libdl
+# and libelf directories, these directories may also contain inc.flg's.
+# As inc.flg processing presently isn't recursive, users should also
+# perform explicit bringovers of each of these libraries to insure they
+# have all components necessary for their build.
+ 
+find_files "s.*" \
+        usr/src/cmd/sgs/libdl \
+        usr/src/cmd/sgs/libelf
+ 

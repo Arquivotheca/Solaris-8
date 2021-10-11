@@ -1,0 +1,30 @@
+\
+\ Copyright (c) 1999 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)hard_addr.dbg	1.1	99/07/21 SMI"
+\
+#include <sys/isa_defs.h>
+#include <sys/types.h>
+#include <sys/dditypes.h>
+#include <sys/ddidmareq.h>
+#include <sys/mutex.h>
+#include <sys/semaphore.h>
+#include <sys/condvar.h>
+#include <sys/thread.h>
+#include <sys/devops.h>
+#include <sys/fibre-channel/fc.h>
+#include "dummy.h"
+\
+\
+hard_addr
+{adb_inline_begin}
+.>q
+#if defined(i386)
+<q+{OFFSET, hard_addr}/n"hard_addr"16t"rsvd"n3BBn
+#elif defined(sparc)
+<q+{OFFSET, rsvd}/n"rsvd"16t"hard_addr"nB3Bn
+#else
+#endif
+<q+{SIZEOF}=""
+{adb_inline_end}

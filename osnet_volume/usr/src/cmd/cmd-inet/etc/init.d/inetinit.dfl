@@ -1,0 +1,9 @@
+# @(#)inetinit.dfl 1.2 97/05/08
+#
+# TCP_STRONG_ISS sets the TCP initial sequence number generation parameters.
+# Set TCP_STRONG_ISS to be:
+#	0 = Old-fashioned sequential initial sequence number generation.
+#	1 = Improved sequential generation, with random variance in increment.
+#	2 = RFC 1948 sequence number generation, unique-per-connection-ID.
+#
+TCP_STRONG_ISS=1

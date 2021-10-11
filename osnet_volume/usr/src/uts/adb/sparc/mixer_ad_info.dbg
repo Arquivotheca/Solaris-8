@@ -1,0 +1,25 @@
+\
+\ Copyright (c) 1999 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)mixer_ad_info.dbg	1.2	99/10/11 SMI"
+
+#include <sys/mixer_impl.h>
+#include "dummy.h"
+
+\
+\
+am_ad_info	ad_	mixer_ad_info
+	int_vers	decimal
+	mode		decimal
+	add_mode	hex
+	codec_type	decimal
+	play_comb	hex
+	rec_comb	hex
+	defaults	hex
+	entry		hex
+	dev_info	hex
+	diag_flags	hex
+	diff_flags	hex
+	assist_flags	hex
+	num_mics	hex

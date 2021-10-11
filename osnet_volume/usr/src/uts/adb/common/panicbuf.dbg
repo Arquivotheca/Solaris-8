@@ -1,0 +1,16 @@
+\
+\ Copyright (c) 1999 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)panicbuf.dbg	1.1	99/03/23 SMI"
+
+#include <sys/types.h>
+#include <sys/panic.h>
+#include "dummy.h"
+
+panic_data	pd_	panicbuf
+{adb_inline_begin}
+*(panicbuf+{OFFSET, pd_msgoff})>/i/o
+panicbuf+<o/snn
+panicbuf+{OFFSET, pd_nvdata},(<o-{OFFSET, pd_nvdata})%0t24/16c8tJn
+{adb_inline_end}

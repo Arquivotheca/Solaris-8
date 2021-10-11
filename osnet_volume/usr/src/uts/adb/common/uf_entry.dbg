@@ -1,0 +1,32 @@
+\
+\ Copyright (c) 1999 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\ #pragma ident	"@(#)uf_entry.dbg	1.1	99/08/17 SMI"
+
+#include <sys/user.h>
+#include "dummy.h"
+
+\
+\
+uf_entry        uf_
+{adb_inline_begin}
+.>s
+<9>v
+<s+{OFFSET, uf_lock}=""
+{adb_inline_end}
+	lock			.mutex
+        file			hex
+        fpollinfo		hex
+        refcnt			sdecimal
+	alloc			sdecimal
+        flag			hex
+        busy			hex
+	wanted_cv		hex
+	closing_cv		hex
+{adb_inline_begin}
+,#<v$<
+<v-1>v
+<s+{SIZEOF}>s
+<s,<v$<uf_entry
+{adb_inline_end}

@@ -1,0 +1,19 @@
+#
+#
+# Copyright (c) 1998-1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#pragma ident	"@(#)versions	1.1	99/07/07 SMI"
+#
+# vers file for libsldap
+#
+
+sparc {
+	SUNWprivate_1.0;
+}
+i386 {
+	SUNWprivate_1.0;
+}
+sparcv9 {
+	SUNWprivate_1.0;
+}

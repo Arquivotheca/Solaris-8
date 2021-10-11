@@ -1,0 +1,199 @@
+/* LINTLIBRARY */
+/* PROTOLIB1 */
+
+/*
+ * Copyright (c) 1997-1998 by Sun Microsystems, Inc. 
+ * All rights reserved. 
+ */ 
+#pragma ident	"@(#)llib-lsocket	1.14	99/03/21 SMI"
+
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <net/if.h>
+#include <netinet/in.h>
+#include <sys/uio.h>
+#include <sys/isa_defs.h>
+#include <netinet/if_ether.h>
+#include <netdb.h>
+
+/*
+ * usr/src/lib/libsocket/inet routines
+ */
+
+/* bindresvport.c */
+int bindresvport(int sd, struct sockaddr_in *sin);
+
+/* bootparams_getbyname.c */
+int bootparams_getbyname(char *name, char *linebuf, int linelen);
+
+/* byteorder.c */
+uint32_t htonl(uint32_t hl);
+uint16_t htons(uint16_t hs);
+uint32_t ntohl(uint32_t nl);
+uint16_t ntohs(uint16_t ns);
+
+/* ether_addr.c */
+int ether_hostton(const char *host, ether_addr_t e);
+int ether_ntohost(char *host, ether_addr_t e);
+int ether_line(const char *s, ether_addr_t e, char *hostname);
+char *ether_ntoa(const ether_addr_t e);
+ether_addr_t *ether_aton(const char *s);
+/* getaddrinfo.c */
+const struct in6_addr in6addr_any = IN6ADDR_ANY_INIT;
+const struct in6_addr in6addr_loopback = IN6ADDR_LOOPBACK_INIT;
+int getaddrinfo(const char *, const char *,
+		const struct addrinfo *, struct addrinfo **);
+void freeaddrinfo(struct addrinfo *);
+char *gai_strerror(int);
+/* getnameinfo.c */
+int getnameinfo(const struct sockaddr *, socklen_t,
+		char *, size_t, char *, size_t, int);
+/* getnetent.c */
+struct netent *getnetbyname(const char *nam);
+struct netent *getnetbyaddr(in_addr_t net, int type);
+struct netent *getnetent(void);
+
+/* getnetent_r.c */
+struct netent *getnetbyname_r(const char *name, struct netent *result,
+				char *buffer, int buflen);
+struct netent *getnetbyaddr_r(long net, int type, struct netent *result,
+				char *buffer, int buflen);
+int setnetent(int stay);
+int endnetent(void);
+struct netent *getnetent_r(struct netent *result, char *buffer, int buflen);
+
+/* getprotoent.c */
+struct protoent *getprotobyname(const char *nam);
+struct protoent *getprotobynumber(int proto);
+struct protoent *getprotoent(void);
+
+/* getprotoent_r.c */
+struct protoent *getprotobyname_r(const char *name, struct protoent *result,
+				char *buffer, int buflen);
+struct protoent *getprotobynumber_r(int proto, struct protoent *result,
+				char *buffer, int buflen);
+int setprotoent(int stay);
+int endprotoent(void);
+struct protoent *getprotoent_r(struct protoent *result,
+				char *buffer, int buflen);
+
+/* getservbyname_r.c */
+struct servent *getservbyname_r(const char *name, const char *proto,
+				struct servent *result,
+				char *buffer, int buflen);
+struct servent *getservbyport_r(int port, const char *proto,
+				struct servent *result,
+				char *buffer, int buflen);
+
+/* getservent.c */
+struct servent *getservbyname(const char *nam, const char *proto);
+struct servent *getservbyport(int port, const char *proto);
+struct servent *getservent(void);
+
+/* getservent_r.c */
+int setservent(int stay);
+int endservent(void);
+struct servent *getservent_r(struct servent *result, char *buffer, int buflen);
+
+/* inet_lnaof.c */
+in_addr_t inet_lnaof(struct in_addr in);
+
+/* inet_mkaddr.c */
+struct in_addr inet_makeaddr(ipaddr_t net, ipaddr_t host);
+
+/* inet_network.c */
+in_addr_t inet_network(const char *cp);
+
+/* netmasks.c */
+int getnetmaskbynet(const struct in_addr net, struct in_addr *mask);
+int getnetmaskbyaddr(const struct in_addr addr, struct in_addr *mask);
+
+/* rcmd.c */
+int rcmd(char **ahost, unsigned short rport, const char *locuser,
+			const char *remuser, const char *cmd, int *fd2p);
+int rcmd_af(char **ahost, unsigned short rport, const char *locuser,
+			const char *remuser, const char *cmd, int *fd2p, int af);
+int rresvport(int *alport);
+int rresvport_af(int *alport, int af);
+int ruserok(const char *rhost, int superuser, const char *ruser,
+			const char *luser);
+
+/* rexec.c */
+int rexec(char **ahost, unsigned short rport, const char *name,
+			const char *pass, const char *cmd, int *fd2p);
+int rexec_af(char **ahost, unsigned short rport, const char *name,
+			const char *pass, const char *cmd, int *fd2p, int af);
+
+/* ruserpass.c */
+void _ruserpass(const char *host, char **aname, char **apass);
+
+
+/*
+ * usr/src/lib/libsocket/socket routines
+ */
+
+/* _soutil.c */
+
+/* socket.c */
+int socket(int domain, int type, int protocol);
+int _socket(int domain, int type, int protocol);
+int _socket_bsd(int family, int type, int protocol);
+int __xnet_socket(int family, int type, int protocol);
+
+/* socketpair.c */
+int socketpair(int domain, int type, int protocol, int sv[]);
+int _socketpair(int domain, int type, int protocol, int *sv);
+int _socketpair_bsd(int domain, int type, int protocol, int *sv);
+int __xnet_socketpair(int domain, int type, int protocol, int *sv);
+
+/* weaks.c */
+int bind(int s, const struct sockaddr *name, socklen_t namelen);
+int listen(int s, int backlog);
+int accept(int s, struct sockaddr *addr, Psocklen_t addrlen);
+int connect(int s, const struct sockaddr *name, socklen_t namelen);
+int shutdown(int s, int how);
+ssize_t recv(int s, void *buf, size_t len, int flags);
+ssize_t recvfrom(int s, void *buf, size_t len, int flags,
+				struct sockaddr *from, Psocklen_t fromlen);
+ssize_t recvmsg(int s, struct msghdr *msg, int flags);
+ssize_t send(int s, const void *msg, size_t len, int flags);
+ssize_t sendmsg(int s, const struct msghdr *msg, int flags);
+ssize_t sendto(int s, const void *msg, size_t len, int flags,
+				const struct sockaddr *to, socklen_t tolen);
+int getpeername(int s, struct sockaddr *name, Psocklen_t namelen);
+int getsockname(int s, struct sockaddr *name, Psocklen_t namelen);
+int getsockopt(int s, int level, int optname, void *optval, Psocklen_t optlen);
+int setsockopt(int s, int level, int optname, const void *optval, socklen_t optlen);
+
+/* interface_id.c */
+void if_freenameindex(struct if_nameindex *ptr);
+struct if_nameindex *if_nameindex(void);
+uint32_t if_nametoindex(const char *ifname);
+char *if_indextoname(uint32_t ifindex, char *ifname);
+
+int _bind(int s, const struct sockaddr *name, int namelen);
+int _listen(int s, int backlog);
+int _accept(int s, struct sockaddr *addr, int *addrlen);
+int _connect(int s, struct sockaddr *name, int namelen);
+int _shutdown(int s, int how);
+int _recv(int s, char *buf, int len, int flags);
+int _recvfrom(int s, char *buf, int len, int flags,
+					struct sockaddr *from, int *fromlen);
+int _recvmsg(int s, struct msghdr *msg, int flags);
+int _send(int s, const char *msg, int len, int flags);
+int _sendmsg(int s, const struct msghdr *msg, int flags);
+int _sendto(int s, const char *msg, int len, int flags,
+					const struct sockaddr *to, int tolen);
+int _getpeername(int s, struct sockaddr *name, int *namelen);
+int _getsockname(int s, struct sockaddr *name, int *namelen);
+int _getsockopt(int s, int level, int optname, char *optval, int *optlen);
+int _setsockopt(int s, int level, int optname, const char *optval, int optlen);
+int __xnet_bind(int sock, const struct sockaddr *addr, int addrlen);
+int __xnet_listen(int sock, int backlog);
+int __xnet_connect(int sock, const struct sockaddr *addr, int addrlen);
+int __xnet_recvmsg(int sock, struct msghdr *msg, int flags);
+int __xnet_sendmsg(int sock, const struct msghdr *msg, int flags);
+int __xnet_sendto(int sock, const char *buf, int len, int flags,
+				const struct sockaddr *addr, int *addrlen);
+int __xnet_getsockopt(int sock, int level, int option_name,
+    void *option_value, int *option_lenp);

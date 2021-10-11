@@ -1,0 +1,129 @@
+/* LINTLIBRARY */
+/* PROTOLIB1 */
+
+/*
+ * Copyright (c) 1997 by Sun Microsystems, Inc. 
+ * All rights reserved. 
+ */ 
+#pragma ident   "@(#)llib-lsldap 1.1     99/07/07 SMI"
+
+#include <stdio.h>
+#include <sys/types.h>
+#include <lber.h>
+#include <ldap.h>
+#include "ns_sldap.h"
+
+
+/*
+ * Simplified LDAP Naming APIs
+ */
+int __ns_ldap_list(
+	const char *database,
+	const char *filter,
+	const char * const *attribute,
+	const char *domain,
+	const Auth_t *cred,
+	const int flags,
+	ns_ldap_result_t ** result,
+	ns_ldap_error_t ** errorp,
+	int (*callback)(const ns_ldap_entry_t *entry, const void *userdata),
+	const void *userdata);
+
+int  __ns_ldap_addAttr(
+	const char *dn,
+	const ns_ldap_attr_t * const *attr,
+	const Auth_t *cred,
+	const int flags,
+	ns_ldap_error_t **errorp);
+
+int __ns_ldap_delAttr(
+	const char *dn,
+	const ns_ldap_attr_t * const *attr,
+	const Auth_t *cred,
+	const int flags,
+	ns_ldap_error_t **errorp);
+
+int  __ns_ldap_repAttr(
+	const char *dn,
+	const ns_ldap_attr_t * const *attr,
+	const Auth_t *cred,
+	const int flags,
+	ns_ldap_error_t **errorp);
+
+int  __ns_ldap_addEntry(
+	const char *dn,
+	const ns_ldap_entry_t *entry,
+	const Auth_t *cred,
+	const int flags,
+	ns_ldap_error_t **errorp);
+
+int __ns_ldap_delEntry(
+	const char *dn,
+	const Auth_t *cred,
+	const int flags,
+	ns_ldap_error_t **errorp);
+
+int __ns_ldap_firstEntry(
+	const char *database,
+	const char *filter,
+	const char * const *attribute,
+	const char *domain,
+	const Auth_t *cred,
+	const int flags,
+	void **cookie,
+	ns_ldap_result_t ** result,
+	ns_ldap_error_t **errorp);
+
+int  __ns_ldap_nextEntry(
+	void *cookie,
+	ns_ldap_result_t ** result,
+	ns_ldap_error_t **errorp);
+
+int  __ns_ldap_endEntry(
+	void **cookie,
+	ns_ldap_error_t **errorp);
+
+int __ns_ldap_freeResult(
+	ns_ldap_result_t **result);
+
+int __ns_ldap_freeError(
+	ns_ldap_error_t **errorp);
+
+int __ns_ldap_freeCookie(
+	void **cookie);
+
+int  __ns_ldap_uid2dn(
+	const char *uid,
+	const char *domain,
+	char **userDN,
+	const char *cred,
+	ns_ldap_error_t ** errorp);
+
+int __ns_ldap_auth(
+	const Auth_t *cred,
+	const char *domain,
+	const int flag,
+	ns_ldap_error_t **errorp);
+
+int __ns_ldap_err2str(
+	int err,
+	char **strmsg);
+
+int __ns_ldap_setParam(
+	const char *domain,
+	const ParamIndexType type,
+	const void *data,
+	ns_ldap_error_t **errorp);
+
+int __ns_ldap_getParam(
+	const char *domain,
+	const ParamIndexType type,
+	void ***data,
+	ns_ldap_error_t **errorp);
+
+int __ns_ldap_freeParam(
+	void ***data);
+
+char **__ns_ldap_getAttr(
+	const ns_ldap_entry_t *entry,
+	const char *attrname);

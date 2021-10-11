@@ -1,0 +1,9 @@
+# "@(#)Mail.rc 1.1 91/01/08"
+
+# BSD compatible Mail defaults.
+
+# like mailx...
+source /etc/mail/mailx.rc
+# except...
+unset showname autoinc
+set escapeok

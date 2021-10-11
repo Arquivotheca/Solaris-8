@@ -1,0 +1,22 @@
+#
+#ident	"@(#)Makefile.targ	1.6	94/10/13 SMI"
+#
+# Copyright (c) 1993 by Sun Microsystems, Inc.
+#
+# cmd/eeprom/Makefile.targ
+#
+install: all $(USR_PSM_SBIN_PROG) $(USR_PSM_SBIN_PROG_LINKS)
+
+$(PROG): $(OBJS)
+	$(LINK.c) -o $@ $(OBJS) $(LDLIBS)
+	$(POST_PROCESS)
+
+clean:
+	-$(RM) $(OBJS)
+	-$(RM) $(LINT_OBJS)
+
+lint: $(LINT_OBJS)
+	$(LINT.c) $(LINT_OBJS)
+
+include $(SRCDIR)/../Makefile.targ
+include $(SRCDIR)/../../Makefile.psm.targ

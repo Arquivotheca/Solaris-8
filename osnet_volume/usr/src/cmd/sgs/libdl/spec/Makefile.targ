@@ -1,0 +1,17 @@
+#
+# Copyright (c) 1997-1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#ident	"@(#)Makefile.targ	1.2	99/02/16 SMI"
+#
+# cmd/sgs/libdl/spec/Makefile.targ
+
+LIBRARY	=	libdl.a
+VERS	=	.1
+
+OBJECTS	=	dlfunc.o	\
+		weak.o
+
+SPECCPP =
+
+lint:

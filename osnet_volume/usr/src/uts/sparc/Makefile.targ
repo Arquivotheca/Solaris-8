@@ -1,0 +1,23 @@
+#
+# uts/sparc/Makefile.targ
+# Copyright (c) 1991 by Sun Microsystems, Inc.
+#
+#ident	"@(#)Makefile.targ	1.2	92/07/14 SMI"
+#
+#	This Makefile defines the set of all required, target containing
+# included Makefiles for the sparc architecture.
+#
+
+#
+#	Targets for all implementations:
+#
+include $(UTSBASE)/Makefile.targ
+
+#
+#	Target set for sparc (order is not important, as it is with the
+# isomorphic Makefile.files set).
+#
+include $(UTSBASE)/sparc/Makefile.rules
+include $(UTSBASE)/sun/Makefile.rules
+include $(UTSBASE)/common/Makefile.rules
+

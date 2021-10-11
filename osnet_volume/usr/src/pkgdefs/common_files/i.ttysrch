@@ -1,0 +1,42 @@
+#!/bin/sh
+#
+#ident	"@(#)i.ttysrch	1.1	94/02/07 SMI"
+#
+# Copyright (c) 1994 by Sun Microsystems, Inc.
+#
+
+PATH="/usr/bin:/usr/sbin:${PATH}"
+export PATH
+
+while read src dest
+do
+	if [ ! -f $dest ] ; then
+		cp $src $dest
+	else
+		# get the first real entry and trim whitespace
+
+		awk '/^\/dev/ { print $1 }' $dest > /tmp/i.$$
+		if [ "`cat /tmp/i.$$`" != "/dev/pts" ]; then
+
+			# update the SCCS id
+			grep '@(#)ttysrch' $src \
+				> /tmp/newident.$$ 2>/dev/null
+			grep -v '@(#)ttysrch' $dest \
+				> /tmp/rest.$$ 2>/dev/null
+			cat /tmp/newident.$$ /tmp/rest.$$ > $dest
+
+			sed '/^\/dev\/pts$/d' $dest > /tmp/i.$$
+			ed -s /tmp/i.$$ << EOF
+/^\/dev/i
+/dev/pts
+.
+w
+q
+EOF
+			mv /tmp/i.$$ $dest
+		fi
+
+	fi
+done
+
+exit 0

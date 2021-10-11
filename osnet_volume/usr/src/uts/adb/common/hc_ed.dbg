@@ -1,0 +1,30 @@
+\
+\ Copyright (c) 1998-1999 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)hc_ed.dbg	1.1	99/11/05 SMI"
+
+#include <sys/usb/usba.h>
+#include <sys/usb/usba/usba_types.h>
+#include <sys/usb/hcd/openhci/ohci.h>
+#include "dummy.h"
+
+\
+\
+
+hc_ed	hced_	
+{adb_inline_begin}
+.>z
+<z+{OFFSET, hced_ctrl}=""
+{adb_inline_end}
+	ctrl			hex
+	tailp			hex
+	headp			hex
+	next			hex
+	prev			hex
+	reclaim_next		hex
+	node			hex
+	flag			hex
+{adb_inline_begin}
+<z+{SIZEOF}=""
+{adb_inline_end}

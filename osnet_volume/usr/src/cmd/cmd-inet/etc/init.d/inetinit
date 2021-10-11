@@ -1,0 +1,353 @@
+#!/sbin/sh
+#
+# Copyright (c) 1995, 1997-1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#pragma ident	"@(#)inetinit	1.44	99/10/04 SMI"
+
+#
+# This is the second phase of TCP/IP configuration.  The first part,
+# run in the "/etc/rcS.d/S30rootusr.sh" script, does all configuration
+# necessary to mount the "/usr" filesystem via NFS.  This includes configuring
+# the interfaces and setting the machine's hostname.  The second part,
+# run in this script, does all configuration that can be done before
+# NIS or NIS+ is started.  This includes configuring IP routing,
+# setting the NIS domainname and setting any tunable parameters.  The
+# third part, run in a subsequent startup script, does all
+# configuration that may be dependent on NIS/NIS+ maps.  This includes
+# a final re-configuration of the interfaces and starting all internet
+# services.
+#
+
+case "$1" in
+'start')
+	;; # Fall through -- rest of script is the initialization code
+
+'stop')
+	#
+	# If we were routing dynamically, we will note this with
+	# the .dynamic_routing file, so that we can leave the routes
+	# in place without thinking they're static route entries
+	# when we come back into states 2 or 3.
+	#
+	if /usr/bin/pgrep -x -u 0 'in.routed|in.rdisc' >/dev/null 2>&1; then
+		/usr/bin/pkill -x -u 0 'in.routed|in.rdisc'
+		> /etc/.dynamic_routing
+	fi
+	exit 0
+	;;
+
+*)
+	echo "Usage: $0 { start | stop }"
+	exit 1
+	;;
+esac
+
+#
+# Initialize IPsec only if ipsecinit.conf exists.  Otherwise, save the
+# kernel memory that'll be chomped if IPsec is loaded.
+#
+if [ -f /etc/inet/ipsecinit.conf ] ; then
+	/usr/sbin/ipsecconf -qa /etc/inet/ipsecinit.conf
+fi
+
+#
+# Set the RFC 1948 entropy, regardless of if I'm using it or not.  If present,
+# use the encrypted root password as a source of entropy.  Otherwise,
+# just use the pre-set (and hopefully difficult to guess) entropy that
+# tcp used when it loaded.
+#
+encr=`/usr/bin/awk -F: '/^root:/ {print $2}' /etc/shadow`
+[ -z "$encr" ] || /usr/sbin/ndd -set /dev/tcp tcp_1948_phrase $encr
+unset encr
+
+#
+# Set TCP ISS generation.  By default the ISS generation is
+# time + random()-delta.  This might not be strong enough for some users.
+# See /etc/default/inetinit for settings and further info on TCP_STRONG_ISS.
+# If not set, use TCP's internal default setting.
+#
+
+# Get value of TCP_STRONG_ISS
+[ -f /etc/default/inetinit ] && . /etc/default/inetinit
+if [ $TCP_STRONG_ISS ]; then
+	/usr/sbin/ndd -set /dev/tcp tcp_strong_iss $TCP_STRONG_ISS
+fi
+
+#
+# Configure default IPv4 routers using the local "/etc/defaultrouter"
+# configuration file.  The file can contain the hostnames or IP
+# addresses of one or more default routers.  If hostnames are used,
+# each hostname must also be listed in the local "/etc/hosts" file
+# because NIS and NIS+ are not running at the time that this script is
+# run.  Each router name or address is listed on a single line by
+# itself in the file.  Anything else on that line after the router's
+# name or address is ignored.  Lines that begin with "#" are
+# considered comments and ignored.
+#
+# The default routes listed in the "/etc/defaultrouter" file will
+# replace those added by the kernel during diskless booting.  An
+# empty "/etc/defaultrouter" file will cause the default route
+# added by the kernel to be deleted.
+#
+# Note that the default router file is ignored if we received routes
+# from a DHCP server.  Our policy is to always trust DHCP over local
+# administration.
+#
+if [ "$_INIT_NET_STRATEGY" = "dhcp" ] && [ -n "`/sbin/dhcpinfo Router`" ]; then
+	defrouters=`/sbin/dhcpinfo Router`
+elif [ -f /etc/defaultrouter ]; then
+	defrouters=`/usr/bin/grep -v \^\# /etc/defaultrouter | \
+	    /usr/bin/awk '{print $1}'`
+	if [ -n "$defrouters" ]; then
+		#
+		# We want the default router(s) listed in /etc/defaultrouter
+		# to replace the one added from the BOOTPARAMS WHOAMI response
+		# but we must avoid flushing the last route between the running
+		# system and its /usr file system.
+		#
+
+		# First, remember the original route.
+		shift $#
+		set -- `/usr/bin/netstat -rn -f inet | /usr/bin/grep '^default'`
+		route_IP="$2"
+
+		#
+		# Next, add those from /etc/defaultrouter.  While doing this,
+		# if one of the routes we add is for the route previously
+		# added as a result of the BOOTPARAMS response, we will see
+		# a message of the form:
+		#	"add net default: gateway a.b.c.d: entry exists"
+		#
+		do_delete=yes
+		for router in $defrouters; do
+			set -- `/usr/sbin/route -n add default $router`
+			[ $? -eq 0 -a "x$5" = "x$route_IP:" ] && do_delete=no
+		done
+
+		#
+		# Finally, delete the original default route unless it was
+		# also listed in the defaultrouter file.
+		#
+		if [ -n "$route_IP" -a $do_delete = yes ]; then
+			/usr/sbin/route -n delete default $route_IP > /dev/null
+		fi
+	else
+		/usr/sbin/route -fn > /dev/null
+	fi
+else
+	defrouters=
+fi
+
+#
+# Set NIS domainname if locally configured.
+#
+if [ -f /etc/defaultdomain ]; then
+	/usr/bin/domainname `cat /etc/defaultdomain`
+	echo "NIS domainname is `/usr/bin/domainname`"
+fi
+
+#
+# Run in.routed/router discovery if we don't already have a default
+# route installed or if we had been running them in a previous
+# multiuser state.
+#
+if [ -z "$defrouters" -a ! -f /etc/.dynamic_routing ]; then
+	#
+	# No default routes were setup by "route" command above - check the
+	# kernel routing table for any other default routes.
+	#
+	/usr/bin/netstat -rn -f inet | \
+	    /usr/bin/grep default >/dev/null 2>&1 && defrouters=yes
+fi
+[ -f /etc/.dynamic_routing ] && /usr/bin/rm -f /etc/.dynamic_routing
+
+if [ -z "$defrouters" ]; then
+	#
+	# Determine how many active interfaces there are and how many pt-pt
+	# interfaces. Act as an IPv4 router if there are more than 2 interfaces
+	# (including the loopback interface) or one or more point-point
+	# interface. Also act as an IPv4 router if /etc/gateways exists.
+	#
+	# Do NOT act as an IPv4 router if /etc/notrouter exists.
+	# Do NOT act as an IPv4 router if DHCP was used to configure
+	# interface(s)
+	#
+	inetifaddrs="`/usr/sbin/ifconfig -a4u | /usr/bin/grep inet`"
+	numifs=`echo "$inetifaddrs" | /usr/bin/wc -l`
+	numptptifs=`echo "$inetifaddrs" | /usr/bin/egrep -c -e '-->'`
+
+	if [ "$_INIT_NET_STRATEGY" = "dhcp" ]; then
+		numdhcp=`/usr/sbin/ifconfig -a4 | /usr/bin/grep -c DHCP`
+	else
+		numdhcp=0
+	fi
+
+	if [ ! -f /etc/notrouter -a $numdhcp -eq 0 -a \
+	    \( $numifs -gt 2 -o $numptptifs -gt 0 -o -f /etc/gateways \) ]; then
+		#
+		# Machine is an IPv4 router: turn on ip_forwarding, run
+		# in.routed, and advertise ourselves as a router using router
+		# discovery.
+		#
+		echo 'Machine is an IPv4 router.'
+		/usr/sbin/ndd -set /dev/ip ip_forwarding 1
+
+		[ -f /usr/sbin/in.routed ] && /usr/sbin/in.routed -s
+		[ -f /usr/sbin/in.rdisc ] && /usr/sbin/in.rdisc -r
+
+	else
+		#
+		# Machine is an IPv4 host: if router discovery finds a router
+		# then we rely on router discovery. If there are no routers
+		# advertising themselves through router discovery
+		# run in.routed in quiet mode.  In both cases, turn off
+		# ip_forwarding.
+		#
+		/usr/sbin/ndd -set /dev/ip ip_forwarding 0
+
+		if [ -f /usr/sbin/in.rdisc ] && /usr/sbin/in.rdisc -s; then
+			echo 'Starting IPv4 router discovery.'
+		elif [  -f /usr/sbin/in.routed ]; then
+			/usr/sbin/in.routed -q
+			echo 'Starting IPv4 routing daemon.'
+		fi
+	fi
+else
+	/usr/sbin/ndd -set /dev/ip ip_forwarding 0
+fi
+
+#
+# Run IPv6 if more than lo0 plumbed for IPv6.
+#
+/usr/sbin/ifconfig -a6u >/tmp/ifconfig.$$
+numv6ifs=`/usr/bin/grep -c inet6 /tmp/ifconfig.$$`
+if  [ $numv6ifs -gt 1 ]; then
+	#
+	# Run IPv6 routing only if /etc/inet/ndpd.conf exists, otherwise just
+	# run the host portion.
+	#
+	if [ -f /etc/inet/ndpd.conf ]; then
+		#
+		# Machine is an IPv6 router: turn on ip6_forwarding,
+		# ip6_send_redirects and ip6_ignore_redirect, run in.ripngd, and
+		# advertise ourselves as a router using neighbor discovery.
+		#
+		echo "Machine is an IPv6 router."
+		/usr/sbin/ndd -set /dev/ip ip6_forwarding 1
+		/usr/sbin/ndd -set /dev/ip ip6_send_redirects 1
+		/usr/sbin/ndd -set /dev/ip ip6_ignore_redirect 1
+		if [ -f /usr/lib/inet/in.ndpd ]; then
+			/usr/lib/inet/in.ndpd
+		fi
+		if [ -f /usr/lib/inet/in.ripngd ]; then
+			/usr/lib/inet/in.ripngd -s
+		fi
+	else
+		# Machine is an IPv6 host - just run neighbor discovery.
+		/usr/sbin/ndd -set /dev/ip ip6_forwarding 0
+		/usr/sbin/ndd -set /dev/ip ip6_send_redirects 0
+		/usr/sbin/ndd -set /dev/ip ip6_ignore_redirect 0
+		if [ -f /usr/lib/inet/in.ndpd ] ; then
+			echo "Starting IPv6 neighbor discovery."
+			/usr/lib/inet/in.ndpd
+		fi
+	fi
+	#
+	# Add a static route for multicast packets out of a link-local
+	# interface, although would like to specify multicast interface using
+	# an interface name!
+	#
+	set -- `/usr/bin/awk '
+		/inet6 fe80:/ {
+			print substr($2, 1, index($2, "/") - 1)
+		}' /tmp/ifconfig.$$`
+
+	if [ -n "$1" ]; then
+		echo "Setting default IPv6 interface for multicast: \c"
+		/usr/sbin/route -n add -interface -inet6 "ff00::/8" "$1"
+	fi
+else
+	/usr/sbin/ndd -set /dev/ip ip6_forwarding 0
+	/usr/sbin/ndd -set /dev/ip ip6_send_redirects 0
+	/usr/sbin/ndd -set /dev/ip ip6_ignore_redirect 0
+fi
+/usr/bin/rm -f /tmp/ifconfig.$$
+
+#
+# Configure tunnels which was deferred by /etc/rcS.d/S30network.sh since
+# it depends on the tunnel endpoints being reachable i.e. routing must be
+# running.
+#
+# WARNING: you may wish to turn OFF forwarding if you haven't already, because
+# of various possible security vulnerabilities when configuring tunnels for
+# Virtual Private Network (VPN) construction.
+#
+# Also, if names are used in the /etc/hostname.ip.tun* file, those names
+# have to be in either DNS (and DNS is used) or in /etc/hosts, because this
+# file is executed before NIS or NIS+ is started.
+#
+
+#
+# IPv4 tunnels
+# The second component of the name must be either "ip" or "ip6".
+#
+interface_names="`/usr/bin/ls /etc/hostname.ip*.*[0-9] 2>/dev/null | \
+    /usr/bin/grep '/etc/hostname\.ip6\{0,1\}\.'`"
+if [ -n "$interface_names" ]; then
+	(
+		echo "configuring IPv4 tunnels:\c"
+		# Extract the part after the first '.'
+		set -- `for intr in $interface_names; do \
+		    /usr/bin/expr //$intr : '[^.]*\.\(.*\)$'; done`
+		while [ $# -ge 1 ]; do
+			# Skip empty files
+			if [ ! -s /etc/hostname\.$1 ]; then
+				shift
+				continue
+			fi
+			/usr/sbin/ifconfig $1 plumb 2>&1 >/dev/null
+			while read ifcmds; do
+				if [ -n "$ifcmds" ]; then
+					/usr/sbin/ifconfig $1 inet $ifcmds \
+					    2>&1 >/dev/null
+				fi
+			done </etc/hostname\.$1
+			echo " $1\c"
+			shift
+		done
+		echo "."
+	)
+fi
+
+#
+# IPv6 Tunnels
+# The second component of the name must be either "ip" or "ip6".
+#
+interface_names="`/usr/bin/ls /etc/hostname6.ip*.*[0-9] 2>/dev/null | \
+    /usr/bin/grep '/etc/hostname6\.ip6\{0,1\}\.'`"
+if [ -n "$interface_names" ]; then
+	(
+		echo "configuring IPv6 tunnels:\c"
+		# Extract the part after the first '.'
+		set -- `for intr in $interface_names; do \
+		    /usr/bin/expr //$intr : '[^.]*\.\(.*\)$'; done`
+		while [ $# -ge 1 ]; do
+			# Skip empty files
+			if [ ! -s /etc/hostname6\.$1 ]; then
+				shift
+				continue
+			fi
+			/usr/sbin/ifconfig $1 inet6 plumb 2>&1 >/dev/null
+			while read ifcmds; do
+				if [ -n "$ifcmds" ]; then
+					/usr/sbin/ifconfig $1 inet6 $ifcmds \
+					    2>&1 >/dev/null
+				fi
+			done </etc/hostname6\.$1
+			echo " $1\c"
+			shift
+		done
+		echo "."
+	)
+fi

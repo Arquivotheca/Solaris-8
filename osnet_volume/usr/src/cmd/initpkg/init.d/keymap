@@ -1,0 +1,30 @@
+#!/sbin/sh
+#
+# Copyright (c) 1984, 1986, 1987, 1988, 1989 AT&T.
+# All rights reserved.
+#
+# THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF AT&T
+# The copyright notice above does not evidence any
+# actual or intended publication of such source code.
+#
+# Copyright (c) 1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#pragma ident	"@(#)keymap	1.15	99/05/12 SMI"
+
+# This file loads keyboard mappings and initializes keyboard defaults
+
+#
+# Systems with no hardware keyboard ID will provide an eeprom value.
+#
+if test -x /usr/lib/set_keyboard_layout
+then
+	/usr/lib/set_keyboard_layout
+fi
+
+# Load the keymap for the attached keyboard.
+/usr/bin/loadkeys
+
+# Initialize the keyboard defaults
+
+[ -h /dev/kbd -a -x /usr/bin/kbd ] && /usr/bin/kbd -i >/dev/null 2>&1

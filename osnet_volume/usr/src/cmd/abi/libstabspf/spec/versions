@@ -1,0 +1,19 @@
+#
+# Copyright (c) 1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#pragma ident	"@(#)versions	1.1	99/05/14 SMI"
+#
+# cmd/abi/libstabspf/spec/versions
+
+i386 {
+	SUNWprivate_1.1;
+}
+
+sparc {
+	SUNWprivate_1.1;
+}
+
+sparcv9 {
+	SUNWprivate_1.1;
+}

@@ -1,0 +1,232 @@
+#
+#ident "@(#)msg_master 1.2 94/04/04"
+#
+# Copyright (c) 1993 by Sun Microsystems, Inc.
+#
+
+# This is the master message file for kdmconfig.  Any time you create a new
+# message or edit the text for an existing message, you must do it here.
+# see the file `mkmsgs.c' for details on the format for this file.
+# Running the tool on this file will generate 3 files:
+#	kdmconfig_msgs.h
+#	kdmconfig_msgs.c
+#	kdmconfig_message.po
+
+# We don't export any of these codes to the world, so ordering is not important
+# here, and we can let the tool automatically generate the msg codes simply by
+# specifying msg codes of zero.
+
+# Don't worry about format in this file.  All text retrieved from gettext() is
+# automatically formatted for the specific terminal's column width, although
+# you can insert \n & \t whereever you like to override the formatter.
+
+CFILE	TTYLIB_MSGS
+
+PREFIX	TTYLIB
+BASE	0	TTYLIB
+
+#
+# Usage Message
+#
+USAGE		0	"Usage: kdmconfig [-v] [-s <hostname> ] -c|-u"
+
+#
+# Exception handler messages
+#
+WARNING		0	"kdmconfig: The following warning was noted:"
+ERROR_EXIT	0	"kdmconfig: Cannot continue due to the following error:"
+
+#
+# Configuration state messages
+#
+FOUND		0	"(Found)."
+NOT_FOUND	0	"(Not Found)."
+GET_DIS		0	"Looking for Display configuration data"
+GET_KBD		0	"Looking for Keyboard configuration data"
+GET_PTR		0	"Looking for Pointer configuration data"
+
+#
+# On-screen text
+#
+COMMENT	On-screen text -- grouped by category/attribute.
+COMMENT For each, there is a form title, an input field label,
+COMMENT a confirmation (output field) label, and on-screen text.
+
+DISPLAY_TITLE	0	"Graphics Card"
+DISPLAY_LABEL	0	"Graphics card"
+DISPLAY_CONFIRM	0	"Graphics card:"
+DISPLAY_TEXT	0	"On this screen you must specify the "
+			"graphics card that is installed in your system.\n\n"
+			"> To make a selection, use the arrow keys to "
+			"highlight the option and\n  "
+			"press Return to mark it [X]."
+
+POINTER_TITLE	0	"Pointing Device"
+POINTER_LABEL	0	"Pointing device"
+POINTER_CONFIRM	0	"Pointing device:"
+POINTER_TEXT	0	"On this screen you must specify the type of "
+			"pointing device that is attached to your system.\n\n"
+			"> To make a selection, use the arrow keys to "
+			"highlight the option and\n  "
+			"press Return to mark it [X]."
+
+COMMENT Future -- only AT 101 type keyboard is supported at this time
+KEYBOARD_TITLE	0	"Keyboard Type"
+KEYBOARD_LABEL	0	"Keyboard type"
+KEYBOARD_CONFIRM 0	"Keyboard type:"
+KEYBOARD_TEXT	0	"On this screen you must specify the type of "
+			"keyboard that is attached to your system.\n\n"
+			"> To make a selection, use the arrow keys to "
+			"highlight the option and\n  "
+			"press Return to mark it [X]."
+
+SCREEN_TITLE	0	"Screen Size"
+SCREEN_LABEL	0	"Screen size"
+SCREEN_CONFIRM	0	"Screen size:"
+SCREEN_TEXT	0	"On this screen you must specify the size "
+			"of your screen.  The size determines the "
+			"default active display area after Solaris "
+			"is installed. If your exact screen size is not shown, pick"
+			"the closest size.\n\n"
+			"> To make a selection, use the arrow keys to "
+			"highlight the option and\n  "
+			"press Return to mark it [X]."
+
+IRQ_TITLE	0	"Interrupt Number (IRQ)"
+IRQ_LABEL	0	"IRQ"
+IRQ_CONFIRM	0	"IRQ:"
+IRQ_TEXT	0	"On this screen you must specify the interrupt number "
+			"(IRQ) of your pointing device.\n\n"
+			"> To make a selection, use the arrow keys to "
+			"highlight the option and\n  "
+			"press Return to mark it [X]."
+
+BUTTONS_TITLE	0	"Number of Buttons"
+BUTTONS_LABEL	0	"Buttons"
+BUTTONS_CONFIRM	0	"Buttons:"
+BUTTONS_TEXT	0	"On this screen you must specify the number of buttons "
+			"on your pointing device.\n\n"
+			"> To make a selection, use the arrow keys to "
+			"highlight the option and\n  "
+			"press Return to mark it [X]."
+
+LAYOUT_TITLE	0	"Keyboard Language"
+LAYOUT_LABEL	0	"Keyboard language"
+LAYOUT_CONFIRM	0	"Keyboard language:"
+LAYOUT_TEXT	0	"On this screen you must specify the language your "
+			"keyboard supports.\n\n"
+			"> To make a selection, use the arrow keys to "
+			"highlight the option and\n  "
+			"press Return to mark it [X]."
+
+DEVICE_TITLE	0	"Serial Communications Port"
+DEVICE_LABEL	0	"Serial Port"
+DEVICE_CONFIRM	0	"Serial Port:"
+DEVICE_TEXT	0	"On this screen you must specify the serial "
+			"communications port used to connect your mouse.\n\n"
+			"> To make a selection, use the arrow keys to "
+			"highlight the option and\n  "
+			"press Return to mark it [X]."
+
+IOADDR_TITLE	0	"I/O Address"
+IOADDR_LABEL	0	"I/O address"
+IOADDR_CONFIRM	0	"I/O address:"
+IOADDR_TEXT	0	"On this screen you must specify the address of the "
+			"device's control and/or status registers.\n\n"
+			"> To make a selection, use the arrow keys to "
+			"highlight the option and\n  "
+			"press Return to mark it [X]."
+
+POSITION_TITLE	0	"Relative Screen Position"
+POSITION_LABEL	0	"Relative Screen Position"
+POSITION_CONFIRM	0	"Relative Screen Position"
+POSITION_TEXT	0	"On this screen you must specify the position of this "
+			"display relative to the primary display. \n\n"
+			"> To make a selection, use the arrow keys to "
+			"highlight the option and\n  "
+			"press Return to mark it [X]."
+
+RESOLUTION_TITLE	0	"Display Resolution"
+RESOLUTION_LABEL	0	"Display Resolution"
+RESOLUTION_CONFIRM	0	"Display Resolution"
+RESOLUTION_TEXT	0	"On this screen you must specify the display resolution "
+			"desired on this display device. \n\n"
+			"> To make a selection, use the arrow keys to "
+			"highlight the option and\n  "
+			"press Return to mark it [X]."
+
+
+SELECT_TEXT	0	"> To make a selection, use the arrow keys to "
+			"highlight the option and\n  "
+			"press Return to mark it [X]."
+
+CONFIRM_TITLE	0	"Confirm Information"
+CONFIRM_TEXT	0	"> Confirm the following information.  "
+			"If it is correct, press F2;\n  "
+			"to change any information, press F4.\n\n"
+
+INTRO_TITLE	0	"Identify Graphics Devices"
+INTRO_TEXT	0	"On the next screens, you must identify one or more of "
+			"the following peripheral devices that are attached "
+			"to your system. This is necessary to configure your window "
+			" system for use during install.\n\n"
+			"\t- Graphics card\n"
+			"\t- Pointing device\n\n"
+			"You will not be asked to identify devices which have been "
+			"identified automatically.\n\n"
+			"> If you do NOT wish to configure your window system at this "
+			"time, press F4. This will cause install to run in a non-graphics "
+			"mode. You will have another chance to configure the window "
+			"system when the system reboots after installation, if you "
+			"choose this option.\n\n"
+			"> To begin identifying devices, press F2.\n\n"
+
+ERROR_TITLE	0	"Error Notification"
+ERROR_TEXT	0	"> Press F2 to dismiss this message."
+
+#
+# Misc. text
+#
+YES		0	"Yes"
+NO		0	"No"
+CONTINUE	0	"> Press F2 to go to the next screen."
+
+#
+# Help index entries
+#
+COMMENT	The following are the "topics" online help entries for each attribute.
+COMMENT	Make sure these match the strings in the appropriate index files.
+
+SCREEN_TOPICS	0	"Screen Size"
+
+BUTTONS_TOPICS	0	"Buttons"
+
+LAYOUT_TOPICS	0	"Keyboard Layout"
+
+DEVICE_TOPICS	0	"Serial Port"
+
+IRQ_TOPICS	0	"Interrupt Number (IRQ)"
+
+IOADDR_TOPICS	0	"I/O Address"
+
+POSITION_TOPICS	0	"Relative Screen Position"
+
+RESOLUTION_TOPICS	0	"Display Resolution"
+
+DISPLAY_TOPICS	0	"Graphics Card"
+
+KEYBOARD_TOPICS	0	"Keyboard"
+
+POINTER_TOPICS	0	"Pointing Device"
+
+NAVIGATE_TOPICS	0	"Navigation"
+
+CONFIRM_TOPICS	0	"Confirm Information"
+
+#
+# Device labels for confirmation screens
+#
+COMMENT	"Singular" category names for confirmation screen
+DIS_DEVICE	0	"Graphics card:"
+KBD_DEVICE	0	"Keyboard:"
+PTR_DEVICE	0	"Pointing device:"

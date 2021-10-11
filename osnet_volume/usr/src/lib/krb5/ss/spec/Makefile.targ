@@ -1,0 +1,12 @@
+#
+# Copyright (c) 1997-1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#pragma ident	"@(#)Makefile.targ	1.1	99/07/18 SMI"
+#
+# lib/krb5/ss/spec/Makefile.targ
+
+LIBRARY	=	libss.a
+VERS	=	.1
+
+OBJECTS	=	ss.o

@@ -1,0 +1,116 @@
+\
+\ Copyright (c) 1997-1998 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)ipc.dbg	1.4	99/08/25 SMI"
+
+#include <sys/types.h>
+#include <sys/stropts.h>
+#include <sys/socket.h>
+#include <netinet/in_systm.h>
+#include <netinet/in.h>
+#include <netinet/ip.h>
+#include <netinet/ip6.h>
+#include <netinet/icmp6.h>
+#include <net/if.h>
+#include <sys/stream.h>
+#include <inet/common.h>
+#include <inet/led.h>
+#include <inet/ip.h>
+#include <inet/ip6.h>
+#include "dummy.h"
+
+ipc_s                ""              ipc
+{adb_inline_begin}
+.>z
+<z+{OFFSET, ipc_hash_next}=""
+{adb_inline_end}
+	ipc_hash_next		hex	ipc_hash_next
+	ipc_ptphn		hex	ipc_ptphn
+	ipc_irc_lock		.mutex
+	ipc_ire_cache		hex	ipc_ire_cache
+	ipc_rq			hex	ipc_rq
+	ipc_wq			hex	ipc_wq
+	ipc_fanout_lock		hex	ipc_fanout_lock
+	ipc_pending_ill		hex	ipc_pending_ill
+	ipcua_v6addr.ipcua_laddr .in6_addr
+	ipcua_v6addr.ipcua_faddr .in6_addr
+	ipc_ipcu.ipcu_ports1.ipcu_fport hex ipc_fport
+	ipc_ipcu.ipcu_ports1.ipcu_lport hex ipc_lport
+	ipc_reflock		.mutex
+	ipc_refcnt		decimal	ipc_refcnt
+	ipc_refcv		hex	ipc_refcv
+	ipc_ilg			hex	ipc_ilg
+	ipc_ilg_allocated	decimal	ipc_ilg_allocated
+	ipc_ilg_inuse		decimal	ipc_ilg_inuse
+	ipc_multicast_ipif	hex	ipc_multicast_ipif
+	ipc_multicast_ill	hex	ipc_multicast_ill
+	ipc_incoming_ill	hex	ipc_incoming_ill
+	ipc_outgoing_ill	hex	ipc_outgoing_ill
+	ipc_close_flags		hex	ipc_close_flags
+	ipc_proto		decimal	ipc_proto
+{adb_inline_begin}
+*(<z+{OFFSET, ipc_dontroute})>/i/t
+#if defined(_BIG_ENDIAN)
+(##(<t&0x80000000))="ipc_dontroute"8tB
+(##(<t&0x40000000))="ipc_loopback"8tB
+(##(<t&0x20000000))="ipc_broadcast"8tB
+(##(<t&0x10000000))="ipc_reuseaddr"8tB
+(##(<t&0x08000000))="ipc_multicast_loop"8tB
+(##(<t&0x04000000))="ipc_multi_router"8tB
+(##(<t&0x02000000))="ipc_priv_stream"8tB
+(##(<t&0x01000000))="ipc_draining"8tB
+(##(<t&0x00800000))="ipc_did_putbq"8tB
+(##(<t&0x00400000))="ipc_unspec_src"8tB
+(##(<t&0x00200000))="ipc_proxy_listen"8tB
+(##(<t&0x00100000))="ipc_policy_cached"8tB
+(##(<t&0x00080000))="ipc_in_enforce_policy"8tB
+(##(<t&0x00040000))="ipc_out_enforce_policy"8tB
+(##(<t&0x00020000))="ipc_af_isv6"8tB
+(##(<t&0x00010000))="ipc_pkt_isv6"8tB
+(##(<t&0x00008000))="ipc_ipv6_recvpktinfo"8tB
+(##(<t&0x00004000))="ipc_ipv6_recvhoplimit"8tB
+(##(<t&0x00002000))="ipc_ipv6_recvhopopts"8tB
+(##(<t&0x00001000))="ipc_ipv6_recvdstopts"8tB
+(##(<t&0x00000800))="ipc_ipv6_recvrthdr"8tB
+(##(<t&0x00000400))="ipc_ipv6_recvrtdstopts"8tB
+(##(<t&0x00000200))="ipc_fully_bound"8tB
+#elif defined(_LITTLE_ENDIAN)
+(##(<t&0x00000001))="ipc_dontroute"8tB
+(##(<t&0x00000002))="ipc_loopback"8tB
+(##(<t&0x00000004))="ipc_broadcast"8tB
+(##(<t&0x00000008))="ipc_reuseaddr"8tB
+(##(<t&0x00000010))="ipc_multicast_loop"8tB
+(##(<t&0x00000020))="ipc_multi_router"8tB
+(##(<t&0x00000040))="ipc_priv_stream"8tB
+(##(<t&0x00000080))="ipc_draining"8tB
+(##(<t&0x00000100))="ipc_did_putbq"8tB
+(##(<t&0x00000200))="ipc_unspec_src"8tB
+(##(<t&0x00000400))="ipc_proxy_listen"8tB
+(##(<t&0x00000800))="ipc_policy_cached"8tB
+(##(<t&0x00001000))="ipc_in_enforce_policy"8tB
+(##(<t&0x00002000))="ipc_out_enforce_policy"8tB
+(##(<t&0x00004000))="ipc_af_isv6"8tB
+(##(<t&0x00008000))="ipc_pkt_isv6"8tB
+(##(<t&0x00010000))="ipc_ipv6_recvpktinfo"8tB
+(##(<t&0x00020000))="ipc_ipv6_recvhoplimit"8tB
+(##(<t&0x00040000))="ipc_ipv6_recvhopopts"8tB
+(##(<t&0x00080000))="ipc_ipv6_recvdstopts"8tB
+(##(<t&0x00100000))="ipc_ipv6_recvrthdr"8tB
+(##(<t&0x00200000))="ipc_ipv6_recvrtdstopts"8tB
+(##(<t&0x00400000))="ipc_fully_bound"8tB
+#endif
+<z+{OFFSET, ipc_proxy_ib_pkt_count}=""
+{adb_inline_end}
+	ipc_proxy_ib_pkt_count		decimal	ipc_proxy_ib_pkt_count
+	ipc_palist		hex	ipc_palist
+	ipc_ulp			decimal	ipc_ulp
+	ipc_outbound_policy	hex	ipc_outbound_policy
+	ipc_inbound_policy	hex	ipc_inbound_policy
+	ipc_ipsec_out		hex	ipc_ipsec_out
+	ipc_ipsec_req_in	hex	ipc_ipsec_req_in
+{adb_inline_begin}
+<z+{SIZEOF}=""
+{adb_inline_end}
+
+

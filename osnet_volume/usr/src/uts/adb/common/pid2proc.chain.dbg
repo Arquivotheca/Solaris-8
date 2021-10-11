@@ -1,0 +1,27 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)pid2proc.chain.dbg	1.7	98/07/19 SMI"
+
+#include <sys/proc.h>
+#include "dummy.h"
+
+\	'pid_id' is a 32-bit access.
+\
+pid     ""      	pid2proc.chain
+{adb_inline_begin}
+.>P
+,#(<P)$<
+*(<P+{OFFSET, pid_id})>/i/J
+*(<P+{OFFSET, pid_link}),#(#(<p-<J))$<pid2proc.chain
+*(<P)>/i/Q
+#if defined(__sparc)
+(<Q&0xffffff)*{PTRSIZE}>Q
+*(*procdir+<Q)$<proc
+#elif defined(__i386)
+*(*procdir+((<Q&0xffffff00)%40))$<proc
+#else
+#error "Unknown ISA"
+#endif
+{adb_inline_end}

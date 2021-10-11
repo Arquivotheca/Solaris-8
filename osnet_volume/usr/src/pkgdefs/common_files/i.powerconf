@@ -1,0 +1,57 @@
+#!/bin/sh
+#
+#pragma ident   "@(#)i.powerconf 1.2     99/09/13 SMI"
+#
+# Copyright (c) 1996-1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#
+
+PATH="/usr/bin:/usr/sbin:${PATH}" export PATH
+
+ANCHOR="# management is controlled by the Screen Saver functions."
+
+write_sed_script()
+{
+cat > /tmp/power.sed.$$ << EOF
+/^#ident.*$/d
+/^# Putting an entry in this file will only be effective if the driver$/d
+/^# for the device supports device power management. After the file is$/d
+/^# modified, pmconfig(1M) command must be executed to activate the new$/d
+/^# change.$/d
+/^# Fields must be separated by white space or semicolons$/d
+/^# Note that physical dependents are automatically considered$/d
+/^# by the power management framework.$/d
+/^# Name[ 	][ 	]*.*$/d
+/^\/dev\/kbd[ 	][ 	]*.*$/d
+/^\/dev\/mouse[ 	][ 	]*.*$/d
+s/^\(\/dev\/fb[0-9]*\)[ 	][ 	]*[0-9]*[ 	]*[0-9]*[ 	][ 	]*\/dev\/kbd[ 	][ 	]*\/dev\/mouse/device-dependency \1 \/dev\/kbd/
+/$ANCHOR/s/Screen Saver functions/window system/
+EOF
+}
+
+while read src dest
+do
+	if [ ! -f $dest ] ; then
+		cp $src $dest
+	else
+		grep 'device-dependency[ 	][ 	]*/dev/fb[ 	][ 	]*/dev/kbd' $dest > /dev/null 2>&1
+		if [ $? != 0 ]; then
+			grep '@(#)power.conf' $src > /tmp/p.$$
+			write_sed_script
+			sed -f /tmp/power.sed.$$ < $dest >> /tmp/p.$$
+			cp -f /tmp/p.$$ $dest
+			rm -f /tmp/power.sed.$$ /tmp/p.$$
+		fi
+		grep 'device-dependency[ 	][ 	]*/dev/fb[ 	][ 	]*/dev/kbd' $dest > /dev/null 2>&1
+		if [ $? != 0 ]; then
+			grep -w 'device-dependency' $src >> $dest
+		fi
+		grep -w 'autopm' $dest > /dev/null 2>&1
+		if [ $? != 0 ]; then
+			grep -w 'autopm' $src >> $dest
+		fi
+	fi
+done
+
+exit 0

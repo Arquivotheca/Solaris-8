@@ -1,0 +1,82 @@
+#
+# Copyright (c) 1998-1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#ident	"@(#)prototype_sparc	1.10	99/10/04 SMI"
+#
+# This required package information file contains a list of package contents.
+# The 'pkgmk' command uses this file to identify the contents of a package
+# and their location on the development machine when building the package.
+# Can be created via a text editor or through use of the 'pkgproto' command.
+
+#!search <pathname pathname ...>	# where to find pkg objects
+#!include <filename>			# include another 'prototype' file
+#!default <mode> <owner> <group>	# default used if not specified on entry
+#!<param>=<value>			# puts parameter in pkg environment
+
+#
+# Include ISA independent files (prototype_com)
+#
+!include prototype_com
+#
+#
+#
+# List files which are SPARC specific here
+#
+# source locations relative to the prototype file
+#
+# SUNWkvmx.u
+#
+d none usr 755 root sys
+d none usr/platform 755 root sys
+d none usr/platform/sun4u 755 root sys
+#
+# create other sun4u platform directories
+#
+d none usr/platform/SUNW,Ultra-1 755 root sys
+d none usr/platform/SUNW,Ultra-250 755 root sys
+d none usr/platform/SUNW,Ultra-4 755 root sys
+d none usr/platform/SUNW,Ultra-Enterprise 755 root sys
+d none usr/platform/SUNW,Ultra-Enterprise-10000 755 root sys
+#
+# create lib directory for sun4u and for all other sun4u platforms
+#
+d none usr/platform/sun4u/lib 755 root bin
+d none usr/platform/SUNW,Ultra-1/lib 755 root bin
+d none usr/platform/SUNW,Ultra-250/lib 755 root bin
+d none usr/platform/SUNW,Ultra-4/lib 755 root bin
+d none usr/platform/SUNW,Ultra-Enterprise/lib 755 root bin
+d none usr/platform/SUNW,Ultra-Enterprise-10000/lib 755 root bin
+#
+# create lib/sparcv9 directory for sun4u and links to it for all other sun4u platforms
+#
+d none usr/platform/sun4u/lib/sparcv9 755 root bin
+s none usr/platform/SUNW,Ultra-1/lib/sparcv9=../../sun4u/lib/sparcv9
+s none usr/platform/SUNW,Ultra-250/lib/sparcv9=../../sun4u/lib/sparcv9
+s none usr/platform/SUNW,Ultra-4/lib/sparcv9=../../sun4u/lib/sparcv9
+s none usr/platform/SUNW,Ultra-Enterprise/lib/sparcv9=../../sun4u/lib/sparcv9
+s none usr/platform/SUNW,Ultra-Enterprise-10000/lib/sparcv9=../../sun4u/lib/sparcv9
+#
+# platform dependent libraries
+#
+f none usr/platform/sun4u/lib/sparcv9/libc_psr.so.1 755 root bin
+f none usr/platform/sun4u/lib/sparcv9/libmd5_psr.so.1 755 root bin
+d none usr/platform/sun4u/lib/cfgadm 755 root bin
+d none usr/platform/sun4u/lib/cfgadm/sparcv9 755 root bin
+f none usr/platform/sun4u/lib/cfgadm/sparcv9/sysctrl.so.1 755 root bin
+s none usr/platform/sun4u/lib/cfgadm/sparcv9/sysctrl.so=./sysctrl.so.1
+f none usr/platform/sun4u/lib/cfgadm/sparcv9/ac.so.1 755 root bin
+s none usr/platform/sun4u/lib/cfgadm/sparcv9/ac.so=./ac.so.1
+#
+# platform dependent adb macros
+#
+d none usr/platform/sun4u/lib/adb 755 root bin
+d none usr/platform/sun4u/lib/adb/sparcv9 755 root bin
+f none usr/platform/sun4u/lib/adb/sparcv9/adaptive_mutex 644 root sys
+f none usr/platform/sun4u/lib/adb/sparcv9/ctx 644 root sys
+f none usr/platform/sun4u/lib/adb/sparcv9/machpcb 644 root sys
+f none usr/platform/sun4u/lib/adb/sparcv9/mutex 644 root sys
+f none usr/platform/sun4u/lib/adb/sparcv9/regs 644 root sys
+f none usr/platform/sun4u/lib/adb/sparcv9/rwlock 644 root sys
+f none usr/platform/sun4u/lib/adb/sparcv9/sema 644 root sys
+f none usr/platform/sun4u/lib/adb/sparcv9/spin_mutex 644 root sys

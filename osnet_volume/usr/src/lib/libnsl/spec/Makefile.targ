@@ -1,0 +1,24 @@
+#ident	"@(#)Makefile.targ	1.1	99/01/25 SMI"
+#
+# Copyright (c) 1998-1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+# lib/libnsl/spec/Makefile.targ
+
+LIBRARY	=	libnsl.a
+VERS	=	.1
+
+OBJECTS	=	des.o		\
+		dial.o		\
+		inet.o		\
+		netdir.o	\
+		nis.o		\
+		nsl.o		\
+		rpc.o 		\
+		tli.o		\
+		xdr.o		\
+		xti.o		\
+		yp.o		\
+		private.o
+
+SPECCPP =	-I..

@@ -1,0 +1,37 @@
+#
+# Copyrights (c) 1996 by Sun Microsystems, Inc.
+# All Rights Reserved
+#
+#	Example pieces of NIS Makefile.
+#
+# ident	"@(#)Makefile.yp	1.5	96/04/22 SMI"
+#
+
+#
+# Printers conf Rules
+#
+DIR=/etc
+#
+$(DOM)/printers.conf.time: $(DIR)/printers.conf
+	-@if [ -f $(DIR)/printers.conf ]; then \
+		(sed -e '/^#/d' -e s/#.*$$// -e 's/[ 	][ 	]*$$//' \
+		  -e '/\\$$/s/\\$$/ /'  $(DIR)/printers.conf $(CHKPIPE))\
+		|( awk '/ $$/ {printf "%s", $$0} !/ $$/ {print}' $(CHKPIPE))\
+		|( sed -e 's/[ 	][ 	]*/ /g' -e 's/:[ 	]*:/:/' \
+			$(CHKPIPE))\
+		| awk -F: '{n=split($$1, nm, "|");  for (i=1; i<=n; i++) \
+				print nm[i], $$0}' \
+		| $(MAKEDBM) - $(YPDBDIR)/$(DOM)/printers.conf.byname ; \
+		touch $(DOM)/printers.conf.time;  \
+		echo "updated printers.conf";  \
+		if [ ! $(NOPUSH) ]; then $(YPPUSH) -d $(DOM) printers.conf.byname; \
+		fi ; \
+		if [ ! $(NOPUSH) ]; then echo "pushed printers.conf"; fi ; \
+	else \
+		echo "couldn't find $(DIR)/printers.conf"; \
+	fi
+
+#
+#	Dependency
+#
+printers.conf: $(DOM)/printers.conf.time

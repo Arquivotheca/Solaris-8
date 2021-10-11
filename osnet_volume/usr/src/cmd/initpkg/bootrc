@@ -1,0 +1,93 @@
+#
+#	@(#)bootrc 1.5 96/07/24
+#
+# Copyright (c) 1996, by Sun Microsystems, Inc.
+# All rights reserved.
+#
+# initial properties, set during installation
+# NOTICE: bootpath and boot-args should be set by this point.
+#================================================================
+getprop bootpath bp
+getprop boot-args bootargs
+if .streq ( "${bootargs}"X , kernel/unixX )
+	set bootargs
+endif
+
+set ba0 bogus_response
+set cmd_err 0
+
+# display current defaults
+echo "                     <<< Current Boot Parameters >>>
+Boot path: ${bp}
+Boot args: ${bootargs}"
+
+#comment out following line if auto booting is not desired
+set boot_timeout 5
+
+# display initial boot prompt
+echo '
+Type    b [file-name] [boot-flags] <ENTER>      to boot with options
+or      i <ENTER>                               to enter boot interpreter
+or      <ENTER>                                 to boot with defaults'
+
+if ! .streq ( ${boot_timeout}X , X )
+	echo "
+                  <<< timeout in ${boot_timeout} seconds >>>"
+endif
+
+echo -n '
+Select (b)oot or (i)nterpreter: '
+
+# read response to boot prompt
+if .streq ( ${boot_timeout}X , X )
+	read  ba0 ba1 ba2 ba3 ba4 ba5 ba6 ba7 ba8
+else
+	readt ${boot_timeout} ba0 ba1 ba2 ba3 ba4 ba5 ba6 ba7 ba8
+endif
+
+# process response to boot prompt
+# i command
+if .streq ( ${ba0}X , iX )
+	echo 'Entering boot interpreter - type ctrl-d to resume boot'
+	console
+	if .streq ( ${bootfile}X , X )          # if bootfile not set
+		set bootfile $def_bootfile      # set to default
+	endif
+
+# b command
+elseif .streq ( ${ba0}X , bX )
+	if .strneq ( ${ba1}X , \\- , 1 )        # if first arg is a flag
+		set bootargs $ba1               # save it in bootargs
+		set bootfile $def_bootfile      # set default boot file
+	elseif ! .streq ( ${ba1}X , X )         # else if first arg is present
+		set bootfile $ba1               # set bootfile to it
+	else                                    # else
+		set bootfile $def_bootfile      # set default boot file
+	endif
+	set bootargs "$bootargs $ba2 $ba3 $ba4 $ba5 $ba6 $ba7 $ba8"
+	setprop boot-args "$bootargs"
+
+# anything else
+else                                            # no command
+	if ! .streq ( ${ba0}X , X )
+		echo "invalid response: \"${ba0}\""
+		set cmd_err 1                   # user entered invalid response
+	endif
+	if .streq ( ${bootfile}X , X )          # if bootfile not set
+		set bootfile $def_bootfile      # set to default
+	endif
+endif
+
+# other stuff
+
+setprop whoami $bootfile
+
+# 'b', 'i', or <ENTER> are the only valid responses
+if ( ${cmd_err} == 1 )
+	source /etc/bootrc
+else
+	run $bootfile
+	echo "could not run ${bootfile}"
+	set bootfile
+	source /etc/bootrc
+endif

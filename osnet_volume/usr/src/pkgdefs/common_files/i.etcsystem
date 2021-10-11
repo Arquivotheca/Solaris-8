@@ -1,0 +1,78 @@
+#!/bin/sh
+#
+#ident	"@(#)i.etcsystem	1.13	98/10/02 SMI"
+#
+# Copyright (c) 1993-1998 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#
+PATH="/usr/bin:/usr/sbin:${PATH}"
+export PATH
+TAG=new
+CLEANUP_FILE=/tmp/CLEANUP
+
+while read src dest
+do
+	if [ ! -f $dest ] ; then
+		cp $src $dest
+	else
+		#
+		#  These tunable parameters have moved from nfs to nfssrv.
+		#
+		sed -e "s/^\([^*]*set[ 	]*\)nfs\([ 	]*:[ 	]*nfs_portmon\)/\1nfssrv\2/" \
+    		-e "s/^\([^*]*set[ 	]*\)nfs\([ 	]*:[ 	]*rfs_write_async\)/\1nfssrv\2/" $dest >/tmp/s.$$
+		cp /tmp/s.$$ $dest
+		rm -f /tmp/s.$$
+
+		#
+		# Remove md_mirror_wow_flg line.
+		# 
+
+		egrep -v 'md_mirror:md_mirror_wow_fl' $dest > /tmp/s.$$
+                cp /tmp/s.$$ $dest
+                rm -f /tmp/s.$$
+
+		#
+		# determine whether existing etc/system file is based on
+		# the same one being installed.  If so, no need to update it.
+		#
+		newrev=`sed -n 's/^.*\(@(#)system.*\)\".*/\1/p' $src`
+		oldrev=`sed -n 's/^.*\(@(#)system.*\)\".*/\1/p' $dest`
+		if [ "$oldrev" != "$newrev" ] ; then
+			#
+			# existing /etc/system file is based on a different
+			# original installed version of etc/system.  Determine
+			# whether it has been modified by looking for non-blank,
+			# non-comment lines in the file.  If it has been
+			# modified, preserve it and install the new one as
+			# /etc/system.new.
+			#
+			egrep -v '(^[ 	]*$)|(^\*)' $dest >/dev/null 2>&1
+			if [ $? = 0 ] ; then
+				realdest=`expr $dest : "/a\(.*\)"`
+				if [ "$realdest" = "" ] ; then
+					realdest=$dest
+				fi
+				cp $src $dest.${TAG}
+				#
+				# Checking for the existance of "rootfs:cachefs" from
+				# an AutoClient installation in the existing /etc/system.
+				# Transfer it to /etc/system.new if it does.
+				#
+				grep 'rootfs:cachefs' $dest > /dev/null 2>&1
+				if [ $? = 0 ] ; then
+					grep 'rootfs:cachefs' $dest >> $dest.${TAG}
+				fi
+				echo "EXISTING_FILE_PRESERVED: ${realdest} ${realdest}.${TAG}" \
+					>> ${CLEANUP_FILE}
+			else
+
+				# existing file hasn't been modified, so
+				# install over it.
+
+				cp $src $dest
+			fi
+		fi
+	fi
+done
+exit 0

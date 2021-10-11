@@ -1,0 +1,22 @@
+#!/bin/sh
+#
+# Copyright (c) 1998 Sun Microsystems, Inc.
+# All rights reserved.
+#
+#ident	"@(#)preinstall	1.1	98/06/04 SMI"
+
+# preinstall script for SUNWuxflr.u
+#
+# Properly remove old links to the /etc/init.d script
+# The links below have been replaced by new ones.
+
+root=${PKG_INSTALL_ROOT:-/}
+oldlink=/etc/rc2.d/S71flashprom
+pkg=SUNWuxflr
+
+if [ -f ${root}/${oldlink} ]; then
+	removef -R $root $pkg $oldlink > /dev/null 2>&1
+	removef -R $root -f $pkg > /dev/null 2>&1
+	rm -f ${root}${oldlink}
+fi
+

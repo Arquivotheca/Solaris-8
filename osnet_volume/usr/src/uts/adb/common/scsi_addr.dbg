@@ -1,0 +1,26 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)scsi_addr.dbg	1.5	98/01/19 SMI"
+
+\       this macro is a submacro used by another submacro (scsi_pkt) that
+\       is already using 'w'. Use 'o'.
+
+#include <sys/scsi/scsi.h>
+#include "dummy.h"
+
+\
+\
+scsi_address            a_              scsi_addr
+{adb_inline_begin}
+.>o
+<o+{OFFSET, a_hba_tran}=""
+{adb_inline_end}
+        hba_tran                hex
+        target                  hex
+        lun                     hex
+        sublun                  hex
+{adb_inline_begin}
+<o+{SIZEOF}=""
+{adb_inline_end}

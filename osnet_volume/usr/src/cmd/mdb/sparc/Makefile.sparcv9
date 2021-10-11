@@ -1,0 +1,19 @@
+#
+# Copyright (c) 1997-1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#ident	"@(#)Makefile.sparcv9	1.1	99/08/11 SMI"
+
+ROOTMOD = $(ROOT)/usr/lib/mdb/$(MDBTGT)/sparcv9
+
+$(ROOTMOD)/%: %
+	$(INS.file)
+
+CFLAGS = -xstrconst
+CFLAGS64 += -xstrconst
+CPPFLAGS += -D_ELF64
+LINTFLAGS = $(LINTFLAGS64)
+LINTFLAGS64 = -mux -Xarch=v9 -xerroff=E_BAD_FORMAT_STR2
+
+LFLAGS = -t -v
+YFLAGS = -d -v

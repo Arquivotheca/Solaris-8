@@ -1,0 +1,23 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)buflist.dbg	1.6	98/07/19 SMI"
+
+#include <sys/types.h>
+#include <sys/var.h>
+#include "dummy.h"
+
+\
+\
+var	""	buflist
+{adb_inline_begin}
+v>V
+0>I
+0>C
+*(<V+{OFFSET, v_hbuf})>/i/V
+<V=n24t"Hash buckets:"Dn
+=2n"edev"16t"blkno"16t"addr"n"flags"n
+*hbuf>H
+,#(#(<V))$<buflist.nxt
+{adb_inline_end}

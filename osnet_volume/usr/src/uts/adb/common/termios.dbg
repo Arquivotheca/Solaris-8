@@ -1,0 +1,30 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)termios.dbg	1.3	98/01/19 SMI"
+
+\ arg             : address of a struct termios
+\ uses            :
+\ registers       : w (this is a first-level submacro; the caller
+\                   is already using 'z')
+\ description     : prints the contents of termios structure
+
+#include <sys/termios.h>
+#include "dummy.h"
+
+\
+\
+termios                 c_
+{adb_inline_begin}
+.>w
+<w+{OFFSET, c_iflag}=""
+{adb_inline_end}
+        iflag                   hex
+        oflag                   hex
+        cflag                   hex
+        lflag                   hex
+        cc                      hex
+{adb_inline_begin}
+<w+{SIZEOF}=""
+{adb_inline_end}

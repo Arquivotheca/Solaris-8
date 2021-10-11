@@ -1,0 +1,253 @@
+#
+# Copyright (c) 1990-1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#ident	"@(#)prototype_sparc	1.36	99/11/24 SMI"
+#
+# This required package information file contains a list of package contents.
+# The 'pkgmk' command uses this file to identify the contents of a package
+# and their location on the development machine when building the package.
+# Can be created via a text editor or through use of the 'pkgproto' command.
+
+#!search <pathname pathname ...>	# where to find pkg objects
+#!include <filename>			# include another 'prototype' file
+#!default <mode> <owner> <group>	# default used if not specified on entry
+#!<param>=<value>			# puts parameter in pkg environment
+
+#
+# Include ISA independent files (prototype_com)
+#
+!include prototype_com
+#
+#
+#
+# List files which are SPARC specific here
+#
+# source locations relative to the prototype file
+#
+# SUNWcarx.u
+#
+d none kernel/drv/sparcv9 755 root sys
+f none kernel/drv/sparcv9/arp 755 root sys
+f none kernel/drv/sparcv9/bpp 755 root sys
+f none kernel/drv/sparcv9/clone 755 root sys
+f none kernel/drv/sparcv9/cn 755 root sys
+f none kernel/drv/sparcv9/conskbd 755 root sys
+f none kernel/drv/sparcv9/consms 755 root sys
+f none kernel/drv/sparcv9/dad 755 root sys
+f none kernel/drv/sparcv9/devinfo 755 root sys
+f none kernel/drv/sparcv9/esp 755 root sys
+f none kernel/drv/sparcv9/icmp 755 root sys
+f none kernel/drv/sparcv9/icmp6 755 root sys
+f none kernel/drv/sparcv9/ip 755 root sys
+f none kernel/drv/sparcv9/ip6 755 root sys
+f none kernel/drv/sparcv9/ipsecah 755 root sys
+f none kernel/drv/sparcv9/ipsecesp 755 root sys
+f none kernel/drv/sparcv9/isp 755 root sys
+f none kernel/drv/sparcv9/iwscn 755 root sys
+f none kernel/drv/sparcv9/keysock 755 root sys
+f none kernel/drv/sparcv9/le 755 root sys
+f none kernel/drv/sparcv9/lebuffer 755 root sys
+f none kernel/drv/sparcv9/llc1 755 root sys
+f none kernel/drv/sparcv9/lofi 755 root sys
+f none kernel/drv/sparcv9/log 755 root sys
+f none kernel/drv/sparcv9/mm 755 root sys
+f none kernel/drv/sparcv9/openeepr 755 root sys
+f none kernel/drv/sparcv9/options 755 root sys
+f none kernel/drv/sparcv9/poll 755 root sys
+f none kernel/drv/sparcv9/pseudo 755 root sys
+f none kernel/drv/sparcv9/ptc 755 root sys
+f none kernel/drv/sparcv9/ptsl 755 root sys
+f none kernel/drv/sparcv9/qe 755 root sys
+f none kernel/drv/sparcv9/qec 755 root sys
+f none kernel/drv/sparcv9/rts 755 root sys
+f none kernel/drv/sparcv9/sad 755 root sys
+f none kernel/drv/sparcv9/sd 755 root sys
+f none kernel/drv/sparcv9/sgen 755 root sys
+f none kernel/drv/sparcv9/st 755 root sys
+f none kernel/drv/sparcv9/sy 755 root sys
+f none kernel/drv/sparcv9/sysmsg 755 root sys
+f none kernel/drv/sparcv9/tcp 755 root sys
+f none kernel/drv/sparcv9/tcp6 755 root sys
+f none kernel/drv/sparcv9/tl 755 root sys
+f none kernel/drv/sparcv9/uata 755 root sys	
+f none kernel/drv/sparcv9/udp 755 root sys
+f none kernel/drv/sparcv9/udp6 755 root sys
+f none kernel/drv/sparcv9/wc 755 root sys
+d none kernel/exec/sparcv9 755 root sys
+f none kernel/exec/sparcv9/aoutexec 755 root sys
+f none kernel/exec/sparcv9/elfexec 755 root sys
+f none kernel/exec/sparcv9/intpexec 755 root sys
+d none kernel/fs/sparcv9 755 root sys
+f none kernel/fs/sparcv9/autofs 755 root sys
+f none kernel/fs/sparcv9/cachefs 755 root sys
+f none kernel/fs/sparcv9/fifofs 755 root sys
+f none kernel/fs/sparcv9/hsfs 755 root sys
+f none kernel/fs/sparcv9/lofs 755 root sys
+f none kernel/fs/sparcv9/mntfs 755 root sys
+f none kernel/fs/sparcv9/nfs 755 root sys
+f none kernel/fs/sparcv9/procfs 755 root sys
+f none kernel/fs/sparcv9/sockfs 755 root sys
+f none kernel/fs/sparcv9/specfs 755 root sys
+f none kernel/fs/sparcv9/tmpfs 755 root sys
+f none kernel/fs/sparcv9/ufs 755 root sys
+d none kernel/misc/sparcv9 755 root sys
+f none kernel/misc/sparcv9/busra 755 root sys
+f none kernel/misc/sparcv9/consconfig 755 root sys
+f none kernel/misc/sparcv9/dada 755 root sys
+f none kernel/misc/sparcv9/des 755 root sys
+f none kernel/misc/sparcv9/ipc 755 root sys
+f none kernel/misc/sparcv9/klmmod 755 root sys
+f none kernel/misc/sparcv9/klmops 755 root sys
+f none kernel/misc/sparcv9/krtld 755 root sys
+f none kernel/misc/sparcv9/md5 755 root sys
+f none kernel/misc/sparcv9/nfs_dlboot 755 root sys
+f none kernel/misc/sparcv9/nfssrv 755 root sys
+f none kernel/misc/sparcv9/rpcsec 755 root sys
+f none kernel/misc/sparcv9/scsi 755 root sys
+f none kernel/misc/sparcv9/seg_drv 755 root sys
+f none kernel/misc/sparcv9/seg_mapdev 755 root sys
+f none kernel/misc/sparcv9/strplumb 755 root sys
+f none kernel/misc/sparcv9/swapgeneric 755 root sys
+f none kernel/misc/sparcv9/tlimod 755 root sys
+f none kernel/misc/sparcv9/ufs_log 755 root sys
+d none kernel/sched/sparcv9 755 root sys
+f none kernel/sched/sparcv9/TS 755 root sys
+f none kernel/sched/sparcv9/TS_DPTBL 755 root sys
+d none kernel/strmod/sparcv9 755 root sys
+l none kernel/strmod/sparcv9/arp=../../../kernel/drv/sparcv9/arp
+f none kernel/strmod/sparcv9/atun 755 root sys
+f none kernel/strmod/sparcv9/bufmod 755 root sys
+f none kernel/strmod/sparcv9/connld 755 root sys
+f none kernel/strmod/sparcv9/dedump 755 root sys
+f none kernel/strmod/sparcv9/ldterm 755 root sys
+f none kernel/strmod/sparcv9/ms 755 root sys
+f none kernel/strmod/sparcv9/pckt 755 root sys
+f none kernel/strmod/sparcv9/pfmod 755 root sys
+f none kernel/strmod/sparcv9/pipemod 755 root sys
+f none kernel/strmod/sparcv9/ptem 755 root sys
+f none kernel/strmod/sparcv9/redirmod 755 root sys
+f none kernel/strmod/sparcv9/rpcmod 755 root sys
+f none kernel/strmod/sparcv9/timod 755 root sys
+f none kernel/strmod/sparcv9/tirdwr 755 root sys
+f none kernel/strmod/sparcv9/ttcompat 755 root sys
+f none kernel/strmod/sparcv9/tun 755 root sys
+f none kernel/strmod/sparcv9/authmd5h 755 root sys
+f none kernel/strmod/sparcv9/authsha1 755 root sys
+d none kernel/sys/sparcv9 755 root sys
+f none kernel/sys/sparcv9/c2audit 755 root sys
+f none kernel/sys/sparcv9/doorfs 755 root sys
+f none kernel/sys/sparcv9/inst_sync 755 root sys
+f none kernel/sys/sparcv9/kaio 755 root sys
+f none kernel/sys/sparcv9/msgsys 755 root sys
+l none kernel/sys/sparcv9/nfs=../../../kernel/fs/sparcv9/nfs
+f none kernel/sys/sparcv9/pipe 755 root sys
+f none kernel/sys/sparcv9/pset 755 root sys
+l none kernel/sys/sparcv9/rpcmod=../../../kernel/strmod/sparcv9/rpcmod
+f none kernel/sys/sparcv9/semsys 755 root sys
+f none kernel/sys/sparcv9/shmsys 755 root sys
+d none platform/SUNW,Ultra-4 755 root sys
+d none platform/SUNW,Ultra-4/kernel 755 root sys
+d none platform/SUNW,Ultra-4/kernel/misc 755 root sys
+d none platform/SUNW,Ultra-4/kernel/misc/sparcv9 755 root sys
+f none platform/SUNW,Ultra-4/kernel/misc/sparcv9/platmod 755 root sys
+d none platform/SUNW,Ultra-4/kernel/drv 755 root sys
+d none platform/SUNW,Ultra-4/kernel/drv/sparcv9 755 root sys
+f none platform/SUNW,Ultra-4/kernel/drv/sparcv9/envctrl 755 root sys
+d none platform/SUNW,Ultra-5_10 755 root sys
+d none platform/SUNW,Ultra-5_10/kernel 755 root sys
+d none platform/SUNW,Ultra-5_10/kernel/misc 755 root sys
+d none platform/SUNW,Ultra-5_10/kernel/misc/sparcv9 755 root sys
+f none platform/SUNW,Ultra-5_10/kernel/misc/sparcv9/platmod 755 root sys
+d none platform/SUNW,Ultra-80 755 root sys
+d none platform/SUNW,Ultra-80/kernel 755 root sys
+d none platform/SUNW,Ultra-80/kernel/misc 755 root sys
+d none platform/SUNW,Ultra-80/kernel/misc/sparcv9 755 root sys
+s none platform/SUNW,Ultra-80/kernel/misc/sparcv9/platmod=../../../../SUNW,Ultra-5_10/kernel/misc/sparcv9/platmod
+d none platform/SUNW,Ultra-Enterprise 755 root sys
+d none platform/SUNW,Ultra-Enterprise/kernel 755 root sys
+d none platform/SUNW,Ultra-Enterprise/kernel/drv 755 root sys
+d none platform/SUNW,Ultra-Enterprise/kernel/drv/sparcv9 755 root sys
+f none platform/SUNW,Ultra-Enterprise/kernel/drv/sparcv9/ac 755 root sys
+f none platform/SUNW,Ultra-Enterprise/kernel/drv/sparcv9/central 755 root sys
+f none platform/SUNW,Ultra-Enterprise/kernel/drv/sparcv9/environ 755 root sys
+f none platform/SUNW,Ultra-Enterprise/kernel/drv/sparcv9/fhc 755 root sys
+f none platform/SUNW,Ultra-Enterprise/kernel/drv/sparcv9/simmstat 755 root sys
+f none platform/SUNW,Ultra-Enterprise/kernel/drv/sparcv9/sram 755 root sys
+f none platform/SUNW,Ultra-Enterprise/kernel/drv/sparcv9/sysctrl 755 root sys
+d none platform/SUNW,Ultra-Enterprise/kernel/misc 755 root sys
+d none platform/SUNW,Ultra-Enterprise/kernel/misc/sparcv9 755 root sys
+f none platform/SUNW,Ultra-Enterprise/kernel/misc/sparcv9/platmod 755 root sys
+d none platform/SUNW,Ultra-250 755 root sys
+d none platform/SUNW,Ultra-250/kernel 755 root sys
+d none platform/SUNW,Ultra-250/kernel/misc 755 root sys
+d none platform/SUNW,Ultra-250/kernel/drv 755 root sys
+d none platform/SUNW,Ultra-250/kernel/misc/sparcv9 755 root sys
+d none platform/SUNW,Ultra-250/kernel/drv/sparcv9 755 root sys
+f none platform/SUNW,Ultra-250/kernel/misc/sparcv9/platmod 755 root sys
+f none platform/SUNW,Ultra-250/kernel/drv/sparcv9/envctrltwo 755 root sys
+d none platform/SUNW,Ultra-Enterprise-10000 755 root sys
+d none platform/SUNW,Ultra-Enterprise-10000/kernel 755 root sys
+d none platform/SUNW,Ultra-Enterprise-10000/kernel/sparcv9 755 root sys
+f none platform/SUNW,Ultra-Enterprise-10000/kernel/sparcv9/unix 755 root sys
+d none platform/SUNW,Ultra-Enterprise-10000/kernel/cpu 755 root sys
+d none platform/SUNW,Ultra-Enterprise-10000/kernel/cpu/sparcv9 755 root sys
+f none platform/SUNW,Ultra-Enterprise-10000/kernel/cpu/sparcv9/SUNW,UltraSPARC 755 root sys
+s none platform/SUNW,Ultra-Enterprise-10000/kernel/cpu/sparcv9/SUNW,UltraSPARC-II=SUNW,UltraSPARC
+d none platform/SUNW,Ultra-Enterprise-10000/kernel/drv 755 root sys
+d none platform/SUNW,Ultra-Enterprise-10000/kernel/drv/sparcv9 755 root sys
+f none platform/SUNW,Ultra-Enterprise-10000/kernel/drv/sparcv9/rootnex 755 root sys
+f none platform/SUNW,Ultra-Enterprise-10000/kernel/drv/sparcv9/pcipsy 755 root sys
+f none platform/SUNW,Ultra-Enterprise-10000/kernel/drv/sparcv9/sbus 755 root sys
+d none platform/SUNW,Ultra-Enterprise-10000/kernel/misc 755 root sys
+d none platform/SUNW,Ultra-Enterprise-10000/kernel/misc/sparcv9 755 root sys
+f none platform/SUNW,Ultra-Enterprise-10000/kernel/misc/sparcv9/platmod 755 root sys
+d none platform/sun4u 755 root sys
+d none platform/sun4u/kernel 755 root sys
+d none platform/sun4u/kernel/cpu 755 root sys
+d none platform/sun4u/kernel/drv 755 root sys
+d none platform/sun4u/kernel/misc 755 root sys
+d none platform/sun4u/kernel/strmod 755 root sys
+d none platform/sun4u/kernel/cpu/sparcv9 755 root sys
+f none platform/sun4u/kernel/cpu/sparcv9/SUNW,UltraSPARC 755 root sys
+s none platform/sun4u/kernel/cpu/sparcv9/SUNW,UltraSPARC-II=SUNW,UltraSPARC
+s none platform/sun4u/kernel/cpu/sparcv9/SUNW,UltraSPARC-IIi=SUNW,UltraSPARC
+d none platform/sun4u/kernel/dacf 755 root sys
+d none platform/sun4u/kernel/dacf/sparcv9 755 root sys
+f none platform/sun4u/kernel/dacf/sparcv9/consconfig_dacf 755 root sys
+d none platform/sun4u/kernel/drv/sparcv9 755 root sys
+f none platform/sun4u/kernel/drv/sparcv9/dma 755 root sys
+f none platform/sun4u/kernel/drv/sparcv9/ebus 755 root sys
+f none platform/sun4u/kernel/drv/sparcv9/fd 755 root sys
+f none platform/sun4u/kernel/drv/sparcv9/ledma 755 root sys
+f none platform/sun4u/kernel/drv/sparcv9/pcipsy 755 root sys
+f none platform/sun4u/kernel/drv/sparcv9/pci_pci 755 root sys
+f none platform/sun4u/kernel/drv/sparcv9/power 755 root sys
+f none platform/sun4u/kernel/drv/sparcv9/rootnex 755 root sys
+f none platform/sun4u/kernel/drv/sparcv9/sbus 755 root sys
+f none platform/sun4u/kernel/drv/sparcv9/sbusmem 755 root sys
+f none platform/sun4u/kernel/drv/sparcv9/simba 755 root sys
+f none platform/sun4u/kernel/drv/sparcv9/stc 755 root sys
+f none platform/sun4u/kernel/drv/sparcv9/su 755 root sys
+f none platform/sun4u/kernel/drv/sparcv9/zs 755 root sys
+f none platform/sun4u/kernel/drv/sparcv9/zsh 755 root sys
+d none platform/sun4u/kernel/misc/sparcv9 755 root sys
+f none platform/sun4u/kernel/misc/sparcv9/bootdev 755 root sys
+f none platform/sun4u/kernel/misc/sparcv9/consconfig 755 root sys
+f none platform/sun4u/kernel/misc/sparcv9/forthdebug 755 root sys
+f none platform/sun4u/kernel/misc/sparcv9/md5 755 root sys
+f none platform/sun4u/kernel/misc/sparcv9/obpsym 755 root sys
+f none platform/sun4u/kernel/misc/sparcv9/platmod 755 root sys
+f none platform/sun4u/kernel/misc/sparcv9/vis 755 root sys
+f none platform/sun4u/kernel/misc/sparcv9/pcmcia 755 root sys
+d none platform/sun4u/kernel/sparcv9 755 root sys
+f none platform/sun4u/kernel/sparcv9/genunix 755 root sys
+f none platform/sun4u/kernel/sparcv9/unix 755 root sys
+d none platform/sun4u/kernel/strmod/sparcv9 755 root sys
+f none platform/sun4u/kernel/strmod/sparcv9/kb 755 root sys
+d none platform/sun4u/kernel/tod 755 root sys
+d none platform/sun4u/kernel/tod/sparcv9 755 root sys
+f none platform/sun4u/kernel/tod/sparcv9/todmostek 755 root sys
+f none platform/sun4u/kernel/tod/sparcv9/todstarfire 755 root sys
+d none var/ld/sparcv9 755 root bin
+s none var/ld/64=sparcv9

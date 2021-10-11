@@ -1,0 +1,16 @@
+# Copyright (c) 1998-1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+
+#pragma ident	"@(#)usb_mid.wlcmd	1.4	99/09/24 SMI"
+
+one usb_mid
+one usb_device
+
+### currently unused functions
+root usb_mid_dump_state
+root usba_dump_usb_device
+root usb_mid_dump
+root usb_mid_event_callback
+root usb_mid_power
+root usb_mid_bus_ctl

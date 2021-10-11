@@ -1,0 +1,11 @@
+#ident	"@(#)mapfile	1.5	93/01/14 SMI" /* from SunOS 4.1 */  
+ 
+text    = LOAD ?RX V0xedd00000;
+text    : $PROGBITS ?A!W;
+ 
+data    = LOAD ?RWX;
+data    : $PROGBITS ?AW;
+data    : $NOBITS ?AW;
+ 
+note    = NOTE;
+note    : $NOTE;

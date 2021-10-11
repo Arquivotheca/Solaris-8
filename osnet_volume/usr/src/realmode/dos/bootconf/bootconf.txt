@@ -1,0 +1,1234 @@
+ * 
+ * Copyright (c) 1999 by Sun Microsystems, Inc.
+ * All rights reserved.
+ *
+ * bootconf.txt -- text translations for boot configuration program
+ * 
+ * This is the .txt file that contains all the string translations for the
+ * bootconf program. Text translations consist of key/value pairs. A key
+ * always starts with a '[' as the first character on a line and goes up
+ * to the matching ']' (use a backslash to get a literal ']' in the key).
+ * Then, the value starts at the next double quote '"' and goes up to the
+ * matching double quote. Anything else in this file is a comment.
+ * 
+ * The file size limit is 64K bytes. 
+ *
+ * Menus now grouped according to function; see FUNCTIONALITY below.
+
+#ident	"@(#)bootconf.txt	1.119	99/06/21 SMI"
+
+ * FUNCTIONALITY: Add ISA Device *
+
+[MENU_ISA]
+"Add ISA Device
+
+Select the ISA device to add and choose Continue.
+
+If device is not listed, select \"Unsupported ISA device\" and choose
+Continue.
+
+"
+
+[MENU_HELP_ISA]
+"Help: Add ISA Device
+
+To select an ISA device that is not in the list, select \"Unsupported
+ISA device\".
+
+\"Unsupported ISA device\" selection reserves resources for devices
+that the Solaris system does not support. The resources must be
+reserved to ensure they are not re-allocated.
+
+\"Unsupported ISA device\" selection can be used many times to
+reserve different resource combinations."
+
+[MENU_RESSELECT]
+"Select Resource Types
+
+Define the resources used by the device. It can use any of the resource
+types, but may not use all those shown. Refer to the device's hardware
+manual for specific resource usage information.
+
+Select the resource type from the list and choose Continue to assign
+the value. When resource information is correct, choose Add to save
+the device information. Choose Cancel to exit without saving.
+
+%.70s"
+
+[MENU_HELP_RESSELECT]
+"Help: Select Resource Types
+
+All resources associated with a device must be correct. Resolve conflicts
+by changing the hardware settings or using the \"View/Edit Devices\" menu.
+
+A device may not use all resource types; for example, it may require
+IRQs and I/O Port addresses, but not DMA channels or Memory addresses."
+
+[MENU_GETRESOURCE]
+"Specify %s Resource
+
+Assign the resource value to be used by this device.
+
+%s
+
+To specify a shared resource, add \"s\" to the resource value, for
+example, \"7s\".
+
+Once the correct resource value is entered, choose Continue to set the
+value or choose Cancel to return to the previous menu.
+
+Specify Resource Value: %.70s"
+
+[MENU_HELP_IO]
+"Help: Specify I/O Ports
+
+Commands, data, and status are transferred between the device driver
+and the device using the I/O port address. I/O port addresses cannot
+be shared.
+
+Single addresses are separated by commas."
+
+[MENU_HELP_IRQ]
+"Help: Specify IRQs
+
+A device uses an IRQ to request attention from its device driver.
+
+IRQ 2 is automatically converted to use IRQ 9."
+
+[MENU_HELP_DMA]
+"Help: Specify DMA Channels
+
+A Direct Memory Access (DMA) channel allows a device to transfer data
+to or from memory without involving the CPU."
+
+[MENU_HELP_MEM]
+"Help: Specify Memory Addresses
+
+A device can have memory independent of system memory. The device's memory
+must be mapped to available memory addresses to avoid conflicts.
+
+A memory address must be aligned on a 1K boundary."
+
+ * FUNCTIONALITY: Boot Solaris *
+
+[MENU_DEFAULT_BOOT]
+"Set Default Boot Device
+
+Select the default boot device and choose Continue.
+
+"
+
+[MENU_HELP_DEFAULT_BOOT]
+"Help: Set Default Boot Device
+
+After installation, a default boot device is selected, and the autoboot
+feature is turned on. Typically the device is the BIOS primary disk.
+
+Only devices on the \"Boot Solaris\" menu can be the default boot
+device.
+
+If booting an AutoClient or diskless machine, select the network device
+as the default boot device.
+
+Setting the default boot device only takes effect if the autoboot
+feature is turned on."
+
+[MENU_BOOT]
+"Boot Solaris
+
+Select one of the identified devices to boot the Solaris kernel and
+choose Continue.
+
+To perform optional features, such as modifying the autoboot and property
+settings, choose Boot Tasks.
+
+An asterisk (*) indicates the current default boot device.
+
+> To make a selection use the arrow keys, and press Enter to mark it [X].
+
+"
+
+[MENU_NETCONFIG]
+"Set Network Configuration Strategy
+
+Specify the network boot and install protocol to use for booting the
+Solaris system. Select the desired protocol and choose Continue.
+
+CAUTION: A DHCP or RARP/BOOTPARAMS server must be installed and
+	 configured prior to booting from the network device.
+
+"
+
+[MENU_HELP_NETCONFIG]
+"Help: Set Network Configuration Strategy
+
+The Solaris operating environment supports two protocols for booting
+diskless clients:
+
+	Dynamic Host Configuration Protocol (DHCP)
+		Acquire boot parameters and network configuration
+		information from a DHCP server.
+	Reverse Address Resolution Protocol (RARP)/BOOTPARAMS
+		Use a combination of RARP and BOOTPARAMS to acquire
+		boot parameters and network configuration information.
+
+RARP/BOOTPARAMS is the default network configuration strategy.
+
+CAUTION: A DHCP or RARP/BOOTPARAMS server must be installed and
+	 configured prior to booting from the network device.
+
+"
+
+[MENU_BAD_NETCONFIG]
+"Error: Invalid Network Configuration Strategy
+
+The network configration strategy is currently set to an invalid
+value, %s. The value must be one of the following:
+
+	o DHCP
+	o RARP/BOOTPARAMS
+
+"
+
+
+[MENU_NO_BOOTDEV]
+"Error: Boot Solaris
+
+No bootable devices have been found.
+
+"
+
+[MENU_HELP_BOOT]
+"Help: Boot Solaris
+
+To boot the Solaris kernel, the device must have access to a Solaris
+root file system. Select the boot device:
+
+	CD	when installing from a CD.
+	NET	when installing from the network. The machine
+		must be a netinstall client.
+	DISK	when the Solaris system is already installed on
+		the local disk.
+
+If the machine:
+
+	- runs on the network, a network device should be listed.
+	- has a CD-ROM, disk, and/or tape drive attached, either a
+	  SCSI host bus adapter or an IDE controller should be listed.
+
+If boot devices are missing or incorrectly configured, fix the problem
+on the \"View/Edit Devices\" menu."
+
+[MENU_MOUNT_FAIL]
+"Error: Mount Failed
+
+Unable to mount a Solaris root file system from the device:
+
+	%s
+
+Error message from mount: 
+
+%s"
+
+[MENU_BAD_BOOTPATH]
+"Error: Malformed bootpath Property
+
+The bootpath property:
+
+%s
+
+is badly formed, and will be ignored."
+
+ * FUNCTIONALITY: Saved Configurations *
+
+[MENU_NEW_CONFIG]
+"Save Configuration
+
+Name the configuration and choose Continue to save it.
+
+Configuration name: "
+
+[MENU_HELP_NEW_CONFIG]
+"Help: Save Configuration
+
+Several configurations can be saved to the Boot Diskette or the Solaris
+root file system to avoid recreating changes.
+
+Save a configuration when:
+
+	- using a single diskette to install and maintain several
+	  machines.
+	- making manual changes to the configuration.
+
+To save a configuration, assign it a unique, descriptive name. The name
+can be up to 20 alphanumeric characters. A space can be used, but not
+as the first character. The name of the machine is a good configuration
+name choice."
+
+[MENU_SEL_CONFIG]
+"Activate Configuration
+
+To activate a saved configuration, select it from the list and choose
+Continue. To create a new one, select \"New Configuration\" and choose
+Continue.
+
+"
+
+[MENU_HELP_SEL_CONFIG]
+"Help: Activate Configuration
+
+When a configuration is selected, the Configuration Assistant proceeds
+to the \"Boot Solaris\" menu."
+
+[MENU_DEL_CONFIG]
+"Delete Saved Configuration
+
+To delete a configuration, select it from the list and choose Delete.
+To return to the Device Tasks menu without deleting a configuration,
+choose Continue.
+
+"
+
+[MENU_HELP_DEL_CONFIG]
+"Help: Delete Saved Configuration
+
+If an error message suggests deletion of a configuration because the
+utility reached the maximum number of saved configurations or ran out
+of space, a second copy of the diskette may be created to save new
+configurations."
+
+[MENU_UPDATING_CONF]
+"Updating\n\n\n\n\tUpdating Saved Configuration Information ...
+"
+
+[MENU_NO_CONFIG]
+"Error: No Saved Configurations Found
+
+You are attempting to delete a saved configuration; however, no
+saved configurations exist by name.
+
+To save a configuration, go to the \"Device Tasks\" menu and select
+the \"Save Configuration\" option."
+
+[SAVE CONFIG ERR2]
+"Error: Save Configuration
+
+You are attempting to save a configuration but have reached the maximum
+number of %d configurations. To save the current configuration, you must
+first delete an existing configuration.
+
+Go to the \"Device Tasks\" menu and select the \"Delete Saved Configuration\"
+option to create space for this configuration."
+
+[MENU_REBOOT]
+"Error: Reboot Required
+
+You are attempting to activate a different saved configuration. Reboot
+and choose the configuration you want to activate."
+
+[CONSOLE_CONFLICT_MSG]
+"The serial device chosen for console output has a conflict with another
+device. This may be caused when the serial device uses the same
+interrupt as another device.
+
+While the booting system can operate with this conflict (serial output
+doesn't use interrupts while booting), the Solaris driver cannot."
+
+[CONSOLE_CONFLICT_BOOT]
+"Error: Console Redirection
+
+%s
+
+Resolve the conflict or specify a different console device."
+
+[CONSOLE_CONFLICT_REBOOT]
+"Error: Console Redirection
+
+%s
+
+Reboot the system and interrupt the autoboot process. Then select a
+different console device."
+
+[MENU_NAMES_CONFIG]
+"Error: Duplicate Configuration Name
+
+The configuration name, %s, is already in use. The list of existing
+configuration names is shown below. Press Enter and select another name.
+
+"
+
+ * FUNCTIONALITY: Keyboard Configuration Selection *
+
+[MENU_KBD_TYPE]
+"Set Keyboard Configuration
+
+Specify a keyboard other than the default model, US-English with
+Windows(TM) keys. Select the desired keyboard type and choose
+Continue.
+
+"
+
+[MENU_HELP_KBD_TYPE]
+"Help: Set Keyboard Configuration
+
+The Solaris environment supports several keyboard configurations.
+US-English with Windows keys is the default.
+
+Although most PC keyboards are electronically the same, key caps can
+differ to support different configurations and languages. If not using
+the default keyboard, choose the desired key caps layout."
+
+[MENU_WKEYS]
+"Set Keyboard Format
+
+The Solaris environment supports PC keyboards with and without Windows
+keys. Select the desired keyboard type and choose Continue.
+
+"
+
+[MENU_HELP_WKEYS]
+"Help: Set Keyboard Format
+
+The Solaris environment supports two kinds of PC keyboards: one with
+Windows keys, the other without.
+
+The Windows keyboard has three extra keys: two have the Windows logo on
+them and the third key depicts a pointer selecting a menu item."
+
+ * FUNCTIONALITY: Boot Property Setting *
+
+[MENU_NEW_PROP]
+"Create Property
+
+Valid property names can be up to 32 characters, but cannot include
+white space or control characters.
+
+Specify Property Name: "
+
+[MENU_NEW_VAL]
+"Specify Property Value
+
+Valid property values can be up to 200 characters. Properties with null
+values are legal.
+
+Property: %s
+
+Specify Value: "
+
+[MENU_HELP_CONSOLE]
+"Help: Set Console Device
+
+There are input and output pairs associated with the console. 
+
+Console input can come from:
+
+	- the machine's keyboard (keyboard)
+	- a serial terminal keyboard attached to COM1 or COM2
+	  (ttya or ttyb)
+	- a different machine's keyboard attached to COM1 or COM2
+	  (ttya or ttyb)
+
+Console output can come from:
+
+	- the machine's display (screen)
+	- a serial terminal monitor attached to COM1 or COM2
+	  (ttya or ttyb)
+	- a different machine's display attached to COM1 or COM2
+	  (ttya or ttyb)
+
+CAUTION: After choosing Continue, the selected input and output devices
+         are immediately used to access the console."
+
+[MENU_CONSOLE]
+"Set Console Device
+
+Specify a console output and input device other than the screen and
+keyboard. Select the desired devices and choose Continue.
+
+CAUTION: After choosing Continue, the selected output and input devices
+         are immediately used to access the console.
+
+"
+
+[STATUS_CONSOLE_SWITCH]
+"Select Console Device
+
+
+
+	The input and output have been switched to %s.
+"
+
+[STATUS_NETCONFIG_SWITCH]
+"Updating Network Configuration Strategy
+
+
+
+	%s is the new network configuration strategy.
+"
+
+ * FUNCTIONALITY: Netinstall Help; accessed through Help Topics *
+
+[MENU_HELP_NETINST]
+"Help: Network Device Booting
+
+The driver for the specified network boot device was unable to locate
+the device.
+
+This may be because the device is configured incorrectly or is
+missing. Correct this problem by scanning for devices and viewing the
+configuration from the \"View/Edit Devices\" menu.
+
+Make sure the network device is listed and that the resource values
+associated with it are correct.
+
+To successfully boot the network device, the machine must be registered
+as a client of a netboot server."
+
+ * FUNCTIONALITY: Selective Scan *
+
+[MENU_PROBE]
+"Specific Scan
+
+From this menu it is possible to manually select the types of hardware
+to be scanned. By default, all listed hardware will be scanned.
+
+> Select items that do not cause the machine to stall and choose Continue.
+
+"
+
+[MENU_HELP_PROBE]
+"Help: Specific Scan
+
+If your system stalls during a full scan, identify the device or platform
+type that caused the stall. Its name will be the one on the \"Scanning: \"
+line.
+
+From the \"Specific Scan\" menu, select all devices and platforms other
+than the one that stalled the machine and rescan.
+
+For troubleshooting information, refer to the Troubleshooting module in
+the Solaris Intel Platform Edition Information Library."
+
+ * FUNCTIONALITY: Help Index Menus *
+
+[MENU_HELP_TOPICS]
+"Help Index
+
+Configuration Assistant help is available from this index. Choose Help
+to view help for the current menu or for a selected item.
+
+"
+
+ * FUNCTIONALITY: Device Resource Conflict Help; From Help Index *
+
+[MENU_HELP_CONFLICTS]
+"Help: Device Resource Conflicts
+
+Resource conflict messages describe the devices, resource type, and
+resource value of the conflict. Turn off the system and change the
+configuration of the devices in conflict.
+
+Resource conflicts must be resolved.
+
+When physical device conflicts have been fixed, use the Configuration
+Assistant program to describe the current state of the system.
+
+EXAMPLE
+
+A common conflict occurs between the SMC Ethernet adapter and the
+second serial port; they both use IRQ 3 by default. There are
+two options to resolve this conflict:
+
+	- Ignore the error and let the system use the SMC Ethernet
+	  adapter with IRQ 3 (COM2 will be unavailable for use).
+	- Use another available IRQ (between 1 and 15, but not 3) for
+	  the SMC Ethernet adapter; see the \"View/Edit Devices\"
+	  menu for available IRQs."
+
+ * FUNCTIONALITY: Solaris Root File System Mounting Help; From Help Index *
+
+[MENU_HELP_MOUNT]
+"Help: Mounting the Solaris Root File System
+
+To boot the Solaris kernel, the boot device must have access to a
+Solaris root file system.
+
+The \"Error: Mount Failed\" screen appears when the mount of the root
+file system is unsuccessful. Further error messages from the Solaris
+kernel may be displayed.
+
+If booting from a network device, be sure that the system is a 
+registered netboot client.
+
+If booting from the CD-ROM drive, be sure that a CD with a Solaris root
+file system (such as an install CD) is in the drive."
+
+ * FUNCTIONALITY: Navigating Through the Menus Help; From Help Index *
+
+[MENU_HELP_NAVIGATE]
+"Help: Navigating Through the Menus
+
+MOVING THE CURSOR THROUGH MENUS
+
+Use arrow keys to move up and down through the list of items. The Page
+Up and Page Down keys scroll through the menus a page at a time.
+
+On keyboards without arrow keys, use the h, j, k, and l keys: h moves
+left, j moves down, k moves up, and l moves right.
+
+SELECTING MENU ITEMS
+
+Select items from a list by moving the cursor to that item and pressing
+Enter. The highlighted box ([ ]) will be marked with an \"X\" ([X]),
+indicating that the item is selected. Many menus only allow one item to
+be selected at a time.
+
+INITIATING AN ACTION
+
+Press the function key (F1, F2, etc.) shown in the action bar at the
+bottom of the menu.
+
+On keyboards without function keys, press ESC; the bar at the bottom of
+the screen shows the keys to use. To revert to function keys, press ESC-f."
+
+ * FUNCTIONALITY: Messages from CA as it's coming up *
+
+[MENU_CHECKING_CONF]
+"Initializing\n\n\n\n\tGathering Configuration Information ...
+"
+
+[MENU_LOADING]
+"Loading\n\n\n\n\tLoading %s ...
+"
+
+ * FUNCTIONALITY: Setting Properties *
+
+[MENU_PROPERTIES]
+"View/Edit Property Settings
+
+CAUTION: Invalid settings can make your system unusable. Make a backup
+copy of the Configuration Assistant Boot Diskette before changing any
+property settings. The backup copy can be used for recovery purposes.
+
+To change or delete a property, select it from the list and choose
+Change or Delete. To create a property, choose Create.
+
+"
+
+[MENU_HELP_PROPERTIES]
+"Help: View/Edit Property Settings
+
+Properties can be created, modified, and deleted via the \"View/Edit
+Property Settings\" menu. To perform the same tasks when the system is
+running, use the eeprom(1M) command as the superuser.
+
+CAUTION: Invalid settings can make your system unusable. Make a backup
+copy of the Configuration Assistant Boot Diskette before changing any
+property settings. The backup copy can be used for recovery purposes.
+
+Valid property names can be up to 32 characters, but cannot include
+white space or control characters.
+
+Valid property values can be up to 200 characters. Properties with null
+values are legal."
+
+ * FUNCTIONALITY: Miscellaneous CA Menus *
+
+[MENU_SHORTHELP_ENTER]
+"Press Enter to Continue.
+"
+
+[MENU_SHORTHELP_TEXT]
+""
+
+[MENU_RUNNING_DVR]
+"Running Driver
+
+"
+
+[MENU_CHECKING_DRIVERS]
+"Building Driver List
+"
+
+ * FUNCTIONALITY: Identify Devices Found *
+
+[MENU_IDENT_DEVICES]
+"Identified Devices
+
+The following devices have been identified on this system. To identify
+devices not on this list or to modify device characteristics, such as
+keyboard configuration, choose Device Tasks. Platform types may be
+included in this list.
+
+"
+
+[MENU_IDENT_HELP]
+"Help: Identified Devices
+
+The Identified Devices screen shows the list of major devices in the
+system. All major devices are listed if the scan was successful,
+including any platform types.
+
+OEMs may supply realmode drivers to determine the specific platform
+type of the machine (displayed by uname -i) to run platform-specific
+drivers or kernels.
+
+Any devices found but disabled due to resource conflicts are marked
+with an exclamation point (!).
+
+If devices are missing from the list, go to the \"View/Edit Devices\"
+menu from \"Device Tasks\", where a complete list of devices is
+provided."
+
+ * FUNCTIONALITY: Main Menu; Scanning For Devices *
+
+[MENU_PROBE_ALL]
+"Solaris Device Configuration Assistant
+
+The Solaris(TM) (Intel Platform Edition) Device Configuration Assistant
+scans to identify system hardware, lists identified devices, and can
+boot the Solaris software from a specified device. This program must be
+used to install the Solaris operating environment, add a driver, or
+change the hardware on the system.
+
+> To perform a full scan to identify all system hardware, choose Continue.
+
+> To diagnose possible full scan failures, choose Specific Scan.
+
+> To add new or updated device drivers, choose Add Driver.
+
+About navigation...
+    - The mouse cannot be used.
+    - If the keyboard does not have function keys or they do not respond, 
+      press ESC. The legend at the bottom of the screen will change to show
+      the ESC keys to use for navigation.
+    - The F2 key performs the default action."
+
+[MENU_HELP_PROBE_ALL]
+"Help: Solaris Device Configuration Assistant
+
+All devices must be identified for a system to work correctly. Supplemental
+driver diskettes must be read in prior to scanning for devices.
+
+If the scan stalls, reboot the machine by typing the Ctrl, Alt, and Del
+keys simultaneously, or by pressing the Reset or Power button. When the
+system reboots, perform the \"Specific Scan\". Select all devices from
+the list, except the one on which the scanning stalled, and scan again.
+
+Repeat the Specific Scan, eliminating devices that stall the machine,
+until the entire scan is successful.
+
+If the entire scan cannot be completed, specific ISA devices can be
+added to the configuration. Choose \"Device Tasks\" from the
+\"Identified Devices\" screen. Go to \"View/Edit Devices\" and then
+select \"Add ISA Device.\""
+
+[MENU_PROBE_DEVICES]
+"Scanning Devices
+
+The system is being scanned to identify system hardware.
+
+If the scanning stalls, press the system's reset button. When the
+system reboots, choose Specific Scan or Help.
+
+"
+
+ * FUNCTIONALITY: View and Edit Devices *
+
+[MENU_REVIEW]
+"View/Edit Devices
+
+Select a device to edit, add, or delete.
+
+An exclamation point (!) denotes a device disabled due to resource conflicts.
+
+> To edit a device, first delete it, then choose Add Device.
+
+
+"
+
+[MENU_HELP_REVIEW]
+"Help: View/Edit Devices
+
+This menu lists each device in the system and the resources it uses. ISA
+and VLB devices can be added and deleted from this menu.
+
+ISA Plug-and-Play (PnP) devices are programmable. To manually add an
+ISA (or VLB) device, use the resources currently assigned to a
+programmable device. The resources of the ISA PnP device are
+re-programmed to make use of available resources.
+
+If an ISA device is missing from the menu, use one of the scanning
+options to locate it. If a missing ISA device is unsupported by the
+Solaris system, select \"Unsupported ISA Device\" from the list on the
+\"Add ISA Device\" menu.
+
+If resources of an ISA device are incorrectly configured, delete the
+device from the menu and add it manually with the correct information."
+
+[MENU_DEL_MOTHR]
+"Error: Cannot Delete Motherboard Device
+
+You are attempting to delete the motherboard device. This device
+cannot be deleted."
+
+[MENU_DEL_PNP]
+"Error: Cannot Delete ISA Plug-and-Play Device
+
+You are attempting to delete an ISA Plug-and-Play (PnP) device. Such
+devices cannot be deleted."
+
+ * FUNCTIONALITY: Configuration Assistant Tasks Menus *
+
+[MENU_BOOT_TASKS]
+"Boot Tasks
+
+Select a boot task and choose Continue.
+
+> To make a selection use the arrow keys, and press Enter to mark it [X].
+
+"
+
+[MENU_HELP_BOOT_TASKS]
+"Help: Boot Tasks
+
+View/Edit Autoboot Settings
+	Select the default boot device from the list of bootable devices,
+	specify the autoboot timeout value, and set the autoboot feature.
+
+View/Edit Property Settings
+	View, set, create, and delete properties."
+
+[MENU_ADV]
+"Device Tasks
+
+Select a device task and choose Continue.
+
+TIP: If there are devices that have not been identified, scan for
+specific devices before manually editing the devices.
+
+> To make a selection use the arrow keys, and press Enter to mark it [X].
+
+"
+
+[MENU_HELP_ADV]
+"Help: Device Tasks
+
+View/Edit Devices
+	View configuration details. Each detected device and its resources
+	are listed. Add and delete devices from this menu.
+
+Set Keyboard Configuration
+	Choose the keyboard configuration when your keyboard is other
+	than the 101-key U.S. English configuration.
+
+Save Configuration
+ 	Multiple configurations can be saved simultaneously. Use when
+ 	configuring and maintaining multiple systems with the same
+ 	diskette or when manual configuration tasks have been performed.
+
+Delete Saved Configuration
+	Delete a configuration by name when it is no longer needed or
+	when more space is required for a new one.
+
+Set Console Device
+	Specify console devices other than screen and keyboard."
+
+ * FUNCTIONALITY: Enable Autoboot Feature *
+
+[MENU_AUTO_BOOT]
+"View/Edit Autoboot Settings
+
+Current autoboot settings:
+
+	Default Boot Device:	%s
+	Timeout:		%d seconds
+	Autoboot:		%s
+
+To save the current information, select \"Accept Settings\" and choose
+Continue. To exit without saving, choose Cancel.
+
+To edit an autoboot feature, select it from the list and choose Continue.
+
+"
+
+[MENU_ONOFF_BOOT]
+"Set Autoboot
+
+Autoboot is currently %s.
+
+"
+
+[MENU_AUTO_BOOT_TIMEOUT]
+"Set Autoboot Timeout
+
+Specify the number of seconds for the autoboot timeout and choose Continue.
+
+Autoboot timeout value: "
+
+[MENU_HELP_AUTO_BOOT]
+"Help: View/Edit Autoboot Settings
+
+After installation, the autoboot feature is turned on. Subsequent boots
+are \"hands-off\". Saved configurations, including the default
+configuration, can have the autoboot feature turned on or off.
+
+To perform a \"hands-off\" boot:
+
+	- set the autoboot timeout
+	- set the default boot device
+	- set the autoboot feature"
+
+ * FUNCTIONALITY: Miscellaneous Error Menus *
+
+[MENU_PRIME_CONFLICT]
+"Error: Resource Conflict
+
+No devices of this type can be added at this time due to %s conflicts.
+Remove or reconfigure the conflicting device(s) and try again.
+
+The conflict occurred with the device: %s
+
+Both devices use %s %s."
+
+[MENU_CONFLICTS]
+"Error: Resource Conflicts Found
+
+Resource conflicts were detected. For your system to work properly,
+eliminate the conflicts by changing the resources used by the
+conflicting devices. Then, run the Configuration Assistant to
+describe the changed configuration.
+
+The following resource conflicts were noted:
+
+"
+
+[FILE CREATE ERR]
+"Error: Cannot Create File
+
+Unable to create configuration file. Is the media full?"
+
+[MENU_WRITE_ERR]
+"Error: Cannot Write to Solaris Configuration Assistant Boot Diskette
+
+Error writing the %s file.
+
+There are two possible causes for this error when using the Solaris
+Configuration Assistant Boot Diskette:
+
+	- The diskette has the write-protect tab set.
+
+	  Move the write-protect tab to the unlocked position and
+	  press Enter to continue.
+
+	- The diskette is full.
+
+	  Reboot the diskette and select the \"Delete Saved
+	  Configuration\" option from the \"Device Tasks\" menu. See if
+	  there are any saved configurations you can remove."
+
+[MENU_HW_NVRAM_NOMATCH]
+"Error: EISA Hardware-NVRAM Mismatch
+
+The board in EISA slot %d does not match the NVRAM information
+about the board in that slot.
+
+Remove the Solaris Configuration Assistant Boot Diskette and run the
+EISA configuration utility to update the NVRAM information, then reboot
+the Solaris Configuration Assistant Boot Diskette."
+
+[MENU_PROG_WARN]
+"Warning: Cannot Program Programmable Device
+
+The %s programmable device was unable to be programmed.
+
+There are two possible causes for this problem:
+
+	- There is a lack of available resources.
+	- There is a conflict with the following already-existing device,
+	  %s."
+
+[MENU_CORRUPT_ESCD]
+"Error: Bad ESCD File
+
+The %s file that contains your system configuration information is bad.
+
+There are two possible causes for this problem:
+
+	- The file uses an old revision of the file format.
+	- The file is corrupted.
+
+The file will be deleted, so you must ensure that the new file contains
+correct information."
+
+[MENU_DEV_80]
+"Error: Missing Primary Disk
+
+The Solaris system could not detect a primary disk. Realmode drivers
+are used to detect them, but none of them map to the primary disk.
+
+However, the system has detected a disk controller without a driver,
+and assumes that the following disk maps to the primary disk:
+
+	%s
+
+Choose Continue to confirm the Solaris bootpath of the primary disk.
+
+Choose Cancel if the bootpath is incorrect. Supply the correct bootpath
+by selecting the \"View/Edit Property Settings\" option from the \"Boot
+Tasks\" menu. Set the bootpath property and reboot the system.
+Alternately, use the eeprom command to set the bootpath while the
+Solaris system is running (/boot/solaris/bootenv.rc)."
+
+[MENU_ENUM_BUS]
+"Bus Enumeration\n\n\n\nDetermining bus types and gathering hardware configuration data ...
+"
+
+[MENU_BEF_MISSING]
+"Error: Unable to Find Device Driver
+
+The device driver, %.45s, is missing."
+
+[MENU_BAD_BEF_LOAD]
+"Error: Unable to Load Device Driver
+
+The device driver, %.45s, cannot be loaded. The realmode driver is bad."
+
+[MENU_NO_DB_ENTRY]
+"Error: Missing Device Database Entry
+
+No device database entry exists for %.45s."
+
+[autoboot1]
+"Autobooting from bootpath"
+
+[autoboot2]
+"If the system hardware has changed, or to boot from a different
+device, interrupt the autoboot process by pressing ESC."
+
+ * FUNCTIONALITY: Driver Update menus and screens *
+
+[MENU_GET_DU]
+"Install Supplemental Drivers
+
+A supplemental driver diskette contains software, such as device drivers
+and patches, which can be added to the Solaris operating environment.
+
+Note that some supplemental diskettes contain video-related device drivers
+and patches. Do not try to read them at this time, as the installation
+program is not ready to use the information.
+
+To install supplemental drivers, replace the Solaris Device Configuration
+Assistant Boot Diskette with the first supplemental diskette, and choose
+Continue.
+
+To bypass supplemental driver installation, choose Cancel."
+
+[MENU_GET_DU_CDBOOT]
+"Install Supplemental Drivers
+
+A supplemental driver diskette contains software, such as device drivers
+and patches, which can be added to the Solaris operating environment.
+
+Note that some supplemental diskettes contain video-related device drivers
+and patches. Do not try to read them at this time, as the installation
+program is not ready to use the information.
+
+To install supplemental drivers, insert the first supplemental diskette,
+and choose Continue.
+
+To bypass supplemental driver installation, choose Cancel."
+
+[MENU_GET_NEXT_DU]
+"Continue Supplemental Driver Installation
+
+To continue supplemental driver installation, insert the next diskette,
+and choose Continue.
+
+When all supplemental driver diskettes have been processed, insert the
+Solaris Device Configuration Assistant Boot Diskette and choose Done."
+
+[MENU_GET_NEXT_DU_CDBOOT]
+"Continue Supplemental Driver Installation
+
+To continue supplemental driver installation, insert the next diskette,
+and choose Continue.
+
+When all supplemental driver diskettes have been processed, remove the
+diskette and choose Done."
+
+[MENU_HELP_DU]
+"Help: Install Supplemental Drivers
+
+A supplemental driver diskette contains software, such as device drivers
+and patches, which can be added to the Solaris operating environment.
+Note that some supplemental diskettes contain video-related device drivers
+and patches.
+
+Use supplemental driver diskettes to update software on a machine already
+installed with Solaris or to install a machine for the first time.
+
+Note that the packages and patches on the supplemental driver diskettes
+will be applied to the Solaris system later by the installation program.
+
+Choosing Cancel at any time during the boot process will discard all
+supplemental driver information already read."
+
+[MENU_LOAD_DU]
+"Loading Supplemental Driver Software
+
+The system is being loaded with the software from the supplemental
+driver diskette.
+
+"
+[MENU_LOAD_DU_FLOPPY]
+"Warning: Supplemental Driver Diskette Not Loaded
+
+Insert a supplemental driver diskette into drive A."
+
+[MENU_RELOAD_DU_FLOPPY]
+"Warning: Diskette does not contain bootable driver components.
+
+A supplemental driver diskette contains software, such as device drivers
+and patches, which can be added to the Solaris operating environment.
+
+Note that some supplemental diskettes contain video-related device drivers
+and patches. Do not try to read them at this time, as the installation
+program is not ready to use the information.
+
+Insert a supplemental driver diskette into drive A."
+
+[MENU_READ_DU_FLOPPY]
+"Reading Supplemental Driver Diskette
+"
+
+[MENU_DU_OSVER]
+"Select Solaris System Version
+
+Select the system version to be installed or updated, and choose
+Continue.
+
+If the appropriate Solaris system version is not in the list,
+choose Cancel.
+
+"
+[MENU_HELP_OSVER]
+"Help: Select Solaris System Version
+
+A supplemental driver diskette contains drivers and patches for several
+Solaris system versions. Be sure to match the supplemental driver version
+with the version of the Solaris system being used.
+
+Once the Solaris system version is chosen, the drivers and patches 
+will be loaded from each supplemental driver diskette based on the chosen
+version.
+
+If a supplemental driver diskette does not contain drivers and patches for
+the chosen version, the program will issue a warning and prompt for
+another diskette to load.
+
+"
+[MENU_VERIFY_OSVER_CHOICES]
+"Warning: Mismatched Solaris System Version
+
+The supplemental driver diskette in drive A does not contain software
+support for Solaris %s, which was the version chosen.
+
+If you accidentally inserted the wrong diskette, insert the correct
+one and choose Continue.
+
+If the system version to be installed is different from the one chosen,
+choose Cancel. (Note that, when Cancel is chosen, all previously read
+updates will be discarded and all supplemental driver diskettes must be
+read again.)"
+
+[FLOPPY_READ_BEFORE]
+"Warning: Diskette Already Processed
+
+Supplemental driver diskette %s has already been processed. It was diskette
+number %d. Insert another diskette to process."
+
+[FLOPPY_READ_LAST]
+"Warning: Diskette Just Processed
+
+Supplemental driver diskette %s was just processed. Replace it with another
+diskette."
+
+[DU_LAYOUT_OPEN_FAILED]
+"Error: Cannot Open File
+
+Cannot open the %s file to
+determine the layout version of the supplemental driver diskette. The
+diskette cannot be used in this state. Obtain a new version of the
+diskette from the provider."
+
+[DU_LAYOUT_MISMATCH]
+"Error: Diskette Layout Mismatch
+
+The layout version on this diskette is not supported.
+
+	Version found: 		%s
+	Version supported:	%s
+
+Obtain a new version of the diskette from the provider."
+
+[MENU_DUP_ITUO]
+"Warning: Multiple Updates of the Same Driver Found
+
+Multiple updates for driver \"%s\" have been found. Only one can
+be applied to the system.
+
+To apply this version, choose Continue. To discard this version,
+and apply the first version, choose Cancel."
+
+[VOLNAME_ERROR]
+"Error: Bad Diskette
+
+Unable to determine the volume name of the diskette. Obtain a new
+version of the diskette from the provider."
+
+[MENU_DU_RESULTS]
+"Identified Device Drivers
+
+The processing of the supplemental driver diskettes is complete.
+
+Drivers for self-identifying devices, those ISA devices corresponding
+to actual hardware, and drivers and modules which are unconditionally
+upgraded, will be installed.
+
+To determine which ISA devices are in the system, perform the full scan
+from the Solaris Device Configuration Assistant screen.
+
+If any driver is missing from the list, refer to the release notes 
+that accompany the supplemental driver diskette.
+
+"
+[DU_PROCESSING_ERROR]
+"Error: Supplemental Driver Processing 
+
+Processing of the supplemental driver %s failed."
+
+[ITU_OPEN_FAILED]
+"Error: Open of Supplemental Driver Configuration File
+
+Could not open file %s."
+
+[ITU_PARSE_ERROR]
+"Error: Supplemental Driver Configuration File
+
+%s"
+
+[DU_FDOPENDIR_ERROR]
+"Error: Supplemental Driver Diskette Read 
+
+%s"
+
+[DU_RAMFILE_ERROR]
+"Error: Supplemental Driver RAM File 
+
+%s"
+
+[DU_LIMIT_DRVRS]
+"Warning: Supplemental Driver Installation
+
+%s"

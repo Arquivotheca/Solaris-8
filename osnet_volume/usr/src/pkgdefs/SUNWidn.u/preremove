@@ -1,0 +1,18 @@
+#! /bin/sh
+#
+# Copyright (c) 1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+# ident "@(#)preremove	1.2	99/07/09 SMI"
+#
+# SUNWidn postremove script
+#
+
+PATH="/usr/bin:/usr/sbin:${PATH}"
+export PATH
+
+EXIT=0
+
+rem_drv -b ${BASEDIR} idn || EXIT=1
+
+exit $EXIT

@@ -1,0 +1,40 @@
+\
+\ Copyright (c) 1999 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)usoc_idinfo.dbg	1.1	99/09/26 SMI"
+\
+#include <sys/isa_defs.h>
+#include <sys/types.h>
+#include <sys/dditypes.h>
+#include <sys/ddidmareq.h>
+#include <sys/mutex.h>
+#include <sys/semaphore.h>
+#include <sys/condvar.h>
+#include <sys/thread.h>
+#include <sys/devops.h>
+#include <sys/taskq.h>
+#include <sys/fibre-channel/fc.h>
+#include <sys/fibre-channel/fca/usoc_cq_defs.h>
+#include <sys/fibre-channel/fca/usocio.h>
+#include <sys/fibre-channel/fca/usocreg.h>
+#include <sys/fibre-channel/fca/usocvar.h>
+#include "dummy.h"
+\
+\
+usoc_idinfo				id_
+{adb_inline_begin}
+.>w
+#if defined(sparcv9)
+<w+{OFFSET, id_token}/n"fc_pkts"n2048Jn
+#else
+<w+{OFFSET, id_token}/n"fc_pkts"n2048Xn
+#endif
+<w+{OFFSET, id_multiplier}/n"multipliers"n2048xn
+<w+{OFFSET, id_nextfree}/n"nextfree"n2048xn
+<w+{OFFSET, id_freelist_head}=""
+{adb_inline_end}
+	freelist_head			hex
+{adb_inline_begin}
+<w+{SIZEOF}=""
+{adb_inline_end}

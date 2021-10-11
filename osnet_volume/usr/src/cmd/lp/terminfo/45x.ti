@@ -1,0 +1,24 @@
+#	Copyright (c) 1984, 1986, 1987, 1988, 1989 AT&T
+#	  All Rights Reserved
+
+#	THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF AT&T
+#	The copyright notice above does not evidence any
+#	actual or intended publication of such source code.
+
+#ident	"@(#)45x.ti	1.2	89/11/27 SMI"	/* SVr4.0 1.1	*/
+
+######################################################################
+#
+# Entries for the AT&T 455, 457, 459 printers
+#
+
+455|att455|AT&T 455 Daisywheel printer,
+
+	use=Gdaisy+basic,
+
+457|att457|458|att458|AT&T 457 Daisy printer,
+
+	bufsz#1024,
+	use=455,
+
+

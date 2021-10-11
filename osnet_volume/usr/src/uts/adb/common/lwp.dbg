@@ -1,0 +1,75 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)lwp.dbg	1.29	98/01/19 SMI"
+
+#include <sys/types.h>
+#include <sys/thread.h>
+#include <sys/lwp.h>
+#include "dummy.h"
+
+\
+\
+_klwp			lwp_		lwp
+{adb_inline_begin}
+.>z
+<_>U;1>_
+<z+{OFFSET, lwp_oldcontext}=""
+{adb_inline_end}
+	oldcontext		hex
+	ap			hex
+	errno			sdecimal
+	error			hex
+	eosys			hex
+	argsaved		hex
+	watchtrap		hex
+	arg			hex		"arg(s)"
+	regs			hex
+	qsav			hex		"qsav.pc:qsav.sp"
+	cursig			hex
+	curflt			hex
+	sysabort		hex
+	asleep			hex
+	sigaltstack		.sigaltstack
+{adb_inline_begin}
+<z+{OFFSET, lwp_curinfo}=""
+{adb_inline_end}
+	curinfo			hex
+	siginfo			.ksiginfo
+{adb_inline_begin}
+<z+{OFFSET, lwp_sigoldmask}=""
+{adb_inline_end}
+	sigoldmask		hex
+{adb_inline_begin}
+<z+{OFFSET, lwp_watch}/n"wpaddr0"16t"wpsize0"16t"wpcode0"16t"wppc0"n{HEX}{SDEC}D{HEX}
+<z+{OFFSET, lwp_watch[1]}/n"wpaddr1"16t"wpsize1"16t"wpcode1"16t"wppc1"n{HEX}{SDEC}D{HEX}
+<z+{OFFSET, lwp_watch[2]}/n"wpaddr2"16t"wpsize2"16t"wpcode2"16t"wppc2"n{HEX}{SDEC}D{HEX}
+<z+{OFFSET, lwp_watch[3]}/n"wpaddr3"16t"wpsize3"16t"wpcode3"16t"wppc3"n{HEX}{SDEC}D{HEX}
+<z+{OFFSET, lwp_oweupc}=""
+{adb_inline_end}
+	oweupc			hex
+	mstate			hex
+	ru			hex
+	lastfault		sdecimal
+	lastfaddr		hex
+{adb_inline_begin}
+<z+{OFFSET, lwp_timer[0].it_interval}/n"t0interval.sec"16t"t0interval.usec"n{HEX}{HEX}
+<z+{OFFSET, lwp_timer[0].it_value}/n"t0value.sec"16t"t0value.usec"n{HEX}{HEX}
+<z+{OFFSET, lwp_timer[1].it_interval}/n"t1interval.sec"16t"t1interval.usec"n{HEX}{HEX}
+<z+{OFFSET, lwp_timer[1].it_value}/n"t1value.sec"16t"t1value.usec"n{HEX}{HEX}
+<z+{OFFSET, lwp_timer[2].it_interval}/n"t2interval.sec"16t"t2interval.usec"n{HEX}{HEX}
+<z+{OFFSET, lwp_timer[2].it_value}/n"t2value.sec"16t"t2value.usec"n{HEX}{HEX}
+<z+{OFFSET, lwp_state}=""
+{adb_inline_end}
+	state			hex
+	nostop			sdecimal
+	cv			hex
+	utime			hex
+	stime			hex
+	thread			hex
+	procp			hex
+{adb_inline_begin}
+<U>_
+<z+{SIZEOF}=""
+{adb_inline_end}

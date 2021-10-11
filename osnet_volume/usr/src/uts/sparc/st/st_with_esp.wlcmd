@@ -1,0 +1,27 @@
+#
+# Copyright (c) 1998 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#pragma ident	"@(#)st_with_esp.wlcmd 1.7	98/10/11 SMI"
+
+add scsi_watch_request::swr_callback targets \
+	st.c:st_media_watch_cb
+
+add esp_cmd::cmd_pkt.pkt_comp targets \
+	st.c:st_media_watch_cb \
+	scsi_watch.c:scsi_watch_request_intr \
+	st.c:st_intr
+
+
+one scsi_device
+one esp 
+
+root 	esp_kmem_cache_constructor esp_kmem_cache_destructor
+root  	esp.c:esp_scsi_dmafree esp.c:esp_scsi_sync_pkt
+root  	esp.c:esp_abort esp.c:esp_scsi_reset_notify
+
+assert order scsi_device::sd_mutex  esp::e_mutex
+
+disallow esp_call_pkt_comp scsi_watch_request_intr
+
+add notify_entry::callback target warlock_dummy

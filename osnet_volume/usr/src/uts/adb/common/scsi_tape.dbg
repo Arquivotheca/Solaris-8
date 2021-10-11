@@ -1,0 +1,103 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)scsi_tape.dbg	1.19	98/05/24 SMI"
+
+#include <sys/modctl.h>
+#include <sys/scsi/scsi.h>
+#include <sys/mtio.h>
+#include <sys/scsi/targets/stdef.h>
+#include <sys/file.h>
+#include <sys/stat.h>
+#include "dummy.h"
+
+\
+\
+scsi_tape		un_
+{adb_inline_begin}
+.>z
+<z+{OFFSET, un_sd}=""
+{adb_inline_end}
+	sd			hex
+	rqs			hex
+	mkr_pkt			hex
+	sbuf_cv			hex
+	queue_cv		hex
+	sbufp			hex
+	srqbufp			hex
+	clscv			hex
+	quef			hex
+	quel			hex
+	runqf			hex
+	runql			hex
+	mspl			hex
+	dp			hex
+	dp_size			hex
+	tmpbuf			hex
+	blkno			hex
+	oflags			hex
+	fileno			hex
+	err_fileno		hex
+	err_blkno		hex
+	err_resid		hex
+	fmneeded		hex
+	dev			hex
+	attached		hex
+	pwr_mgmt		hex
+	density_known		hex
+	curdens			hex
+	lastop			hex
+	eof			hex
+	laststate		hex
+	state			hex
+	status			hex
+	retry_ct		hex
+	tran_retry_ct		hex
+	read_only		hex
+	test_append		hex
+	arq_enabled		hex
+	untagged_qing		hex
+	allow_large_xfer	hex
+	sbuf_busy		hex
+	ncmds			hex
+	throttle		hex
+	last_throttle		hex
+	max_throttle		hex
+	persistence		hex
+	persist_errors		hex
+	flush_on_errors		hex
+	kbytes_xferred		hex
+	last_resid		hex
+	last_count		hex
+	stats			hex
+	rqs_bp			hex
+	wf			hex
+	wl			hex
+	rbl			hex
+	maxdma			hex
+	bsize			hex
+	maxbsize		hex
+	minbsize		hex
+	errno			hex
+	state_cv		hex
+	mediastate		hex
+	specified_mediastate	hex
+	delay_tid		hex
+	hib_tid			hex
+	swr_token		hex
+	comp_page		hex
+	rsvd_status		hex
+	errstats		hex
+	init_options	hex
+	save_fileno		hex
+	save_blkno		hex
+	restore_pos		hex
+	silent_skip		hex
+	power_level		hex
+	tids_at_suspend	hex
+	tape_busy_cv	hex
+	suspend_cv		hex
+{adb_inline_begin}
+<z+{SIZEOF}=""
+{adb_inline_end}

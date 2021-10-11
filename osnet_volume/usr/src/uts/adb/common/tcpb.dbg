@@ -1,0 +1,101 @@
+\
+\ Copyright (c) 1999 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)tcpb.dbg	1.5	99/11/04 SMI"
+
+#include <sys/types.h>
+#include <sys/stropts.h>
+#include <netinet/in.h>
+#include <sys/stream.h>
+#include <inet/common.h>
+#include <inet/led.h>
+#include <netinet/ip6.h>
+#include <inet/ip.h>
+#include <inet/tcp.h>
+#include "dummy.h"
+
+\
+\
+\ The bit field portion of this macro is a bit complex.  Here is how
+\ the SPARC and X86 architectures store bits in a word.
+\ 
+\			SPARC				x86
+\  byte		bit_number	bit_number	bit_number	bit_number
+\   3		  7		   0		   31		  24
+\   2		  15		   8		   23		  16
+\   1		  23		  16		   15		   8
+\   0		  31		  24		   7		   0
+\
+\
+tcp_base_s                ""              tcpb
+{adb_inline_begin}
+.>u
+<u+{OFFSET, tcpb_bind_hash}=""
+{adb_inline_end}
+	tcpb_bind_hash		hex	tcp_bind_hash
+	tcpb_ptpbhn		hex	tcp_ptpbhn
+	tcpb_conn_hash		hex	tcp_conn_hash
+	tcpb_ptpchn		hex	tcp_ptpchn
+	tcpb_time_wait_next	hex	time_wait_next
+	tcpb_time_wait_prev	hex	time_wait_prev
+	tcpb_time_wait_expire	hex	time_wait_expir
+	tcpb_last_rcv_lbolt	hex	last_rcv_lbolt
+	tcpb_state		sdecimal tcp_state
+	tcpb_rcv_ws		hex	tcp_rcv_ws
+	tcpb_snd_ws		hex	tcp_snd_ws
+	tcpb_ts_recent		hex	tcp_ts_recent
+	tcpb_rto		hex	tcp_rto
+{adb_inline_begin}
+*(<u+{OFFSET, tcpb_snd_ts_ok})>/i/t
+#if defined(_BIG_ENDIAN)
+(##(<t&0x80000000))="snd_ts_ok"8tB
+(##(<t&0x40000000))="snd_ws_ok"8tB
+(##(<t&0x20000000))="is_secure"8tB
+(##(<t&0x10000000))="reuseaddr"8tB
+(##(<t&0x08000000))="exclbind"8tB
+#elif defined(_LITTLE_ENDIAN)
+(##(<t&0x00000001))="snd_ts_ok"8tB
+(##(<t&0x00000002))="snd_ws_ok"8tB
+(##(<t&0x00000004))="is_secure"8tB
+(##(<t&0x00000008))="reuseaddr"8tB
+(##(<t&0x00000010))="exclbind"8tB
+#endif
+<u+{OFFSET, tcpb_snxt}=""
+{adb_inline_end}
+	tcpb_snxt		hex	tcp_snxt
+	tcpb_swnd		hex	tcp_swnd
+	tcpb_mss		hex	tcp_mss
+	tcpb_iss		hex	tcp_iss
+	tcpb_rnxt		hex	tcp_rnxt
+	tcpb_rwnd		hex	tcp_rwnd
+	tcpb_reflock		.mutex
+{adb_inline_begin}
+<u+{OFFSET, tcpb_refcnt}=""
+{adb_inline_end}
+	tcpb_refcnt		hex	tcp_refcnt
+	tcpb_hdr_info.v6_hdr_info.v6_vcf	hex	tcpb_vcf
+	tcpb_hdr_info.v6_hdr_info.v6_hops	hex	tcpb_hops
+	tcpb_remote_v6		.in6_addr
+{adb_inline_begin}
+<u+{OFFSET, tcpb_bound_source_v6}=""
+{adb_inline_end}
+	tcpb_bound_source_v6	.in6_addr
+{adb_inline_begin}
+<u+{OFFSET, tcpb_ip_src_v6}=""
+{adb_inline_end}
+	tcpb_ip_src_v6		.in6_addr	
+{adb_inline_begin}
+<u+{OFFSET, tcpb_tcpu.tcpu_ports1.tcpu_fport}=""
+{adb_inline_end}
+	tcpb_tcpu.tcpu_ports1.tcpu_fport	hex	tcpu_fport
+	tcpb_tcpu.tcpu_ports1.tcpu_lport	hex	tcpu_lport
+	tcpb_ipsec_out		hex	ipsec_out
+	tcpb_ipsec_req_in	hex	ipsec_req_in
+	tcpb_tcp		hex	tcpb_tcp
+	tcpb_ipversion		hex	tcpb_ipversion
+	tcpb_bound_if		hex	bound_if
+	tcpb_ownerid		sdecimal	ownerid
+{adb_inline_begin}
+<u+{SIZEOF}=""
+{adb_inline_end}

@@ -1,0 +1,52 @@
+.\" @(#)ld_concurrency.3t 1.2 95/03/08 SMI
+.\" Copyright (c) 1995 by Sun Microsystems, Inc.
+.\" All rights reserved.
+.\"
+.TH _ld_concurrency 3t "Nov 6 1992"
+.SH NAME
+_ld_concurrency \- inform run-time linker of concurrency functions
+.SH SYNOPSIS
+.\".nr C 0
+.\".nr D 0
+.\".nr E 0
+.\".nr F 0
+.\".nr G 0
+.\".nr H 0
+.LP
+.B
+#include <link.h>
+.LP
+.BI "void _ld_concurrency(Ld_concurrency * funcs );"
+.SH DESCRIPTION
+.B _ld_concurrency(\|)
+provides a private interface between the threads library and the run-time linker
+that safeguards dynamic threaded applications during execution of the
+run-time linker.  Dynamic applications enter the run-time linker to perform
+function binding and to exercise any of the
+.B dlopen(3x)
+family of routines.  During these periods it is necessary for the run-time
+linker to hold various mutex locks.  To insure the correct co-ordination of
+these locks with the threads library, and to provide as little overhead as
+possible, the threads library uses
+.B _ld_concurrency(\|)
+to pass the addresses of various mutex function primitives to the run-time
+linker.
+.PP
+This initialization procedure occurs during the .init processing of the
+threads library, and is made available though \f4libdl.so\f1.
+.SH NOTES
+If a dynamic application is built using the archive version of the threads
+library, the user must insure the necessary \f4-ld\^ \f1 reference to
+enable the
+.B _ld_concurrency(\|)
+initialization.
+.PP
+Because this is a private interface all definitions for the
+.B _ld_concurrency(\|)
+interface are specified in the \f4link.h\^ \f1 header rather than \f4dlfcn.h\f1.
+.PD
+.SH "SEE ALSO" 
+.BR intro (3t),
+.BR dlopen (3x)
+.LP
+.TZ LLM

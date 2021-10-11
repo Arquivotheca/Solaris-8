@@ -1,0 +1,687 @@
+\ Copyright 1998 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\ offsets.in: input file to produce assym.h using the stabs program
+\
+\
+\ Guidelines:
+\ 
+\ A blank line is required between structure/union/intrinsic names.
+\ 
+\ The general form is:
+\ 
+\	name size_define [shift_define]
+\		member_name [offset_define]
+\	{blank line}
+\ 
+\ If offset_define is not specified then the member_name is
+\ converted to all caps and used instead.  If the size of an item is
+\ a power of two then an optional shift count may be output using
+\ shift_define as the name but only if shift_define was specified.
+\ 
+\ Arrays cause stabs to automatically output the per-array-item increment
+\ in addition to the base address:
+\ 
+\	 foo FOO_SIZE
+\		array	FOO_ARRAY
+\ 
+\ results in:
+\ 
+\	#define	FOO_ARRAY	0x0
+\	#define	FOO_ARRAY_INCR	0x4
+\ 
+\ which allows \#define's to be used to specify array items:
+\ 
+\	#define	FOO_0	(FOO_ARRAY + (0 * FOO_ARRAY_INCR))
+\	#define	FOO_1	(FOO_ARRAY + (1 * FOO_ARRAY_INCR))
+\	...
+\	#define	FOO_n	(FOO_ARRAY + (n * FOO_ARRAY_INCR))
+\ 
+\ There are several examples below (search for _INCR).
+\ 
+\ There is currently no manner in which to identify "anonymous"
+\ structures or unions so if they are to be used in assembly code
+\ they must be given names.
+\ 
+\ When specifying the offsets of nested structures/unions each nested
+\ structure or union must be listed separately then use the
+\ "\#define" escapes to add the offsets from the base structure/union
+\ and all of the nested structures/unions together.  See the many
+\ examples already in this file.
+
+#pragma ident	"@(#)offsets.in	1.27	99/09/15 SMI"
+
+#ifndef	_GENASSYM
+#define	_GENASSYM
+#endif
+
+#define	SIZES	1
+
+#include <sys/types.h>
+#include <sys/param.h>
+#include <sys/elf_notes.h>
+#include <sys/sysinfo.h>
+#include <sys/vmmeter.h>
+#include <sys/vmparam.h>
+#include <sys/signal.h>
+#include <sys/user.h>
+#include <sys/map.h>
+#include <sys/thread.h>
+#include <sys/t_lock.h>		/* XXX Payne */
+#include <sys/mutex_impl.h>
+#include <sys/lockstat.h>
+#include <sys/proc.h>
+#include <sys/buf.h>
+#include <sys/rt.h>
+#include <sys/ts.h>
+#include <sys/obpdefs.h>
+#include <sys/cpuvar.h>
+#include <sys/dditypes.h>	/* XXX Payne */
+#include <sys/ddi_isa.h>
+#include <sys/vtrace.h>
+#include <sys/pte.h>
+#include <sys/privregs.h>
+#include <sys/machpcb.h>
+#include <sys/mmu.h>
+#include <sys/cpu.h>
+#include <sys/scb.h>
+#include <sys/clock.h>
+#include <sys/intr.h>
+#include <sys/ivintr.h>
+#include <sys/eeprom.h>
+#include <sys/devops.h>
+#include <sys/ddi_impldefs.h>
+#include <vm/hat.h>
+#include <vm/as.h>
+#include <vm/seg.h>
+#include <vm/hat_sfmmu.h>
+#include <sys/avintr.h>
+#include <sys/fdvar.h>		/* XXX Payne */
+#include <sys/stream.h>
+#include <sys/strsubr.h>
+#include <sys/file.h>
+#include <sys/psr_compat.h>
+#include <sys/dmv.h>
+#include <sys/machcpuvar.h>
+#include <sys/traptrace.h>
+
+greg_t		GREGSIZE
+
+uintptr_t	LWP_ARG_SZ
+
+proc		PROCSIZE
+	p_link
+	p_next
+	p_child
+	p_sibling
+	p_sig
+	p_wcode
+	p_flag
+	p_tlist
+	p_as
+	p_lockp
+	p_pidp
+	p_fixalignment
+	p_utraps
+
+\#define	P_UTRAP4	(UT_ILLTRAP_INSTRUCTION * CPTRSIZE)
+\#define	P_UTRAP7	(UT_FP_DISABLED * CPTRSIZE)
+\#define	P_UTRAP8	(UT_FP_EXCEPTION_IEEE_754 * CPTRSIZE)
+\#define	P_UTRAP10	(UT_TAG_OVERFLOW * CPTRSIZE)
+\#define	P_UTRAP11	(UT_DIVISION_BY_ZERO * CPTRSIZE)
+\#define	P_UTRAP15	(UT_MEM_ADDRESS_NOT_ALIGNED * CPTRSIZE)
+\#define	P_UTRAP16	(UT_PRIVILEGED_ACTION * CPTRSIZE)
+
+pid	PID_SIZE
+	pid_id	PID_PIDID
+
+_label_t	LABEL_SIZE
+	val	LABEL_VAL
+
+_kthread	THREAD_SIZE
+	t_lock
+	t_lock_flush
+	t_lockp
+	t_oldspl
+	t_pri
+	t_lwp
+	t_procp
+	t_link
+	t_state
+	t_mstate
+	t_stk		T_STACK
+	t_swap
+	t_wchan
+	t_flag		T_FLAGS
+	t_ctx
+	t_pcb
+	t_lofault
+	t_onfault
+	t_nofault
+	t_cpu
+	t_bound_cpu
+	t_intr
+	t_forw
+	t_back
+	t_sig
+	t_tid
+	t_pre_sys
+	t_preempt
+	t_proc_flag
+	t_startpc
+	t_sysnum
+	_tu
+	t_preempt_lk
+	t_kpri_req
+	t_lockstat
+	t_pil
+
+\#define	L_PC	(0 * LABEL_VAL_INCR)
+\#define	L_SP	(1 * LABEL_VAL_INCR)
+
+\#define	T_PC	(T_PCB + L_PC)
+\#define	T_SP	(T_PCB + L_SP)
+
+
+__ts	T_TS_SIZE
+	_t_astflag
+	_t_sig_check
+	_t_post_sys
+	_t_trapret
+
+__tu	T_TU_SIZE
+	_ts
+	_t_post_sys_ast
+
+\#define	T_ASTFLAG	(_TU + _TS + _T_ASTFLAG)
+\#define	T_SIG_CHECK	(_TU + _TS + _T_SIG_CHECK)
+\#define	T_POST_SYS	(_TU + _TS + _T_POST_SYS)
+\#define	T_TRAPRET	(_TU + _TS + _T_TRAPRET)
+\#define	T_POST_SYS_AST	(_TU + _T_POST_SYS_AST)
+
+sysent	SYSENT_SIZE SYSENT_SHIFT
+	sy_callc
+	sy_flags
+
+as	AS_SIZE
+	a_hat
+	a_userlimit
+
+hat	HAT_SIZE
+	sfmmu_ismblk
+	sfmmu_cnum
+	sfmmu_cpusran
+
+hmehash_bucket	HMEBUCK_SIZE
+	hmeblkp	HMEBUCK_HBLK
+	hmeh_nextpa	HMEBUCK_NEXTPA
+	hmeh_listlock	HMEBUCK_LOCK
+
+sfmmu_global_stat HATSTAT_SIZE
+	sf_pagefaults		HATSTAT_PAGEFAULT
+	sf_uhash_searches	HATSTAT_UHASH_SEARCH
+	sf_uhash_links		HATSTAT_UHASH_LINKS
+	sf_khash_searches	HATSTAT_KHASH_SEARCH
+	sf_khash_links		HATSTAT_KHASH_LINKS
+
+ctx	C_SIZE
+	c_un
+	c_refcnt
+	c_flags
+	c_ismblkpa
+
+_c_un	C_UN_SIZE
+	c_sfmmup
+	c_freep
+
+\#define	C_SFMMU	(C_UN + C_SFMMUP)
+\#define	C_FREE	(C_UN + C_FREEP)
+
+
+tte_t	TTE_SIZE
+	ll	TTE_LL
+
+ism_blk	ISMBLK_SIZE
+	iblk_maps	IBLK_MAPS
+	iblk_next	IBLK_NEXT
+
+ism_map_t	ISM_MAP_SZ
+	imap_seg	IMAP_SEG
+	imap_ismhat	IMAP_ISMHAT
+
+tsbe	TSBE_SIZE
+	tte_tag		TSBE_TAG
+	tte_data	TSBE_TTE
+
+tsb_tag	TSBTAG_SIZE
+	tagints	TSBTAG_INTS
+
+tsb_tagints	TSBTAGINTS_SIZE
+	inthi	_TSBTAG_INTHI
+	intlo	_TSBTAG_INTLO
+
+\#define	TSBTAG_INTHI	(TSBTAG_INTS + _TSBTAG_INTHI)
+\#define	TSBTAG_INTLO	(TSBTAG_INTS + _TSBTAG_INTLO)
+
+hme_blk	HMEBLK_SIZE
+	hblk_next	HMEBLK_NEXT
+	hblk_tag	HMEBLK_TAG
+	hblk_misc	HMEBLK_MISC
+	hblk_hme	HMEBLK_HME1
+	hblk_nextpa	HMEBLK_NEXTPA
+	hblk_cpuset	HMEBLK_CPUSET
+
+sf_hment	SFHME_SIZE
+	hme_tte		SFHME_TTE
+
+tsbmiss		TSBMISS_SIZE TSBMISS_SHIFT
+	tsbptr		TSBMISS_TSBPTR
+	tsbptr4m	TSBMISS_TSBPTR4M
+	sfmmup		TSBMISS_KHATID
+	khashsz		TSBMISS_KHASHSZ
+	khashstart	TSBMISS_KHASHSTART
+	dcache_line_mask	TSBMISS_DMASK
+	uhashsz		TSBMISS_UHASHSZ
+	uhashstart	TSBMISS_UHASHSTART
+	ctxs		TSBMISS_CTXS
+	itlb_misses	TSBMISS_ITLBMISS
+	dtlb_misses	TSBMISS_DTLBMISS
+	utsb_misses	TSBMISS_UTSBMISS
+	ktsb_misses	TSBMISS_KTSBMISS
+	uprot_traps	TSBMISS_UPROTS
+	kprot_traps	TSBMISS_KPROTS
+	scratch		TSBMISS_SCRATCH
+
+\#define	TSB_TAGACC	(0 * TSBMISS_SCRATCH_INCR)
+\#define	TSBMISS_HMEBP	(1 * TSBMISS_SCRATCH_INCR)
+\#define	TSBMISS_HATID	(2 * TSBMISS_SCRATCH_INCR)
+
+tsb_info	TSBINFO_SIZE	TSBINFO_SZSHIFT
+	tsb_reg		TSBINFO_REG
+	tsb_tte		TSBINFO_TTE
+
+user	USIZEBYTES
+	u_comm
+	u_signal
+
+_klwp	LWP_SIZE
+	lwp_thread
+	lwp_regs
+	lwp_fpu
+	lwp_arg
+	lwp_cursig
+	lwp_ru
+	lwp_state
+	lwp_stime
+	lwp_utime
+	lwp_mstate
+	lwp_pcb
+
+lrusage	LRUSAGE_SIZE
+	sysc	_LRUSAGE_SYSC
+
+\#define	LWP_RU_SYSC	(LWP_RU + _LRUSAGE_SYSC)
+
+mstate	MSTATE_SIZE
+	ms_start
+	ms_prev
+	ms_term
+	ms_state_start
+	ms_acct
+
+\#define	LWP_STATE_START (LWP_MSTATE + MS_STATE_START)
+\#define	LWP_MS_START (LWP_MSTATE + MS_START)
+\#define	LWP_MS_PREV (LWP_MSTATE + MS_PREV)
+\#define	LWP_ACCT_USER (LWP_MSTATE + MS_ACCT + (LMS_USER * MS_ACCT_INCR))
+\#define	LWP_ACCT_SYSTEM (LWP_MSTATE + MS_ACCT + (LMS_SYSTEM * MS_ACCT_INCR))
+
+pcb	PCB_SIZE
+	pcb_flags	_PCB_FLAGS
+	pcb_trap0addr	_PCB_TRAP0
+	pcb_step	_PCB_STEP
+	pcb_tracepc	_PCB_TRACEPC
+
+\#define	PCB_FLAGS	(LWP_PCB + _PCB_FLAGS)
+\#define	PCB_TRAP0	(LWP_PCB + _PCB_TRAP0)
+\#define	PCB_STEP	(LWP_PCB + _PCB_STEP)
+\#define	PCB_TRACEPC	(LWP_PCB + _PCB_TRACEPC)
+
+rwindow32	RWIN32SIZE	RWIN32SHIFT
+	rw_local	RW32_LOCAL
+	rw_in		RW32_IN
+
+rwindow64	RWIN64SIZE	RWIN64SHIFT
+	rw_local	RW64_LOCAL
+	rw_in		RW64_IN
+
+machpcb	MPCBSIZE
+	mpcb_regs
+	mpcb_wbuf
+	mpcb_spbuf
+	mpcb_wbcnt
+	mpcb_rwin
+	mpcb_rsp
+	mpcb_flags
+	mpcb_thread
+	mpcb_wstate
+
+\#define	MPCB_RWIN0	(MPCB_RWIN + (0 * MPCB_RWIN_INCR))
+\#define	MPCB_RWIN1	(MPCB_RWIN + (1 * MPCB_RWIN_INCR))
+\#define	MPCB_RSP0	(MPCB_RSP + (0 * MPCB_RSP_INCR))
+\#define	MPCB_RSP1	(MPCB_RSP + (1 * MPCB_RSP_INCR))
+
+v9_fpu	V9FPUSIZE
+	fpu_fr
+	fpu_fsr
+	fpu_fprs
+	fpu_q
+	fpu_qcnt
+	fpu_en
+
+_fpu_fr	V9FPUFRSIZE
+	fpu_regs	FPU_FR_REGS
+
+\#define	FPU_REGS	(FPU_FR + FPU_FR_REGS)
+
+\#define	FPU_GSR		V9FPUSIZE
+
+regs	REGSIZE
+	r_tstate	TSTATE_OFF
+	r_g1		G1_OFF
+	r_g2		G2_OFF
+	r_g3		G3_OFF
+	r_g4		G4_OFF
+	r_g5		G5_OFF
+	r_g6		G6_OFF
+	r_g7		G7_OFF
+	r_o0		O0_OFF
+	r_o1		O1_OFF
+	r_o2		O2_OFF
+	r_o3		O3_OFF
+	r_o4		O4_OFF
+	r_o5		O5_OFF
+	r_o6		O6_OFF
+	r_o7		O7_OFF
+	r_pc		PC_OFF
+	r_npc		NPC_OFF
+	r_y		Y_OFF
+
+\ XXX - doesn't preserve case up above
+\#define	nPC_OFF		NPC_OFF
+
+flushmeter	FM_SIZE
+	f_ctx		FM_CTX
+	f_usr		FM_USR
+	f_region	FM_REGION
+	f_segment	FM_SEGMENT
+	f_page		FM_PAGE
+	f_partial	FM_PARTIAL
+
+autovec		AUTOVECSIZE
+	av_vector
+	av_intarg
+
+cpu_node	CPU_NODE_SIZE
+	name
+	implementation
+	version
+	upaid
+	nodeid
+	clock_freq
+	ecache_size	ECACHE_SIZE
+
+cpu	CPUSIZE
+	cpu_id
+	cpu_flags
+	cpu_thread
+	cpu_thread_lock
+	cpu_kprunrun
+	cpu_lwp
+	cpu_fpowner
+	cpu_idle_thread
+	cpu_intr_thread
+	cpu_intr_actv
+	cpu_base_spl
+	cpu_on_intr
+	cpu_intr_stack
+	cpu_stat	CPU_STATS
+	cpu_profile_cyclic_id
+	cpu_profile_pc
+	cpu_profile_pil
+	cpu_profile_when
+	cpu_profile_ilate
+	cpu_trace
+	cpu_ftrace
+	cpu_m		CPU_MCPU
+
+cpuset_t	CPUSET_SIZE
+
+ftrace_data
+	ftd_state
+
+\#define	CPU_FTRACE_STATE	(CPU_FTRACE + FTD_STATE)
+
+tracedata
+	tbuf_start
+	tbuf_end
+	tbuf_wrap
+	tbuf_head
+	tbuf_tail
+	tbuf_redzone
+	tbuf_overflow
+	real_event_map	TD_REAL_EVENT_MAP
+	event_map	TD_EVENT_MAP
+	last_hrtime_lo32	TD_LAST_HRTIME_LO32
+	last_thread	TD_LAST_THREAD
+	scratch		TD_SCRATCH
+
+\#define	CPU_TRACE_START	(CPU_TRACE + TBUF_START)
+\#define	CPU_TRACE_END	(CPU_TRACE + TBUF_END)
+\#define	CPU_TRACE_WRAP	(CPU_TRACE + TBUF_WRAP)
+\#define	CPU_TRACE_HEAD	(CPU_TRACE + TBUF_HEAD)
+\#define	CPU_TRACE_TAIL	(CPU_TRACE + TBUF_TAIL)
+\#define	CPU_TRACE_REDZONE	(CPU_TRACE + TBUF_REDZONE)
+\#define	CPU_TRACE_OVERFLOW	(CPU_TRACE + TBUF_OVERFLOW)
+\#define	CPU_TRACE_REAL_MAP	(CPU_TRACE + TD_REAL_EVENT_MAP)
+\#define	CPU_TRACE_EVENT_MAP	(CPU_TRACE + TD_EVENT_MAP)
+\#define	CPU_TRACE_HRTIME	(CPU_TRACE + TD_LAST_HRTIME_LO32)
+\#define	CPU_TRACE_THREAD	(CPU_TRACE + TD_LAST_THREAD)
+\#define	CPU_TRACE_SCRATCH	(CPU_TRACE + TD_SCRATCH)
+
+machcpu
+	tl1_hdlr	MCPU_TL1_HDLR
+	tmp1	MCPU_TMP1
+	tmp2	MCPU_TMP2
+	intr_pool	MCPU_INTR_POOL
+	intr_head	MCPU_INTR_HEAD
+	intr_tail	MCPU_INTR_TAIL
+	mpcb	MCPU_MPCB
+
+\#define	INTR_TAIL	(CPU_MCPU + MCPU_INTR_TAIL)
+\#define	INTR_HEAD	(CPU_MCPU + MCPU_INTR_HEAD)
+\#define	INTR_POOL	(CPU_MCPU + MCPU_INTR_POOL)
+
+\#define	CPU_TL1_HDLR	(CPU_MCPU + MCPU_TL1_HDLR)
+
+\#define	CPU_TMP1	(CPU_MCPU + MCPU_TMP1)
+\#define	CPU_TMP2	(CPU_MCPU + MCPU_TMP2)
+
+\#define	CPU_MPCB	(CPU_MCPU + MCPU_MPCB)
+
+cpu_sysinfo	CPU_SYSINFO_SIZE
+	cpumigrate	CPU_SI_CPUMIGRATE
+	intr		CPU_SI_INTR
+	intrblk		CPU_SI_INTRBLK
+	intrthread	CPU_SI_INTRTHREAD
+	syscall		CPU_SI_SYSCALL
+	win_uo_cnt	CPU_SI_UO_CNT
+	win_uu_cnt	CPU_SI_UU_CNT
+	win_so_cnt	CPU_SI_SO_CNT
+	win_su_cnt	CPU_SI_SU_CNT
+	win_suo_cnt	CPU_SI_SUO_CNT
+
+cpu_stat	CPU_STAT_SIZE
+	cpu_stat_lock	_STAT_LOCK
+	cpu_sysinfo	_STAT_SYSINFO
+	cpu_syswait	_STAT_SYSWAIT
+	cpu_vminfo	_STAT_VMINFO
+
+\#define	CPU_SYSINFO_INTR (CPU_STATS + _STAT_SYSINFO + CPU_SI_INTR)
+\#define	CPU_SYSINFO_INTRTHREAD (CPU_STATS + _STAT_SYSINFO + CPU_SI_INTRTHREAD)
+\#define	CPU_SYSINFO_INTRBLK (CPU_STATS + _STAT_SYSINFO + CPU_SI_INTRBLK)
+\#define	CPU_SYSINFO_CPUMIGRATE (CPU_STATS + _STAT_SYSINFO + CPU_SI_CPUMIGRATE)
+\#define	CPU_SYSINFO_SYSCALL (CPU_STATS + _STAT_SYSINFO + CPU_SI_SYSCALL)
+\#define	CPU_SYSINFO_SO_CNT (CPU_STATS + _STAT_SYSINFO + CPU_SI_SO_CNT)
+\#define	CPU_SYSINFO_SU_CNT (CPU_STATS + _STAT_SYSINFO + CPU_SI_SU_CNT)
+\#define	CPU_SYSINFO_UO_CNT (CPU_STATS + _STAT_SYSINFO + CPU_SI_UO_CNT)
+\#define	CPU_SYSINFO_UU_CNT (CPU_STATS + _STAT_SYSINFO + CPU_SI_UU_CNT)
+\#define	CPU_SYSINFO_SUO_CNT (CPU_STATS + _STAT_SYSINFO + CPU_SI_SUO_CNT)
+
+intr_vector INTR_VECTOR_SIZE INTR_VECTOR_SHIFT
+	iv_handler
+	iv_arg
+	iv_pil
+	iv_pending
+
+dmv_disp DMV_DISP_SIZE DMV_DISP_SHIFT
+	dmv_func
+	dmv_arg
+
+intr_req	INTR_SIZE
+	intr_number
+	intr_next
+
+spin_mutex SM_SIZE
+	m_spinlock
+
+ddi_acc_impl	DDI_ACC_IMPL_SIZE
+	ahi_common
+	ahi_get8
+	ahi_get16
+	ahi_get32
+	ahi_get64
+	ahi_put8
+	ahi_put16
+	ahi_put32
+	ahi_put64
+	ahi_rep_get8
+	ahi_rep_get16
+	ahi_rep_get32
+	ahi_rep_get64
+	ahi_rep_put8
+	ahi_rep_put16
+	ahi_rep_put32
+	ahi_rep_put64
+	ahi_fault_check
+	ahi_fault
+
+stdata	STDATA_SIZE
+	sd_lock
+
+queue	 Q_SIZE
+	q_flag
+	q_next
+	q_stream
+	q_syncq
+	q_qinfo
+
+qinit	QI_SIZE
+	qi_putp
+
+syncq	SQ_SIZE
+	sq_flags
+	sq_count
+	sq_lock
+	sq_wait
+	sq_exitwait
+	sq_save
+
+PTL1_DAT	PTL1_DAT_SIZE
+	d	PTL1_D
+
+_ptl1_d		_PTL1_D_SIZE
+	ptl1_tstate	_PTL1_TSTATE
+	ptl1_tick	_PTL1_TICK
+	ptl1_tpc	_PTL1_TPC
+	ptl1_tnpc	_PTL1_TNPC
+	ptl1_tt		_PTL1_TT
+	ptl1_tl		_PTL1_TL
+
+\#define	PTL1_TICK	(PTL1_D + _PTL1_TICK)
+\#define	PTL1_TL		(PTL1_D + _PTL1_TL)
+\#define	PTL1_TNPC	(PTL1_D + _PTL1_TNPC)
+\#define	PTL1_TPC	(PTL1_D + _PTL1_TPC)
+\#define	PTL1_TSTATE	(PTL1_D + _PTL1_TSTATE)
+\#define	PTL1_TT		(PTL1_D + _PTL1_TT)
+
+bus_ops		BUS_OPS_SIZE
+	bus_dma_map		OPS_MAP
+	bus_dma_allochdl	OPS_ALLOCHDL
+	bus_dma_freehdl		OPS_FREEHDL
+	bus_dma_bindhdl		OPS_BINDHDL
+	bus_dma_unbindhdl	OPS_UNBINDHDL
+	bus_dma_flush		OPS_FLUSH
+	bus_dma_win		OPS_WIN
+	bus_dma_ctl		OPS_MCTL
+	bus_ctl			OPS_CTL
+
+dev_ops		DEV_OPS_SIZE
+	devo_bus_ops	DEVI_BUS_OPS
+
+dev_info	DEVI_SIZE
+	devi_ops	DEVI_DEV_OPS
+	devi_bus_dma_win
+	devi_bus_dma_allochdl
+	devi_bus_dma_freehdl
+	devi_bus_dma_bindhdl
+	devi_bus_dma_unbindhdl
+	devi_bus_dma_flush
+	devi_bus_dma_unbindfunc
+	devi_bus_ctl
+	devi_bus_dma_map
+	devi_bus_dma_ctl
+
+kstat_io
+	wtime		KSTAT_IO_WTIME
+	wlentime	KSTAT_IO_WLENTIME
+	wlastupdate	KSTAT_IO_WLASTUPDATE
+	rtime		KSTAT_IO_RTIME
+	rlentime	KSTAT_IO_RLENTIME
+	rlastupdate	KSTAT_IO_RLASTUPDATE
+	wcnt		KSTAT_IO_WCNT
+	rcnt		KSTAT_IO_RCNT
+
+ddi_dma_impl
+	dmai_rflags	DMA_HANDLE_RFLAGS
+	dmai_rdip	DMA_HANDLE_RDIP
+
+ls_pend
+	lp_start_time
+	lp_lock
+
+ddi_nofault_data
+	op_type		NF_OP_TYPE
+	pc		NF_PC
+	jmpbuf		NF_JMPBUF
+	save_nofault	NF_SAVE_NOFAULT
+
+vt_elapsed_time TRACE_ETIME_SIZE
+	head		TRACE_ETIME_HEAD
+	time		TRACE_ETIME_TIME
+
+vt_raw_kthread_id TRACE_KTID_SIZE
+	head	TRACE_KTID_HEAD
+	tid	TRACE_KTID_TID
+
+trap_trace_record	TRAP_ENT_SIZE
+	tt_tl		TRAP_ENT_TL
+	tt_tt		TRAP_ENT_TT
+	tt_tpc		TRAP_ENT_TPC
+	tt_tstate	TRAP_ENT_TSTATE
+	tt_tick		TRAP_ENT_TICK
+	tt_sp		TRAP_ENT_SP
+	tt_tr		TRAP_ENT_TR
+	tt_f1		TRAP_ENT_F1
+	tt_f2		TRAP_ENT_F2
+	tt_f3		TRAP_ENT_F3
+	tt_f4		TRAP_ENT_F4

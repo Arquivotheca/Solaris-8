@@ -1,0 +1,41 @@
+#
+#pragma ident	"@(#)prototype_com	1.4	99/09/27 SMI"
+#
+# Copyright (c) 1999, by Sun Microsystems, Inc.
+# All rights reserved.
+#
+# This required package information file contains a list of package contents.
+# The 'pkgmk' command uses this file to identify the contents of a package
+# and their location on the development machine when building the package.
+# Can be created via a text editor or through use of the 'pkgproto' command.
+
+#!search <pathname pathname ...>	# where to find pkg objects
+#!include <filename>			# include another 'prototype' file
+#!default <mode> <owner> <group>	# default used if not specified on entry
+#!<param>=<value>			# puts parameter in pkg environment
+
+# packaging files
+i pkginfo
+i copyright
+i depend
+i i.initd
+#
+# source locations relative to the prototype file
+#
+# SUNWslpr
+#
+d none etc 0755 root sys
+d none etc/inet 0755 root sys
+d none etc/init.d 0755 root sys
+e initd etc/init.d/slpd 0744 root sys
+d none etc/rc0.d 0755 root sys
+l initd etc/rc0.d/K41slpd=../../etc/init.d/slpd
+d none etc/rc1.d 0755 root sys
+l initd etc/rc1.d/K41slpd=../../etc/init.d/slpd
+d none etc/rcS.d 0755 root sys
+l initd etc/rcS.d/K41slpd=../../etc/init.d/slpd
+d none etc/rc2.d 0755 root sys
+l initd etc/rc2.d/S72slpd=../../etc/init.d/slpd
+d none etc/rc3.d 0755 root sys
+f none etc/inet/slp.conf.example 0644 root sys
+

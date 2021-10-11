@@ -1,0 +1,18 @@
+
+
+
+
+
+forceload: drv/nei
+
+exclude: smc
+exclude: iee
+exclude: elink
+exclude: el
+exclude: eepro
+exclude: pcn
+* exclude: fmvel
+exclude: tiqmouse
+
+* Note: nei now needs this variable for forceload to work
+set nei:nei_forceload = 1

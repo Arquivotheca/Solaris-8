@@ -1,0 +1,38 @@
+\
+\ Copyright (c) 1999 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)fcio.dbg	1.1	99/07/21 SMI"
+\
+#include <sys/isa_defs.h>
+#include <sys/types.h>
+#include <sys/dditypes.h>
+#include <sys/ddidmareq.h>
+#include <sys/mutex.h>
+#include <sys/semaphore.h>
+#include <sys/condvar.h>
+#include <sys/thread.h>
+#include <sys/devops.h>
+#include <sys/fibre-channel/fcio.h>
+#include "dummy.h"
+\
+\
+fcio	fcio_
+{adb_inline_begin}
+.>j
+<j+{OFFSET, fcio_xfer}=""
+{adb_inline_end}
+	xfer		hex
+	cmd		hex
+	flags		hex
+	cmd_flags	hex
+	ilen		hex
+	ibuf		hex
+	olen		hex
+	obuf		hex
+	alen		hex
+	abuf		hex
+	errno		hex
+{adb_inline_begin}
+<j+{SIZEOF}=""
+{adb_inline_end}

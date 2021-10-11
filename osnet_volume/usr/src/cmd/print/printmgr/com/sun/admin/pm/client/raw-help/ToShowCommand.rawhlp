@@ -1,0 +1,52 @@
+<TITLE> To Show Command-Line Console</TITLE>
+<!-- Tag=ToShowCommand -->
+
+<CONTENT>
+
+<p>
+
+Do the following to cause the command-line version of add, modify, and
+delete actions to be displayed in the Solaris Print Manager
+Command-Line Console -- or to turn off this option if it was
+previously turned on. Errors and warnings may also be
+displayed after the command. 
+
+<p>
+
+1. Choose Show Command-Line Console from the Print Manager menu. 
+
+<p>
+
+If the Show Command-line Console box was not checked when you chose
+it, it will be checked and the Show Command-line Console will be
+displayed; Solaris Print Manager actions will be displayed in the
+Console.
+
+<p>
+
+Note that errors and warnings may also appear in the Console, after
+the commands used to complete the action.
+
+<p>
+
+If the Show Command-line Console box was checked when you chose it,
+it will no longer be checked and the Show Command-line Console will be
+closed.
+
+<p>
+
+</CONTENT>
+
+<KEYWORDS>
+"command-line" log command show console
+</KEYWORDS>
+
+<p>
+
+<SEEALSO>
+ShowCommandConsole
+Overview
+MainWindow 
+HelpOnHelp
+</SEEALSO>
+

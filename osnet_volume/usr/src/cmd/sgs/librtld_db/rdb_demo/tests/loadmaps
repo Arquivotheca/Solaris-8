@@ -1,0 +1,12 @@
+echo "==============================================================="
+echo "Display maps before any link-maps are available."
+echo "==============================================================="
+maps
+break main
+cont
+echo "==============================================================="
+echo "Now that link-maps are available display both memory maps and "
+echo "link-maps"
+echo "==============================================================="
+maps
+linkmaps

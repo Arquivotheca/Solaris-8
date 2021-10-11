@@ -1,0 +1,111 @@
+\
+\ Copyright (c) 1997-1999 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)ill.dbg	1.5	99/08/23 SMI"
+
+#include <sys/types.h>
+#include <sys/stropts.h>
+#include <sys/socket.h>
+#include <netinet/in_systm.h>
+#include <netinet/in.h>
+#include <netinet/ip.h>
+#include <netinet/ip6.h>
+#include <netinet/icmp6.h>
+#include <net/if.h>
+#include <sys/stream.h>
+#include <inet/common.h>
+#include <inet/led.h>
+#include <inet/ip.h>
+#include <inet/ip6.h>
+#include "dummy.h"
+
+ill_s                ""              ill
+{adb_inline_begin}
+.>z
+<z+{OFFSET, ill_next}=""
+{adb_inline_end}
+	ill_next		hex	ill_next
+	ill_ptpn		hex	ill_ptpn
+	ill_rq			hex	ill_rq
+	ill_wq			hex	ill_wq
+	ill_error		decimal	ill_error
+	ill_ipif		hex	ill_ipif
+	ill_ipif_up_count	decimal	ill_ipif_up_count
+	ill_max_frag		decimal	ill_max_frag
+	ill_name		hex	ill_name
+	ill_name_length		decimal	ill_name_length
+	ill_ndd_name		hex	ill_ndd_name
+	ill_net_type		hex	ill_net_type
+	ill_ppa			decimal	ill_ppa
+	ill_sap			hex	ill_sap
+	ill_sap_length		decimal	ill_sap_length
+	ill_phys_addr_length	decimal	ill_phys_addr_length
+	ill_bcast_addr_length	decimal	ill_bcast_addr_length
+	ill_mactype		hex	ill_mactype
+	ill_frag_ptr		hex	ill_frag_ptr
+	ill_frag_timer_id	hex	ill_frag_timer_id
+	ill_frag_hash_tbl	hex	ill_frag_hash_tbl
+	ill_pending_q		hex	ill_pending_q
+	ill_pending_ipif	hex	ill_pending_ipif
+	ill_ilm			hex	ill_ilm
+	ill_multicast_type	hex	ill_multicast_type
+	ill_multicast_time	decimal	ill_multicast_time
+	ill_bcast_mp		hex	ill_bcast_mp
+	ill_pending_mp		hex	ill_pending_mp
+	ill_resolver_mp		hex	ill_resolver_mp
+	ill_down_mp		hex	ill_down_mp
+	ill_dlunit_req		hex	ill_dlunit_req
+	ill_dlpi_deferred	hex	ill_dlpi_deferred
+	ill_dlunit_req		hex	ill_dlunit_req
+	ill_hw_mp		hex	ill_hw_mp
+	ill_hw_addr		hex	ill_hw_addr
+	ill_ick.ick_magic	hex	ick_magic
+	ill_ick.ick_split	decimal	ick_split			
+	ill_ick.ick_split_align	decimal	ick_split_align			
+	ill_ick.ick_xmit	decimal	ick_xmit			
+	ill_close_flags		hex	ill_close_flags
+{adb_inline_begin}
+*(<z+{OFFSET, ill_needs_attach})>/i/t
+#if defined(_BIG_ENDIAN)
+(##(<t&0x80000000))="ill_needs_attach"8tB
+(##(<t&0x40000000))="ill_priv_stream"8tB
+(##(<t&0x20000000))="ill_dlpi_pending"8tB
+(##(<t&0x10000000))="ill_isv6"8tB
+(##(<t&0x08000000))="ill_name_set"8tB
+(##(<t&0x04000000))="ill_dlpi_style_set"8tB
+(##(<t&0x02000000))="ill_forwarding"8tB
+(##(<t&0x01000000))="ill_ifname_pending"8tB
+#elif defined(_LITTLE_ENDIAN)
+(##(<t&0x00000001))="ill_needs_attach"8tB
+(##(<t&0x00000002))="ill_priv_stream"8tB
+(##(<t&0x00000004))="ill_dlpi_pending"8tB
+(##(<t&0x00000008))="ill_isv6"8tB
+(##(<t&0x00000010))="ill_name_set"8tB
+(##(<t&0x00000020))="ill_dlpi_style_set"8tB
+(##(<t&0x00000040))="ill_forwarding"8tB
+(##(<t&0x00000080))="ill_ifname_pending"8tB
+#endif
+<z+{OFFSET, ill_arp_muxid}=""
+{adb_inline_end}
+	ill_arp_muxid			decimal	ill_arp_muxid
+	ill_ip_muxid			decimal	ill_ip_muxid
+	ill_ipf_gen			hex	ill_ipf_gen
+	ill_frag_count			decimal	ill_frag_count
+	ill_index			decimal	ill_index
+	ill_type			hex	ill_type
+	ill_dlpi_multicast_state	hex	ill_dlpi_multicast_state
+	ill_dlpi_fastpath_state		hex	ill_dlpi_fastpath_state
+	ill_max_hops			decimal	ill_max_hops
+	ill_max_mtu			decimal	ill_max_mtu
+	ill_reachable_time		decimal	ill_reachable_time
+	ill_reachable_retrans_time	decimal	ill_reachable_retrans_time
+	ill_max_buf			decimal	ill_max_buf
+	ill_token			.in6_addr
+	ill_token_length		decimal	ill_token_length
+	ill_xmit_count			decimal	ill_xmit_count
+	ill_ip6_mib			hex	ill_ip6_mib
+	ill_icmp6_mib			hex	ill_icmp6_mib
+{adb_inline_begin}
+<z+{SIZEOF}=""
+{adb_inline_end}

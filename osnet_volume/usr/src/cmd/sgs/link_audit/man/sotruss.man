@@ -1,0 +1,110 @@
+.\" @(#)sotruss.man 1.3 96/12/06 SMI;
+.\" Copyright (c) 1996, Sun Microsystems, Inc.
+.\" All Rights Reserved
+.if n .tr \--
+.TH sotruss 1 "18 Nov 1996"
+.SH NAME
+sotruss \- trace shared library procedure call and returns
+.SH SYNOPSIS
+.B sotruss
+[
+.B -f
+] [
+.B -F
+.I bindfromlist
+] [
+.B T
+.I bindtolist
+] [
+.B -o
+.I outputfile
+] executable [executable arguements ...]
+.SH AVAILABILITY
+.LP
+SUNWosdem
+.SH DESCRIPTION
+.B sotruss
+executes the specified command and produces a trace of
+the library calls that it performs and the return codes that
+they return.  Each line of the trace output reports what bindings are
+occuring between dynamic objects as well as either the entering or exiting
+of a procedure call.
+.B sotruss
+traces all of the procedure calls that occur between dynamic objects
+via the
+.I Procedure Linkage Table,
+so only those procedure calls which are bound via the
+.I Procedure Linkage Table
+will be traced.
+.LP
+When both procedure entrance and exit are being traced the procedure
+call depth will also be tracked, this will be visible in the level
+of indentation which is used when displaying the procedures as
+the are entered and exited.
+.SH OPTIONS
+.TP 10
+.BI \-F " bindfromlist"
+A colon seperated list of libraries that are to be
+traced.  Only calls from these libraries will be traced.  The default
+is to trace calls from the main executable only.
+.TP
+.BI \-T " bindtolist"
+A colon seperated list of libraries that are to be traced.
+Only calls to these libraries will be traced.  The default is
+to trace all calls.
+.TP
+.BI \-o " outputfile"
+.B sotruss
+output will be directed to the
+.I outputfile.  If this option is combinded with the \-p option
+then the
+.B pid
+of the executing program will be placed at the end of the filename.
+By default
+.B sotruss
+output is placed on stdout.
+.TP
+.B \-f
+Follow all children created by fork() and also print truss output
+on each.  This option will also cause a 'pid' to be output on each
+truss output line.
+.SH EXAMPLES
+A simple example shows the tracing of a simple
+.B ls
+command:
+.LP
+.nf
+.ft 3
+polyslo 2197% sotruss ls | more
+ls              ->       libc.so.1:*atexit(0xef7d7d1c, 0x23c00, 0x0)
+ls              ->       libc.so.1:*atexit(0x1392c, 0xef7d7d1c, 0xef621bb0)
+ls              ->       libc.so.1:*setlocale(0x6, 0x1396c, 0xef621ba8)
+ls              ->       libc.so.1:*textdomain(0x13970, 0x1396c, 0xef621ba8)
+ls              ->       libc.so.1:*time(0x0, 0xef61f6fc, 0xef621ba8)
+ls              ->       libc.so.1:*isatty(0x1, 0xef61f6fc, 0x0)
+ls              ->       libc.so.1:*getopt(0x1, 0xeffff8fc, 0x13980)
+ls              ->       libc.so.1:*malloc(0x100, 0x0, 0x0)
+ls              ->       libc.so.1:*malloc(0x9000, 0x0, 0x0)
+ls              ->       libc.so.1:*lstat64(0x23ee8, 0xeffff7a0, 0x0)
+ls              ->       libc.so.1:*qsort(0x255c0, 0x1, 0x4)
+ls              ->       libc.so.1:*opendir(0x23ee8, 0xef7b150c, 0xef5c94cc)
+ls              ->       libc.so.1:*readdir64(0x2e6f0, 0x241a8, 0xf000)
+ls              ->       libc.so.1:*readdir64(0x2e6f0, 0x0, 0xf000)
+ls              ->       libc.so.1:*readdir64(0x2e6f0, 0x0, 0xf000)
+ls              ->       libc.so.1:*readdir64(0x2e6f0, 0x3, 0x25908)
+ls              ->       libc.so.1:*readdir64(0x2e6f0, 0x4, 0x25b48)
+ls              ->       libc.so.1:*readdir64(0x2e6f0, 0x48, 0x25b48)
+ls              ->       libc.so.1:*readdir64(0x2e6f0, 0x4, 0x25d88)
+...
+ls              ->       libc.so.1:*printf(0x13a64, 0x29a48, 0x23ef0)
+ls              ->       libc.so.1:*printf(0x13a64, 0x28188, 0x23ef0)
+ls              ->       libc.so.1:*printf(0x13a64, 0x26f88, 0x23ef0)
+ls              ->       libc.so.1:*printf(0x13a64, 0x26208, 0x23ef0)
+ls              ->       libc.so.1:*printf(0x13a64, 0x26448, 0x23ef0)
+ls              ->       libc.so.1:*exit(0x0, 0x24220, 0x2421c)
+.ft
+.fi
+.SH SEE ALSO
+.BR ld.so.1 (1)
+.br
+.TZ LLM

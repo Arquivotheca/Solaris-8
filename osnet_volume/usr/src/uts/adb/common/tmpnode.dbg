@@ -1,0 +1,38 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)tmpnode.dbg	1.5	98/01/19 SMI"
+
+#include <sys/fs/tmpnode.h>
+#include "dummy.h"
+
+\
+\
+tmpnode
+{adb_inline_begin}
+.>z
+<z+{OFFSET, tn_back}=""
+{adb_inline_end}
+        tn_back                                 hex             back
+        tn_forw                                 hex             forw
+        un_tmpnode.un_dirstruct.un_dirlist      hex             dirlist
+        un_tmpnode.un_dirstruct.un_dirents      sdecimal        dirents
+        tn_vnode                                .vnode          vnode
+{adb_inline_begin}
+<z+{OFFSET, tn_gen}=""
+{adb_inline_end}
+        tn_gen                                  hex             gen
+        tn_attr                                 .vattr          vattr
+{adb_inline_begin}
+<z+{OFFSET, tn_contents}=""
+{adb_inline_end}
+        tn_contents                             .rwlock         contents
+{adb_inline_begin}
+<z+{OFFSET, tn_rwlock}=""
+{adb_inline_end}
+        tn_rwlock                               .rwlock         rwlock
+{adb_inline_begin}
+<z+{OFFSET, tn_tlock}=""
+{adb_inline_end}
+        tn_tlock                                .mutex          tlock

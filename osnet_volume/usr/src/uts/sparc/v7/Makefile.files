@@ -1,0 +1,59 @@
+#
+# uts/sparc/v7/Makefile.files
+# Copyright (c) 1991-1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#ident	"@(#)Makefile.files	1.14	99/06/05 SMI"
+#
+#	This Makefile defines all file modules and build rules for the
+# directory uts/sparc and it's children. These are the source files which
+# are specific to the sparc processor.
+#
+
+#
+#	object lists
+#
+
+CORE_OBJS +=	avintr.o	\
+		crt.o		\
+		ddi_v7.o	\
+		ddi_v7_asm.o	\
+		float.o		\
+		lock_prim.o	\
+		mon_clock.o	\
+		softmath64.o	\
+		sparc_subr.o	\
+		syscall_trap.o	\
+		v7dep.o		\
+		xregs.o
+
+
+#
+#	generic-unix module
+#
+GENUNIX_OBJS +=	fpu.o		\
+		hwmuldiv.o	\
+		install_utrap.o	\
+		simulator.o	\
+		uword.o		\
+		v7instr.o
+
+
+#
+#	Build up paths and defines.
+#
+INC_PATH	+= -I$(UTSBASE)/sparc/v7
+
+#
+# Since assym.h is a derived file, the dependency must be explicit for
+# all files including this file. (This is only actually required in the
+# instance when the .nse_depinfo file does not exist.) It may seem that
+# the lint targets should also have a similar dependency, but they don't
+# since only C headers are included when #defined(lint) is true.
+#
+ASSYM_DEPS +=	crt.o		\
+		float.o		\
+		lock_prim.o	\
+		sparc_subr.o	\
+		syscall_trap.o	\
+		ddi_v7_asm.o

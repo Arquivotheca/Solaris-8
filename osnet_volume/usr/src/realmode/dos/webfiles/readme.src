@@ -1,0 +1,63 @@
+#########################################################################
+#									#
+#	Copyright (c) 1997 by Sun Microsystems, Inc.			#
+#	All Rights Reserved.						#
+#									#
+#	@(#)readme.src	1.5	97/03/13 SMI				#
+#									#
+#########################################################################
+
+Instructions for installation of Realmode DDK Source Files
+==========================================================
+
+This document assumes that you are familiar with the SunSoft Solaris x86
+Realmode Driver white paper and the Realmode Driver External Interface
+Specification.
+
+The file SOURCE.ZIP contains sources of the files distributed as object
+files and libraries in the basic development kit (BASIC.ZIP).  None of
+the files are necessary for building realmode drivers, but they are
+provided as a reference for debugging.  You should have already installed
+the basic development files.
+
+Download this file (README.SRC) and SOURCE.ZIP and copy them into the
+root of your realmode development tree (assumed here to be C:\BOOT).
+Extract the files from SOURCE.ZIP such that the directory hierarchy is
+preserved.  Some extraction tools require an argument to prevent all the
+files from being placed in the local directory.  You should have the
+following directory hierarchy after extraction:
+
+C:\BOOT
+    +--	INC
+    |
+    +--	DRIVERS
+	 +-----	HALFBEFS
+	 |
+	 +-----	INCLUDE
+	 |
+	 +-----	LIB
+	 |	 +----- SRC
+	 |
+	 +-----	NETWORK
+	 |	 +-----	PCN
+	 |
+	 +----- PROTO
+	 |
+	 +-----	SCSI
+		 +-----	AHA1540
+
+The source files include files MAIN.C, NETWORK.C, SCSI.C and all the
+C and assembler source files for the subroutine library.
+
+SunSoft's intent in providing these source files is to allow you to
+refer to the sources for documentation or debugging purposes and to
+allow you to build debugging versions of the object files.  SunSoft
+strongly discourages you from altering these files except for these
+purposes.  If you need to add other routines you should do so within
+your driver directory.  If you find errors or omissions in these sources
+please notify SunSoft so that they can be fixed in future releases.
+
+If you are having difficulty getting your driver to work, you should
+read README.DBG and then download and extract DEBUG.ZIP.  This archive
+contains debug versions of framework object files and a debug utility
+to assist with debugging realmode drivers using MS-DOS debuggers.

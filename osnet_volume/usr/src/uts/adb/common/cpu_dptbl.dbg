@@ -1,0 +1,26 @@
+\
+\ Copyright (c) 1997-1998 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)cpu_dptbl.dbg	1.4	98/02/09 SMI"
+
+\       arg             : address of a struct cpu
+\       uses            : cpu_dptbl.nxt
+\       registers       : c, e, n, q
+\       description     : prints the active dispatch table entries for
+\                         the cpu
+#include <sys/types.h>
+#include <sys/cpuvar.h>
+#include "dummy.h"
+
+\
+\
+cpu     	""      	cpu_dptbl
+{adb_inline_begin}
+.>c
+0>n
+*(<c+{OFFSET, cpu_disp.disp_q})>q
+*(<c+{OFFSET, cpu_disp.disp_q_limit})>e
+$<<cpu_dptbl.nxt
+=nn"DONE"
+{adb_inline_end}

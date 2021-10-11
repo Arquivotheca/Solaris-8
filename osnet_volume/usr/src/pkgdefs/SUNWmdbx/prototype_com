@@ -1,0 +1,19 @@
+#
+# Copyright (c) 1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#ident	"@(#)prototype_com	1.2	99/08/18 SMI"
+#
+i pkginfo
+i copyright
+i depend
+#
+# SUNWmdb
+#
+d none usr 755 root sys
+d none usr/bin 755 root bin
+d none usr/lib 755 root bin
+d none usr/lib/mdb 755 root sys
+d none usr/lib/mdb/kvm 755 root sys
+d none usr/lib/mdb/proc 755 root sys
+d none usr/platform 755 root sys

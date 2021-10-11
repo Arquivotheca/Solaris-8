@@ -1,0 +1,47 @@
+#
+# Copyright (c) 1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#ident	"@(#)Makefile.common	1.1	99/11/19 SMI"
+
+MODULES = example1.so example2.so
+
+CFLAGS += -v -xstrconst -K pic
+CPPFLAGS += -D_KERNEL
+LDFLAGS += -Wl,-z,text
+
+OBJECTS = $(MODULES:%.so=%.o)
+LINTFILES = $(MODULES:%.so=%.ln)
+
+all: $(MODULES)
+
+.KEEP_STATE:
+
+.NO_PARALLEL:
+.PARALLEL: $(OBJECTS) $(LINTFILES)
+
+%.so: %.o
+	$(CC) $(CFLAGS) -G -o $@ $< $(LDFLAGS) $(LIBS)
+
+%.o: %.c
+	$(CC) $(CFLAGS) $(CPPFLAGS) -c $<
+
+%.o: ../common/%.c
+	$(CC) $(CFLAGS) $(CPPFLAGS) -c $<
+
+clean:
+	rm -f $(OBJECTS)
+
+clean.lint:
+	rm -f $(LINTFILES)
+
+clobber: clean clean.lint
+	rm -f $(MODULES)
+
+%.ln: %.c
+	$(LINT) $(LINTFLAGS) $(CPPFLAGS) -c $<
+
+%.ln: ../common/%.c
+	$(LINT) $(LINTFLAGS) $(CPPFLAGS) -c $<
+
+lint: $(LINTFILES)

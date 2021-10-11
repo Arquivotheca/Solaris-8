@@ -1,0 +1,46 @@
+#
+#ident	"@(#)Makefile.targ	1.9	99/06/23 SMI"
+#
+# Copyright (c) 1999 by Sun Microsystems, Inc.
+# All rights reserved.
+
+lint:		$(LINTLIB) $(LINTOUT32) $(SGSLINTOUT)
+
+pics/%.o:	../common/%.c
+		$(COMPILE.c) -o $@ $<
+		$(POST_PROCESS_O)
+
+pics/%.o:	%.c
+		$(COMPILE.c) -o $@ $<
+		$(POST_PROCESS_O)
+
+PICFLAGS=	-xregs=no%appl -K PIC -DPIC -D_TS_ERRNO
+
+pics/%64.o:	../common/%.c
+		$(COMPILE.c) -D_ELF64 $(PICFLAGS) -o $@ $<
+		$(POST_PROCESS_O)
+
+$(DYNLIB):	$(MAPFILE)
+
+$(LIBLINKS):
+		-$(RM) $@; $(SYMLINK) $(DYNLIB) $@
+
+$(MAPFILE):	../spec/rtld_db.spec ../spec/versions
+		@ cd $(MAPDIR); $(MAKE) mapfile
+
+delete:
+		-$(RM) $(DYNLIB)
+
+include		$(SRC)/lib/Makefile.targ
+include		$(SRC)/cmd/sgs/Makefile.targ
+
+# Derived source and header files (messaging).
+
+catalog:
+
+chkmsg:		$(LINTSRCS)
+		-sh $(CHKMSG) $(CHKMSGFLAGS) $(LINTSRCS)
+
+$(BLTDEFS) + \
+$(BLTDATA):	$(SGSMSGTARG)
+		$(SGSMSG) $(SGSMSGFLAGS) $(SGSMSGTARG)

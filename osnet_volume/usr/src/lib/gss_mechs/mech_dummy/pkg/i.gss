@@ -1,0 +1,42 @@
+#!/bin/sh
+#
+#ident	"@(#)i.gss	1.5	97/11/09 SMI"
+#
+# Copyright (c) 1997, by Sun Microsystems, Inc.
+# All rights reserved.
+#
+
+PATH="/usr/bin:/usr/sbin:${PATH}"
+export PATH
+
+trap "rm -f /tmp/$$;exit" 0 1 2 3 13 15
+
+while read src dest
+do
+	if [ ! -f $dest ] ; then
+		touch $dest
+	fi
+	# find each line in the existing file whose
+	# first field does not exist in the new file
+	rm -f /tmp/$$
+	cat $src |
+       (while read e1 e2
+	do
+		# skip comments
+		if [ `expr "$e1" : '^[ 	]*#'` = 1 ] ; then
+			continue;
+		fi
+		grep -w "$e1" $dest >/dev/null 2>&1
+		if [ $? = 0 ] ; then
+			continue
+		else
+			echo "$e1 $e2 #$PKGINST" >> /tmp/$$
+		fi
+	done)
+	if [ -f /tmp/$$ ] ; then
+		cat /tmp/$$ >> $dest
+	fi
+	rm -f /tmp/$$
+done
+
+exit 0

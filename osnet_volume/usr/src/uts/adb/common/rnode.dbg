@@ -1,0 +1,98 @@
+\
+\ Copyright (c) 1997, 1999 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)rnode.dbg	1.22	99/06/25 SMI"
+
+#include <rpc/types.h>
+#include <sys/time.h>
+#include <sys/t_lock.h>
+#include <sys/vfs.h>
+#include <rpc/types.h>
+#include <rpc/xdr.h>
+#include <rpc/auth.h>
+#include <rpc/clnt.h>
+#include <sys/tiuser.h>
+#include <nfs/nfs.h>
+#include <nfs/nfs_clnt.h>
+#include <sys/vnode.h>
+#include <nfs/rnode.h>
+#include "dummy.h"
+
+
+\
+\
+rnode		r_
+{adb_inline_begin}
+.>z
+<z+{OFFSET, r_freef}=""
+{adb_inline_end}
+	freef			hex
+	freeb			hex
+	hash			hex
+	vnode			.vnode
+{adb_inline_begin}
+<z+{OFFSET, r_rwlock}=""
+{adb_inline_end}
+	rwlock.count		sdecimal
+	rwlock.waiters		sdecimal
+	rwlock.owner		hex
+	rwlock.lock		.mutex
+{adb_inline_begin}
+<z+{OFFSET, r_lkserlock}=""
+{adb_inline_end}
+	lkserlock.count		sdecimal
+	lkserlock.waiters	sdecimal
+	lkserlock.owner		hex
+	lkserlock.lock		.mutex
+{adb_inline_begin}
+<z+{OFFSET, r_statelock}=""
+{adb_inline_end}
+	statelock		.mutex
+{adb_inline_begin}
+<z+{OFFSET, r_fh}/n"fh_len"16t"fh_buf"nD16t16X
+<z+{OFFSET, r_server}=""
+{adb_inline_end}
+	server			hex
+	path			hex
+	nextr			hex
+	flags			hex
+	error			sdecimal
+	cred			hex
+	unlcred			hex
+	unlname			hex
+	unldvp			hex
+	size			decimal
+	attr			.vattr	
+{adb_inline_begin}
+<z+{OFFSET, r_attrtime}=""
+{adb_inline_end}
+	attrtime		hex
+	mtime			hex
+	mapcnt			sdecimal
+	count			decimal
+	awcount			decimal
+	seq			hex
+	putapage		hex
+	dir			hex
+	direof			hex
+	symlink.contents	hex
+	symlink.len		sdecimal
+	symlink.size		sdecimal
+{adb_inline_begin}
+<z+{OFFSET, r_verf}/16t2X
+<z+{OFFSET, r_modaddr}=""
+{adb_inline_end}
+	modaddr			decimal
+	commit.c_pages		hex
+	commit.c_commbase	sdecimal
+	commit.c_commlen	sdecimal
+	truncaddr		decimal
+	secattr			hex
+{adb_inline_begin}
+<z+{OFFSET, r_cookieverf}/16t2X
+<z+{OFFSET, r_lmpl}=""
+{adb_inline_end}
+	lmpl			hex
+	pathconf		hex
+	acache			hex

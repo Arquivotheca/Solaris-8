@@ -1,0 +1,111 @@
+# Copyright (c) 1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+
+#pragma ident	"@(#)hid_with_usba.wlcmd	1.6	99/10/07 SMI"
+
+one openhci_state
+
+### specify the root functions
+
+root	usb_ascii_string_descr
+root	usb_console_input_enter
+root	usb_console_input_exit
+root	usb_console_input_fini
+root	usb_console_input_init
+root	usb_console_read
+root	usba_hcdi_soft_intr
+root	hubd_hotplug_thread
+root	usb_pipe_do_async_func
+root	usb_get_dev_descr
+root	usb_get_interface_number
+root	usb_parse_CV_configuration_descr
+root	usb_parse_CV_endpoint_descr
+root	usb_parse_CV_interface_descr
+root	usb_pipe_abort
+root	usb_pipe_device_ctrl_receive
+root	usb_pipe_device_ctrl_send
+root	usb_pipe_get_policy
+root	usb_pipe_get_private
+root	usb_pipe_receive_bulk_data
+root	usb_pipe_reserve
+root	usb_pipe_send_bulk_data
+root	usb_pipe_send_isoc_data
+root	usb_pipe_set_policy
+root	usb_pipe_set_private
+root	usba_bind_driver_to_interface
+root	usba_free_hcdi_ops
+root	usba_async_request_raise_power
+root	usba_async_request_lower_power
+root	usb_request_raise_power
+root	usb_request_lower_power
+root	usb_set_device_pwrlvl0
+root	usb_set_device_pwrlvl1
+root	usb_set_device_pwrlvl2
+root	usb_set_device_pwrlvl3
+root	usb_is_pm_enabled
+root	usb_taskq_request
+
+root	usb_get_hc_dma_attr
+root	usb_pipe_bulk_transfer_size
+
+root	ohci_intr
+
+root	usba_dump_all
+root	usb_log
+root	hubd_connect_event_callback
+root	hubd_disconnect_event_callback
+root	usba_hubdi_power
+root	usba_hubdi_root_hub_power
+root	usba_get_hotplug_stats
+root	usba_reset_hotplug_stats
+
+### specify the hid root functions
+root hid_open
+root hid_close
+root hid_interrupt_pipe_callback
+root hid_wsrv
+root hid_wput
+root hid_timeout
+root hid_default_pipe_callback
+root hid_async_pipe_close_callback
+root hid_default_pipe_exception_callback 
+root hid_default_pipe_reset_callback 
+root hid_interrupt_pipe_exception_callback 
+root hid_interrupt_pipe_reset_callback 
+root hid_connect_event_callback
+root hid_disconnect_event_callback
+root hid_power
+root hid_power_change_callback
+
+
+### polled functions
+root hid_polled_input_enter
+root hid_polled_input_exit
+root hid_polled_read
+root usba_dump_all
+
+add usb_pipe_async_request::sync_func targets usb_pipe_sync_close
+add usb_pipe_async_request::sync_func targets usb_pipe_sync_abort
+add usb_pipe_async_request::sync_func targets usb_pipe_sync_reset
+
+add usb_pipe_async_request::callback targets warlock_dummy
+
+add usba_hcdi_soft_intr/cb targets hubd_read_callback
+add usba_hcdi_soft_intr/cb targets hubd_intr_pipe_reset_callback
+add usba_hcdi_soft_intr/cb targets hid_default_pipe_callback
+add usba_hcdi_soft_intr/cb targets hid_interrupt_pipe_callback
+
+add usba_hcdi_soft_intr/exc_cb targets hubd_exception_callback
+add usba_hcdi_soft_intr/exc_cb targets hid_default_pipe_exception_callback 
+add usba_hcdi_soft_intr/exc_cb targets hid_interrupt_pipe_exception_callback
+
+add usba_hcdi_callback/exc_cb  targets hubd_exception_callback
+add usba_hcdi_callback/exc_cb  targets hid_default_pipe_exception_callback
+add usba_hcdi_callback/exc_cb  targets hid_interrupt_pipe_exception_callback
+
+add pm_request::cb targets warlock_dummy
+add ohci_trans_wrapper::tw_handle_td targets ohci_handle_bulk_td
+add ohci_trans_wrapper::tw_handle_td targets ohci_handle_intr_td
+add ohci_trans_wrapper::tw_handle_td targets ohci_handle_ctrl_td
+add ohci_trans_wrapper::tw_handle_td targets ohci_handle_isoc_td

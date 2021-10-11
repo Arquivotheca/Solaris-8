@@ -1,0 +1,230 @@
+#
+# uts/i86pc/Makefile.i86pc
+# Copyright (c) 1992-1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#pragma ident	"@(#)Makefile.i86pc	1.94	99/09/21 SMI"
+#
+#	This makefile contains the common definitions for the i86pc unix
+#	and all i86pc implementation architecture dependent modules.
+#
+
+#
+#	Machine type (implementation architecture):
+#
+PLATFORM	 = i86pc
+
+#
+#	Everybody needs to know how to build modstubs.o and to locate unix.o
+#
+UNIX_DIR	 = $(UTSBASE)/$(PLATFORM)/unix
+GENLIB_DIR	 = $(UTSBASE)/intel/ia32/genunix
+MODSTUBS_DIR	 = $(UNIX_DIR)
+DSF_DIR		 = $(UTSBASE)/$(PLATFORM)/genassym
+LINTS_DIR	 = $(OBJS_DIR)
+LINT_LIB_DIR	 = $(UTSBASE)/$(PLATFORM)/lint-libs/$(OBJS_DIR)
+GEN_LINT_LIB_DIR = $(UTSBASE)/intel/ia32/lint-libs/$(OBJS_DIR)
+
+#
+#	mmu modules need to know how to build their own symcheck module
+#
+MMUNAME		= mmu
+MMULIB		= $(MMU_DIR)/$(OBJS_DIR)/libmmu.so
+SYM_MOD		= $(OBJS_DIR)/unix.sym
+
+UNIX_O		 = $(UNIX_DIR)/$(OBJS_DIR)/unix.o
+MODSTUBS_O	 = $(MODSTUBS_DIR)/$(OBJS_DIR)/modstubs.o
+GENLIB	 	 = $(GENLIB_DIR)/$(OBJS_DIR)/libgenunix.so
+LINT_LIB	 = $(LINT_LIB_DIR)/llib-lunix.ln
+GEN_LINT_LIB	 = $(GEN_LINT_LIB_DIR)/llib-lgenunix.ln
+
+#
+#	Include the makefiles which define build rule templates, the
+#	collection of files per module, and a few specific flags. Note
+#	that order is significant, just as with an include path. The
+#	first build rule template which matches the files name will be
+#	used. By including these in order from most machine dependent
+#	to most machine independent, we allow a machine dependent file
+#	to be used in preference over a machine independent version
+#	(Such as a machine specific optimization, which preserves the
+#	interfaces.)
+#
+include $(UTSBASE)/$(PLATFORM)/Makefile.files
+include $(UTSBASE)/intel/ia32/Makefile.files
+include $(UTSBASE)/intel/Makefile.files
+include $(UTSBASE)/common/Makefile.files
+
+#
+#	Include machine independent rules. Note that this does not imply
+#	that the resulting module from rules in Makefile.uts is	machine
+#	independent. Only that the build rules are machine independent.
+#
+include $(UTSBASE)/Makefile.uts
+
+#
+#	Define supported builds
+#
+DEF_BUILDS			= obj32
+$(NOT_RELEASE_BUILD)DEF_BUILDS	= debug32
+ALL_BUILDS			= obj32 debug32
+
+AS_INC_PATH	+= -I$(DSF_DIR)/$(OBJS_DIR)
+
+#
+#	The following must be defined for all implementations:
+#
+#	MAPFILE:	ld mapfile for the build of kernel/unix.
+#	MODSTUBS:	Module stubs source file.
+#	GENASSYM_SRC:	genassym.c
+#
+MAPFILE		 = $(UTSBASE)/$(PLATFORM)/conf/Mapfile
+MODSTUBS	 = $(UTSBASE)/intel/ia32/ml/modstubs.s
+GENASSYM_SRC	 = $(UTSBASE)/$(PLATFORM)/ml/genassym.c
+
+#
+#	Define the actual specific platforms
+#
+MACHINE_DEFS	 = -D$(PLATFORM) -D_MACHDEP -Di86
+
+#
+#	Debugging level
+#
+#	Special knowledge of which special debugging options effect which
+#	file is used to optimize the build if these flags are changed.
+#
+#	XXX: The above could possibly be done for more flags and files, but
+#	     is left as an experiment to the interested reader. Be forewarned,
+#	     that excessive use could lead to maintenance difficulties.
+#
+DEBUG_DEFS_OBJ32	=
+DEBUG_DEFS_DBG32	= -DDEBUG
+DEBUG_DEFS		= $(DEBUG_DEFS_$(BUILD_TYPE))
+
+DEBUG_COND_OBJ32	:sh = echo \\043
+DEBUG_COND_DBG32	= 
+IF_DEBUG_OBJ		= $(DEBUG_COND_$(BUILD_TYPE))$(OBJS_DIR)/
+
+$(IF_DEBUG_OBJ)trap.o		:= DEBUG_DEFS += -DTRAPDEBUG -DTRAPTRACE
+$(IF_DEBUG_OBJ)locore.o		:= DEBUG_DEFS += -DSYSCALLTRACE -DTRAPTRACE
+$(IF_DEBUG_OBJ)mp_startup.o	:= DEBUG_DEFS += -DTRAPTRACE
+
+#
+#	Build `options'. These are mostly historical and the need for these
+#	is largely removed by the module technology. However, the static
+#	build will continue to require these.
+#
+OPTION_DEFS	 = -DSYSACCT -DC2_AUDIT
+
+#
+#	Collect the preprocessor definitions to be associated with *all*
+#	files.
+#
+ALL_DEFS	 = $(MACHINE_DEFS) $(DEBUG_DEFS) $(OPTION_DEFS)
+GENASSYM_DEFS	 = $(MACHINE_DEFS) $(OPTION_DEFS)
+
+#
+# ----- TRANSITIONAL SECTION --------------------------------------------------
+#
+
+#
+#	Not everything which *should* be a module is a module yet. The
+#	following is a list of such objects which are currently part of
+#	the base kernel but should soon become kmods.
+#
+#	XXX: $(KMACCT_OBJS) is neither in the MT kernel nor was it ever
+#	     made into a module. If it is made MT safe before being made
+#	     into a module, it should be added to this list. It was in
+#	     this list pre ON-4.0.
+#
+#
+MACH_NOT_YET_KMODS	= $(AUTOCONF_OBJS)
+
+#
+# ----- END OF TRANSITIONAL SECTION -------------------------------------------
+#
+
+#
+#	The kernels modules which are "implementation architecture"
+#	specific for this machine are enumerated below. Note that most
+#	of these modules must exist (in one form or another) for each
+#	architecture.
+#
+#	Machine Specific Driver Modules (/kernel/drv):
+#
+#	XXX: How many of these are really machine specific?
+#
+DRV_KMODS	+= rootnex
+DRV_KMODS	+= eisa
+DRV_KMODS	+= isa
+DRV_KMODS	+= pci
+DRV_KMODS	+= pcic
+
+DRV_KMODS	+= chs
+DRV_KMODS	+= dpt
+DRV_KMODS	+= elx
+DRV_KMODS	+= elxl
+DRV_KMODS	+= fd
+DRV_KMODS	+= fdc
+DRV_KMODS	+= lp
+DRV_KMODS	+= pci-ide
+DRV_KMODS	+= pcscsi
+DRV_KMODS	+= pcn
+DRV_KMODS	+= ncrs
+DRV_KMODS	+= sbpro
+
+DRV_KMODS	+= ata
+DRV_KMODS	+= dnet
+DRV_KMODS	+= ieef
+DRV_KMODS	+= iprb
+DRV_KMODS	+= logi
+DRV_KMODS	+= mscsi
+DRV_KMODS	+= msm
+DRV_KMODS	+= pcplusmp
+DRV_KMODS	+= spwr
+
+DRV_KMODS	+= cpc
+
+#
+#	Exec Class Modules (/kernel/exec):
+#
+EXEC_KMODS	+= 
+
+#
+#	Scheduling Class Modules (/kernel/sched):
+#
+SCHED_KMODS	+= 
+
+#
+#	File System Modules (/kernel/fs):
+#
+FS_KMODS	+=
+
+#
+#	Streams Modules (/kernel/strmod):
+#
+STRMOD_KMODS	+= vuid2ps2
+STRMOD_KMODS	+= vuid3ps2
+STRMOD_KMODS	+= vuidm3p
+STRMOD_KMODS	+= vuidm4p
+STRMOD_KMODS	+= vuidm5p
+
+#
+#	'System' Modules (/kernel/sys):
+#
+SYS_KMODS	+=
+
+#
+#	'Misc' Modules (/kernel/misc):
+#
+MISC_KMODS	+= pci_autoconfig bootdev
+
+#
+#	'Mach' Modules (/kernel/mach):
+#
+MACH_KMODS     	+= uppc
+MISC_KMODS	+= emul_80387
+
+#
+#	mmu modules
+#
+MMU_KMODS	+= mmu36 mmu32

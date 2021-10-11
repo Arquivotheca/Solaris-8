@@ -1,0 +1,31 @@
+\
+\ Copyright (c) 1998-1999 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)ohci_save_intr_status.dbg	1.2	99/11/18 SMI"
+
+#include <sys/usb/usba.h>
+#include <sys/usb/usba/usba_types.h>
+#include <sys/usb/usba/usba_impl.h>
+#include <sys/usb/hcd/openhci/ohci.h>
+#include <sys/usb/hcd/openhci/ohcid.h>
+#include "dummy.h"
+
+\
+\
+
+ohci_save_intr_status	ohci_	
+{adb_inline_begin}
+.>z
+<z+{OFFSET, ohci_intr_flag}=""
+{adb_inline_end}
+	intr_flag		hex
+	curr_intr_sts		hex
+	curr_done_lst		hex
+	critical_intr_sts	hex
+	critical_done_lst	hex
+	missed_intr_sts		hex
+	missed_done_lst		hex
+{adb_inline_begin}
+<z+{SIZEOF}=""
+{adb_inline_end}

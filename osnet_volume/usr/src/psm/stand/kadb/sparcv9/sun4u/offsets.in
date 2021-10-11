@@ -1,0 +1,59 @@
+
+#ifndef _GENASSYM
+#define _GENASSYM
+#endif
+
+#define SIZES	1
+
+#include <sys/types.h>
+#include <sys/param.h>
+#include <sys/privregs.h>
+#include "allregs.h"
+#include "cpusave.h"
+
+cpu_regsave		CPUSAVESIZE
+	cpu_status	CPU_STATUS
+	cpu_regs	CPU_REGS
+	cpu_fpregs	CPU_FPREGS
+
+allregs_v9		ALLREGSIZE
+	r_tstate	R_TSTATE
+	r_pc		R_PC
+	r_npc		R_NPC
+	r_tba		R_TBA
+	r_y		R_Y
+	r_globals	R_GLOBALS
+	r_mmu_pcontext	R_MMU_PCONTEXT
+	r_tt		R_TT
+	r_pil		R_PIL
+	r_cwp		R_CWP
+	r_otherwin	R_OTHERWIN
+	r_cleanwin	R_CLEANWIN
+	r_cansave	R_CANSAVE
+	r_canrestore	R_CANRESTORE
+	r_wstate	R_WSTATE
+	r_window	R_WINDOW
+
+\#define	R_G1	R_GLOBALS + (0*R_GLOBALS_INCR)
+\#define	R_G2	R_GLOBALS + (1*R_GLOBALS_INCR)
+\#define	R_G3	R_GLOBALS + (2*R_GLOBALS_INCR)
+\#define	R_G4	R_GLOBALS + (3*R_GLOBALS_INCR)
+\#define	R_G5	R_GLOBALS + (4*R_GLOBALS_INCR)
+\#define	R_G6	R_GLOBALS + (5*R_GLOBALS_INCR)
+\#define	R_G7	R_GLOBALS + (6*R_GLOBALS_INCR)
+
+v9_fpu	V9FPUSIZE
+	fpu_fr
+	fpu_fsr
+	fpu_fprs
+	fpu_q
+	fpu_qcnt
+
+_fpu_fr	V9FPUFRSIZE
+	fpu_regs	FPU_FR_REGS
+
+\#define	FPU_REGS	(FPU_FR + FPU_FR_REGS)
+
+\#define	FPU_GSR		V9FPUSIZE
+
+

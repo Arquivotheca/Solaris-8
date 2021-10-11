@@ -1,0 +1,28 @@
+#!/sbin/sh
+#
+# Copyright (c) 1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#ident "@(#)preinstall 1.1 99/04/08"
+#
+
+#
+# If /boot/solaris/drivers directory doesn't exist but the old location 
+# /platform/i86pc/boot is there, copy all the files to the new
+# location /boot and remove the old ones
+#
+OLDBOOT=/platform/i86pc/boot
+OLDBOOTDIR=${BASEDIR}${OLDBOOT}
+NEWBOOTDIR=${BASEDIR}/boot
+
+if [ ! -d ${NEWBOOTDIR}/solaris/drivers -a -d ${OLDBOOTDIR} ] ;
+then
+	if [ ! -d ${NEWBOOTDIR} ] ;
+	then
+		mkdir -p $NEWBOOTDIR > /dev/null 2>&1
+	fi
+	cd $OLDBOOTDIR
+	find . -depth -print | cpio -pdm $NEWBOOTDIR >/dev/null 2>&1
+fi
+
+exit 0

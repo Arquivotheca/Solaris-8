@@ -1,0 +1,26 @@
+\
+\ Copyright (c) 1999 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)itimerspec.dbg	1.1	99/06/05 SMI"
+
+\       this macro is a submacro used by other macros that (possibly)
+\       use the "z" register. Use 'w'.
+
+#include <sys/time.h>
+#include "dummy.h"
+
+\
+\
+itimerspec       it_
+{adb_inline_begin}
+.>w
+<w+{OFFSET, it_interval.tv_sec}=""
+{adb_inline_end}
+        interval.tv_sec         hex
+        interval.tv_nsec        hex
+        value.tv_sec            hex
+        value.tv_nsec           hex
+{adb_inline_begin}
+<w+{SIZEOF}=""
+{adb_inline_end}

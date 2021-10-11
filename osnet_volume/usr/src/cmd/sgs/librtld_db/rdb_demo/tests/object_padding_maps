@@ -1,0 +1,12 @@
+echo "==============================================================="
+echo "Enable object padding with a padd of 0x90000"
+echo "==============================================================="
+objpad 0x90000
+break main
+cont
+echo "==============================================================="
+echo "Now display both mapping and link-maps to show results of"
+echo "object paddings."
+echo "==============================================================="
+maps
+linkmaps

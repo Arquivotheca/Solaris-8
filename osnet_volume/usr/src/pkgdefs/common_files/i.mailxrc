@@ -1,0 +1,46 @@
+#!/bin/sh
+#
+#ident  "@(#)i.mailxrc 1.2 95/08/11 SMI"
+#
+# Copyright (c) 1995 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+txtfile=/tmp/mailx-txt.$$
+scrfile=/tmp/mailx-scratch.$$
+
+export txtfile scrfile
+while read src dest
+do
+	if [ ! -f $dest ] ; then
+		cp $src $dest
+	else
+		#
+		# determine whether existing etc/mail/mailx.rc file is
+		# based on the same one being installed.  If so, no need
+		# to update it.
+		#
+		newrev="`sed -n 's/^.*\(@(#)mailx\.rc.*\)\".*/\1/p' $src`"
+		sed -n -e 's/^\([^#]*\).*$/\1/p' < $dest > $scrfile
+		#
+		# if either of the following is defined, no need to update.
+		#
+		if grep 'set[ 	][ 	]*appenddeadletter' $scrfile \
+		       >/dev/null 2>&1 || \
+		   grep 'set[ 	][ 	]*+pipeignore' $scrfile \
+		       >/dev/null 2>&1 ; then
+			:
+		else
+			#
+			# existing /etc/mail/mailx.rc file is based on
+			# the original installed version
+			#
+			echo "# The following 3 settings produce the familiar Solaris behavior." > $txtfile
+			echo "set appenddeadletter" >> $txtfile
+			echo "unset pipeignore" >> $txtfile
+			echo "unset replyall" >> $txtfile
+			printf "1 c\n# \"%s\"\n.\n1 r %s\nw\nq\n" "$newrev" $txtfile | ed -s $dest
+		fi
+	fi
+done
+rm -f $txtfile $scrfile
+exit 0

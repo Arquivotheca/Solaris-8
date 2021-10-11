@@ -1,0 +1,39 @@
+\
+\ Copyright (c) 1997-1998 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)prnode.dbg	1.6	98/06/06 SMI"
+
+#include <sys/procfs.h>
+#include <sys/vnode.h>
+#include <fs/proc/prdata.h>
+#include "dummy.h"
+
+\
+\
+prnode                  pr_
+{adb_inline_begin}
+.>z
+<_>D;1>_
+<z+{OFFSET, pr_next}=""
+{adb_inline_end}
+        next                    hex
+        flags                   hex
+        mutex                   hex
+        type                    sdecimal
+        mode                    octal
+        ino                     hex
+        hatid                   hex
+        common                  hex
+        pcommon                 hex
+        parent                  hex
+        files                   hex
+        index                   sdecimal
+        pidfile                 hex
+        realvp                  hex
+        owner                   hex
+        vnode                   .vnode
+{adb_inline_begin}
+<D>_
+<z+{SIZEOF}=""
+{adb_inline_end}

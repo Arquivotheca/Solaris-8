@@ -1,0 +1,172 @@
+#!/bin/sh
+#
+#ident	"@(#)i.nsswitch	1.13	99/09/24 SMI"
+#
+# Copyright (c) 1993-1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+
+write_sed_script() {
+cat > /tmp/sed.scr.$$ << EOF
+/hosts:[ 	]*nisplus[ 	][ 	]*dns/i\\
+#You must also set up the /etc/resolv.conf file for DNS name\\
+#server lookup.  See resolv.conf(4).
+EOF
+}
+
+write_ipnodes_sed_script() {
+cat > /tmp/sed.scr.$$ << EOF
+# original hosts entry
+/^hosts:/p
+# commented-out ipnodes entry
+s/^hosts:/#ipnodes:/
+# add newline after commented-out ipnodes entry
+/^#ipnodes:/a\\
+
+# add "real" ipnodes entry before commented-out one
+/^#ipnodes:/i\\
+ipnodes:    files\\
+# Uncomment the following line and comment out the above to resolve\\
+# both IPv4 and IPv6 addresses from the ipnodes databases. Note that\\
+# IPv4 addresses are searched in all of the ipnodes databases before\\
+# searching the hosts databases. Before turning this option on, consult\\
+# the Network Administration Guide for more details on using IPv6.
+EOF
+}
+
+while read src dest
+do
+	if [ ! -f $dest ] ; then
+		cp $src $dest
+	else
+		grep '/etc/nsswitch.nisplus' $dest > /dev/null 2>&1
+		if [ $? = 0 ] ; then
+			grep 'You must also set up the /etc/resolv.conf' \
+			    $dest > /dev/null 2>&1
+			if [ $? != 0 ]; then
+				write_sed_script
+				sed -f /tmp/sed.scr.$$ $dest > /tmp/d.$$
+				cp /tmp/d.$$ $dest
+				rm -f /tmp/d.$$ /tmp/sed.scr.$$
+			fi
+		else
+			egrep '/etc/nsswitch\.(nis|files)' $dest \
+			    > /dev/null 2>&1
+			if [ $? = 0 ] ; then
+				grep '^sendmailvars:' $dest > /dev/null 2>&1
+				if [ $? != 0 ] ; then
+					echo 'sendmailvars:   files' >> $dest
+				fi
+			fi
+		fi
+		grep 'nametoaddr_libs of' $dest > /dev/null 2>&1
+		if [ $? != 0 ]; then
+			cat $dest | \
+			sed -e 's/# "hosts:" and "services:" in this file are used only if the \/etc\/netconfig.*/# "hosts:" and "services:" in this file are used only if the/' \
+			    -e 's/# file contains "switch.so" as a nametoaddr library for/# \/etc\/netconfig file has a "-" for nametoaddr_libs of/' > /tmp/d2.$$
+			cp /tmp/d2.$$ $dest
+			rm -f /tmp/d2.$$
+		fi
+
+		#
+		# If the file contains "xfn" in the "hosts:" line, omit it.
+		# The support for "xfn" has been removed
+		#
+		grep xfn $dest > /dev/null 2>&1
+		if [ $? = 0 ]; then
+			sed 's/\([ 	]*\)xfn[ 	]*/\1/' $dest > /tmp/d.$$
+			cp /tmp/d.$$ $dest
+			rm -f /tmp/d.$$
+		fi
+
+		# If the file doesn't have a "printers" database entry, add
+		# an appropriate entry.  Default to everything if we can't
+		# figure out what is appropriate.
+		grep printers: $dest > /dev/null 2>&1
+		if [ $? != 0 ]; then
+			PRINTERS="files nis nisplus xfn"
+			egrep '/etc/nsswitch\.(dns|files)' $dest >/dev/null 2>&1
+			if [ $? = 0 ] ; then
+				PRINTERS="files"
+			fi
+			grep '/etc/nsswitch.nis' $dest >/dev/null 2>&1
+			if [ $? = 0 ] ; then
+				PRINTERS="files nis"
+			fi
+			grep '/etc/nsswitch.nisplus' $dest >/dev/null 2>&1
+			if [ $? = 0 ] ; then
+				PRINTERS="nisplus files xfn"
+			fi
+			echo "printers:	user ${PRINTERS}" >>$dest
+		fi
+
+		#
+		# If not there, add "ipnodes: files" databases for unified host
+		# addresses.  In all cases except the simple "hosts: files" one,
+		# add commented-out "ipnodes" databases that match the "hosts"
+		# one and a comment regarding the search order of the "ipnodes"
+		# and "hosts" databases.  All of this is followed by a blank
+		# line.
+		#
+		grep -s 'ipnodes:' $dest > /dev/null 2>&1
+		if [ $? != 0 ] ; then
+			grep -s '^hosts:[ 	]*files[ 	]*$' $dest \
+				> /dev/null 2>&1
+			if [ $? = 0 ]; then
+				sed '/^hosts:/p;s/^hosts.*/ipnodes:    files/' \
+					$dest > /tmp/d.$$
+				if [ $? = 0 ]; then
+					cp /tmp/d.$$ $dest
+				fi
+			else
+				write_ipnodes_sed_script
+				sed -f /tmp/sed.scr.$$ $dest > /tmp/d.$$
+				if [ $? = 0 ]; then
+					cp /tmp/d.$$ $dest
+				fi
+				rm -f /tmp/sed.scr.$$
+			fi
+			rm -f /tmp/d.$$
+		fi
+
+		#role-based access control databases
+		ATTR="files nis nisplus"
+		# Solaris 8 Beta refresh had audit_user, exec_attr and
+		# user_attr entries for dns, files, nis and nis+. Remove
+		# them if they are present
+                sed -e '/^# role-based access control/d'\
+                    -e '/^exec_attr:/d' \
+                    -e '/^user_attr:/d' \
+                    -e '/^# audit/d' \
+                    -e '/^audit_user:/d' \
+                    $dest > /tmp/d.$$
+                cp /tmp/d.$$ $dest
+                rm -f /tmp/d.$$
+		# If the file doesn't have user attr database entries, add
+		# appropriate entries.  Default to everything if we can't
+		# figure out what is appropriate.
+		for DB in auth_attr prof_attr
+		do
+			grep $DB: $dest > /dev/null 2>&1
+			if [ $? != 0 ]; then
+				egrep '/etc/nsswitch\.(dns|files)' $dest >\
+				    /dev/null 2>&1
+				if [ $? = 0 ] ; then
+					ATTR="files"
+				fi
+				grep '/etc/nsswitch.nis' $dest >/dev/null 2>&1
+				if [ $? = 0 ] ; then
+					ATTR="files nis"
+				fi
+				grep '/etc/nsswitch.nisplus' $dest >/dev/null \
+				    2>&1
+				if [ $? = 0 ] ; then
+					ATTR="files nisplus"
+				fi
+				echo "${DB}:	${ATTR}" >> $dest
+			fi
+		done
+	fi
+done
+
+exit 0

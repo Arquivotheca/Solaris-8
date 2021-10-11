@@ -1,0 +1,31 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)ufs_acllist.dbg	1.6	98/07/19 SMI"
+
+#include <sys/types.h>
+#include <sys/t_lock.h>
+#include <sys/time.h>
+#include <sys/vnode.h>
+#include <vm/seg.h>
+#include <sys/fs/ufs_acl.h>
+#include "dummy.h"
+
+
+\ acl_un.acl_next is a 32-bit access.
+\
+\
+ufs_acl         ""      ufs_acllist
+{adb_inline_begin}
+.>X
+*(<X+{OFFSET, acl_un.acl_next})>/i/N
+<X+{OFFSET, acl_un.acl_next}=""
+{adb_inline_end}
+        acl_un.acl_next hex             next
+        acl_perm        octal           perm
+        acl_who         sdecimal        "who (uid)"
+{adb_inline_begin}
+,#<N$<
+<N$<ufs_acllist
+{adb_inline_end}

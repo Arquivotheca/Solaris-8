@@ -1,0 +1,11 @@
+/* LINTLIBRARY */
+/* PROTOLIB1 */
+
+/*
+ * Copyright (c) 1999 by Sun Microsystems, Inc.
+ * All rights reserved.
+ */
+#pragma ident	"@(#)llib-lthread	1.1	99/10/14 SMI"
+
+#include <thread.h>
+#include <pthread.h>

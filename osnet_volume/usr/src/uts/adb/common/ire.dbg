@@ -1,0 +1,94 @@
+
+\ Copyright (c) 1997-1999 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)ire.dbg	1.6	99/10/07 SMI"
+
+#include <sys/types.h>
+#include <sys/stropts.h>
+#include <sys/socket.h>
+#include <netinet/in_systm.h>
+#include <netinet/in.h>
+#include <netinet/ip.h>
+#include <netinet/ip6.h>
+#include <netinet/icmp6.h>
+#include <net/if.h>
+#include <sys/stream.h>
+#include <inet/common.h>
+#include <inet/led.h>
+#include <inet/ip.h>
+#include <inet/ip6.h>
+#include "dummy.h"
+
+ire_s                ""              ire
+{adb_inline_begin}
+.>z
+<z+{OFFSET, ire_next}=""
+{adb_inline_end}
+	ire_next		hex	ire_next
+	ire_ptpn		hex	ire_ptpn
+	ire_refcnt		decimal	ire_refcnt
+	ire_mp			hex	ire_mp
+	ire_fp_mp		hex	ire_fp_mp
+	ire_rfq			hex	ire_rfq
+	ire_stq			hex	ire_stq
+	ire_max_frag		decimal	ire_max_frag
+	ire_frag_flag		hex	ire_frag_flag
+	ire_ident		decimal	ire_ident
+	ire_tire_mark		decimal	ire_tire_mark
+	ire_ipversion		decimal	ire_ipversion
+	ire_marks		hex	ire_marks
+	ire_type		hex	ire_type
+{adb_inline_begin}
+*(<z+{OFFSET, ire_type})>/s/t
+#if defined(_BIG_ENDIAN)
+((<t&0x0001))="IRE_BROADCAST"8tx
+((<t&0x0002))="IRE_DEFAULT"8tx
+((<t&0x0004))="IRE_LOCAL"8tx
+((<t&0x0008))="IRE_LOOPBACK"8tx
+((<t&0x0010))="IRE_PREFIX"8tx
+((<t&0x0020))="IRE_CACHE"8tx
+((<t&0x0040))="IRE_IF_NORESOLVER"8tx
+((<t&0x0080))="IRE_IF_RESOLVER"8tx
+((<t&0x0100))="IRE_HOST"8tx
+((<t&0x0200))="IRE_HOST_REDIRECT"8tx
+#else /* _BIG_ENDIAN */
+((<t&0x0100))="IRE_BROADCAST"8tx
+((<t&0x0200))="IRE_DEFAULT"8tx
+((<t&0x0400))="IRE_LOCAL"8tx
+((<t&0x0800))="IRE_LOOPBACK"8tx
+((<t&0x1000))="IRE_PREFIX"8tx
+((<t&0x2000))="IRE_CACHE"8tx
+((<t&0x4000))="IRE_IF_NORESOLVER"8tx
+((<t&0x8000))="IRE_IF_RESOLVER"8tx
+((<t&0x0001))="IRE_HOST"8tx
+((<t&0x0002))="IRE_HOST_REDIRECT"8tx
+#endif
+<z+{OFFSET, ire_ib_pkt_count}=""
+{adb_inline_end}
+	ire_ib_pkt_count	decimal	ire_ib_pkt_count
+	ire_ob_pkt_count	decimal	ire_ob_pkt_count
+	ire_ll_hdr_length	decimal	ire_ll_hdr_length
+	ire_create_time		decimal	ire_create_time
+	ire_dlureq_mp		hex	ire_dlureq_mp
+	ire_phandle		hex	ire_phandle
+	ire_ihandle		hex	ire_ihandle
+	ire_ipif		hex	ire_ipif
+	ire_flags		hex	ire_flags
+	ire_ipsec_options_size	decimal	ire_ipsec_options_size
+	ire_nce			hex	ire_nce
+	ire_masklen		decimal	ire_masklen
+	ire_u.ire6_u.ire6_src_addr	.in6_addr
+	ire_u.ire6_u.ire6_mask		.in6_addr
+	ire_u.ire6_u.ire6_addr		.in6_addr
+	ire_u.ire6_u.ire6_gateway_addr	.in6_addr
+	ire_u.ire6_u.ire6_cmask		.in6_addr
+{adb_inline_begin}
+<z+{OFFSET, ire_bucket}=""
+{adb_inline_end}
+	ire_bucket		hex	ire_bucket
+	ire_uinfo			.iulp
+	ire_lock			.mutex
+{adb_inline_begin}
+<z+{SIZEOF}=""
+{adb_inline_end}

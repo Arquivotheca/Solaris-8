@@ -1,0 +1,46 @@
+#
+#ident  "@(#)Makefile 1.5     98/01/23 SMI"
+#
+# Makefile for bsmconv
+#
+
+PROG = bsmconv
+SRCS = bsmconv.sh
+
+include ../Makefile.cmd
+
+ETCSECURITYFILES =	bsmconv
+ROOTETCSECURITY =	$(ROOT)/etc/security
+ROOTETCSECURITYSPOOL =	$(ROOT)/etc/security/spool
+$(ROOTETCSECURITY) :=   DIRMODE = 0755
+$(ROOTETCSECURITY) :=   OWNER = root
+$(ROOTETCSECURITY) :=   GROUP = sys
+$(ROOTETCSECURITYSPOOL) :=   DIRMODE = 0755
+$(ROOTETCSECURITYSPOOL) :=   OWNER = root
+$(ROOTETCSECURITYSPOOL) :=   GROUP = sys
+ROOTETCSECURITYFILES =  $(ETCSECURITYFILES:%=$(ROOTETCSECURITY)/%)
+$(ROOTETCSECURITYFILES) := FILEMODE = 0740
+$(ROOTETCSECURITYFILES) := OWNER = root
+$(ROOTETCSECURITYFILES) := GROUP = sys
+
+all: $(PROG)
+
+install: all $(ROOTETCSECURITY) $(ROOTETCSECURITYFILES) $(ROOTETCSECURITYSPOOL)
+
+$(ROOTETCSECURITY):
+	$(INS.dir)
+
+$(ROOTETCSECURITYSPOOL):
+	$(INS.dir)
+
+$(ROOTETCSECURITY)/%:%
+	$(INS.file)
+
+clean:
+	$(RM) -f $(PROG)
+
+clobber: clean
+
+include ../Makefile.targ
+
+.KEEP_STATE:

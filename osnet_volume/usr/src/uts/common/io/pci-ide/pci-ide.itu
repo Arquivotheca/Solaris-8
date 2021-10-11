@@ -1,0 +1,32 @@
+#
+#  Copyright (c) 1998, by Sun Microsystems, Inc.
+#  All rights reserved.
+#
+# @(#)pci-ide.itu        1.1     98/02/24 SMI
+name=pci-ide
+itu_type=partial
+interface_version=1.0
+patchid=199999-01
+driverpkg=SUNWos86r
+driverpkgvers="1.1.0,REV=1997.06.13.11.51"
+driverpkgdesc="Platform Support, OS Functionality (Root)"
+load_always=TRUE
+
+# these entries are commented until pci-ide is fully enabled
+
+#dev_type = msd
+#bef_name = none
+#
+#{
+#bus_type = pciclass
+#dev_id = pciclass,010100|pciclass,010101|pciclass,010102|pciclass,010103|pciclass,010104|pciclass,010105|pciclass,010106|pciclass,010107|pciclass,010108|pciclass,010109|pciclass,01010a|pciclass,01010b|pciclass,01010c|pciclass,01010d|pciclass,01010e|pciclass,01010f
+#node_name = none
+#describe_dev =  "IDE controller"
+#}
+#
+#{
+#bus_type = pciclass
+#dev_id = pciclass,010180|pciclass,010181|pciclass,010182|pciclass,010183|pciclass,010184|pciclass,010185|pciclass,010186|pciclass,010187|pciclass,010188|pciclass,010189|pciclass,01018a|pciclass,01018b|pciclass,01018c|pciclass,01018d|pciclass,01018e|pciclass,01018f
+#node_name = none
+#describe_dev =  "Bus Mastering IDE controller"
+#}

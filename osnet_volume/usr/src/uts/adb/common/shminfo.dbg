@@ -1,0 +1,21 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)shminfo.dbg	1.4	98/01/19 SMI"
+
+#include <sys/cred.h>
+#include <sys/shm.h>
+#include "dummy.h"
+
+\
+\
+shminfo                 ""              shminfo
+{adb_inline_begin}
+shminfo>s
+<s+{OFFSET, shmmax}=""
+{adb_inline_end}
+        shmmax                  hex
+        shmmin                  hex
+        shmmni                  hex
+        shmseg                  hex

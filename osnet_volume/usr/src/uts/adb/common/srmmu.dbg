@@ -1,0 +1,20 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)srmmu.dbg	1.4	98/01/14 SMI"
+
+#include <sys/param.h>
+#include <vm/hat.h>
+#include <vm/hat_srmmu.h>
+#include "dummy.h"
+
+\
+\
+srmmu
+        srmmu_u._su_hat         hex
+        s_l1ptbl                hex
+        s_l3ptbl                hex
+        srmmu_root              hex
+        s_addr                  hex
+        s_ctx                   hex

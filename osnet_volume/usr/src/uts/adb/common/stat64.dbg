@@ -1,0 +1,27 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)stat64.dbg	1.3	98/01/14 SMI"
+
+#include <sys/stat.h>
+#include "dummy.h"
+
+\
+\
+stat64
+        st_dev                  hex
+        st_ino                  sdecimal
+        st_mode                 hex
+        st_nlink                sdecimal
+        st_uid                  sdecimal
+        st_gid                  sdecimal
+        st_rdev                 hex
+        st_size                 hex
+        st_atim.tv_sec          sdecimal
+        st_atim.tv_nsec         sdecimal
+        st_mtim.tv_sec          sdecimal
+        st_mtim.tv_nsec         sdecimal
+        st_ctim.tv_sec          sdecimal
+        st_ctim.tv_nsec         sdecimal
+        st_blksize              sdecimal

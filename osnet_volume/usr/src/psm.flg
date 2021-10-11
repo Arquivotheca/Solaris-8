@@ -1,0 +1,7 @@
+#!/bin/sh
+#
+#pragma ident	"@(#)psm.flg	1.1	93/06/03 SMI"
+#
+
+echo_file usr/src/Makefile.psm
+echo_file usr/src/Makefile.psm.targ

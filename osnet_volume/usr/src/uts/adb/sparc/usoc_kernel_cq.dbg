@@ -1,0 +1,58 @@
+\
+\ Copyright (c) 1999 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)usoc_kernel_cq.dbg	1.1	99/07/21 SMI"
+#include <sys/isa_defs.h>
+#include <sys/types.h>
+#include <sys/dditypes.h>
+#include <sys/ddidmareq.h>
+#include <sys/mutex.h>
+#include <sys/semaphore.h>
+#include <sys/condvar.h>
+#include <sys/thread.h>
+#include <sys/devops.h>
+#include <sys/taskq.h>
+#include <sys/fibre-channel/fc.h>
+#include <sys/fibre-channel/fca/usoc_cq_defs.h>
+#include <sys/fibre-channel/fca/usocio.h>
+#include <sys/fibre-channel/fca/usocreg.h>
+#include <sys/fibre-channel/fca/usocvar.h>
+#include "dummy.h"
+\
+\
+usoc_kernel_cq
+{adb_inline_begin}
+.>w
+<w+{OFFSET, skc_mtx}=""
+{adb_inline_end}
+	skc_mtx				.mutex
+{adb_inline_begin}
+<w+{OFFSET, skc_cv}=""
+{adb_inline_end}
+	skc_cv				hex
+	skc_dhandle			hex
+{adb_inline_begin}
+#if defined(sparcv9)
+<w+{OFFSET, skc_dcookie}/n"cmd dmacookie"nJJXn
+#else
+<w+{OFFSET, skc_dcookie}/n"cmd dmacookie"n4Xn
+#endif
+<w+{OFFSET, skc_acchandle}=""
+{adb_inline_end}
+	skc_acchandle			hex
+	skc_xram_cqdesc			hex
+	skc_cq_raw			hex
+	skc_cq				hex
+	skc_in				hex
+	skc_out				hex
+	skc_last_index			hex
+	skc_seqno			hex
+	skc_full			hex
+	skc_saved_out			hex
+	skc_saved_seqno			hex
+	skc_overflowh			hex
+	skc_overflowt			hex
+{adb_inline_begin}
+<w+{SIZEOF}=""
+{adb_inline_end}

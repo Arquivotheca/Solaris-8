@@ -1,0 +1,834 @@
+#
+# Copyright (c) 1992-1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#pragma ident	"@(#)Makefile.files	1.222	99/10/27 SMI"
+#
+# uts/common/Makefile.files
+#
+#	This Makefile defines all file modules for the directory uts/common
+# and its children. These are the source files which may be considered
+# common to all SunOS systems.
+#
+
+#
+#	object lists
+#
+
+READFONT_OBJS += readfont.o
+
+i386_CORE_OBJS += \
+		avintr.o	\
+		pit.o		\
+		pic.o		\
+		hardclk.o	\
+		i8254.o
+
+sparc_CORE_OBJS +=
+
+COMMON_CORE_OBJS +=		\
+		autoconf.o	\
+		bp_map.o	\
+		cpu.o		\
+		cpu_intr.o	\
+		cpupart.o	\
+		disp.o		\
+		kstat_fr.o	\
+		mach_page.o	\
+		mutex.o		\
+		page_lock.o	\
+		panic.o		\
+		param.o		\
+		putnext.o	\
+		rwlock.o	\
+		seg_kmem.o	\
+		vm_page.o
+
+CORE_OBJS +=	$(COMMON_CORE_OBJS) $($(MACH)_CORE_OBJS)
+
+GENUNIX_OBJS +=	\
+		access.o	\
+		acl.o		\
+		adjtime.o	\
+		alarm.o		\
+		aio_subr.o	\
+		auditsys.o	\
+		bdev_dsort.o	\
+		bio.o		\
+		bitmap.o	\
+		callb.o		\
+		callout.o	\
+		chdir.o		\
+		chmod.o		\
+		chown.o		\
+		cladm.o		\
+		class.o		\
+		clock.o		\
+		clock_highres.o	\
+		clock_realtime.o\
+		close.o		\
+		compress.o	\
+		condvar.o	\
+		conf.o		\
+		console.o	\
+		copyops.o	\
+		core.o		\
+		corectl.o	\
+		cred.o		\
+		cs_stubs.o	\
+		dacf.o		\
+		dacf_clnt.o	\
+		cyclic.o	\
+		ddi.o		\
+		ddi_nodeid.o	\
+		disp_lock.o	\
+		dnlc.o		\
+		driver.o	\
+		dumpsubr.o	\
+		driver_lyr.o	\
+		etheraddr.o	\
+		exec.o		\
+		exit.o		\
+		fbio.o		\
+		fcntl.o		\
+		fdbuffer.o	\
+		fdsync.o	\
+		fio.o		\
+		flock.o		\
+		fork.o		\
+		fs_subr.o	\
+		fsflush.o	\
+		ftrace.o	\
+		getdents.o	\
+		getloadavg.o	\
+		getpid.o	\
+		gid.o		\
+		groups.o	\
+		grow.o		\
+		hat_refmod.o	\
+		id32.o		\
+		instance.o	\
+		ioctl.o		\
+		kmem.o		\
+		ksyms_snapshot.o	\
+		l_strplumb.o	\
+		link.o		\
+		lockstat_subr.o	\
+		log_event.o	\
+		logsubr.o	\
+		lookup.o	\
+		lseek.o		\
+		lwp.o		\
+		lwp_create.o	\
+		lwp_info.o	\
+		lwp_self.o	\
+		lwp_sobj.o	\
+		lwpsys.o	\
+		main.o		\
+		memcntl.o	\
+		mkdir.o		\
+		mknod.o		\
+		dc_interface.o	\
+		mount.o		\
+		move.o		\
+		msacct.o	\
+		nice.o		\
+		ntptime.o	\
+		open.o		\
+		p_online.o	\
+		pathconf.o	\
+		pathname.o	\
+		pause.o		\
+		pgrp.o		\
+		pgrpsys.o	\
+		pid.o		\
+		poll.o		\
+		printf.o	\
+		priocntl.o	\
+		procset.o	\
+		processor_bind.o	\
+		processor_info.o	\
+		profil.o	\
+		readlink.o	\
+		refstr.o	\
+		rename.o	\
+		resolvepath.o	\
+		rlimit.o	\
+		rmap.o		\
+		rmdir.o		\
+		rw.o		\
+		sad_conf.o	\
+		sched.o		\
+		schedctl.o	\
+		seg_dev.o	\
+		seg_kp.o	\
+		seg_map.o	\
+		seg_vn.o	\
+		semaphore.o	\
+		seg_spt.o	\
+		session.o	\
+		share.o		\
+		shuttle.o	\
+		sig.o		\
+		sigaction.o	\
+		sigaltstack.o	\
+		signotify.o	\
+		sigpending.o	\
+		sigprocmask.o	\
+		sigqueue.o	\
+		sigsendset.o	\
+		sigsuspend.o	\
+		sigtimedwait.o	\
+		sleepq.o	\
+		softint.o	\
+		space.o		\
+		ssig.o		\
+		stat.o		\
+		statfs.o	\
+		statvfs.o	\
+		str_conf.o	\
+		strcalls.o	\
+		stream.o	\
+		streamio.o	\
+		string.o	\
+		strsubr.o	\
+		strsun.o	\
+		subr.o		\
+		sunddi.o	\
+		sunndi.o	\
+		sunpm.o		\
+		sundlpi.o	\
+		suntpi.o	\
+		swap_subr.o	\
+		swap_vnops.o	\
+		symlink.o	\
+		sync.o		\
+		sysclass.o	\
+		sysconfig.o	\
+		sysent.o	\
+		sysfs.o		\
+		systeminfo.o	\
+		taskq.o		\
+		time.o		\
+		timer.o		\
+		times.o		\
+		timers.o	\
+		thread.o	\
+		tnf_res.o	\
+		turnstile.o	\
+		tty_common.o	\
+		uadmin.o	\
+		uid.o		\
+		umask.o		\
+		umount.o	\
+		uname.o		\
+		unix_bb.o	\
+		unlink.o	\
+		utime.o		\
+		utssys.o	\
+		vfs.o		\
+		vfs_conf.o	\
+		vmem.o		\
+		vm_anon.o	\
+		vm_as.o		\
+		vm_meter.o	\
+		vm_pageout.o	\
+		vm_pvn.o	\
+		vm_rm.o		\
+		vm_seg.o	\
+		vm_subr.o	\
+		vm_swap.o	\
+		vnode.o		\
+		vtrace.o	\
+		vuid_queue.o	\
+	 	vuid_store.o	\
+		watchpoint.o	\
+		yield.o		\
+		scsi_confdata.o
+
+#
+#	Stubs for the stand-alone linker/loader
+#
+GENSTUBS_OBJS +=	kobj_stubs.o
+
+#
+#			Driver (pseudo-driver) Modules
+#
+CONSKBD_OBJS += conskbd.o
+
+CONSMS_OBJS +=	consms.o
+
+DIAUDIO_OBJS += audio.o
+
+OLDPTY_OBJS +=	tty_ptyconf.o
+
+PCI_PCINEXUS_OBJS += pci_pci.o
+
+PTC_OBJS +=	tty_pty.o
+
+PTSL_OBJS += 	tty_pts.o
+
+PTM_OBJS +=	ptm.o
+
+PTS_OBJS +=	pts.o
+
+PTY_OBJS +=	ptms_conf.o
+
+SAD_OBJS +=	sad.o
+
+MD5_OBJS +=	md5.o
+
+ARP_OBJS +=	arpddi.o arp.o
+
+ICMP_OBJS +=	icmpddi.o icmp.o icmp_opt_data.o
+
+ICMP6_OBJS +=	icmp6ddi.o
+
+RTS_OBJS +=	rtsddi.o rts.o rts_opt_data.o
+
+IP_OBJS +=	igmp.o ip.o ip6.o ip6_if.o ip6_ire.o ip6_rts.o ip_cksum.o \
+		ip_if.o ip_ire.o ip_mroute.o ip_multi.o ip_ndp.o \
+		ip_opt_data.o ip_rts.o ip_srcid.o ipddi.o mi.o nd.o optcom.o \
+		snmpcom.o
+
+IP6_OBJS +=	ip6ddi.o
+
+KEYSOCK_OBJS +=	keysockddi.o keysock.o keysock_opt_data.o
+
+IPSECESP_OBJS += ipsecespddi.o ipsecesp.o
+
+ENCRDES_OBJS +=	encrdes.o
+
+ENCR3DES_OBJS += encr3des.o
+
+IPSECAH_OBJS +=	ipsecahddi.o ipsecah.o sadb.o
+
+AUTHMD5H_OBJS += authmd5h.o
+
+AUTHSHA1_OBJS += authsha1.o sha1.o
+
+IPD_OBJS += ipd.o
+
+IPDCM_OBJS += ipdcm.o
+
+IPDPTP_OBJS += ipdptp.o
+
+PPP_OBJS += 	ppp_str.o ppp_pap.o ppp_chap.o ppp_common.o ppp_lcp.o \
+		ppp_ipncp.o ppp_lqm.o ppp_wrapper.o vjcomp.o
+
+PPP_DIAG_OBJS += ppp_diag.o
+
+TCP_OBJS +=	tcpddi.o tcp.o tcp_trace.o tcp_opt_data.o tcp_sack.o
+
+TCP6_OBJS +=	tcp6ddi.o
+
+NCA_OBJS +=	ncaddi.o nca.o ncaproto.o ncahttp.o ncakmem.o
+
+TUN_OBJS +=	tun.o
+
+ATUN_OBJS +=	atun.o
+
+UDP_OBJS +=	udpddi.o udp.o udp_opt_data.o
+
+UDP6_OBJS +=	udp6ddi.o
+
+SY_OBJS +=	gentty.o
+
+TCO_OBJS +=	ticots.o
+
+TCOO_OBJS +=	ticotsord.o
+
+TCL_OBJS +=	ticlts.o
+
+TL_OBJS +=	tl.o
+
+DUMP_OBJS +=	dump.o
+
+SEGDRV_OBJS +=	seg_drv.o
+
+CLONE_OBJS +=	clone.o
+
+CN_OBJS +=	cons.o
+
+GLD_OBJS +=     gld.o gldutil.o
+
+KSTAT_OBJS +=	kstat.o
+
+KSYMS_OBJS +=	ksyms.o
+
+INSTANCE_OBJS += inst_sync.o
+
+IWSCN_OBJS +=	iwscons.o
+
+LOFI_OBJS +=	lofi.o
+
+MM_OBJS +=	mem.o
+
+OPTIONS_OBJS += options.o
+
+VOL_OBJS +=	vol.o
+
+WINLOCK_OBJS +=	winlockio.o
+
+PM_OBJS +=	pm.o
+
+PSEUDO_OBJS +=	pseudonex.o
+
+RAMDISK_OBJS +=	ramdisk.o
+
+LLC1_OBJS += llc1.o
+
+USBKBM_OBJS += usbkbm.o usbkbm_keytables.o
+
+HID_OBJS += hid.o
+
+HIDPARSER_OBJS += hidparser.o
+
+USBMS_OBJS += usbms.o
+
+WC_OBJS += wscons.o
+
+LOCKSTAT_OBJS += lockstat.o
+
+SCSI_OBJS +=	scsi_capabilities.o	scsi_control.o	scsi_watch.o \
+		scsi_data.o	scsi_resource.o		scsi_subr.o	\
+		scsi_hba.o	scsi_transport.o	scsi_confsubr.o \
+		scsi_reset_notify.o
+
+USBA_OBJS +=	hcdi.o	usba.o	usbai.o hubdi.o parser.o genconsole.o
+
+PMODEM_OBJS += pmodem.o pmodem_cis.o cis.o cis_callout.o cis_handlers.o cis_params.o
+
+SGEN_OBJS +=	sgen.o
+
+ST_OBJS +=	st.o	st_conf.o
+
+SYSMSG_OBJS +=	sysmsg.o
+
+SES_OBJS +=	ses.o ses_sen.o ses_safte.o ses_ses.o
+
+TNF_OBJS += 	tnf_buf.o 	tnf_trace.o 	tnf_writer.o 	trace_init.o \
+		trace_funcs.o 	tnf_probe.o	tnf.o
+
+LOGINDMUX_OBJS += logindmux.o
+
+DEVINFO_OBJS += devinfo.o
+
+DEVPOLL_OBJS += devpoll.o
+
+I8042_OBJS +=	i8042.o
+
+KB8042_OBJS +=	\
+		at_keyprocess.o	\
+		kb8042.o	\
+		kb8042_keytables.o
+
+MOUSE8042_OBJS += mouse8042.o
+
+FDC_OBJS +=	fdc.o
+
+LP_OBJS +=	lp.o
+
+ASY_OBJS +=	asy.o
+
+VUIDM3P_OBJS += vuidmice.o vuidm3p.o
+
+VUIDM4P_OBJS += vuidmice.o vuidm4p.o
+
+VUIDM5P_OBJS += vuidmice.o vuidm5p.o
+
+VUIDPS2_OBJS += vuidmice.o vuidps2.o
+
+SYSINIT_OBJS +=	sysinit.o
+
+DADK_OBJS +=	dadk.o
+
+GDA_OBJS +=	gda.o
+
+SNLB_OBJS += 	snlb.o
+
+STRATEGY_OBJS += strategy.o
+
+CMDK_OBJS +=	cmdk.o
+
+OBJMGR_OBJS += 	objmgr.o
+
+HPCSVC_OBJS += hpcsvc.o
+
+PCIHPNEXUS_OBJS += pcihp.o
+
+PCICFG_OBJS += pcicfg.o
+
+OPENEEPR_OBJS += openprom.o
+
+#
+# The GHD files are currently shared source and not yet a driver module
+#
+GHD_OBJS +=	ghd.o ghd_debug.o ghd_dma.o ghd_queue.o ghd_scsa.o \
+		ghd_scsi.o ghd_timer.o ghd_waitq.o ghd_gcmd.o
+
+PCIIDE_OBJS += pci-ide.o
+
+PCN_OBJS += pcn.o
+
+PCEPP_OBJS += pcepp.o
+
+CPC_OBJS += cpc.o
+
+#
+#			exec modules
+#
+AOUTEXEC_OBJS +=aout.o
+
+ELFEXEC_OBJS +=	elf.o elf_notes.o old_notes.o
+
+COFFEXEC_OBJS +=coff.o
+
+INTPEXEC_OBJS +=intp.o
+
+JAVAEXEC_OBJS +=java.o
+
+#
+#			file system modules
+#
+AUTOFS_OBJS +=  auto_vfsops.o auto_vnops.o auto_subr.o auto_xdr.o
+
+CACHEFS_OBJS +=	cachefs_cnode.o		cachefs_cod.o \
+		cachefs_dir.o		cachefs_dlog.o	cachefs_filegrp.o \
+		cachefs_fscache.o	cachefs_ioctl.o	cachefs_log.o \
+		cachefs_module.o \
+		cachefs_noopc.o		cachefs_resource.o \
+		cachefs_strict.o \
+		cachefs_subr.o		cachefs_vfsops.o \
+		cachefs_vnops.o
+
+FDFS_OBJS +=	fdops.o
+
+FIFO_OBJS +=	fifosubr.o	fifovnops.o
+
+PIPE_OBJS +=	pipe.o
+
+HSFS_OBJS +=	hsfs_node.o	hsfs_subr.o	hsfs_vfsops.o	hsfs_vnops.o \
+		hsfs_susp.o	hsfs_rrip.o	hsfs_susp_subr.o
+
+LOFS_OBJS +=	lofs_subr.o	lofs_vfsops.o	lofs_vnops.o
+
+NAMEFS_OBJS +=	namevfs.o	namevno.o
+
+NFS_OBJS +=	nfs_client.o	nfs_common.o	nfs_dump.o \
+		nfs_subr.o	nfs_vfsops.o 	nfs_vnops.o \
+		nfs_xdr.o	nfs_sys.o	nfs_strerror.o \
+		nfs3_vfsops.o	nfs3_vnops.o	nfs3_xdr.o \
+		nfs_acl_vnops.o	nfs_acl_xdr.o
+
+NFSSRV_OBJS +=	nfs_server.o	nfs_srv.o	nfs3_srv.o \
+		nfs_acl_srv.o	nfs_auth.o	nfs_auth_xdr.o \
+		nfs_export.o	nfs_log.o	nfs_log_xdr.o
+
+PCFS_OBJS +=	pc_alloc.o	pc_dir.o	pc_node.o	pc_subr.o \
+		pc_vfsops.o	pc_vnops.o
+
+S5_OBJS +=	s5_alloc.o	s5_bmap.o	s5_dir.o \
+		s5_inode.o	s5_subr.o	s5_vfsops.o \
+		s5_vnops.o	s5_lockfs.o
+
+
+PROC_OBJS +=	prcontrol.o	prioctl.o	prsubr.o	prusrio.o \
+		prvfsops.o	prvnops.o
+
+MNTFS_OBJS +=	mntvfsops.o	mntvnops.o
+
+SPEC_OBJS +=	specsubr.o	specvfsops.o	specvnops.o
+
+SOCK_OBJS +=	socksubr.o	sockvfsops.o	sockvnops.o     \
+		socksyscalls.o	socktpi.o	sockstr.o
+
+TMPFS_OBJS +=	tmp_dir.o	tmp_subr.o	tmp_tnode.o	tmp_vfsops.o \
+		tmp_vnops.o
+
+UDFS_OBJS +=	udf_alloc.o	udf_bmap.o	udf_dir.o	\
+		udf_inode.o	udf_subr.o	udf_vfsops.o	\
+		udf_vnops.o
+
+UFS_OBJS +=	ufs_alloc.o	ufs_bmap.o	ufs_dir.o \
+		ufs_inode.o	ufs_subr.o	ufs_tables.o	ufs_vfsops.o \
+		ufs_vnops.o	quota.o		quotacalls.o	quota_ufs.o \
+		ufs_filio.o	ufs_lockfs.o	ufs_thread.o	ufs_trans.o \
+		ufs_acl.o	ufs_panic.o	ufs_directio.o	ufs_log.o \
+		ufs_extvnops.o
+
+UFSLOG_OBJS +=	lufs.o		lufs_thread.o	lufs_log.o	lufs_map.o \
+		lufs_top.o	lufs_debug.o
+
+#
+#			streams modules
+#
+BUFMOD_OBJS	+=	bufmod.o
+
+CONNLD_OBJS +=	connld.o
+
+DEDUMP_OBJS +=	dedump.o
+
+LDTERM_OBJS +=	ldterm.o
+
+PCKT_OBJS +=	pckt.o
+
+PFMOD_OBJS	+=	pfmod.o
+
+PTEM_OBJS +=	ptem.o
+
+REDIRMOD_OBJS += strredirm.o
+
+TIMOD_OBJS +=	timod.o
+
+TIRDWR_OBJS +=	tirdwr.o
+
+TTCOMPAT_OBJS +=ttcompat.o
+
+LOG_OBJS +=	log.o
+
+PIPEMOD_OBJS +=	pipemod.o
+
+RPCMOD_OBJS +=	rpcmod.o	clnt_cots.o	clnt_clts.o \
+		clnt_gen.o	clnt_perr.o	mt_rpcinit.o	rpc_calmsg.o \
+		rpc_prot.o	rpc_sztypes.o	rpc_subr.o	rpcb_prot.o \
+		svc.o		svc_clts.o	svc_gen.o	svc_cots.o \
+		xdr.o		xdr_array.o	xdr_mblk.o	xdr_mem.o \
+		xdr_refer.o	rpcsys.o
+
+KLMMOD_OBJS +=	klmmod.o	lm_subr.o 	lm_xdr.o	lm_server.o
+
+KLMOPS_OBJS +=	klmops.o	lm_client.o	lm_nlm_server.o lm_nlm4_server.o
+
+TLIMOD_OBJS +=	tlimod.o	t_kalloc.o	t_kbind.o	t_kclose.o \
+		t_kconnect.o	t_kfree.o	t_kgtstate.o	t_kopen.o \
+		t_krcvudat.o	t_ksndudat.o	t_kspoll.o	t_kunbind.o \
+		t_kutil.o
+
+RLMOD_OBJS += rlmod.o
+
+TELMOD_OBJS += telmod.o
+
+KB_OBJS +=	kbd.o		keytables.o
+
+#
+#			scheduling class modules
+#
+RT_OBJS +=		rt.o
+RT_DPTBL_OBJS +=	rt_dptbl.o
+
+TS_OBJS +=		ts.o
+TS_DPTBL_OBJS +=	ts_dptbl.o
+
+IA_OBJS +=		ia.o
+
+#
+#			Inter-Process Communication (IPC) modules
+#
+IPC_OBJS +=	ipc.o
+
+IPCMSG_OBJS +=	msg.o
+
+IPCSEM_OBJS +=	sem.o
+
+IPCSHM_OBJS +=	shm.o
+
+#
+#			SVVS Modules
+#
+LO_OBJS +=	lo.o
+
+TIDG_OBJS +=	tidg.o
+
+TIVC_OBJS +=	tivc.o
+
+TMUX_OBJS +=	tmux.o
+
+LMODB_OBJS +=	lmodb.o
+
+LMODE_OBJS +=	lmode.o
+
+LMODR_OBJS +=	lmodr.o
+
+LMODT_OBJS +=	lmodt.o
+
+#
+#			misc. modules
+#
+C2AUDIT_OBJS +=	adr.o audit.o audit_event.o audit_io.o \
+		audit_path.o audit_start.o audit_syscalls.o audit_token.o \
+		audit_mem.o
+
+RPCSEC_OBJS +=	secmod.o	sec_clnt.o	sec_svc.o	sec_gen.o \
+		auth_des.o	auth_kern.o 	auth_loopb.o\
+		authdesprt.o	authdesubr.o	authu_prot.o \
+		key_call.o	key_prot.o	svc_authu.o 	svcauthdes.o
+
+RPCSEC_GSS_OBJS +=	rpcsec_gssmod.o rpcsec_gss.o rpcsec_gss_misc.o \
+		rpcsec_gss_utils.o svc_rpcsec_gss.o
+
+TERMINAL_EMULATOR_OBJS += terminal-emulator.o 7x14.o
+
+KBTRANS_OBJS +=				\
+		kbtrans.o		\
+		kbtrans_keytables.o	\
+		kbtrans_polled.o	\
+		kbtrans_streams.o
+
+KGSSD_OBJS +=	gssd_clnt_stubs.o gssd_handle.o gssd_prot.o \
+		gss_display_name.o gss_release_name.o gss_import_name.o \
+		gss_release_buffer.o gss_release_oid_set.o gen_oids.o gssdmod.o
+
+KGSSD_DERIVED_OBJS = gssd_xdr.o
+
+KGSS_DUMMY_OBJS += dmech.o
+
+
+CRYPTO=	cryptoconf.o encrypt_data.o decrypt_data.o \
+	des_md5.o raw_des.o
+
+# crypto/des
+CRYPTO_DES= cbc_cksum.o finish_key.o  \
+	process_ky.o key_sched.o u_nfold.o \
+	f_cbc.o f_cksum.o f_sched.o f_parity.o \
+	weak_key.o f_tables.o
+
+# crypto/md5
+CRYPTO_MD5= kmd5glue.o kmd5crypto.o
+
+
+# crypto/os
+CRYPTO_OS= rnd_confoun.o c_ustime.o 
+
+
+
+# krb5/free
+K5_FREE=f_addr.o f_authdata.o \
+	f_authent.o f_auth_cnt.o f_chksum.o \
+	f_error.o  \
+	f_keyblock.o f_princ.o 
+
+K5_KRB= copy_key.o\
+	parse.o init_ctx.o \
+	ser_adata.o ser_addr.o \
+	ser_auth.o ser_cksum.o \
+	ser_eblk.o ser_key.o ser_princ.o \
+	serialize.o unparse.o\
+	ser_actx.o
+
+K5_OS=  timeofday.o \
+	toffset.o init_os_ctx.o  
+SEAL=
+
+MECH=	delete_sec_context.o \
+	import_sec_context.o \
+	gssapi_krb5.o \
+	k5seal.o k5unseal.o \
+	ser_sctx.o \
+	sign.o \
+	util_crypt.o  \
+	util_validate.o  util_ordering.o  \
+	util_seqnum.o util_set.o util_seed.o \
+	wrap_size_limit.o verify.o 
+
+
+
+MECH_GEN= util_token.o 
+
+
+KGSS_KRB5_OBJS += krb5mech.o \
+	$(MECH) $(SEAL) $(MECH_GEN) \
+	$(CRYPTO) $(CRYPTO_DES) $(CRYPTO_MD5) \
+	$(CRYPTO_OS) \
+	$(K5_FREE) \
+	$(K5_KRB) \
+	$(K5_OS) 
+
+DES_OBJS +=	des_crypt.o	des_soft.o
+
+DLBOOT_OBJS +=	bootparam_xdr.o nfs_dlinet.o octet.o scan.o
+
+GLM_OBJS +=	glm.o
+
+KRTLD_OBJS +=	kobj.o		kobj_subr.o
+
+MOD_OBJS +=	modctl.o modsubr.o modsysfile.o modconf.o modhash.o
+
+STRPLUMB_OBJS += strplumb.o
+
+SWAPGENERIC_OBJS += swapgeneric.o
+
+CPR_OBJS +=	cpr_driver.o cpr_dump.o \
+		cpr_main.o cpr_misc.o cpr_mod.o cpr_stat.o \
+		cpr_uthread.o
+
+SEGMAPDEV_OBJS += seg_mapdev.o
+
+PROF_OBJS +=	prf.o
+
+SE_OBJS += se_driver.o
+
+LLC2_OBJS += SAM.o dlpi.o errlog.o ild.o llc2.o
+
+SYSACCT_OBJS +=	acct.o
+
+KAIO_OBJS += aio.o
+
+PCIC_OBJS +=	pcic.o
+
+PCMCIA_OBJS += pcmcia.o
+
+CS_OBJS += cs.o
+
+CIS_OBJS += cis.o cis_callout.o cis_handlers.o cis_params.o
+
+PEM_OBJS += pem.o
+
+BUSRA_OBJS += busra.o
+
+PCS_OBJS += pcs.o
+
+PCATA_OBJS += pcide.o pcdisk.o pclabel.o pcata.o
+
+PCELX_OBJS += pcelx.o pcgld.o
+
+PCMEM_OBJS += pcmem.o
+
+PCRAM_OBJS += pcram.o
+
+PCSER_OBJS += pcser.o pcser_cis.o
+
+PSET_OBJS +=	pset.o
+
+PCI_I2ONEXUS_OBJS += pci_to_i2o.o
+
+I2OMSG_OBJS += i2o_msg.o
+
+I2O_SCSI_OBJS += i2o_scsi.o
+
+I2O_BS_OBJS += i2o_bs.o label.o
+
+OHCI_OBJS += ohci.o ohci_polled.o
+
+UHCI_OBJS +=	uhci.o uhciutil.o uhcitgt.o uhcihub.o uhcipolled.o
+
+HUBD_OBJS +=	hubd.o
+
+USB_MID_OBJS += usb_mid.o
+
+SCSA2USB_OBJS += scsa2usb.o
+
+#
+#	Build up defines and paths.
+#
+LINT_DEFS	+= -Dunix
+
+#
+#	This duality can be removed when the native and target compilers
+#	are the same (or at least recognize the same command line syntax!)
+#	It is a bug in the current compilation system that the assember
+#	can't process the -Y I, flag.
+#
+NATIVE_INC_PATH += $(INC_PATH) $(CCYFLAG)$(UTSBASE)/common
+AS_INC_PATH	+= $(INC_PATH) -I$(UTSBASE)/common
+INCLUDE_PATH    += $(INC_PATH) -Y I,$(UTSBASE)/common

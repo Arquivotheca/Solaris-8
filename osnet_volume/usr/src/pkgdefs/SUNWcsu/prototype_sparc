@@ -1,0 +1,168 @@
+#
+# Copyright (c) 1990-1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#ident	"@(#)prototype_sparc	1.68	99/09/28 SMI"
+#
+# This required package information file contains a list of package contents.
+# The 'pkgmk' command uses this file to identify the contents of a package
+# and their location on the development machine when building the package.
+# Can be created via a text editor or through use of the 'pkgproto' command.
+
+#!search <pathname pathname ...>	# where to find pkg objects
+#!include <filename>			# include another 'prototype' file
+#!default <mode> <owner> <group>	# default used if not specified on entry
+#!<param>=<value>			# puts parameter in pkg environment
+
+#
+# Include ISA independent files (prototype_com)
+#
+!include prototype_com
+#
+# List files which are SPARC specific here
+#
+# source locations relative to the prototype file
+#
+# SUNWcsu
+#
+d none usr/bin/sparcv7 755 root bin
+f none usr/bin/sparcv7/adb 555 root bin
+f none usr/bin/sparcv7/prstat 555 root bin
+f none usr/bin/sparcv7/ps 4555 root sys
+f none usr/bin/sparcv7/savecore 555 root bin
+f none usr/bin/sparcv7/setuname 555 root bin
+f none usr/bin/sparcv7/uptime 4555 root bin
+l none usr/bin/sparcv7/w=uptime
+s none usr/sbin/fdisk=../../sbin/fdisk
+d none usr/sbin/sparcv7 755 root bin
+f none usr/sbin/sparcv7/crash 755 root sys
+f none usr/sbin/sparcv7/lockstat 555 root bin
+f none usr/sbin/sparcv7/prtconf 2555 root sys
+f none usr/sbin/sparcv7/swap 2555 root sys
+f none usr/sbin/sparcv7/sysdef 2555 root sys
+f none usr/sbin/sparcv7/whodo 4555 root bin
+f none usr/lib/ld.so 755 root bin
+f none usr/lib/adb/ata_controller 644 root sys
+f none usr/lib/adb/ata_drive 644 root sys
+f none usr/lib/adb/ata_pkt 644 root sys
+f none usr/lib/adb/cb 644 root sys
+f none usr/lib/adb/cmd_ctl 644 root sys
+f none usr/lib/adb/common_service 644 root sys
+f none usr/lib/adb/config_header 644 root sys
+f none usr/lib/adb/config_header_state 644 root sys
+f none usr/lib/adb/cq 644 root sys
+f none usr/lib/adb/cq_hdr 644 root sys
+f none usr/lib/adb/cqe 644 root sys
+f none usr/lib/adb/ct_header 644 root sys
+f none usr/lib/adb/d_id_hash 644 root sys
+f none usr/lib/adb/dcd_address 644 root sys
+f none usr/lib/adb/dcd_cmd 644 root sys
+f none usr/lib/adb/dcd_device 644 root sys
+f none usr/lib/adb/dcd_disk 644 root sys
+f none usr/lib/adb/dcd_hba_tran 644 root sys
+f none usr/lib/adb/dcd_identify 644 root sys
+f none usr/lib/adb/dcd_pkt 644 root sys
+f none usr/lib/adb/ddi_dma_impl 644 root sys
+f none usr/lib/adb/dk_label 644 root sys
+f none usr/lib/adb/dvma_rec 644 root sys
+f none usr/lib/adb/ecc 644 root sys
+f none usr/lib/adb/esp 644 root sys
+f none usr/lib/adb/esp_cb_info 644 root sys
+f none usr/lib/adb/esp_cmd 644 root sys
+f none usr/lib/adb/esp_tagQ 644 root sys
+f none usr/lib/adb/fc_dataseg 644 root sys
+f none usr/lib/adb/fc_device 644 root sys
+f none usr/lib/adb/fc_fca_bind 644 root sys
+f none usr/lib/adb/fc_fca_port_info 644 root sys
+f none usr/lib/adb/fc_lilpmap 644 root sys
+f none usr/lib/adb/fc_packet 644 root sys
+f none usr/lib/adb/fc_port 644 root sys
+f none usr/lib/adb/fc_port_clist 644 root sys
+f none usr/lib/adb/fc_port_dev 644 root sys
+f none usr/lib/adb/fc_portmap 644 root sys
+f none usr/lib/adb/fca_port 644 root sys
+f none usr/lib/adb/fca_tran 644 root sys
+f none usr/lib/adb/fcio 644 root sys
+f none usr/lib/adb/fcp_cmd 644 root sys
+f none usr/lib/adb/fcp_rsp 644 root sys
+f none usr/lib/adb/fp_cmd 644 root sys
+f none usr/lib/adb/frame_header 644 root sys
+f none usr/lib/adb/ghd_cmd 644 root sys
+f none usr/lib/adb/hard_addr 644 root sys
+f none usr/lib/adb/i_ddi_soft_state 644 root sys
+f none usr/lib/adb/ib 644 root sys
+f none usr/lib/adb/ib_ino_info 644 root sys
+f none usr/lib/adb/ifp 644 root sys
+f none usr/lib/adb/ifp_cmd 644 root sys
+f none usr/lib/adb/ifp_full 644 root sys
+f none usr/lib/adb/ifp_icb 644 root sys
+f none usr/lib/adb/ifp_portdb 644 root sys
+f none usr/lib/adb/ifp_request 644 root sys
+f none usr/lib/adb/ifp_response 644 root sys
+f none usr/lib/adb/ifp_target 644 root sys
+f none usr/lib/adb/intrspec 644 root sys
+f none usr/lib/adb/iommu 644 root sys
+f none usr/lib/adb/isp 644 root sys
+f none usr/lib/adb/isp_cmd 644 root sys
+f none usr/lib/adb/isp_request 644 root sys
+f none usr/lib/adb/isp_response 644 root sys
+f none usr/lib/adb/job_request 644 root sys
+f none usr/lib/adb/la_els_adisc 644 root sys
+f none usr/lib/adb/la_els_logi 644 root sys
+f none usr/lib/adb/la_els_logo 644 root sys
+f none usr/lib/adb/la_wwn 644 root sys
+f none usr/lib/adb/le 644 root sys
+f none usr/lib/adb/lestr 644 root sys
+f none usr/lib/adb/ls_code 644 root sys
+f none usr/lib/adb/ns_resp_gan 644 root sys
+f none usr/lib/adb/nwwn_elem 644 root sys
+f none usr/lib/adb/nwwn_list 644 root sys
+f none usr/lib/adb/pbm 644 root sys
+f none usr/lib/adb/pci 644 root sys
+f none usr/lib/adb/pci_bus_range_t 644 root sys
+f none usr/lib/adb/pci_common 644 root sys
+f none usr/lib/adb/pci_fault_handle 644 root sys
+f none usr/lib/adb/pci_ispec 644 root sys
+f none usr/lib/adb/port_device 644 root sys
+f none usr/lib/adb/port_id 644 root sys
+f none usr/lib/adb/port_type 644 root sys
+f none usr/lib/adb/pwwn_hash 644 root sys
+f none usr/lib/adb/rwindow 644 root sys
+f none usr/lib/adb/sc 644 root sys
+f none usr/lib/adb/service_param 644 root sys
+f none usr/lib/adb/sf 644 root sys
+f none usr/lib/adb/sf_stats 644 root sys
+f none usr/lib/adb/sfpkt 644 root sys
+f none usr/lib/adb/sftarget 644 root sys
+f none usr/lib/adb/sftargets 644 root sys
+f none usr/lib/adb/soft_attach 644 root sys
+f none usr/lib/adb/ssa_disk 644 root sys
+f none usr/lib/adb/ssfcp_ipkt 644 root sys
+f none usr/lib/adb/ssfcp_lun 644 root sys
+f none usr/lib/adb/ssfcp_pkt 644 root sys
+f none usr/lib/adb/ssfcp_port 644 root sys
+f none usr/lib/adb/ssfcp_tgt 644 root sys
+f none usr/lib/adb/stackcalls 644 root sys
+f none usr/lib/adb/ulp_modinfo 644 root sys
+f none usr/lib/adb/ulp_module 644 root sys
+f none usr/lib/adb/ulp_port_info 644 root sys
+f none usr/lib/adb/unsolicited_buffer 644 root sys
+f none usr/lib/adb/usoc_cmdonly_request 644 root sys
+f none usr/lib/adb/usoc_data_request 644 root sys
+f none usr/lib/adb/usoc_diag_request 644 root sys
+f none usr/lib/adb/usoc_hdr 644 root sys
+f none usr/lib/adb/usoc_idinfo 644 root sys
+f none usr/lib/adb/usoc_kernel_cq 644 root sys
+f none usr/lib/adb/usoc_pkt_priv 644 root sys
+f none usr/lib/adb/usoc_pool_request 644 root sys
+f none usr/lib/adb/usoc_port 644 root sys
+f none usr/lib/adb/usoc_priv_cmd 644 root sys
+f none usr/lib/adb/usoc_request 644 root sys
+f none usr/lib/adb/usoc_request_descriptor 644 root sys
+f none usr/lib/adb/usoc_response 644 root sys
+f none usr/lib/adb/usoc_state 644 root sys
+f none usr/lib/adb/usoc_timetag 644 root sys
+f none usr/lib/adb/usoc_ub_priv 644 root sys
+f none usr/lib/adb/usoc_unsol_cb 644 root sys
+f none usr/lib/adb/zscom 644 root sys
+f none usr/lib/devfsadm/linkmod/SUNW_misc_link_sparc.so 755 root sys

@@ -1,0 +1,37 @@
+\ Copyright 1999 Sun Microsystems, Inc.
+\ All rights reserved.
+
+#ident	"@(#)usba.fdbg	1.2	99/09/24 SMI"
+
+#include <sys/usb/usba.h>
+#include <sys/sunndi.h>
+#include <sys/ddi_impldefs.h>
+#include <sys/ndi_impldefs.h>
+#include <sys/usb/usba/usba_types.h>
+#include <sys/usb/usba/usba_impl.h>
+
+usb_pipe_handle_impl
+
+usb_pipe_policy
+
+usb_device
+
+usb_hcdi_ops
+
+usb_hcdi
+
+usb_hubdi
+
+usb_device_descr
+
+usb_config_descr
+
+usb_config_pwr_descr
+
+usb_interface_descr
+
+usb_interface_pwr_descr
+
+usb_endpoint_descr
+
+usb_string_descr

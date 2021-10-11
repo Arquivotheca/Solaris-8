@@ -1,0 +1,129 @@
+#
+# Copyright (c) 1997, 1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#pragma ident	"@(#)Makefile.com.64	1.14	99/05/04 SMI"
+#
+# psm/stand/kadb/common/Makefile.com.64
+#
+# kernel debugger (kadb) included common Makefile definitions
+# included by kernel-architecture specific makefiles
+#
+
+#
+# Hack until stand makefiles are fixed
+#
+CLASS	= 64
+
+# Include global definitions. Note: $(TOPDIR) is defined in
+# the architecture specific Makefile.
+include $(TOPDIR)/Makefile.master
+include $(TOPDIR)/Makefile.psm
+include $(TOPDIR)/psm/stand/lib/Makefile.lib
+
+PROG=		kadb
+PLATFORM=	$(ARCH)
+
+STANDDIR= 	$(TOPDIR)/stand
+SYSDIR=  	$(TOPDIR)/uts
+ARCHDIR= 	$(SYSDIR)/$(ARCH)
+MACHDIR= 	$(SYSDIR)/$(TARG_MACH)
+LIBDIR=		$(STANDDIR)/lib/$(TARG_MACH)
+LIBDIR-net=	$(STANDDIR)/lib/fs/nfs
+MMUDIR=		$(SYSDIR)/$(MMU)
+
+# references to cmd/adb source
+ADBMACH=	$(TOPDIR)/cmd/adb/$(TARG_MACH)
+ADBDIR=		$(TOPDIR)/cmd/adb/$(TARG_MACH)/kadb
+ADBCOM=		$(TOPDIR)/cmd/adb/common
+
+# for NSE compatibility ADBOBJ has ARCH encoded in its name;
+# this allows the ARCH value to be passed in the target name
+ADBOBJ=		$(ADBDIR)/$(ARCH)-kadb.o
+
+PROMDIR= 	$(PSMSTANDLIBDIR)/promif/$(TARG_MACH)/$(PROMTYPE)/common
+PLATDIR= 	$(PSMSTANDLIBDIR)/promif/$(TARG_MACH)/$(PROMTYPE)/$(KARCH)
+PSMNAMELIBDIR=	$(PSMSTANDLIBDIR)/names/$(TARG_MACH)/$(KARCH)
+PSMBOOTLIBDIR=	$(PSMSTANDLIBDIR)/boot/$(TARG_MACH)/$(KARCH)
+
+OBJSDIR=	.
+
+KADBPROMLIB =	$(PROMDIR)/libprom.a
+
+#
+# Define PLATLIB in ARCH Makefile if required.
+# Need specific path in ARCH Makefile.
+#PLATLIB=
+
+OBJ=		kadb.o main.o
+AOBJ=		debug.o
+
+MACDIR=		$(SYSDIR)/adb
+# returns the list of adb macro files to use as arguments to genpf
+#
+MACLIST32=	`cd ${MACDIR}/platform/$(MACH)/$(ARCH); $(MAKE) maclist`
+MACLIST=	`cd $(MACDIR)/platform/$(MACH64)/$(ARCH); $(MAKE) maclist`
+
+CPPDEFS=	$(ARCHOPTS) -DKADB -D_KADB -D$(ARCH) -D__$(ARCH) \
+		-D$(TARG_MACH) -D__$(TARG_MACH) -D_KERNEL -D_MACHDEP -D__ELF 
+
+NATIVECPPDEFS=	-DKADB -D_KADB
+
+CPPINCS=	-I. -I$(KADBDIR)/$(TARG_MACH)/$(ARCH) -I${COMDIR} $(INCLUDE) \
+		-I$(SYSDIR)/$(KSUN) -I$(SYSDIR)/common -I${ADBCOM} \
+		-I$(ADBMACH) -I$(TOPDIR)/head
+
+CPPOPTS=  	$(CPPDEFS)  $(CPPINCS)
+NATIVECPPOPTS=	$(NATIVECPPDEFS) $(CPPINCS)
+COPTS=
+# XXX merced -- ecc does not support the "-Y I," construction
+#CPPFLAGS=	$(CCYFLAG)$(SYSDIR)/common $(CPPFLAGS.master)
+CPPFLAGS=	-I$(SYSDIR)/common $(CPPFLAGS.master)
+NATIVECPPFLAGS=	$(CCYFLAG)$(SYSDIR)/common $(CPPFLAGS.master)
+AS_CPPFLAGS=	$(CPPFLAGS.master)
+CFLAGS=		${COPTS} ${CPPOPTS}
+NATIVE_CFLAGS=	${COPTS} ${NATIVECPPOPTS}
+ASFLAGS= 	-P -D_ASM -D_KADB $(CPPOPTS) $(AS_CPPFLAGS) -DLOCORE \
+		-D_LOCORE -D__STDC__
+
+# Stolen from Makefile.cmd, so that kadb gets built against current libc.
+# storing LDLIBS in two macros allows reordering of options
+#LDLIBS64.kadb=	$(ENVLDLIBS1)/sparcv9  $(ENVLDLIBS2)/sparcv9  
+LDLIBS.kadb=	$(ENVLDLIBS1)  $(ENVLDLIBS2)  $(ENVLDLIBS3)
+LDLIBS=		$(LDLIBS64.kadb) $(LDLIBS.kadb)
+LDFLAGS.kadb=	$(STRIPFLAG) $(ENVLDFLAGS1) $(ENVLDFLAGS2) $(ENVLDFLAGS3)
+LDFLAGS=	$(LDFLAGS.kadb)
+
+LD_LIBNFS=	-L$(LIBDIR) -lnfs
+LD_LIBSA=	-L$(LIBDIR) -lsadb
+LD_NAMES=	-L$(PSMNAMELIBDIR) -lnames
+LD_BOOT=	-L$(PSMBOOTLIBDIR) -lboot
+LDLIBS +=	$(LD_NAMES) $(LD_LIBSA) $(LD_BOOT)
+
+LIBSA=		$(LIBDIR)/libsadb.a
+L_LIBSA=	$(LIBDIR)/llib-lsadb.ln
+LIBNFS=		$(LIBDIR)/libnfs.a
+L_LIBNFS=	$(LIBDIR)/llib-lnfs.ln
+LIBBOOT=	$(PSMBOOTLIBDIR)/libboot.a
+L_LIBBOOT=	$(PSMBOOTLIBDIR)/llib-lboot.ln
+LIBNAMES=	$(PSMNAMELIBDIR)/libnames.a
+L_LIBNAMES=	$(PSMNAMELIBDIR)/llib-lnames.ln
+
+LIBS=		$(LIBSA) $(LIBNAMES) $(LIBBOOT)
+L_LIBS=		$(L_LIBSA) $(L_LIBNAMES) $(L_LIBBOOT)
+
+L_LDLIBS=	$(LDLIBS)
+
+OTHERLIBS=	$(KADBPROMLIB) $(PLATLIB)
+
+L_PROMLIB=	$(KADBPROMLIB:%libprom.a=%llib-lprom.ln)
+L_PLATLIB=	$(PLATLIB:%libplat.a=%llib-lplat.ln)
+L_OTHERLIBS=	$(L_PROMLIB) $(L_PLATLIB)
+
+# install values
+FILEMODE=	644
+OWNER=		root
+GROUP=		sys
+
+LINT.c=	$(LINT) $(LINTFLAGS.c) $(LINT_DEFS) $(CFLAGS) -c
+LINT.s=	$(LINT) $(LINTFLAGS.s) $(LINT_DEFS) $(CFLAGS) -c

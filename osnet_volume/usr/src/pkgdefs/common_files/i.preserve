@@ -1,0 +1,14 @@
+#!/bin/sh
+#
+#ident	"@(#)i.preserve	1.2	93/02/16 SMI"
+#
+# Copyright (c) 1993 by Sun Microsystems, Inc.
+#
+
+while read src dest
+do
+	if [ ! -f $dest ] ; then
+		cp $src $dest
+	fi
+done
+exit 0

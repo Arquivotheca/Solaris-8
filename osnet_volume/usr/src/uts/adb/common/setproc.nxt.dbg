@@ -1,0 +1,26 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)setproc.nxt.dbg	1.8	98/07/19 SMI"
+
+#include <sys/proc.h>
+#include "dummy.h"
+
+
+\ pid_id is a 32-bit access.
+\
+pid	""	setproc.nxt
+{adb_inline_begin}
+.>P
+,#(<P)$<setproc.nop
+*(<P+{OFFSET, pid_id})>/i/J
+*(<P+{OFFSET, pid_link}),#(#(<p-<J))$<setproc.nxt
+*(<P)>/i/Q
+#if defined(_BIG_ENDIAN)
+(<Q&0xffffff)*{PTRSIZE}>Q
+*(*procdir+<Q)$<setproc.done
+#elif defined(_LITTLE_ENDIAN)
+*(*procdir+((<Q&0xffffff00)%40))$<setproc.done
+#endif
+{adb_inline_end}

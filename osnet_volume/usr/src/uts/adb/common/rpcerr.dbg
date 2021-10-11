@@ -1,0 +1,30 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)rpcerr.dbg	1.3	98/01/19 SMI"
+
+\ arg             : address of a struct rpc_err
+\ uses            :
+\ registers       : z
+\ description     : prints the contents of rpc_err structure
+
+#include <sys/types.h>
+#include <rpc/types.h>
+#include <rpc/auth.h>
+#include <rpc/clnt.h>
+#include "dummy.h"
+
+\
+\
+rpc_err                 ""              rpcerr
+{adb_inline_begin}
+.>z
+<z+{OFFSET, re_status}=""
+{adb_inline_end}
+        re_status               sdecimal        status
+        ru.RE_err.RE_errno      sdecimal        errno
+        ru.RE_err.RE_t_errno    sdecimal        terrno
+{adb_inline_begin}
+<z+{SIZEOF}=""
+{adb_inline_end}

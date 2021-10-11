@@ -1,0 +1,109 @@
+#
+#ident	"@(#)Makefile.rules	1.9	99/10/04 SMI"
+#
+# Copyright (c) 1994, 1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+# psm/stand/bootblks/obp-c/Makefile.rules
+#
+
+OBPSRCDIR	= $(BASEDIR)/obp-c
+OBPCMNDIR	= $(OBPSRCDIR)/common
+OBPMACHDIR	= $(OBPSRCDIR)/$(MACH)/common
+OBPPLATDIR	= $(OBPSRCDIR)/$(MACH)/$(PLATFORM)
+
+#
+# Sources and objects used to build the C-based bootblock
+# for OBP V0 and V2 machines (using the romvec client interface)
+#
+OBP_C_SRCS	= main.c read_elf_file.c obp_devio.c $(FS_C_SRCS)
+OBP_S_SRCS	= exitto.s
+OBP_SRCS	= $(OBP_C_SRCS) $(OBP_S_SRCS)
+OBP_SRT		= obp_srt0.o
+OBP_OBJS	= $(OBP_C_SRCS:%.c=%.o) $(OBP_S_SRCS:%.s=%.o) bbvers.o
+OBP_L_OBJS	= $(OBP_SRT:%.o=%.ln) $(OBP_OBJS:%.o=%.ln)
+OBP_LD_LIBS	= -L$(PSMNAMELIBDIR)/$(PLATFORM) -lnames -L$(SYSLIBDIR) -lsa
+
+#
+# Sources and objects used to build the C-based bootblock for
+# deprecated OBP V0 and V2 platforms.
+#
+OBPDEP_C_SRCS	= stub.c
+OBPDEP_S_SRCS	=
+OBPDEP_SRCS	= $(OBPDEP_C_SRCS) $(OBPDEP_S_SRCS)
+OBPDEP_SRT	= obp_srt0.o
+OBPDEP_OBJS	= $(OBPDEP_C_SRCS:%.c=%.o) $(OBPDEP_S_SRCS:%.s=%.o) bbvers.o
+OBPDEP_L_OBJS	= $(OBPDEP_SRT:%.o=%.ln) $(OBPDEP_OBJS:%.o=%.ln)
+OBPDEP_LD_LIBS	=
+
+#
+# Sources and objects used to build the C-based bootblock
+# for IEEE1275 machines
+#
+IEEE1275_C_SRCS	= main.c read_elf_file.c ieee1275_devio.c
+IEEE1275_C_SRCS	+= exitto.c rootfs_start.c $(FS_C_SRCS)
+IEEE1275_S_SRCS	= 
+IEEE1275_SRCS	= $(IEEE1275_C_SRCS) $(IEEE1275_S_SRCS)
+IEEE1275_SRT	= ieee1275_srt0.o
+IEEE1275_OBJS	= $(IEEE1275_C_SRCS:%.c=%.o) $(IEEE1275_S_SRCS:%.s=%.o) bbvers.o
+IEEE1275_L_OBJS	= $(IEEE1275_SRT:%.o=%.ln) $(IEEE1275_OBJS:%.o=%.ln)
+IEEE1275_LD_LIBS= -L$(PSMNAMELIBDIR)/$(PLATFORM) -lnames -L$(SYSLIBDIR) -lsa
+
+#
+# Rules used to build boot blocks.  PROM_TYPE is defined in the platform
+# specific Makefile in ../<fs>/<mach>/<platform>/Makefile and is set to one
+# of OBP or IEEE1275.
+#
+BOOT_OBJS	= $($(PROM_TYPE)_OBJS)
+BOOT_SRT	= $($(PROM_TYPE)_SRT)
+BOOT_L_OBJS	= $($(PROM_TYPE)_L_OBJS)
+BOOT_LD_LIBS	= $($(PROM_TYPE)_LD_LIBS)
+
+MAPFILE		= $(OBPMACHDIR)/mapfile
+
+CPPINCS		+= -I$(OBPCMNDIR) -I$(PSMSYSHDRDIR)
+CPPFLAGS	+= -D_BOOT -D_KERNEL
+CPPFLAGS	+= $(CPPINCS) $(CCYFLAG)$(PSMSYSHDRDIR)
+ASFLAGS		+= -D_BOOT -D_ASM -P $(CPPINCS)
+LDFLAGS		= -dn -e start -M $(MAPFILE)
+LDLIBS		= $(BOOT_LD_LIBS)
+
+#
+# lint pass1 enforcement
+#
+CFLAGS		+= -v
+
+MKBOOT		= mkboot
+MKVERS		= makevers
+
+#
+# Pattern matching rules to compile the source in this directory
+#
+%.o: $(OBPCMNDIR)/%.c
+	$(COMPILE.c) -o $@ $<
+
+%.o: $(OBPMACHDIR)/%.s
+	$(COMPILE.s) -o $@ $<
+
+%.o: $(OBPMACHDIR)/%.c
+	$(COMPILE.c) -o $@ $<
+
+%.o: $(OBPPLATDIR)/%.s
+	$(COMPILE.s) -o $@ $<
+
+%.ln: $(OBPCMNDIR)/%.c
+	@($(LHEAD) $(LINT.c) $< $(LTAIL))
+
+%.ln: $(OBPMACHDIR)/%.s
+	@($(LHEAD) $(LINT.s) $< $(LTAIL))
+
+%.ln: $(OBPMACHDIR)/%.c
+	@($(LHEAD) $(LINT.c) $< $(LTAIL))
+
+%.ln: $(OBPPLATHDIR)/%.s
+	@($(LHEAD) $(LINT.s) $< $(LTAIL))
+
+%: $(OBPCMNDIR)/%.sh
+	$(RM) $@
+	cat $< > $@
+	chmod +x $@

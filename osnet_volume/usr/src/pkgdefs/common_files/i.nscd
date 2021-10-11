@@ -1,0 +1,37 @@
+#!/bin/sh
+#
+#ident	"@(#)i.nscd	1.2	99/07/09 SMI"
+#
+# Copyright (c) 1993-1998 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+while read src dest
+do
+	if [ ! -f $dest ] ; then
+		cp $src $dest
+		continue
+	fi
+
+	grep ipnodes $dest > /dev/null 2>&1
+
+	if [ $? -ne 0 ] ; then
+		echo > /tmp/nscd.$$
+		grep '^[^#].*[ 	]hosts[ 	]' $dest |
+			sed 's/hosts/ipnodes/' >> /tmp/nscd.$$
+		cat /tmp/nscd.$$ >> $dest
+		rm -f /tmp/nscd.$$
+	fi
+
+	for DB in exec_attr prof_attr user_attr
+	do
+		grep $DB $dest > /dev/null 2>&1
+		if [ $? -ne 0 ] ; then
+			echo > /tmp/nscd.$$
+			grep '^[^#].*[ 	]hosts[ 	]' $dest |
+			    sed "s/hosts[	]/${DB}/" >> /tmp/nscd.$$
+			cat /tmp/nscd.$$ >> $dest
+			rm -f /tmp/nscd.$$
+		fi
+	done
+done
+exit 0

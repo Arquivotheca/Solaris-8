@@ -1,0 +1,56 @@
+# 
+# This file is no longer used for configuring Internet Protocol (IP)
+# parameters. All IP configuration is now performed by the startup file
+# "/etc/rc2.d/S69inet".
+# 
+# Configuring your host's IP parameters is now done similarly to SunOS
+# 4.1.  For each network interface you have a file of the form:
+# 
+# 	/etc/hostname.<interface-name>
+# 
+# where <interface-name> is the name of the interface, "sle0" or "sie1"
+# for example.  The hostname and IP adress of each interface must also
+# be listed in the local "/etc/hosts" file.
+# 
+# Your NIS domainname is configured in a file named:
+# 
+# 	/etc/defaultdomain
+# 
+# You may configure a default IP router by listing its name or IP adress
+# in the file named:
+# 
+# 	/etc/defaultrouter
+# 
+# If you don't configure a default IP router, the routing daemon
+# "in.routed" will be run.  If you do configure a default router,
+# "in.routed" will not be run.  Not running "in.routed" can improve your
+# system's performance.  Generally speaking, "in.routed" is not needed
+# on hosts connected to networks with only one router.
+# 
+# Running "in.named", the Internet domain name server, is now
+# conditional on the existance of the server's boot file,
+# "/etc/named.boot".  If the boot file exists, the server will be run.
+# If the boot file does not exist, the server will not be run.
+# 
+# There are some differences relative to SunOS 4.1.  The machine's
+# hostname is now set in a file named:
+# 
+# 	/etc/nodename
+# 
+# I know this is a gross filename, but you can make "/etc/nodename" a
+# symlink to one of your "/etc/hostname.<interface-name>" files.
+# 
+# Also, in this release, the streams plumbing for the Internet protocol
+# drivers is set up at user-level via the "slink" program.  The "slink"
+# program is is driven by a configuration file named:
+# 
+# 	/etc/strcf
+# 
+# For each network interface, there must be one configuration line in
+# the "boot" function in "/etc/strcf".
+# 
+# We hope to place linkage of the streams plumbing for the Internet
+# protocol drivers into the kernel in a future release.  When this
+# happens, we will not have to run "slink" at boot time and you will not
+# have to worry about configuring your "/etc/strcf" file.
+# 

@@ -1,0 +1,26 @@
+\
+\ Copyright (c) 1998 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)pollcacheset.dbg	1.1	98/06/12 SMI"
+
+\ arg             : address of a struct pollcacheset
+\ uses            :
+\ registers       : w
+\ description     : print pollcacheset; use w because we are called by pollstate
+
+#include <sys/poll_impl.h>
+#include "dummy.h"
+
+pollcacheset	pcs_
+{adb_inline_begin}
+.>w
+<w+{OFFSET, pcs_usradr}=""
+{adb_inline_end}
+	usradr			hex
+	pollfd			hex
+	nfds			decimal
+	count			decimal
+{adb_inline_begin}
+<w+{SIZEOF}=""
+{adb_inline_end}

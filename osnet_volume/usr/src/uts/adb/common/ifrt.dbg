@@ -1,0 +1,37 @@
+\
+\ Copyright (c) 1999 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)ifrt.dbg	1.4	99/11/07 SMI"
+
+#include <sys/types.h>
+#include <sys/stropts.h>
+#include <sys/socket.h>
+#include <netinet/in_systm.h>
+#include <netinet/in.h>
+#include <netinet/ip.h>
+#include <netinet/ip6.h>
+#include <netinet/icmp6.h>
+#include <net/if.h>
+#include <sys/stream.h>
+#include <inet/common.h>
+#include <inet/led.h>
+#include <inet/ip.h>
+#include <inet/ip6.h>
+#include "dummy.h"
+
+ifrt_s                ""              ifrt
+{adb_inline_begin}
+.>z
+<z+{OFFSET, ifrt_type}=""
+{adb_inline_end}
+	ifrt_type		hex	ifrt_type
+	ifrt_v6addr		.in6_addr
+	ifrt_v6gateway_addr	.in6_addr
+	ifrt_v6mask		.in6_addr
+	ifrt_flags		hex	ifrt_flags
+	ifrt_max_frag		decimal	ifrt_max_frag
+	ifrt_iulp_info		.iulp
+{adb_inline_begin}
+<z+{SIZEOF}=""
+{adb_inline_end}

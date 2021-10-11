@@ -1,0 +1,45 @@
+\
+\ Copyright (c) 1998-1999 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)ohci_trans_wrapper.dbg	1.2	99/11/18 SMI"
+
+#include <sys/usb/usba.h>
+#include <sys/usb/usba/usba_types.h>
+#include <sys/usb/usba/usba_impl.h>
+#include <sys/usb/hcd/openhci/ohci.h>
+#include <sys/usb/hcd/openhci/ohcid.h>
+#include "dummy.h"
+
+\
+\
+
+ohci_trans_wrapper	tw_	
+{adb_inline_begin}
+.>x
+<x+{OFFSET, tw_next}=""
+{adb_inline_end}
+	next			hex
+	pipe_private		hex
+	length			hex
+	dmahandle		hex
+	accesshandle		hex
+	buf			hex
+	cookie			.ddi_dma_cookie
+{adb_inline_begin}
+<x+{OFFSET, tw_ctrl_state}=""
+{adb_inline_end}
+	ctrl_state		hex
+	num_tds			hex
+	hctd_head		hex
+	hctd_tail		hex
+	direction		hex
+	flags			hex
+	id			hex
+	timeout_value		hex
+	timeout_next		hex
+	handle_td		symbolic
+	handle_callback_value	hex
+{adb_inline_begin}
+<x+{SIZEOF}=""
+{adb_inline_end}

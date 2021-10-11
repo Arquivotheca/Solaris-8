@@ -1,0 +1,16 @@
+#
+# Copyright (c) 1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#pragma ident	"@(#)Makefile.targ	1.2	99/05/14 SMI"
+#
+# lib/libslp/spec/Makefile.targ
+
+LIBRARY	=	libslp.a
+VERS	=	.1
+
+OBJECTS	=	slp.o
+
+SPECCPP = -I$(JAVA_ROOT)/include -I$(JAVA_ROOT)/include/solaris
+
+lint:

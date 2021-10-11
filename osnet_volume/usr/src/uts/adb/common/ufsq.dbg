@@ -1,0 +1,25 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)ufsq.dbg	1.5	98/01/14 SMI"
+
+#include <sys/types.h>
+#include <sys/t_lock.h>
+#include <sys/time.h>
+#include <sys/vnode.h>
+#include <vm/seg.h>
+#include <sys/fs/ufs_inode.h>
+#include "dummy.h"
+
+\
+\
+ufs_q                   ""              ufsq
+        _uq_head._uq_generic    hex
+        uq_ne                   sdecimal
+        uq_lowat                sdecimal
+        uq_hiwat                sdecimal
+        uq_flags                hex
+        uq_cv                   hex
+        uq_threadp              hex
+        uq_mutex                .mutex

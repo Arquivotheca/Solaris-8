@@ -1,0 +1,60 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)cg.dbg	1.8	98/07/19 SMI"
+
+#include <sys/types.h>
+#include <sys/t_lock.h>
+#include <sys/time.h>
+#include <sys/vnode.h>
+#include <vm/seg.h>
+#include <sys/fs/ufs_fs.h>
+#include "dummy.h"
+
+\
+\       all memory accesses for cg_*off are 32-bit accesses
+\
+cg      	cg_
+{adb_inline_begin}
+.>z
+<z+{OFFSET, cg_link}=""
+{adb_inline_end}
+        link                    hex
+        magic                   hex
+        time                    date
+        cgx                     sdecimal
+        ncyl                    hex
+        niblk                   hex
+        ndblk                   hex
+        cs                      .csum           "cg summary"
+{adb_inline_begin}
+<z+{OFFSET, cg_rotor}=""
+{adb_inline_end}
+        rotor                   hex
+        frotor                  hex
+        irotor                  hex
+        frsum                   hex
+        btotoff                 hex
+        boff                    hex
+        iusedoff                hex
+        freeoff                 hex
+        nextfreeoff             hex
+{adb_inline_begin}
++/"block totals per cylinder"n
+*(<z+{OFFSET, cg_btotoff})>/i/S
+*(<z+{OFFSET, cg_boff})>/i/E
+<z+<S,(<E-<S)%4/X
++/"free block positions"n
+<E>S
+*(<z+{OFFSET, cg_iusedoff})>/i/E
+<z+<S,(<E-<S)%2/x
++/"used inode map"n
+<E>S
+*(<z+{OFFSET, cg_freeoff})>/i/E
+<z+<S,(<E-<S)%2/x
++/"free block map"n
+<E>S
+*(<z+{OFFSET, cg_nextfreeoff})>/i/E
+<z+<S,(<E-<S)%2/x
+{adb_inline_end}

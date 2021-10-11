@@ -1,0 +1,58 @@
+<TITLE> To Start Solaris Print Manager </TITLE> 
+<!-- Tag=ToStart --> 
+
+<CONTENT>
+
+<p> 
+
+If you have installed SUNWppm package, do the following to start
+Solaris Print Manager. Note that you must be root to run Print
+Manager; if you attempt to launch it from Solaris Management Console
+you will be prompted for the root password. 
+
+<p> 
+
+1. Double-click the Solaris Print Manager icon in Solaris Management
+Console 
+
+<p>
+
+ OR 
+
+<p>
+
+cd to the directory /usr/sadm/admin/bin and as root type ./printmgr
+
+<p>
+
+A dialog is displayed, asking you to choose a naming service. 
+
+<p>
+
+2. Choose a naming service (or files, if no naming service is to be
+used) and click OK.
+
+<p>
+
+The Solaris Print Manager main window is displayed, listing all the
+printers accessible from the computer on which you are running Solaris
+Print Manager. 
+
+<p>
+
+</CONTENT> 
+
+<KEYWORDS> 
+start startup load "name service" "naming service" SUNWppm "Solaris Management Console"
+"the Console"
+</KEYWORDS> 
+
+<p>
+
+<SEEALSO> 
+ToSelectName
+ToExit
+Mainwindow 
+Overview 
+HelpOnHelp
+</SEEALSO> 

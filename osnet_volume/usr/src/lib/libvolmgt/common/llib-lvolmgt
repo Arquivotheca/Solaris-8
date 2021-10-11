@@ -1,0 +1,44 @@
+/* LINTLIBRARY */
+/* PROTOLIB1 */
+
+/*
+ * Copyright(c) 1997 by Sun Microsystems, Inc.
+ * All rights reserved.
+ */
+#pragma	ident	"@(#)llib-lvolmgt	1.2	97/10/23 SMI"
+
+#include	<stdio.h>
+#include	<stdlib.h>
+#include	<string.h>
+#include	<dirent.h>
+#include	<string.h>
+#include	<errno.h>
+#include	<limits.h>
+#include	<unistd.h>
+#include	<volmgt.h>
+#include	<sys/types.h>
+#include	<sys/stat.h>
+#include	<sys/param.h>
+#include	<sys/vol.h>
+
+/* volmgt_fsi.c */
+int volmgt_acquire(char *, char *, int, char **, pid_t *);
+int volmgt_release(char *);
+
+/* volattr.c */
+char *media_getattr(char *, char *);
+int media_setattr(char *, char *, char *);
+u_longlong_t media_getid(char *);
+
+/* volname.c */
+char *media_findname(char *);
+
+/* volutil.c */
+int volmgt_check(char *);
+int volmgt_inuse(char *);
+int volmgt_ownspath(char *);
+const char *volmgt_root(void);
+int volmgt_running(void);
+char *volmgt_symdev(char *);
+char *volmgt_symname(char *);
+int volmgt_feature_enabled(char *);

@@ -1,0 +1,6 @@
+#!/bin/sh
+#pragma ident	"@(#)req.flg	1.3	92/07/14 SMI" 
+
+echo_file usr/src/ucbcmd/Makefile.ucbcmd
+echo_file usr/src/ucbcmd/Makefile.ucbtarg
+echo_file usr/src/cmd/Makefile.targ

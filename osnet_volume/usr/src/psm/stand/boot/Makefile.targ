@@ -1,0 +1,17 @@
+#
+#ident	"@(#)Makefile.targ	1.3	94/12/22 SMI"
+#
+# Copyright (c) 1994 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+# psm/stand/boot/Makefile.files
+
+#
+# Targets common to all versions
+#
+install: all $(ROOT_PSM_UFSBOOT) $(USR_PSM_NFSBOOT)
+
+#
+# Install rules
+#
+include $(TOPDIR)/Makefile.psm.targ

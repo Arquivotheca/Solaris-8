@@ -1,0 +1,14 @@
+#!/bin/sh
+#
+# Copyright (c) 1992-1998 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#ident	"@(#)req.flg	1.8	99/12/06 SMI"
+
+echo_file usr/src/Makefile
+echo_file usr/src/Targetdirs
+echo_file usr/src/Makefile.master
+echo_file usr/src/Makefile.master.64
+echo_file usr/src/Makefile.psm
+echo_file usr/src/Makefile.psm.64
+echo_file usr/src/xmod/xmod_files

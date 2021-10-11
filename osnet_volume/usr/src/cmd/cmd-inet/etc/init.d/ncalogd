@@ -1,0 +1,57 @@
+#!/sbin/sh 
+#
+# Copyright (c) 1998-1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#ident	"@(#)ncalogd	1.1	99/08/06 SMI"
+
+# Default config values used by script
+ncalogdconf=/etc/nca/ncalogd.conf
+ncakmodconf=/etc/nca/ncakmod.conf
+defaultlogdir=/var/nca
+
+case "$1" in
+'start')
+	if [ ! -f $ncalogdconf ]; then
+		# If configuration file is missing, just exit
+		exit 0
+	fi
+
+	. $ncalogdconf
+
+	# Default is "disabled" so we want to exit
+	[ "x$status" != "xenabled" ] && exit 0
+
+	. $ncakmodconf
+
+	# Default is "disabled" so we want to exit
+	[ "x$status" != "xenabled" ] && exit 0
+
+	[ -d "$defaultlogdir" ] || /usr/bin/mkdir -m 0755 -p $defaultlogdir
+
+	/usr/sbin/ndd -set /dev/nca nca_log_size $logd_file_size
+
+	for i in $logd_path_name; do
+		# Create the subdirectories as appropriate for the log files
+		logd_dir=`/usr/bin/dirname $i`
+		[ -d "$logd_dir" ] || /usr/bin/mkdir -m 0755 -p $logd_dir
+		/usr/sbin/ndd -set /dev/nca nca_log_file $i
+	done
+
+	/usr/sbin/ndd -set /dev/nca nca_logging_on 1
+	;;
+
+'stop')
+	. $ncakmodconf
+
+	if [ "x$status" = "xenabled" ]; then
+		/usr/sbin/ndd -set /dev/nca nca_logging_on 0
+	fi
+	;;
+
+*)
+	echo "Usage: $0 { start | stop }"
+	exit 1
+	;;
+esac
+exit 0

@@ -1,0 +1,32 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)xdr.dbg	1.3	98/01/19 SMI"
+
+\       arg             : address of a struct XDR
+\       uses            :
+\       registers       : z
+\       description     : prints the contents of XDR structure
+
+#include <sys/types.h>
+#include <rpc/types.h>
+#include <rpc/xdr.h>
+#include "dummy.h"
+
+\
+\
+XDR                     x_              xdr
+{adb_inline_begin}
+.>z
+<z+{OFFSET, x_op}=""
+{adb_inline_end}
+        op                      sdecimal
+        ops                     symbolic
+        public                  hex
+        private                 hex
+        base                    hex
+        handy                   hex
+{adb_inline_begin}
+<z+{SIZEOF}=""
+{adb_inline_end}

@@ -1,0 +1,9 @@
+# Copyright (c) 1999 by Sun Microsystems, Inc. All rights reserved.
+#
+# /etc/user_attr
+#
+# user attributes. see user_attr(4)
+#
+#pragma ident	"@(#)user_attr	1.2	99/07/14 SMI"
+#
+root::::type=normal;auths=solaris.*,solaris.grant;profiles=All

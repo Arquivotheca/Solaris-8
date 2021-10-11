@@ -1,0 +1,27 @@
+#
+#ident	"@(#)nfslogd.dfl	1.8	99/02/27 SMI"
+#
+# Copyright (c) 1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+
+# Specify the maximum number of logs to preserve.
+#
+# MAX_LOGS_PRESERVE=10
+
+# Minimum size buffer should reach before processing.
+#
+# MIN_PROCESSING_SIZE=524288
+
+# Number of seconds the daemon should sleep waiting for more work.
+#
+# IDLE_TIME=300
+
+# CYCLE_FREQUENCY specifies the frequency (in hours) with which the
+# log buffers should be cycled.
+# 
+# CYCLE_FREQUENCY=24
+
+# Use UMASK for the creation of logs and file handle mapping tables.
+#
+# UMASK=0137

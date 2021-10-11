@@ -1,0 +1,21 @@
+#	Copyright (c) 1990-95 Sun Microsystems, Inc.
+#		All Rights Reserved
+#
+#	@(#)prototype_i386	1.1	95/02/23 (c) Sun Microsystems, Inc.
+#
+# This required package information file contains a list of package contents.
+# The 'pkgmk' command uses this file to identify the contents of a package
+# and their location on the development machine when building the package.
+# Can be created via a text editor or through use of the 'pkgproto' command.
+
+#
+# Include ISA independent files (prototype_com)
+#
+!include prototype_com
+#
+#
+# source locations relative to the prototype file
+#
+#
+# SUNW0on
+#

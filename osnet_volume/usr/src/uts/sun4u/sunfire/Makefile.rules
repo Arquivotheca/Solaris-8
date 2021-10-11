@@ -1,0 +1,139 @@
+#
+# uts/sun4u/sunfire/Makefile.rules
+# Copyright (c) 1994-1998 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#ident	"@(#)Makefile.rules 1.2     99/10/03 SMI"
+#
+#	This Makefile defines the build rules for the directory
+#	uts/sun4u/sunfire.
+#
+
+#
+#	C object build rules
+#
+#	The following are alphabetized by source file path. Please maintain
+# this ordering.
+#
+#
+
+$(OBJS_DIR)/sunfire.o:		$(UTSBASE)/sun4u/sunfire/os/sunfire.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun4u/sunfire/os/sunfire.c
+
+$(OBJS_DIR)/ac.o:		$(UTSBASE)/sun4u/sunfire/io/ac.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun4u/sunfire/io/ac.c
+
+$(OBJS_DIR)/ac_stat.o:	$(UTSBASE)/sun4u/sunfire/io/ac_stat.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun4u/sunfire/io/ac_stat.c
+
+$(OBJS_DIR)/ac_add.o:	$(UTSBASE)/sun4u/sunfire/io/ac_add.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun4u/sunfire/io/ac_add.c
+
+$(OBJS_DIR)/ac_del.o:	$(UTSBASE)/sun4u/sunfire/io/ac_del.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun4u/sunfire/io/ac_del.c
+
+$(OBJS_DIR)/ac_test.o:	$(UTSBASE)/sun4u/sunfire/io/ac_test.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun4u/sunfire/io/ac_test.c
+
+$(OBJS_DIR)/ac_asm.o:	$(UTSBASE)/sun4u/sunfire/ml/ac_asm.s
+	$(COMPILE.s) -o $@ $(UTSBASE)/sun4u/sunfire/ml/ac_asm.s
+
+$(OBJS_DIR)/central.o:		$(UTSBASE)/sun4u/sunfire/io/central.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun4u/sunfire/io/central.c
+
+$(OBJS_DIR)/environ.o:		$(UTSBASE)/sun4u/sunfire/io/environ.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun4u/sunfire/io/environ.c
+
+$(OBJS_DIR)/fhc.o:		$(UTSBASE)/sun4u/sunfire/io/fhc.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun4u/sunfire/io/fhc.c
+
+$(OBJS_DIR)/fhc_bd.o:		$(UTSBASE)/sun4u/sunfire/io/fhc_bd.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun4u/sunfire/io/fhc_bd.c
+
+$(OBJS_DIR)/fhc_asm.o:	$(UTSBASE)/sun4u/sunfire/ml/fhc_asm.s
+	$(COMPILE.s) -o $@ $(UTSBASE)/sun4u/sunfire/ml/fhc_asm.s
+
+$(OBJS_DIR)/jtag.o:		$(UTSBASE)/sun4u/sunfire/io/jtag.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun4u/sunfire/io/jtag.c
+
+$(OBJS_DIR)/simmstat.o:		$(UTSBASE)/sun4u/sunfire/io/simmstat.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun4u/sunfire/io/simmstat.c
+
+$(OBJS_DIR)/sram.o:		$(UTSBASE)/sun4u/sunfire/io/sram.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun4u/sunfire/io/sram.c
+
+$(OBJS_DIR)/sysctrl.o:		$(UTSBASE)/sun4u/sunfire/io/sysctrl.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun4u/sunfire/io/sysctrl.c
+
+$(OBJS_DIR)/sysctrl_quiesce.o:	$(UTSBASE)/sun4u/sunfire/io/sysctrl_quiesce.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun4u/sunfire/io/sysctrl_quiesce.c
+
+$(OBJS_DIR)/sysctrl_asm.o:	$(UTSBASE)/sun4u/sunfire/ml/sysctrl_asm.s
+	$(COMPILE.s) -o $@ $(UTSBASE)/sun4u/sunfire/ml/sysctrl_asm.s
+
+$(OBJS_DIR)/sysctrl_dr.o:	$(UTSBASE)/sun4u/sunfire/io/sysctrl_dr.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun4u/sunfire/io/sysctrl_dr.c
+
+#
+#	Lint `object' build rules
+#
+#	The following are alphabetized by source file path. Please maintain
+# this ordering.
+#
+
+$(LINTS_DIR)/sunfire.ln:	$(UTSBASE)/sun4u/sunfire/os/sunfire.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun4u/sunfire/os/sunfire.c $(LTAIL))
+
+$(LINTS_DIR)/ac.ln:		$(UTSBASE)/sun4u/sunfire/io/ac.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun4u/sunfire/io/ac.c $(LTAIL))
+
+$(LINTS_DIR)/ac_stat.ln:	$(UTSBASE)/sun4u/sunfire/io/ac_stat.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun4u/sunfire/io/ac_stat.c $(LTAIL))
+
+$(LINTS_DIR)/ac_add.ln:	$(UTSBASE)/sun4u/sunfire/io/ac_add.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun4u/sunfire/io/ac_add.c $(LTAIL))
+
+$(LINTS_DIR)/ac_del.ln:	$(UTSBASE)/sun4u/sunfire/io/ac_del.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun4u/sunfire/io/ac_del.c $(LTAIL))
+
+$(LINTS_DIR)/ac_test.ln:	$(UTSBASE)/sun4u/sunfire/io/ac_test.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun4u/sunfire/io/ac_test.c $(LTAIL))
+
+$(LINTS_DIR)/ac_asm.ln:	$(UTSBASE)/sun4u/sunfire/ml/ac_asm.s
+	@($(LHEAD) $(LINT.s) $(UTSBASE)/sun4u/sunfire/ml/ac_asm.s $(LTAIL))
+
+$(LINTS_DIR)/central.ln:	$(UTSBASE)/sun4u/sunfire/io/central.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun4u/sunfire/io/central.c $(LTAIL))
+
+$(LINTS_DIR)/environ.ln:	$(UTSBASE)/sun4u/sunfire/io/environ.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun4u/sunfire/io/environ.c $(LTAIL))
+
+$(LINTS_DIR)/fhc.ln:		$(UTSBASE)/sun4u/sunfire/io/fhc.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun4u/sunfire/io/fhc.c $(LTAIL))
+
+$(LINTS_DIR)/fhc_bd.ln:		$(UTSBASE)/sun4u/sunfire/io/fhc_bd.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun4u/sunfire/io/fhc_bd.c $(LTAIL))
+
+$(LINTS_DIR)/fhc_asm.ln: $(UTSBASE)/sun4u/sunfire/ml/fhc_asm.s
+	@($(LHEAD) $(LINT.s) $(UTSBASE)/sun4u/sunfire/ml/fhc_asm.s $(LTAIL))
+
+$(LINTS_DIR)/jtag.ln:		$(UTSBASE)/sun4u/sunfire/io/jtag.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun4u/sunfire/io/jtag.c $(LTAIL))
+
+$(LINTS_DIR)/simmstat.ln:	$(UTSBASE)/sun4u/sunfire/io/simmstat.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun4u/sunfire/io/simmstat.c $(LTAIL))
+
+$(LINTS_DIR)/sram.ln:		$(UTSBASE)/sun4u/sunfire/io/sram.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun4u/sunfire/io/sram.c $(LTAIL))
+
+$(LINTS_DIR)/sysctrl.ln:	$(UTSBASE)/sun4u/sunfire/io/sysctrl.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun4u/sunfire/io/sysctrl.c $(LTAIL))
+
+$(LINTS_DIR)/sysctrl_quiesce.ln:	$(UTSBASE)/sun4u/sunfire/io/sysctrl_quiesce.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun4u/sunfire/io/sysctrl_quiesce.c $(LTAIL))
+
+$(LINTS_DIR)/sysctrl_asm.ln:	$(UTSBASE)/sun4u/sunfire/ml/sysctrl_asm.s
+	@($(LHEAD) $(LINT.s) $(UTSBASE)/sun4u/sunfire/ml/sysctrl_asm.s $(LTAIL))
+
+$(LINTS_DIR)/sysctrl_dr.ln:	$(UTSBASE)/sun4u/sunfire/io/sysctrl_dr.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun4u/sunfire/io/sysctrl_dr.c $(LTAIL))

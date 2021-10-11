@@ -1,0 +1,67 @@
+#
+#
+# Copyright (c) 1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#ident	"@(#)prototype_com	1.1	99/10/08 SMI"
+#
+# This required package information file contains a list of package contents.
+# The 'pkgmk' command uses this file to identify the contents of a package
+# and their location on the development machine when building the package.
+# Can be created via a text editor or through use of the 'pkgproto' command.
+
+#!search <pathname pathname ...>	# where to find pkg objects
+#!include <filename>			# include another 'prototype' file
+#!default <mode> <owner> <group>	# default used if not specified on entry
+#!<param>=<value>			# puts parameter in pkg environment
+
+# packaging files
+i pkginfo
+i copyright
+i depend
+#
+# source locations relative to the prototype file
+#
+# SUNWbzipS
+#
+d none usr 755 root sys
+d none usr/share 755 root sys
+d none usr/share/src 755 root sys
+d none usr/share/src/bzip2 755 root bin
+f none usr/share/src/bzip2/blocksort.c 444 root bin
+f none usr/share/src/bzip2/bzip2.c 444 root bin
+f none usr/share/src/bzip2/bzip2recover.c 444 root bin
+f none usr/share/src/bzip2/bzlib.c 444 root bin
+f none usr/share/src/bzip2/compress.c 444 root bin
+f none usr/share/src/bzip2/crctable.c 444 root bin
+f none usr/share/src/bzip2/decompress.c 444 root bin
+f none usr/share/src/bzip2/dlltest.c 444 root bin
+f none usr/share/src/bzip2/howbig.c 444 root bin
+f none usr/share/src/bzip2/huffman.c 444 root bin
+f none usr/share/src/bzip2/randtable.c 444 root bin
+f none usr/share/src/bzip2/bzlib.h 444 root bin
+f none usr/share/src/bzip2/bzlib_private.h 444 root bin
+f none usr/share/src/bzip2/Makefile.dist 444 root bin
+f none usr/share/src/bzip2/manual.texi 444 root bin
+f none usr/share/src/bzip2/manual.ps 444 root bin
+f none usr/share/src/bzip2/LICENSE 444 root bin
+f none usr/share/src/bzip2/bzip2.1 444 root bin
+f none usr/share/src/bzip2/bzip2.1.preformatted 444 root bin
+f none usr/share/src/bzip2/bzip2.txt 444 root bin
+f none usr/share/src/bzip2/words1 444 root bin
+f none usr/share/src/bzip2/words2 444 root bin
+f none usr/share/src/bzip2/words3 444 root bin
+f none usr/share/src/bzip2/sample1.ref 444 root bin
+f none usr/share/src/bzip2/sample2.ref 444 root bin
+f none usr/share/src/bzip2/sample1.bz2 444 root bin
+f none usr/share/src/bzip2/sample2.bz2 444 root bin
+f none usr/share/src/bzip2/manual_1.html 444 root bin
+f none usr/share/src/bzip2/manual_2.html 444 root bin
+f none usr/share/src/bzip2/manual_3.html 444 root bin
+f none usr/share/src/bzip2/manual_4.html 444 root bin
+f none usr/share/src/bzip2/manual_toc.html 444 root bin
+f none usr/share/src/bzip2/README 444 root bin
+f none usr/share/src/bzip2/CHANGES 444 root bin
+f none usr/share/src/bzip2/libbz2.def 444 root bin
+f none usr/share/src/bzip2/libbz2.dsp 444 root bin
+f none usr/share/src/bzip2/dlltest.dsp 444 root bin

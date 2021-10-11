@@ -1,0 +1,13 @@
+#!/sbin/sh
+#
+# Copyright (c) 1996-1997 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#ident	"@(#)cacheos.finish	1.9	97/12/08 SMI"
+
+if [ "x`/usr/lib/fs/cachefs/cfsfstype -r 2>/dev/null`" = xcachefs ]; then
+	if [ -f /.autoinstall/postinstall ]; then
+		mv /.autoinstall/postinstall /.autoinstall/postinstall.done
+		/sbin/sh /.autoinstall/postinstall.done
+	fi
+fi

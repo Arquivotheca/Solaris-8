@@ -1,0 +1,31 @@
+#!/bin/sh
+#
+#ident	"@(#)preinstall	1.4	99/09/20 SMI"
+#
+# Copyright (c) 1996-1999 Sun Microsystems Inc. All rights reserved.
+#
+# Pre-install script to ensure an Old version of SUNWpcnet is not installed.
+#
+
+PATH="/usr/sbin:/usr/bin:/bin"
+export PATH
+
+# Set PKG_INSTALL_ROOT if it is not already set.
+: ${PKG_INSTALL_ROOT:=/}
+
+#
+# If an instance of the SUNWpcnet package is already installed, and is less than
+# 2.0, warn the user.
+#
+SNSTART=${PKG_INSTALL_ROOT}/etc/init.d/solarnet
+VERSION=`pkginfo -R ${PKG_INSTALL_ROOT} -c networking -x SUNWpcnet 2> /dev/null | awk '/^ / {a=$2; FS = "."; split(a,b); printf("%s%s", b[1], b[2]); }'`
+
+if [ ${VERSION:=0} -lt 20 ]
+then
+	if [ -f ${SNSTART} ] && grep -s -i dhcp ${SNSTART} > /dev/null 2>&1
+	then
+		echo "WARNING: Edit ${PKG_INSTALL_ROOT}/etc/init.d/solarnet, and remove all lines referring to DHCP." >&2
+	fi
+fi
+
+exit 0

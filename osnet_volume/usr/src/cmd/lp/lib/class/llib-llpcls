@@ -1,0 +1,19 @@
+/* LINTLIBRARY */
+/* PROTOLIB1 */
+
+/*
+ * Copyright (c) 1998 by Sun Microsystems, Inc.
+ * All rights reserved.
+ */
+#pragma ident   "@(#)llib-llpcls 1.1     98/07/10 SMI"
+
+typedef struct CLASS {
+	char   *name;		/* name of class (redundant) */
+	char   **members;       /* members of class */
+}			CLASS;
+
+int		putclass ( char *, CLASS * );
+int		delclass ( char * );
+
+void		freeclass ( CLASS * );
+

@@ -1,0 +1,4325 @@
+#
+# Copyright (c) 1992-1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#pragma ident	"@(#)Makefile.rules	1.205	00/09/18 SMI"
+#
+# uts/common/Makefile.rules
+#
+#	This Makefile defines all the file build rules for the directory
+# uts/common and its children. These are the source files which may
+# be considered common to all SunOS systems.
+#
+
+#
+#	This was implemented by pattern matching rules of the form:
+#
+# $(OBJS_DIR)/%.o:	 $(UTSBASE)/common/os/%.c
+#	$(COMPILE.c) -o $@ $<
+#
+# $(LINTS_DIR)/%.ln:	$(UTSBASE)/common/os/%.c
+#	@($(LHEAD) $(LINT.c) $< $(LTAIL))
+#
+#	For each directory containing source. This proved too slow under
+#	Nse because it caused a significant additional number of stats
+#	and stats are real slow under TFS. If TFS performance should
+#	improve, one might consider returning to the former implementation.
+#	In the former implementation, this file (Makefile.rules) was not
+#	needed and the pattern matching rules were in Makefile.files.
+#
+
+#
+#	C objects build rules
+#
+#	The following are alphabetized by source file path. Please maintain
+# this ordering.
+#
+$(OBJS_DIR)/param.o:		$(UTSBASE)/common/conf/param.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/conf/param.c
+
+$(OBJS_DIR)/adr.o:		$(UTSBASE)/common/c2/adr.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/c2/adr.c
+
+$(OBJS_DIR)/audit.o:		$(UTSBASE)/common/c2/audit.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/c2/audit.c
+
+$(OBJS_DIR)/audit_event.o:	$(UTSBASE)/common/c2/audit_event.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/c2/audit_event.c
+
+$(OBJS_DIR)/audit_io.o:		$(UTSBASE)/common/c2/audit_io.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/c2/audit_io.c
+
+$(OBJS_DIR)/audit_mem.o:	$(UTSBASE)/common/c2/audit_mem.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/c2/audit_mem.c
+
+$(OBJS_DIR)/audit_path.o:	$(UTSBASE)/common/c2/audit_path.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/c2/audit_path.c
+
+$(OBJS_DIR)/audit_start.o:	$(UTSBASE)/common/c2/audit_start.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/c2/audit_start.c
+
+$(OBJS_DIR)/audit_syscalls.o:	$(UTSBASE)/common/c2/audit_syscalls.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/c2/audit_syscalls.c
+
+$(OBJS_DIR)/audit_token.o:	$(UTSBASE)/common/c2/audit_token.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/c2/audit_token.c
+
+$(OBJS_DIR)/auditsys.o:		$(UTSBASE)/common/syscall/auditsys.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/syscall/auditsys.c
+
+#$(OBJS_DIR)/c2audit.o:		$(UTSBASE)/common/c2/c2audit.c
+#	$(COMPILE.c) -o $@ $(UTSBASE)/common/c2/c2audit.c
+
+$(OBJS_DIR)/cpr_driver.o:	$(UTSBASE)/common/cpr/cpr_driver.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/cpr/cpr_driver.c
+
+$(OBJS_DIR)/cpr_dump.o:		$(UTSBASE)/common/cpr/cpr_dump.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/cpr/cpr_dump.c
+
+$(OBJS_DIR)/cpr_main.o:		$(UTSBASE)/common/cpr/cpr_main.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/cpr/cpr_main.c
+
+$(OBJS_DIR)/cpr_misc.o:		$(UTSBASE)/common/cpr/cpr_misc.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/cpr/cpr_misc.c
+
+$(OBJS_DIR)/cpr_mod.o:		$(UTSBASE)/common/cpr/cpr_mod.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/cpr/cpr_mod.c
+
+$(OBJS_DIR)/cpr_stat.o:		$(UTSBASE)/common/cpr/cpr_stat.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/cpr/cpr_stat.c
+
+$(OBJS_DIR)/cpr_uthread.o:	$(UTSBASE)/common/cpr/cpr_uthread.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/cpr/cpr_uthread.c
+
+$(OBJS_DIR)/des_crypt.o:	$(UTSBASE)/common/des/des_crypt.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/des/des_crypt.c
+
+$(OBJS_DIR)/des_soft.o:		$(UTSBASE)/common/des/des_soft.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/des/des_soft.c
+
+$(OBJS_DIR)/class.o:		$(UTSBASE)/common/disp/class.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/disp/class.c
+
+$(OBJS_DIR)/cpupart.o:		$(UTSBASE)/common/disp/cpupart.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/disp/cpupart.c
+
+$(OBJS_DIR)/disp.o:		$(UTSBASE)/common/disp/disp.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/disp/disp.c
+
+$(OBJS_DIR)/disp_lock.o:	$(UTSBASE)/common/disp/disp_lock.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/disp/disp_lock.c
+
+$(OBJS_DIR)/ia.o:		$(UTSBASE)/common/disp/ia.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/disp/ia.c
+
+$(OBJS_DIR)/priocntl.o:		$(UTSBASE)/common/disp/priocntl.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/disp/priocntl.c
+
+$(OBJS_DIR)/rt.o:		$(UTSBASE)/common/disp/rt.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/disp/rt.c
+
+$(OBJS_DIR)/rt_dptbl.o:		$(UTSBASE)/common/disp/rt_dptbl.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/disp/rt_dptbl.c
+
+$(OBJS_DIR)/shuttle.o:		$(UTSBASE)/common/disp/shuttle.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/disp/shuttle.c
+
+$(OBJS_DIR)/sysclass.o:		$(UTSBASE)/common/disp/sysclass.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/disp/sysclass.c
+
+$(OBJS_DIR)/thread.o:		$(UTSBASE)/common/disp/thread.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/disp/thread.c
+
+$(OBJS_DIR)/ts.o:		$(UTSBASE)/common/disp/ts.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/disp/ts.c
+
+$(OBJS_DIR)/ts_dptbl.o:		$(UTSBASE)/common/disp/ts_dptbl.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/disp/ts_dptbl.c
+
+$(OBJS_DIR)/aout.o:		$(UTSBASE)/common/exec/aout/aout.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/exec/aout/aout.c
+
+$(OBJS_DIR)/elf.o:		$(UTSBASE)/common/exec/elf/elf.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/exec/elf/elf.c
+
+$(OBJS_DIR)/elf_notes.o:	$(UTSBASE)/common/exec/elf/elf_notes.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/exec/elf/elf_notes.c
+
+$(OBJS_DIR)/old_notes.o:	$(UTSBASE)/common/exec/elf/old_notes.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/exec/elf/old_notes.c
+
+$(OBJS_DIR)/coff.o:		$(UTSBASE)/common/exec/coff/coff.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/exec/coff/coff.c
+
+$(OBJS_DIR)/intp.o:		$(UTSBASE)/common/exec/intp/intp.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/exec/intp/intp.c
+
+$(OBJS_DIR)/java.o:		$(UTSBASE)/common/exec/java/java.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/exec/java/java.c
+
+#
+# XXX: define this here so that cachefs rules fit on a line.
+# The lint rules got particularly long and hard to read without this...
+#
+CACHEFSBASE = $(UTSBASE)/common/fs/cachefs
+
+$(OBJS_DIR)/cachefs_cnode.o:	$(CACHEFSBASE)/cachefs_cnode.c
+	$(COMPILE.c) -o $@ $(CACHEFSBASE)/cachefs_cnode.c
+
+$(OBJS_DIR)/cachefs_cod.o:	$(CACHEFSBASE)/cachefs_cod.c
+	$(COMPILE.c) -o $@ $(CACHEFSBASE)/cachefs_cod.c
+
+$(OBJS_DIR)/cachefs_dir.o:	$(CACHEFSBASE)/cachefs_dir.c
+	$(COMPILE.c) -o $@ $(CACHEFSBASE)/cachefs_dir.c
+
+$(OBJS_DIR)/cachefs_dlog.o:	$(CACHEFSBASE)/cachefs_dlog.c
+	$(COMPILE.c) -o $@ $(CACHEFSBASE)/cachefs_dlog.c
+
+$(OBJS_DIR)/cachefs_filegrp.o:	$(CACHEFSBASE)/cachefs_filegrp.c
+	$(COMPILE.c) -o $@ $(CACHEFSBASE)/cachefs_filegrp.c
+
+$(OBJS_DIR)/cachefs_fscache.o:	$(CACHEFSBASE)/cachefs_fscache.c
+	$(COMPILE.c) -o $@ $(CACHEFSBASE)/cachefs_fscache.c
+
+$(OBJS_DIR)/cachefs_ioctl.o:	$(CACHEFSBASE)/cachefs_ioctl.c
+	$(COMPILE.c) -o $@ $(CACHEFSBASE)/cachefs_ioctl.c
+
+$(OBJS_DIR)/cachefs_log.o:	$(CACHEFSBASE)/cachefs_log.c
+	$(COMPILE.c) -o $@ $(CACHEFSBASE)/cachefs_log.c
+
+$(OBJS_DIR)/cachefs_module.o:	$(CACHEFSBASE)/cachefs_module.c
+	$(COMPILE.c) -o $@ $(CACHEFSBASE)/cachefs_module.c
+
+$(OBJS_DIR)/cachefs_noopc.o:	$(CACHEFSBASE)/cachefs_noopc.c
+	$(COMPILE.c) -o $@ $(CACHEFSBASE)/cachefs_noopc.c
+
+$(OBJS_DIR)/cachefs_resource.o:	$(CACHEFSBASE)/cachefs_resource.c
+	$(COMPILE.c) -o $@ $(CACHEFSBASE)/cachefs_resource.c
+
+$(OBJS_DIR)/cachefs_strict.o:	$(CACHEFSBASE)/cachefs_strict.c
+	$(COMPILE.c) -o $@ $(CACHEFSBASE)/cachefs_strict.c
+
+$(OBJS_DIR)/cachefs_subr.o:	$(CACHEFSBASE)/cachefs_subr.c
+	$(COMPILE.c) -o $@ $(CACHEFSBASE)/cachefs_subr.c
+
+$(OBJS_DIR)/cachefs_vfsops.o:	$(CACHEFSBASE)/cachefs_vfsops.c
+	$(COMPILE.c) -o $@ $(CACHEFSBASE)/cachefs_vfsops.c
+
+$(OBJS_DIR)/cachefs_vnops.o:	$(CACHEFSBASE)/cachefs_vnops.c
+	$(COMPILE.c) -o $@ $(CACHEFSBASE)/cachefs_vnops.c
+
+$(OBJS_DIR)/dnlc.o:		$(UTSBASE)/common/fs/dnlc.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/fs/dnlc.c
+
+$(OBJS_DIR)/auto_vfsops.o:	$(UTSBASE)/common/fs/autofs/auto_vfsops.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/fs/autofs/auto_vfsops.c
+
+$(OBJS_DIR)/auto_vnops.o:	$(UTSBASE)/common/fs/autofs/auto_vnops.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/fs/autofs/auto_vnops.c
+
+$(OBJS_DIR)/auto_subr.o:	$(UTSBASE)/common/fs/autofs/auto_subr.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/fs/autofs/auto_subr.c
+
+$(OBJS_DIR)/auto_xdr.o:		$(UTSBASE)/common/fs/autofs/auto_xdr.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/fs/autofs/auto_xdr.c
+
+$(OBJS_DIR)/s5_alloc.o:		$(UTSBASE)/common/fs/s5fs/s5_alloc.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/fs/s5fs/s5_alloc.c
+
+$(OBJS_DIR)/s5_bmap.o:		$(UTSBASE)/common/fs/s5fs/s5_bmap.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/fs/s5fs/s5_bmap.c
+
+$(OBJS_DIR)/s5_dir.o:		$(UTSBASE)/common/fs/s5fs/s5_dir.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/fs/s5fs/s5_dir.c
+
+$(OBJS_DIR)/s5_inode.o:		$(UTSBASE)/common/fs/s5fs/s5_inode.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/fs/s5fs/s5_inode.c
+
+$(OBJS_DIR)/s5_lockfs.o:	$(UTSBASE)/common/fs/s5fs/s5_lockfs.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/fs/s5fs/s5_lockfs.c
+
+$(OBJS_DIR)/s5_subr.o:		$(UTSBASE)/common/fs/s5fs/s5_subr.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/fs/s5fs/s5_subr.c
+
+$(OBJS_DIR)/s5_vfsops.o:	$(UTSBASE)/common/fs/s5fs/s5_vfsops.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/fs/s5fs/s5_vfsops.c
+
+$(OBJS_DIR)/s5_vnops.o:		$(UTSBASE)/common/fs/s5fs/s5_vnops.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/fs/s5fs/s5_vnops.c
+
+$(OBJS_DIR)/fdops.o:		$(UTSBASE)/common/fs/fd/fdops.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/fs/fd/fdops.c
+
+$(OBJS_DIR)/fdbuffer.o:		$(UTSBASE)/common/fs/fdbuffer.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/fs/fdbuffer.c
+
+$(OBJS_DIR)/fifosubr.o:		$(UTSBASE)/common/fs/fifofs/fifosubr.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/fs/fifofs/fifosubr.c
+
+$(OBJS_DIR)/fifovnops.o:	$(UTSBASE)/common/fs/fifofs/fifovnops.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/fs/fifofs/fifovnops.c
+
+$(OBJS_DIR)/fs_subr.o:		$(UTSBASE)/common/fs/fs_subr.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/fs/fs_subr.c
+
+$(OBJS_DIR)/fsflush.o:		$(UTSBASE)/common/fs/fsflush.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/fs/fsflush.c
+
+$(OBJS_DIR)/hsfs_node.o:	$(UTSBASE)/common/fs/hsfs/hsfs_node.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/fs/hsfs/hsfs_node.c
+
+$(OBJS_DIR)/hsfs_rrip.o:	$(UTSBASE)/common/fs/hsfs/hsfs_rrip.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/fs/hsfs/hsfs_rrip.c
+
+$(OBJS_DIR)/hsfs_subr.o:	$(UTSBASE)/common/fs/hsfs/hsfs_subr.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/fs/hsfs/hsfs_subr.c
+
+$(OBJS_DIR)/hsfs_susp.o:	$(UTSBASE)/common/fs/hsfs/hsfs_susp.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/fs/hsfs/hsfs_susp.c
+
+$(OBJS_DIR)/hsfs_susp_subr.o:	$(UTSBASE)/common/fs/hsfs/hsfs_susp_subr.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/fs/hsfs/hsfs_susp_subr.c
+
+$(OBJS_DIR)/hsfs_vfsops.o:	$(UTSBASE)/common/fs/hsfs/hsfs_vfsops.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/fs/hsfs/hsfs_vfsops.c
+
+$(OBJS_DIR)/hsfs_vnops.o:	$(UTSBASE)/common/fs/hsfs/hsfs_vnops.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/fs/hsfs/hsfs_vnops.c
+
+$(OBJS_DIR)/lofs_vnops.o:	$(UTSBASE)/common/fs/lofs/lofs_vnops.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/fs/lofs/lofs_vnops.c
+
+$(OBJS_DIR)/lofs_vfsops.o:	$(UTSBASE)/common/fs/lofs/lofs_vfsops.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/fs/lofs/lofs_vfsops.c
+
+$(OBJS_DIR)/lofs_subr.o:	$(UTSBASE)/common/fs/lofs/lofs_subr.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/fs/lofs/lofs_subr.c
+
+$(OBJS_DIR)/lookup.o:		$(UTSBASE)/common/fs/lookup.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/fs/lookup.c
+
+$(OBJS_DIR)/mntvfsops.o:	$(UTSBASE)/common/fs/mntfs/mntvfsops.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/fs/mntfs/mntvfsops.c
+
+$(OBJS_DIR)/mntvnops.o:		$(UTSBASE)/common/fs/mntfs/mntvnops.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/fs/mntfs/mntvnops.c
+
+$(OBJS_DIR)/namevfs.o:		$(UTSBASE)/common/fs/namefs/namevfs.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/fs/namefs/namevfs.c
+
+$(OBJS_DIR)/namevno.o:		$(UTSBASE)/common/fs/namefs/namevno.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/fs/namefs/namevno.c
+
+$(OBJS_DIR)/nfs_client.o:	$(UTSBASE)/common/fs/nfs/nfs_client.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/fs/nfs/nfs_client.c
+
+$(OBJS_DIR)/nfs_common.o:	$(UTSBASE)/common/fs/nfs/nfs_common.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/fs/nfs/nfs_common.c
+
+$(OBJS_DIR)/bootparam_xdr.o:	$(UTSBASE)/common/fs/nfs/bootparam_xdr.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/fs/nfs/bootparam_xdr.c
+
+$(OBJS_DIR)/nfs_dlinet.o:	$(UTSBASE)/common/fs/nfs/nfs_dlinet.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/fs/nfs/nfs_dlinet.c
+
+$(OBJS_DIR)/nfs_dump.o:		$(UTSBASE)/common/fs/nfs/nfs_dump.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/fs/nfs/nfs_dump.c
+
+$(OBJS_DIR)/nfs_export.o:	$(UTSBASE)/common/fs/nfs/nfs_export.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/fs/nfs/nfs_export.c
+
+$(OBJS_DIR)/nfs_log.o:		$(UTSBASE)/common/fs/nfs/nfs_log.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/fs/nfs/nfs_log.c
+
+$(OBJS_DIR)/nfs_log_xdr.o:	$(UTSBASE)/common/fs/nfs/nfs_log_xdr.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/fs/nfs/nfs_log_xdr.c
+
+$(OBJS_DIR)/nfs_server.o:	$(UTSBASE)/common/fs/nfs/nfs_server.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/fs/nfs/nfs_server.c
+
+$(OBJS_DIR)/nfs_srv.o:		$(UTSBASE)/common/fs/nfs/nfs_srv.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/fs/nfs/nfs_srv.c
+
+$(OBJS_DIR)/nfs_strerror.o:	$(UTSBASE)/common/fs/nfs/nfs_strerror.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/fs/nfs/nfs_strerror.c
+
+$(OBJS_DIR)/nfs_subr.o:		$(UTSBASE)/common/fs/nfs/nfs_subr.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/fs/nfs/nfs_subr.c
+
+$(OBJS_DIR)/nfs_vfsops.o:	$(UTSBASE)/common/fs/nfs/nfs_vfsops.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/fs/nfs/nfs_vfsops.c
+
+$(OBJS_DIR)/nfs_vnops.o:	$(UTSBASE)/common/fs/nfs/nfs_vnops.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/fs/nfs/nfs_vnops.c
+
+$(OBJS_DIR)/nfs_xdr.o:		$(UTSBASE)/common/fs/nfs/nfs_xdr.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/fs/nfs/nfs_xdr.c
+
+$(OBJS_DIR)/nfs_sys.o:		$(UTSBASE)/common/fs/nfs/nfs_sys.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/fs/nfs/nfs_sys.c
+
+$(OBJS_DIR)/nfs3_srv.o:		$(UTSBASE)/common/fs/nfs/nfs3_srv.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/fs/nfs/nfs3_srv.c
+
+$(OBJS_DIR)/nfs3_vfsops.o:	$(UTSBASE)/common/fs/nfs/nfs3_vfsops.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/fs/nfs/nfs3_vfsops.c
+
+$(OBJS_DIR)/nfs3_vnops.o:	$(UTSBASE)/common/fs/nfs/nfs3_vnops.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/fs/nfs/nfs3_vnops.c
+
+$(OBJS_DIR)/nfs3_xdr.o:		$(UTSBASE)/common/fs/nfs/nfs3_xdr.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/fs/nfs/nfs3_xdr.c
+
+$(OBJS_DIR)/nfs_acl_srv.o:	$(UTSBASE)/common/fs/nfs/nfs_acl_srv.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/fs/nfs/nfs_acl_srv.c
+
+$(OBJS_DIR)/nfs_acl_vnops.o:	$(UTSBASE)/common/fs/nfs/nfs_acl_vnops.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/fs/nfs/nfs_acl_vnops.c
+
+$(OBJS_DIR)/nfs_acl_xdr.o:	$(UTSBASE)/common/fs/nfs/nfs_acl_xdr.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/fs/nfs/nfs_acl_xdr.c
+
+$(OBJS_DIR)/nfs_auth.o:		$(UTSBASE)/common/fs/nfs/nfs_auth.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/fs/nfs/nfs_auth.c
+
+$(OBJS_DIR)/nfs_auth_xdr.o:	nfs_auth_xdr.c
+	$(COMPILE.c) -o $@ nfs_auth_xdr.c
+
+nfs_auth_xdr.c:			$(UTSBASE)/common/rpcsvc/nfsauth_prot.x
+	$(RPCGEN) -i 0 -C -c -o $@ $(UTSBASE)/common/rpcsvc/nfsauth_prot.x
+
+$(OBJS_DIR)/octet.o:		$(SRC)/common/net/dhcp/octet.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/../common/net/dhcp/octet.c
+
+$(OBJS_DIR)/pathname.o:		$(UTSBASE)/common/fs/pathname.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/fs/pathname.c
+
+$(OBJS_DIR)/pc_alloc.o:		$(UTSBASE)/common/fs/pcfs/pc_alloc.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/fs/pcfs/pc_alloc.c
+
+$(OBJS_DIR)/pc_dir.o:		$(UTSBASE)/common/fs/pcfs/pc_dir.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/fs/pcfs/pc_dir.c
+
+$(OBJS_DIR)/pc_node.o:		$(UTSBASE)/common/fs/pcfs/pc_node.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/fs/pcfs/pc_node.c
+
+$(OBJS_DIR)/pc_subr.o:		$(UTSBASE)/common/fs/pcfs/pc_subr.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/fs/pcfs/pc_subr.c
+
+$(OBJS_DIR)/pc_vfsops.o:	$(UTSBASE)/common/fs/pcfs/pc_vfsops.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/fs/pcfs/pc_vfsops.c
+
+$(OBJS_DIR)/pc_vnops.o:		$(UTSBASE)/common/fs/pcfs/pc_vnops.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/fs/pcfs/pc_vnops.c
+
+$(OBJS_DIR)/prcontrol.o:	$(UTSBASE)/common/fs/proc/prcontrol.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/fs/proc/prcontrol.c
+
+$(OBJS_DIR)/prioctl.o:		$(UTSBASE)/common/fs/proc/prioctl.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/fs/proc/prioctl.c
+
+$(OBJS_DIR)/prsubr.o:		$(UTSBASE)/common/fs/proc/prsubr.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/fs/proc/prsubr.c
+
+$(OBJS_DIR)/prusrio.o:		$(UTSBASE)/common/fs/proc/prusrio.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/fs/proc/prusrio.c
+
+$(OBJS_DIR)/prvfsops.o:		$(UTSBASE)/common/fs/proc/prvfsops.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/fs/proc/prvfsops.c
+
+$(OBJS_DIR)/prvnops.o:		$(UTSBASE)/common/fs/proc/prvnops.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/fs/proc/prvnops.c
+
+$(OBJS_DIR)/scan.o:		$(SRC)/common/net/dhcp/scan.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/../common/net/dhcp/scan.c
+
+$(OBJS_DIR)/socksubr.o:		$(UTSBASE)/common/fs/sockfs/socksubr.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/fs/sockfs/socksubr.c
+
+$(OBJS_DIR)/sockvfsops.o:	$(UTSBASE)/common/fs/sockfs/sockvfsops.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/fs/sockfs/sockvfsops.c
+
+$(OBJS_DIR)/sockvnops.o:	$(UTSBASE)/common/fs/sockfs/sockvnops.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/fs/sockfs/sockvnops.c
+
+$(OBJS_DIR)/socksyscalls.o:	$(UTSBASE)/common/fs/sockfs/socksyscalls.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/fs/sockfs/socksyscalls.c
+
+$(OBJS_DIR)/sockstr.o:		$(UTSBASE)/common/fs/sockfs/sockstr.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/fs/sockfs/sockstr.c
+
+$(OBJS_DIR)/socktpi.o:		$(UTSBASE)/common/fs/sockfs/socktpi.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/fs/sockfs/socktpi.c
+
+$(OBJS_DIR)/specsubr.o:		$(UTSBASE)/common/fs/specfs/specsubr.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/fs/specfs/specsubr.c
+
+$(OBJS_DIR)/specvfsops.o:	$(UTSBASE)/common/fs/specfs/specvfsops.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/fs/specfs/specvfsops.c
+
+$(OBJS_DIR)/specvnops.o:	$(UTSBASE)/common/fs/specfs/specvnops.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/fs/specfs/specvnops.c
+
+$(OBJS_DIR)/swap_subr.o:	$(UTSBASE)/common/fs/swapfs/swap_subr.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/fs/swapfs/swap_subr.c
+
+$(OBJS_DIR)/swap_vnops.o:	$(UTSBASE)/common/fs/swapfs/swap_vnops.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/fs/swapfs/swap_vnops.c
+
+$(OBJS_DIR)/tmp_dir.o:		$(UTSBASE)/common/fs/tmpfs/tmp_dir.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/fs/tmpfs/tmp_dir.c
+
+$(OBJS_DIR)/tmp_subr.o:		$(UTSBASE)/common/fs/tmpfs/tmp_subr.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/fs/tmpfs/tmp_subr.c
+
+$(OBJS_DIR)/tmp_tnode.o:	$(UTSBASE)/common/fs/tmpfs/tmp_tnode.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/fs/tmpfs/tmp_tnode.c
+
+$(OBJS_DIR)/tmp_vfsops.o:	$(UTSBASE)/common/fs/tmpfs/tmp_vfsops.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/fs/tmpfs/tmp_vfsops.c
+
+$(OBJS_DIR)/tmp_vnops.o:	$(UTSBASE)/common/fs/tmpfs/tmp_vnops.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/fs/tmpfs/tmp_vnops.c
+
+$(OBJS_DIR)/udf_alloc.o:	$(UTSBASE)/common/fs/udfs/udf_alloc.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/fs/udfs/udf_alloc.c
+ 
+$(OBJS_DIR)/udf_bmap.o:		$(UTSBASE)/common/fs/udfs/udf_bmap.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/fs/udfs/udf_bmap.c
+ 
+$(OBJS_DIR)/udf_dir.o:		$(UTSBASE)/common/fs/udfs/udf_dir.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/fs/udfs/udf_dir.c
+ 
+$(OBJS_DIR)/udf_inode.o:	$(UTSBASE)/common/fs/udfs/udf_inode.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/fs/udfs/udf_inode.c
+ 
+$(OBJS_DIR)/udf_subr.o:		$(UTSBASE)/common/fs/udfs/udf_subr.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/fs/udfs/udf_subr.c
+ 
+$(OBJS_DIR)/udf_vfsops.o:	$(UTSBASE)/common/fs/udfs/udf_vfsops.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/fs/udfs/udf_vfsops.c
+
+$(OBJS_DIR)/udf_vnops.o:	$(UTSBASE)/common/fs/udfs/udf_vnops.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/fs/udfs/udf_vnops.c
+
+$(OBJS_DIR)/quota.o:		$(UTSBASE)/common/fs/ufs/quota.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/fs/ufs/quota.c
+
+$(OBJS_DIR)/quota_ufs.o:	$(UTSBASE)/common/fs/ufs/quota_ufs.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/fs/ufs/quota_ufs.c
+
+$(OBJS_DIR)/quotacalls.o:	$(UTSBASE)/common/fs/ufs/quotacalls.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/fs/ufs/quotacalls.c
+
+$(OBJS_DIR)/ufs_alloc.o:	$(UTSBASE)/common/fs/ufs/ufs_alloc.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/fs/ufs/ufs_alloc.c
+
+$(OBJS_DIR)/ufs_bmap.o:		$(UTSBASE)/common/fs/ufs/ufs_bmap.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/fs/ufs/ufs_bmap.c
+
+$(OBJS_DIR)/ufs_dir.o:		$(UTSBASE)/common/fs/ufs/ufs_dir.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/fs/ufs/ufs_dir.c
+
+$(OBJS_DIR)/ufs_extvnops.o:	$(UTSBASE)/common/fs/ufs/ufs_extvnops.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/fs/ufs/ufs_extvnops.c
+
+$(OBJS_DIR)/ufs_filio.o:	$(UTSBASE)/common/fs/ufs/ufs_filio.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/fs/ufs/ufs_filio.c
+
+$(OBJS_DIR)/ufs_inode.o:	$(UTSBASE)/common/fs/ufs/ufs_inode.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/fs/ufs/ufs_inode.c
+
+$(OBJS_DIR)/ufs_lockfs.o:	$(UTSBASE)/common/fs/ufs/ufs_lockfs.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/fs/ufs/ufs_lockfs.c
+
+$(OBJS_DIR)/ufs_subr.o:		$(UTSBASE)/common/fs/ufs/ufs_subr.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/fs/ufs/ufs_subr.c
+
+$(OBJS_DIR)/ufs_tables.o:	$(UTSBASE)/common/fs/ufs/ufs_tables.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/fs/ufs/ufs_tables.c
+
+$(OBJS_DIR)/ufs_thread.o:	$(UTSBASE)/common/fs/ufs/ufs_thread.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/fs/ufs/ufs_thread.c
+
+$(OBJS_DIR)/ufs_trans.o:	$(UTSBASE)/common/fs/ufs/ufs_trans.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/fs/ufs/ufs_trans.c
+
+$(OBJS_DIR)/ufs_vfsops.o:	$(UTSBASE)/common/fs/ufs/ufs_vfsops.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/fs/ufs/ufs_vfsops.c
+
+$(OBJS_DIR)/ufs_vnops.o:	$(UTSBASE)/common/fs/ufs/ufs_vnops.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/fs/ufs/ufs_vnops.c
+
+$(OBJS_DIR)/ufs_acl.o:		$(UTSBASE)/common/fs/ufs/ufs_acl.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/fs/ufs/ufs_acl.c
+
+$(OBJS_DIR)/ufs_panic.o:	$(UTSBASE)/common/fs/ufs/ufs_panic.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/fs/ufs/ufs_panic.c
+
+$(OBJS_DIR)/ufs_directio.o:	$(UTSBASE)/common/fs/ufs/ufs_directio.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/fs/ufs/ufs_directio.c
+
+$(OBJS_DIR)/ufs_log.o:		$(UTSBASE)/common/fs/ufs/ufs_log.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/fs/ufs/ufs_log.c
+
+$(OBJS_DIR)/lufs.o:		$(UTSBASE)/common/fs/ufs_log/lufs.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/fs/ufs_log/lufs.c
+
+$(OBJS_DIR)/lufs_log.o:		$(UTSBASE)/common/fs/ufs_log/lufs_log.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/fs/ufs_log/lufs_log.c
+
+$(OBJS_DIR)/lufs_map.o:		$(UTSBASE)/common/fs/ufs_log/lufs_map.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/fs/ufs_log/lufs_map.c
+
+$(OBJS_DIR)/lufs_thread.o:	$(UTSBASE)/common/fs/ufs_log/lufs_thread.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/fs/ufs_log/lufs_thread.c
+
+$(OBJS_DIR)/lufs_top.o:		$(UTSBASE)/common/fs/ufs_log/lufs_top.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/fs/ufs_log/lufs_top.c
+
+$(OBJS_DIR)/lufs_debug.o:	$(UTSBASE)/common/fs/ufs_log/lufs_debug.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/fs/ufs_log/lufs_debug.c
+
+$(OBJS_DIR)/vfs.o:		$(UTSBASE)/common/fs/vfs.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/fs/vfs.c
+
+$(OBJS_DIR)/vfs_conf.o:		$(UTSBASE)/common/os/vfs_conf.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/os/vfs_conf.c
+
+$(OBJS_DIR)/vnode.o:		$(UTSBASE)/common/fs/vnode.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/fs/vnode.c
+
+$(OBJS_DIR)/arp.o:		$(UTSBASE)/common/inet/arp.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/inet/arp.c
+
+$(OBJS_DIR)/arpddi.o:		$(UTSBASE)/common/inet/arpddi.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/inet/arpddi.c
+
+$(OBJS_DIR)/icmp.o:		$(UTSBASE)/common/inet/icmp.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/inet/icmp.c
+
+$(OBJS_DIR)/icmpddi.o:		$(UTSBASE)/common/inet/icmpddi.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/inet/icmpddi.c
+
+$(OBJS_DIR)/icmp6ddi.o:		$(UTSBASE)/common/inet/icmp6ddi.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/inet/icmp6ddi.c
+
+$(OBJS_DIR)/icmp_opt_data.o:	$(UTSBASE)/common/inet/icmp_opt_data.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/inet/icmp_opt_data.c
+
+$(OBJS_DIR)/authsha1.o:		$(UTSBASE)/common/inet/authsha1.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/inet/authsha1.c
+
+$(OBJS_DIR)/sha1.o:		$(UTSBASE)/common/inet/sha1.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/inet/sha1.c
+
+$(OBJS_DIR)/authmd5h.o:		$(UTSBASE)/common/inet/authmd5h.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/inet/authmd5h.c
+
+$(OBJS_DIR)/ipsecah.o:		$(UTSBASE)/common/inet/ipsecah.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/inet/ipsecah.c
+
+$(OBJS_DIR)/ipsecahddi.o:		$(UTSBASE)/common/inet/ipsecahddi.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/inet/ipsecahddi.c
+
+$(OBJS_DIR)/ipsecesp.o:		$(UTSBASE)/common/inet/ipsecesp.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/inet/ipsecesp.c
+
+$(OBJS_DIR)/ipsecespddi.o:		$(UTSBASE)/common/inet/ipsecespddi.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/inet/ipsecespddi.c
+
+$(OBJS_DIR)/encrdes.o:		$(UTSBASE)/common/inet/encrdes.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/inet/encrdes.c
+
+$(OBJS_DIR)/encr3des.o:		$(UTSBASE)/common/inet/encr3des.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/inet/encr3des.c
+
+$(OBJS_DIR)/keysock.o:		$(UTSBASE)/common/inet/keysock.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/inet/keysock.c
+
+$(OBJS_DIR)/keysockddi.o:		$(UTSBASE)/common/inet/keysockddi.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/inet/keysockddi.c
+
+$(OBJS_DIR)/keysock_opt_data.o:	$(UTSBASE)/common/inet/keysock_opt_data.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/inet/keysock_opt_data.c
+
+$(OBJS_DIR)/sadb.o:	$(UTSBASE)/common/inet/sadb.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/inet/sadb.c
+
+$(OBJS_DIR)/rts.o:		$(UTSBASE)/common/inet/rts.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/inet/rts.c
+
+$(OBJS_DIR)/rtsddi.o:		$(UTSBASE)/common/inet/rtsddi.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/inet/rtsddi.c
+
+$(OBJS_DIR)/rts_opt_data.o:	$(UTSBASE)/common/inet/rts_opt_data.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/inet/rts_opt_data.c
+
+$(OBJS_DIR)/igmp.o:		$(UTSBASE)/common/inet/igmp.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/inet/igmp.c
+
+
+$(OBJS_DIR)/ip6.o:		$(UTSBASE)/common/inet/ip6.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/inet/ip6.c
+
+$(OBJS_DIR)/ip_mroute.o:	$(UTSBASE)/common/inet/ip_mroute.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/inet/ip_mroute.c
+
+$(OBJS_DIR)/ip_multi.o:		$(UTSBASE)/common/inet/ip_multi.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/inet/ip_multi.c
+
+$(OBJS_DIR)/ipcsum.o:		$(UTSBASE)/common/inet/ipcsum.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/inet/ipcsum.c
+
+$(OBJS_DIR)/ip_cksum.o:		$(UTSBASE)/common/inet/ip_cksum.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/inet/ip_cksum.c
+
+
+$(OBJS_DIR)/ipddi.o:		$(UTSBASE)/common/inet/ipddi.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/inet/ipddi.c
+
+$(OBJS_DIR)/ip6ddi.o:		$(UTSBASE)/common/inet/ip6ddi.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/inet/ip6ddi.c
+
+$(OBJS_DIR)/ip_if.o:		$(UTSBASE)/common/inet/ip_if.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/inet/ip_if.c
+
+$(OBJS_DIR)/ip6_if.o:		$(UTSBASE)/common/inet/ip6_if.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/inet/ip6_if.c
+
+$(OBJS_DIR)/ip_ire.o:		$(UTSBASE)/common/inet/ip_ire.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/inet/ip_ire.c
+
+$(OBJS_DIR)/ip6_ire.o:		$(UTSBASE)/common/inet/ip6_ire.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/inet/ip6_ire.c
+
+$(OBJS_DIR)/ip_ndp.o:		$(UTSBASE)/common/inet/ip_ndp.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/inet/ip_ndp.c
+
+$(OBJS_DIR)/ip_opt_data.o:	$(UTSBASE)/common/inet/ip_opt_data.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/inet/ip_opt_data.c
+
+$(OBJS_DIR)/ip_srcid.o:	$(UTSBASE)/common/inet/ip_srcid.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/inet/ip_srcid.c
+
+$(OBJS_DIR)/snmpcom.o:		$(UTSBASE)/common/inet/snmpcom.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/inet/snmpcom.c
+
+$(OBJS_DIR)/mi.o:		$(UTSBASE)/common/inet/mi.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/inet/mi.c
+
+$(OBJS_DIR)/nd.o:		$(UTSBASE)/common/inet/nd.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/inet/nd.c
+
+$(OBJS_DIR)/optcom.o:		$(UTSBASE)/common/inet/optcom.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/inet/optcom.c
+
+$(OBJS_DIR)/md5.o:		$(SRC)/common/md5/md5.c
+	$(COMPILE.c) -o $@ $(SRC)/common/md5/md5.c
+
+$(OBJS_DIR)/ncaddi.o:		$(UTSBASE)/common/inet/nca/ncaddi.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/inet/nca/ncaddi.c
+
+$(OBJS_DIR)/nca.o:		$(UTSBASE)/common/inet/nca/nca.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/inet/nca/nca.c
+
+$(OBJS_DIR)/ncaproto.o:		$(UTSBASE)/common/inet/nca/ncaproto.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/inet/nca/ncaproto.c
+
+$(OBJS_DIR)/ncahttp.o:		$(UTSBASE)/common/inet/nca/ncahttp.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/inet/nca/ncahttp.c
+
+$(OBJS_DIR)/ncakmem.o:		$(UTSBASE)/common/inet/nca/ncakmem.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/inet/nca/ncakmem.c
+
+
+$(OBJS_DIR)/tcp_trace.o:	$(UTSBASE)/common/inet/tcp_trace.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/inet/tcp_trace.c
+
+$(OBJS_DIR)/tcpddi.o:		$(UTSBASE)/common/inet/tcpddi.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/inet/tcpddi.c
+
+$(OBJS_DIR)/tcp6ddi.o:		$(UTSBASE)/common/inet/tcp6ddi.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/inet/tcp6ddi.c
+
+$(OBJS_DIR)/tcp_opt_data.o:	$(UTSBASE)/common/inet/tcp_opt_data.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/inet/tcp_opt_data.c
+
+$(OBJS_DIR)/tcp_sack.o:		$(UTSBASE)/common/inet/tcp_sack.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/inet/tcp_sack.c
+
+$(OBJS_DIR)/tun.o:		$(UTSBASE)/common/inet/tun.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/inet/tun.c
+
+$(OBJS_DIR)/atun.o:		$(UTSBASE)/common/inet/atun.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/inet/atun.c
+
+$(OBJS_DIR)/udp.o:		$(UTSBASE)/common/inet/udp.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/inet/udp.c
+
+$(OBJS_DIR)/udpddi.o:		$(UTSBASE)/common/inet/udpddi.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/inet/udpddi.c
+
+$(OBJS_DIR)/udp6ddi.o:		$(UTSBASE)/common/inet/udp6ddi.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/inet/udp6ddi.c
+
+$(OBJS_DIR)/udp_opt_data.o:	$(UTSBASE)/common/inet/udp_opt_data.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/inet/udp_opt_data.c
+
+$(OBJS_DIR)/7x14.o:		$(UTSBASE)/common/io/7x14.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/7x14.c
+
+$(OBJS_DIR)/audio.o:		$(UTSBASE)/common/io/audio.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/audio.c
+
+$(OBJS_DIR)/asy.o:		$(UTSBASE)/common/io/asy.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/asy.c
+
+$(OBJS_DIR)/bufmod.o:		$(UTSBASE)/common/io/bufmod.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/bufmod.c
+
+$(OBJS_DIR)/busra.o:		$(UTSBASE)/common/io/busra.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/busra.c
+
+$(OBJS_DIR)/clone.o:		$(UTSBASE)/common/io/clone.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/clone.c
+
+$(OBJS_DIR)/conf.o:		$(UTSBASE)/common/io/conf.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/conf.c
+
+$(OBJS_DIR)/connld.o:		$(UTSBASE)/common/io/connld.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/connld.c
+
+$(OBJS_DIR)/cons.o:		$(UTSBASE)/common/io/cons.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/cons.c
+
+$(OBJS_DIR)/conskbd.o:		$(UTSBASE)/common/io/conskbd.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/conskbd.c
+
+$(OBJS_DIR)/consms.o:		$(UTSBASE)/common/io/consms.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/consms.c
+
+$(OBJS_DIR)/cpc.o:		$(UTSBASE)/common/io/cpc.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/cpc.c
+
+$(OBJS_DIR)/dedump.o:		$(UTSBASE)/common/io/dedump.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/dedump.c
+
+$(OBJS_DIR)/devinfo.o:		$(UTSBASE)/common/io/devinfo.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/devinfo.c
+
+$(OBJS_DIR)/devpoll.o:		$(UTSBASE)/common/io/devpoll.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/devpoll.c
+
+$(OBJS_DIR)/dadk.o:		$(UTSBASE)/common/io/dktp/dcdev/dadk.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/dktp/dcdev/dadk.c
+
+$(OBJS_DIR)/gda.o:		$(UTSBASE)/common/io/dktp/dcdev/gda.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/dktp/dcdev/gda.c
+
+$(OBJS_DIR)/cmdk.o:		$(UTSBASE)/common/io/dktp/disk/cmdk.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/dktp/disk/cmdk.c
+
+$(OBJS_DIR)/objmgr.o:		$(UTSBASE)/common/io/dktp/drvobj/objmgr.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/dktp/drvobj/objmgr.c
+
+$(OBJS_DIR)/strategy.o:		$(UTSBASE)/common/io/dktp/drvobj/strategy.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/dktp/drvobj/strategy.c
+
+$(OBJS_DIR)/snlb.o:		$(UTSBASE)/common/io/dktp/disk/snlb.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/dktp/disk/snlb.c
+
+$(OBJS_DIR)/dma_engine.o:	$(UTSBASE)/common/io/dma_engine.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/dma_engine.c
+
+$(OBJS_DIR)/dump.o:		$(UTSBASE)/common/io/dump.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/dump.c
+
+$(OBJS_DIR)/etheraddr.o:	$(UTSBASE)/common/io/etheraddr.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/etheraddr.c
+
+$(OBJS_DIR)/fdc.o:		$(UTSBASE)/common/io/fdc.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/fdc.c
+
+$(OBJS_DIR)/gentty.o:		$(UTSBASE)/common/io/gentty.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/gentty.c
+
+$(OBJS_DIR)/gld.o:		$(UTSBASE)/common/io/gld.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/gld.c
+
+$(OBJS_DIR)/gldutil.o:		$(UTSBASE)/common/io/gldutil.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/gldutil.c
+
+$(OBJS_DIR)/pci_to_i2o.o:	$(UTSBASE)/common/io/i2o/pci_to_i2o.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/i2o/pci_to_i2o.c
+
+$(OBJS_DIR)/i2o_msg.o:		$(UTSBASE)/common/io/i2o/i2o_msg.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/i2o/i2o_msg.c
+
+$(OBJS_DIR)/i2o_scsi.o:		$(UTSBASE)/common/io/i2o/i2o_scsi.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/i2o/i2o_scsi.c
+
+$(OBJS_DIR)/i2o_bs.o:		$(UTSBASE)/common/io/i2o/i2o_bs.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/i2o/i2o_bs.c
+
+$(OBJS_DIR)/label.o:		$(UTSBASE)/common/io/i2o/label.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/i2o/label.c
+
+$(OBJS_DIR)/i8042.o:		$(UTSBASE)/common/io/i8042.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/i8042.c
+
+$(OBJS_DIR)/hpcsvc.o:		$(UTSBASE)/common/io/hotplug/hpcsvc/hpcsvc.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/hotplug/hpcsvc/hpcsvc.c
+
+
+$(OBJS_DIR)/ipd.o:		$(UTSBASE)/common/io/ipd.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/ipd.c
+
+$(OBJS_DIR)/ipdcm.o:		$(UTSBASE)/common/io/ipdcm.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/ipdcm.c
+
+$(OBJS_DIR)/ipdptp.o:		$(UTSBASE)/common/io/ipdptp.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/ipdptp.c
+
+$(OBJS_DIR)/iwscons.o:		$(UTSBASE)/common/io/iwscons.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/iwscons.c
+
+$(OBJS_DIR)/at_keyprocess.o:	$(UTSBASE)/common/io/kb8042/at_keyprocess.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/kb8042/at_keyprocess.c
+
+$(OBJS_DIR)/kb8042.o:		$(UTSBASE)/common/io/kb8042/kb8042.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/kb8042/kb8042.c
+
+$(OBJS_DIR)/kb8042_keytables.o:		$(UTSBASE)/common/io/kb8042/kb8042_keytables.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/kb8042/kb8042_keytables.c
+
+$(OBJS_DIR)/kbd.o:		$(UTSBASE)/common/io/kbd.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/kbd.c
+
+$(OBJS_DIR)/kbtrans.o:		$(UTSBASE)/common/io/kbtrans/kbtrans.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/kbtrans/kbtrans.c
+
+$(OBJS_DIR)/kbtrans_keytables.o:	$(UTSBASE)/common/io/kbtrans/kbtrans_keytables.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/kbtrans/kbtrans_keytables.c
+
+$(OBJS_DIR)/kbtrans_polled.o:	$(UTSBASE)/common/io/kbtrans/kbtrans_polled.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/kbtrans/kbtrans_polled.c
+
+$(OBJS_DIR)/kbtrans_streams.o:	$(UTSBASE)/common/io/kbtrans/kbtrans_streams.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/kbtrans/kbtrans_streams.c
+
+$(OBJS_DIR)/keytables.o:	$(UTSBASE)/common/io/keytables.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/keytables.c
+
+$(OBJS_DIR)/kstat.o:		$(UTSBASE)/common/io/kstat.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/kstat.c
+
+$(OBJS_DIR)/ksyms.o:		$(UTSBASE)/common/io/ksyms.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/ksyms.c
+
+$(OBJS_DIR)/l_strplumb.o:	$(UTSBASE)/common/io/l_strplumb.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/l_strplumb.c
+
+$(OBJS_DIR)/ldterm.o:		$(UTSBASE)/common/io/ldterm.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/ldterm.c
+
+$(OBJS_DIR)/llc1.o:		$(UTSBASE)/common/io/llc1.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/llc1.c
+
+LLC2BASE = $(UTSBASE)/common/io/llc2
+
+
+$(OBJS_DIR)/lmodb.o:		$(UTSBASE)/common/io/lmodb.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/lmodb.c
+
+$(OBJS_DIR)/lmode.o:		$(UTSBASE)/common/io/lmode.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/lmode.c
+
+$(OBJS_DIR)/lmodr.o:		$(UTSBASE)/common/io/lmodr.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/lmodr.c
+
+$(OBJS_DIR)/lmodt.o:		$(UTSBASE)/common/io/lmodt.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/lmodt.c
+
+$(OBJS_DIR)/lo.o:		$(UTSBASE)/common/io/lo.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/lo.c
+
+$(OBJS_DIR)/lockstat.o:		$(UTSBASE)/common/io/lockstat.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/lockstat.c
+
+$(OBJS_DIR)/lofi.o:		$(UTSBASE)/common/io/lofi.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/lofi.c
+
+$(OBJS_DIR)/log.o:		$(UTSBASE)/common/io/log.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/log.c
+
+$(OBJS_DIR)/logindmux.o:	$(UTSBASE)/common/io/logindmux.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/logindmux.c
+
+$(OBJS_DIR)/lp.o:		$(UTSBASE)/common/io/lp/lp.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/lp/lp.c
+
+$(OBJS_DIR)/mem.o:		$(UTSBASE)/common/io/mem.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/mem.c
+
+$(OBJS_DIR)/mouse8042.o:		$(UTSBASE)/common/io/mouse8042.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/mouse8042.c
+
+$(OBJS_DIR)/openprom.o:		$(UTSBASE)/common/io/openprom.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/openprom.c
+
+$(OBJS_DIR)/options.o:		$(UTSBASE)/common/io/options.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/options.c
+
+$(OBJS_DIR)/pcicfg.o:		$(UTSBASE)/common/io/hotplug/pcicfg/pcicfg.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/hotplug/pcicfg/pcicfg.c
+
+$(OBJS_DIR)/pcihp.o:	$(UTSBASE)/common/io/hotplug/pcihp/pcihp.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/hotplug/pcihp/pcihp.c
+
+$(OBJS_DIR)/pckt.o:		$(UTSBASE)/common/io/pckt.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/pckt.c
+
+$(OBJS_DIR)/pci-ide.o:		$(UTSBASE)/common/io/pci-ide/pci-ide.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/pci-ide/pci-ide.c
+
+$(OBJS_DIR)/pcic.o:		$(UTSBASE)/common/io/pcic.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/pcic.c
+
+$(OBJS_DIR)/pcn.o:		$(UTSBASE)/common/io/pcn/pcn.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/pcn/pcn.c
+
+$(OBJS_DIR)/pfmod.o:		$(UTSBASE)/common/io/pfmod.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/pfmod.c
+
+$(OBJS_DIR)/pic.o:		$(UTSBASE)/common/io/pic.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/pic.c
+
+$(OBJS_DIR)/pipemod.o:		$(UTSBASE)/common/io/pipemod.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/pipemod.c
+
+
+$(OBJS_DIR)/ppp_chap.o:		$(UTSBASE)/common/io/ppp_chap.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/ppp_chap.c
+
+$(OBJS_DIR)/ppp_common.o:	$(UTSBASE)/common/io/ppp_common.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/ppp_common.c
+
+$(OBJS_DIR)/ppp_diag.o:		$(UTSBASE)/common/io/ppp_diag.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/ppp_diag.c
+
+$(OBJS_DIR)/ppp_ipncp.o:	$(UTSBASE)/common/io/ppp_ipncp.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/ppp_ipncp.c
+
+$(OBJS_DIR)/ppp_lcp.o:		$(UTSBASE)/common/io/ppp_lcp.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/ppp_lcp.c
+
+$(OBJS_DIR)/ppp_lqm.o:		$(UTSBASE)/common/io/ppp_lqm.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/ppp_lqm.c
+
+$(OBJS_DIR)/ppp_pap.o:		$(UTSBASE)/common/io/ppp_pap.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/ppp_pap.c
+
+$(OBJS_DIR)/ppp_str.o:		$(UTSBASE)/common/io/ppp_str.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/ppp_str.c
+
+$(OBJS_DIR)/ppp_wrapper.o:	$(UTSBASE)/common/io/ppp_wrapper.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/ppp_wrapper.c
+
+$(OBJS_DIR)/pm.o:		$(UTSBASE)/common/io/pm.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/pm.c
+
+$(OBJS_DIR)/pseudonex.o:	$(UTSBASE)/common/io/pseudonex.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/pseudonex.c
+
+$(OBJS_DIR)/ptem.o:		$(UTSBASE)/common/io/ptem.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/ptem.c
+
+$(OBJS_DIR)/ptm.o:		$(UTSBASE)/common/io/ptm.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/ptm.c
+
+$(OBJS_DIR)/ptms_conf.o:	$(UTSBASE)/common/io/ptms_conf.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/ptms_conf.c
+
+$(OBJS_DIR)/pts.o:		$(UTSBASE)/common/io/pts.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/pts.c
+
+$(OBJS_DIR)/ramdisk.o:		$(UTSBASE)/common/io/ramdisk.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/ramdisk.c
+
+$(OBJS_DIR)/rlmod.o:		$(UTSBASE)/common/io/rlmod.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/rlmod.c
+
+$(OBJS_DIR)/sysinit.o:		$(UTSBASE)/common/io/sysinit.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/sysinit.c
+
+$(OBJS_DIR)/sysmsg.o:		$(UTSBASE)/common/io/sysmsg.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/sysmsg.c
+
+$(OBJS_DIR)/sad.o:		$(UTSBASE)/common/io/sad.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/sad.c
+
+$(OBJS_DIR)/sad_conf.o:	$(UTSBASE)/common/io/sad_conf.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/sad_conf.c
+
+$(OBJS_DIR)/scsi_confdata.o:	$(UTSBASE)/common/io/scsi/conf/scsi_confdata.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/scsi/conf/scsi_confdata.c
+
+$(OBJS_DIR)/scsi_confsubr.o:	$(UTSBASE)/common/io/scsi/conf/scsi_confsubr.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/scsi/conf/scsi_confsubr.c
+
+$(OBJS_DIR)/scsi_capabilities.o: $(UTSBASE)/common/io/scsi/impl/scsi_capabilities.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/scsi/impl/scsi_capabilities.c
+
+$(OBJS_DIR)/scsi_control.o:	$(UTSBASE)/common/io/scsi/impl/scsi_control.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/scsi/impl/scsi_control.c
+
+$(OBJS_DIR)/scsi_watch.o:	$(UTSBASE)/common/io/scsi/impl/scsi_watch.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/scsi/impl/scsi_watch.c
+
+$(OBJS_DIR)/scsi_data.o:	$(UTSBASE)/common/io/scsi/impl/scsi_data.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/scsi/impl/scsi_data.c
+
+$(OBJS_DIR)/scsi_hba.o:		$(UTSBASE)/common/io/scsi/impl/scsi_hba.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/scsi/impl/scsi_hba.c
+
+$(OBJS_DIR)/scsi_resource.o:	$(UTSBASE)/common/io/scsi/impl/scsi_resource.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/scsi/impl/scsi_resource.c
+
+$(OBJS_DIR)/scsi_subr.o:	$(UTSBASE)/common/io/scsi/impl/scsi_subr.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/scsi/impl/scsi_subr.c
+
+$(OBJS_DIR)/scsi_transport.o:	$(UTSBASE)/common/io/scsi/impl/scsi_transport.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/scsi/impl/scsi_transport.c
+
+$(OBJS_DIR)/scsi_reset_notify.o: $(UTSBASE)/common/io/scsi/impl/scsi_reset_notify.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/scsi/impl/scsi_reset_notify.c
+
+$(OBJS_DIR)/seg_drv.o:		$(UTSBASE)/common/io/seg_drv.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/seg_drv.c
+
+$(OBJS_DIR)/seg_mapdev.o:	$(UTSBASE)/common/io/seg_mapdev.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/seg_mapdev.c
+
+$(OBJS_DIR)/se_driver.o:	$(UTSBASE)/common/io/se/se_driver.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/se/se_driver.c
+
+
+$(OBJS_DIR)/st.o:		$(UTSBASE)/common/io/scsi/targets/st.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/scsi/targets/st.c
+
+$(OBJS_DIR)/st_conf.o:		$(UTSBASE)/common/io/scsi/targets/st_conf.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/scsi/targets/st_conf.c
+
+$(OBJS_DIR)/str_conf.o:		$(UTSBASE)/common/io/str_conf.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/str_conf.c
+
+$(OBJS_DIR)/stream.o:		$(UTSBASE)/common/io/stream.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/stream.c
+
+$(OBJS_DIR)/strredirm.o:	$(UTSBASE)/common/io/strredirm.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/strredirm.c
+
+$(OBJS_DIR)/strplumb.o:		$(UTSBASE)/common/io/strplumb.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/strplumb.c
+
+$(OBJS_DIR)/strsun.o:		$(UTSBASE)/common/io/strsun.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/strsun.c
+
+$(OBJS_DIR)/sundlpi.o:		$(UTSBASE)/common/io/sundlpi.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/sundlpi.c
+
+$(OBJS_DIR)/suntpi.o:		$(UTSBASE)/common/io/suntpi.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/suntpi.c
+
+$(OBJS_DIR)/telmod.o:		$(UTSBASE)/common/io/telmod.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/telmod.c
+
+$(OBJS_DIR)/terminal-emulator.o:	$(UTSBASE)/common/io/terminal-emulator.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/terminal-emulator.c
+
+$(OBJS_DIR)/ticlts.o:		$(UTSBASE)/common/io/ticlts.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/ticlts.c
+
+$(OBJS_DIR)/ticots.o:		$(UTSBASE)/common/io/ticots.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/ticots.c
+
+$(OBJS_DIR)/ticotsord.o:	$(UTSBASE)/common/io/ticotsord.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/ticotsord.c
+
+$(OBJS_DIR)/tl.o:		$(UTSBASE)/common/io/tl.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/tl.c
+
+$(OBJS_DIR)/tidg.o:		$(UTSBASE)/common/io/tidg.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/tidg.c
+
+$(OBJS_DIR)/timod.o:		$(UTSBASE)/common/io/timod.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/timod.c
+
+$(OBJS_DIR)/tirdwr.o:		$(UTSBASE)/common/io/tirdwr.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/tirdwr.c
+
+$(OBJS_DIR)/tivc.o:		$(UTSBASE)/common/io/tivc.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/tivc.c
+
+$(OBJS_DIR)/tmux.o:		$(UTSBASE)/common/io/tmux.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/tmux.c
+
+$(OBJS_DIR)/ttcompat.o:		$(UTSBASE)/common/io/ttcompat.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/ttcompat.c
+
+$(OBJS_DIR)/tty_common.o:	$(UTSBASE)/common/io/tty_common.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/tty_common.c
+
+$(OBJS_DIR)/tty_pty.o:		$(UTSBASE)/common/io/tty_pty.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/tty_pty.c
+
+$(OBJS_DIR)/tty_pts.o:		$(UTSBASE)/common/io/tty_pts.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/tty_pts.c
+
+$(OBJS_DIR)/tty_ptyconf.o:	$(UTSBASE)/common/io/tty_ptyconf.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/tty_ptyconf.c
+
+USBBASE = $(UTSBASE)/common/io/usb
+USBKBMBASE = $(UTSBASE)/common/io/usb/clients/usbkbm
+
+$(OBJS_DIR)/hid.o:		$(UTSBASE)/common/io/usb/clients/hid/hid.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/usb/clients/hid/hid.c
+
+$(OBJS_DIR)/hidparser.o:	$(USBBASE)/clients/hidparser/hidparser.c
+	$(COMPILE.c) -o $@ $(USBBASE)/clients/hidparser/hidparser.c
+
+$(OBJS_DIR)/usbkbm.o:		$(USBBASE)/clients/usbkbm/usbkbm.c
+	$(COMPILE.c) -o $@ $(USBBASE)/clients/usbkbm/usbkbm.c
+
+$(OBJS_DIR)/usbkbm_keytables.o:	$(USBBASE)/clients/usbkbm/usbkbm_keytables.c
+	$(COMPILE.c) -o $@ $(USBBASE)/clients/usbkbm/usbkbm_keytables.c
+
+$(OBJS_DIR)/usbms.o:		$(USBBASE)/clients/usbms/usbms.c
+	$(COMPILE.c) -o $@ $(USBBASE)/clients/usbms/usbms.c
+
+$(OBJS_DIR)/hubd.o:		$(UTSBASE)/common/io/usb/hubd/hubd.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/usb/hubd/hubd.c
+
+$(OBJS_DIR)/usb_mid.o:		$(UTSBASE)/common/io/usb/usb_mid/usb_mid.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/usb/usb_mid/usb_mid.c
+
+$(OBJS_DIR)/hubdi.o:		$(UTSBASE)/common/io/usb/usba/hubdi.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/usb/usba/hubdi.c
+
+$(OBJS_DIR)/hcdi.o:		$(UTSBASE)/common/io/usb/usba/hcdi.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/usb/usba/hcdi.c
+
+$(OBJS_DIR)/genconsole.o:	$(UTSBASE)/common/io/usb/usba/genconsole.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/usb/usba/genconsole.c
+
+$(OBJS_DIR)/usbai.o:		$(UTSBASE)/common/io/usb/usba/usbai.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/usb/usba/usbai.c
+ 
+$(OBJS_DIR)/parser.o:		$(UTSBASE)/common/io/usb/usba/parser.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/usb/usba/parser.c
+ 
+$(OBJS_DIR)/usba.o:	$(UTSBASE)/common/io/usb/usba/usba.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/usb/usba/usba.c
+ 
+$(OBJS_DIR)/scsa2usb.o:		$(UTSBASE)/common/io/usb/scsa2usb/scsa2usb.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/usb/scsa2usb/scsa2usb.c
+
+$(OBJS_DIR)/vgasubr.o:		$(UTSBASE)/common/io/vgasubr.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/vgasubr.c
+
+$(OBJS_DIR)/vjcomp.o:		$(UTSBASE)/common/io/vjcomp.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/vjcomp.c
+
+$(OBJS_DIR)/vol.o:		$(UTSBASE)/common/io/vol.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/vol.c
+
+$(OBJS_DIR)/vuid_queue.o:	$(UTSBASE)/common/io/vuid_queue.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/vuid_queue.c
+
+$(OBJS_DIR)/vuid_store.o:	$(UTSBASE)/common/io/vuid_store.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/vuid_store.c
+
+$(OBJS_DIR)/vuidmice.o:		$(UTSBASE)/common/io/vuidmice/vuidmice.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/vuidmice/vuidmice.c
+
+$(OBJS_DIR)/vuidm3p.o:		$(UTSBASE)/common/io/vuidmice/vuidm3p.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/vuidmice/vuidm3p.c
+
+$(OBJS_DIR)/vuidm4p.o:		$(UTSBASE)/common/io/vuidmice/vuidm4p.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/vuidmice/vuidm4p.c
+
+$(OBJS_DIR)/vuidm5p.o:		$(UTSBASE)/common/io/vuidmice/vuidm5p.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/vuidmice/vuidm5p.c
+
+$(OBJS_DIR)/vuidps2.o:		$(UTSBASE)/common/io/vuidmice/vuidps2.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/vuidmice/vuidps2.c
+
+$(OBJS_DIR)/winlockio.o:	$(UTSBASE)/common/io/winlockio.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/winlockio.c
+
+$(OBJS_DIR)/wscons.o:		$(UTSBASE)/common/io/wscons.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/wscons.c
+
+$(OBJS_DIR)/klmmod.o:		$(UTSBASE)/common/klm/klmmod.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/klm/klmmod.c
+
+$(OBJS_DIR)/klmops.o:		$(UTSBASE)/common/klm/klmops.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/klm/klmops.c
+
+
+$(OBJS_DIR)/tlimod.o:		$(UTSBASE)/common/ktli/tlimod.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/ktli/tlimod.c
+
+$(OBJS_DIR)/t_kalloc.o:		$(UTSBASE)/common/ktli/t_kalloc.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/ktli/t_kalloc.c
+
+$(OBJS_DIR)/t_kbind.o:		$(UTSBASE)/common/ktli/t_kbind.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/ktli/t_kbind.c
+
+$(OBJS_DIR)/t_kclose.o:		$(UTSBASE)/common/ktli/t_kclose.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/ktli/t_kclose.c
+
+$(OBJS_DIR)/t_kconnect.o:	$(UTSBASE)/common/ktli/t_kconnect.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/ktli/t_kconnect.c
+
+$(OBJS_DIR)/t_kfree.o:		$(UTSBASE)/common/ktli/t_kfree.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/ktli/t_kfree.c
+
+$(OBJS_DIR)/t_kgtstate.o:	$(UTSBASE)/common/ktli/t_kgtstate.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/ktli/t_kgtstate.c
+
+$(OBJS_DIR)/t_kopen.o:		$(UTSBASE)/common/ktli/t_kopen.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/ktli/t_kopen.c
+
+$(OBJS_DIR)/t_krcvudat.o:	$(UTSBASE)/common/ktli/t_krcvudat.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/ktli/t_krcvudat.c
+
+$(OBJS_DIR)/t_ksndudat.o:	$(UTSBASE)/common/ktli/t_ksndudat.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/ktli/t_ksndudat.c
+
+$(OBJS_DIR)/t_kspoll.o:		$(UTSBASE)/common/ktli/t_kspoll.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/ktli/t_kspoll.c
+
+$(OBJS_DIR)/t_kunbind.o:	$(UTSBASE)/common/ktli/t_kunbind.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/ktli/t_kunbind.c
+
+$(OBJS_DIR)/t_kutil.o:		$(UTSBASE)/common/ktli/t_kutil.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/ktli/t_kutil.c
+
+$(OBJS_DIR)/acct.o:		$(UTSBASE)/common/os/acct.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/os/acct.c
+
+$(OBJS_DIR)/aio.o:		$(UTSBASE)/common/os/aio.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/os/aio.c
+
+$(OBJS_DIR)/aio_subr.o:		$(UTSBASE)/common/os/aio_subr.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/os/aio_subr.c
+
+$(OBJS_DIR)/autoconf.o:		$(UTSBASE)/common/os/autoconf.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/os/autoconf.c
+
+$(OBJS_DIR)/bio.o:		$(UTSBASE)/common/os/bio.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/os/bio.c
+
+$(OBJS_DIR)/bdev_dsort.o:	$(UTSBASE)/common/os/bdev_dsort.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/os/bdev_dsort.c
+
+$(OBJS_DIR)/bitmap.o:		$(UTSBASE)/common/os/bitmap.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/os/bitmap.c
+
+$(OBJS_DIR)/bp_map.o:		$(UTSBASE)/common/os/bp_map.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/os/bp_map.c
+
+$(OBJS_DIR)/callb.o:		$(UTSBASE)/common/os/callb.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/os/callb.c
+
+$(OBJS_DIR)/callout.o:		$(UTSBASE)/common/os/callout.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/os/callout.c
+
+$(OBJS_DIR)/clock.o:		$(UTSBASE)/common/os/clock.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/os/clock.c
+
+$(OBJS_DIR)/clock_highres.o:	$(UTSBASE)/common/os/clock_highres.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/os/clock_highres.c
+
+$(OBJS_DIR)/clock_realtime.o:	$(UTSBASE)/common/os/clock_realtime.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/os/clock_realtime.c
+
+$(OBJS_DIR)/compress.o:		$(UTSBASE)/common/os/compress.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/os/compress.c
+
+$(OBJS_DIR)/condvar.o:		$(UTSBASE)/common/os/condvar.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/os/condvar.c
+
+$(OBJS_DIR)/console.o:		$(UTSBASE)/common/os/console.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/os/console.c
+
+$(OBJS_DIR)/copyops.o:		$(UTSBASE)/common/os/copyops.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/os/copyops.c
+
+$(OBJS_DIR)/core.o:		$(UTSBASE)/common/os/core.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/os/core.c
+
+$(OBJS_DIR)/cpu.o:		$(UTSBASE)/common/os/cpu.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/os/cpu.c
+
+$(OBJS_DIR)/cpu_intr.o:		$(UTSBASE)/common/os/cpu_intr.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/os/cpu_intr.c
+
+$(OBJS_DIR)/cred.o:		$(UTSBASE)/common/os/cred.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/os/cred.c
+
+$(OBJS_DIR)/cyclic.o:		$(UTSBASE)/common/os/cyclic.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/os/cyclic.c
+
+$(OBJS_DIR)/dacf.o:		$(UTSBASE)/common/os/dacf.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/os/dacf.c
+
+$(OBJS_DIR)/dacf_clnt.o:	$(UTSBASE)/common/os/dacf_clnt.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/os/dacf_clnt.c
+
+$(OBJS_DIR)/dc_interface.o:	$(UTSBASE)/common/os/dc_interface.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/os/dc_interface.c
+
+$(OBJS_DIR)/ddi.o:		$(UTSBASE)/common/os/ddi.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/os/ddi.c
+
+$(OBJS_DIR)/ddi_nodeid.o:	$(UTSBASE)/common/os/ddi_nodeid.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/os/ddi_nodeid.c
+
+$(OBJS_DIR)/driver.o:		$(UTSBASE)/common/os/driver.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/os/driver.c
+
+$(OBJS_DIR)/driver_lyr.o:		$(UTSBASE)/common/os/driver_lyr.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/os/driver_lyr.c
+
+$(OBJS_DIR)/dumpsubr.o:		$(UTSBASE)/common/os/dumpsubr.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/os/dumpsubr.c
+
+$(OBJS_DIR)/exec.o:		$(UTSBASE)/common/os/exec.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/os/exec.c
+
+$(OBJS_DIR)/exit.o:		$(UTSBASE)/common/os/exit.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/os/exit.c
+
+$(OBJS_DIR)/fbio.o:		$(UTSBASE)/common/os/fbio.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/os/fbio.c
+
+$(OBJS_DIR)/fio.o:		$(UTSBASE)/common/os/fio.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/os/fio.c
+
+$(OBJS_DIR)/flock.o:		$(UTSBASE)/common/os/flock.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/os/flock.c
+
+$(OBJS_DIR)/fork.o:		$(UTSBASE)/common/os/fork.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/os/fork.c
+
+$(OBJS_DIR)/ftrace.o:		$(UTSBASE)/common/os/ftrace.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/os/ftrace.c
+
+$(OBJS_DIR)/grow.o:		$(UTSBASE)/common/os/grow.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/os/grow.c
+
+$(OBJS_DIR)/id32.o:		$(UTSBASE)/common/os/id32.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/os/id32.c
+
+$(OBJS_DIR)/ipc.o:		$(UTSBASE)/common/os/ipc.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/os/ipc.c
+
+$(OBJS_DIR)/inst_sync.o:	$(UTSBASE)/common/os/inst_sync.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/os/inst_sync.c
+
+$(OBJS_DIR)/instance.o:		$(UTSBASE)/common/os/instance.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/os/instance.c
+
+$(OBJS_DIR)/kmem.o:		$(UTSBASE)/common/os/kmem.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/os/kmem.c
+
+$(OBJS_DIR)/kobj.o:		$(UTSBASE)/common/krtld/kobj.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/krtld/kobj.c
+
+$(OBJS_DIR)/kobj_stubs.o:	$(UTSBASE)/common/krtld/kobj_stubs.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/krtld/kobj_stubs.c
+
+$(OBJS_DIR)/kobj_subr.o:	$(UTSBASE)/common/krtld/kobj_subr.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/krtld/kobj_subr.c
+
+$(OBJS_DIR)/kstat_fr.o:		$(UTSBASE)/common/os/kstat_fr.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/os/kstat_fr.c
+
+$(OBJS_DIR)/ksyms_snapshot.o:	$(UTSBASE)/common/os/ksyms_snapshot.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/os/ksyms_snapshot.c
+
+$(OBJS_DIR)/lockstat_subr.o:	$(UTSBASE)/common/os/lockstat_subr.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/os/lockstat_subr.c
+
+$(OBJS_DIR)/log_event.o:	$(UTSBASE)/common/os/log_event.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/os/log_event.c
+
+$(OBJS_DIR)/logsubr.o:		$(UTSBASE)/common/os/logsubr.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/os/logsubr.c
+
+$(OBJS_DIR)/lwp.o:		$(UTSBASE)/common/os/lwp.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/os/lwp.c
+
+$(OBJS_DIR)/main.o:		$(UTSBASE)/common/os/main.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/os/main.c
+
+$(OBJS_DIR)/modconf.o:		$(UTSBASE)/common/os/modconf.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/os/modconf.c
+
+$(OBJS_DIR)/modctl.o:		$(UTSBASE)/common/os/modctl.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/os/modctl.c
+
+$(OBJS_DIR)/modhash.o:		$(UTSBASE)/common/os/modhash.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/os/modhash.c
+
+$(OBJS_DIR)/modsubr.o:		$(UTSBASE)/common/os/modsubr.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/os/modsubr.c
+
+$(OBJS_DIR)/modsysfile.o:	$(UTSBASE)/common/os/modsysfile.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/os/modsysfile.c
+
+$(OBJS_DIR)/move.o:		$(UTSBASE)/common/os/move.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/os/move.c
+
+$(OBJS_DIR)/msacct.o:		$(UTSBASE)/common/os/msacct.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/os/msacct.c
+
+$(OBJS_DIR)/msg.o:		$(UTSBASE)/common/os/msg.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/os/msg.c
+
+$(OBJS_DIR)/mutex.o:		$(UTSBASE)/common/os/mutex.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/os/mutex.c
+
+$(OBJS_DIR)/panic.o:		$(UTSBASE)/common/os/panic.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/os/panic.c
+
+$(OBJS_DIR)/pgrp.o:		$(UTSBASE)/common/os/pgrp.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/os/pgrp.c
+
+$(OBJS_DIR)/pid.o:		$(UTSBASE)/common/os/pid.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/os/pid.c
+
+$(OBJS_DIR)/printf.o:		$(UTSBASE)/common/os/printf.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/os/printf.c
+
+$(OBJS_DIR)/procset.o:		$(UTSBASE)/common/os/procset.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/os/procset.c
+
+$(OBJS_DIR)/putnext.o:		$(UTSBASE)/common/os/putnext.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/os/putnext.c
+
+$(OBJS_DIR)/readfont.o:		$(UTSBASE)/common/os/readfont.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/os/readfont.c
+
+$(OBJS_DIR)/refstr.o:		$(UTSBASE)/common/os/refstr.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/os/refstr.c
+
+$(OBJS_DIR)/rmap.o:		$(UTSBASE)/common/os/rmap.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/os/rmap.c
+
+$(OBJS_DIR)/rwlock.o:		$(UTSBASE)/common/os/rwlock.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/os/rwlock.c
+
+$(OBJS_DIR)/sched.o:		$(UTSBASE)/common/os/sched.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/os/sched.c
+
+$(OBJS_DIR)/schedctl.o:		$(UTSBASE)/common/os/schedctl.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/os/schedctl.c
+
+$(OBJS_DIR)/semaphore.o:	$(UTSBASE)/common/os/semaphore.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/os/semaphore.c
+
+$(OBJS_DIR)/ses.o:		$(UTSBASE)/common/io/scsi/targets/ses.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/scsi/targets/ses.c
+
+$(OBJS_DIR)/ses_sen.o:		$(UTSBASE)/common/io/scsi/targets/ses_sen.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/scsi/targets/ses_sen.c
+
+$(OBJS_DIR)/ses_safte.o:	$(UTSBASE)/common/io/scsi/targets/ses_safte.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/scsi/targets/ses_safte.c
+
+$(OBJS_DIR)/ses_ses.o:		$(UTSBASE)/common/io/scsi/targets/ses_ses.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/scsi/targets/ses_ses.c
+
+$(OBJS_DIR)/session.o:		$(UTSBASE)/common/os/session.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/os/session.c
+
+$(OBJS_DIR)/share.o:		$(UTSBASE)/common/os/share.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/os/share.c
+
+$(OBJS_DIR)/shm.o:		$(UTSBASE)/common/os/shm.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/os/shm.c
+
+$(OBJS_DIR)/sig.o:		$(UTSBASE)/common/os/sig.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/os/sig.c
+
+$(OBJS_DIR)/sleepq.o:		$(UTSBASE)/common/os/sleepq.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/os/sleepq.c
+
+$(OBJS_DIR)/softint.o:		$(UTSBASE)/common/os/softint.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/os/softint.c
+
+$(OBJS_DIR)/space.o:		$(UTSBASE)/common/os/space.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/os/space.c
+
+$(OBJS_DIR)/streamio.o:		$(UTSBASE)/common/os/streamio.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/os/streamio.c
+
+$(OBJS_DIR)/string.o:		$(UTSBASE)/common/os/string.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/os/string.c
+
+$(OBJS_DIR)/strsubr.o:		$(UTSBASE)/common/os/strsubr.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/os/strsubr.c
+
+$(OBJS_DIR)/subr.o:		$(UTSBASE)/common/os/subr.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/os/subr.c
+
+$(OBJS_DIR)/sunddi.o:		$(UTSBASE)/common/os/sunddi.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/os/sunddi.c
+
+$(OBJS_DIR)/sunndi.o:		$(UTSBASE)/common/os/sunndi.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/os/sunndi.c
+
+$(OBJS_DIR)/sunpm.o:		$(UTSBASE)/common/os/sunpm.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/os/sunpm.c
+
+$(OBJS_DIR)/swapgeneric.o:	$(UTSBASE)/common/os/swapgeneric.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/os/swapgeneric.c
+
+$(OBJS_DIR)/sysent.o:		$(UTSBASE)/common/os/sysent.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/os/sysent.c
+
+$(OBJS_DIR)/taskq.o:		$(UTSBASE)/common/os/taskq.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/os/taskq.c
+
+$(OBJS_DIR)/timer.o:		$(UTSBASE)/common/os/timer.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/os/timer.c
+
+
+$(OBJS_DIR)/turnstile.o:	$(UTSBASE)/common/os/turnstile.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/os/turnstile.c
+
+$(OBJS_DIR)/unix_bb.o:		$(UTSBASE)/common/os/unix_bb.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/os/unix_bb.c
+
+$(OBJS_DIR)/vmem.o:		$(UTSBASE)/common/os/vmem.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/os/vmem.c
+
+$(OBJS_DIR)/vm_meter.o:		$(UTSBASE)/common/os/vm_meter.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/os/vm_meter.c
+
+$(OBJS_DIR)/vm_pageout.o:	$(UTSBASE)/common/os/vm_pageout.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/os/vm_pageout.c
+
+$(OBJS_DIR)/vm_subr.o:		$(UTSBASE)/common/os/vm_subr.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/os/vm_subr.c
+
+$(OBJS_DIR)/vtrace.o:		$(UTSBASE)/common/os/vtrace.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/os/vtrace.c
+
+$(OBJS_DIR)/watchpoint.o:	$(UTSBASE)/common/os/watchpoint.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/os/watchpoint.c
+
+$(OBJS_DIR)/pcmcia.o:		$(UTSBASE)/common/pcmcia/nexus/pcmcia.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/pcmcia/nexus/pcmcia.c
+
+$(OBJS_DIR)/cs.o:		$(UTSBASE)/common/pcmcia/cs/cs.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/pcmcia/cs/cs.c
+
+$(OBJS_DIR)/cs_stubs.o:		$(UTSBASE)/common/pcmcia/cs/cs_stubs.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/pcmcia/cs/cs_stubs.c
+
+$(OBJS_DIR)/pem.o:		$(UTSBASE)/common/pcmcia/pem/pem.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/pcmcia/pem/pem.c
+
+$(OBJS_DIR)/pcs.o:		$(UTSBASE)/common/pcmcia/pcs/pcs.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/pcmcia/pcs/pcs.c
+
+$(OBJS_DIR)/cis.o:		$(UTSBASE)/common/pcmcia/cis/cis.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/pcmcia/cis/cis.c
+
+$(OBJS_DIR)/cis_callout.o:	$(UTSBASE)/common/pcmcia/cis/cis_callout.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/pcmcia/cis/cis_callout.c
+
+$(OBJS_DIR)/cis_handlers.o:	$(UTSBASE)/common/pcmcia/cis/cis_handlers.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/pcmcia/cis/cis_handlers.c
+
+$(OBJS_DIR)/cis_params.o:	$(UTSBASE)/common/pcmcia/cis/cis_params.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/pcmcia/cis/cis_params.c
+
+$(OBJS_DIR)/pcata.o:		$(UTSBASE)/common/io/pcmcia/pcata.c 
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/pcmcia/pcata.c
+
+$(OBJS_DIR)/pcdisk.o:		$(UTSBASE)/common/io/pcmcia/pcdisk.c 
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/pcmcia/pcdisk.c
+
+
+$(OBJS_DIR)/pcgld.o:		$(UTSBASE)/common/io/pcmcia/pcgld.c 
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/pcmcia/pcgld.c
+
+$(OBJS_DIR)/pcide.o:		$(UTSBASE)/common/io/pcmcia/pcide.c 
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/pcmcia/pcide.c
+
+$(OBJS_DIR)/pclabel.o:		$(UTSBASE)/common/io/pcmcia/pclabel.c 
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/pcmcia/pclabel.c
+
+$(OBJS_DIR)/pcmem.o:		$(UTSBASE)/common/io/pcmcia/pcmem.c 
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/pcmcia/pcmem.c
+
+$(OBJS_DIR)/pcram.o:		$(UTSBASE)/common/io/pcmcia/pcram.c 
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/pcmcia/pcram.c
+
+$(OBJS_DIR)/pcser.o:		$(UTSBASE)/common/io/pcmcia/pcser.c 
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/pcmcia/pcser.c
+
+$(OBJS_DIR)/pcser_cis.o:	$(UTSBASE)/common/io/pcmcia/pcser_cis.c 
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/pcmcia/pcser_cis.c
+
+#
+# rpc
+#
+$(OBJS_DIR)/clnt_clts.o:	$(UTSBASE)/common/rpc/clnt_clts.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/rpc/clnt_clts.c
+
+$(OBJS_DIR)/clnt_cots.o:	$(UTSBASE)/common/rpc/clnt_cots.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/rpc/clnt_cots.c
+
+$(OBJS_DIR)/clnt_gen.o:		$(UTSBASE)/common/rpc/clnt_gen.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/rpc/clnt_gen.c
+
+$(OBJS_DIR)/clnt_perr.o:	$(UTSBASE)/common/rpc/clnt_perr.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/rpc/clnt_perr.c
+
+$(OBJS_DIR)/mt_rpcinit.o:	$(UTSBASE)/common/rpc/mt_rpcinit.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/rpc/mt_rpcinit.c
+
+$(OBJS_DIR)/rpc_calmsg.o:	$(UTSBASE)/common/rpc/rpc_calmsg.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/rpc/rpc_calmsg.c
+
+$(OBJS_DIR)/rpc_prot.o:		$(UTSBASE)/common/rpc/rpc_prot.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/rpc/rpc_prot.c
+
+$(OBJS_DIR)/rpc_subr.o:		$(UTSBASE)/common/rpc/rpc_subr.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/rpc/rpc_subr.c
+
+$(OBJS_DIR)/rpc_sztypes.o:	$(UTSBASE)/common/rpc/rpc_sztypes.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/rpc/rpc_sztypes.c
+
+$(OBJS_DIR)/rpcb_prot.o:	$(UTSBASE)/common/rpc/rpcb_prot.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/rpc/rpcb_prot.c
+
+
+$(OBJS_DIR)/svc_clts.o:		$(UTSBASE)/common/rpc/svc_clts.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/rpc/svc_clts.c
+
+$(OBJS_DIR)/svc_cots.o:		$(UTSBASE)/common/rpc/svc_cots.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/rpc/svc_cots.c
+
+$(OBJS_DIR)/svc_gen.o:		$(UTSBASE)/common/rpc/svc_gen.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/rpc/svc_gen.c
+
+$(OBJS_DIR)/xdr.o:		$(UTSBASE)/common/rpc/xdr.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/rpc/xdr.c
+
+$(OBJS_DIR)/xdr_array.o:	$(UTSBASE)/common/rpc/xdr_array.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/rpc/xdr_array.c
+
+$(OBJS_DIR)/xdr_mblk.o:		$(UTSBASE)/common/rpc/xdr_mblk.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/rpc/xdr_mblk.c
+
+$(OBJS_DIR)/xdr_mem.o:		$(UTSBASE)/common/rpc/xdr_mem.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/rpc/xdr_mem.c
+
+$(OBJS_DIR)/xdr_refer.o:	$(UTSBASE)/common/rpc/xdr_refer.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/rpc/xdr_refer.c
+
+$(OBJS_DIR)/rpcsys.o:	$(UTSBASE)/common/rpc/rpcsys.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/rpc/rpcsys.c
+
+#
+# rpc/sec - auth/security specific
+#
+$(OBJS_DIR)/auth_des.o:		$(UTSBASE)/common/rpc/sec/auth_des.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/rpc/sec/auth_des.c
+
+$(OBJS_DIR)/auth_kern.o:	$(UTSBASE)/common/rpc/sec/auth_kern.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/rpc/sec/auth_kern.c
+
+$(OBJS_DIR)/auth_loopb.o:	$(UTSBASE)/common/rpc/sec/auth_loopb.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/rpc/sec/auth_loopb.c
+
+$(OBJS_DIR)/sec_clnt.o:		$(UTSBASE)/common/rpc/sec/sec_clnt.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/rpc/sec/sec_clnt.c
+
+$(OBJS_DIR)/sec_gen.o:		$(UTSBASE)/common/rpc/sec/sec_gen.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/rpc/sec/sec_gen.c
+
+$(OBJS_DIR)/sec_svc.o:		$(UTSBASE)/common/rpc/sec/sec_svc.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/rpc/sec/sec_svc.c
+
+$(OBJS_DIR)/authdesprt.o:	$(UTSBASE)/common/rpc/sec/authdesprt.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/rpc/sec/authdesprt.c
+
+$(OBJS_DIR)/authdesubr.o:	$(UTSBASE)/common/rpc/sec/authdesubr.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/rpc/sec/authdesubr.c
+
+$(OBJS_DIR)/secmod.o:		$(UTSBASE)/common/rpc/sec/secmod.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/rpc/sec/secmod.c
+
+$(OBJS_DIR)/authu_prot.o:	$(UTSBASE)/common/rpc/sec/authu_prot.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/rpc/sec/authu_prot.c
+
+$(OBJS_DIR)/key_call.o:		$(UTSBASE)/common/rpc/sec/key_call.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/rpc/sec/key_call.c
+
+$(OBJS_DIR)/key_prot.o:		$(UTSBASE)/common/rpc/sec/key_prot.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/rpc/sec/key_prot.c
+
+$(OBJS_DIR)/svc_authu.o:	$(UTSBASE)/common/rpc/sec/svc_authu.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/rpc/sec/svc_authu.c
+
+$(OBJS_DIR)/svcauthdes.o:	$(UTSBASE)/common/rpc/sec/svcauthdes.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/rpc/sec/svcauthdes.c
+
+
+#
+# rpcsec_gss - RPC security service : RPCSEC_GSS flavor specific
+#
+RPCSECGSS_BASE=$(UTSBASE)/common/rpc/sec_gss
+
+$(OBJS_DIR)/rpcsec_gssmod.o:	$(RPCSECGSS_BASE)/rpcsec_gssmod.c
+	$(COMPILE.c) -o $@ $(RPCSECGSS_BASE)/rpcsec_gssmod.c
+
+
+$(OBJS_DIR)/rpcsec_gss_utils.o:	$(RPCSECGSS_BASE)/rpcsec_gss_utils.c
+	$(COMPILE.c) -o $@ $(RPCSECGSS_BASE)/rpcsec_gss_utils.c
+
+
+#
+#  kgssapi - kernel gssapi service
+#
+KGSSDBASE=$(UTSBASE)/common/gssapi
+KGSSDFLAGS=-I $(KGSSDBASE)/include
+
+$(OBJS_DIR)/gssdmod.o:		$(KGSSDBASE)/gssdmod.c
+	$(COMPILE.c) $(KGSSDFLAGS) -o $@ $(KGSSDBASE)/gssdmod.c
+
+$(OBJS_DIR)/gssd_clnt_stubs.o:	$(KGSSDBASE)/gssd_clnt_stubs.c
+	$(COMPILE.c) $(KGSSDFLAGS) -o $@ $(KGSSDBASE)/gssd_clnt_stubs.c
+
+$(OBJS_DIR)/gssd_handle.o:	$(KGSSDBASE)/gssd_handle.c
+	$(COMPILE.c) $(KGSSDFLAGS) -o $@ $(KGSSDBASE)/gssd_handle.c
+
+$(OBJS_DIR)/gssd_prot.o:	$(KGSSDBASE)/gssd_prot.c
+	$(COMPILE.c) $(KGSSDFLAGS) -o $@ $(KGSSDBASE)/gssd_prot.c
+
+$(OBJS_DIR)/gssd_xdr.o:	$(KGSSDBASE)/gssd_xdr.c
+	$(COMPILE.c) $(KGSSDFLAGS) -o $@ $(KGSSDBASE)/gssd_xdr.c
+
+$(OBJS_DIR)/gss_display_name.o:	$(KGSSDBASE)/gss_display_name.c
+	$(COMPILE.c) $(KGSSDFLAGS) -o $@ $(KGSSDBASE)/gss_display_name.c
+
+$(OBJS_DIR)/gss_import_name.o:	$(KGSSDBASE)/gss_import_name.c
+	$(COMPILE.c) $(KGSSDFLAGS) -o $@ $(KGSSDBASE)/gss_import_name.c
+
+$(OBJS_DIR)/gss_release_name.o:	$(KGSSDBASE)/gss_release_name.c
+	$(COMPILE.c) $(KGSSDFLAGS) -o $@ $(KGSSDBASE)/gss_release_name.c
+
+$(OBJS_DIR)/gss_release_buffer.o:	$(KGSSDBASE)/gss_release_buffer.c
+	$(COMPILE.c) $(KGSSDFLAGS) -o $@ $(KGSSDBASE)/gss_release_buffer.c
+
+$(OBJS_DIR)/gss_release_oid_set.o:	$(KGSSDBASE)/gss_release_oid_set.c
+	$(COMPILE.c) $(KGSSDFLAGS) -o $@ $(KGSSDBASE)/gss_release_oid_set.c
+
+
+#
+#  kmech_dummy - kernel gssapi dummy mechansim
+#
+KMECHDUMMY_BASE=$(KGSSDBASE)/mechs/dummy
+
+$(OBJS_DIR)/dmech.o:  $(KMECHDUMMY_BASE)/dmech.c
+	$(COMPILE.c) $(KGSSDFLAGS) -o $@ $(KMECHDUMMY_BASE)/dmech.c
+
+#
+#  kmech_krb5 - kernel gssapi krb5 mechansim
+#
+KMECHKRB5_BASE=$(KGSSDBASE)/mechs/krb5
+
+
+# syscall files
+
+$(OBJS_DIR)/access.o:	$(UTSBASE)/common/syscall/access.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/syscall/access.c
+
+$(OBJS_DIR)/acl.o:	$(UTSBASE)/common/syscall/acl.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/syscall/acl.c
+
+$(OBJS_DIR)/adjtime.o:	$(UTSBASE)/common/syscall/adjtime.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/syscall/adjtime.c
+
+$(OBJS_DIR)/alarm.o:	$(UTSBASE)/common/syscall/alarm.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/syscall/alarm.c
+
+$(OBJS_DIR)/chdir.o:	$(UTSBASE)/common/syscall/chdir.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/syscall/chdir.c
+
+$(OBJS_DIR)/chmod.o:	$(UTSBASE)/common/syscall/chmod.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/syscall/chmod.c
+
+$(OBJS_DIR)/chown.o:	$(UTSBASE)/common/syscall/chown.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/syscall/chown.c
+
+$(OBJS_DIR)/cladm.o:	$(UTSBASE)/common/syscall/cladm.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/syscall/cladm.c
+
+$(OBJS_DIR)/close.o:	$(UTSBASE)/common/syscall/close.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/syscall/close.c
+
+$(OBJS_DIR)/corectl.o:	$(UTSBASE)/common/syscall/corectl.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/syscall/corectl.c
+
+$(OBJS_DIR)/fcntl.o:	$(UTSBASE)/common/syscall/fcntl.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/syscall/fcntl.c
+
+$(OBJS_DIR)/fdsync.o:	$(UTSBASE)/common/syscall/fdsync.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/syscall/fdsync.c
+
+$(OBJS_DIR)/getdents.o:	$(UTSBASE)/common/syscall/getdents.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/syscall/getdents.c
+
+$(OBJS_DIR)/getloadavg.o: $(UTSBASE)/common/syscall/getloadavg.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/syscall/getloadavg.c
+
+$(OBJS_DIR)/getpid.o:	$(UTSBASE)/common/syscall/getpid.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/syscall/getpid.c
+
+$(OBJS_DIR)/gid.o:	$(UTSBASE)/common/syscall/gid.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/syscall/gid.c
+
+$(OBJS_DIR)/groups.o:	$(UTSBASE)/common/syscall/groups.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/syscall/groups.c
+
+$(OBJS_DIR)/ioctl.o:	$(UTSBASE)/common/syscall/ioctl.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/syscall/ioctl.c
+
+$(OBJS_DIR)/link.o:	$(UTSBASE)/common/syscall/link.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/syscall/link.c
+
+$(OBJS_DIR)/lseek.o:	$(UTSBASE)/common/syscall/lseek.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/syscall/lseek.c
+
+$(OBJS_DIR)/lwp_create.o:	$(UTSBASE)/common/syscall/lwp_create.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/syscall/lwp_create.c
+
+$(OBJS_DIR)/lwp_info.o:	$(UTSBASE)/common/syscall/lwp_info.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/syscall/lwp_info.c
+
+$(OBJS_DIR)/lwp_self.o:	$(UTSBASE)/common/syscall/lwp_self.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/syscall/lwp_self.c
+
+$(OBJS_DIR)/lwp_sobj.o:	$(UTSBASE)/common/syscall/lwp_sobj.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/syscall/lwp_sobj.c
+
+$(OBJS_DIR)/lwpsys.o:	$(UTSBASE)/common/syscall/lwpsys.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/syscall/lwpsys.c
+
+$(OBJS_DIR)/memcntl.o:	$(UTSBASE)/common/syscall/memcntl.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/syscall/memcntl.c
+
+$(OBJS_DIR)/mkdir.o:	$(UTSBASE)/common/syscall/mkdir.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/syscall/mkdir.c
+
+$(OBJS_DIR)/mknod.o:	$(UTSBASE)/common/syscall/mknod.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/syscall/mknod.c
+
+$(OBJS_DIR)/mount.o:	$(UTSBASE)/common/syscall/mount.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/syscall/mount.c
+
+$(OBJS_DIR)/ntptime.o:	$(UTSBASE)/common/syscall/ntptime.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/syscall/ntptime.c
+
+$(OBJS_DIR)/open.o:	$(UTSBASE)/common/syscall/open.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/syscall/open.c
+
+$(OBJS_DIR)/nice.o:	$(UTSBASE)/common/syscall/nice.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/syscall/nice.c
+
+$(OBJS_DIR)/p_online.o:	$(UTSBASE)/common/syscall/p_online.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/syscall/p_online.c
+
+$(OBJS_DIR)/pathconf.o:	$(UTSBASE)/common/syscall/pathconf.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/syscall/pathconf.c
+
+$(OBJS_DIR)/pause.o:	$(UTSBASE)/common/syscall/pause.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/syscall/pause.c
+
+$(OBJS_DIR)/pgrpsys.o:	$(UTSBASE)/common/syscall/pgrpsys.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/syscall/pgrpsys.c
+
+$(OBJS_DIR)/pipe.o:	$(UTSBASE)/common/syscall/pipe.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/syscall/pipe.c
+
+$(OBJS_DIR)/poll.o:	$(UTSBASE)/common/syscall/poll.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/syscall/poll.c
+
+$(OBJS_DIR)/processor_bind.o:	$(UTSBASE)/common/syscall/processor_bind.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/syscall/processor_bind.c
+
+$(OBJS_DIR)/processor_info.o:	$(UTSBASE)/common/syscall/processor_info.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/syscall/processor_info.c
+
+$(OBJS_DIR)/profil.o:	$(UTSBASE)/common/syscall/profil.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/syscall/profil.c
+
+$(OBJS_DIR)/pset.o:	$(UTSBASE)/common/syscall/pset.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/syscall/pset.c
+
+$(OBJS_DIR)/readlink.o:	$(UTSBASE)/common/syscall/readlink.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/syscall/readlink.c
+
+$(OBJS_DIR)/rename.o:	$(UTSBASE)/common/syscall/rename.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/syscall/rename.c
+
+$(OBJS_DIR)/resolvepath.o:	$(UTSBASE)/common/syscall/resolvepath.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/syscall/resolvepath.c
+
+$(OBJS_DIR)/rlimit.o:	$(UTSBASE)/common/syscall/rlimit.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/syscall/rlimit.c
+
+$(OBJS_DIR)/rmdir.o:	$(UTSBASE)/common/syscall/rmdir.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/syscall/rmdir.c
+
+$(OBJS_DIR)/rw.o:	$(UTSBASE)/common/syscall/rw.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/syscall/rw.c
+
+$(OBJS_DIR)/sem.o:	$(UTSBASE)/common/syscall/sem.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/syscall/sem.c
+
+$(OBJS_DIR)/sigaction.o:	$(UTSBASE)/common/syscall/sigaction.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/syscall/sigaction.c
+
+$(OBJS_DIR)/sigaltstack.o:	$(UTSBASE)/common/syscall/sigaltstack.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/syscall/sigaltstack.c
+
+$(OBJS_DIR)/signotify.o:	$(UTSBASE)/common/syscall/signotify.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/syscall/signotify.c
+
+$(OBJS_DIR)/sigpending.o:	$(UTSBASE)/common/syscall/sigpending.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/syscall/sigpending.c
+
+$(OBJS_DIR)/sigprocmask.o:	$(UTSBASE)/common/syscall/sigprocmask.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/syscall/sigprocmask.c
+
+$(OBJS_DIR)/sigqueue.o:	$(UTSBASE)/common/syscall/sigqueue.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/syscall/sigqueue.c
+
+$(OBJS_DIR)/sigsendset.o:	$(UTSBASE)/common/syscall/sigsendset.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/syscall/sigsendset.c
+
+$(OBJS_DIR)/sigsuspend.o:	$(UTSBASE)/common/syscall/sigsuspend.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/syscall/sigsuspend.c
+
+$(OBJS_DIR)/sigtimedwait.o:	$(UTSBASE)/common/syscall/sigtimedwait.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/syscall/sigtimedwait.c
+
+$(OBJS_DIR)/ssig.o:	$(UTSBASE)/common/syscall/ssig.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/syscall/ssig.c
+
+$(OBJS_DIR)/stat.o:	$(UTSBASE)/common/syscall/stat.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/syscall/stat.c
+
+$(OBJS_DIR)/statfs.o:	$(UTSBASE)/common/syscall/statfs.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/syscall/statfs.c
+
+$(OBJS_DIR)/statvfs.o:	$(UTSBASE)/common/syscall/statvfs.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/syscall/statvfs.c
+
+$(OBJS_DIR)/strcalls.o:	$(UTSBASE)/common/syscall/strcalls.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/syscall/strcalls.c
+
+$(OBJS_DIR)/symlink.o:	$(UTSBASE)/common/syscall/symlink.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/syscall/symlink.c
+
+$(OBJS_DIR)/sync.o:	$(UTSBASE)/common/syscall/sync.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/syscall/sync.c
+
+$(OBJS_DIR)/sysconfig.o:	$(UTSBASE)/common/syscall/sysconfig.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/syscall/sysconfig.c
+
+$(OBJS_DIR)/sysfs.o:	$(UTSBASE)/common/syscall/sysfs.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/syscall/sysfs.c
+
+$(OBJS_DIR)/systeminfo.o:	$(UTSBASE)/common/syscall/systeminfo.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/syscall/systeminfo.c
+
+$(OBJS_DIR)/time.o:	$(UTSBASE)/common/syscall/time.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/syscall/time.c
+
+$(OBJS_DIR)/times.o:	$(UTSBASE)/common/syscall/times.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/syscall/times.c
+
+$(OBJS_DIR)/uadmin.o:	$(UTSBASE)/common/syscall/uadmin.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/syscall/uadmin.c
+
+$(OBJS_DIR)/uid.o:	$(UTSBASE)/common/syscall/uid.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/syscall/uid.c
+
+$(OBJS_DIR)/umask.o:	$(UTSBASE)/common/syscall/umask.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/syscall/umask.c
+
+$(OBJS_DIR)/umount.o:	$(UTSBASE)/common/syscall/umount.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/syscall/umount.c
+
+$(OBJS_DIR)/uname.o:	$(UTSBASE)/common/syscall/uname.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/syscall/uname.c
+
+$(OBJS_DIR)/unlink.o:	$(UTSBASE)/common/syscall/unlink.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/syscall/unlink.c
+
+$(OBJS_DIR)/utime.o:	$(UTSBASE)/common/syscall/utime.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/syscall/utime.c
+
+$(OBJS_DIR)/utssys.o:	$(UTSBASE)/common/syscall/utssys.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/syscall/utssys.c
+
+$(OBJS_DIR)/yield.o:	$(UTSBASE)/common/syscall/yield.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/syscall/yield.c
+
+#
+
+$(OBJS_DIR)/tnf.o:		$(UTSBASE)/common/tnf/tnf.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/tnf/tnf.c
+
+$(OBJS_DIR)/tnf_buf.o:		$(UTSBASE)/common/tnf/tnf_buf.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/tnf/tnf_buf.c
+
+$(OBJS_DIR)/tnf_res.o:		$(UTSBASE)/common/tnf/tnf_res.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/tnf/tnf_res.c
+
+$(OBJS_DIR)/tnf_trace.o:	$(UTSBASE)/common/tnf/tnf_trace.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/tnf/tnf_trace.c
+
+$(OBJS_DIR)/tnf_writer.o:	$(UTSBASE)/common/tnf/tnf_writer.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/tnf/tnf_writer.c
+
+$(OBJS_DIR)/trace_funcs.o:	$(UTSBASE)/common/tnf/trace_funcs.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/tnf/trace_funcs.c
+
+$(OBJS_DIR)/tnf_probe.o:	$(UTSBASE)/common/tnf/tnf_probe.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/tnf/tnf_probe.c
+
+$(OBJS_DIR)/trace_init.o:	$(UTSBASE)/common/tnf/trace_init.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/tnf/trace_init.c
+
+$(OBJS_DIR)/hat_refmod.o:	$(UTSBASE)/common/vm/hat_refmod.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/vm/hat_refmod.c
+
+$(OBJS_DIR)/mach_page.o:	$(UTSBASE)/common/vm/mach_page.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/vm/mach_page.c
+
+$(OBJS_DIR)/page_lock.o:	$(UTSBASE)/common/vm/page_lock.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/vm/page_lock.c
+
+$(OBJS_DIR)/seg_dev.o:		$(UTSBASE)/common/vm/seg_dev.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/vm/seg_dev.c
+
+$(OBJS_DIR)/seg_kmem.o:		$(UTSBASE)/common/vm/seg_kmem.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/vm/seg_kmem.c
+
+$(OBJS_DIR)/seg_kp.o:		$(UTSBASE)/common/vm/seg_kp.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/vm/seg_kp.c
+
+$(OBJS_DIR)/seg_map.o:		$(UTSBASE)/common/vm/seg_map.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/vm/seg_map.c
+
+$(OBJS_DIR)/seg_vn.o:		$(UTSBASE)/common/vm/seg_vn.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/vm/seg_vn.c
+
+$(OBJS_DIR)/seg_spt.o:		$(UTSBASE)/common/vm/seg_spt.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/vm/seg_spt.c
+
+$(OBJS_DIR)/vm_anon.o:		$(UTSBASE)/common/vm/vm_anon.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/vm/vm_anon.c
+
+$(OBJS_DIR)/vm_as.o:		$(UTSBASE)/common/vm/vm_as.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/vm/vm_as.c
+
+$(OBJS_DIR)/vm_page.o:		$(UTSBASE)/common/vm/vm_page.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/vm/vm_page.c
+
+$(OBJS_DIR)/vm_pvn.o:		$(UTSBASE)/common/vm/vm_pvn.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/vm/vm_pvn.c
+
+$(OBJS_DIR)/vm_rm.o:		$(UTSBASE)/common/vm/vm_rm.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/vm/vm_rm.c
+
+$(OBJS_DIR)/vm_seg.o:		$(UTSBASE)/common/vm/vm_seg.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/vm/vm_seg.c
+
+$(OBJS_DIR)/vm_swap.o:		$(UTSBASE)/common/vm/vm_swap.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/vm/vm_swap.c
+
+$(OBJS_DIR)/ohci.o:		$(USBBASE)/hcd/openhci/ohci.c
+	$(COMPILE.c) -o $@ $(USBBASE)/hcd/openhci/ohci.c
+
+$(OBJS_DIR)/ohci_polled.o:		$(USBBASE)/hcd/openhci/ohci_polled.c
+	$(COMPILE.c) -o $@ $(USBBASE)/hcd/openhci/ohci_polled.c
+
+$(OBJS_DIR)/uhci.o:		$(USBBASE)/hcd/uhci/uhci.c
+	$(COMPILE.c) -I../../common -o $@ $(USBBASE)/hcd/uhci/uhci.c
+
+$(OBJS_DIR)/uhcihub.o:		$(USBBASE)/hcd/uhci/uhcihub.c
+	$(COMPILE.c) -o $@ $(USBBASE)/hcd/uhci/uhcihub.c
+
+$(OBJS_DIR)/uhcipolled.o:		$(USBBASE)/hcd/uhci/uhcipolled.c
+	$(COMPILE.c) -o $@ $(USBBASE)/hcd/uhci/uhcipolled.c
+
+$(OBJS_DIR)/uhcitgt.o:		$(USBBASE)/hcd/uhci/uhcitgt.c
+	$(COMPILE.c) -o $@ $(USBBASE)/hcd/uhci/uhcitgt.c
+
+$(OBJS_DIR)/uhciutil.o:		$(USBBASE)/hcd/uhci/uhciutil.c
+	$(COMPILE.c) -o $@ $(USBBASE)/hcd/uhci/uhciutil.c
+#
+#	Section 1b:	Lint `objects'
+#
+#	The following are alphabetized by source file path. Please maintain
+# this ordering.
+#
+$(LINTS_DIR)/adr.ln:		$(UTSBASE)/common/c2/adr.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/c2/adr.c $(LTAIL))
+
+$(LINTS_DIR)/audit.ln:		$(UTSBASE)/common/c2/audit.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/c2/audit.c $(LTAIL))
+
+$(LINTS_DIR)/audit_event.ln:		$(UTSBASE)/common/c2/audit_event.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/c2/audit_event.c $(LTAIL))
+
+$(LINTS_DIR)/audit_io.ln:		$(UTSBASE)/common/c2/audit_io.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/c2/audit_io.c $(LTAIL))
+
+$(LINTS_DIR)/audit_mem.ln:		$(UTSBASE)/common/c2/audit_mem.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/c2/audit_mem.c $(LTAIL))
+
+$(LINTS_DIR)/audit_path.ln:		$(UTSBASE)/common/c2/audit_path.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/c2/audit_path.c $(LTAIL))
+
+$(LINTS_DIR)/audit_start.ln:		$(UTSBASE)/common/c2/audit_start.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/c2/audit_start.c $(LTAIL))
+
+$(LINTS_DIR)/audit_syscalls.ln:		$(UTSBASE)/common/c2/audit_syscalls.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/c2/audit_syscalls.c $(LTAIL))
+
+$(LINTS_DIR)/audit_token.ln:		$(UTSBASE)/common/c2/audit_token.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/c2/audit_token.c $(LTAIL))
+
+$(LINTS_DIR)/auditsys.ln:		$(UTSBASE)/common/syscall/auditsys.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/syscall/auditsys.c $(LTAIL))
+
+#$(LINTS_DIR)/c2audit.ln:	$(UTSBASE)/common/c2/c2audit.c
+#	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/c2/c2audit.c $(LTAIL))
+
+$(LINTS_DIR)/param.ln:		$(UTSBASE)/common/conf/param.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/conf/param.c $(LTAIL))
+
+$(LINTS_DIR)/cpr_driver.ln:	$(UTSBASE)/common/cpr/cpr_driver.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/cpr/cpr_driver.c $(LTAIL))
+
+$(LINTS_DIR)/cpr_dump.ln:	$(UTSBASE)/common/cpr/cpr_dump.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/cpr/cpr_dump.c $(LTAIL))
+
+$(LINTS_DIR)/cpr_main.ln:	$(UTSBASE)/common/cpr/cpr_main.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/cpr/cpr_main.c $(LTAIL))
+
+$(LINTS_DIR)/cpr_misc.ln:	$(UTSBASE)/common/cpr/cpr_misc.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/cpr/cpr_misc.c $(LTAIL))
+
+$(LINTS_DIR)/cpr_mod.ln:	$(UTSBASE)/common/cpr/cpr_mod.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/cpr/cpr_mod.c $(LTAIL))
+
+$(LINTS_DIR)/cpr_stat.ln:	$(UTSBASE)/common/cpr/cpr_stat.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/cpr/cpr_stat.c $(LTAIL))
+
+$(LINTS_DIR)/cpr_uthread.ln:	$(UTSBASE)/common/cpr/cpr_uthread.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/cpr/cpr_uthread.c $(LTAIL))
+
+$(LINTS_DIR)/des_crypt.ln:	$(UTSBASE)/common/des/des_crypt.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/des/des_crypt.c $(LTAIL))
+
+$(LINTS_DIR)/des_soft.ln:	$(UTSBASE)/common/des/des_soft.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/des/des_soft.c $(LTAIL))
+
+$(LINTS_DIR)/class.ln:		$(UTSBASE)/common/disp/class.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/disp/class.c $(LTAIL))
+
+$(LINTS_DIR)/cpupart.ln:	$(UTSBASE)/common/disp/cpupart.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/disp/cpupart.c $(LTAIL))
+
+$(LINTS_DIR)/disp.ln:		$(UTSBASE)/common/disp/disp.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/disp/disp.c $(LTAIL))
+
+$(LINTS_DIR)/disp_lock.ln:	$(UTSBASE)/common/disp/disp_lock.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/disp/disp_lock.c $(LTAIL))
+
+$(LINTS_DIR)/ia.ln:		$(UTSBASE)/common/disp/ia.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/disp/ia.c $(LTAIL))
+
+$(LINTS_DIR)/priocntl.ln:	$(UTSBASE)/common/disp/priocntl.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/disp/priocntl.c $(LTAIL))
+
+$(LINTS_DIR)/rt.ln:		$(UTSBASE)/common/disp/rt.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/disp/rt.c $(LTAIL))
+
+$(LINTS_DIR)/rt_dptbl.ln:	$(UTSBASE)/common/disp/rt_dptbl.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/disp/rt_dptbl.c $(LTAIL))
+
+$(LINTS_DIR)/shuttle.ln:	$(UTSBASE)/common/disp/shuttle.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/disp/shuttle.c $(LTAIL))
+
+$(LINTS_DIR)/sysclass.ln:	$(UTSBASE)/common/disp/sysclass.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/disp/sysclass.c $(LTAIL))
+
+$(LINTS_DIR)/thread.ln:		$(UTSBASE)/common/disp/thread.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/disp/thread.c $(LTAIL))
+
+$(LINTS_DIR)/ts.ln:		$(UTSBASE)/common/disp/ts.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/disp/ts.c $(LTAIL))
+
+$(LINTS_DIR)/ts_dptbl.ln:	$(UTSBASE)/common/disp/ts_dptbl.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/disp/ts_dptbl.c $(LTAIL))
+
+$(LINTS_DIR)/aout.ln:		$(UTSBASE)/common/exec/aout/aout.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/exec/aout/aout.c $(LTAIL))
+
+$(LINTS_DIR)/elf.ln:		$(UTSBASE)/common/exec/elf/elf.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/exec/elf/elf.c $(LTAIL))
+
+$(LINTS_DIR)/elf_notes.ln:	$(UTSBASE)/common/exec/elf/elf_notes.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/exec/elf/elf_notes.c $(LTAIL))
+
+$(LINTS_DIR)/old_notes.ln:	$(UTSBASE)/common/exec/elf/old_notes.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/exec/elf/old_notes.c $(LTAIL))
+
+$(LINTS_DIR)/coff.ln:		$(UTSBASE)/common/exec/coff/coff.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/exec/coff/coff.c $(LTAIL))
+
+$(LINTS_DIR)/intp.ln:		$(UTSBASE)/common/exec/intp/intp.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/exec/intp/intp.c $(LTAIL))
+
+$(LINTS_DIR)/java.ln:		$(UTSBASE)/common/exec/java/java.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/exec/java/java.c $(LTAIL))
+
+$(LINTS_DIR)/cachefs_cnode.ln:	$(CACHEFSBASE)/cachefs_cnode.c
+	@($(LHEAD) $(LINT.c) $(CACHEFSBASE)/cachefs_cnode.c $(LTAIL))
+
+$(LINTS_DIR)/cachefs_cod.ln:	$(CACHEFSBASE)/cachefs_cod.c
+	@($(LHEAD) $(LINT.c) $(CACHEFSBASE)/cachefs_cod.c $(LTAIL))
+
+$(LINTS_DIR)/cachefs_dir.ln:	$(CACHEFSBASE)/cachefs_dir.c
+	@($(LHEAD) $(LINT.c) $(CACHEFSBASE)/cachefs_dir.c $(LTAIL))
+
+$(LINTS_DIR)/cachefs_dlog.ln:	$(CACHEFSBASE)/cachefs_dlog.c
+	@($(LHEAD) $(LINT.c) $(CACHEFSBASE)/cachefs_dlog.c $(LTAIL))
+
+$(LINTS_DIR)/cachefs_filegrp.ln:	$(CACHEFSBASE)/cachefs_filegrp.c
+	@($(LHEAD) $(LINT.c) $(CACHEFSBASE)/cachefs_filegrp.c $(LTAIL))
+
+$(LINTS_DIR)/cachefs_fscache.ln:	$(CACHEFSBASE)/cachefs_fscache.c
+	@($(LHEAD) $(LINT.c) $(CACHEFSBASE)/cachefs_fscache.c $(LTAIL))
+
+$(LINTS_DIR)/cachefs_ioctl.ln:	$(CACHEFSBASE)/cachefs_ioctl.c
+	@($(LHEAD) $(LINT.c) $(CACHEFSBASE)/cachefs_ioctl.c $(LTAIL))
+
+$(LINTS_DIR)/cachefs_log.ln:	$(CACHEFSBASE)/cachefs_log.c
+	@($(LHEAD) $(LINT.c) $(CACHEFSBASE)/cachefs_log.c $(LTAIL))
+
+$(LINTS_DIR)/cachefs_module.ln:	$(CACHEFSBASE)/cachefs_module.c
+	@($(LHEAD) $(LINT.c) $(CACHEFSBASE)/cachefs_module.c $(LTAIL))
+
+$(LINTS_DIR)/cachefs_noopc.ln:	$(CACHEFSBASE)/cachefs_noopc.c
+	@($(LHEAD) $(LINT.c) $(CACHEFSBASE)/cachefs_noopc.c $(LTAIL))
+
+$(LINTS_DIR)/cachefs_resource.ln:	$(CACHEFSBASE)/cachefs_resource.c
+	@($(LHEAD) $(LINT.c) $(CACHEFSBASE)/cachefs_resource.c $(LTAIL))
+
+$(LINTS_DIR)/cachefs_strict.ln:	$(CACHEFSBASE)/cachefs_strict.c
+	@($(LHEAD) $(LINT.c) $(CACHEFSBASE)/cachefs_strict.c $(LTAIL))
+
+$(LINTS_DIR)/cachefs_subr.ln:	$(CACHEFSBASE)/cachefs_subr.c
+	@($(LHEAD) $(LINT.c) $(CACHEFSBASE)/cachefs_subr.c $(LTAIL))
+
+$(LINTS_DIR)/cachefs_vfsops.ln:	$(CACHEFSBASE)/cachefs_vfsops.c
+	@($(LHEAD) $(LINT.c) $(CACHEFSBASE)/cachefs_vfsops.c $(LTAIL))
+
+$(LINTS_DIR)/cachefs_vnops.ln:	$(CACHEFSBASE)/cachefs_vnops.c
+	@($(LHEAD) $(LINT.c) $(CACHEFSBASE)/cachefs_vnops.c $(LTAIL))
+
+$(LINTS_DIR)/dnlc.ln:		$(UTSBASE)/common/fs/dnlc.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/fs/dnlc.c $(LTAIL))
+
+$(LINTS_DIR)/auto_vfsops.ln:	$(UTSBASE)/common/fs/autofs/auto_vfsops.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/fs/autofs/auto_vfsops.c $(LTAIL))
+
+$(LINTS_DIR)/auto_vnops.ln:	$(UTSBASE)/common/fs/autofs/auto_vnops.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/fs/autofs/auto_vnops.c $(LTAIL))
+
+$(LINTS_DIR)/auto_subr.ln:	$(UTSBASE)/common/fs/autofs/auto_subr.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/fs/autofs/auto_subr.c $(LTAIL))
+
+$(LINTS_DIR)/auto_xdr.ln:	$(UTSBASE)/common/fs/autofs/auto_xdr.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/fs/autofs/auto_xdr.c $(LTAIL))
+
+$(LINTS_DIR)/s5_alloc.ln:		$(UTSBASE)/common/fs/s5fs/s5_alloc.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/fs/s5fs/s5_alloc.c $(LTAIL))
+
+$(LINTS_DIR)/s5_bmap.ln:		$(UTSBASE)/common/fs/s5fs/s5_bmap.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/fs/s5fs/s5_bmap.c $(LTAIL))
+
+$(LINTS_DIR)/s5_dir.ln:		$(UTSBASE)/common/fs/s5fs/s5_dir.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/fs/s5fs/s5_dir.c $(LTAIL))
+
+$(LINTS_DIR)/s5_inode.ln:		$(UTSBASE)/common/fs/s5fs/s5_inode.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/fs/s5fs/s5_inode.c $(LTAIL))
+
+$(LINTS_DIR)/s5_lockfs.ln:		$(UTSBASE)/common/fs/s5fs/s5_lockfs.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/fs/s5fs/s5_lockfs.c $(LTAIL))
+
+$(LINTS_DIR)/s5_subr.ln:		$(UTSBASE)/common/fs/s5fs/s5_subr.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/fs/s5fs/s5_subr.c $(LTAIL))
+
+$(LINTS_DIR)/s5_vfsops.ln:		$(UTSBASE)/common/fs/s5fs/s5_vfsops.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/fs/s5fs/s5_vfsops.c $(LTAIL))
+
+$(LINTS_DIR)/s5_vnops.ln:		$(UTSBASE)/common/fs/s5fs/s5_vnops.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/fs/s5fs/s5_vnops.c $(LTAIL))
+
+$(LINTS_DIR)/fdops.ln:		$(UTSBASE)/common/fs/fd/fdops.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/fs/fd/fdops.c $(LTAIL))
+
+$(LINTS_DIR)/fdbuffer.ln:	$(UTSBASE)/common/fs/fdbuffer.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/fs/fdbuffer.c $(LTAIL))
+
+$(LINTS_DIR)/fifosubr.ln:	$(UTSBASE)/common/fs/fifofs/fifosubr.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/fs/fifofs/fifosubr.c $(LTAIL))
+
+$(LINTS_DIR)/fifovnops.ln:	$(UTSBASE)/common/fs/fifofs/fifovnops.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/fs/fifofs/fifovnops.c $(LTAIL))
+
+$(LINTS_DIR)/fs_subr.ln:	$(UTSBASE)/common/fs/fs_subr.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/fs/fs_subr.c $(LTAIL))
+
+$(LINTS_DIR)/fsflush.ln:	$(UTSBASE)/common/fs/fsflush.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/fs/fsflush.c $(LTAIL))
+
+$(LINTS_DIR)/hsfs_node.ln:	$(UTSBASE)/common/fs/hsfs/hsfs_node.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/fs/hsfs/hsfs_node.c $(LTAIL))
+
+$(LINTS_DIR)/hsfs_rrip.ln:	$(UTSBASE)/common/fs/hsfs/hsfs_rrip.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/fs/hsfs/hsfs_rrip.c $(LTAIL))
+
+$(LINTS_DIR)/hsfs_subr.ln:	$(UTSBASE)/common/fs/hsfs/hsfs_subr.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/fs/hsfs/hsfs_subr.c $(LTAIL))
+
+$(LINTS_DIR)/hsfs_susp.ln:	$(UTSBASE)/common/fs/hsfs/hsfs_susp.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/fs/hsfs/hsfs_susp.c $(LTAIL))
+
+$(LINTS_DIR)/hsfs_susp_subr.ln:	$(UTSBASE)/common/fs/hsfs/hsfs_susp_subr.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/fs/hsfs/hsfs_susp_subr.c $(LTAIL))
+
+$(LINTS_DIR)/hsfs_vfsops.ln:	$(UTSBASE)/common/fs/hsfs/hsfs_vfsops.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/fs/hsfs/hsfs_vfsops.c $(LTAIL))
+
+$(LINTS_DIR)/hsfs_vnops.ln:	$(UTSBASE)/common/fs/hsfs/hsfs_vnops.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/fs/hsfs/hsfs_vnops.c $(LTAIL))
+
+$(LINTS_DIR)/lofs_vnops.ln:	$(UTSBASE)/common/fs/lofs/lofs_vnops.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/fs/lofs/lofs_vnops.c $(LTAIL))
+
+$(LINTS_DIR)/lofs_vfsops.ln:	$(UTSBASE)/common/fs/lofs/lofs_vfsops.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/fs/lofs/lofs_vfsops.c $(LTAIL))
+
+$(LINTS_DIR)/lofs_subr.ln:	$(UTSBASE)/common/fs/lofs/lofs_subr.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/fs/lofs/lofs_subr.c $(LTAIL))
+
+$(LINTS_DIR)/lookup.ln:		$(UTSBASE)/common/fs/lookup.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/fs/lookup.c $(LTAIL))
+
+$(LINTS_DIR)/mntvfsops.ln:	$(UTSBASE)/common/fs/mntfs/mntvfsops.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/fs/mntfs/mntvfsops.c $(LTAIL))
+
+$(LINTS_DIR)/mntvnops.ln:	$(UTSBASE)/common/fs/mntfs/mntvnops.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/fs/mntfs/mntvnops.c $(LTAIL))
+
+$(LINTS_DIR)/namevfs.ln:	$(UTSBASE)/common/fs/namefs/namevfs.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/fs/namefs/namevfs.c $(LTAIL))
+
+$(LINTS_DIR)/namevno.ln:	$(UTSBASE)/common/fs/namefs/namevno.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/fs/namefs/namevno.c $(LTAIL))
+
+$(LINTS_DIR)/nfs_client.ln:	$(UTSBASE)/common/fs/nfs/nfs_client.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/fs/nfs/nfs_client.c $(LTAIL))
+
+$(LINTS_DIR)/nfs_common.ln:	$(UTSBASE)/common/fs/nfs/nfs_common.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/fs/nfs/nfs_common.c $(LTAIL))
+
+$(LINTS_DIR)/bootparam_xdr.ln:	$(UTSBASE)/common/fs/nfs/bootparam_xdr.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/fs/nfs/bootparam_xdr.c $(LTAIL))
+
+$(LINTS_DIR)/nfs_dlinet.ln:	$(UTSBASE)/common/fs/nfs/nfs_dlinet.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/fs/nfs/nfs_dlinet.c $(LTAIL))
+
+$(LINTS_DIR)/nfs_dump.ln:	$(UTSBASE)/common/fs/nfs/nfs_dump.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/fs/nfs/nfs_dump.c $(LTAIL))
+
+$(LINTS_DIR)/nfs_export.ln:	$(UTSBASE)/common/fs/nfs/nfs_export.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/fs/nfs/nfs_export.c $(LTAIL))
+
+$(LINTS_DIR)/nfs_log.ln:	$(UTSBASE)/common/fs/nfs/nfs_log.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/fs/nfs/nfs_log.c $(LTAIL))
+
+$(LINTS_DIR)/nfs_log_xdr.ln:	$(UTSBASE)/common/fs/nfs/nfs_log_xdr.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/fs/nfs/nfs_log_xdr.c $(LTAIL))
+
+$(LINTS_DIR)/nfs_server.ln:	$(UTSBASE)/common/fs/nfs/nfs_server.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/fs/nfs/nfs_server.c $(LTAIL))
+
+$(LINTS_DIR)/nfs_srv.ln:	$(UTSBASE)/common/fs/nfs/nfs_srv.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/fs/nfs/nfs_srv.c $(LTAIL))
+
+$(LINTS_DIR)/nfs_strerror.ln:	$(UTSBASE)/common/fs/nfs/nfs_strerror.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/fs/nfs/nfs_strerror.c $(LTAIL))
+
+$(LINTS_DIR)/nfs_subr.ln:	$(UTSBASE)/common/fs/nfs/nfs_subr.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/fs/nfs/nfs_subr.c $(LTAIL))
+
+$(LINTS_DIR)/nfs_vfsops.ln:	$(UTSBASE)/common/fs/nfs/nfs_vfsops.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/fs/nfs/nfs_vfsops.c $(LTAIL))
+
+$(LINTS_DIR)/nfs_vnops.ln:	$(UTSBASE)/common/fs/nfs/nfs_vnops.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/fs/nfs/nfs_vnops.c $(LTAIL))
+
+$(LINTS_DIR)/nfs_xdr.ln:	$(UTSBASE)/common/fs/nfs/nfs_xdr.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/fs/nfs/nfs_xdr.c $(LTAIL))
+
+$(LINTS_DIR)/nfs_sys.ln:	$(UTSBASE)/common/fs/nfs/nfs_sys.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/fs/nfs/nfs_sys.c $(LTAIL))
+
+$(LINTS_DIR)/nfs3_srv.ln:	$(UTSBASE)/common/fs/nfs/nfs3_srv.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/fs/nfs/nfs3_srv.c $(LTAIL))
+
+$(LINTS_DIR)/nfs3_vfsops.ln:	$(UTSBASE)/common/fs/nfs/nfs3_vfsops.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/fs/nfs/nfs3_vfsops.c $(LTAIL))
+
+$(LINTS_DIR)/nfs3_vnops.ln:	$(UTSBASE)/common/fs/nfs/nfs3_vnops.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/fs/nfs/nfs3_vnops.c $(LTAIL))
+
+$(LINTS_DIR)/nfs3_xdr.ln:	$(UTSBASE)/common/fs/nfs/nfs3_xdr.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/fs/nfs/nfs3_xdr.c $(LTAIL))
+
+$(LINTS_DIR)/nfs_acl_srv.ln:	$(UTSBASE)/common/fs/nfs/nfs_acl_srv.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/fs/nfs/nfs_acl_srv.c $(LTAIL))
+
+$(LINTS_DIR)/nfs_acl_vnops.ln:	$(UTSBASE)/common/fs/nfs/nfs_acl_vnops.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/fs/nfs/nfs_acl_vnops.c $(LTAIL))
+
+$(LINTS_DIR)/nfs_acl_xdr.ln:	$(UTSBASE)/common/fs/nfs/nfs_acl_xdr.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/fs/nfs/nfs_acl_xdr.c $(LTAIL))
+
+$(LINTS_DIR)/nfs_auth.ln:	$(UTSBASE)/common/fs/nfs/nfs_auth.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/fs/nfs/nfs_auth.c $(LTAIL))
+
+$(LINTS_DIR)/nfs_auth_xdr.ln:	nfs_auth_xdr.c
+	@($(LHEAD) $(LINT.c) nfs_auth_xdr.c $(LTAIL))
+
+$(LINTS_DIR)/octet.ln:	$(SRC)/common/net/dhcp/octet.c
+	@($(LHEAD) $(LINT.c) $(SRC)/common/net/dhcp/octet.c $(LTAIL))
+
+$(LINTS_DIR)/pathname.ln:	$(UTSBASE)/common/fs/pathname.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/fs/pathname.c $(LTAIL))
+
+$(LINTS_DIR)/pc_alloc.ln:	$(UTSBASE)/common/fs/pcfs/pc_alloc.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/fs/pcfs/pc_alloc.c $(LTAIL))
+
+$(LINTS_DIR)/pc_dir.ln:		$(UTSBASE)/common/fs/pcfs/pc_dir.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/fs/pcfs/pc_dir.c $(LTAIL))
+
+$(LINTS_DIR)/pc_node.ln:	$(UTSBASE)/common/fs/pcfs/pc_node.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/fs/pcfs/pc_node.c $(LTAIL))
+
+$(LINTS_DIR)/pc_subr.ln:	$(UTSBASE)/common/fs/pcfs/pc_subr.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/fs/pcfs/pc_subr.c $(LTAIL))
+
+$(LINTS_DIR)/pc_vfsops.ln:	$(UTSBASE)/common/fs/pcfs/pc_vfsops.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/fs/pcfs/pc_vfsops.c $(LTAIL))
+
+$(LINTS_DIR)/pc_vnops.ln:	$(UTSBASE)/common/fs/pcfs/pc_vnops.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/fs/pcfs/pc_vnops.c $(LTAIL))
+
+$(LINTS_DIR)/prcontrol.ln:	$(UTSBASE)/common/fs/proc/prcontrol.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/fs/proc/prcontrol.c $(LTAIL))
+
+$(LINTS_DIR)/prioctl.ln:	$(UTSBASE)/common/fs/proc/prioctl.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/fs/proc/prioctl.c $(LTAIL))
+
+$(LINTS_DIR)/prsubr.ln:		$(UTSBASE)/common/fs/proc/prsubr.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/fs/proc/prsubr.c $(LTAIL))
+
+$(LINTS_DIR)/prusrio.ln:	$(UTSBASE)/common/fs/proc/prusrio.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/fs/proc/prusrio.c $(LTAIL))
+
+$(LINTS_DIR)/prvfsops.ln:	$(UTSBASE)/common/fs/proc/prvfsops.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/fs/proc/prvfsops.c $(LTAIL))
+
+$(LINTS_DIR)/prvnops.ln:	$(UTSBASE)/common/fs/proc/prvnops.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/fs/proc/prvnops.c $(LTAIL))
+
+$(LINTS_DIR)/scan.ln:	$(SRC)/common/net/dhcp/scan.c
+	@($(LHEAD) $(LINT.c) $(SRC)/common/net/dhcp/scan.c $(LTAIL))
+
+$(LINTS_DIR)/socksubr.ln:	$(UTSBASE)/common/fs/sockfs/socksubr.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/fs/sockfs/socksubr.c $(LTAIL))
+
+$(LINTS_DIR)/sockvfsops.ln:	$(UTSBASE)/common/fs/sockfs/sockvfsops.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/fs/sockfs/sockvfsops.c $(LTAIL))
+
+$(LINTS_DIR)/sockvnops.ln:	$(UTSBASE)/common/fs/sockfs/sockvnops.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/fs/sockfs/sockvnops.c $(LTAIL))
+
+$(LINTS_DIR)/socksyscalls.ln:	$(UTSBASE)/common/fs/sockfs/socksyscalls.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/fs/sockfs/socksyscalls.c $(LTAIL))
+
+$(LINTS_DIR)/sockstr.ln:	$(UTSBASE)/common/fs/sockfs/sockstr.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/fs/sockfs/sockstr.c $(LTAIL))
+
+$(LINTS_DIR)/socktpi.ln:	$(UTSBASE)/common/fs/sockfs/socktpi.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/fs/sockfs/socktpi.c $(LTAIL))
+
+$(LINTS_DIR)/specsubr.ln:	$(UTSBASE)/common/fs/specfs/specsubr.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/fs/specfs/specsubr.c $(LTAIL))
+
+$(LINTS_DIR)/specvfsops.ln:	$(UTSBASE)/common/fs/specfs/specvfsops.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/fs/specfs/specvfsops.c $(LTAIL))
+
+$(LINTS_DIR)/specvnops.ln:	$(UTSBASE)/common/fs/specfs/specvnops.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/fs/specfs/specvnops.c $(LTAIL))
+
+$(LINTS_DIR)/swap_subr.ln:	$(UTSBASE)/common/fs/swapfs/swap_subr.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/fs/swapfs/swap_subr.c $(LTAIL))
+
+$(LINTS_DIR)/swap_vnops.ln:	$(UTSBASE)/common/fs/swapfs/swap_vnops.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/fs/swapfs/swap_vnops.c $(LTAIL))
+
+$(LINTS_DIR)/tmp_dir.ln:	$(UTSBASE)/common/fs/tmpfs/tmp_dir.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/fs/tmpfs/tmp_dir.c $(LTAIL))
+
+$(LINTS_DIR)/tmp_subr.ln:	$(UTSBASE)/common/fs/tmpfs/tmp_subr.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/fs/tmpfs/tmp_subr.c $(LTAIL))
+
+$(LINTS_DIR)/tmp_tnode.ln:	$(UTSBASE)/common/fs/tmpfs/tmp_tnode.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/fs/tmpfs/tmp_tnode.c $(LTAIL))
+
+$(LINTS_DIR)/tmp_vfsops.ln:	$(UTSBASE)/common/fs/tmpfs/tmp_vfsops.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/fs/tmpfs/tmp_vfsops.c $(LTAIL))
+
+$(LINTS_DIR)/tmp_vnops.ln:	$(UTSBASE)/common/fs/tmpfs/tmp_vnops.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/fs/tmpfs/tmp_vnops.c $(LTAIL))
+
+$(LINTS_DIR)/udf_inode.ln:	$(UTSBASE)/common/fs/udfs/udf_inode.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/fs/udfs/udf_inode.c $(LTAIL))
+
+$(LINTS_DIR)/udf_alloc.ln:	$(UTSBASE)/common/fs/udfs/udf_alloc.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/fs/udfs/udf_alloc.c $(LTAIL))
+
+$(LINTS_DIR)/udf_bmap.ln:	$(UTSBASE)/common/fs/udfs/udf_bmap.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/fs/udfs/udf_bmap.c $(LTAIL))
+
+$(LINTS_DIR)/udf_dir.ln:	$(UTSBASE)/common/fs/udfs/udf_dir.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/fs/udfs/udf_dir.c $(LTAIL))
+
+$(LINTS_DIR)/udf_subr.ln:	$(UTSBASE)/common/fs/udfs/udf_subr.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/fs/udfs/udf_subr.c $(LTAIL))
+
+$(LINTS_DIR)/udf_vfsops.ln:	$(UTSBASE)/common/fs/udfs/udf_vfsops.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/fs/udfs/udf_vfsops.c $(LTAIL))
+
+$(LINTS_DIR)/udf_vnops.ln:	$(UTSBASE)/common/fs/udfs/udf_vnops.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/fs/udfs/udf_vnops.c $(LTAIL))
+
+$(LINTS_DIR)/quota.ln:		$(UTSBASE)/common/fs/ufs/quota.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/fs/ufs/quota.c $(LTAIL))
+
+$(LINTS_DIR)/quota_ufs.ln:	$(UTSBASE)/common/fs/ufs/quota_ufs.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/fs/ufs/quota_ufs.c $(LTAIL))
+
+$(LINTS_DIR)/quotacalls.ln:	$(UTSBASE)/common/fs/ufs/quotacalls.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/fs/ufs/quotacalls.c $(LTAIL))
+
+$(LINTS_DIR)/ufs_alloc.ln:	$(UTSBASE)/common/fs/ufs/ufs_alloc.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/fs/ufs/ufs_alloc.c $(LTAIL))
+
+$(LINTS_DIR)/ufs_bmap.ln:	$(UTSBASE)/common/fs/ufs/ufs_bmap.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/fs/ufs/ufs_bmap.c $(LTAIL))
+
+$(LINTS_DIR)/ufs_dir.ln:	$(UTSBASE)/common/fs/ufs/ufs_dir.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/fs/ufs/ufs_dir.c $(LTAIL))
+
+$(LINTS_DIR)/ufs_extvnops.ln:	$(UTSBASE)/common/fs/ufs/ufs_extvnops.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/fs/ufs/ufs_extvnops.c $(LTAIL))
+
+$(LINTS_DIR)/ufs_filio.ln:	$(UTSBASE)/common/fs/ufs/ufs_filio.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/fs/ufs/ufs_filio.c $(LTAIL))
+
+$(LINTS_DIR)/ufs_inode.ln:	$(UTSBASE)/common/fs/ufs/ufs_inode.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/fs/ufs/ufs_inode.c $(LTAIL))
+
+$(LINTS_DIR)/ufs_lockfs.ln:	$(UTSBASE)/common/fs/ufs/ufs_lockfs.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/fs/ufs/ufs_lockfs.c $(LTAIL))
+
+$(LINTS_DIR)/ufs_subr.ln:	$(UTSBASE)/common/fs/ufs/ufs_subr.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/fs/ufs/ufs_subr.c $(LTAIL))
+
+$(LINTS_DIR)/ufs_tables.ln:	$(UTSBASE)/common/fs/ufs/ufs_tables.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/fs/ufs/ufs_tables.c $(LTAIL))
+
+$(LINTS_DIR)/ufs_thread.ln:	$(UTSBASE)/common/fs/ufs/ufs_thread.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/fs/ufs/ufs_thread.c $(LTAIL))
+
+$(LINTS_DIR)/ufs_trans.ln:	$(UTSBASE)/common/fs/ufs/ufs_trans.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/fs/ufs/ufs_trans.c $(LTAIL))
+
+$(LINTS_DIR)/ufs_vfsops.ln:	$(UTSBASE)/common/fs/ufs/ufs_vfsops.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/fs/ufs/ufs_vfsops.c $(LTAIL))
+
+$(LINTS_DIR)/ufs_vnops.ln:	$(UTSBASE)/common/fs/ufs/ufs_vnops.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/fs/ufs/ufs_vnops.c $(LTAIL))
+
+$(LINTS_DIR)/ufs_acl.ln:	$(UTSBASE)/common/fs/ufs/ufs_acl.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/fs/ufs/ufs_acl.c $(LTAIL))
+
+$(LINTS_DIR)/ufs_panic.ln:	$(UTSBASE)/common/fs/ufs/ufs_panic.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/fs/ufs/ufs_panic.c $(LTAIL))
+
+$(LINTS_DIR)/ufs_directio.ln:	$(UTSBASE)/common/fs/ufs/ufs_directio.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/fs/ufs/ufs_directio.c $(LTAIL))
+
+$(LINTS_DIR)/ufs_log.ln:	$(UTSBASE)/common/fs/ufs/ufs_log.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/fs/ufs/ufs_log.c $(LTAIL))
+
+$(LINTS_DIR)/lufs.ln:		$(UTSBASE)/common/fs/ufs_log/lufs.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/fs/ufs_log/lufs.c $(LTAIL))
+
+$(LINTS_DIR)/lufs_log.ln:	$(UTSBASE)/common/fs/ufs_log/lufs_log.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/fs/ufs_log/lufs_log.c $(LTAIL))
+
+$(LINTS_DIR)/lufs_map.ln:	$(UTSBASE)/common/fs/ufs_log/lufs_map.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/fs/ufs_log/lufs_map.c $(LTAIL))
+
+$(LINTS_DIR)/lufs_thread.ln:	$(UTSBASE)/common/fs/ufs_log/lufs_thread.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/fs/ufs_log/lufs_thread.c $(LTAIL))
+
+$(LINTS_DIR)/lufs_top.ln:	$(UTSBASE)/common/fs/ufs_log/lufs_top.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/fs/ufs_log/lufs_top.c $(LTAIL))
+
+$(LINTS_DIR)/lufs_debug.ln:	$(UTSBASE)/common/fs/ufs_log/lufs_debug.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/fs/ufs_log/lufs_debug.c $(LTAIL))
+
+$(LINTS_DIR)/vfs.ln:		$(UTSBASE)/common/fs/vfs.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/fs/vfs.c $(LTAIL))
+
+$(LINTS_DIR)/vfs_conf.ln:	$(UTSBASE)/common/os/vfs_conf.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/os/vfs_conf.c $(LTAIL))
+
+$(LINTS_DIR)/vnode.ln:		$(UTSBASE)/common/fs/vnode.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/fs/vnode.c $(LTAIL))
+
+$(LINTS_DIR)/arp.ln:		$(UTSBASE)/common/inet/arp.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/inet/arp.c $(LTAIL))
+
+$(LINTS_DIR)/arpddi.ln:		$(UTSBASE)/common/inet/arpddi.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/inet/arpddi.c $(LTAIL))
+
+$(LINTS_DIR)/icmp.ln:		$(UTSBASE)/common/inet/icmp.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/inet/icmp.c $(LTAIL))
+
+$(LINTS_DIR)/icmpddi.ln:	$(UTSBASE)/common/inet/icmpddi.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/inet/icmpddi.c $(LTAIL))
+
+$(LINTS_DIR)/icmp6ddi.ln:	$(UTSBASE)/common/inet/icmp6ddi.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/inet/icmp6ddi.c $(LTAIL))
+
+$(LINTS_DIR)/icmp_opt_data.ln:	$(UTSBASE)/common/inet/icmp_opt_data.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/inet/icmp_opt_data.c $(LTAIL))
+
+$(LINTS_DIR)/authsha1.ln:		$(UTSBASE)/common/inet/authsha1.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/inet/authsha1.c $(LTAIL))
+
+$(LINTS_DIR)/sha1.ln:		$(UTSBASE)/common/inet/sha1.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/inet/sha1.c $(LTAIL))
+
+$(LINTS_DIR)/authmd5h.ln:		$(UTSBASE)/common/inet/authmd5h.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/inet/authmd5h.c $(LTAIL))
+
+$(LINTS_DIR)/ipsecah.ln:		$(UTSBASE)/common/inet/ipsecah.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/inet/ipsecah.c $(LTAIL))
+
+$(LINTS_DIR)/ipsecahddi.ln:	$(UTSBASE)/common/inet/ipsecahddi.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/inet/ipsecahddi.c $(LTAIL))
+
+$(LINTS_DIR)/ipsecesp.ln:		$(UTSBASE)/common/inet/ipsecesp.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/inet/ipsecesp.c $(LTAIL))
+
+$(LINTS_DIR)/ipsecespddi.ln:	$(UTSBASE)/common/inet/ipsecespddi.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/inet/ipsecespddi.c $(LTAIL))
+
+$(LINTS_DIR)/encrdes.ln:		$(UTSBASE)/common/inet/encrdes.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/inet/encrdes.c $(LTAIL))
+
+$(LINTS_DIR)/encr3des.ln:		$(UTSBASE)/common/inet/encr3des.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/inet/encr3des.c $(LTAIL))
+
+$(LINTS_DIR)/keysock.ln:		$(UTSBASE)/common/inet/keysock.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/inet/keysock.c $(LTAIL))
+
+$(LINTS_DIR)/keysockddi.ln:	$(UTSBASE)/common/inet/keysockddi.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/inet/keysockddi.c $(LTAIL))
+
+$(LINTS_DIR)/keysock_opt_data.ln:	$(UTSBASE)/common/inet/keysock_opt_data.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/inet/keysock_opt_data.c $(LTAIL))
+
+$(LINTS_DIR)/sadb.ln:	$(UTSBASE)/common/inet/sadb.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/inet/sadb.c $(LTAIL))
+
+$(LINTS_DIR)/rts.ln:		$(UTSBASE)/common/inet/rts.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/inet/rts.c $(LTAIL))
+
+$(LINTS_DIR)/rtsddi.ln:	$(UTSBASE)/common/inet/rtsddi.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/inet/rtsddi.c $(LTAIL))
+
+$(LINTS_DIR)/rts_opt_data.ln:	$(UTSBASE)/common/inet/rts_opt_data.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/inet/rts_opt_data.c $(LTAIL))
+
+$(LINTS_DIR)/igmp.ln:		$(UTSBASE)/common/inet/igmp.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/inet/igmp.c $(LTAIL))
+
+$(LINTS_DIR)/ip_opt_data.ln:		$(UTSBASE)/common/inet/ip_opt_data.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/inet/ip_opt_data.c $(LTAIL))
+
+
+$(LINTS_DIR)/ip6.ln:		$(UTSBASE)/common/inet/ip6.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/inet/ip6.c $(LTAIL))
+
+$(LINTS_DIR)/ip_mroute.ln:	$(UTSBASE)/common/inet/ip_mroute.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/inet/ip_mroute.c $(LTAIL))
+
+$(LINTS_DIR)/ip_multi.ln:	$(UTSBASE)/common/inet/ip_multi.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/inet/ip_multi.c $(LTAIL))
+
+$(LINTS_DIR)/ipcsum.ln:		$(UTSBASE)/common/inet/ipcsum.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/inet/ipcsum.c $(LTAIL))
+
+$(LINTS_DIR)/ip_cksum.ln:	$(UTSBASE)/common/inet/ip_cksum.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/inet/ip_cksum.c $(LTAIL))
+
+$(LINTS_DIR)/ipddi.ln:		$(UTSBASE)/common/inet/ipddi.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/inet/ipddi.c $(LTAIL))
+
+$(LINTS_DIR)/ip6ddi.ln:		$(UTSBASE)/common/inet/ip6ddi.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/inet/ip6ddi.c $(LTAIL))
+
+$(LINTS_DIR)/ip_if.ln:		$(UTSBASE)/common/inet/ip_if.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/inet/ip_if.c $(LTAIL))
+
+$(LINTS_DIR)/ip6_if.ln:	$(UTSBASE)/common/inet/ip6_if.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/inet/ip6_if.c $(LTAIL))
+
+$(LINTS_DIR)/ip_ire.ln:		$(UTSBASE)/common/inet/ip_ire.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/inet/ip_ire.c $(LTAIL))
+
+$(LINTS_DIR)/ip6_ire.ln:		$(UTSBASE)/common/inet/ip6_ire.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/inet/ip6_ire.c $(LTAIL))
+
+$(LINTS_DIR)/ip_ndp.ln:		$(UTSBASE)/common/inet/ip_ndp.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/inet/ip_ndp.c $(LTAIL))
+
+
+$(LINTS_DIR)/ip_srcid.ln:		$(UTSBASE)/common/inet/ip_srcid.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/inet/ip_srcid.c $(LTAIL))
+
+$(LINTS_DIR)/snmpcom.ln:	$(UTSBASE)/common/inet/snmpcom.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/inet/snmpcom.c $(LTAIL))
+
+$(LINTS_DIR)/mi.ln:		$(UTSBASE)/common/inet/mi.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/inet/mi.c $(LTAIL))
+
+$(LINTS_DIR)/nd.ln:		$(UTSBASE)/common/inet/nd.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/inet/nd.c $(LTAIL))
+
+$(LINTS_DIR)/optcom.ln:		$(UTSBASE)/common/inet/optcom.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/inet/optcom.c $(LTAIL))
+
+
+$(LINTS_DIR)/md5.ln:		$(SRC)/common/md5/md5.c
+	@($(LHEAD) $(LINT.c) $(SRC)/common/md5/md5.c $(LTAIL))
+
+$(LINTS_DIR)/ncaddi.ln:		$(UTSBASE)/common/inet/nca/ncaddi.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/inet/nca/ncaddi.c $(LTAIL))
+
+$(LINTS_DIR)/nca.ln:		$(UTSBASE)/common/inet/nca/nca.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/inet/nca/nca.c $(LTAIL))
+
+$(LINTS_DIR)/ncaproto.ln:	$(UTSBASE)/common/inet/nca/ncaproto.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/inet/nca/ncaproto.c $(LTAIL))
+
+$(LINTS_DIR)/ncahttp.ln:	$(UTSBASE)/common/inet/nca/ncahttp.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/inet/nca/ncahttp.c $(LTAIL))
+
+$(LINTS_DIR)/ncakmem.ln:	$(UTSBASE)/common/inet/nca/ncakmem.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/inet/nca/ncakmem.c $(LTAIL))
+
+$(LINTS_DIR)/tcp_trace.ln:	$(UTSBASE)/common/inet/tcp_trace.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/inet/tcp_trace.c $(LTAIL))
+
+$(LINTS_DIR)/tcpddi.ln:		$(UTSBASE)/common/inet/tcpddi.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/inet/tcpddi.c $(LTAIL))
+
+$(LINTS_DIR)/tcp6ddi.ln:	$(UTSBASE)/common/inet/tcp6ddi.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/inet/tcp6ddi.c $(LTAIL))
+
+$(LINTS_DIR)/tcp_opt_data.ln:		$(UTSBASE)/common/inet/tcp_opt_data.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/inet/tcp_opt_data.c $(LTAIL))
+
+$(LINTS_DIR)/tcp_sack.ln:		$(UTSBASE)/common/inet/tcp_sack.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/inet/tcp_sack.c $(LTAIL))
+
+$(LINTS_DIR)/tun.ln:		$(UTSBASE)/common/inet/tun.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/inet/tun.c $(LTAIL))
+
+$(LINTS_DIR)/atun.ln:		$(UTSBASE)/common/inet/atun.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/inet/atun.c $(LTAIL))
+
+$(LINTS_DIR)/udp.ln:		$(UTSBASE)/common/inet/udp.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/inet/udp.c $(LTAIL))
+
+$(LINTS_DIR)/udpddi.ln:		$(UTSBASE)/common/inet/udpddi.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/inet/udpddi.c $(LTAIL))
+
+$(LINTS_DIR)/udp6ddi.ln:	$(UTSBASE)/common/inet/udp6ddi.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/inet/udp6ddi.c $(LTAIL))
+
+$(LINTS_DIR)/udp_opt_data.ln:		$(UTSBASE)/common/inet/udp_opt_data.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/inet/udp_opt_data.c $(LTAIL))
+
+$(LINTS_DIR)/7x14.ln:		$(UTSBASE)/common/io/7x14.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/7x14.c $(LTAIL))
+
+$(LINTS_DIR)/audio.ln:		$(UTSBASE)/common/io/audio.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/audio.c $(LTAIL))
+
+$(LINTS_DIR)/asy.ln:		$(UTSBASE)/common/io/asy.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/asy.c $(LTAIL))
+
+$(LINTS_DIR)/bufmod.ln:		$(UTSBASE)/common/io/bufmod.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/bufmod.c $(LTAIL))
+
+$(LINTS_DIR)/busra.ln:	$(UTSBASE)/common/io/busra.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/busra.c $(LTAIL))
+
+$(LINTS_DIR)/clone.ln:		$(UTSBASE)/common/io/clone.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/clone.c $(LTAIL))
+
+$(LINTS_DIR)/conf.ln:		$(UTSBASE)/common/io/conf.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/conf.c $(LTAIL))
+
+$(LINTS_DIR)/connld.ln:		$(UTSBASE)/common/io/connld.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/connld.c $(LTAIL))
+
+$(LINTS_DIR)/cons.ln:		$(UTSBASE)/common/io/cons.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/cons.c $(LTAIL))
+
+$(LINTS_DIR)/conskbd.ln:	$(UTSBASE)/common/io/conskbd.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/conskbd.c $(LTAIL))
+
+$(LINTS_DIR)/consms.ln:		$(UTSBASE)/common/io/consms.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/consms.c $(LTAIL))
+
+$(LINTS_DIR)/cpc.ln:		$(UTSBASE)/common/io/cpc.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/cpc.c $(LTAIL))
+
+$(LINTS_DIR)/dedump.ln:		$(UTSBASE)/common/io/dedump.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/dedump.c $(LTAIL))
+
+$(LINTS_DIR)/devinfo.ln:	$(UTSBASE)/common/io/devinfo.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/devinfo.c $(LTAIL))
+
+$(LINTS_DIR)/devpoll.ln:	$(UTSBASE)/common/io/devpoll.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/devpoll.c $(LTAIL))
+
+$(LINTS_DIR)/dadk.ln:		$(UTSBASE)/common/io/dktp/dcdev/dadk.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/dktp/dcdev/dadk.c $(LTAIL))
+
+$(LINTS_DIR)/gda.ln:		$(UTSBASE)/common/io/dktp/dcdev/gda.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/dktp/dcdev/gda.c $(LTAIL))
+
+$(LINTS_DIR)/cmdk.ln:		$(UTSBASE)/common/io/dktp/disk/cmdk.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/dktp/disk/cmdk.c $(LTAIL))
+
+$(LINTS_DIR)/objmgr.ln:		$(UTSBASE)/common/io/dktp/drvobj/objmgr.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/dktp/drvobj/objmgr.c $(LTAIL))
+
+$(LINTS_DIR)/strategy.ln:	$(UTSBASE)/common/io/dktp/drvobj/strategy.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/dktp/drvobj/strategy.c $(LTAIL))
+
+$(LINTS_DIR)/snlb.ln:		$(UTSBASE)/common/io/dktp/disk/snlb.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/dktp/disk/snlb.c $(LTAIL))
+
+$(LINTS_DIR)/dma_engine.ln:	$(UTSBASE)/common/io/dma_engine.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/dma_engine.c $(LTAIL))
+
+$(LINTS_DIR)/dump.ln:		$(UTSBASE)/common/io/dump.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/dump.c $(LTAIL))
+
+$(LINTS_DIR)/etheraddr.ln:	$(UTSBASE)/common/io/etheraddr.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/etheraddr.c $(LTAIL))
+
+$(LINTS_DIR)/fdc.ln:	$(UTSBASE)/common/io/fdc.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/fdc.c $(LTAIL))
+
+$(LINTS_DIR)/gentty.ln:		$(UTSBASE)/common/io/gentty.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/gentty.c $(LTAIL))
+
+$(LINTS_DIR)/gld.ln:		$(UTSBASE)/common/io/gld.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/gld.c $(LTAIL))
+
+$(LINTS_DIR)/gldutil.ln:        $(UTSBASE)/common/io/gldutil.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/gldutil.c $(LTAIL))
+
+$(LINTS_DIR)/i8042.ln:	$(UTSBASE)/common/io/i8042.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/i8042.c $(LTAIL))
+
+$(LINTS_DIR)/hpcsvc.ln:        $(UTSBASE)/common/io/hotplug/hpcsvc/hpcsvc.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/hotplug/hpcsvc/hpcsvc.c $(LTAIL))
+
+
+$(LINTS_DIR)/ipd.ln:		$(UTSBASE)/common/io/ipd.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/ipd.c $(LTAIL))
+
+$(LINTS_DIR)/ipdcm.ln:		$(UTSBASE)/common/io/ipdcm.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/ipdcm.c $(LTAIL))
+
+$(LINTS_DIR)/ipdptp.ln:		$(UTSBASE)/common/io/ipdptp.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/ipdptp.c $(LTAIL))
+
+$(LINTS_DIR)/iwscons.ln:	$(UTSBASE)/common/io/iwscons.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/iwscons.c $(LTAIL))
+
+$(LINTS_DIR)/at_keyprocess.ln:	$(UTSBASE)/common/io/kb8042/at_keyprocess.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/kb8042/at_keyprocess.c $(LTAIL))
+
+$(LINTS_DIR)/kb8042.ln:		$(UTSBASE)/common/io/kb8042/kb8042.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/kb8042/kb8042.c $(LTAIL))
+
+$(LINTS_DIR)/kb8042_keytables.ln:		$(UTSBASE)/common/io/kb8042/kb8042_keytables.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/kb8042/kb8042_keytables.c $(LTAIL))
+
+$(LINTS_DIR)/kbd.ln:		$(UTSBASE)/common/io/kbd.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/kbd.c $(LTAIL))
+
+$(LINTS_DIR)/kbtrans.ln:	$(UTSBASE)/common/io/kbtrans/kbtrans.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/kbtrans/kbtrans.c $(LTAIL))
+
+$(LINTS_DIR)/kbtrans_keytables.ln:	$(UTSBASE)/common/io/kbtrans/kbtrans_keytables.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/kbtrans/kbtrans_keytables.c $(LTAIL))
+
+$(LINTS_DIR)/kbtrans_polled.ln:	$(UTSBASE)/common/io/kbtrans/kbtrans_polled.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/kbtrans/kbtrans_polled.c $(LTAIL))
+
+$(LINTS_DIR)/kbtrans_streams.ln:	$(UTSBASE)/common/io/kbtrans/kbtrans_streams.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/kbtrans/kbtrans_streams.c $(LTAIL))
+
+$(LINTS_DIR)/keytables.ln:	$(UTSBASE)/common/io/keytables.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/keytables.c $(LTAIL))
+
+$(LINTS_DIR)/kstat.ln:		$(UTSBASE)/common/io/kstat.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/kstat.c $(LTAIL))
+
+$(LINTS_DIR)/ksyms.ln:		$(UTSBASE)/common/io/ksyms.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/ksyms.c $(LTAIL))
+
+$(LINTS_DIR)/l_strplumb.ln:	$(UTSBASE)/common/io/l_strplumb.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/l_strplumb.c $(LTAIL))
+
+$(LINTS_DIR)/ldterm.ln:		$(UTSBASE)/common/io/ldterm.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/ldterm.c $(LTAIL))
+
+$(LINTS_DIR)/llc1.ln:	$(UTSBASE)/common/io/llc1.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/llc1.c $(LTAIL))
+
+
+$(LINTS_DIR)/lmodb.ln:		$(UTSBASE)/common/io/lmodb.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/lmodb.c $(LTAIL))
+
+$(LINTS_DIR)/lmode.ln:		$(UTSBASE)/common/io/lmode.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/lmode.c $(LTAIL))
+
+$(LINTS_DIR)/lmodr.ln:		$(UTSBASE)/common/io/lmodr.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/lmodr.c $(LTAIL))
+
+$(LINTS_DIR)/lmodt.ln:		$(UTSBASE)/common/io/lmodt.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/lmodt.c $(LTAIL))
+
+$(LINTS_DIR)/lo.ln:		$(UTSBASE)/common/io/lo.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/lo.c $(LTAIL))
+
+$(LINTS_DIR)/lockstat.ln:	$(UTSBASE)/common/io/lockstat.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/lockstat.c $(LTAIL))
+
+$(LINTS_DIR)/logindmux.ln:		$(UTSBASE)/common/io/logindmux.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/logindmux.c $(LTAIL))
+
+$(LINTS_DIR)/lp.ln:		$(UTSBASE)/common/io/lp/lp.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/lp/lp.c $(LTAIL))
+
+$(LINTS_DIR)/mem.ln:		$(UTSBASE)/common/io/mem.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/mem.c $(LTAIL))
+
+$(LINTS_DIR)/mouse8042.ln:		$(UTSBASE)/common/io/mouse8042.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/mouse8042.c $(LTAIL))
+
+$(LINTS_DIR)/lofi.ln:		$(UTSBASE)/common/io/lofi.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/lofi.c $(LTAIL))
+
+$(LINTS_DIR)/log.ln:		$(UTSBASE)/common/io/log.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/log.c $(LTAIL))
+
+$(LINTS_DIR)/openprom.ln:		$(UTSBASE)/common/io/openprom.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/openprom.c $(LTAIL))
+
+$(LINTS_DIR)/options.ln:	$(UTSBASE)/common/io/options.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/options.c $(LTAIL))
+
+$(LINTS_DIR)/pcic.ln:		$(UTSBASE)/common/io/pcic.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/pcic.c $(LTAIL))
+
+$(LINTS_DIR)/pcicfg.ln:		$(UTSBASE)/common/io/hotplug/pcicfg/pcicfg.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/hotplug/pcicfg/pcicfg.c $(LTAIL))
+
+$(LINTS_DIR)/pcihp.ln:	$(UTSBASE)/common/io/hotplug/pcihp/pcihp.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/hotplug/pcihp/pcihp.c $(LTAIL))
+
+$(LINTS_DIR)/pckt.ln:		$(UTSBASE)/common/io/pckt.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/pckt.c $(LTAIL))
+
+$(LINTS_DIR)/pci-ide.ln:	$(UTSBASE)/common/io/pci-ide/pci-ide.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/pci-ide/pci-ide.c $(LTAIL))
+
+$(LINTS_DIR)/pcn.ln:		$(UTSBASE)/common/io/pcn/pcn.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/pcn/pcn.c $(LTAIL))
+
+$(LINTS_DIR)/pfmod.ln:		$(UTSBASE)/common/io/pfmod.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/pfmod.c $(LTAIL))
+
+$(LINTS_DIR)/pic.ln:	$(UTSBASE)/common/io/pic.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/pic.c $(LTAIL))
+
+$(LINTS_DIR)/pipemod.ln:	$(UTSBASE)/common/io/pipemod.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/pipemod.c $(LTAIL))
+
+
+$(LINTS_DIR)/ppp_chap.ln:	$(UTSBASE)/common/io/ppp_chap.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/ppp_chap.c $(LTAIL))
+
+$(LINTS_DIR)/ppp_common.ln:	$(UTSBASE)/common/io/ppp_common.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/ppp_common.c $(LTAIL))
+
+$(LINTS_DIR)/ppp_diag.ln:	$(UTSBASE)/common/io/ppp_diag.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/ppp_diag.c $(LTAIL))
+
+$(LINTS_DIR)/ppp_ipncp.ln:	$(UTSBASE)/common/io/ppp_ipncp.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/ppp_ipncp.c $(LTAIL))
+
+$(LINTS_DIR)/ppp_lcp.ln:	$(UTSBASE)/common/io/ppp_lcp.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/ppp_lcp.c $(LTAIL))
+
+$(LINTS_DIR)/ppp_lqm.ln:	$(UTSBASE)/common/io/ppp_lqm.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/ppp_lqm.c $(LTAIL))
+
+$(LINTS_DIR)/ppp_pap.ln:	$(UTSBASE)/common/io/ppp_pap.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/ppp_pap.c $(LTAIL))
+
+$(LINTS_DIR)/ppp_str.ln:	$(UTSBASE)/common/io/ppp_str.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/ppp_str.c $(LTAIL))
+
+$(LINTS_DIR)/ppp_wrapper.ln:	$(UTSBASE)/common/io/ppp_wrapper.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/ppp_wrapper.c $(LTAIL))
+
+$(LINTS_DIR)/pm.ln:		$(UTSBASE)/common/io/pm.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/pm.c $(LTAIL))
+
+$(LINTS_DIR)/pseudonex.ln:	$(UTSBASE)/common/io/pseudonex.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/pseudonex.c $(LTAIL))
+
+$(LINTS_DIR)/ptem.ln:		$(UTSBASE)/common/io/ptem.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/ptem.c $(LTAIL))
+
+$(LINTS_DIR)/ptm.ln:		$(UTSBASE)/common/io/ptm.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/ptm.c $(LTAIL))
+
+$(LINTS_DIR)/ptms_conf.ln:	$(UTSBASE)/common/io/ptms_conf.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/ptms_conf.c $(LTAIL))
+
+$(LINTS_DIR)/pts.ln:		$(UTSBASE)/common/io/pts.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/pts.c $(LTAIL))
+
+$(LINTS_DIR)/ramdisk.ln:	$(UTSBASE)/common/io/ramdisk.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/ramdisk.c $(LTAIL))
+
+$(LINTS_DIR)/rlmod.ln:	$(UTSBASE)/common/io/rlmod.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/rlmod.c $(LTAIL))
+
+$(LINTS_DIR)/sysinit.ln:	$(UTSBASE)/common/io/sysinit.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/sysinit.c $(LTAIL))
+
+$(LINTS_DIR)/sad_conf.ln:	$(UTSBASE)/common/io/sad_conf.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/sad_conf.c $(LTAIL))
+
+$(LINTS_DIR)/sad.ln:		$(UTSBASE)/common/io/sad.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/sad.c $(LTAIL))
+
+$(OBJS_DIR)/se_driver.ln:	$(UTSBASE)/common/io/se/se_driver.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/se/se_driver.c $(LTAIL))
+
+$(LINTS_DIR)/scsi_confdata.ln:	$(UTSBASE)/common/io/scsi/conf/scsi_confdata.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/scsi/conf/scsi_confdata.c $(LTAIL))
+
+$(LINTS_DIR)/scsi_confsubr.ln:	$(UTSBASE)/common/io/scsi/conf/scsi_confsubr.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/scsi/conf/scsi_confsubr.c $(LTAIL))
+
+$(LINTS_DIR)/scsi_capabilities.ln: $(UTSBASE)/common/io/scsi/impl/scsi_capabilities.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/scsi/impl/scsi_capabilities.c $(LTAIL))
+
+$(LINTS_DIR)/scsi_control.ln:	$(UTSBASE)/common/io/scsi/impl/scsi_control.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/scsi/impl/scsi_control.c $(LTAIL))
+
+$(LINTS_DIR)/scsi_watch.ln:	$(UTSBASE)/common/io/scsi/impl/scsi_watch.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/scsi/impl/scsi_watch.c $(LTAIL))
+
+$(LINTS_DIR)/scsi_data.ln:	$(UTSBASE)/common/io/scsi/impl/scsi_data.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/scsi/impl/scsi_data.c $(LTAIL))
+
+$(LINTS_DIR)/scsi_hba.ln:	$(UTSBASE)/common/io/scsi/impl/scsi_hba.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/scsi/impl/scsi_hba.c $(LTAIL))
+
+$(LINTS_DIR)/scsi_resource.ln:	$(UTSBASE)/common/io/scsi/impl/scsi_resource.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/scsi/impl/scsi_resource.c $(LTAIL))
+
+$(LINTS_DIR)/scsi_subr.ln:	$(UTSBASE)/common/io/scsi/impl/scsi_subr.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/scsi/impl/scsi_subr.c $(LTAIL))
+
+$(LINTS_DIR)/scsi_transport.ln:	$(UTSBASE)/common/io/scsi/impl/scsi_transport.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/scsi/impl/scsi_transport.c $(LTAIL))
+
+$(LINTS_DIR)/scsi_reset_notify.ln: $(UTSBASE)/common/io/scsi/impl/scsi_reset_notify.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/scsi/impl/scsi_reset_notify.c $(LTAIL))
+
+$(LINTS_DIR)/seg_drv.ln:	$(UTSBASE)/common/io/seg_drv.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/seg_drv.c $(LTAIL))
+
+$(LINTS_DIR)/seg_mapdev.ln:	$(UTSBASE)/common/io/seg_mapdev.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/seg_mapdev.c $(LTAIL))
+
+$(LINTS_DIR)/ses.ln:		$(UTSBASE)/common/io/scsi/targets/ses.c 
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/scsi/targets/ses.c $(LTAIL))
+
+$(LINTS_DIR)/ses_ses.ln:	$(UTSBASE)/common/io/scsi/targets/ses_ses.c 
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/scsi/targets/ses_ses.c $(LTAIL))
+
+$(LINTS_DIR)/ses_sen.ln:	$(UTSBASE)/common/io/scsi/targets/ses_sen.c 
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/scsi/targets/ses_sen.c $(LTAIL))
+
+$(LINTS_DIR)/ses_safte.ln:	$(UTSBASE)/common/io/scsi/targets/ses_safte.c 
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/scsi/targets/ses_safte.c $(LTAIL))
+
+
+$(LINTS_DIR)/st.ln:		$(UTSBASE)/common/io/scsi/targets/st.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/scsi/targets/st.c $(LTAIL))
+
+$(LINTS_DIR)/st_conf.ln:	$(UTSBASE)/common/io/scsi/targets/st_conf.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/scsi/targets/st_conf.c $(LTAIL))
+
+
+$(LINTS_DIR)/str_conf.ln:	$(UTSBASE)/common/io/str_conf.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/str_conf.c $(LTAIL))
+
+$(LINTS_DIR)/stream.ln:		$(UTSBASE)/common/io/stream.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/stream.c $(LTAIL))
+
+$(LINTS_DIR)/strredirm.ln:	$(UTSBASE)/common/io/strredirm.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/strredirm.c $(LTAIL))
+
+$(LINTS_DIR)/strplumb.ln:	$(UTSBASE)/common/io/strplumb.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/strplumb.c $(LTAIL))
+
+$(LINTS_DIR)/strsun.ln:		$(UTSBASE)/common/io/strsun.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/strsun.c $(LTAIL))
+
+$(LINTS_DIR)/sundlpi.ln:	$(UTSBASE)/common/io/sundlpi.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/sundlpi.c $(LTAIL))
+
+$(LINTS_DIR)/suntpi.ln:		$(UTSBASE)/common/io/suntpi.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/suntpi.c $(LTAIL))
+
+$(LINTS_DIR)/sysmsg.ln:		$(UTSBASE)/common/io/sysmsg.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/sysmsg.c $(LTAIL))
+
+$(LINTS_DIR)/telmod.ln:		$(UTSBASE)/common/io/telmod.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/telmod.c $(LTAIL))
+
+$(LINTS_DIR)/terminal-emulator.ln:	$(UTSBASE)/common/io/terminal-emulator.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/terminal-emulator.c $(LTAIL))
+
+$(LINTS_DIR)/ticlts.ln:		$(UTSBASE)/common/io/ticlts.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/ticlts.c $(LTAIL))
+
+$(LINTS_DIR)/ticots.ln:		$(UTSBASE)/common/io/ticots.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/ticots.c $(LTAIL))
+
+$(LINTS_DIR)/ticotsord.ln:	$(UTSBASE)/common/io/ticotsord.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/ticotsord.c $(LTAIL))
+
+$(LINTS_DIR)/tidg.ln:		$(UTSBASE)/common/io/tidg.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/tidg.c $(LTAIL))
+
+$(LINTS_DIR)/timod.ln:		$(UTSBASE)/common/io/timod.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/timod.c $(LTAIL))
+
+$(LINTS_DIR)/tirdwr.ln:		$(UTSBASE)/common/io/tirdwr.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/tirdwr.c $(LTAIL))
+ 
+$(LINTS_DIR)/tivc.ln:		$(UTSBASE)/common/io/tivc.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/tivc.c $(LTAIL))
+ 
+$(LINTS_DIR)/tl.ln:		$(UTSBASE)/common/io/tl.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/tl.c $(LTAIL))
+
+$(LINTS_DIR)/tmux.ln:		$(UTSBASE)/common/io/tmux.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/tmux.c $(LTAIL))
+
+$(LINTS_DIR)/ttcompat.ln:	$(UTSBASE)/common/io/ttcompat.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/ttcompat.c $(LTAIL))
+
+$(LINTS_DIR)/tty_common.ln:	$(UTSBASE)/common/io/tty_common.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/tty_common.c $(LTAIL))
+
+$(LINTS_DIR)/tty_pty.ln:	$(UTSBASE)/common/io/tty_pty.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/tty_pty.c $(LTAIL))
+
+$(LINTS_DIR)/tty_pts.ln:	$(UTSBASE)/common/io/tty_pts.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/tty_pts.c $(LTAIL))
+
+$(LINTS_DIR)/tty_ptyconf.ln:	$(UTSBASE)/common/io/tty_ptyconf.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/tty_ptyconf.c $(LTAIL))
+
+$(LINTS_DIR)/hid.ln:		$(USBBASE)/clients/hid/hid.c
+	@($(LHEAD) $(LINT.c) $(USBBASE)/clients/hid/hid.c $(LTAIL))
+
+$(LINTS_DIR)/hidparser.ln:	$(USBBASE)/clients/hidparser/hidparser.c
+	@($(LHEAD) $(LINT.c) $(USBBASE)/clients/hidparser/hidparser.c $(LTAIL))
+
+$(LINTS_DIR)/usbkbm.ln:		$(USBKBMBASE)/usbkbm.c
+	@($(LHEAD) $(LINT.c) $(USBBASE)/clients/usbkbm/usbkbm.c $(LTAIL))
+
+$(LINTS_DIR)/usbkbm_keytables.ln:	$(USBKBMBASE)/usbkbm_keytables.c
+	@($(LHEAD) $(LINT.c) $(USBKBMBASE)/usbkbm_keytables.c $(LTAIL))
+
+$(LINTS_DIR)/usbms.ln:			$(USBBASE)/clients/usbms/usbms.c
+	@($(LHEAD) $(LINT.c) $(USBBASE)/clients/usbms/usbms.c $(LTAIL))
+
+$(LINTS_DIR)/hubd.ln:		$(UTSBASE)/common/io/usb/hubd/hubd.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/usb/hubd/hubd.c $(LTAIL))
+
+$(LINTS_DIR)/usb_mid.ln:	$(UTSBASE)/common/io/usb/usb_mid/usb_mid.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/usb/usb_mid/usb_mid.c $(LTAIL))
+
+$(LINTS_DIR)/hcdi.ln:		$(UTSBASE)/common/io/usb/usba/hcdi.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/usb/usba/hcdi.c $(LTAIL))
+
+$(LINTS_DIR)/hubdi.ln:		$(UTSBASE)/common/io/usb/usba/hubdi.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/usb//usba/hubdi.c $(LTAIL))
+
+$(LINTS_DIR)/usbai.ln:		$(UTSBASE)/common/io/usb/usba/usbai.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/usb/usba/usbai.c $(LTAIL))
+
+$(LINTS_DIR)/usba.ln:		$(UTSBASE)/common/io/usb/usba/usba.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/usb/usba/usba.c $(LTAIL))
+
+$(LINTS_DIR)/scsa2usb.ln:	$(UTSBASE)/common/io/usb/scsa2usb/scsa2usb.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/usb/scsa2usb/scsa2usb.c $(LTAIL))
+
+$(LINTS_DIR)/parser.ln:		$(UTSBASE)/common/io/usb/usba/parser.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/usb/usba/parser.c $(LTAIL))
+ 
+$(LINTS_DIR)/genconsole.ln:	$(UTSBASE)/common/io/usb/usba/genconsole.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/usb/usba/genconsole.c $(LTAIL))
+
+$(LINTS_DIR)/vgasubr.ln:	$(UTSBASE)/common/io/vgasubr.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/vgasubr.c $(LTAIL))
+
+$(LINTS_DIR)/vjcomp.ln:		$(UTSBASE)/common/io/vjcomp.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/vjcomp.c $(LTAIL))
+
+$(LINTS_DIR)/vol.ln:		$(UTSBASE)/common/io/vol.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/vol.c $(LTAIL))
+
+$(LINTS_DIR)/vuid_queue.ln:	$(UTSBASE)/common/io/vuid_queue.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/vuid_queue.c $(LTAIL))
+
+$(LINTS_DIR)/vuid_store.ln:	$(UTSBASE)/common/io/vuid_store.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/vuid_store.c $(LTAIL))
+
+$(LINTS_DIR)/vuidmice.ln:	$(UTSBASE)/common/io/vuidmice/vuidmice.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/vuidmice/vuidmice.c $(LTAIL))
+
+$(LINTS_DIR)/vuidm3p.ln:	$(UTSBASE)/common/io/vuidmice/vuidm3p.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/vuidmice/vuidm3p.c $(LTAIL))
+
+$(LINTS_DIR)/vuidm4p.ln:	$(UTSBASE)/common/io/vuidmice/vuidm4p.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/vuidmice/vuidm4p.c $(LTAIL))
+
+$(LINTS_DIR)/vuidm5p.ln:	$(UTSBASE)/common/io/vuidmice/vuidm5p.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/vuidmice/vuidm5p.c $(LTAIL))
+
+$(LINTS_DIR)/vuidps2.ln:	$(UTSBASE)/common/io/vuidmice/vuidps2.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/vuidmice/vuidps2.c $(LTAIL))
+
+$(LINTS_DIR)/winlockio.ln:	$(UTSBASE)/common/io/winlockio.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/winlockio.c $(LTAIL))
+
+$(LINTS_DIR)/wscons.ln:		$(UTSBASE)/common/io/wscons.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/wscons.c $(LTAIL))
+
+$(LINTS_DIR)/klmmod.ln:		$(UTSBASE)/common/klm/klmmod.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/klm/klmmod.c $(LTAIL))
+
+$(LINTS_DIR)/klmops.ln:		$(UTSBASE)/common/klm/klmops.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/klm/klmops.c $(LTAIL))
+
+
+$(LINTS_DIR)/tlimod.ln:		$(UTSBASE)/common/ktli/tlimod.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/ktli/tlimod.c $(LTAIL))
+
+$(LINTS_DIR)/t_kalloc.ln:	$(UTSBASE)/common/ktli/t_kalloc.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/ktli/t_kalloc.c $(LTAIL))
+
+$(LINTS_DIR)/t_kbind.ln:	$(UTSBASE)/common/ktli/t_kbind.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/ktli/t_kbind.c $(LTAIL))
+
+$(LINTS_DIR)/t_kclose.ln:	$(UTSBASE)/common/ktli/t_kclose.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/ktli/t_kclose.c $(LTAIL))
+
+$(LINTS_DIR)/t_kconnect.ln:	$(UTSBASE)/common/ktli/t_kconnect.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/ktli/t_kconnect.c $(LTAIL))
+
+$(LINTS_DIR)/t_kfree.ln:	$(UTSBASE)/common/ktli/t_kfree.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/ktli/t_kfree.c $(LTAIL))
+
+$(LINTS_DIR)/t_kgtstate.ln:	$(UTSBASE)/common/ktli/t_kgtstate.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/ktli/t_kgtstate.c $(LTAIL))
+
+$(LINTS_DIR)/t_kopen.ln:	$(UTSBASE)/common/ktli/t_kopen.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/ktli/t_kopen.c $(LTAIL))
+
+$(LINTS_DIR)/t_krcvudat.ln:	$(UTSBASE)/common/ktli/t_krcvudat.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/ktli/t_krcvudat.c $(LTAIL))
+
+$(LINTS_DIR)/t_ksndudat.ln:	$(UTSBASE)/common/ktli/t_ksndudat.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/ktli/t_ksndudat.c $(LTAIL))
+
+$(LINTS_DIR)/t_kspoll.ln:	$(UTSBASE)/common/ktli/t_kspoll.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/ktli/t_kspoll.c $(LTAIL))
+
+$(LINTS_DIR)/t_kunbind.ln:	$(UTSBASE)/common/ktli/t_kunbind.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/ktli/t_kunbind.c $(LTAIL))
+
+$(LINTS_DIR)/t_kutil.ln:	$(UTSBASE)/common/ktli/t_kutil.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/ktli/t_kutil.c $(LTAIL))
+
+$(LINTS_DIR)/acct.ln:		$(UTSBASE)/common/os/acct.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/os/acct.c $(LTAIL))
+
+$(LINTS_DIR)/aio.ln:		$(UTSBASE)/common/os/aio.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/os/aio.c $(LTAIL))
+
+$(LINTS_DIR)/aio_subr.ln:	$(UTSBASE)/common/os/aio_subr.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/os/aio_subr.c $(LTAIL))
+
+$(LINTS_DIR)/autoconf.ln:	$(UTSBASE)/common/os/autoconf.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/os/autoconf.c $(LTAIL))
+
+$(LINTS_DIR)/bdev_dsort.ln:	$(UTSBASE)/common/os/bdev_dsort.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/os/bdev_dsort.c $(LTAIL))
+
+$(LINTS_DIR)/bio.ln:		$(UTSBASE)/common/os/bio.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/os/bio.c $(LTAIL))
+
+$(LINTS_DIR)/bitmap.ln:		$(UTSBASE)/common/os/bitmap.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/os/bitmap.c $(LTAIL))
+
+$(LINTS_DIR)/bp_map.ln:		$(UTSBASE)/common/os/bp_map.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/os/bp_map.c $(LTAIL))
+
+$(LINTS_DIR)/callb.ln:	$(UTSBASE)/common/os/callb.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/os/callb.c $(LTAIL))
+
+$(LINTS_DIR)/callout.ln:	$(UTSBASE)/common/os/callout.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/os/callout.c $(LTAIL))
+
+$(LINTS_DIR)/clock.ln:		$(UTSBASE)/common/os/clock.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/os/clock.c $(LTAIL))
+
+$(LINTS_DIR)/clock_highres.ln:	$(UTSBASE)/common/os/clock_highres.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/os/clock_highres.c $(LTAIL))
+
+$(LINTS_DIR)/clock_realtime.ln:	$(UTSBASE)/common/os/clock_realtime.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/os/clock_realtime.c $(LTAIL))
+
+$(LINTS_DIR)/compress.ln:	$(UTSBASE)/common/os/compress.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/os/compress.c $(LTAIL))
+
+$(LINTS_DIR)/condvar.ln:	$(UTSBASE)/common/os/condvar.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/os/condvar.c $(LTAIL))
+
+$(LINTS_DIR)/console.ln:	$(UTSBASE)/common/os/console.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/os/console.c $(LTAIL))
+
+$(LINTS_DIR)/copyops.ln:	$(UTSBASE)/common/os/copyops.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/os/copyops.c $(LTAIL))
+
+$(LINTS_DIR)/core.ln:		$(UTSBASE)/common/os/core.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/os/core.c $(LTAIL))
+
+$(LINTS_DIR)/cpu.ln:		$(UTSBASE)/common/os/cpu.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/os/cpu.c $(LTAIL))
+
+$(LINTS_DIR)/cpu_intr.ln:	$(UTSBASE)/common/os/cpu_intr.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/os/cpu_intr.c $(LTAIL))
+
+$(LINTS_DIR)/cred.ln:		$(UTSBASE)/common/os/cred.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/os/cred.c $(LTAIL))
+
+$(LINTS_DIR)/cyclic.ln:		$(UTSBASE)/common/os/cyclic.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/os/cyclic.c $(LTAIL))
+
+$(LINTS_DIR)/dacf.ln:		$(UTSBASE)/common/os/dacf.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/os/dacf.c $(LTAIL))
+
+$(LINTS_DIR)/dacf_clnt.ln:	$(UTSBASE)/common/os/dacf_clnt.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/os/dacf_clnt.c $(LTAIL))
+
+$(LINTS_DIR)/dc_interface.ln:	$(UTSBASE)/common/os/dc_interface.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/os/dc_interface.c $(LTAIL))
+
+$(LINTS_DIR)/ddi.ln:		$(UTSBASE)/common/os/ddi.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/os/ddi.c $(LTAIL))
+
+$(LINTS_DIR)/ddi_nodeid.ln:	$(UTSBASE)/common/os/ddi_nodeid.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/os/ddi_nodeid.c $(LTAIL))
+
+$(LINTS_DIR)/driver.ln:		$(UTSBASE)/common/os/driver.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/os/driver.c $(LTAIL))
+
+$(LINTS_DIR)/driver_lyr.ln:		$(UTSBASE)/common/os/driver_lyr.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/os/driver_lyr.c $(LTAIL))
+
+$(LINTS_DIR)/dumpsubr.ln:	$(UTSBASE)/common/os/dumpsubr.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/os/dumpsubr.c $(LTAIL))
+
+$(LINTS_DIR)/exec.ln:		$(UTSBASE)/common/os/exec.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/os/exec.c $(LTAIL))
+
+$(LINTS_DIR)/exit.ln:		$(UTSBASE)/common/os/exit.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/os/exit.c $(LTAIL))
+
+$(LINTS_DIR)/fbio.ln:		$(UTSBASE)/common/os/fbio.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/os/fbio.c $(LTAIL))
+
+$(LINTS_DIR)/fio.ln:		$(UTSBASE)/common/os/fio.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/os/fio.c $(LTAIL))
+
+$(LINTS_DIR)/flock.ln:		$(UTSBASE)/common/os/flock.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/os/flock.c $(LTAIL))
+
+$(LINTS_DIR)/fork.ln:		$(UTSBASE)/common/os/fork.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/os/fork.c $(LTAIL))
+
+$(LINTS_DIR)/ftrace.ln:		$(UTSBASE)/common/os/ftrace.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/os/ftrace.c $(LTAIL))
+
+$(LINTS_DIR)/grow.ln:		$(UTSBASE)/common/os/grow.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/os/grow.c $(LTAIL))
+
+$(LINTS_DIR)/id32.ln:		$(UTSBASE)/common/os/id32.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/os/id32.c $(LTAIL))
+
+$(LINTS_DIR)/ipc.ln:		$(UTSBASE)/common/os/ipc.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/os/ipc.c $(LTAIL))
+
+$(LINTS_DIR)/inst_sync.ln:	$(UTSBASE)/common/os/inst_sync.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/os/inst_sync.c $(LTAIL))
+
+$(LINTS_DIR)/kmem.ln:		$(UTSBASE)/common/os/kmem.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/os/kmem.c $(LTAIL))
+
+$(LINTS_DIR)/kobj.ln:		$(UTSBASE)/common/krtld/kobj.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/krtld/kobj.c $(LTAIL))
+
+$(LINTS_DIR)/kobj_stubs.ln:	$(UTSBASE)/common/krtld/kobj_stubs.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/krtld/kobj_stubs.c $(LTAIL))
+
+$(LINTS_DIR)/kobj_subr.ln:	$(UTSBASE)/common/krtld/kobj_subr.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/krtld/kobj_subr.c $(LTAIL))
+
+$(LINTS_DIR)/kstat_fr.ln:	$(UTSBASE)/common/os/kstat_fr.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/os/kstat_fr.c $(LTAIL))
+
+$(LINTS_DIR)/ksyms_snapshot.ln:	$(UTSBASE)/common/os/ksyms_snapshot.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/os/ksyms_snapshot.c $(LTAIL))
+
+$(LINTS_DIR)/lockstat_subr.ln:	$(UTSBASE)/common/os/lockstat_subr.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/os/lockstat_subr.c $(LTAIL))
+
+$(LINTS_DIR)/log_event.ln:		$(UTSBASE)/common/os/log_event.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/os/log_event.c $(LTAIL))
+
+$(LINTS_DIR)/logsubr.ln:	$(UTSBASE)/common/os/logsubr.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/os/logsubr.c $(LTAIL))
+
+$(LINTS_DIR)/lwp.ln:		$(UTSBASE)/common/os/lwp.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/os/lwp.c $(LTAIL))
+
+$(LINTS_DIR)/main.ln:		$(UTSBASE)/common/os/main.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/os/main.c $(LTAIL))
+
+$(LINTS_DIR)/move.ln:		$(UTSBASE)/common/os/move.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/os/move.c $(LTAIL))
+
+$(LINTS_DIR)/msacct.ln:		$(UTSBASE)/common/os/msacct.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/os/msacct.c $(LTAIL))
+
+$(LINTS_DIR)/msg.ln:		$(UTSBASE)/common/os/msg.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/os/msg.c $(LTAIL))
+
+$(LINTS_DIR)/mutex.ln:		$(UTSBASE)/common/os/mutex.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/os/mutex.c $(LTAIL))
+
+$(LINTS_DIR)/panic.ln:		$(UTSBASE)/common/os/panic.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/os/panic.c $(LTAIL))
+
+$(LINTS_DIR)/pgrp.ln:		$(UTSBASE)/common/os/pgrp.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/os/pgrp.c $(LTAIL))
+
+$(LINTS_DIR)/pid.ln:		$(UTSBASE)/common/os/pid.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/os/pid.c $(LTAIL))
+
+$(LINTS_DIR)/printf.ln:		$(UTSBASE)/common/os/printf.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/os/printf.c $(LTAIL))
+
+$(LINTS_DIR)/procset.ln:	$(UTSBASE)/common/os/procset.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/os/procset.c $(LTAIL))
+
+$(LINTS_DIR)/putnext.ln:		$(UTSBASE)/common/os/putnext.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/os/putnext.c $(LTAIL))
+
+$(LINTS_DIR)/readfont.ln:		$(UTSBASE)/common/os/readfont.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/os/readfont.c $(LTAIL))
+
+$(LINTS_DIR)/refstr.ln:		$(UTSBASE)/common/os/refstr.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/os/refstr.c $(LTAIL))
+
+$(LINTS_DIR)/rmap.ln:		$(UTSBASE)/common/os/rmap.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/os/rmap.c $(LTAIL))
+
+$(LINTS_DIR)/rwlock.ln:		$(UTSBASE)/common/os/rwlock.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/os/rwlock.c $(LTAIL))
+
+$(LINTS_DIR)/sched.ln:		$(UTSBASE)/common/os/sched.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/os/sched.c $(LTAIL))
+
+$(LINTS_DIR)/schedctl.ln:	$(UTSBASE)/common/os/schedctl.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/os/schedctl.c $(LTAIL))
+
+$(LINTS_DIR)/semaphore.ln:	$(UTSBASE)/common/os/semaphore.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/os/semaphore.c $(LTAIL))
+
+$(LINTS_DIR)/session.ln:	$(UTSBASE)/common/os/session.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/os/session.c $(LTAIL))
+
+$(LINTS_DIR)/share.ln:		$(UTSBASE)/common/os/share.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/os/share.c $(LTAIL))
+
+$(LINTS_DIR)/shm.ln:		$(UTSBASE)/common/os/shm.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/os/shm.c $(LTAIL))
+
+$(LINTS_DIR)/sig.ln:		$(UTSBASE)/common/os/sig.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/os/sig.c $(LTAIL))
+
+$(LINTS_DIR)/sleepq.ln:		$(UTSBASE)/common/os/sleepq.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/os/sleepq.c $(LTAIL))
+
+$(LINTS_DIR)/softint.ln:	$(UTSBASE)/common/os/softint.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/os/softint.c $(LTAIL))
+
+$(LINTS_DIR)/space.ln:		$(UTSBASE)/common/os/space.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/os/space.c $(LTAIL))
+
+$(LINTS_DIR)/streamio.ln:	$(UTSBASE)/common/os/streamio.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/os/streamio.c $(LTAIL))
+
+$(LINTS_DIR)/string.ln:		$(UTSBASE)/common/os/string.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/os/string.c $(LTAIL))
+
+$(LINTS_DIR)/strsubr.ln:	$(UTSBASE)/common/os/strsubr.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/os/strsubr.c $(LTAIL))
+
+$(LINTS_DIR)/subr.ln:		$(UTSBASE)/common/os/subr.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/os/subr.c $(LTAIL))
+
+$(LINTS_DIR)/sysent.ln:		$(UTSBASE)/common/os/sysent.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/os/sysent.c $(LTAIL))
+
+$(LINTS_DIR)/sunddi.ln:		$(UTSBASE)/common/os/sunddi.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/os/sunddi.c $(LTAIL))
+
+$(LINTS_DIR)/sunndi.ln:		$(UTSBASE)/common/os/sunndi.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/os/sunndi.c $(LTAIL))
+
+$(LINTS_DIR)/sunpm.ln:		$(UTSBASE)/common/os/sunpm.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/os/sunpm.c $(LTAIL))
+
+$(LINTS_DIR)/swapgeneric.ln:	$(UTSBASE)/common/os/swapgeneric.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/os/swapgeneric.c $(LTAIL))
+
+$(LINTS_DIR)/taskq.ln:		$(UTSBASE)/common/os/taskq.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/os/taskq.c $(LTAIL))
+
+$(LINTS_DIR)/timer.ln:		$(UTSBASE)/common/os/timer.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/os/timer.c $(LTAIL))
+
+
+$(LINTS_DIR)/turnstile.ln:	$(UTSBASE)/common/os/turnstile.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/os/turnstile.c $(LTAIL))
+
+$(LINTS_DIR)/unix_bb.ln:	$(UTSBASE)/common/os/unix_bb.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/os/unix_bb.c $(LTAIL))
+
+$(LINTS_DIR)/vmem.ln:		$(UTSBASE)/common/os/vmem.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/os/vmem.c $(LTAIL))
+
+$(LINTS_DIR)/vm_meter.ln:	$(UTSBASE)/common/os/vm_meter.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/os/vm_meter.c $(LTAIL))
+
+$(LINTS_DIR)/vm_pageout.ln:	$(UTSBASE)/common/os/vm_pageout.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/os/vm_pageout.c $(LTAIL))
+
+$(LINTS_DIR)/vm_subr.ln:	$(UTSBASE)/common/os/vm_subr.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/os/vm_subr.c $(LTAIL))
+
+$(LINTS_DIR)/vtrace.ln:		$(UTSBASE)/common/os/vtrace.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/os/vtrace.c $(LTAIL))
+
+$(LINTS_DIR)/watchpoint.ln:	$(UTSBASE)/common/os/watchpoint.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/os/watchpoint.c $(LTAIL))
+
+$(LINTS_DIR)/pcmcia.ln:		$(UTSBASE)/common/pcmcia/nexus/pcmcia.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/pcmcia/nexus/pcmcia.c $(LTAIL))
+
+$(LINTS_DIR)/cs.ln:		$(UTSBASE)/common/pcmcia/cs/cs.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/pcmcia/cs/cs.c $(LTAIL))
+
+$(LINTS_DIR)/cs_stubs.ln:		$(UTSBASE)/common/pcmcia/cs/cs_stubs.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/pcmcia/cs/cs_stubs.c $(LTAIL))
+
+$(LINTS_DIR)/cis.ln:            $(UTSBASE)/common/pcmcia/cis/cis.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/pcmcia/cis/cis.c $(LTAIL))
+
+$(LINTS_DIR)/cis_callout.ln:    $(UTSBASE)/common/pcmcia/cis/cis_callout.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/pcmcia/cis/cis_callout.c $(LTAIL))
+
+$(LINTS_DIR)/cis_handlers.ln:   $(UTSBASE)/common/pcmcia/cis/cis_handlers.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/pcmcia/cis/cis_handlers.c $(LTAIL))
+
+$(LINTS_DIR)/cis_params.ln:     $(UTSBASE)/common/pcmcia/cis/cis_params.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/pcmcia/cis/cis_params.c $(LTAIL))
+
+$(LINTS_DIR)/pem.ln:		$(UTSBASE)/common/pcmcia/pem/pem.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/pcmcia/pem/pem.c $(LTAIL))
+
+$(LINTS_DIR)/pcs.ln:		$(UTSBASE)/common/pcmcia/pcs/pcs.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/pcmcia/pcs/pcs.c $(LTAIL))
+
+$(LINTS_DIR)/pcata.ln:		$(UTSBASE)/common/io/pcmcia/pcata.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/pcmcia/pcata.c $(LTAIL))
+
+$(LINTS_DIR)/pcdisk.ln:		$(UTSBASE)/common/io/pcmcia/pcdisk.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/pcmcia/pcdisk.c $(LTAIL))
+
+
+$(LINTS_DIR)/pcgld.ln:		$(UTSBASE)/common/io/pcmcia/pcgld.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/pcmcia/pcgld.c $(LTAIL))
+
+$(LINTS_DIR)/pcide.ln:		$(UTSBASE)/common/io/pcmcia/pcide.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/pcmcia/pcide.c $(LTAIL))
+
+$(LINTS_DIR)/pclabel.ln:	$(UTSBASE)/common/io/pcmcia/pclabel.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/pcmcia/pclabel.c $(LTAIL))
+
+$(LINTS_DIR)/pcmem.ln:		$(UTSBASE)/common/io/pcmcia/pcmem.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/pcmcia/pcmem.c $(LTAIL))
+
+$(LINTS_DIR)/pcram.ln:		$(UTSBASE)/common/io/pcmcia/pcram.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/pcmcia/pcram.c $(LTAIL))
+
+$(LINTS_DIR)/pcser.ln:		$(UTSBASE)/common/io/pcmcia/pcser.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/pcmcia/pcser.c $(LTAIL))
+
+$(LINTS_DIR)/pcser_cis.ln:	$(UTSBASE)/common/io/pcmcia/pcser_cis.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/pcmcia/pcser_cis.c $(LTAIL))
+
+#
+# rpc
+#
+$(LINTS_DIR)/clnt_clts.ln:	$(UTSBASE)/common/rpc/clnt_clts.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/rpc/clnt_clts.c $(LTAIL))
+
+$(LINTS_DIR)/clnt_cots.ln:	$(UTSBASE)/common/rpc/clnt_cots.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/rpc/clnt_cots.c $(LTAIL))
+
+$(LINTS_DIR)/clnt_gen.ln:	$(UTSBASE)/common/rpc/clnt_gen.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/rpc/clnt_gen.c $(LTAIL))
+
+$(LINTS_DIR)/clnt_perr.ln:	$(UTSBASE)/common/rpc/clnt_perr.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/rpc/clnt_perr.c $(LTAIL))
+
+$(LINTS_DIR)/mt_rpcinit.ln:	$(UTSBASE)/common/rpc/mt_rpcinit.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/rpc/mt_rpcinit.c $(LTAIL))
+
+$(LINTS_DIR)/rpc_calmsg.ln:	$(UTSBASE)/common/rpc/rpc_calmsg.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/rpc/rpc_calmsg.c $(LTAIL))
+
+$(LINTS_DIR)/rpc_prot.ln:	$(UTSBASE)/common/rpc/rpc_prot.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/rpc/rpc_prot.c $(LTAIL))
+
+$(LINTS_DIR)/rpc_subr.ln:	$(UTSBASE)/common/rpc/rpc_subr.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/rpc/rpc_subr.c $(LTAIL))
+
+$(LINTS_DIR)/rpc_sztypes.ln:	$(UTSBASE)/common/rpc/rpc_sztypes.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/rpc/rpc_sztypes.c $(LTAIL))
+
+$(LINTS_DIR)/rpcb_prot.ln:	$(UTSBASE)/common/rpc/rpcb_prot.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/rpc/rpcb_prot.c $(LTAIL))
+
+
+$(LINTS_DIR)/svc_clts.ln:	$(UTSBASE)/common/rpc/svc_clts.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/rpc/svc_clts.c $(LTAIL))
+
+$(LINTS_DIR)/svc_cots.ln:	$(UTSBASE)/common/rpc/svc_cots.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/rpc/svc_cots.c $(LTAIL))
+
+$(LINTS_DIR)/svc_gen.ln:	$(UTSBASE)/common/rpc/svc_gen.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/rpc/svc_gen.c $(LTAIL))
+
+$(LINTS_DIR)/xdr.ln:		$(UTSBASE)/common/rpc/xdr.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/rpc/xdr.c $(LTAIL))
+
+$(LINTS_DIR)/xdr_array.ln:	$(UTSBASE)/common/rpc/xdr_array.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/rpc/xdr_array.c $(LTAIL))
+
+$(LINTS_DIR)/xdr_mblk.ln:	$(UTSBASE)/common/rpc/xdr_mblk.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/rpc/xdr_mblk.c $(LTAIL))
+
+$(LINTS_DIR)/xdr_mem.ln:	$(UTSBASE)/common/rpc/xdr_mem.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/rpc/xdr_mem.c $(LTAIL))
+
+$(LINTS_DIR)/xdr_refer.ln:	$(UTSBASE)/common/rpc/xdr_refer.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/rpc/xdr_refer.c $(LTAIL))
+
+$(LINTS_DIR)/rpcsys.ln:	$(UTSBASE)/common/rpc/rpcsys.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/rpc/rpcsys.c $(LTAIL))
+
+#
+# rpc/sec security specific
+#
+$(LINTS_DIR)/auth_des.ln:	$(UTSBASE)/common/rpc/sec/auth_des.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/rpc/sec/auth_des.c $(LTAIL))
+
+$(LINTS_DIR)/auth_kern.ln:	$(UTSBASE)/common/rpc/sec/auth_kern.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/rpc/sec/auth_kern.c $(LTAIL))
+
+$(LINTS_DIR)/auth_loopb.ln:	$(UTSBASE)/common/rpc/sec/auth_loopb.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/rpc/sec/auth_loopb.c $(LTAIL))
+
+$(LINTS_DIR)/sec_clnt.ln:	$(UTSBASE)/common/rpc/sec/sec_clnt.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/rpc/sec/sec_clnt.c $(LTAIL))
+
+$(LINTS_DIR)/sec_gen.ln:	$(UTSBASE)/common/rpc/sec/sec_gen.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/rpc/sec/sec_gen.c $(LTAIL))
+
+$(LINTS_DIR)/sec_svc.ln:	$(UTSBASE)/common/rpc/sec/sec_svc.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/rpc/sec/sec_svc.c $(LTAIL))
+
+$(LINTS_DIR)/authdesprt.ln:	$(UTSBASE)/common/rpc/sec/authdesprt.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/rpc/sec/authdesprt.c $(LTAIL))
+
+$(LINTS_DIR)/authdesubr.ln:	$(UTSBASE)/common/rpc/sec/authdesubr.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/rpc/sec/authdesubr.c $(LTAIL))
+
+$(LINTS_DIR)/secmod.ln:	$(UTSBASE)/common/rpc/sec/secmod.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/rpc/sec/secmod.c $(LTAIL))
+
+$(LINTS_DIR)/authu_prot.ln:	$(UTSBASE)/common/rpc/sec/authu_prot.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/rpc/sec/authu_prot.c $(LTAIL))
+
+$(LINTS_DIR)/key_call.ln:	$(UTSBASE)/common/rpc/sec/key_call.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/rpc/sec/key_call.c $(LTAIL))
+
+$(LINTS_DIR)/key_prot.ln:	$(UTSBASE)/common/rpc/sec/key_prot.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/rpc/sec/key_prot.c $(LTAIL))
+
+$(LINTS_DIR)/svc_authu.ln:	$(UTSBASE)/common/rpc/sec/svc_authu.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/rpc/sec/svc_authu.c $(LTAIL))
+
+$(LINTS_DIR)/svcauthdes.ln:	$(UTSBASE)/common/rpc/sec/svcauthdes.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/rpc/sec/svcauthdes.c $(LTAIL))
+
+#
+# rpcsec_gss - RPC security service : RPCSEC_GSS flavor specific
+#
+$(LINTS_DIR)/rpcsec_gssmod.ln:        $(RPCSECGSS_BASE)/rpcsec_gssmod.c
+	@($(LHEAD) $(LINT.c) $(RPCSECGSS_BASE)/rpcsec_gssmod.c $(LTAIL))
+
+
+$(LINTS_DIR)/rpcsec_gss_utils.ln:     $(RPCSECGSS_BASE)/rpcsec_gss_utils.c
+	@($(LHEAD) $(LINT.c) $(RPCSECGSS_BASE)/rpcsec_gss_utils.c $(LTAIL))
+
+
+#
+# kgssapi - kernel gssapi services
+#
+$(LINTS_DIR)/gssdmod.ln: $(KGSSDBASE)/gssdmod.c
+	@($(LHEAD) $(LINT.c) $(KGSSDFLAGS) $(KGSSDBASE)/gssdmod.c $(LTAIL))
+
+$(LINTS_DIR)/gssd_clnt_stubs.ln: $(KGSSDBASE)/gssd_clnt_stubs.c
+	@($(LHEAD) $(LINT.c) $(KGSSDFLAGS) $(KGSSDBASE)/gssd_clnt_stubs.c \
+	$(LTAIL))
+
+$(LINTS_DIR)/gssd_handle.ln: $(KGSSDBASE)/gssd_handle.c
+	@($(LHEAD) $(LINT.c) $(KGSSDFLAGS) $(KGSSDBASE)/gssd_handle.c \
+	$(LTAIL))
+
+$(LINTS_DIR)/gssd_prot.ln: $(KGSSDBASE)/gssd_prot.c
+	@($(LHEAD) $(LINT.c) $(KGSSDFLAGS) $(KGSSDBASE)/gssd_prot.c \
+	$(LTAIL))
+
+$(LINTS_DIR)/gss_display_name.ln: $(KGSSDBASE)/gss_display_name.c
+	@($(LHEAD) $(LINT.c) $(KGSSDFLAGS) $(KGSSDBASE)/gss_display_name.c \
+	$(LTAIL))
+
+$(LINTS_DIR)/gss_import_name.ln: $(KGSSDBASE)/gss_import_name.c
+	@($(LHEAD) $(LINT.c) $(KGSSDFLAGS) $(KGSSDBASE)/gss_import_name.c \
+	$(LTAIL))
+
+$(LINTS_DIR)/gss_release_name.ln: $(KGSSDBASE)/gss_release_name.c
+	@($(LHEAD) $(LINT.c) $(KGSSDFLAGS) $(KGSSDBASE)/gss_release_name.c \
+	$(LTAIL))
+
+$(LINTS_DIR)/gss_release_buffer.ln: $(KGSSDBASE)/gss_release_buffer.c
+	@($(LHEAD) $(LINT.c) $(KGSSDFLAGS) $(KGSSDBASE)/gss_release_buffer.c \
+	$(LTAIL))
+
+$(LINTS_DIR)/gss_release_oid_set.ln: $(KGSSDBASE)/gss_release_oid_set.c
+	@($(LHEAD) $(LINT.c) $(KGSSDFLAGS) $(KGSSDBASE)/gss_release_oid_set.c \
+	$(LTAIL))
+
+
+#
+#  kmech_dummy - kernel gssapi dummy mechansim
+#
+$(LINTS_DIR)/dmech.ln:  $(KMECHDUMMY_BASE)/dmech.c
+	@($(LHEAD) $(LINT.c) $(KGSSDFLAGS) $(KMECHDUMMY_BASE)/dmech.c $(LTAIL))
+
+#
+#  kmech_krb5 - kernel gssapi krb5 mechansim
+#
+#  $(KMECHKRB5_BASE) is uts/common/gssapi/mechs/krb5
+#
+
+
+# syscall files
+
+SCALLBASE = $(UTSBASE)/common/syscall
+
+$(LINTS_DIR)/access.ln:		$(SCALLBASE)/access.c
+	@($(LHEAD) $(LINT.c) $@ $(SCALLBASE)/access.c $(LTAIL))
+
+$(LINTS_DIR)/acl.ln:		$(SCALLBASE)/acl.c
+	@($(LHEAD) $(LINT.c) $@ $(SCALLBASE)/acl.c $(LTAIL))
+
+$(LINTS_DIR)/adjtime.ln:	$(SCALLBASE)/adjtime.c
+	@($(LHEAD) $(LINT.c) $@ $(SCALLBASE)/adjtime.c $(LTAIL))
+
+$(LINTS_DIR)/alarm.ln:		$(SCALLBASE)/alarm.c
+	@($(LHEAD) $(LINT.c) $@ $(SCALLBASE)/alarm.c $(LTAIL))
+
+$(LINTS_DIR)/chdir.ln:		$(SCALLBASE)/chdir.c
+	@($(LHEAD) $(LINT.c) $@ $(SCALLBASE)/chdir.c $(LTAIL))
+
+$(LINTS_DIR)/chmod.ln:		$(SCALLBASE)/chmod.c
+	@($(LHEAD) $(LINT.c) $(SCALLBASE)/chmod.c $(LTAIL))
+
+$(LINTS_DIR)/chown.ln:		$(SCALLBASE)/chown.c
+	@($(LHEAD) $(LINT.c) $(SCALLBASE)/chown.c $(LTAIL))
+
+$(LINTS_DIR)/cladm.ln:		$(SCALLBASE)/cladm.c
+	@($(LHEAD) $(LINT.c) $(SCALLBASE)/cladm.c $(LTAIL))
+
+$(LINTS_DIR)/close.ln:		$(SCALLBASE)/close.c
+	@($(LHEAD) $(LINT.c) $(SCALLBASE)/close.c $(LTAIL))
+
+$(LINTS_DIR)/corectl.ln:	$(SCALLBASE)/corectl.c
+	@($(LHEAD) $(LINT.c) $(SCALLBASE)/corectl.c $(LTAIL))
+
+$(LINTS_DIR)/fcntl.ln:		$(SCALLBASE)/fcntl.c
+	@($(LHEAD) $(LINT.c) $(SCALLBASE)/fcntl.c $(LTAIL))
+
+$(LINTS_DIR)/fdsync.ln:		$(SCALLBASE)/fdsync.c
+	@($(LHEAD) $(LINT.c) $(SCALLBASE)/fdsync.c $(LTAIL))
+
+$(LINTS_DIR)/getdents.ln:	$(SCALLBASE)/getdents.c
+	@($(LHEAD) $(LINT.c) $(SCALLBASE)/getdents.c $(LTAIL))
+
+$(LINTS_DIR)/getloadavg.ln:	$(SCALLBASE)/getloadavg.c
+	@($(LHEAD) $(LINT.c) $(SCALLBASE)/getloadavg.c $(LTAIL))
+
+$(LINTS_DIR)/getpid.ln:		$(SCALLBASE)/getpid.c
+	@($(LHEAD) $(LINT.c) $(SCALLBASE)/getpid.c $(LTAIL))
+
+$(LINTS_DIR)/gid.ln:		$(SCALLBASE)/gid.c
+	@($(LHEAD) $(LINT.c) $(SCALLBASE)/gid.c $(LTAIL))
+
+$(LINTS_DIR)/groups.ln:		$(SCALLBASE)/groups.c
+	@($(LHEAD) $(LINT.c) $(SCALLBASE)/groups.c $(LTAIL))
+
+$(LINTS_DIR)/ioctl.ln:		$(SCALLBASE)/ioctl.c
+	@($(LHEAD) $(LINT.c) $(SCALLBASE)/ioctl.c $(LTAIL))
+
+$(LINTS_DIR)/link.ln:		$(SCALLBASE)/link.c
+	@($(LHEAD) $(LINT.c) $(SCALLBASE)/link.c $(LTAIL))
+
+$(LINTS_DIR)/lseek.ln:		$(SCALLBASE)/lseek.c
+	@($(LHEAD) $(LINT.c) $(SCALLBASE)/lseek.c $(LTAIL))
+
+$(LINTS_DIR)/lwp_create.ln:	$(SCALLBASE)/lwp_create.c
+	@($(LHEAD) $(LINT.c) $(SCALLBASE)/lwp_create.c $(LTAIL))
+
+$(LINTS_DIR)/lwp_info.ln:	$(SCALLBASE)/lwp_info.c
+	@($(LHEAD) $(LINT.c) $(SCALLBASE)/lwp_info.c $(LTAIL))
+
+$(LINTS_DIR)/lwp_self.ln:	$(SCALLBASE)/lwp_self.c
+	@($(LHEAD) $(LINT.c) $(SCALLBASE)/lwp_self.c $(LTAIL))
+
+$(LINTS_DIR)/lwp_sobj.ln:	$(SCALLBASE)/lwp_sobj.c
+	@($(LHEAD) $(LINT.c) $(SCALLBASE)/lwp_sobj.c $(LTAIL))
+
+$(LINTS_DIR)/lwpsys.ln:		$(SCALLBASE)/lwpsys.c
+	@($(LHEAD) $(LINT.c) $(SCALLBASE)/lwpsys.c $(LTAIL))
+
+$(LINTS_DIR)/memcntl.ln:	$(SCALLBASE)/memcntl.c
+	@($(LHEAD) $(LINT.c) $(SCALLBASE)/memcntl.c $(LTAIL))
+
+$(LINTS_DIR)/mkdir.ln:		$(SCALLBASE)/mkdir.c
+	@($(LHEAD) $(LINT.c) $(SCALLBASE)/mkdir.c $(LTAIL))
+
+$(LINTS_DIR)/mknod.ln:		$(SCALLBASE)/mknod.c
+	@($(LHEAD) $(LINT.c) $(SCALLBASE)/mknod.c $(LTAIL))
+
+$(LINTS_DIR)/mount.ln:		$(SCALLBASE)/mount.c
+	@($(LHEAD) $(LINT.c) $(SCALLBASE)/mount.c $(LTAIL))
+
+$(LINTS_DIR)/ntptime.ln:	$(SCALLBASE)/ntptime.c
+	@($(LHEAD) $(LINT.c) $(SCALLBASE)/ntptime.c $(LTAIL))
+
+$(LINTS_DIR)/open.ln:		$(SCALLBASE)/open.c
+	@($(LHEAD) $(LINT.c) $(SCALLBASE)/open.c $(LTAIL))
+
+$(LINTS_DIR)/nice.ln:		$(SCALLBASE)/nice.c
+	@($(LHEAD) $(LINT.c) $(SCALLBASE)/nice.c $(LTAIL))
+
+$(LINTS_DIR)/p_online.ln:	$(SCALLBASE)/p_online.c
+	@($(LHEAD) $(LINT.c) $(SCALLBASE)/p_online.c $(LTAIL))
+
+$(LINTS_DIR)/pathconf.ln:	$(SCALLBASE)/pathconf.c
+	@($(LHEAD) $(LINT.c) $(SCALLBASE)/pathconf.c $(LTAIL))
+
+$(LINTS_DIR)/pause.ln:		$(SCALLBASE)/pause.c
+	@($(LHEAD) $(LINT.c) $(SCALLBASE)/pause.c $(LTAIL))
+
+$(LINTS_DIR)/pgrpsys.ln:	$(SCALLBASE)/pgrpsys.c
+	@($(LHEAD) $(LINT.c) $(SCALLBASE)/pgrpsys.c $(LTAIL))
+
+$(LINTS_DIR)/pipe.ln:		$(SCALLBASE)/pipe.c
+	@($(LHEAD) $(LINT.c) $(SCALLBASE)/pipe.c $(LTAIL))
+
+$(LINTS_DIR)/poll.ln:		$(SCALLBASE)/poll.c
+	@($(LHEAD) $(LINT.c) $(SCALLBASE)/poll.c $(LTAIL))
+
+$(LINTS_DIR)/processor_bind.ln:		$(SCALLBASE)/processor_bind.c
+	@($(LHEAD) $(LINT.c) $(SCALLBASE)/processor_bind.c $(LTAIL))
+
+$(LINTS_DIR)/processor_info.ln:		$(SCALLBASE)/processor_info.c
+	@($(LHEAD) $(LINT.c) $(SCALLBASE)/processor_info.c $(LTAIL))
+
+$(LINTS_DIR)/profil.ln:		$(SCALLBASE)/profil.c
+	@($(LHEAD) $(LINT.c) $(SCALLBASE)/profil.c $(LTAIL))
+
+$(LINTS_DIR)/pset.ln:		$(SCALLBASE)/pset.c
+	@($(LHEAD) $(LINT.c) $(SCALLBASE)/pset.c $(LTAIL))
+
+$(LINTS_DIR)/readlink.ln:	$(SCALLBASE)/readlink.c
+	@($(LHEAD) $(LINT.c) $(SCALLBASE)/readlink.c $(LTAIL))
+
+$(LINTS_DIR)/rename.ln:		$(SCALLBASE)/rename.c
+	@($(LHEAD) $(LINT.c) $(SCALLBASE)/rename.c $(LTAIL))
+
+$(LINTS_DIR)/resolvepath.ln:	$(SCALLBASE)/resolvepath.c
+	@($(LHEAD) $(LINT.c) $(SCALLBASE)/resolvepath.c $(LTAIL))
+
+$(LINTS_DIR)/rlimit.ln:		$(SCALLBASE)/rlimit.c
+	@($(LHEAD) $(LINT.c) $(SCALLBASE)/rlimit.c $(LTAIL))
+
+$(LINTS_DIR)/rmdir.ln:		$(SCALLBASE)/rmdir.c
+	@($(LHEAD) $(LINT.c) $(SCALLBASE)/rmdir.c $(LTAIL))
+
+$(LINTS_DIR)/rw.ln:		$(SCALLBASE)/rw.c
+	@($(LHEAD) $(LINT.c) $(SCALLBASE)/rw.c $(LTAIL))
+
+$(LINTS_DIR)/sem.ln:		$(SCALLBASE)/sem.c
+	@($(LHEAD) $(LINT.c) $(SCALLBASE)/sem.c $(LTAIL))
+
+$(LINTS_DIR)/sigaction.ln:	$(SCALLBASE)/sigaction.c
+	@($(LHEAD) $(LINT.c) $(SCALLBASE)/sigaction.c $(LTAIL))
+
+$(LINTS_DIR)/sigaltstack.ln:	$(SCALLBASE)/sigaltstack.c
+	@($(LHEAD) $(LINT.c) $(SCALLBASE)/sigaltstack.c $(LTAIL))
+
+$(LINTS_DIR)/signotify.ln:	$(SCALLBASE)/signotify.c
+	@($(LHEAD) $(LINT.c) $(SCALLBASE)/signotify.c $(LTAIL))
+
+$(LINTS_DIR)/sigpending.ln:	$(SCALLBASE)/sigpending.c
+	@($(LHEAD) $(LINT.c) $(SCALLBASE)/sigpending.c $(LTAIL))
+
+$(LINTS_DIR)/sigprocmask.ln:	$(SCALLBASE)/sigprocmask.c
+	@($(LHEAD) $(LINT.c) $(SCALLBASE)/sigprocmask.c $(LTAIL))
+
+$(LINTS_DIR)/sigqueue.ln:	$(SCALLBASE)/sigqueue.c
+	@($(LHEAD) $(LINT.c) $(SCALLBASE)/sigqueue.c $(LTAIL))
+
+$(LINTS_DIR)/sigsendset.ln:	$(SCALLBASE)/sigsendset.c
+	@($(LHEAD) $(LINT.c) $(SCALLBASE)/sigsendset.c $(LTAIL))
+
+$(LINTS_DIR)/sigsuspend.ln:	$(SCALLBASE)/sigsuspend.c
+	@($(LHEAD) $(LINT.c) $(SCALLBASE)/sigsuspend.c $(LTAIL))
+
+$(LINTS_DIR)/sigtimedwait.ln:	$(SCALLBASE)/sigtimedwait.c
+	@($(LHEAD) $(LINT.c) $(SCALLBASE)/sigtimedwait.c $(LTAIL))
+
+$(LINTS_DIR)/ssig.ln:		$(SCALLBASE)/ssig.c
+	@($(LHEAD) $(LINT.c) $(SCALLBASE)/ssig.c $(LTAIL))
+
+$(LINTS_DIR)/stat.ln:		$(SCALLBASE)/stat.c
+	@($(LHEAD) $(LINT.c) $(SCALLBASE)/stat.c $(LTAIL))
+
+$(LINTS_DIR)/statfs.ln:		$(SCALLBASE)/statfs.c
+	@($(LHEAD) $(LINT.c) $(SCALLBASE)/statfs.c $(LTAIL))
+
+$(LINTS_DIR)/statvfs.ln:	$(SCALLBASE)/statvfs.c
+	@($(LHEAD) $(LINT.c) $(SCALLBASE)/statvfs.c $(LTAIL))
+
+$(LINTS_DIR)/strcalls.ln:	$(SCALLBASE)/strcalls.c
+	@($(LHEAD) $(LINT.c) $(SCALLBASE)/strcalls.c $(LTAIL))
+
+$(LINTS_DIR)/symlink.ln:	$(SCALLBASE)/symlink.c
+	@($(LHEAD) $(LINT.c) $(SCALLBASE)/symlink.c $(LTAIL))
+
+$(LINTS_DIR)/sync.ln:		$(SCALLBASE)/sync.c
+	@($(LHEAD) $(LINT.c) $(SCALLBASE)/sync.c $(LTAIL))
+
+$(LINTS_DIR)/sysconfig.ln:	$(SCALLBASE)/sysconfig.c
+	@($(LHEAD) $(LINT.c) $(SCALLBASE)/sysconfig.c $(LTAIL))
+
+$(LINTS_DIR)/sysfs.ln:		$(SCALLBASE)/sysfs.c
+	@($(LHEAD) $(LINT.c) $(SCALLBASE)/sysfs.c $(LTAIL))
+
+$(LINTS_DIR)/systeminfo.ln:	$(SCALLBASE)/systeminfo.c
+	@($(LHEAD) $(LINT.c) $(SCALLBASE)/systeminfo.c $(LTAIL))
+
+$(LINTS_DIR)/time.ln:		$(SCALLBASE)/time.c
+	@($(LHEAD) $(LINT.c) $(SCALLBASE)/time.c $(LTAIL))
+
+$(LINTS_DIR)/times.ln:		$(SCALLBASE)/times.c
+	@($(LHEAD) $(LINT.c) $(SCALLBASE)/times.c $(LTAIL))
+
+$(LINTS_DIR)/uadmin.ln:		$(SCALLBASE)/uadmin.c
+	@($(LHEAD) $(LINT.c) $(SCALLBASE)/uadmin.c $(LTAIL))
+
+$(LINTS_DIR)/uid.ln:		$(SCALLBASE)/uid.c
+	@($(LHEAD) $(LINT.c) $(SCALLBASE)/uid.c $(LTAIL))
+
+$(LINTS_DIR)/umask.ln:		$(SCALLBASE)/umask.c
+	@($(LHEAD) $(LINT.c) $(SCALLBASE)/umask.c $(LTAIL))
+
+$(LINTS_DIR)/umount.ln:		$(SCALLBASE)/umount.c
+	@($(LHEAD) $(LINT.c) $(SCALLBASE)/umount.c $(LTAIL))
+
+$(LINTS_DIR)/uname.ln:		$(SCALLBASE)/uname.c
+	@($(LHEAD) $(LINT.c) $(SCALLBASE)/uname.c $(LTAIL))
+
+$(LINTS_DIR)/unlink.ln:		$(SCALLBASE)/unlink.c
+	@($(LHEAD) $(LINT.c) $(SCALLBASE)/unlink.c $(LTAIL))
+
+$(LINTS_DIR)/utime.ln:		$(SCALLBASE)/utime.c
+	@($(LHEAD) $(LINT.c) $(SCALLBASE)/utime.c $(LTAIL))
+
+$(LINTS_DIR)/utssys.ln:		$(SCALLBASE)/utssys.c
+	@($(LHEAD) $(LINT.c) $(SCALLBASE)/utssys.c $(LTAIL))
+
+$(LINTS_DIR)/yield.ln:		$(SCALLBASE)/yield.c
+	@($(LHEAD) $(LINT.c) $(SCALLBASE)/yield.c $(LTAIL))
+
+#
+
+$(LINTS_DIR)/tnf.ln:		$(UTSBASE)/common/tnf/tnf.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/tnf/tnf.c $(LTAIL))
+
+$(LINTS_DIR)/tnf_buf.ln:	$(UTSBASE)/common/tnf/tnf_buf.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/tnf/tnf_buf.c $(LTAIL))
+
+$(LINTS_DIR)/tnf_res.ln:	$(UTSBASE)/common/tnf/tnf_res.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/tnf/tnf_res.c $(LTAIL))
+
+$(LINTS_DIR)/tnf_trace.ln:	$(UTSBASE)/common/tnf/tnf_trace.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/tnf/tnf_trace.c $(LTAIL))
+
+$(LINTS_DIR)/tnf_writer.ln:	$(UTSBASE)/common/tnf/tnf_writer.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/tnf/tnf_writer.c $(LTAIL))
+
+$(LINTS_DIR)/trace_funcs.ln:	$(UTSBASE)/common/tnf/trace_funcs.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/tnf/trace_funcs.c $(LTAIL))
+
+$(LINTS_DIR)/tnf_probe.ln:	$(UTSBASE)/common/tnf/tnf_probe.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/tnf/tnf_probe.c $(LTAIL))
+
+$(LINTS_DIR)/trace_init.ln:	$(UTSBASE)/common/tnf/trace_init.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/tnf/trace_init.c $(LTAIL))
+
+$(LINTS_DIR)/hat_refmod.ln:	$(UTSBASE)/common/vm/hat_refmod.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/vm/hat_refmod.c $(LTAIL))
+
+$(LINTS_DIR)/instance.ln:	$(UTSBASE)/common/os/instance.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/os/instance.c $(LTAIL))
+
+$(LINTS_DIR)/modconf.ln:	$(UTSBASE)/common/os/modconf.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/os/modconf.c $(LTAIL))
+
+$(LINTS_DIR)/modctl.ln:		$(UTSBASE)/common/os/modctl.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/os/modctl.c $(LTAIL))
+
+$(LINTS_DIR)/modhash.ln:	$(UTSBASE)/common/os/modhash.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/os/modhash.c $(LTAIL))
+
+$(LINTS_DIR)/modsubr.ln:	$(UTSBASE)/common/os/modsubr.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/os/modsubr.c $(LTAIL))
+
+$(LINTS_DIR)/modsysfile.ln:	$(UTSBASE)/common/os/modsysfile.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/os/modsysfile.c $(LTAIL))
+
+$(LINTS_DIR)/mach_page.ln:	$(UTSBASE)/common/vm/mach_page.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/vm/mach_page.c $(LTAIL))
+
+$(LINTS_DIR)/page_lock.ln:	$(UTSBASE)/common/vm/page_lock.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/vm/page_lock.c $(LTAIL))
+
+$(LINTS_DIR)/seg_dev.ln:	$(UTSBASE)/common/vm/seg_dev.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/vm/seg_dev.c $(LTAIL))
+
+$(LINTS_DIR)/seg_kmem.ln:	$(UTSBASE)/common/vm/seg_kmem.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/vm/seg_kmem.c $(LTAIL))
+
+$(LINTS_DIR)/seg_kp.ln:		$(UTSBASE)/common/vm/seg_kp.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/vm/seg_kp.c $(LTAIL))
+
+$(LINTS_DIR)/seg_map.ln:	$(UTSBASE)/common/vm/seg_map.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/vm/seg_map.c $(LTAIL))
+
+$(LINTS_DIR)/seg_vn.ln:		$(UTSBASE)/common/vm/seg_vn.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/vm/seg_vn.c $(LTAIL))
+
+$(LINTS_DIR)/seg_spt.ln:	$(UTSBASE)/common/vm/seg_spt.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/vm/seg_spt.c $(LTAIL))
+
+$(LINTS_DIR)/vm_anon.ln:	$(UTSBASE)/common/vm/vm_anon.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/vm/vm_anon.c $(LTAIL))
+
+$(LINTS_DIR)/vm_as.ln:		$(UTSBASE)/common/vm/vm_as.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/vm/vm_as.c $(LTAIL))
+
+$(LINTS_DIR)/vm_page.ln:	$(UTSBASE)/common/vm/vm_page.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/vm/vm_page.c $(LTAIL))
+
+$(LINTS_DIR)/vm_pvn.ln:		$(UTSBASE)/common/vm/vm_pvn.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/vm/vm_pvn.c $(LTAIL))
+
+$(LINTS_DIR)/vm_rm.ln:		$(UTSBASE)/common/vm/vm_rm.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/vm/vm_rm.c $(LTAIL))
+
+$(LINTS_DIR)/vm_seg.ln:		$(UTSBASE)/common/vm/vm_seg.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/vm/vm_seg.c $(LTAIL))
+
+$(LINTS_DIR)/vm_swap.ln:	$(UTSBASE)/common/vm/vm_swap.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/vm/vm_swap.c $(LTAIL))
+
+$(LINTS_DIR)/i2o_msg.ln:	$(UTSBASE)/common/io/i2o/i2o_msg.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/i2o/i2o_msg.c $(LTAIL))
+
+$(LINTS_DIR)/pci_to_i2o.ln:	$(UTSBASE)/common/io/i2o/pci_to_i2o.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/i2o/pci_to_i2o.c $(LTAIL))
+
+$(LINTS_DIR)/i2o_scsi.ln:	$(UTSBASE)/common/io/i2o/i2o_scsi.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/i2o/i2o_scsi.c $(LTAIL))
+
+$(LINTS_DIR)/i2o_bs.ln:        $(UTSBASE)/common/io/i2o/i2o_bs.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/i2o/i2o_bs.c $(LTAIL))
+
+$(LINTS_DIR)/label.ln:        $(UTSBASE)/common/io/i2o/label.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/i2o/label.c $(LTAIL))
+
+$(LINTS_DIR)/ohci.ln:		$(USBBASE)/hcd/openhci/ohci.c
+	@($(LHEAD) $(LINT.c) $(USBBASE)/hcd/openhci/ohci.c $(LTAIL))
+
+$(LINTS_DIR)/ohci_polled.ln:	$(USBBASE)/hcd/openhci/ohci_polled.c
+	@($(LHEAD) $(LINT.c) $(USBBASE)/hcd/openhci/ohci_polled.c $(LTAIL))
+
+$(LINTS_DIR)/uhci.ln:	$(USBBASE)/hcd/uhci/uhci.c
+	@($(LHEAD) $(LINT.c) $(USBBASE)/hcd/uhci/uhci.c $(LTAIL))
+
+$(LINTS_DIR)/uhcihub.ln:	$(USBBASE)/hcd/uhci/uhcihub.c
+	@($(LHEAD) $(LINT.c) $(USBBASE)/hcd/uhci/uhcihub.c $(LTAIL))
+
+$(LINTS_DIR)/uhcipolled.ln:	$(USBBASE)/hcd/uhci/uhcipolled.c
+	@($(LHEAD) $(LINT.c) $(USBBASE)/hcd/uhci/uhcipolled.c $(LTAIL))
+
+$(LINTS_DIR)/uhcitgt.ln:	$(USBBASE)/hcd/uhci/uhcitgt.c
+	@($(LHEAD) $(LINT.c) $(USBBASE)/hcd/uhci/uhcitgt.c $(LTAIL))
+
+$(LINTS_DIR)/uhciutil.ln:	$(USBBASE)/hcd/uhci/uhciutil.c
+	@($(LHEAD) $(LINT.c) $(USBBASE)/hcd/uhci/uhciutil.c $(LTAIL))

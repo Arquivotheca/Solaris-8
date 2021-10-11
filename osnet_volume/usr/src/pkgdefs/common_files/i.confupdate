@@ -1,0 +1,64 @@
+#!/bin/sh
+#
+#ident	"@(#)i.confupdate	1.5	96/11/12 SMI"
+#
+# Copyright (c) 1996 by Sun Microsystems, Inc.
+# All Rights Reserved.
+#
+
+while read src dest
+do
+	#
+	# First preserve any existing version, excepting the SCCS
+	# ident and copyright, which we'll take from the new version.
+	#
+	if [ ! -f $dest ] ; then
+		# no existing version, just copy in new one
+		cp $src $dest
+	else
+		# update the SCCS id and copyright line(s)
+		newident=`grep '^#ident[ 	]*"@(#)' $src`
+		newcr=`grep '^#[ 	]*Copyright (c)' $src`
+		newall=`grep '^#[ 	]*All Rights Reserved' $src`
+		d=`basename $dest`
+
+		while read line
+		do
+			case "$line" in
+			"#ident"*)
+				echo "$newident"
+				;;
+
+			"#pragma ident"*)
+				echo "$newident"
+				;;
+
+			"# Copyright"*)
+				echo "$newcr"
+				echo "$newall"
+				;;
+
+			"# All Rights"*)
+				;;
+
+			*)
+				echo "$line"
+				;;
+			esac
+		done < $dest > /tmp/tmp.$d.$$
+		mv /tmp/tmp.$d.$$ $dest
+	fi
+
+	# Now add 'ignore-hardware-nodes' line if necessary
+	grep 'ignore-hardware-nodes' $dest > /dev/null
+	if [ $? -ne 0 ] ; then
+		cat >> $dest <<EOT
+
+# This is an old-style, non-conformant, driver.conf file.
+# This file is not meant to be modified in the field.
+ignore-hardware-nodes=1;
+
+EOT
+	fi
+done
+exit 0

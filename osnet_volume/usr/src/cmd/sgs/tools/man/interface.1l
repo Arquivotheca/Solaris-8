@@ -1,0 +1,191 @@
+.\" @(#)interface.1l 1.6 96/03/27 SMI
+.\" Copyright (c) 1995 by Sun Microsystems, Inc.
+.\" All rights reserved.
+.\"
+.TH interface 1l "3 Oct 1995"
+.SH NAME
+intf_create, intf_cmp \- create and compare a shared object interface database
+.SH SYNOPSIS
+.B intf_create
+[
+.BI \-d " directory"
+] [
+.B \-r
+] [
+.B \-v
+]
+.sp
+.B intf_cmp
+[
+.mc |
+.B \-apv
+.mc
+]
+.I " new_release_dir  old_release_dir"
+.SH DESCRIPTION
+These interface scripts
+provide for the creation and comparison of shared object interface databases.
+These databases reflect the association of the shared object's global
+symbols with a recorded
+.I version definition
+(see
+.BR ld (1)
+and
+.BR pvs (1)
+for details).
+.PP
+\f3intf_create\f1 traverses a workspaces
+.B $ROOT
+directory hierarchy looking for shared objects.  Any version definitions
+within these objects is saved in one or more database files. By default
+these files are created in the directory
+.BI $ROOT /usr/lib/interfaces.
+This default directory can be overridden with the
+.B \-d
+option.  Shared objects that contain no version definitions are ignored
+unless the
+.B \-v
+option is specified, in which case a warning diagnostic is generated.
+The
+.B \-r
+option attempts to deduce any symbol reductions that have occurred within
+a file.
+.PP
+There are several version databases created:
+.IP \(bu
+Shared objects made available to the
+.I compilation environment
+have a suffix of
+.BR .so .
+Public version definitions found within these objects are
+recorded as
+.I file control directives
+within the file
+.BR $RELEASE .
+This file therefore describes the public interfaces available for a
+particular release.
+.
+.IP \(bu
+Shared objects made available to the
+.I runtime environment
+have a suffix of
+.BR .so
+followed by a version number.  All version definitions found within these
+objects, together with their associated symbols, are recorded 
+within individual files that identify the objects name, i.e.,
+.BI audit/ libc.so.1.
+These files provide for the internal
+audit of shared object symbolic interfaces from release to release.
+.
+.IP \(bu
+If the
+.B \-r
+option is specified an attempt is made to determine the reduced symbols
+within the shared object.  Reduced symbols are global symbols that have
+been reduced to locals as part of creating version interface definitions.
+These reductions are recorded in individual audit files suffixed with the
+string
+.BR -REDUCED ,
+\&.i.e.,
+.BI audit/ libc.so.1 -REDUCED .
+.
+.IP \(bu
+Some runtime shared objects offer
+.I standard
+binary interfaces.  The standard version definitions found within these
+objects are recorded as
+.I file control directives
+within one of the standard definition files.  Presently two binary interface
+standards are recognized;
+the System V Application Binary Interface, Third Edition (referred to as
+.BR SYSVABI_1.3 ),
+and the SPARC International, SPARC Compliance Definition,
+Version 2.3 (referred to as
+.BR SISCD_2.3 ).
+.sp
+.PP
+The
+.B intf_cmp
+routine examines the version definitions and associated symbols from two
+release databases looking for inconsistencies.  To insure symbolic
+interface consistency between successive software releases, existing
+version definitions and their symbol association should remain intact.
+Any discrepancies between the two interface definitions are flagged as
+errors.
+.mc |
+.PP
+The
+.B \-a
+option displays any interface additions.
+The
+.B \-p
+option causes private interfaces to be included in the interface comparison.
+The
+.B \-v
+option details each interface file as it is processed.
+.PP
+Note that version definition inheritance has the effect of causing a
+symbol to be viewed as existing in multiple definitions. This insures
+that both version definitions and their inheritance relationship are
+processed as part of the comparison.
+.mc
+.PP
+.SH EXAMPLES
+The following example uses
+.B intf_create
+within an integration workspace to generate an interface database.
+.PP
+.RS
+.nf
+.B % pwd
+/ws/on596-gate
+.B % RELEASE=5.6 intf_create -r
+.B % ls -1R $ROOT/usr/lib/interfaces
+/ws/on596-gate/proto/sparc_root/usr/lib/interfaces:
+5.6
+SISCD_2.3
+SYSVABI_1.3
+audit/
+
+/ws/on596-gate/proto/sparc_root/usr/lib/interfaces/audit:
+libadm.so.1
+libadm.so.1-REDUCED
+libaio.so.1
+libaio.so.1-REDUCED
+libauth.so.1
+libauth.so.1-REDUCED
+libc.so.1
+libc.so.1-REDUCED
+\&\.\.\.\.\.\.\.
+.br
+.fi
+.RE
+.sp
+.PP
+The following example uses
+.B intf_cmp
+to compare this releases interface definition with the previous
+software release.
+.PP
+.RS
+.nf
+.B % intf_cmp -p $ROOT/usr/lib/interfaces  $OLD-ROOT/usr/lib/interfaces
+ERROR: ON-libadm.so.1: SUNW_1.1: circf(4): has been added
+ERROR: ON-libaio.so.1: SUNW_1.1: _aiocancel: has been deleted
+ERROR: ON-libauth.so.1: SUNWprivate_1.1: sa_getall: has been added
+ERROR: ON-libauth.so.1: SUNWprivate_1.1: free_resp: has been added
+ERROR: ON-libauth.so.1: SUNWprivate_1.1: defopen: has been added
+ERROR: ON-libc.so.1: SUNW_1.1: _sys_illlist(64): has been deleted
+ERROR: ON-libc.so.1: SUNW_1.1: _sys_illlist(32): has been added
+.fi
+.RE
+.sp
+.PP
+Note: the above comparison files were doctored in order to provide
+the example, they do not indicate any real changes that have
+occurred in the associated system libraries.
+.SH SEE ALSO
+.BR ld (1),
+.BR pvs (1).
+.LP
+.TZ LLM

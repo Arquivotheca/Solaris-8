@@ -1,0 +1,95 @@
+#
+#ident	"@(#)Makefile.targ	1.9	98/09/23 SMI"
+#
+# Copyright (c) 1998 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+
+%:	../common/%.ksh
+	$(RM) $@
+	cat $< > $@
+	chmod +x $@
+
+$(PICDIR)/%.o:	%.c
+		$(COMPILE.c) $< -o $@
+		$(POST_PROCESS_O)
+
+$(PICDIR)/%.o:	../common/%.c
+		$(COMPILE.c) $< -o $@
+		$(POST_PROCESS_O)
+
+$(OBJDIR)/%.o:	%.c
+		$(COMPILE.c) $< -o $@
+		$(POST_PROCESS_O)
+
+$(OBJDIR)/%.o: ../common/%.c
+		$(COMPILE.c) $< -o $@
+		$(POST_PROCESS_O)
+
+$(TRUSSLIB): $(TRUSSPICS)
+		$(BUILD.SO)
+		$(POST_PROCESS_SO)
+
+$(BINDLIB): $(BINDPICS)
+		$(BUILD.SO)
+		$(POST_PROCESS_SO)
+
+$(SYMBINDREP): $(SYMBINDREPPICS)
+		$(BUILD.SO)
+		$(POST_PROCESS_SO)
+
+$(PERFLIB): $(PERFPICS)
+		$(BUILD.SO)
+		$(POST_PROCESS_SO)
+
+$(WHOLIB): $(WHOPICS)
+		$(BUILD.SO)
+		$(POST_PROCESS_SO)
+
+dumpbind: $(OBJDIR)/dumpbind.o
+		$(LINK.c) -o $@ $(OBJDIR)/dumpbind.o
+
+$(ROOTUSRBIN)/%: %
+		$(INS.file)
+
+$(ROOTCCSLIB)/%: %
+		$(INS.file)
+
+$(ROOTCCSLIB64)/%: %
+		$(INS.file)
+
+$(ROOTONLDBIN)/%: %
+		$(INS.file)
+
+$(ROOTONLDLIB)/%: %
+		$(INS.file)
+
+$(ROOTONLDLIB64)/%: %
+		$(INS.file)
+
+$(ROOTCCSLIB):
+	$(INS.dir)
+
+$(ROOTCCSLIB64):
+	$(INS.dir)
+
+lint:
+		@echo "\nLint of: sotruss"		 > $(LINTOUT)
+		@echo "========================"	>> $(LINTOUT)
+		$(LINT.c) ../common/truss.c		>> $(LINTOUT) 2>&1
+		@echo "\nLint of: symbindrep"		>> $(LINTOUT)
+		@echo "========================"	>> $(LINTOUT)
+		$(LINT.c) ../common/symbindrep.c	>> $(LINTOUT) 2>&1
+		@echo "\nLint of: perfcnt"		>> $(LINTOUT)
+		@echo "========================"	>> $(LINTOUT)
+		$(LINT.c) ../common/perfcnt.c \
+			../common/hash.c		>> $(LINTOUT) 2>&1
+		@echo "\nLint of: whocalls"		>> $(LINTOUT)
+		@echo "========================"	>> $(LINTOUT)
+		$(LINT.c) ../common/who.c \
+			../common/env.c			>> $(LINTOUT) 2>&1
+		@echo "\nLint of: bindings.so"		>> $(LINTOUT)
+		@echo "========================"	>> $(LINTOUT)
+		$(LINT.c) ../common/bindings.c		>> $(LINTOUT) 2>&1
+
+include		../../../../lib/Makefile.targ

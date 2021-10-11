@@ -1,0 +1,26 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)proc_tlist.dbg	1.3	98/01/19 SMI"
+
+
+\ arg		: address of a struct proc
+\ uses		: proc_tlist.nxt
+\ registers	: e, p
+\ description	: executes proc_tlist.nxt with the address of
+\ 		  the first thread of the proc.
+
+#include <sys/param.h>
+#include <sys/types.h>
+#include <sys/proc.h>
+#include "dummy.h"
+
+\
+\
+proc		""		proc_tlist
+{adb_inline_begin}
+.>p
+*(<p+{OFFSET, p_tlist})>e
+<e$<proc_tlist.nxt
+{adb_inline_end}

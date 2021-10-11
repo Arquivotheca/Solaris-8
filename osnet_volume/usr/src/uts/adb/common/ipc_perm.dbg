@@ -1,0 +1,36 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)ipc_perm.dbg	1.3	98/01/19 SMI"
+
+\ arg             : address of ipc_perm struct
+\ uses            :
+\ registers       : w
+\ description     : prints the contents of ipc_perm structure
+\
+
+#include <sys/types.h>
+#include <sys/cred.h>
+#include <sys/proc.h>
+#include <sys/ipc.h>
+#include <sys/shm.h>
+#include "dummy.h"
+
+\
+\
+ipc_perm
+{adb_inline_begin}
+.>w
+<w+{OFFSET, uid}=""
+{adb_inline_end}
+        uid                     sdecimal
+        gid                     sdecimal
+        cuid                    sdecimal
+        cgid                    sdecimal
+        mode                    hex
+        seq                     decimal
+        key                     hex
+{adb_inline_begin}
+<w+{SIZEOF}=""
+{adb_inline_end}

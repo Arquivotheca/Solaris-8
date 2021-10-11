@@ -1,0 +1,16 @@
+/* LINTLIBRARY */
+/* PROTOLIB1 */
+
+/*
+ * Copyright (c) 1997 by Sun Microsystems, Inc. 
+ * All rights reserved. 
+ */ 
+#pragma ident	"@(#)llib-lintl	1.1	97/03/12 SMI"
+
+/*
+ * usr/src/lib/libintl
+ * EMPTY library
+ */
+
+#include <libintl.h>
+#include <locale.h>

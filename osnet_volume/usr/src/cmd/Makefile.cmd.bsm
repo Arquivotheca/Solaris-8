@@ -1,0 +1,28 @@
+#
+#ident  "@(#)Makefile.cmd.bsm 1.5 93/09/13 SMI;"
+#
+# Copyright (c) 1992 by Sun Microsystems, Inc.
+#
+# Definitions common to BSM command source
+#
+#	Before including this file you must set the PROG variable
+#	and include Makefile.cmd
+#
+
+
+all:
+
+install: all $(ROOTUSRSBINPROG)
+
+# Rules for internationalization
+
+PO=	$(TEXT_DOMAIN).po
+
+po:	$(PO)
+
+$(PO):	$(POS)
+	cat $(POS) > $@
+
+%.po:	%.c
+	xgettext -c TRANSLATION_NOTE -d $(TEXT_DOMAIN) $<
+	mv $(TEXT_DOMAIN).po $@

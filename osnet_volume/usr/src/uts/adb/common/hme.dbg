@@ -1,0 +1,20 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)hme.dbg	1.6	98/01/14 SMI"
+
+#include <sys/param.h>
+#include <vm/hat.h>
+#include <vm/hat_srmmu.h>
+#include "dummy.h"
+
+\
+\
+hment                   hme_            hme
+        prev                    hex
+        next                    hex
+        hat                     hex
+        impl                    hex
+        notused                 hex             flags
+        page                    hex

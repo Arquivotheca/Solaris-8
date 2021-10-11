@@ -1,0 +1,25 @@
+#
+#ident	"@(#)mapfile-vers	1.11	98/01/21 SMI"
+#
+# Copyright (c) 1995 by Sun Microsystems, Inc.
+# All rights reserved.
+
+# Specify what global symbols we export.  Note that we're not really
+# interested in declaring a version, simply scoping the file is sufficient.
+
+{
+	global:
+		main;			# Provides basic adb symbol offsets
+
+		dbg_mask;		# Debugging support (liblddbg)
+		dbg_print;
+		eprintf;
+
+		calloc;			# malloc interposition
+		free;
+		libld_malloc;
+		malloc;
+		realloc;
+	local:
+		*;
+};

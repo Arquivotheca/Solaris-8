@@ -1,0 +1,23 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)ic_acl.dbg	1.3	98/01/14 SMI"
+
+#include <sys/types.h>
+#include <sys/t_lock.h>
+#include <sys/time.h>
+#include <sys/vnode.h>
+#include <vm/seg.h>
+#include <sys/fs/ufs_acl.h>
+#include "dummy.h"
+
+\
+\
+ic_acl
+        owner                   hex
+        group                   hex
+        other                   hex
+        users                   hex
+        groups                  hex
+        mask                    .ufs_aclmask

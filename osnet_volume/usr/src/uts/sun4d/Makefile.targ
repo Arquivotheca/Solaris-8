@@ -1,0 +1,28 @@
+#
+# Copyright (c) 1991 by Sun Microsystems, Inc.
+#
+
+#ident	"@(#)Makefile.targ	1.10	99/10/04 SMI"
+
+#
+#	This Makefile defines the set of all required, target containing
+# included Makefiles for the sun4d "implementation architecture".
+#
+
+#
+#	Targets for all implementations:
+#
+include $(UTSBASE)/Makefile.targ
+
+#
+#	Target set for sun4d (order is not important, as it is with the
+# isomorphic Makefile.files set).
+#
+include $(UTSBASE)/sun4d/Makefile.rules
+include $(UTSBASE)/srmmu/Makefile.rules
+include $(UTSBASE)/sparc/v7/Makefile.rules
+include $(UTSBASE)/sparc/Makefile.rules
+include $(UTSBASE)/sun/Makefile.rules
+include $(PSMBASE)/promif/$(PROMIF)/Makefile.rules
+include $(UTSBASE)/common/Makefile.rules
+

@@ -1,0 +1,35 @@
+\
+\ Copyright (c) 1999 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)unsolicited_buffer.dbg	1.1	99/07/21 SMI"
+\
+#include <sys/isa_defs.h>
+#include <sys/types.h>
+#include <sys/dditypes.h>
+#include <sys/ddidmareq.h>
+#include <sys/mutex.h>
+#include <sys/semaphore.h>
+#include <sys/condvar.h>
+#include <sys/thread.h>
+#include <sys/devops.h>
+#include <sys/fibre-channel/fc.h>
+#include "dummy.h"
+\
+\
+unsolicited_buffer		ub_
+{adb_inline_begin}
+.>w
+<w+{OFFSET, ub_class}=""
+{adb_inline_end}
+	class			hex
+	bufsize			hex
+	buffer			hex
+	port_private		hex
+	fca_private		hex
+	port_handle		hex
+	token			hex
+	frame			.frame_header
+{adb_inline_begin}
+<w+{SIZEOF}=""
+{adb_inline_end}

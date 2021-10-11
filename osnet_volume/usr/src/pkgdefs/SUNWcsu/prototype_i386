@@ -1,0 +1,61 @@
+#
+# Copyright (c) 1998-1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#ident	"@(#)prototype_i386	1.54	99/08/03 SMI"
+#
+# This required package information file contains a list of package contents.
+# The 'pkgmk' command uses this file to identify the contents of a package
+# and their location on the development machine when building the package.
+# Can be created via a text editor or through use of the 'pkgproto' command.
+
+#!search <pathname pathname ...>	# where to find pkg objects
+#!include <filename>			# include another 'prototype' file
+#!default <mode> <owner> <group>	# default used if not specified on entry
+#!<param>=<value>			# puts parameter in pkg environment
+
+#
+# Include ISA independent files (prototype_com)
+#
+!include prototype_com
+#
+#
+# List files which are i386 specific here
+#
+# source locations relative to the prototype file
+#
+# SUNWcsu
+#
+f none usr/bin/addbadsec 555 root bin
+f none usr/bin/diskscan 555 root bin
+d none usr/bin/i86 755 root bin
+f none usr/bin/i86/adb 555 root bin
+f none usr/bin/i86/prstat 555 root bin
+f none usr/bin/i86/ps 4555 root sys
+f none usr/bin/i86/savecore 555 root bin
+f none usr/bin/i86/setuname 555 root bin
+f none usr/bin/i86/uptime 4555 root bin
+l none usr/bin/i86/w=uptime
+f none usr/lib/adb/hat 644 root sys
+f none usr/lib/adb/hat.nxt 644 root sys
+f none usr/lib/adb/hatppp 644 root sys
+f none usr/lib/adb/hwpp 644 root sys
+f none usr/lib/adb/hwpp.nxt 644 root sys
+f none usr/lib/adb/machcpu 644 root sys
+f none usr/lib/adb/machpp 644 root sys
+f none usr/lib/adb/mcpu 644 root sys
+f none usr/lib/adb/segxdata 644 root sys
+f none usr/lib/adb/xmount 644 root sys
+f none usr/lib/adb/xnode 644 root sys
+f none usr/lib/devfsadm/linkmod/SUNW_misc_link_i386.so 755 root sys
+d none usr/lib/fs/xmemfs 755 root sys
+f none usr/lib/fs/xmemfs/mount 555 root bin
+f none usr/sbin/rtc 555 root bin
+s none usr/sbin/fdisk=../../sbin/fdisk
+d none usr/sbin/i86 755 root bin
+f none usr/sbin/i86/crash 755 root sys
+f none usr/sbin/i86/lockstat 555 root bin
+f none usr/sbin/i86/prtconf 2555 root sys
+f none usr/sbin/i86/swap 2555 root sys
+f none usr/sbin/i86/sysdef 2555 root sys
+f none usr/sbin/i86/whodo 4555 root bin

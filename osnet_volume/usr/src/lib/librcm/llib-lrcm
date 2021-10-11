@@ -1,0 +1,62 @@
+/*LINTLIBRARY*/
+/*PROTOLIB1*/
+/*
+ * Copyright (c) 1999 by Sun Microsystems, Inc.
+ * All rights reserved.
+ * 
+ * usr/src/lib/librcm/llib-ldevinfo
+ */
+
+#pragma ident	"@(#)llib-lrcm	1.1	99/08/10 SMI"
+
+#include "librcm.h"
+#include "librcm_event.h"
+
+/* librcm interfaces */
+
+int rcm_get_handle(char *, uint_t, void *, rcm_handle_t **);
+int rcm_free_handle(rcm_handle_t *);
+int rcm_get_info(rcm_handle_t *, char *, uint_t, rcm_info_t **);
+void rcm_free_info(rcm_info_t *);
+int rcm_append_info(rcm_info_t **, rcm_info_t *);
+rcm_info_tuple_t *rcm_info_next(rcm_info_t *, rcm_info_tuple_t *);
+const char *rcm_info_rsrc(rcm_info_tuple_t *);
+const char *rcm_info_info(rcm_info_tuple_t *);
+const char *rcm_info_modname(rcm_info_tuple_t *);
+pid_t rcm_info_pid(rcm_info_tuple_t *);
+int rcm_info_state(rcm_info_tuple_t *);
+int rcm_info_seqnum(rcm_info_tuple_t *);
+int rcm_request_offline(rcm_handle_t *, char *, uint_t, rcm_info_t **);
+int rcm_notify_online(rcm_handle_t *, char *, uint_t, rcm_info_t **);
+int rcm_notify_remove(rcm_handle_t *, char *, uint_t, rcm_info_t **);
+int rcm_request_suspend(rcm_handle_t *, char *, uint_t, timespec_t *,
+    rcm_info_t **);
+int rcm_notify_resume(rcm_handle_t *, char *, uint_t, rcm_info_t **);
+int rcm_register_interest(rcm_handle_t *, char *, uint_t, rcm_info_t **);
+int rcm_unregister_interest(rcm_handle_t *, char *, uint_t);
+int rcm_exec_cmd(char *);
+char *rcm_module_dir(uint_t);
+void *rcm_module_open(char *);
+void rcm_module_close(void *);
+
+/* event related interfaces */
+
+int get_event_service(char *, void *, size_t, void **, size_t *);
+int create_event_service(char *, void (*)(void **, size_t *));
+int revoke_event_service(int);
+sys_event_t *se_alloc(int, int, int);
+int se_append_ints(sys_event_t *, char *, int *, int);
+int se_append_bytes(sys_event_t *, char *, uchar_t *, int);
+int se_append_strings(sys_event_t *, char *, char *, int);
+sys_event_t *se_end_of_data(sys_event_t *);
+void se_free(sys_event_t *);
+int se_lookup_ints(sys_event_t *, char *, int **);
+int se_lookup_bytes(sys_event_t *, char *, uchar_t **);
+int se_lookup_strings(sys_event_t *, char *, char **);
+se_data_tuple_t se_get_next_tuple(sys_event_t *, se_data_tuple_t);
+char *se_tuple_name(se_data_tuple_t);
+int se_tuple_type(se_data_tuple_t);
+int se_tuple_ints(se_data_tuple_t, int **);
+int se_tuple_bytes(se_data_tuple_t, uchar_t **);
+int se_tuple_strings(se_data_tuple_t, char **);
+void se_print(FILE *, sys_event_t *);

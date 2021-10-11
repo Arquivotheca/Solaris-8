@@ -1,0 +1,49 @@
+\
+\ Copyright (c) 1999 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)fp_cmd.dbg	1.1	99/07/21 SMI"
+\
+#include <sys/isa_defs.h>
+#include <sys/types.h>
+#include <sys/dditypes.h>
+#include <sys/ddidmareq.h>
+#include <sys/mutex.h>
+#include <sys/semaphore.h>
+#include <sys/condvar.h>
+#include <sys/thread.h>
+#include <sys/devops.h>
+#include <sys/fibre-channel/fcio.h>
+#include <sys/fibre-channel/fc.h>
+#include <sys/fibre-channel/impl/fc_ulpif.h>
+#include <sys/fibre-channel/impl/fc_portif.h>
+#include <sys/fibre-channel/impl/fp.h>
+#include "dummy.h"
+\
+\
+fp_cmd		cmd_
+{adb_inline_begin}
+.>e
+<e+{OFFSET, cmd_dflags}=""
+{adb_inline_end}
+	dflags			hex
+	sema			.sema
+{adb_inline_begin}
+<e+{OFFSET, cmd_flags}=""
+{adb_inline_end}	
+	flags			hex
+	retry_count		hex
+	retry_interval		hex
+	pkt			.fc_packet
+{adb_inline_begin}
+<e+{OFFSET, cmd_port}=""
+{adb_inline_end}
+	port			hex
+	private			hex
+	next			hex
+	ulp_pkt			hex
+	job			hex
+	transport		hex
+{adb_inline_begin}
+<e+{SIZEOF}=""
+{adb_inline_end}

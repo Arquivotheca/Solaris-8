@@ -1,0 +1,23 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)qthread.info.dbg	1.5	99/07/06 SMI"
+
+#include <sys/thread.h>
+#include "dummy.h"
+
+\
+\
+_kthread	""	qthread.info
+{adb_inline_begin}
+.>z
+.=n"thread_id "8t{HEX}
+<z+{OFFSET, t_lwpchan.lc_wchan}=""
+{adb_inline_end}
+	t_lwpchan.lc_wchan	hex	wchan
+	t_lwp			hex	_klwp
+	t_procp			hex	procp
+{adb_inline_begin}
+*(<f+{OFFSET, t_procp})$<<qproc.info
+{adb_inline_end}

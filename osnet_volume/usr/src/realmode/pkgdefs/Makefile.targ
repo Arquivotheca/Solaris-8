@@ -1,0 +1,31 @@
+#
+#ident	"@(#)Makefile.targ	1.2	00/09/14 SMI"
+#
+# Copyright (c) 1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+
+pkginfo: pkginfo.tmpl $(PKGDEFS)/awk_pkginfo
+	$(RM) $@; nawk -f $(PKGDEFS)/awk_pkginfo $@.tmpl > $@
+
+$(PKGDEFS)/awk_pkginfo: $(PKGDEFS)/bld_awk_pkginfo.ksh
+	@cd $(PKGDEFS); pwd; make awk_pkginfo
+
+pkg: $(PKGARCHIVE) FRC
+	pkgmk -f prototype_$(MACH) -d $(PKGARCHIVE) -r $(ROOT) -o $(PACKAGE)
+
+$(PKGARCHIVE):
+	[ -d $(PKGARCHIVE) ] || mkdir -p $(PKGARCHIVE)
+
+$(DATAFILES): $(PKGDEFS)/common_files/$$@
+	$(RM) $@; cp $(PKGDEFS)/common_files/$@ $@
+
+$(MACHDATAFILES): $(PKGDEFS)/common_files/$$@_$(MACH)
+	$(RM) $@; cp $(PKGDEFS)/common_files/$@_$(MACH) $@
+
+clobber clean:
+	-$(RM) $(CLOBBERFILES) $(CLEANFILES)
+
+
+
+FRC:

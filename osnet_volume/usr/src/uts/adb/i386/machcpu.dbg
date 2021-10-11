@@ -1,0 +1,82 @@
+\
+\ Copyright (c) 1999 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)machcpu.dbg	1.1	99/08/02 SMI"
+
+#define _MACHDEP
+
+#include <sys/machparam.h>
+#include <sys/machsystm.h>
+#include <sys/mman.h>
+#include <sys/debug.h>
+#include <sys/types.h>
+#include <sys/vtrace.h>
+#include <sys/systm.h>
+#include <sys/cpuvar.h>
+#include <sys/thread.h>
+#include <sys/proc.h>
+
+#include <sys/kmem.h>
+#include <sys/cpu.h>
+#include <sys/cmn_err.h>
+#include <sys/sysmacros.h>
+#include <sys/vmem.h>
+#include <sys/vmsystm.h>
+#include <sys/promif.h>
+
+#include <vm/hat.h>
+#include <vm/hat_i86.h>
+#include <vm/as.h>
+#include <vm/seg.h>
+#include <vm/page.h>
+#include <vm/mach_page.h>
+#include <vm/rm.h>
+#include <vm/seg_kp.h>
+#include <vm/seg_kmem.h>
+#include <vm/seg_spt.h>
+#include <sys/var.h>
+#include <sys/x86_archext.h>
+#include <vm/faultcode.h>
+#include <sys/atomic.h>
+#include <sys/bitmap.h>
+#include <sys/ddidmareq.h>
+#include <sys/ddi_implfuncs.h>                   
+#include "dummy.h"
+
+\
+\
+machcpu     mcpu_
+{adb_inline_begin}
+.>z
+<z+{OFFSET, mcpu_nodeid}=""
+{adb_inline_end}
+	nodeid		hex
+	pri		hex
+	pri_data	hex
+	mask		hex
+	current_hat	hex
+	pt_lock		hex
+	hat_infop	hex
+	ctx		.cr3ctx
+	gdt		hex
+	idt		hex
+	tss		hex
+	ldt		hex
+	cp_tables	hex
+{adb_inline_begin}
+.>z
+<z+{OFFSET, mcpu_caddr1}=""
+{adb_inline_end}
+	caddr1		hex
+	caddr2		hex
+	pte.mcpu_caddr1pte	hex	caddr1pte
+	pte.mcpu_caddr2pte	hex	caddr2pte
+	pte.mcpu_pagedir	hex	pagedir
+	pte.mcpu_pgdirpttbl	hex	pgdirpttbl
+	pde_index	hex
+	numpdes		hex
+	curcr3		hex
+{adb_inline_begin}
+<z+{SIZEOF}=""
+{adb_inline_end}

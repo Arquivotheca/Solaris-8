@@ -1,0 +1,72 @@
+\
+\ Copyright (c) 1998, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)mt_map.dbg	1.1	98/02/02 SMI"
+
+#include <sys/types.h>
+#include <sys/t_lock.h>
+#include <sys/time.h>
+#include <sys/vnode.h>
+#include <vm/seg.h>
+#include <sys/fs/ufs_log.h>
+#include "dummy.h"
+
+\
+\
+mt_map			mtm_
+{adb_inline_begin}
+.>z
+<z+{OFFSET, mtm_next}=""
+{adb_inline_end}
+	next		hex
+	prev		hex
+	type		hex
+	flags		hex
+	ref		hex
+	debug		hex
+	age		hex
+	cancel		hex
+	nhash		hex
+	hash		hex
+	tops		hex
+	nme		hex
+	nmet		hex
+	nud		hex
+	nsud		hex
+	tail_lof	hex
+	tail_nb		hex
+	trimlof		hex
+	trimtail	hex
+	trimalof	hex
+	trimclof	hex
+	trimrlof	hex
+	ul		hex
+	tid		hex
+	committid	hex
+	closed		hex
+	seq		hex
+	wantin		hex
+	active		hex
+	activesync	hex
+	dirty		hex
+	lock		.mutex
+{adb_inline_begin}
+<z+{OFFSET, mtm_cv_commit}=""
+{adb_inline_end}
+	cv_commit	hex
+	cv_next		hex
+	cv_eot		hex
+	mutex		.mutex
+{adb_inline_begin}
+<z+{OFFSET, mtm_cv}=""
+{adb_inline_end}
+	cv		hex
+	rwlock		.rwlock
+{adb_inline_begin}
+<z+{OFFSET, mtm_scan_mutex}=""
+{adb_inline_end}
+	scan_mutex	.mutex
+{adb_inline_begin}
+<z+{SIZEOF}=""
+{adb_inline_end}

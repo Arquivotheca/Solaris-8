@@ -1,0 +1,19 @@
+#
+#ident	"@(#)Makefile.sparcv9	1.1	99/09/16 SMI"
+#
+# Copyright (c) 1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+
+include ../../../Makefile.cmd
+include ../../../Makefile.cmd.64
+
+CFLAGS64 += -v
+
+lint := LINTFLAGS64 = -mux -Xarch=v9
+
+ROOTISAPROG=$(ROOTBIN64)/$(PROG)
+
+include ../../Makefile.bld
+
+include ../../../Makefile.targ

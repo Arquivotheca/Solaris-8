@@ -1,0 +1,27 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)pollfd.dbg	1.3	98/01/19 SMI"
+
+\ arg             : address of a struct pollfd
+\ uses            :
+\ registers       : z
+\ description     : prints the contents of pollfd structure
+
+#include <sys/poll.h>
+#include "dummy.h"
+
+\
+\
+pollfd
+{adb_inline_begin}
+.>z
+<z+{OFFSET, fd}=""
+{adb_inline_end}
+        fd                      sdecimal
+        events                  hex
+        revents                 hex
+{adb_inline_begin}
+<z+{SIZEOF}=""
+{adb_inline_end}

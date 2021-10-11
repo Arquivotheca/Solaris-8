@@ -1,0 +1,12 @@
+#ident	"@(#)root	1.19	98/07/06 SMI"	/* SVr4.0 1.1.3.1	*/
+#
+# The root crontab should be used to perform accounting data collection.
+#
+# The rtc command is run to adjust the real time clock if and when
+# daylight savings time changes.
+#
+10 3 * * 0,4 /etc/cron.d/logchecker
+10 3 * * 0   /usr/lib/newsyslog
+15 3 * * 0 /usr/lib/fs/nfs/nfsfind
+1 2 * * * [ -x /usr/sbin/rtc ] && /usr/sbin/rtc -c > /dev/null 2>&1
+30 3 * * * [ -x /usr/lib/gss/gsscred_clean ] && /usr/lib/gss/gsscred_clean

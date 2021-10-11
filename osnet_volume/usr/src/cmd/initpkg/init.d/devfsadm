@@ -1,0 +1,54 @@
+#!/sbin/sh
+#
+# Copyright (c) 1998-1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#ident	"@(#)devfsadm	1.5	99/09/06 SMI"
+
+case "$1" in
+'start')
+	/usr/lib/devfsadm/devfseventd >/dev/msglog 2>&1
+	/usr/lib/devfsadm/devfsadmd >/dev/msglog 2>&1
+
+	if [ -n "$_INIT_RECONFIG" ]; then
+	        if [ -x /usr/ucb/ucblinks -a -f /usr/ucblib/ucblinks.awk ]; then
+	                echo 'Configuring the /dev directory (compatibility devices)'
+	                /usr/ucb/ucblinks >/dev/null 2>&1
+	        fi
+
+		#
+		# Flush any existing socket mappings since the major numbers of
+		# the device files may have changed.
+		#
+		/usr/bin/awk '/^[^#]/ { print $1, $2, $3 }' /etc/sock2path \
+			>/tmp/sock2path.$$
+		/sbin/soconfig -f /tmp/sock2path.$$ >/dev/null 2>&1
+		/usr/bin/rm -f /tmp/sock2path.$$
+		/sbin/soconfig -f /etc/sock2path >/dev/null 2>&1
+	fi
+
+	# Establish the default framebuffer name.
+
+	fbdev=`/usr/sbin/prtconf -F 2>/dev/null`
+
+	if [ $? -eq 0 ]; then
+		set -- /devices$fbdev*
+		if [ -c $1 ]; then
+			rm -f /dev/fb
+			ln -s $1 /dev/fb
+		fi
+	fi
+	;;
+
+'stop')
+	/usr/bin/pkill -x -u 0 -f /usr/lib/rcm/rcm_daemon
+	/usr/bin/pkill -x -u 0 -f /usr/lib/devfsadm/devfsadmd
+	/usr/bin/pkill -x -u 0 -f /usr/lib/devfsadm/devfseventd
+	;;	
+
+*)
+	echo "Usage: $0 { start | stop }"
+	;;
+
+esac
+exit 0

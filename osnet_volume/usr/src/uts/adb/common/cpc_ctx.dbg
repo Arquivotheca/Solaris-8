@@ -1,0 +1,22 @@
+\
+\ Copyright (c) 1999 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\ "@(#)cpc_ctx.dbg	1.1	99/08/15 SMI"
+
+#include <sys/cpc_impl.h>
+
+#include "dummy.h"
+
+_kcpc_ctx	c_	cpc_ctx
+	event	.cpc_event
+#if defined(__sparc) || defined(__sparcv9)
+	rawtick	hex
+#elif defined(__i386)
+	rawtsc	hex
+#else
+#error "Unknown ISA"
+#endif
+	rawpic	hex
+	next	hex
+	flags	hex

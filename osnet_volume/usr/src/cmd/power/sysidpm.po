@@ -1,0 +1,33 @@
+#	/*
+#	 * TRANSLATION_NOTE:
+#	 *	These are messages of
+#	 *	the sysidpm script
+msgid	"\tAfter 30 minutes of idle time on this system, your system \
+	state\n\twill automatically be saved to disk, and the system will \
+	power-off.\n\n\tLater, when you want to use the system again, and \
+	you turn the power\n\tback on, your system will be restored to its \
+	previous state,\n\tincluding all the programs that you were running.\
+	\n\n\tDo you want this automatic power-saving shutdown?\n\
+	\t(If this system is used as a server, answer n)"
+msgstr
+msgid "\tDo you want the system to ask about this again, when you next \
+	reboot?\n\t(This gives you the chance to try it before deciding \
+	whether\n\tto keep it.)"
+msgstr
+msgid	"\t****************************************************************"
+msgstr
+msgid	"\tThis system is configured to conserve energy."
+msgstr
+msgid	"\t****************************************************************"
+msgstr
+msgid	"\tAutoshutdown remains enabled."
+msgstr
+msgid	"\tAutoshutdown has been disabled."
+msgstr
+msgid	"\n\tThe system will ask you about automatic shutdown at the next reboot."
+msgstr
+msgid	"\n\tThe system will not ask you again about automatic shutdown."
+msgstr
+msgid	"\n\tThe \"Using Power Management\" AnswerBook describes more about how"
+msgstr
+msgid	"\tto change and set workstation energy-saving features."

@@ -1,0 +1,20 @@
+#       Copyright (c) 1990-93 Sun Microsystems, Inc.
+#               All Rights Reserved
+#
+#       @(#)prototype_i386	1.14     94/06/27 (c) Sun Microsystems, Inc.
+#
+
+#
+# Include ISA independent files (prototype_com)
+#
+!include prototype_com
+#
+#
+#
+# List files which are Intel specific here
+#
+# source locations relative to the prototype file
+#
+#
+# SUNWkvm.i
+#

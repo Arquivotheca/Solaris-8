@@ -1,0 +1,67 @@
+#!/bin/sh
+#
+#ident	"@(#)i.deflogin	1.1	93/08/23 SMI"
+#
+# Copyright (c) 1993, by Sun Microsystems, Inc.
+#
+
+PATH="/usr/bin:/usr/sbin:${PATH}"
+export PATH
+
+while read src dest
+do
+	if [ ! -f $dest ] ; then
+		cp $src $dest
+	else
+		wk1=/tmp/dfl.$$
+		wk2=$wk1.1
+
+		# Take out the set to HZ (login will do a sysconf;  the
+		# HZ in login.dfl is at best superfluous and at worst
+		# incorrect).  
+		awk 'BEGIN { FS = "\n"; RS = ""; OFS = "\n"} 
+		/Set the HZ/ { 
+		  	i = 4; 
+			while ( i <= NF ) { 
+				print $i ++i 
+			} 
+			print "" 
+		} 
+		$0 !~ /Set the HZ/ { 
+			print $0 "\n" 
+		}' < $src > $wk1
+
+		for word in TIMEZONE ULIMIT HZ CONSOLE PASSREQ ALTSHELL \
+		    PATH SUPATH TIMEOUT UMASK SYSLOG SLEEPTIME \
+		    RETRIES SYSLOG_FAILED_LOGINS; do
+
+			oldline=`grep "^${word}=" $dest 2> /dev/null`
+			if [ $? = 0 ]; then
+				sed -e "s|^#* *${word}=.*|$oldline|" \
+				    -e "s|^${word}=.*|$oldline|" $wk1 > $wk2
+				mv -f $wk2 $wk1
+			fi
+
+			oldline=`grep "^#* *${word}=" $dest 2> /dev/null`
+			if [ $? = 0 ]; then
+
+				# hack to discard the bogus default ulimit
+				# comment in pre-2.3 versions of this file
+
+				grep '^#ULIMIT=4096$' $dest > /dev/null 2>&1
+				if [ $? = 0 ]; then
+					continue
+				fi
+
+				sed -e "s|^#* *${word}=.*|$oldline|" \
+				    -e "s|^${word}=.*|$oldline|" $wk1 > $wk2
+				mv -f $wk2 $wk1
+			fi
+
+		done
+		cp $wk1 $dest
+		rm -f $wk1 $wk2
+	fi
+done
+
+exit 0

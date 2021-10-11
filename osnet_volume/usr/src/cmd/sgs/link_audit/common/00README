@@ -1,0 +1,19 @@
+#pragma ident	"@(#)00README	1.1	96/11/20 SMI"
+
+This directory contains sample code on how to use the Link-Auditing
+interface of the run-time linker (ld.so.1).  The Link-Auditing interface
+permits a user supplied shared object auditi objects that are
+loaded and symbols that are bound by the run-time linker.  A full
+description of the Link-Auditing interface and its uses can be
+found in the 'Linker & Libraries Manual' which is part of the
+Solaris AnswerBook.
+
+The following is an overview of the directory structure and highlight
+of some of the important files contained within:
+
+Makefile	- Makefile to build the Link-Auditing examples
+src/*		- source code
+man/*		- Man pages for the examples
+
+To build this example copy this directory structure to a directory
+where you have write permissions.  Then type 'make'.

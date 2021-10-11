@@ -1,0 +1,14 @@
+#
+# Copyright (c) 1999 by Sun Microsystems, Inc. All rights reserved.
+#
+# /etc/security/prof_attr
+#
+# profiles attributes. see prof_attr(4)
+#
+#pragma ident	"@(#)prof_attr	1.2	99/07/12 SMI"
+#
+All:::Standard Solaris user:help=All.html
+Audit Control:::Administer the audit subsystem:auths=solaris.audit.config,solaris.jobs.admin;help=AuditControl.html
+Audit Review:::View the audit trail:auths=solaris.audit.read;help=AuditReview.html
+Device Management:::Control Access to Removable Media:auths=solaris.device.*;help=DevMgmt.html
+Printer Management:::Control Access to Printer:help=PrinterMgmt.html

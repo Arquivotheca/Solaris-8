@@ -1,0 +1,71 @@
+\
+\ Copyright (c) 1999 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)hat.dbg	1.1	99/08/02 SMI"
+
+#define _MACHDEP
+
+#include <sys/machparam.h>
+#include <sys/machsystm.h>
+#include <sys/mman.h>
+#include <sys/debug.h>
+#include <sys/types.h>
+#include <sys/vtrace.h>
+#include <sys/systm.h>
+#include <sys/cpuvar.h>
+#include <sys/thread.h>
+#include <sys/proc.h>
+
+#include <sys/kmem.h>
+#include <sys/cpu.h>
+#include <sys/cmn_err.h>
+#include <sys/sysmacros.h>
+#include <sys/vmem.h>
+#include <sys/vmsystm.h>
+#include <sys/promif.h>
+
+#include <vm/hat.h>
+#include <vm/hat_i86.h>
+#include <vm/as.h>
+#include <vm/seg.h>
+#include <vm/page.h>
+#include <vm/mach_page.h>
+#include <vm/rm.h>
+#include <vm/seg_kp.h>
+#include <vm/seg_kmem.h>
+#include <vm/seg_spt.h>
+#include <sys/var.h>
+#include <sys/x86_archext.h>
+#include <vm/faultcode.h>
+#include <sys/atomic.h>
+#include <sys/bitmap.h>
+#include <sys/ddidmareq.h>
+#include <sys/ddi_implfuncs.h>                   
+#include "dummy.h"
+
+\
+\
+hat            hat_
+{adb_inline_begin}
+.>z
+<z+{OFFSET, hat_as}=""
+{adb_inline_end}
+	as		hex
+	hwpp		hex
+	cpusrunning	hex	cpurun
+	rss		hex
+	numhwpp		hex
+	stat		hex
+	critical	hex
+	ppp		hex
+	next		hex
+	prev		hex
+	index		hex
+	pagedir		hex
+	flags		hex
+	ctx.ct_cr3	hex	ctx.cr3
+	ctx.ct_hat	hex	ctx.hat
+{adb_inline_begin}
+*(<z+{OFFSET, hat_next})>z
+{adb_inline_end}

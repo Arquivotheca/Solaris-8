@@ -1,0 +1,73 @@
+#
+#  Copyright (c) 1997, by Sun Microsystems, Inc.
+#  All rights reserved.
+#
+# @(#)dnet.itu        1.5     98/03/24 SMI
+name= dnet
+itu_type = complete
+interface_version = 1.0
+patchid=105594-02
+driverpkg=SUNWos86r
+driverpkgvers="1.1.0,REV=1997.06.13.11.51"
+driverpkgdesc="Platform Support, OS Functionality (Root)"
+driver_path=/kernel/drv
+manpkg=SUNWman
+manpkgdesc="On-Line Manual Pages"
+manpkgvers="39.0,REV=16"
+realmode_path=/platform/i86pc/boot/solaris/drivers/notisa.010
+bef_name=dnet.bef
+dev_type=net
+{
+bus_type = pci
+dev_id = pci1011,2 
+node_name =  pci1011,2
+describe_dev = "DEC 21040 Ethernet"
+}
+{
+bus_type = pci
+dev_id = pci1011,9 
+node_name =  pci1011,9
+describe_dev = "DEC 21140 Ethernet"
+}
+{
+bus_type = pci
+dev_id = pci1011,19 
+node_name =  pci1011,19
+describe_dev = "DEC 21142/21143 Ethernet"
+}
+{
+bus_type = pci
+dev_id = pci1011,14 
+node_name =  pci1011,14
+describe_dev = "DEC 21041 Ethernet"
+}
+{
+bus_type = pci
+dev_id = pci1109,1400
+node_name =  pci1109,1400
+describe_dev = "Cogent EM110TX Fast Ethernet"
+}
+{
+bus_type = pci
+dev_id = pci10b8,2001
+node_name =  pci10b8,2001
+describe_dev = "SMC9332BDT Fast Ethernet"
+}
+{
+bus_type = pci
+dev_id = pci1109,2400
+node_name =  pci1109,2400
+describe_dev = "Cogent EM440 Fast Ethernet"
+}
+{
+bus_type = pci
+dev_id = pci1109,2a00
+node_name =  pci1109,2a00
+describe_dev = "DEC 21142/21143 Ethernet"
+}
+{
+bus_type = pci
+dev_id = pci1109,2b00
+node_name =  pci1109,2b00
+describe_dev = "DEC 21142/21143 Ethernet"
+}

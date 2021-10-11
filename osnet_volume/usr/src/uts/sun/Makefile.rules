@@ -1,0 +1,548 @@
+#
+# Copyright (c) 1998-1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#pragma ident	"@(#)Makefile.rules	1.88	00/09/14 SMI"
+#
+# uts/sun/Makefile.rules
+#
+#	This Makefile defines all build rules for the directory uts/sun and
+# it's children. These are the source files which are common to all sun
+# implementations.
+#
+
+#
+#	This was implemented by pattern matching rules of the form:
+#
+# $(OBJS_DIR)/%.o:	 $(UTSBASE)/common/os/%.c
+#	$(COMPILE.c) -o $@ $<
+#
+# $(LINTS_DIR)/%.ln:	$(UTSBASE)/common/os/%.c
+#	@($(LHEAD) $(LINT.c) $< $(LTAIL))
+#
+#	for each directory containing source. 
+#	This technique proved to be too slow under
+#	Nse because it caused a significant additional number of stats
+#	and stats are real slow under TFS. If TFS performance should
+#	improve, one might consider returning to the former implementation.
+#	In the former implementation, this file (Makefile.rules) was not
+#	needed and the pattern matching rules were in Makefile.files.
+#
+
+#
+#	C object build rules
+#
+#	The following are alphabetized by source file path. Please maintain
+# this ordering.
+#
+
+$(OBJS_DIR)/glm.o:		$(UTSBASE)/common/io/scsi/adapters/glm.c 
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/scsi/adapters/glm.c
+
+$(OBJS_DIR)/audio_79C30.o:	$(UTSBASE)/sun/io/audio_79C30.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun/io/audio_79C30.c
+
+$(OBJS_DIR)/audio_mixer.o:	$(UTSBASE)/sun/io/audio_mixer.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun/io/audio_mixer.c
+
+$(OBJS_DIR)/audio_support.o:	$(UTSBASE)/sun/io/audio_support.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun/io/audio_support.c
+
+$(OBJS_DIR)/audio_4231.o:	$(UTSBASE)/sun/io/audiocs/audio_4231.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun/io/audiocs/audio_4231.c
+
+$(OBJS_DIR)/audio_4231_apcdma.o: $(UTSBASE)/sun/io/audiocs/audio_4231_apcdma.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun/io/audiocs/audio_4231_apcdma.c
+
+$(OBJS_DIR)/audio_4231_eb2dma.o: $(UTSBASE)/sun/io/audiocs/audio_4231_eb2dma.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun/io/audiocs/audio_4231_eb2dma.c
+
+$(OBJS_DIR)/bpp.o:		$(UTSBASE)/sun/io/bpp.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun/io/bpp.c
+
+$(OBJS_DIR)/bwtwo.o:		$(UTSBASE)/sun/io/bwtwo.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun/io/bwtwo.c
+
+$(OBJS_DIR)/cgfourteen.o:	$(UTSBASE)/sun/io/cgfourteen.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun/io/cgfourteen.c
+
+$(OBJS_DIR)/cgeight.o:		$(UTSBASE)/sun/io/cgeight.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun/io/cgeight.c
+
+$(OBJS_DIR)/cgsix.o:		$(UTSBASE)/sun/io/cgsix.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun/io/cgsix.c
+
+$(OBJS_DIR)/cgthree.o:		$(UTSBASE)/sun/io/cgthree.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun/io/cgthree.c
+
+$(OBJS_DIR)/consmsconf.o:	$(UTSBASE)/sun/io/consmsconf.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun/io/consmsconf.c
+
+$(OBJS_DIR)/dbri.o:		$(UTSBASE)/sun/io/dbri.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun/io/dbri.c
+
+$(OBJS_DIR)/dbri_conf.o:	$(UTSBASE)/sun/io/dbri_conf.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun/io/dbri_conf.c
+
+$(OBJS_DIR)/dbri_connect.o:	$(UTSBASE)/sun/io/dbri_connect.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun/io/dbri_connect.c
+
+$(OBJS_DIR)/dbri_driver.o:	$(UTSBASE)/sun/io/dbri_driver.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun/io/dbri_driver.c
+
+$(OBJS_DIR)/dbri_isdn.o:	$(UTSBASE)/sun/io/dbri_isdn.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun/io/dbri_isdn.c
+
+$(OBJS_DIR)/dbri_isr.o:		$(UTSBASE)/sun/io/dbri_isr.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun/io/dbri_isr.c
+
+$(OBJS_DIR)/dbri_mmcodec.o:	$(UTSBASE)/sun/io/dbri_mmcodec.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun/io/dbri_mmcodec.c
+
+$(OBJS_DIR)/dbri_pipe.o:	$(UTSBASE)/sun/io/dbri_pipe.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun/io/dbri_pipe.c
+
+$(OBJS_DIR)/dbri_subr.o:	$(UTSBASE)/sun/io/dbri_subr.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun/io/dbri_subr.c
+
+$(OBJS_DIR)/dmaga.o:		$(UTSBASE)/sun/io/dmaga.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun/io/dmaga.c
+
+$(OBJS_DIR)/dtopnub.o:		$(UTSBASE)/sun/io/dtopnub.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun/io/dtopnub.c
+
+$(OBJS_DIR)/ecpp.o:		$(UTSBASE)/sun/io/ecpp.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun/io/ecpp.c
+
+$(OBJS_DIR)/fcp.o:		$(UTSBASE)/sun/io/fibre-channel/ulp/fcp.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun/io/fibre-channel/ulp/fcp.c
+
+$(OBJS_DIR)/fctl.o:		$(UTSBASE)/sun/io/fibre-channel/impl/fctl.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun/io/fibre-channel/impl/fctl.c
+
+$(OBJS_DIR)/fd.o:		$(UTSBASE)/sun/io/fd.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun/io/fd.c
+
+$(OBJS_DIR)/fp.o:		$(UTSBASE)/sun/io/fibre-channel/impl/fp.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun/io/fibre-channel/impl/fp.c
+
+$(OBJS_DIR)/le.o	:=	CFLAGS += -dalign
+$(OBJS_DIR)/le.o:		$(UTSBASE)/sun/io/le.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun/io/le.c
+
+$(OBJS_DIR)/lebuffer.o:		$(UTSBASE)/sun/io/lebuffer.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun/io/lebuffer.c
+
+$(OBJS_DIR)/ledma.o:		$(UTSBASE)/sun/io/ledma.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun/io/ledma.c
+
+$(OBJS_DIR)/mem_kern.o:		$(UTSBASE)/sun/io/mem_kern.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun/io/mem_kern.c
+
+$(OBJS_DIR)/ms.o:		$(UTSBASE)/sun/io/ms.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun/io/ms.c
+
+$(OBJS_DIR)/obio.o:		$(UTSBASE)/sun/io/obio.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun/io/obio.c
+
+$(OBJS_DIR)/qec.o	:=	CFLAGS += -dalign
+$(OBJS_DIR)/qec.o:		$(UTSBASE)/sun/io/qec.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun/io/qec.c
+
+$(OBJS_DIR)/qe.o	:=	CFLAGS += -dalign
+$(OBJS_DIR)/qe.o:		$(UTSBASE)/sun/io/qe.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun/io/qe.c
+
+$(OBJS_DIR)/hme.o	:=	CFLAGS += -dalign
+$(OBJS_DIR)/hme.o:		$(UTSBASE)/sun/io/hme.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun/io/hme.c
+
+$(OBJS_DIR)/sbus.o:		$(UTSBASE)/sun/io/sbus.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun/io/sbus.c
+
+$(OBJS_DIR)/sbusmem.o:		$(UTSBASE)/sun/io/sbusmem.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun/io/sbusmem.c
+
+$(OBJS_DIR)/esp.o	:=	CFLAGS += -dalign
+$(OBJS_DIR)/esp.o:		$(UTSBASE)/sun/io/scsi/adapters/esp.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun/io/scsi/adapters/esp.c
+
+$(OBJS_DIR)/fas.o	:=	CFLAGS += -dalign
+$(OBJS_DIR)/fas.o:		$(UTSBASE)/sun/io/scsi/adapters/fas.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun/io/scsi/adapters/fas.c
+
+$(OBJS_DIR)/fas_callbacks.o :=	CFLAGS += -dalign
+$(OBJS_DIR)/fas_callbacks.o:	$(UTSBASE)/sun/io/scsi/adapters/fas_callbacks.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun/io/scsi/adapters/fas_callbacks.c
+
+$(OBJS_DIR)/ifp.o	:=	CFLAGS += -dalign
+$(OBJS_DIR)/ifp.o:		$(UTSBASE)/sun/io/scsi/adapters/ifp.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun/io/scsi/adapters/ifp.c
+
+
+$(OBJS_DIR)/isp.o	:=	CFLAGS += -dalign
+$(OBJS_DIR)/isp.o:		$(UTSBASE)/sun/io/scsi/adapters/isp.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun/io/scsi/adapters/isp.c
+
+
+$(OBJS_DIR)/sf.o	:=	CFLAGS += -dalign
+$(OBJS_DIR)/sf.o:		$(UTSBASE)/sun/io/scsi/adapters/sf.c
+	$(COMPILE.c) -I. -o $@ $(UTSBASE)/sun/io/scsi/adapters/sf.c
+
+
+$(OBJS_DIR)/sd.o:		$(UTSBASE)/sun/io/scsi/targets/sd.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun/io/scsi/targets/sd.c
+
+$(OBJS_DIR)/dad.o:		$(UTSBASE)/sun/io/dada/targets/dad.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun/io/dada/targets/dad.c
+
+$(OBJS_DIR)/ata_common.o:	$(UTSBASE)/sun/io/dada/adapters/ata_common.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun/io/dada/adapters/ata_common.c
+
+$(OBJS_DIR)/ata_disk.o:		$(UTSBASE)/sun/io/dada/adapters/ata_disk.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun/io/dada/adapters/ata_disk.c
+
+$(OBJS_DIR)/atapi.o:		$(UTSBASE)/sun/io/dada/adapters/atapi.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun/io/dada/adapters/atapi.c
+
+$(OBJS_DIR)/ghd.o:		$(UTSBASE)/sun/io/dada/adapters/ghd/ghd.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun/io/dada/adapters/ghd/ghd.c
+
+$(OBJS_DIR)/ghd_dma.o:		$(UTSBASE)/sun/io/dada/adapters/ghd/ghd_dma.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun/io/dada/adapters/ghd/ghd_dma.c
+
+$(OBJS_DIR)/ghd_scsi.o:		$(UTSBASE)/sun/io/dada/adapters/ghd/ghd_scsi.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun/io/dada/adapters/ghd/ghd_scsi.c
+
+$(OBJS_DIR)/ghd_scsa.o:		$(UTSBASE)/sun/io/dada/adapters/ghd/ghd_scsa.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun/io/dada/adapters/ghd/ghd_scsa.c
+
+$(OBJS_DIR)/ghd_queue.o:	$(UTSBASE)/sun/io/dada/adapters/ghd/ghd_queue.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun/io/dada/adapters/ghd/ghd_queue.c
+
+$(OBJS_DIR)/ghd_gcmd.o:		$(UTSBASE)/sun/io/dada/adapters/ghd/ghd_gcmd.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun/io/dada/adapters/ghd/ghd_gcmd.c
+
+$(OBJS_DIR)/ghd_timer.o:	$(UTSBASE)/sun/io/dada/adapters/ghd/ghd_timer.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun/io/dada/adapters/ghd/ghd_timer.c
+
+$(OBJS_DIR)/ghd_waitq.o:	$(UTSBASE)/sun/io/dada/adapters/ghd/ghd_waitq.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun/io/dada/adapters/ghd/ghd_waitq.c
+
+$(OBJS_DIR)/ghd_debug.o:	$(UTSBASE)/sun/io/dada/adapters/ghd/ghd_debug.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun/io/dada/adapters/ghd/ghd_debug.c
+
+$(OBJS_DIR)/dcd_hba.o:		$(UTSBASE)/sun/io/dada/impl/dcd_hba.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun/io/dada/impl/dcd_hba.c
+
+$(OBJS_DIR)/dcd_transport.o:	$(UTSBASE)/sun/io/dada/impl/dcd_transport.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun/io/dada/impl/dcd_transport.c
+
+$(OBJS_DIR)/dcd_control.o:	$(UTSBASE)/sun/io/dada/impl/dcd_control.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun/io/dada/impl/dcd_control.c
+
+$(OBJS_DIR)/dcd_resource.o:	$(UTSBASE)/sun/io/dada/impl/dcd_resource.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun/io/dada/impl/dcd_resource.c
+
+$(OBJS_DIR)/dcd_subr.o:		$(UTSBASE)/sun/io/dada/impl/dcd_subr.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun/io/dada/impl/dcd_subr.c
+
+$(OBJS_DIR)/dcd_confsubr.o:	$(UTSBASE)/sun/io/dada/conf/dcd_confsubr.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun/io/dada/conf/dcd_confsubr.c
+
+$(OBJS_DIR)/dcd_confdata.o:	$(UTSBASE)/sun/io/dada/conf/dcd_confdata.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun/io/dada/conf/dcd_confdata.c
+
+
+$(OBJS_DIR)/soc_ucode.o:	$(UTSBASE)/sun/io/soc_ucode.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun/io/soc_ucode.c
+
+$(OBJS_DIR)/socal.o:		$(UTSBASE)/sun/io/socal.c
+	$(COMPILE.c) -I. -o $@ $(UTSBASE)/sun/io/socal.c
+
+$(OBJS_DIR)/socal_ucode.o:	$(UTSBASE)/sun/io/socal_ucode.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun/io/socal_ucode.c
+
+$(OBJS_DIR)/stc.o:		$(UTSBASE)/sun/io/stc.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun/io/stc.c
+
+$(OBJS_DIR)/stp4020.o:		$(UTSBASE)/sun/io/stp4020.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun/io/stp4020.c
+
+$(OBJS_DIR)/usoc.o:		$(UTSBASE)/sun/io/fibre-channel/fca/usoc.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun/io/fibre-channel/fca/usoc.c
+
+$(OBJS_DIR)/usoc_ucode.o:	$(UTSBASE)/sun/io/fibre-channel/fca/usoc_ucode.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun/io/fibre-channel/fca/usoc_ucode.c
+
+$(OBJS_DIR)/wsdrv.o:		$(UTSBASE)/sun/io/wsdrv.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun/io/wsdrv.c
+
+$(OBJS_DIR)/xbox.o:		$(UTSBASE)/sun/io/xbox.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun/io/xbox.c
+
+$(OBJS_DIR)/zs_async.o:		$(UTSBASE)/sun/io/zs_async.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun/io/zs_async.c
+
+$(OBJS_DIR)/zs_common.o:	$(UTSBASE)/sun/io/zs_common.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun/io/zs_common.c
+
+$(OBJS_DIR)/zs_hdlc.o:		$(UTSBASE)/sun/io/zs_hdlc.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun/io/zs_hdlc.c
+
+
+#
+#	Lint `object' build rules
+#
+#	The following are alphabetized by source file path. Please maintain
+# this ordering.
+#
+$(LINTS_DIR)/glm.ln:		$(UTSBASE)/common/io/scsi/adapters/glm.c 
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/scsi/adapters/glm.c $(LTAIL))
+
+$(LINTS_DIR)/audio_79C30.ln:	$(UTSBASE)/sun/io/audio_79C30.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun/io/audio_79C30.c $(LTAIL))
+
+$(LINTS_DIR)/audio_mixer.ln:	$(UTSBASE)/sun/io/audio_mixer.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun/io/audio_mixer.c $(LTAIL))
+
+$(LINTS_DIR)/audio_support.ln:	$(UTSBASE)/sun/io/audio_support.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun/io/audio_support.c $(LTAIL))
+
+$(LINTS_DIR)/audio_4231.ln:	$(UTSBASE)/sun/io/audiocs/audio_4231.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun/io/audiocs/audio_4231.c $(LTAIL))
+
+$(LINTS_DIR)/audio_4231_apcdma.ln: $(UTSBASE)/sun/io/audiocs/audio_4231_apcdma.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun/io/audiocs/audio_4231_apcdma.c \
+	$(LTAIL))
+
+$(LINTS_DIR)/audio_4231_eb2dma.ln: $(UTSBASE)/sun/io/audiocs/audio_4231_eb2dma.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun/io/audiocs/audio_4231_eb2dma.c \
+	$(LTAIL))
+
+$(LINTS_DIR)/bpp.ln:		$(UTSBASE)/sun/io/bpp.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun/io/bpp.c $(LTAIL))
+
+$(LINTS_DIR)/bwtwo.ln:		$(UTSBASE)/sun/io/bwtwo.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun/io/bwtwo.c $(LTAIL))
+
+$(LINTS_DIR)/cgfourteen.ln:	$(UTSBASE)/sun/io/cgfourteen.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun/io/cgfourteen.c $(LTAIL))
+
+$(LINTS_DIR)/cgeight.ln:	$(UTSBASE)/sun/io/cgeight.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun/io/cgeight.c $(LTAIL))
+
+$(LINTS_DIR)/cgsix.ln:		$(UTSBASE)/sun/io/cgsix.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun/io/cgsix.c $(LTAIL))
+
+$(LINTS_DIR)/cgthree.ln:	$(UTSBASE)/sun/io/cgthree.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun/io/cgthree.c $(LTAIL))
+
+$(LINTS_DIR)/consmsconf.ln:	$(UTSBASE)/sun/io/consmsconf.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun/io/consmsconf.c $(LTAIL))
+
+$(LINTS_DIR)/dbri.ln:		$(UTSBASE)/sun/io/dbri.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun/io/dbri.c $(LTAIL))
+
+$(LINTS_DIR)/dbri_conf.ln:	$(UTSBASE)/sun/io/dbri_conf.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun/io/dbri_conf.c $(LTAIL))
+
+$(LINTS_DIR)/dbri_connect.ln:	$(UTSBASE)/sun/io/dbri_connect.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun/io/dbri_connect.c $(LTAIL))
+
+$(LINTS_DIR)/dbri_driver.ln:	$(UTSBASE)/sun/io/dbri_driver.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun/io/dbri_driver.c $(LTAIL))
+
+$(LINTS_DIR)/dbri_isdn.ln:	$(UTSBASE)/sun/io/dbri_isdn.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun/io/dbri_isdn.c $(LTAIL))
+
+$(LINTS_DIR)/dbri_isr.ln:	$(UTSBASE)/sun/io/dbri_isr.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun/io/dbri_isr.c $(LTAIL))
+
+$(LINTS_DIR)/dbri_mmcodec.ln:	$(UTSBASE)/sun/io/dbri_mmcodec.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun/io/dbri_mmcodec.c $(LTAIL))
+
+$(LINTS_DIR)/dbri_pipe.ln:	$(UTSBASE)/sun/io/dbri_pipe.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun/io/dbri_pipe.c $(LTAIL))
+
+$(LINTS_DIR)/dbri_subr.ln:	$(UTSBASE)/sun/io/dbri_subr.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun/io/dbri_subr.c $(LTAIL))
+
+$(LINTS_DIR)/dmaga.ln:		$(UTSBASE)/sun/io/dmaga.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun/io/dmaga.c $(LTAIL))
+
+$(LINTS_DIR)/dtopnub.ln:	$(UTSBASE)/sun/io/dtopnub.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun/io/dtopnub.c $(LTAIL))
+
+$(LINTS_DIR)/ecpp.ln:		$(UTSBASE)/sun/io/ecpp.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun/io/ecpp.c $(LTAIL))
+
+$(OBJS_DIR)/fcp.ln:		$(UTSBASE)/sun/io/fibre-channel/ulp/fcp.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun/io/fibre-channel/ulp/fcp.c $(LTAIL))
+
+$(OBJS_DIR)/fctl.ln:		$(UTSBASE)/sun/io/fibre-channel/impl/fctl.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun/io/fibre-channel/impl/fctl.c $(LTAIL))
+
+$(LINTS_DIR)/fd.ln:		$(UTSBASE)/sun/io/fd.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun/io/fd.c $(LTAIL))
+
+$(OBJS_DIR)/fp.ln:		$(UTSBASE)/sun/io/fibre-channel/impl/fp.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun/io/fibre-channel/impl/fp.c $(LTAIL))
+
+$(LINTS_DIR)/le.ln:		$(UTSBASE)/sun/io/le.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun/io/le.c $(LTAIL))
+
+$(LINTS_DIR)/lebuffer.ln:	$(UTSBASE)/sun/io/lebuffer.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun/io/lebuffer.c $(LTAIL))
+
+$(LINTS_DIR)/ledma.ln:		$(UTSBASE)/sun/io/ledma.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun/io/ledma.c $(LTAIL))
+
+$(LINTS_DIR)/mem_kern.ln:	$(UTSBASE)/sun/io/mem_kern.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun/io/mem_kern.c $(LTAIL))
+
+$(LINTS_DIR)/ms.ln:		$(UTSBASE)/sun/io/ms.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun/io/ms.c $(LTAIL))
+
+$(LINTS_DIR)/obio.ln:		$(UTSBASE)/sun/io/obio.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun/io/obio.c $(LTAIL))
+
+$(LINTS_DIR)/qec.ln:		$(UTSBASE)/sun/io/qec.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun/io/qec.c $(LTAIL))
+
+$(LINTS_DIR)/qe.ln:		$(UTSBASE)/sun/io/qe.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun/io/qe.c $(LTAIL))
+
+$(LINTS_DIR)/hme.ln:		$(UTSBASE)/sun/io/hme.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun/io/hme.c $(LTAIL))
+
+$(LINTS_DIR)/sbus.ln:		$(UTSBASE)/sun/io/sbus.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun/io/sbus.c $(LTAIL))
+
+$(LINTS_DIR)/sbusmem.ln:	$(UTSBASE)/sun/io/sbusmem.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun/io/sbusmem.c $(LTAIL))
+
+$(LINTS_DIR)/esp.ln:		$(UTSBASE)/sun/io/scsi/adapters/esp.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun/io/scsi/adapters/esp.c $(LTAIL))
+
+$(LINTS_DIR)/fas.ln:		$(UTSBASE)/sun/io/scsi/adapters/fas.c \
+	$(UTSBASE)/sun/io/scsi/adapters/fas_callbacks.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun/io/scsi/adapters/fas.c \
+	$(UTSBASE)/sun/io/scsi/adapters/fas_callbacks.c  $(LTAIL))
+
+$(LINTS_DIR)/fas_callbacks.ln:	$(UTSBASE)/sun/io/scsi/adapters/fas_callbacks.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun/io/scsi/adapters/fas_callbacks.c $(LTAIL))
+
+$(LINTS_DIR)/ifp.ln:		$(UTSBASE)/sun/io/scsi/adapters/ifp.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun/io/scsi/adapters/ifp.c $(LTAIL))
+
+
+$(LINTS_DIR)/isp.ln:		$(UTSBASE)/sun/io/scsi/adapters/isp.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun/io/scsi/adapters/isp.c $(LTAIL))
+
+
+$(LINTS_DIR)/sf.ln:		$(UTSBASE)/sun/io/scsi/adapters/sf.c
+	@($(LHEAD) $(LINT.c) -I. $(UTSBASE)/sun/io/scsi/adapters/sf.c $(LTAIL))
+
+
+$(LINTS_DIR)/sd.ln:		$(UTSBASE)/sun/io/scsi/targets/sd.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun/io/scsi/targets/sd.c $(LTAIL))
+
+$(LINTS_DIR)/dad.ln:		$(UTSBASE)/sun/io/dada/targets/dad.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun/io/dada/targets/dad.c $(LTAIL))
+
+$(LINTS_DIR)/ata_common.ln:	$(UTSBASE)/sun/io/dada/adapters/ata_common.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun/io/dada/adapters/ata_common.c $(LTAIL))
+
+$(LINTS_DIR)/ata_disk.ln:	$(UTSBASE)/sun/io/dada/adapters/ata_disk.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun/io/dada/adapters/ata_disk.c $(LTAIL))
+
+$(LINTS_DIR)/atapi.ln:		$(UTSBASE)/sun/io/dada/adapters/atapi.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun/io/dada/adapters/atapi.c $(LTAIL))
+
+$(LINTS_DIR)/ghd.ln:		$(UTSBASE)/sun/io/dada/adapters/ghd/ghd.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun/io/dada/adapters/ghd/ghd.c $(LTAIL))
+
+$(LINTS_DIR)/ghd_debug.ln:	$(UTSBASE)/sun/io/dada/adapters/ghd/ghd_debug.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun/io/dada/adapters/ghd/ghd_debug.c $(LTAIL))
+
+$(LINTS_DIR)/ghd_dma.ln:	$(UTSBASE)/sun/io/dada/adapters/ghd/ghd_dma.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun/io/dada/adapters/ghd/ghd_dma.c $(LTAIL))
+
+$(LINTS_DIR)/ghd_queue.ln:	$(UTSBASE)/sun/io/dada/adapters/ghd/ghd_queue.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun/io/dada/adapters/ghd/ghd_queue.c $(LTAIL))
+
+$(LINTS_DIR)/ghd_gcmd.ln:	$(UTSBASE)/sun/io/dada/adapters/ghd/ghd_gcmd.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun/io/dada/adapters/ghd/ghd_gcmd.c $(LTAIL))
+
+$(LINTS_DIR)/ghd_scsa.ln:	$(UTSBASE)/sun/io/dada/adapters/ghd/ghd_scsa.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun/io/dada/adapters/ghd/ghd_scsa.c $(LTAIL))
+
+$(LINTS_DIR)/ghd_scsi.ln:	$(UTSBASE)/sun/io/dada/adapters/ghd/ghd_scsi.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun/io/dada/adapters/ghd/ghd_scsi.c $(LTAIL))
+
+$(LINTS_DIR)/ghd_timer.ln:	$(UTSBASE)/sun/io/dada/adapters/ghd/ghd_timer.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun/io/dada/adapters/ghd/ghd_timer.c $(LTAIL))
+
+$(LINTS_DIR)/ghd_waitq.ln:	$(UTSBASE)/sun/io/dada/adapters/ghd/ghd_waitq.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun/io/dada/adapters/ghd/ghd_waitq.c $(LTAIL))
+
+$(LINTS_DIR)/dcd_transport.ln:	$(UTSBASE)/sun/io/dada/impl/dcd_transport.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun/io/dada/impl/dcd_transport.c $(LTAIL))
+
+$(LINTS_DIR)/dcd_resource.ln:	$(UTSBASE)/sun/io/dada/impl/dcd_resource.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun/io/dada/impl/dcd_resource.c $(LTAIL))
+
+$(LINTS_DIR)/dcd_control.ln:	$(UTSBASE)/sun/io/dada/impl/dcd_control.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun/io/dada/impl/dcd_control.c $(LTAIL))
+
+
+$(LINTS_DIR)/dcd_hba.ln:	$(UTSBASE)/sun/io/dada/impl/dcd_hba.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun/io/dada/impl/dcd_hba.c $(LTAIL))
+
+$(LINTS_DIR)/dcd_subr.ln:	$(UTSBASE)/sun/io/dada/impl/dcd_subr.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun/io/dada/impl/dcd_subr.c $(LTAIL))
+
+$(LINTS_DIR)/dcd_confsubr.ln:	$(UTSBASE)/sun/io/dada/conf/dcd_confsubr.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun/io/dada/conf/dcd_confsubr.c $(LTAIL))
+
+$(LINTS_DIR)/dcd_confdata.ln:	$(UTSBASE)/sun/io/dada/conf/dcd_confdata.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun/io/dada/conf/dcd_confdata.c $(LTAIL))
+
+
+$(LINTS_DIR)/soc_ucode.ln:	$(UTSBASE)/sun/io/soc_ucode.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun/io/soc_ucode.c $(LTAIL))
+
+$(LINTS_DIR)/socal.ln:		$(UTSBASE)/sun/io/socal.c
+	@($(LHEAD) $(LINT.c) -I. $(UTSBASE)/sun/io/socal.c $(LTAIL))
+
+$(LINTS_DIR)/socal_ucode.ln:	$(UTSBASE)/sun/io/socal_ucode.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun/io/socal_ucode.c $(LTAIL))
+
+$(LINTS_DIR)/stc.ln:		$(UTSBASE)/sun/io/stc.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun/io/stc.c $(LTAIL))
+
+$(LINTS_DIR)/stp4020.ln:	$(UTSBASE)/sun/io/stp4020.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun/io/stp4020.c $(LTAIL))
+
+$(OBJS_DIR)/usoc.ln:	$(UTSBASE)/sun/io/fibre-channel/fca/usoc.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun/io/fibre-channel/fca/usoc.c $(LTAIL))
+
+$(OBJS_DIR)/usoc_ucode.ln:	$(UTSBASE)/sun/io/fibre-channel/fca/usoc_ucode.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun/io/fibre-channel/fca/usoc_ucode.c $(LTAIL))
+
+$(LINTS_DIR)/wsdrv.ln:		$(UTSBASE)/sun/io/wsdrv.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun/io/wsdrv.c $(LTAIL))
+
+$(LINTS_DIR)/xbox.ln:		$(UTSBASE)/sun/io/xbox.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun/io/xbox.c $(LTAIL))
+
+$(LINTS_DIR)/zs_async.ln:	$(UTSBASE)/sun/io/zs_async.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun/io/zs_async.c $(LTAIL))
+
+$(LINTS_DIR)/zs_common.ln:	$(UTSBASE)/sun/io/zs_common.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun/io/zs_common.c $(LTAIL))
+
+$(LINTS_DIR)/zs_hdlc.ln:	$(UTSBASE)/sun/io/zs_hdlc.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun/io/zs_hdlc.c $(LTAIL))
+

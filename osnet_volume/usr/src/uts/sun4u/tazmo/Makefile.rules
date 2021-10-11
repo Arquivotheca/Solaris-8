@@ -1,0 +1,37 @@
+#
+# uts/sun4u/tazmo/Makefile.rules
+# Copyright (c) 1994-1998 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#ident	"@(#)Makefile.rules 1.2     99/02/09 SMI"
+#
+#	This Makefile defines the build rules for the directory
+#	uts/sun4u/tazmo.
+#
+
+#
+#	C object build rules
+#
+#	The following are alphabetized by source file path. Please maintain
+# this ordering.
+#
+#
+
+$(OBJS_DIR)/envctrl.o:		$(UTSBASE)/sun4u/tazmo/io/envctrl.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun4u/tazmo/io/envctrl.c
+
+$(OBJS_DIR)/tazmo.o:		$(UTSBASE)/sun4u/tazmo/os/tazmo.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun4u/tazmo/os/tazmo.c
+
+#
+#	Lint `object' build rules
+#
+#	The following are alphabetized by source file path. Please maintain
+# this ordering.
+#
+
+$(LINTS_DIR)/envctrl.ln:	$(UTSBASE)/sun4u/tazmo/io/envctrl.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun4u/tazmo/io/envctrl.c $(LTAIL))
+
+$(LINTS_DIR)/tazmo.ln:	$(UTSBASE)/sun4u/tazmo/os/tazmo.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun4u/tazmo/os/tazmo.c $(LTAIL))

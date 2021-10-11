@@ -1,0 +1,11 @@
+/* LINTLIBRARY */
+/* PROTOLIB1 */
+
+/*
+ * Copyright (c) 1997 by Sun Microsystems, Inc. 
+ * All rights reserved. 
+ */ 
+
+#pragma ident	"@(#)llib-ldemangle	1.1	97/12/30 SMI"
+
+char *	sgs_demangle(char *);

@@ -1,0 +1,97 @@
+#!/sbin/sh
+#
+# Copyright (c) 1984, 1986, 1987, 1988, 1989 AT&T.
+# All rights reserved.
+#
+# THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF AT&T
+# The copyright notice above does not evidence any
+# actual or intended publication of such source code.
+#
+# Copyright (c) 1991-1994, 1997-1998 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#ident	"@(#)standardmounts	1.20	99/08/09 SMI"
+
+# mount /proc early because swap depends on isaexec, which uses /proc
+
+exec < $vfstab; readvfstab /proc
+if [ "$mountp" -a -d /proc ]; then
+	/sbin/mount /proc >/dev/null 2>&1
+	if [ $? != 0 ]; then
+		echo "WARNING: /proc could not be mounted" >& 2
+	fi
+fi
+
+# Add physical swap.
+
+/sbin/swapadd -1
+
+# Check and remount the / (root) file system.
+# For NFS mounts, force the llock option on.
+
+exec < $vfstab; readvfstab /
+checkfs $fsckdev $fstype $mountp
+checkopt "llock" $mntopts
+mntopts='remount'
+
+[ -n "$otherops" ] && mntopts="${mntopts},${otherops}"
+[ "$fstype" = nfs -o "$fstype" = cachefs ] && mntopts="${mntopts},llock"
+
+/sbin/mount -m -o $mntopts $mountp
+
+# Check and remount the /usr file system (formerly mounted read-only).
+
+exec < $vfstab; readvfstab /usr
+
+if [ "$mountp" ]; then
+	if [ "$fstype" = cachefs ]; then
+		/sbin/mount -F cachefs -O -o $mntopts $special $mountp
+	else
+		checkopt ro $mntopts
+		if [ "x$option" != xro ]; then
+			checkfs $fsckdev $fstype $mountp
+			if [ "x$mntopts" != x- ]; then
+				mntopts="remount,$mntopts"
+			else
+				mntopts="remount"
+			fi
+			/sbin/mount -o $mntopts $mountp
+		fi
+	fi
+fi
+
+# Check and mount the /usr/platform file system.  This should only be
+# present when a SunOS 5.5 (Solaris 2.5) or greater client is being
+# administered by a SunOS 5.4 or less host.
+
+exec < $vfstab; readvfstab /usr/platform
+
+if [ "$mountp" ]; then
+	checkfs ${fsckdev} ${fstype} ${mountp}
+	if [ "x$mntopts" != x- ]; then
+		/sbin/mount -o $mntopts $mountp
+	else
+		/sbin/mount $mountp
+	fi
+fi
+
+# Mount the fd file systems if mount point exists.
+
+exec < $vfstab; readvfstab /dev/fd
+if [ "$mountp" -a -d /dev/fd ]; then
+	/sbin/mount /dev/fd >/dev/null 2>&1
+fi
+
+# Clean up existing /etc/dfs/sharetab as there are no shared file systems
+# at this point. This also takes care of a corrupt sharetab.
+
+if [ -f /etc/dfs/sharetab ]; then
+	> /etc/dfs/sharetab
+fi
+
+#
+#Flush any IPSEC policy entries left behind during the last boot.
+#
+if [ -f /etc/inet/ipsecpolicy.conf ]; then
+	> /etc/inet/ipsecpolicy.conf
+fi

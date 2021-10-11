@@ -1,0 +1,37 @@
+#
+# Copyright (c) 1998 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#pragma ident	"@(#)sd_with_glm.wlcmd 1.5	98/10/11 SMI"
+
+add scsi_watch_request::swr_callback targets \
+	sd.c:sd_mhd_watch_cb \
+	sd.c:sd_media_watch_cb
+
+add scsi_pkt::pkt_comp targets \
+	sd.c:sd_mhd_watch_cb \
+	sd.c:sd_media_watch_cb \
+	sd.c:sd_mhd_watch_cb \
+	scsi_watch.c:scsi_watch_request_intr \
+	sd.c:sd_restart_unit_callback \
+	sd.c:sdintr \
+	glm.c:glm_scsi_destroy_pkt \
+	glm.c:glm_scsi_init_pkt \
+	glm.c:glm_scsi_start \
+	glm.c:glm_scsi_abort \
+	glm.c:glm_scsi_reset \
+	glm.c:glm_scsi_setcap \
+	glm.c:glm_scsi_getcap \
+	glm.c:glm_scsi_dmafree \
+	glm.c:glm_scsi_reset_notify \
+	glm.c:glm_scsi_tgt_init \
+	glm.c:glm_scsi_tgt_free \
+	glm.c:glm_scsi_sync_pkt
+
+one scsi_device
+one glm 
+add notify_entry::callback target  sd_mhd_reset_notify_cb
+
+root glm_kmem_cache_constructor glm_kmem_cache_destructor
+
+assert order scsi_device::sd_mutex  glm::g_mutex

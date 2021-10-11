@@ -1,0 +1,100 @@
+ #
+#ident	"@(#)mapfile-vers	1.5	99/01/21 SMI"
+#
+# Copyright (c) 1996 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#
+# Generic interface definition for usr/src/lib/print.
+#
+# For information regarding the establishment of versioned definitions see:
+#	The Linker and Libraries Manual (version 2.5 or greater)
+# This is part of the Developers Guide in the Answerbook.  Specifically refer
+# to Chapter 2 under section "Defining Additional Symbols" through section
+# "Reducing Symbol Scope", and Chapter 5 "Versioning".
+#
+# For specific OSNET rules for the modification (evolution) of these version
+# definitions see:
+#	Policy for Shared Library Version Names and Interface Definitions
+
+
+SUNWprivate_2.1 {
+	global:
+		getprinterbyname;		# NSS support
+		getprinterentry;
+		setprinterentry;
+		endprinterentry;
+
+		ns_printer_create;		# Old NS support
+		ns_printer_get_name;
+		ns_printer_get_list;
+		ns_printer_put;
+		ns_printer_destroy;
+		ns_get_value;
+		ns_get_value_string;
+		ns_set_value;
+		ns_set_value_from_string;
+		ns_kvp_create;
+		ns_bsd_addr_get_default;
+		ns_bsd_addr_get_name;
+		ns_bsd_addr_get_all;
+		ns_bsd_addr_get_list;
+		string_to_bsd_addr;
+		ns_printer_match_name;
+		ns_printer_name_list;
+		value_to_string;
+		string_to_value;
+		normalize_ns_name;
+
+		list_append;			# list support
+		list_append_unique;
+		list_concatenate;
+		list_locate;
+		list_iterate;
+
+		job_primative;			# job support
+		job_svr4_primative;
+		job_add_data_file;
+		job_store;
+		job_free;
+		job_destroy;
+		job_create;
+		job_retrieve;
+		job_list_append;
+		vjob_match_attribute;
+		vjob_cancel;
+
+		net_open;			# net support
+		net_close;
+		net_read;
+		net_write;
+		net_printf;
+		net_gets;
+		net_send_message;
+		net_response;
+		net_send_file;
+
+		long_date;			# misc support
+		short_date;
+		check_client_spool;
+		get_lock;
+		get_user_id;
+		get_user_name;
+		strcdup;
+		strndup;
+		strsplit;
+		file_size;
+		copy_file;
+		map_in_file;
+		write_buffer;
+		start_daemon;
+		kill_process;
+		
+		files_put_printer;		# required for ns_put_printer()
+		nis_put_printer;
+		nisplus_put_printer;
+		xfn_put_printer;
+
+	local:
+		*;
+};

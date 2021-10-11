@@ -1,0 +1,37 @@
+\
+\ Copyright (c) 1999 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)fcp_rsp.dbg	1.1	99/07/21 SMI"
+\
+#include <sys/isa_defs.h>
+#include <sys/types.h>
+#include <sys/dditypes.h>
+#include <sys/ddidmareq.h>
+#include <sys/mutex.h>
+#include <sys/semaphore.h>
+#include <sys/condvar.h>
+#include <sys/thread.h>
+#include <sys/devops.h>
+#include <sys/scsi/scsi.h>
+#include <sys/fibre-channel/fc.h>
+#include <sys/fibre-channel/impl/fc_ulpif.h>
+#include <sys/fibre-channel/ulp/fcp.h>
+#include <sys/fibre-channel/ulp/fcpvar.h>
+#include "dummy.h"
+\
+\
+fcp_rsp	
+{adb_inline_begin}
+.>z
+<z+{OFFSET, reserved_0}=""
+{adb_inline_end}
+	reserved_0		hex
+	reserved_1		hex
+	fcp_u.i_fcp_status	hex
+	fcp_resid		hex
+	fcp_sense_len		hex
+	fcp_response_len	hex
+{adb_inline_begin}
+<z+{SIZEOF}=""
+{adb_inline_end}

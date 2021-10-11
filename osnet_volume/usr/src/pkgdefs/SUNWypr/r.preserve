@@ -1,0 +1,5 @@
+while read src
+do
+	echo "not removing $src"
+done
+exit 0

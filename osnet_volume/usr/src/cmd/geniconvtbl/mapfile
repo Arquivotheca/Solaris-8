@@ -1,0 +1,14 @@
+# Copyright (c) 1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+# "@(#)mapfile 1.2     99/05/25 SMI"
+
+
+{
+	global:
+		_icv_open;
+		_icv_close;
+		_icv_iconv;
+	local:
+		*;
+};

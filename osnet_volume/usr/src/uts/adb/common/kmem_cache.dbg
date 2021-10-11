@@ -1,0 +1,87 @@
+\
+\ Copyright (c) 1997-1999 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)kmem_cache.dbg	1.11	99/04/14 SMI"
+
+#include <sys/kmem.h>
+#include <sys/kmem_impl.h>
+#include "dummy.h"
+
+\ '*ncpus' is a 32-bit access
+\
+kmem_cache		cache_
+{adb_inline_begin}
+.>z
+<_>U;1>_
+<z+{OFFSET, cache_lock}=""
+{adb_inline_end}
+	lock			.mutex
+{adb_inline_begin}
+<z+{OFFSET, cache_flags}=""
+{adb_inline_end}
+	flags			hex
+	freelist		hex
+	offset			sdecimal
+	global_alloc		decimal
+	global_free		decimal
+	alloc_fail		decimal
+	hash_shift		hex
+	hash_mask		hex
+	hash_table		hex
+	nullslab		.slab
+{adb_inline_begin}
+<z+{OFFSET, cache_constructor}=""
+{adb_inline_end}
+	constructor		symbolic
+	destructor		symbolic
+	reclaim			symbolic
+	private			hex
+	arena			hex
+	cflags			hex
+	bufsize			sdecimal
+	align			sdecimal
+	chunksize		sdecimal
+	slabsize		sdecimal
+	color			sdecimal
+	maxcolor		sdecimal
+	slab_create		sdecimal
+	slab_destroy		sdecimal
+	buftotal		sdecimal
+	bufmax			sdecimal
+	rescale			sdecimal
+	lookup_depth		sdecimal
+	kstat			hex
+	next			hex
+	prev			hex
+	name			char
+	bufctl_cache		hex
+	magazine_cache		hex
+	magazine_size		sdecimal
+	magazine_maxsize	sdecimal
+	depot_lock		.mutex
+{adb_inline_begin}
+<z+{OFFSET, cache_ncpus}=""
+{adb_inline_end}
+	ncpus			sdecimal
+	depot_contention	sdecimal
+	depot_contention_last	sdecimal
+	depot_alloc		sdecimal
+	depot_free		sdecimal
+	fmag_list		hex
+	fmag_total		sdecimal
+	fmag_min		sdecimal
+	fmag_reaplimit		sdecimal
+	emag_list		hex
+	emag_total		sdecimal
+	emag_min		sdecimal
+	emag_reaplimit		sdecimal
+{adb_inline_begin}
+(<z+{OFFSET, cache_hash0})>t
+<t=na"hash0[64]"
+<t/64K
+(<z+{OFFSET, cache_cpu})>z
+*ncpus>/i/n
+<z$<kmem_cpu.nxt
+<U>_
+{adb_inline_end}

@@ -1,0 +1,42 @@
+#
+# Copyright (c) 1999 by Sun Microsystems, Inc. All rights reserved.
+#
+# /etc/security/auth_attr
+#
+# authorizations. see auth_attr(4)
+#
+#pragma ident	"@(#)auth_attr	1.2	99/08/16 SMI"
+#
+solaris.*:::Primary Administrator::help=PriAdmin.html
+solaris.grant:::Grant All Rights::help=PriAdmin.html
+#
+solaris.audit.:::Audit Management::help=AuditHeader.html
+solaris.audit.config:::Configure Auditing::help=AuditConfig.html
+solaris.audit.read:::Read Audit Trail::help=AuditRead.html
+#
+solaris.device.:::Device Allocation::help=DevAllocHeader.html
+solaris.device.allocate:::Allocate Device::help=DevAllocate.html
+solaris.device.config:::Configure Device Attributes::help=DevConfig.html
+solaris.device.grant:::Delegate Device Administration::help=DevGrant.html
+solaris.device.revoke:::Revoke or Reclaim Device::help=DevRevoke.html
+#
+solaris.jobs.:::Cron and At Jobs::help=JobHeader.html
+solaris.jobs.admin:::Cron & At Administrator::help=JobsAdmin.html
+solaris.jobs.grant:::Delegate Cron & At Administration::help=JobsGrant.html
+solaris.jobs.user:::Create at or cron jobs::help=JobsUser.html
+#
+solaris.login.:::Login Control::help=LoginHeader.html
+solaris.login.enable:::Enable Logins::help=LoginEnable.html
+solaris.login.remote:::Remote Login::help=LoginRemote.html
+#
+solaris.profmgr.:::Execution Profile Management::help=ProfmgrHeader.html
+solaris.profmgr.assign:::Assign Profiles to Users or Roles::help=ProfmgrAssign.html
+solaris.profmgr.write:::Create, Modify, Delete Profiles::help=ProfmgrWrite.html
+#
+solaris.role.:::Role Management::help=RoleHeader.html
+solaris.role.assign:::Assign Roles to Users::help=RoleAssign.html
+solaris.role.write:::Add, Modify, Delete Roles::help=RoleWrite.html
+#
+solaris.system.:::Machine Administration::help=SysHeader.html
+solaris.system.date:::Set Date & Time::help=SysDate.html
+solaris.system.shutdown:::Shutdown the System::help=SysShutdown.html

@@ -1,0 +1,231 @@
+# Copyright (c) 1992-1994 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#pragma	ident	"@(#)Makefile.rules	1.3	94/11/17 SMI"
+#
+# psm/promif/ieee1275/common/Makefile.rules
+#
+#	This Makefile defines all build rules for the promif version for
+#	IEEE 1275-1994 compliant firmware (generic portions).
+#
+
+#
+#	This was implemented by pattern matching rules of the form:
+#
+# $(OBJS_DIR)/%.o:	 $(UTSBASE)/common/os/%.c
+#	$(COMPILE.c) -o $@ $<
+#
+# $(LINTS_DIR)/%.ln:	$(UTSBASE)/common/os/%.c
+#	@($(LHEAD) $(LINT.c) $< $(LTAIL))
+#
+#	for each directory containing source. 
+#	This technique proved to be too slow under
+#	Nse because it caused a significant additional number of stats
+#	and stats are real slow under TFS. If TFS performance should
+#	improve, one might consider returning to the former implementation.
+#	In the former implementation, this file (Makefile.rules) was not
+#	needed and the pattern matching rules were in Makefile.files.
+#
+
+#
+#	C object build rules
+#
+#	The following are alphabetized by source file path. Please maintain
+# this ordering.
+#
+
+PROMIF_SRC = $(PSMBASE)/promif/ieee1275/common
+
+$(OBJS_DIR)/prom_2path.o:	$(PROMIF_SRC)/prom_2path.c
+	$(COMPILE.c) -o $@ $(PROMIF_SRC)/prom_2path.c
+
+$(OBJS_DIR)/prom_boot.o:	$(PROMIF_SRC)/prom_boot.c
+	$(COMPILE.c) -o $@ $(PROMIF_SRC)/prom_boot.c
+
+$(OBJS_DIR)/prom_devname.o:	$(PROMIF_SRC)/prom_devname.c
+	$(COMPILE.c) -o $@ $(PROMIF_SRC)/prom_devname.c
+
+$(OBJS_DIR)/prom_devtype.o:	$(PROMIF_SRC)/prom_devtype.c
+	$(COMPILE.c) -o $@ $(PROMIF_SRC)/prom_devtype.c
+
+$(OBJS_DIR)/prom_enter.o:	$(PROMIF_SRC)/prom_enter.c
+	$(COMPILE.c) -o $@ $(PROMIF_SRC)/prom_enter.c
+
+$(OBJS_DIR)/prom_env.o:		$(PROMIF_SRC)/prom_env.c
+	$(COMPILE.c) -o $@ $(PROMIF_SRC)/prom_env.c
+
+$(OBJS_DIR)/prom_exit.o:	$(PROMIF_SRC)/prom_exit.c
+	$(COMPILE.c) -o $@ $(PROMIF_SRC)/prom_exit.c
+
+$(OBJS_DIR)/prom_fb.o:		$(PROMIF_SRC)/prom_fb.c
+	$(COMPILE.c) -o $@ $(PROMIF_SRC)/prom_fb.c
+
+$(OBJS_DIR)/prom_getchar.o:	$(PROMIF_SRC)/prom_getchar.c
+	$(COMPILE.c) -o $@ $(PROMIF_SRC)/prom_getchar.c
+
+$(OBJS_DIR)/prom_gettime.o:	$(PROMIF_SRC)/prom_gettime.c
+	$(COMPILE.c) -o $@ $(PROMIF_SRC)/prom_gettime.c
+
+$(OBJS_DIR)/prom_handler.o:	$(PROMIF_SRC)/prom_handler.c
+	$(COMPILE.c) -o $@ $(PROMIF_SRC)/prom_handler.c
+
+$(OBJS_DIR)/prom_inpath.o:	$(PROMIF_SRC)/prom_inpath.c
+	$(COMPILE.c) -o $@ $(PROMIF_SRC)/prom_inpath.c
+
+$(OBJS_DIR)/prom_interp.o:	$(PROMIF_SRC)/prom_interp.c
+	$(COMPILE.c) -o $@ $(PROMIF_SRC)/prom_interp.c
+
+$(OBJS_DIR)/prom_io.o:	$(PROMIF_SRC)/prom_io.c
+	$(COMPILE.c) -o $@ $(PROMIF_SRC)/prom_io.c
+
+$(OBJS_DIR)/prom_kbd.o:		$(PROMIF_SRC)/prom_kbd.c
+	$(COMPILE.c) -o $@ $(PROMIF_SRC)/prom_kbd.c
+
+$(OBJS_DIR)/prom_node.o:	$(PROMIF_SRC)/prom_node.c
+	$(COMPILE.c) -o $@ $(PROMIF_SRC)/prom_node.c
+
+$(OBJS_DIR)/prom_outpath.o:	$(PROMIF_SRC)/prom_outpath.c
+	$(COMPILE.c) -o $@ $(PROMIF_SRC)/prom_outpath.c
+
+$(OBJS_DIR)/prom_panic.o:	$(PROMIF_SRC)/prom_panic.c
+	$(COMPILE.c) -o $@ $(PROMIF_SRC)/prom_panic.c
+
+$(OBJS_DIR)/prom_path.o:	$(PROMIF_SRC)/prom_path.c
+	$(COMPILE.c) -o $@ $(PROMIF_SRC)/prom_path.c
+
+$(OBJS_DIR)/prom_phandle.o:	$(PROMIF_SRC)/prom_phandle.c
+	$(COMPILE.c) -o $@ $(PROMIF_SRC)/prom_phandle.c
+
+$(OBJS_DIR)/prom_printf.o:	$(PROMIF_SRC)/prom_printf.c
+	$(COMPILE.c) -o $@ $(PROMIF_SRC)/prom_printf.c
+
+$(OBJS_DIR)/prom_prop.o:	$(PROMIF_SRC)/prom_prop.c
+	$(COMPILE.c) -o $@ $(PROMIF_SRC)/prom_prop.c
+
+$(OBJS_DIR)/prom_putchar.o:	$(PROMIF_SRC)/prom_putchar.c
+	$(COMPILE.c) -o $@ $(PROMIF_SRC)/prom_putchar.c
+
+$(OBJS_DIR)/prom_reboot.o:	$(PROMIF_SRC)/prom_reboot.c
+	$(COMPILE.c) -o $@ $(PROMIF_SRC)/prom_reboot.c
+
+$(OBJS_DIR)/prom_stdin.o:	$(PROMIF_SRC)/prom_stdin.c
+	$(COMPILE.c) -o $@ $(PROMIF_SRC)/prom_stdin.c
+
+$(OBJS_DIR)/prom_stdout.o:	$(PROMIF_SRC)/prom_stdout.c
+	$(COMPILE.c) -o $@ $(PROMIF_SRC)/prom_stdout.c
+
+$(OBJS_DIR)/prom_string.o:	$(PROMIF_SRC)/prom_string.c
+	$(COMPILE.c) -o $@ $(PROMIF_SRC)/prom_string.c
+
+$(OBJS_DIR)/prom_test.o:	$(PROMIF_SRC)/prom_test.c
+	$(COMPILE.c) -o $@ $(PROMIF_SRC)/prom_test.c
+
+$(OBJS_DIR)/prom_trap.o:	$(PROMIF_SRC)/prom_trap.c
+	$(COMPILE.c) -o $@ $(PROMIF_SRC)/prom_trap.c
+
+$(OBJS_DIR)/prom_version.o:	$(PROMIF_SRC)/prom_version.c
+	$(COMPILE.c) -o $@ $(PROMIF_SRC)/prom_version.c
+
+$(OBJS_DIR)/prom_wrtestr.o:	$(PROMIF_SRC)/prom_wrtestr.c
+	$(COMPILE.c) -o $@ $(PROMIF_SRC)/prom_wrtestr.c
+
+
+#
+#	Lint `object' build rules
+#
+#	The following are alphabetized by source file path. Please maintain
+# this ordering.
+#
+
+$(LINTS_DIR)/prom_2path.ln:	$(PROMIF_SRC)/prom_2path.c
+	@($(LHEAD) $(LINT.c) $(PROMIF_SRC)/prom_2path.c $(LTAIL))
+
+$(LINTS_DIR)/prom_boot.ln:	$(PROMIF_SRC)/prom_boot.c
+	@($(LHEAD) $(LINT.c) $(PROMIF_SRC)/prom_boot.c $(LTAIL))
+
+$(LINTS_DIR)/prom_devname.ln:	$(PROMIF_SRC)/prom_devname.c
+	@($(LHEAD) $(LINT.c) $(PROMIF_SRC)/prom_devname.c $(LTAIL))
+
+$(LINTS_DIR)/prom_devtype.ln:	$(PROMIF_SRC)/prom_devtype.c
+	@($(LHEAD) $(LINT.c) $(PROMIF_SRC)/prom_devtype.c $(LTAIL))
+
+$(LINTS_DIR)/prom_enter.ln:	$(PROMIF_SRC)/prom_enter.c
+	@($(LHEAD) $(LINT.c) $(PROMIF_SRC)/prom_enter.c $(LTAIL))
+
+$(LINTS_DIR)/prom_env.ln:	$(PROMIF_SRC)/prom_env.c
+	@($(LHEAD) $(LINT.c) $(PROMIF_SRC)/prom_env.c $(LTAIL))
+
+$(LINTS_DIR)/prom_exit.ln:	$(PROMIF_SRC)/prom_exit.c
+	@($(LHEAD) $(LINT.c) $(PROMIF_SRC)/prom_exit.c $(LTAIL))
+
+$(LINTS_DIR)/prom_fb.ln:	$(PROMIF_SRC)/prom_fb.c
+	@($(LHEAD) $(LINT.c) $(PROMIF_SRC)/prom_fb.c $(LTAIL))
+
+$(LINTS_DIR)/prom_getchar.ln:	$(PROMIF_SRC)/prom_getchar.c
+	@($(LHEAD) $(LINT.c) $(PROMIF_SRC)/prom_getchar.c $(LTAIL))
+
+$(LINTS_DIR)/prom_gettime.ln:	$(PROMIF_SRC)/prom_gettime.c
+	@($(LHEAD) $(LINT.c) $(PROMIF_SRC)/prom_gettime.c $(LTAIL))
+
+$(LINTS_DIR)/prom_handler.ln:	$(PROMIF_SRC)/prom_handler.c
+	@($(LHEAD) $(LINT.c) $(PROMIF_SRC)/prom_handler.c $(LTAIL))
+
+$(LINTS_DIR)/prom_inpath.ln:	$(PROMIF_SRC)/prom_inpath.c
+	@($(LHEAD) $(LINT.c) $(PROMIF_SRC)/prom_inpath.c $(LTAIL))
+
+$(LINTS_DIR)/prom_interp.ln:	$(PROMIF_SRC)/prom_interp.c
+	@($(LHEAD) $(LINT.c) $(PROMIF_SRC)/prom_interp.c $(LTAIL))
+
+$(LINTS_DIR)/prom_io.ln:	$(PROMIF_SRC)/prom_io.c
+	@($(LHEAD) $(LINT.c) $(PROMIF_SRC)/prom_io.c $(LTAIL))
+
+$(LINTS_DIR)/prom_kbd.ln:	$(PROMIF_SRC)/prom_kbd.c
+	@($(LHEAD) $(LINT.c) $(PROMIF_SRC)/prom_kbd.c $(LTAIL))
+
+$(LINTS_DIR)/prom_node.ln:	$(PROMIF_SRC)/prom_node.c
+	@($(LHEAD) $(LINT.c) $(PROMIF_SRC)/prom_node.c $(LTAIL))
+
+$(LINTS_DIR)/prom_outpath.ln:	$(PROMIF_SRC)/prom_outpath.c
+	@($(LHEAD) $(LINT.c) $(PROMIF_SRC)/prom_outpath.c $(LTAIL))
+
+$(LINTS_DIR)/prom_panic.ln:	$(PROMIF_SRC)/prom_panic.c
+	@($(LHEAD) $(LINT.c) $(PROMIF_SRC)/prom_panic.c $(LTAIL))
+
+$(LINTS_DIR)/prom_path.ln:	$(PROMIF_SRC)/prom_path.c
+	@($(LHEAD) $(LINT.c) $(PROMIF_SRC)/prom_path.c $(LTAIL))
+
+$(LINTS_DIR)/prom_phandle.ln:	$(PROMIF_SRC)/prom_phandle.c
+	@($(LHEAD) $(LINT.c) $(PROMIF_SRC)/prom_phandle.c $(LTAIL))
+
+$(LINTS_DIR)/prom_printf.ln:	$(PROMIF_SRC)/prom_printf.c
+	@($(LHEAD) $(LINT.c) $(PROMIF_SRC)/prom_printf.c $(LTAIL))
+
+$(LINTS_DIR)/prom_prop.ln:	$(PROMIF_SRC)/prom_prop.c
+	@($(LHEAD) $(LINT.c) $(PROMIF_SRC)/prom_prop.c $(LTAIL))
+
+$(LINTS_DIR)/prom_putchar.ln:	$(PROMIF_SRC)/prom_putchar.c
+	@($(LHEAD) $(LINT.c) $(PROMIF_SRC)/prom_putchar.c $(LTAIL))
+
+$(LINTS_DIR)/prom_reboot.ln:	$(PROMIF_SRC)/prom_reboot.c
+	@($(LHEAD) $(LINT.c) $(PROMIF_SRC)/prom_reboot.c $(LTAIL))
+
+$(LINTS_DIR)/prom_stdin.ln:	$(PROMIF_SRC)/prom_stdin.c
+	@($(LHEAD) $(LINT.c) $(PROMIF_SRC)/prom_stdin.c $(LTAIL))
+
+$(LINTS_DIR)/prom_stdout.ln:	$(PROMIF_SRC)/prom_stdout.c
+	@($(LHEAD) $(LINT.c) $(PROMIF_SRC)/prom_stdout.c $(LTAIL))
+
+$(LINTS_DIR)/prom_string.ln:	$(PROMIF_SRC)/prom_string.c
+	@($(LHEAD) $(LINT.c) $(PROMIF_SRC)/prom_string.c $(LTAIL))
+
+$(LINTS_DIR)/prom_test.ln:	$(PROMIF_SRC)/prom_test.c
+	@($(LHEAD) $(LINT.c) $(PROMIF_SRC)/prom_test.c $(LTAIL))
+
+$(LINTS_DIR)/prom_trap.ln:	$(PROMIF_SRC)/prom_trap.c
+	@($(LHEAD) $(LINT.c) $(PROMIF_SRC)/prom_trap.c $(LTAIL))
+
+$(LINTS_DIR)/prom_version.ln:	$(PROMIF_SRC)/prom_version.c
+	@($(LHEAD) $(LINT.c) $(PROMIF_SRC)/prom_version.c $(LTAIL))
+
+$(LINTS_DIR)/prom_wrtestr.ln:	$(PROMIF_SRC)/prom_wrtestr.c
+	@($(LHEAD) $(LINT.c) $(PROMIF_SRC)/prom_wrtestr.c $(LTAIL))

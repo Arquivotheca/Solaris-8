@@ -1,0 +1,51 @@
+#
+# Copyright (c) 1998-1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#pragma ident	"@(#)Makefile.spec.arch	1.3	99/05/04 SMI"
+#
+# lib/Makefile.spec.arch
+#
+
+#
+# Set BUILD64= in the environment to enable ia64 builds on i386 machines
+#
+
+BUILD64:sh=	if [ "$MACH" = "i386" ]; \
+		then echo \\043; \
+		fi
+
+i386_ARCHITECTURES =	i386
+$(BUILD64)i386_ARCHITECTURES += ia64
+sparc_ARCHITECTURES =	sparc sparcv9
+
+all		:=	TARGET= all
+install		:=	TARGET= install
+clean		:=	TARGET= clean
+clobber		:=	TARGET= clobber
+lint		:=	TARGET= lint
+
+
+.KEEP_STATE:
+
+all install clean clobber: $($(MACH)_ARCHITECTURES)
+
+$($(MACH)_ARCHITECTURES): FRC
+	@cd $@; pwd; $(MAKE) $(TARGET)
+
+#
+# This will make sure that any target not
+# explicitly defined will not break the build.
+#
+# XXX pmake on intel does not like the following rules
+# %: ignore_and_exit_quietly
+# ignore_and_exit_quietly:
+#
+# So here it is manually
+#
+IGNORE=		_msg catalog install_h delete \
+		package tcov debug private_h \
+		check analyse test dynamic lint
+$(IGNORE):
+
+FRC:

@@ -1,0 +1,110 @@
+#!/bin/sh
+#
+#pragma ident	"@(#)i.pamconf	1.7	99/09/21 SMI"
+#
+# Copyright (c) 1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+CLEANUP_FILE=/tmp/CLEANUP
+KERB_ENTRIES=/tmp/scr.$$
+KRB5_CONF_FILE=$BASEDIR/etc/krb5/krb5.conf
+COMMENT_PREFIX="#"
+
+PATH="/usr/bin:/usr/sbin:${PATH}"
+export PATH
+
+kerberos_configured() {
+	if [ -f $KRB5_CONF_FILE ]; then
+		grep "___default_realm___" $KRB5_CONF_FILE > /dev/null 2>&1
+		if [ $? = 1 ]; then
+			COMMENT_PREFIX=""
+		fi
+	fi
+}
+
+setup_kerb_changes() {
+#
+# No comments or blanks lines allowed in entries below
+#
+cat > ${KERB_ENTRIES} << EOF
+dtsession	auth required 	/usr/lib/security/\$ISA/pam_unix.so.1
+rlogin	auth optional 	/usr/lib/security/\$ISA/pam_krb5.so.1 try_first_pass
+login	auth optional 	/usr/lib/security/\$ISA/pam_krb5.so.1 try_first_pass
+other	auth optional	/usr/lib/security/\$ISA/pam_krb5.so.1 try_first_pass
+dtlogin	account optional	/usr/lib/security/\$ISA/pam_krb5.so.1
+other	account optional	/usr/lib/security/\$ISA/pam_krb5.so.1
+other	session optional	/usr/lib/security/\$ISA/pam_krb5.so.1
+other	password optional	/usr/lib/security/\$ISA/pam_krb5.so.1 try_first_pass
+EOF
+}
+
+kerberos_configured
+setup_kerb_changes
+while read src dest
+do
+    if [ ! -f $dest ] ; then
+	cp $src $dest
+    else
+	grep '/usr/lib/security/$ISA/pam_' $dest > /dev/null 2>&1
+	if [ $? = 1 ] ; then
+		echo "${dest} default entries updated, \c" \
+		    >> ${CLEANUP_FILE}
+		echo "please examine/update customized entries" \
+		    >> ${CLEANUP_FILE}
+		sed 's,/usr/lib/security/pam_,/usr/lib/security/$ISA/pam_,' \
+		    $dest > /tmp/pamconf.$$
+		cp /tmp/pamconf.$$ $dest
+		rm -f /tmp/pamconf.$$
+	fi
+#
+# update pam.conf to append kerberos entries if not already present
+#
+	rm -f /tmp/pamconf.$$
+	cat ${KERB_ENTRIES} |
+    	(while read e1 e2 e3 e4 e5
+	do
+		# See if the entry already exists
+		grep \
+"^[#	 ]*$e1[ 	][ 	]*$e2[ 	][ 	]*$e3[ 	][ 	]*$e4[ 	]" \
+		$dest >/dev/null 2>&1
+		if [ $? = 1 ] ; then
+			# Doesn't exist, enter into pam.conf
+			echo "$COMMENT_PREFIX$e1\t$e2\t$e3\t$e4 $e5" >> \
+				/tmp/pamconf.$$
+		fi
+	done)
+	# Append kerberos lines if any were not present already.
+    	if [ -f /tmp/pamconf.$$ ] ; then
+		cat /tmp/pamconf.$$ >> $dest
+		echo "${dest} updating entries to add kerberos, \
+			\c"  >> ${CLEANUP_FILE} 
+		echo "please examine/update any new entries" \
+			>> ${CLEANUP_FILE}
+    		rm -f /tmp/pamconf.$$
+    	fi
+    	rm -f ${KERB_ENTRIES}
+#
+#update pam.conf with entries for roles 
+#
+	grep 'pam_roles.so' $dest > /dev/null 2>&1
+	if [ $? = 1 ] ; then
+		echo "${dest} updating default entries for roles, \
+			\c"  >> ${CLEANUP_FILE} 
+		echo "please examine/update any new entries" \
+			>> ${CLEANUP_FILE}
+		nawk  '/^#/ { print; next } \
+		$4 ~ /pam_role_auth/	{ next } \
+		$2 == "account" && $4 ~ /pam_unix/ { \
+				print $1 "\t" $2 " requisite\t" \
+				  "/usr/lib/security/$ISA/pam_roles.so.1"; \
+				print;	\
+				next \
+			} \
+		{ print }' $dest > /tmp/pamconf.$$
+		cp /tmp/pamconf.$$ $dest
+		rm -f /tmp/pamconf.$$
+    	fi
+    fi 
+done
+
+exit 0

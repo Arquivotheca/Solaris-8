@@ -1,0 +1,41 @@
+#
+# @(#)uk_hobo  1.1 93/03/17 KEYTABLES SMI
+#
+# UK Hobo key layout
+#
+key 42	 base ` shift ¬ caps ` ctrl ` altg ¦
+key 31	 base 2 shift '"' caps 2 ctrl 2 altg nop
+key 32	 base 3 shift £ caps 3 ctrl 3 altg nop
+key 36	 numl 7
+key 37	 numl 8
+key 38	 numl 9
+key 39	 numl *
+key 60	 numl 4
+key 61	 numl 5
+key 62	 numl 6
+key 63	 numl -
+key 83	 numl 1
+key 84	 numl 2
+key 85	 numl 3
+key 86	 numl +
+key 87	 base '\'' shift @ caps '\'' ctrl ^@ altg nop
+key 88   base # shift ~ caps # ctrl # altg nop
+key 106	 numl 0
+key 107	 numl ,
+key 108	 numl .
+key 109	 numl /
+key 124  base '\\' shift | caps '\\' ctrl ^\ altg nop numl nonl
+#
+#
+#
+# New function keys assigned old codes
+#
+key 44   all bf(8)
+key 52   all rf(7)
+key 96   all rf(9)
+key 74   all rf(13)
+key 123  all rf(15)
+key 20   all string+uparrow
+key 24   all string+leftarrow
+key 27   all string+downarrow
+key 28   all string+rightarrow

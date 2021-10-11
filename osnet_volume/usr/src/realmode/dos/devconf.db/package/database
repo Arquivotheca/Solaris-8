@@ -1,0 +1,215 @@
+#
+# Copyright (c) 1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#ident "@(#)database 1.50 99/10/01"
+
+# The release/build with which the prototype area corresponds.
+PKGRELEASE=SUNWbtx86_`date +%y%m%d`
+
+#############################################################################
+#
+# The following variables are generally static and should not require
+# modification by the developer from build to build.
+#
+
+. ../dcb.env
+
+# Location of boot image file.
+BOOT_IMAGE_PATH=${BOOT_IMAGE_PATH=$BASEDIR/../BOOT/proto_dcb/$RELEASE}
+
+# Place where we dump DOS-built drivers for inclusion on DCB boot diskettes.
+PROTO_DOS=$BASEDIR/../../proto
+
+# The root directory of the realmode source hierarchy and the source
+# directories/files to move to DOS
+SRC=$BASEDIR/..
+
+#############################################################################
+#
+# DevConf Hard Disk Boot Area Layout.
+#
+#    /boot/
+#       -----------------------------------
+#	\ solaris_______boot.bin
+#		   |___	boot.rc
+#		   |___	bootargs.rc
+#		   |___	bootenv.rc
+#		   |___	bootconf.exe
+#		   |___	bootconf.txt
+#		   |___	strap.rc
+#		   |___	devicedb _______ master
+#		   |		    |___ config.db
+#		   |
+#		   |___ drivers  _______ isa.025 _______ xxx.BEF
+#				    |			   ...
+#			            |___ isa.125 _______ xxx.BEF
+#				    |			   ...
+#			            |___ isa.150 _______ xxx.BEF
+#				    |			   ...
+#			            |___ isa.175 _______ xxx.BEF
+#				    |			   ...
+#			            |___ notisa.010 ____ xxx.BEF
+#				    |			   ...
+#			            |___ notisa.020 ____ xxx.BEF
+#				    |			   ...
+#				    |___ mca.001 _______ xxx.BEF
+#
+#	The variables below map out exactly what goes where.
+#
+#	The variables that describe the area contents take the form:
+#	BTPKG_{component}_{info-type}
+#
+#	The list of components should be specified in the variable
+#	BTPKG_PARTS
+#
+#	There are currently 4 info types, PROTO, FILES, DEST, and POST.
+#
+#	The prototype area creation algorithm is as follows:
+#
+#	    for each component
+#		copy all FILES from PROTO directory to DEST directory
+#		run POST script (if any)
+#	    endfor
+#
+
+#
+# Prototype area Subdirectories
+#	
+BTPKG_SUBDIRS='solaris'
+
+#
+# Boot area prototype
+#
+BTPKG_PARTS='btfloppy'
+
+BTPKG_btfloppy_PROTO=$BASEDIR/../../proto
+BTPKG_btfloppy_FILES='d1_image'
+BTPKG_btfloppy_DEST='solaris'
+
+BTPKG_rc2_PROTO=$BASEDIR
+BTPKG_rc2_FILES='bootenv.rc'
+BTPKG_rc2_DEST='solaris'
+
+BTPKG_straprc_PROTO=$PROTO_DOS/bootpart/solaris
+BTPKG_straprc_FILES='strap.rc'
+BTPKG_straprc_DEST='solaris'
+
+BTPKG_devicedb_PROTO=$PROTO_DOS/bootpart/solaris/devicedb
+BTPKG_devicedb_FILES='master
+		      config.db'
+BTPKG_devicedb_DEST='solaris/devicedb'
+
+BTPKG_bootconf_PROTO=$PROTO_DOS/bootpart/solaris
+BTPKG_bootconf_FILES='bootconf.exe
+		      bootconf.txt'
+BTPKG_bootconf_DEST='solaris'
+
+BTPKG_isa025_PROTO=$PROTO_DOS
+BTPKG_isa025_FILES='ata.bef
+		    com.bef
+		    fdc.bef
+		    joyst.bef
+		    key.bef
+		    logi.bef
+		    lpt.bef
+		    msm.bef
+		    ps2ms.bef'
+BTPKG_isa025_DEST='solaris/drivers/isa.025'
+
+BTPKG_isa125_PROTO=$PROTO_DOS
+BTPKG_isa125_FILES='aha1540.bef
+		    aic.bef
+		    blogic.bef
+		    dpt.bef
+		    eepro.bef
+		    el.bef
+		    elink.bef
+		    pe3.bef
+		    smc.bef
+		    trantor.bef'
+BTPKG_isa125_DEST='solaris/drivers/isa.125'
+
+BTPKG_isa150_PROTO=$PROTO_DOS
+BTPKG_isa150_FILES='esa.bef
+		    iee.bef
+		    nei.bef
+		    pcn.bef
+		    tr.bef'
+BTPKG_isa150_DEST='solaris/drivers/isa.150'
+
+BTPKG_isa175_PROTO=$PROTO_DOS
+BTPKG_isa175_FILES='sbpro.bef
+		    elx.bef'
+BTPKG_isa175_DEST='solaris/drivers/isa.175'
+
+BTPKG_notisa010_PROTO=$PROTO_DOS
+BTPKG_notisa010_FILES='adp.bef
+		       aha1740.bef
+		       iss.bef
+		       mlx.bef
+		       ncrs.bef
+		       pcscsi.bef
+		       cnft.bef
+		       dnet.bef
+		       ieef.bef
+		       nee.bef
+		       smce.bef
+		       smceu.bef
+		       smcf.bef'
+BTPKG_notisa010_DEST='solaris/drivers/notisa.010'
+
+BTPKG_notisa020_PROTO=$PROTO_DOS
+BTPKG_notisa020_FILES='nfe.bef
+		       riles.bef
+		       corvette.bef
+		       mcis.bef'
+BTPKG_notisa020_DEST='solaris/drivers/notisa.020'
+
+BTPKG_mca001_PROTO=$PROTO_DOS
+BTPKG_mca001_FILES='pe3.bef
+		    trantor.bef'
+BTPKG_mca001_DEST='solaris/drivers/mca.001'
+
+BTPKG_mca_PROTO=$BASEDIR/../../mca_adf
+BTPKG_mca_FILES='@0708.adf
+		 @6042.adf
+		 @61c8.adf
+		 @61c9.adf
+		 @627c.adf
+		 @627d.adf
+		 @6e6c.adf
+		 @6fc0.adf
+		 @6fc1.adf
+		 @6fc2.adf
+		 @80ec.adf
+		 @8efc.adf
+		 @8efe.adf
+		 @8eff.adf
+		 @8f82.adf
+		 @8fbb.adf
+		 @8fda.adf
+		 @8fdb.adf
+		 @90ee.adf
+		 @917b.adf
+		 @deff.adf
+		 @e001.adf
+		 @eee7.adf
+		 @eeff.adf
+		 @efef.adf
+		 @effd.adf
+		 pdefe.adf
+		 pdffe.adf
+		 pe0fe.adf
+		 pe1fe.adf
+		 pe4fe.adf
+		 pff6f.adf
+		 pff9f.adf
+		 @60e9.adf
+		 @6127.adf
+		 @8fa2.adf
+		 @8fa8.adf
+		 @8fd6.adf
+		 pfe80.adf
+		 pfebe.adf'
+BTPKG_mca_DEST='solaris/mca_adf'

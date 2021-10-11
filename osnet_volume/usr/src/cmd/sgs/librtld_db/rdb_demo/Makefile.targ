@@ -1,0 +1,89 @@
+#
+#ident	"@(#)Makefile.targ	1.3	98/03/23 SMI"
+#
+# Copyright (c) 1996 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+
+$(OBJDIR)/%.o:	%.c
+		$(COMPILE.c) $< -o $@
+		$(POST_PROCESS_O)
+
+$(OBJDIR)/%.o:	../common/%.c
+		$(COMPILE.c) $< -o $@
+		$(POST_PROCESS_O)
+
+# DEMO DELETE START
+$(ROOTONLDBIN)/%: %
+		$(INS.file)
+
+$(ROOTONLDBIN)/sparcv9/%: %
+		$(INS.file)
+# DEMO DELETE END
+
+$(OBJDIR)/main.o: gram.h
+
+gram.c + gram.h: ../common/gram.y
+	yacc -d ../common/gram.y
+	mv y.tab.c gram.c
+	mv y.tab.h gram.h
+
+lex.c: ../common/lex.l
+	lex ../common/lex.l
+	mv lex.yy.c lex.c
+
+$(PROG):	$(OBJS)
+		$(LINK.c) $(OBJS) -o $@ $(LDLIBS)
+# DEMO DELETE START
+		$(POST_PROCESS)
+# DEMO DELETE END
+
+
+simp: ../tests/simp.c libsub.so.1
+	$(LINK.c) $(LDFLAG) -o $@ ../tests/simp.c -R. ./libsub.so.1
+
+libsub.so.1: ../tests/sub.c
+	$(LINK.c) $(LDFLAG) -o $@ -G -Kpic -hlibsub.so.1 ../tests/sub.c
+
+#
+# RDB sample runs & tests
+#
+test-maps: simp FRC
+	./rdb -f ../tests/loadmaps ./simp
+
+test-breaks: simp FRC
+	./rdb -f ../tests/breaks ./simp
+
+test-steps: simp FRC
+	./rdb -f ../tests/steps ./simp
+
+test-plt_skip: simp FRC
+	./rdb -f ../tests/plt_skip ./simp
+
+test-sparc-regs: simp FRC
+	./rdb -f ../tests/test-sparc-regs simp
+
+test-object-padding: simp FRC
+	./rdb -f ../tests/object_padding_maps simp
+
+
+
+$(OBJDIR):
+	-@mkdir -p $(OBJDIR)
+
+
+clean: FRC
+		$(RM) $(OBJS) $(CLEANFILES)
+
+clobber: clean FRC
+		$(RM) $(PROG)
+
+FRC:
+
+# DEMO DELETE START
+$(LINTOUT):	$(SRCS)
+		$(LINT.c) $(SRCS) > $(LINTOUT) 2>&1
+
+
+include		../../../../Makefile.targ
+# DEMO DELETE END

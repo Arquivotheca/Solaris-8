@@ -1,0 +1,19 @@
+#
+# Copyright (c) 1996-99 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#pragma ident	"@(#)postinstall	1.4	99/07/18 SMI"
+#
+
+if [ -f $BASEDIR/etc/named.boot ] ; then
+   if [ ! -f $BASEDIR/etc/named.conf ] ; then
+        named-bootconf -i $BASEDIR/etc/named.boot -o $BASEDIR/etc/named.conf >/dev/null 2>&1
+        echo "/etc/named.boot has been converted to /etc/named.conf" \
+		 >> /tmp/CLEANUP
+        echo "The original /etc/named.boot has been left on the system for reference." \
+		 >> /tmp/CLEANUP
+	
+   fi
+fi
+
+exit 0

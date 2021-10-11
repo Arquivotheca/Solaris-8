@@ -1,0 +1,79 @@
+\
+\ Copyright (c) 1997,1999 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)ldtermstd_state.dbg	1.6	99/08/09 SMI"
+
+\	arg		: address of ldtermstd_state_t struct
+\			  (struct ldterm_mod)
+\	uses		: termios, eucioc, csdata, csmethods
+\	registers	: z
+\	description	: prints the contents of ldtermstd_state_t
+\			  structure (struct ldterm_mod)
+
+#include <sys/param.h>
+#include <sys/types.h>
+#include <sys/termio.h>
+#include <sys/stream.h>
+#include <sys/eucioctl.h>
+#include <sys/csiioctl.h>
+#include <sys/ldterm.h>
+#include "dummy.h"
+
+\
+\
+ldterm_mod		t_		ldtermstd_state
+{adb_inline_begin}
+.>z
+<z+{OFFSET, t_modes}=""
+{adb_inline_end}
+	modes			.termios
+{adb_inline_begin}
+<z+{OFFSET, t_amodes}=""
+{adb_inline_end}
+	amodes			.termios
+{adb_inline_begin}
+<z+{OFFSET, t_dmodes}=""
+{adb_inline_end}
+	dmodes			.termios
+{adb_inline_begin}
+<z+{OFFSET, t_state}=""
+{adb_inline_end}
+	state			hex
+	line			hex
+	col			sdecimal
+	rocount			sdecimal
+	rocol			sdecimal
+	message			hex
+	endmsg			hex
+	msglen			sdecimal
+	echomp			hex
+	rd_request		sdecimal
+	iocid			sdecimal
+	wbufcid			sdecimal
+	vtid			sdecimal
+	codeset			hex
+	eucleft			hex
+	eucign			hex
+	eucpad			hex
+	eucwioc			.eucioc
+{adb_inline_begin}
+<z+{OFFSET, t_eucp}=""
+{adb_inline_end}
+	eucp			hex
+	eucp_mp			hex
+	maxeuc			hex
+	eucwarn			sdecimal
+	csdata			.csdata
+{adb_inline_begin}
+<z+{OFFSET, t_csmethods}=""
+{adb_inline_end}
+	csmethods		.csmethods
+{adb_inline_begin}
+<z+{OFFSET, t_scratch}=""
+{adb_inline_end}
+	scratch			hex
+	scratch_len		hex
+{adb_inline_begin}
+<z+{SIZEOF}=""
+{adb_inline_end}

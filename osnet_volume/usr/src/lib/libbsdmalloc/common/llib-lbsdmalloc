@@ -1,0 +1,15 @@
+/* LINTLIBRARY */
+/* PROTOLIB1 */
+
+/*
+ * Copyright (c) 1997 by Sun Microsystems, Inc. 
+ * All rights reserved. 
+ */ 
+#pragma ident	"@(#)llib-lbsdmalloc	1.1	97/03/12 SMI"
+
+#include <sys/types.h>
+#include <unistd.h>
+
+char *malloc(unsigned nbytes);
+int free(char *cp);
+char *realloc(char *cp, unsigned nbytes);

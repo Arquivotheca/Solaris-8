@@ -1,0 +1,20 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)ufs_acl.dbg	1.2	98/01/14 SMI"
+
+#include <sys/types.h>
+#include <sys/t_lock.h>
+#include <sys/time.h>
+#include <sys/vnode.h>
+#include <vm/seg.h>
+#include <sys/fs/ufs_acl.h>
+#include "dummy.h"
+
+\
+\
+ufs_acl
+        acl_un.acl_next         hex                     next
+        acl_perm                octal                   perm
+        acl_who                 sdecimal                "who (uid)"

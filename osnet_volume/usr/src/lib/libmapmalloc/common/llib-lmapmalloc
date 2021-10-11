@@ -1,0 +1,17 @@
+/* LINTLIBRARY */
+/* PROTOLIB1 */
+
+/*
+ * Copyright (c) 1997 by Sun Microsystems, Inc.
+ * All rights reserved.
+ */
+#pragma ident	"@(#)llib-lmapmalloc	1.1	97/08/16 SMI"
+
+#include <sys/types.h>
+#include <unistd.h>
+
+void *malloc(size_t nbytes);
+void *realloc(void *ptr, size_t size);
+void *calloc(size_t num, size_t size);
+void free(void *ptr);
+void cfree(void *p, unsigned num, unsigned size);

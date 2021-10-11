@@ -1,0 +1,117 @@
+\
+\ Copyright (c) 1999 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)usbkbm_state.dbg        1.5     99/10/11 SMI"
+
+#include <sys/usb/usba.h>
+#include <sys/usb/usba/usba_types.h>
+#include <sys/usb/clients/hid/hid.h>
+#include <sys/usb/clients/hid/hid_polled.h>
+#include <sys/usb/clients/hidparser/hidparser.h>
+#include <sys/usb/clients/hid/hidvar.h>
+
+#include <sys/stropts.h>
+
+#include <sys/vuid_event.h>
+#include <sys/termios.h>
+#include <sys/termio.h>
+#include <sys/strtty.h>
+#include <sys/msreg.h>
+#include <sys/msio.h>
+#include "dummy.h"
+
+#include <sys/consdev.h>
+#include <sys/kbd.h>
+#include <sys/kbtrans.h>
+#include <sys/usb/clients/usbkbm/usbkbm.h>
+
+\
+\
+
+usbkbm_state_struct usbkbm_	usbkbm_state
+{adb_inline_begin}
+.>x
+<x+{OFFSET, usbkbm_kbtrans}=""
+{adb_inline_end}
+	kbtrans		hex	kbtrans
+	readq		hex	readq
+	writeq		hex	writeq
+	flags		hex	flags
+	packet_size	hex	packet_size
+	report_descr	hex	report_descr
+	layout		hex	layout
+	setled_second_byte	hex	setled_second_byte
+	lastusbpacket	hex	lastusbpacket
+{adb_inline_begin}
+<x+{OFFSET, usbkbm_hid_callback}=""
+{adb_inline_end}
+	hid_callback	.hid_polled_input_callback	hid_callback
+{adb_inline_begin}
+<x+{OFFSET, usbkbm_pending_link}=""
+{adb_inline_end}
+	pending_link	hex	pending_link
+	streams_iocpending	hex	streams_iocpending
+	streams_bufcallid	hex	streams_bufcallid
+{adb_inline_begin}
+<x+{OFFSET, usbkbm_polled_info}=""
+{adb_inline_end}
+	polled_info	.cons_polledio	polled_info
+{adb_inline_begin}
+<x+{OFFSET, usbkbm_polled_buffer_num_characters}=""
+{adb_inline_end}
+	polled_buffer_num_characters hex polled_buffer_num_characters
+{adb_inline_begin}
++/"polled_scancode_buffer1"
+$<<poll_keystate
+./"polled_scancode_buffer2"
+$<<poll_keystate
+./"polled_scancode_buffer3"
+$<<poll_keystate
+./"polled_scancode_buffer4"
+$<<poll_keystate
+./"polled_scancode_buffer5"
+$<<poll_keystate
+./"polled_scancode_buffer6"
+$<<poll_keystate
+./"polled_scancode_buffer7"
+$<<poll_keystate
+./"polled_scancode_buffer8"
+$<<poll_keystate
+./"polled_scancode_buffer9"
+$<<poll_keystate
+./"polled_scancode_buffer10"
+$<<poll_keystate
+./"polled_scancode_buffer11"
+$<<poll_keystate
+./"polled_scancode_buffer12"
+$<<poll_keystate
+./"polled_scancode_buffer13"
+$<<poll_keystate
+./"polled_scancode_buffer14"
+$<<poll_keystate
+./"polled_scancode_buffer15"
+$<<poll_keystate
+./"polled_scancode_buffer16"
+$<<poll_keystate
+./"polled_scancode_buffer17"
+$<<poll_keystate
+./"polled_scancode_buffer18"
+$<<poll_keystate
+./"polled_scancode_buffer19"
+$<<poll_keystate
+./"polled_scancode_buffer20"
+$<<poll_keystate
+{adb_inline_end}
+{adb_inline_begin}
+<x+{OFFSET, usbkbm_polled_buffer_head}=""
+{adb_inline_end}
+	polled_buffer_head	hex	polled_buffer_head
+	polled_buffer_tail	hex	polled_buffer_tail
+{adb_inline_begin}
+<x+{SIZEOF}=""
+{adb_inline_end}
+
+\
+\
+

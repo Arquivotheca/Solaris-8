@@ -1,0 +1,40 @@
+\
+\ Copyright (c) 1999 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)frame_header.dbg	1.1	99/07/21 SMI"
+\
+#include <sys/isa_defs.h>
+#include <sys/types.h>
+#include <sys/dditypes.h>
+#include <sys/ddidmareq.h>
+#include <sys/mutex.h>
+#include <sys/semaphore.h>
+#include <sys/condvar.h>
+#include <sys/thread.h>
+#include <sys/devops.h>
+#include <sys/fibre-channel/fc.h>
+#include "dummy.h"
+\
+\
+frame_header
+{adb_inline_begin}
+.>z
+#if defined(i386)
+<z+{OFFSET, r_ctl}/n"d_id"16t"r_ctl"n3BBn
++/n"s_id"16t"rsvd"n3BBn
++/n"f_ctl"8t"type"n3BBn
++/n"df_ctl"8t"seq_id"n3BBn
++/n"rx_id"8t"ox_id"nxxn
++/n"ro"nXn
+#elif defined(sparc)
+<z+{OFFSET, r_ctl}/n"rctl"16t"d_id"nB3Bn
++/n"rsvd"8t"s_id"nB3Bn
++/n"type"8t"f_ctl"nB3Bn
++/n"seq_id"8t"df_ctl"nB3Bn
++/n"ox_id"8t"rx_id"nxxn
++/n"ro"nXn
+#else
+#endif
+<z+{SIZEOF}=""
+{adb_inline_end}

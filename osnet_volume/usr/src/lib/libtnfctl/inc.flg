@@ -1,0 +1,5 @@
+#!/bin/sh
+#ident	"@(#)inc.flg	1.2	96/05/16 SMI"
+
+echo_file usr/src/lib/libtnfprobe/tnf_buf.h
+echo_file usr/src/lib/libtnfprobe/prb_internals.h

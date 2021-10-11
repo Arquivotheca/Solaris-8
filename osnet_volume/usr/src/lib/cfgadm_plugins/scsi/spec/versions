@@ -1,0 +1,17 @@
+#
+#ident	"@(#)versions	1.1	99/03/19 SMI"
+#
+# Copyright (c) 1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+# usr/src/lib/cfgadm_plugins/scsi/spec/versions
+#
+i386 {
+	SUNWprivate_1.1;
+}
+sparc {
+	SUNWprivate_1.1;
+}
+sparcv9 {
+	SUNWprivate_1.1;
+}

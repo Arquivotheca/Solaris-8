@@ -1,0 +1,30 @@
+\
+\ Copyright (c) 1999 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)port_id.dbg	1.1	99/07/21 SMI"
+\
+#include <sys/isa_defs.h>
+#include <sys/types.h>
+#include <sys/dditypes.h>
+#include <sys/ddidmareq.h>
+#include <sys/mutex.h>
+#include <sys/semaphore.h>
+#include <sys/condvar.h>
+#include <sys/thread.h>
+#include <sys/devops.h>
+#include <sys/fibre-channel/fc.h>
+#include "dummy.h"
+\
+\
+port_id
+{adb_inline_begin}
+.>z
+#if defined(i386)
+<z+{OFFSET, port_id}/n"port_id"16t"rsvd"n3BBn
+#elif defined(sparc)
+<z+{OFFSET, rsvd}/n"rsvd"16t"port_id"nB3Bn
+#else
+#endif
+<z+{SIZEOF}=""
+{adb_inline_end}

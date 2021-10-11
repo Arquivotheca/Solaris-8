@@ -1,0 +1,81 @@
+#!/bin/sh
+#
+# Copyright (c) 1998 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#ident	"@(#)i.drvalias	1.6	99/07/02 SMI"
+
+PATH=/usr/bin:/usr/sbin:$PATH; export PATH
+
+#
+# obsolete_sparc - Filter function to remove obsolete SPARC driver aliases.
+# Use sed to delete lines matching driver aliases we want to remove.
+#
+obsolete_sparc()
+{
+	sed -e '/^cpu modi4v0m[ 	]*$/d' \
+	    -e '/^cpu TI,TMS390Z50[ 	]*$/d' \
+	    -e '/^obio bootbus[ 	]*$/d' \
+	    -e '/^sw drum[ 	]*$/d' \
+	    -e '/^ie sie[ 	]*$/d' \
+	    -e '/^sbus sbi[ 	]*$/d' \
+	    -e '/^pn SUNW,pn[ 	]*$/d' \
+	    -e '/^glm SUNW,glm[ 	]*$/d' \
+	    -e '/^pci SUNW,pci[ 	]*$/d' \
+	    -e '/^pci "pci108e,8000"[ 	]*$/d' \
+	    -e '/^pci "pci108e,a000"[ 	]*$/d' \
+	    -e '/^pci "pciclass,060000"[ 	]*$/d'
+}
+
+#
+# obsolete_i386 - Filter function to remove obsolete i386 driver aliases.
+#
+obsolete_i386() {
+	sed -e '/^elx[^l].*10b7,9000.*$/d' \
+	    -e '/^elx[^l].*10b7,9050.*$/d' \
+	    -e '/^audiocs[ 	]*"SUNW,CS4231"[ 	]*$/d' \
+	    -e '/^blogic[ 	]*"pci104b,1040"[ 	]*$/d' \
+	    -e '/^p9000[ 	]*"pci100e,9001"[ 	]*$/d' \
+	    -e '/^p9100[ 	]*"pci100e,9100"[ 	]*$/d'
+}
+
+#
+# Generate /etc/driver_aliases file.  Each entry present in $src (the copy
+# of driver_aliases being delivered by the package) is automatically added
+# to $dest (the driver_aliases file on the target system) if not already
+# present; thus it is NOT necessary to add any code below to cause a new
+# alias which has been added to the driver_aliases source to be added to
+# the target system on upgrade.
+#
+while read src dest; do
+	if [ -f $dest ]; then
+		#
+		# Strip obsolete entries from the existing driver_aliases
+		#
+		if [ $ARCH = sparc ]; then
+			obsolete_sparc < $dest > /tmp/oda.$$.tmp
+			cp /tmp/oda.$$.tmp $dest
+			rm -f /tmp/oda.$$.tmp
+		elif [ $ARCH = i386 ]; then
+			obsolete_i386 < $dest > /tmp/oda.$$.tmp
+			cp /tmp/oda.$$.tmp $dest
+			rm -f /tmp/oda.$$.tmp
+		fi
+
+		#
+		# If the alias is not present in the driver_aliases
+		# file, then append it:
+		#
+		while read alias driver; do
+			grep "^$alias[ 	][ 	]*$driver[ 	]*" $dest \
+			    >/dev/null 2>&1 || echo "$alias $driver" >>$dest
+		done < $src
+	else
+		#
+		# If no driver_aliases is present on the target system,
+		# just copy over the one from the package.
+		#
+		cp -p $src $dest
+	fi
+done
+exit 0

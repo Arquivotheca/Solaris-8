@@ -1,0 +1,75 @@
+#!/bin/sh
+#
+#ident	"@(#)i.kclasses_sparc	1.18	99/07/29 SMI"
+#
+# Copyright (c) 1993-1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+
+PATH="/usr/bin:/usr/sbin:${PATH}"
+export PATH
+
+while read src dest
+do
+	if [ ! -f $dest ] ; then
+		cp $src $dest
+	else
+		grep '^#ident[ 	]*\"@(#)driver_classes' $src \
+		    > /tmp/newident.$$ 2>/dev/null
+		sed -e '/^#ident[ 	]*\"@(#)driver_classes.*$/d' \
+		    -e '/^\"QLGC,isp\"[	]*scsi$/d' \
+		    -e '/^\"SUNW,isp\"[	]*scsi$/d' \
+		    -e '/^ncr[	]*scsi$/d' \
+		    -e '/^vme[ 	]*vme$/d' \
+		    -e '/^pci[ 	]*pci$/d' \
+		    $dest > /tmp/rest.$$ 2>/dev/null
+		cat /tmp/newident.$$ /tmp/rest.$$ > $dest
+		grep '^xbox	sbus' $dest > /dev/null 2>&1
+		if [ $? != 0 ] ; then
+			echo 'xbox	sbus' >> $dest
+		fi
+		grep '^isp	scsi' $dest > /dev/null 2>&1
+		if [ $? != 0 ] ; then
+			echo 'isp	scsi' >> $dest
+		fi
+		grep '^pcipsy[ 	].*pci' $dest > /dev/null 2>&1
+		if [ $? != 0 ] ; then
+			echo 'pcipsy	pci' >> $dest
+		fi
+		grep '^pci_pci[ 	].*pci' $dest > /dev/null 2>&1
+		if [ $? != 0 ] ; then
+			echo 'pci_pci	pci' >> $dest
+		fi
+		grep '^fas[ 	].*scsi' $dest > /dev/null 2>&1
+		if [ $? != 0 ] ; then
+			echo 'fas	scsi' >> $dest
+		fi
+		grep '^ebus	ebus' $dest > /dev/null 2>&1
+		if [ $? != 0 ] ; then
+			echo 'ebus	ebus' >> $dest
+		fi
+		grep '^glm	scsi' $dest > /dev/null 2>&1
+		if [ $? != 0 ] ; then
+			echo 'glm	scsi' >> $dest
+		fi
+		grep '^uata	dada' $dest > /dev/null 2>&1
+		if [ $? != 0 ] ; then
+			echo 'uata	dada' >> $dest
+		fi
+		grep '^uata	scsi' $dest > /dev/null 2>&1
+		if [ $? != 0 ] ; then
+			echo 'uata	scsi' >> $dest
+		fi
+		grep '^simba[ 	]*pci' $dest > /dev/null 2>&1
+		if [ $? != 0 ] ; then
+			echo 'simba	pci' >> $dest
+		fi
+		grep '^usoc	fibre-channel' $dest > /dev/null 2>&1
+		if [ $? != 0 ] ; then
+			echo 'usoc	fibre-channel' >> $dest
+		fi
+	fi
+done
+rm -f /tmp/newident.$$ /tmp/rest.$$
+
+exit 0

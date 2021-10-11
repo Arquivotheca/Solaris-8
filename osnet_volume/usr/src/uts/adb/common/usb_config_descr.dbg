@@ -1,0 +1,46 @@
+\
+\ Copyright (c) 1999 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)usb_config_descr.dbg        1.1     99/02/25 SMI"
+
+#include <sys/usb/usba.h>
+#include <sys/usb/usba/usba_types.h>
+#include <sys/usb/clients/hid/hid.h>
+#include <sys/usb/clients/hidparser/hidparser.h>
+#include <sys/usb/clients/hid/hidvar.h>
+#include <sys/usb/clients/hid/hid_polled.h>
+
+#include <sys/stropts.h>
+
+#include <sys/vuid_event.h>
+#include <sys/termios.h>
+#include <sys/termio.h>
+#include <sys/strtty.h>
+#include <sys/msreg.h>
+#include <sys/msio.h>
+#include "dummy.h"
+
+\
+\
+
+usb_config_descr
+{adb_inline_begin}
+.>z
+<z+{OFFSET, bLength}=""
+{adb_inline_end}
+	bLength		hex	length
+	bDescriptorType	hex	descrtype
+	wTotalLength	hex	totallength
+	bNumInterfaces	hex     numi/f
+	bConfigurationValue	hex	configval
+	iConfiguration	hex	config
+	bmAttributes	hex	attribute
+	MaxPower	hex	maxpower
+{adb_inline_begin}
+<z+{SIZEOF}=""
+{adb_inline_end}
+
+\
+\
+

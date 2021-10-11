@@ -1,0 +1,67 @@
+#
+#ident	"@(#)Makefile.mach	1.14	98/05/01 SMI"
+#
+# Copyright (c) 1989-1997, by Sun Microsystems, Inc.
+# All rights reserved.
+#
+# lib/Makefile.mach
+#
+# included to define targets built with machine-dependent source
+#
+
+# conditional assignment of default permissions for the installed DYNLIB.
+# set here and in Makefile.targ, instead of Makefile.lib, because ROOTLIBDIR
+# may be changed in the including makefile after it has included Makefile.lib.
+#
+$(ROOTLIBDIR)/$(DYNLIB)		:= FILEMODE= 755
+$(ROOTLIBDIR64)/$(DYNLIB)	:= FILEMODE= 755
+$(ROOTLIBDIR)/libp/$(MACH64)/$(DYNLIB)	:= FILEMODE= 755
+
+# install rules
+$(ROOTLIBDIR)/%: $(MACH)/%
+	$(INS.file)
+
+$(ROOTLIBDIR64)/%: $(MACH64)/%
+	$(INS.file)
+
+$(ROOTLIBDIR)/libp/%: $(MACH)/libp/%
+	$(INS.file)
+
+$(ROOTLIBDIR)/libp/$(MACH64)/%: $(MACH64)/libp/%
+	$(INS.file)
+
+$(ROOTLIBDIR)/$(LIBLINKS):	$(ROOTLIBDIR)/$(LIBLINKS)$(VERS)
+	$(INS.liblink)
+
+$(ROOTLIBDIR)/libp/$(LIBLINKS):	$(ROOTLIBDIR)/libp/$(LIBLINKS)$(VERS)
+	$(INS.pliblink)
+
+$(ROOTLIBDIR64)/$(LIBLINKS):	$(ROOTLIBDIR64)/$(LIBLINKS)$(VERS)
+	$(INS.liblink64)
+
+$(ROOTLIBDIR)/libp/$(MACH64)/$(LIBLINKS): \
+			$(ROOTLIBDIR)/libp/$(MACH64)/$(LIBLINKS)$(VERS)
+	$(INS.pliblink64)
+
+# libp is installed by Targetdirs, don't re-install it
+#$(ROOTLIBDIR)/$(PLIB): $(ROOTLIBDIR)/libp
+
+#$(ROOTLIBDIR)/libp:
+#	$(INS.dir)
+
+$(MACHLIBS): FRC
+	@cd $(@D); pwd; $(MAKE) $(@F)
+
+$(MACHLIBS64): FRC
+	@cd $(@D); pwd; $(MAKE) $(@F)
+
+$(MACHPLIB): FRC
+	@cd $(MACH); pwd; $(MAKE) $(PLIB)
+
+$(MACHPIC_PLIB): FRC
+	@cd $(MACH); pwd; $(MAKE) $(PIC_PLIB)
+
+$(MACHPIC_PLIB64): FRC
+	@cd $(MACH64); pwd; $(MAKE) $(PIC_PLIB)
+
+FRC:

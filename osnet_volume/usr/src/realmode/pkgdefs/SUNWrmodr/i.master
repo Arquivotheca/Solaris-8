@@ -1,0 +1,383 @@
+#!/bin/sh
+#
+#ident "@(#)i.master 1.35 99/11/23"
+#
+# Copyright (c) 1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+
+#
+# t is a temp file we can use to make copies of the dest
+# file in.  Sometimes we cant just do simple appends of new
+# entries.
+#
+t=/tmp/mstr$$
+
+cannot_merge()
+{
+	echo "EXISTING_FILE_RENAMED: $dest $dest.prev" >> /tmp/CLEANUP
+	mv $dest $dest.prev
+	cp $src $dest
+}
+
+while read src dest
+do
+	if [ ! -f $dest ] ; then
+		# Initial installation
+		cp $src $dest
+	else
+		#
+		#  If the installed version of the master file is too old
+		#  we're going to just have to punt on merging, and use the
+		#  install version.
+		#
+		existvers=`grep \#ident $dest | awk '{ print $3 }'`
+		exmaj=`echo $existvers | awk 'BEGIN {FS="."} {print $1}'`
+		exmin=`echo $existvers | awk 'BEGIN {FS="."} {print $2}'`
+
+		majormatch=`expr $exmaj = "1"`
+		tooold=`expr $exmin \< "156"`
+
+		if [ "$majormatch" != "1" ]
+		then
+			cannot_merge
+			continue
+		elif [ "$tooold" = "1" ]
+		then
+			cannot_merge
+			continue
+		fi
+
+		#
+		# Preserve the installed version of
+		# /boot/solaris/devicedb/master during upgrade
+		#
+		# Master file entries added after the release of
+		# Solaris 2.6 need to be duplicated here so that upgrade
+		# of an installed version of the master file include any
+		# changes while preserving any user applied changes.
+		# (Which would most likely come from third-party driver
+		# additions.)
+		#
+
+		#
+		# Additional sbpro/joyst entries
+		#
+		grep ESS6881 $dest > /dev/null 2>&1
+		if [ $? = 1 ]
+		then
+			cat >> $dest << EOF
+ESS6881 sbpro oth all sbpro.bef "Sound Blaster"
+EOF
+		fi
+
+		grep CTL0041 $dest > /dev/null 2>&1
+		if [ $? = 1 ]
+		then
+			cat >> $dest << EOF
+CTL0041 sbpro oth all sbpro.bef "Sound Blaster"
+EOF
+		fi
+
+		grep CTL7002 $dest > /dev/null 2>&1
+		if [ $? = 1 ]
+		then
+			cat >> $dest << EOF
+CTL7002 joyst oth all joyst.bef "Game port (Joy stick)" 
+EOF
+		fi
+
+		# New Entry for dnet:
+		grep pci1011,19 $dest > /dev/null 2>&1
+		if [ $? = 1 ]
+		then
+			cat >> $dest << EOF
+pci1011,19 pci1011,19 net pci dnet.bef "DEC 21142/21143 Fast Ethernet"
+EOF
+		fi
+
+		# Entry for spwr:
+		grep pci10b8,a011 $dest > /dev/null 2>&1
+		if [ $? = 1 ]
+		then
+			cat >> $dest << EOF
+pci10b8,a011 pci10b8,a011 net pci spwr.bef "SMC EtherPower II 10/100 (9432)"
+EOF
+		fi
+
+		# New iprb server entry
+		grep pci8086,1029 $dest > /dev/null 2>&1
+		if [ $? -eq 1 ]; then
+			cat >>$dest <<EOF
+pci8086,1029 pci8086,1029 net pci iprb.bef "Intel Pro100/S Server Adapter"
+EOF
+		fi
+
+                # New ncrs entries
+                grep pci1000,6 $dest > /dev/null 2>&1
+                if [ $? = 1 ]
+                then
+                        cat >> $dest << EOF
+pci1000,6 pci1000,6 msd pci ncrs.bef "Symbios Logic 53c865 SCSI"
+pci1000,c pci1000,c msd pci ncrs.bef "Symbios Logic 53c895 SCSI"
+pci1000,f pci1000,f msd pci ncrs.bef "Symbios Logic 53c875 SCSI"
+EOF
+                fi
+
+                # New ncrpqs entries
+                grep "pci101a,f2[def]" $dest > /dev/null 2>&1
+                if [ $? = 1 ]
+                then
+                        cat >> $dest << EOF
+pci101a,f2d scsi msd pci none "NCR PDS/PQS 53C896-based PCI SCSI Adapter" compatible="pci101a,f2d"
+pci101a,f2e scsi msd pci none "NCR PDS/PQS 53C896-based PCI SCSI Adapter" compatible="pci101a,f2e"
+pci101a,f2f scsi msd pci none "NCR PDS/PQS 53C896-based PCI SCSI Adapter" compatible="pci101a,f2f"
+EOF
+                fi
+
+                # New Diamond Fireport 40 ncrs entry
+                grep pci1000,8f $dest > /dev/null 2>&1
+                if [ $? = 1 ]
+                then
+                        cat >> $dest << EOF
+pci1000,8f pci1000,8f msd pci ncrs.bef "Diamond Fireport 40 (SYM53C876)"
+EOF
+                fi
+
+		# support for certain elx devices was moved to elxl
+		sed -e '/^pci10b7,90.*elx.bef/d' $dest > $t
+		cp $t $dest
+
+		# Now make sure all the elxl entries are present
+		for devid in 9000 9001 9004 9005 9006 9050 9051 9055 9056 ; do
+			grep pci10b7,$devid $dest > /dev/null 2>&1
+			if [ $? = 1 ]
+			then
+				grep pci10b7,$devid >> $dest << EOF
+pci10b7,9000 pci10b7,9000 net pci elxl.bef "3Com 3C900-TPO Etherlink XL"
+pci10b7,9001 pci10b7,9001 net pci elxl.bef "3Com 3C900-COMBO Etherlink XL"
+pci10b7,9004 pci10b7,9004 net pci elxl.bef "3Com 3C900B-TPO Etherlink XL"
+pci10b7,9005 pci10b7,9005 net pci elxl.bef "3Com 3C900B-COMBO Etherlink XL"
+pci10b7,9006 pci10b7,9006 net pci elxl.bef "3Com 3C900B-TPC Etherlink XL"
+pci10b7,9050 pci10b7,9050 net pci elxl.bef "3Com 3C905-TX Fast Etherlink XL 10/100"
+pci10b7,9051 pci10b7,9051 net pci elxl.bef "3Com 3C905-T4 Fast Etherlink XL 10/100"
+pci10b7,9055 pci10b7,9055 net pci elxl.bef "3Com 3C905B-TX Fast Etherlink XL 10/100"
+pci10b7,9056 pci10b7,9056 net pci elxl.bef "3Com 3C905B-T4 Fast Etherlink XL 10/100"
+EOF
+			fi
+		done
+
+		grep 'pci class entries:' $dest > /dev/null 2>&1
+                if [ $? = 1 ]
+                then
+                        cat >> $dest << EOF
+#
+# pci class entries:
+#
+EOF
+		fi
+
+		grep pciclass,010100 $dest > /dev/null 2>&1
+		if [ $? = 1 ]
+		then
+			cat >> $dest << EOF
+pciclass,010100|pciclass,010101|pciclass,010102|pciclass,010103|pciclass,010104|pciclass,010105|pciclass,010106|pciclass,010107|pciclass,010108|pciclass,010109|pciclass,01010a|pciclass,01010b|pciclass,01010c|pciclass,01010d|pciclass,01010e|pciclass,01010f pci-ide msd pciclass ata.bef "IDE controller"
+EOF
+		else
+			sed	-e '/pciclass,010100/s/^#//'		\
+				-e '/pciclass,010100/s/none msd pciclass ata.bef/pci-ide msd pciclass ata.bef/'	\
+				-e '/pciclass,010100/s/pci-ide msd pciclass none/pci-ide msd pciclass ata.bef/'	\
+				-e '/pciclass,010100/s/Class: //'	\
+				$dest > $t
+			cp $t $dest
+		fi
+
+		grep pciclass,010180 $dest > /dev/null 2>&1
+		if [ $? = 1 ]
+		then
+			cat >> $dest << EOF
+pciclass,010180|pciclass,010181|pciclass,010182|pciclass,010183|pciclass,010184|pciclass,010185|pciclass,010186|pciclass,010187|pciclass,010188|pciclass,010189|pciclass,01018a|pciclass,01018b|pciclass,01018c|pciclass,01018d|pciclass,01018e|pciclass,01018f pci-ide msd pciclass ata.bef "Class: Bus Mastering IDE controller"
+EOF
+		else
+			sed	-e '/pciclass,010180/s/^#//'		\
+				-e '/pciclass,010180/s/none msd pciclass ata.bef/pci-ide msd pciclass ata.bef/'	\
+				-e '/pciclass,010180/s/pci-ide msd pciclass none/pci-ide msd pciclass ata.bef/'	\
+				-e '/pciclass,010180/s/Class: //'	\
+				$dest > $t
+			cp $t $dest
+		fi
+
+		grep pciclass,010110 $dest > /dev/null 2>&1
+		if [ $? = 1 ]
+		then
+			cat >> $dest << EOF
+pciclass,010110|pciclass,010111|pciclass,010112|pciclass,010113|pciclass,010114|pciclass,010115|pciclass,010116|pciclass,010117|pciclass,010118|pciclass,010119|pciclass,01011a|pciclass,01011b|pciclass,01011c|pciclass,01011d|pciclass,01011e|pciclass,01011f pci-ide msd pciclass ata.bef "IDE controller"
+EOF
+		fi
+
+		grep pciclass,010130 $dest > /dev/null 2>&1
+		if [ $? = 1 ]
+		then
+			cat >> $dest << EOF
+pciclass,010130|pciclass,010131|pciclass,010132|pciclass,010133|pciclass,010134|pciclass,010135|pciclass,010136|pciclass,010137|pciclass,010138|pciclass,010139|pciclass,01013a|pciclass,01013b|pciclass,01013c|pciclass,01013d|pciclass,01013e|pciclass,01013f pci-ide msd pciclass ata.bef "IDE controller"
+EOF
+		fi
+
+		grep pciclass,010150 $dest > /dev/null 2>&1
+		if [ $? = 1 ]
+		then
+			cat >> $dest << EOF
+pciclass,010150|pciclass,010151|pciclass,010152|pciclass,010153|pciclass,010154|pciclass,010155|pciclass,010156|pciclass,010157|pciclass,010158|pciclass,010159|pciclass,01015a|pciclass,01015b|pciclass,01015c|pciclass,01015d|pciclass,01015e|pciclass,01015f pci-ide msd pciclass ata.bef "IDE controller"
+EOF
+		fi
+
+		grep pciclass,010170 $dest > /dev/null 2>&1
+		if [ $? = 1 ]
+		then
+			cat >> $dest << EOF
+pciclass,010170|pciclass,010171|pciclass,010172|pciclass,010173|pciclass,010174|pciclass,010175|pciclass,010176|pciclass,010177|pciclass,010178|pciclass,010179|pciclass,01017a|pciclass,01017b|pciclass,01017c|pciclass,01017d|pciclass,01017e|pciclass,01017f pci-ide msd pciclass ata.bef "IDE controller"
+EOF
+		fi
+
+		grep pciclass,010190 $dest > /dev/null 2>&1
+		if [ $? = 1 ]
+		then
+			cat >> $dest << EOF
+pciclass,010190|pciclass,010191|pciclass,010192|pciclass,010193|pciclass,010194|pciclass,010195|pciclass,010196|pciclass,010197|pciclass,010198|pciclass,010199|pciclass,01019a|pciclass,01019b|pciclass,01019c|pciclass,01019d|pciclass,01019e|pciclass,01019f pci-ide msd pciclass ata.bef "Bus Mastering IDE controller"
+EOF
+		fi
+
+		grep pciclass,0101b0 $dest > /dev/null 2>&1
+		if [ $? = 1 ]
+		then
+			cat >> $dest << EOF
+pciclass,0101b0|pciclass,0101b1|pciclass,0101b2|pciclass,0101b3|pciclass,0101b4|pciclass,0101b5|pciclass,0101b6|pciclass,0101b7|pciclass,0101b8|pciclass,0101b9|pciclass,0101ba|pciclass,0101bb|pciclass,0101bc|pciclass,0101bd|pciclass,0101be|pciclass,0101bf pci-ide msd pciclass ata.bef "Bus Mastering IDE controller"
+EOF
+		fi
+
+		grep pciclass,0101d0 $dest > /dev/null 2>&1
+		if [ $? = 1 ]
+		then
+			cat >> $dest << EOF
+pciclass,0101d0|pciclass,0101d1|pciclass,0101d2|pciclass,0101d3|pciclass,0101d4|pciclass,0101d5|pciclass,0101d6|pciclass,0101d7|pciclass,0101d8|pciclass,0101d9|pciclass,0101da|pciclass,0101db|pciclass,0101dc|pciclass,0101dd|pciclass,0101de|pciclass,0101df pci-ide msd pciclass ata.bef "Bus Mastering IDE controller"
+EOF
+		fi
+
+		grep -v '^pciclass,0101fa' $dest > $t
+		cp $t $dest
+
+		grep '^pciclass,0101f0' $dest > /dev/null 2>&1
+		if [ $? = 1 ]
+		then
+			cat >> $dest << EOF
+pciclass,0101f0|pciclass,0101f1|pciclass,0101f2|pciclass,0101f3|pciclass,0101f4|pciclass,0101f5|pciclass,0101f6|pciclass,0101f7|pciclass,0101f8|pciclass,0101f9|pciclass,0101fa|pciclass,0101fb|pciclass,0101fc|pciclass,0101fd|pciclass,0101fe|pciclass,0101ff pci-ide msd pciclass ata.bef "Bus Mastering IDE controller"
+EOF
+		fi
+
+		# Correct description for PCI bus mastering IDE controllers
+		sed	\
+    -e '/^pciclass,0101a0/s/"IDE controller/"Bus Mastering IDE controller/' \
+    -e '/^pciclass,0101c0/s/"IDE controller/"Bus Mastering IDE controller/' \
+    -e '/^pciclass,0101e0/s/"IDE controller/"Bus Mastering IDE controller/' \
+			$dest > $t
+		cp $t $dest
+
+		#
+		# Remove erroneous entry for Symbios Logic 53c875/95 (ncrs)
+		#
+		sed -e '/^pci1000,1000/d' $dest >$t
+		cp $t $dest
+
+		#
+		#  Check for new pcn support
+		#
+		grep CSI2203 $dest > /dev/null 2>&1
+		if [ $? = 1 ]
+		then
+			sed -e '/^PNP8231/s/PNP8231|ATK1500|ADV55AA|PNP828C/PNP8231|ATK1500|ADV55AA|PNP828C|CSI2203/' $dest > $t
+			cp $t $dest
+		fi
+
+		#
+                #  Remove obsolete driver entries
+                #
+		sed     -e '/el.bef/d'          \
+			-e '/elink.bef/d'       \
+			-e '/riles.bef/d'       \
+			-e '/aha1540.bef/d'	\
+			-e '/aha1740.bef/d'	\
+			-e '/aic.bef/d'		\
+			-e '/blogic.bef/d'		\
+			-e '/eepro.bef/d'		\
+			-e '/pe3.bef/d'		\
+			-e '/smc.bef/d'		\
+			-e '/trantor.bef/d'		\
+			-e '/esa.bef/d'		\
+			-e '/iee.bef/d'		\
+			-e '/nei.bef/d'		\
+			-e '/tr.bef/d'		\
+			-e '/nee.bef/d'		\
+			-e '/smce.bef/d'		\
+			-e '/smcf.bef/d'		\
+			-e '/smceu.bef/d'		\
+			-e '/nfe.bef/d'		\
+			$dest > $t
+		cp $t $dest
+
+		#
+                #  Remove all MCA device database entries
+                #
+		sed     -e '/ mca /d'		\
+			-e '/^# Micro-channel/,/^#$/d'	\
+			$dest > $t
+		cp $t $dest
+
+		#
+		#  Console redesign changes
+		#
+		grep "pnpPNP,900" $dest > /dev/null 2>&1
+		if [ $? = 1 ]
+		then
+		    sed \
+			-e 's/chanmux/display/g'	\
+			-e 's/kdmouse/mouse/g'	\
+			-e '/^SUN0006/s/$/ compatible="pnpPNP,900"/'	\
+			-e '/^PNP0900/s/$/ compatible="pnpPNP,900"/'	\
+			-e '/^PNP0902/s/$/ compatible="pnpPNP,900"/'	\
+			-e '/^PNP0302/s/kd/keyboard/'			\
+			-e '/^PNP0302/s/PNP0302/PNP0301|PNP0303/'	\
+			$dest > $t
+		    cat >> $t << EOF
+pciclass,030000|pciclass,000100 display vid pciclass none "VGA compatible display adapter"
+pciclass,030001 display vid pciclass none "VGA+8514 compatible display adapter"
+EOF
+		    cp $t $dest
+		fi
+
+		#
+		# Add an entry for C&T VGAs - some BIOSes don't mark them
+		# as compatible with generic VGAs.
+		#
+		grep "PNP0931" $dest > /dev/null 2>&1
+		if [ $? = 1 ]
+		then
+		    cat >> $dest << EOF
+PNP0931 display vid all none "Chips & Tech VGA Display Adapter" compatible="pnpPNP,900"
+EOF
+		fi
+
+		#
+		#  Replace Copyright year and SCCS id if it seems appropriate
+		#
+		if grep '^#ident' $dest > /dev/null 2>&1
+		then
+		    sed -n -e '1,/^#ident/p' $src > $t
+		    sed -e '1,/^#ident/d' $dest >> $t
+		    cp $t $dest
+		fi
+
+		rm -f $t
+	fi
+done
+
+exit 0

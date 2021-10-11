@@ -1,0 +1,98 @@
+\
+\ Copyright (c) 1997-1998 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+
+#pragma ident	"@(#)offsets.in	1.7	99/10/25 SMI"
+
+\ offsets.in: input file to produce assym.h using the stabs program
+\
+\
+#ifndef _GENASSYM
+#define _GENASSYM
+#endif
+
+#include "libthread.h"
+#include <sys/psw.h>
+
+thread		THREAD_SIZE
+	t_link
+	t_stksize
+	t_tls
+	t_resumestate
+	t_tid
+	t_lwpid
+	t_usropts
+	t_flag
+	t_state
+	t_nosig
+	t_stop
+	t_pending
+	t_can_pending		T_CANPENDING
+	t_can_state		T_CANSTATE
+	t_can_type		T_CANTYPE
+	t_cancelable		T_CANCELABLE
+	t_hold
+	t_psig
+	t_ssig
+	t_idle
+	t_next
+	t_prev
+	t_lock
+	t_forw
+	t_backw
+	t_tpdp
+
+resumestate_t		RESUMESTATE_SIZE
+	rs_sp			RS_SP
+	rs_pc			RS_PC
+	rs_fsr			RS_FSR
+	rs_fpu_en		RS_FPU_EN
+	rs_g2			RS_G2
+	rs_g3			RS_G3
+
+\#define	T_SP (T_RESUMESTATE + RS_SP)
+\#define	T_PC (T_RESUMESTATE + RS_PC)
+\#define	T_FSR (T_RESUMESTATE + RS_FSR)
+\#define	T_FPU_EN (T_RESUMESTATE + RS_FPU_EN)
+\#define	T_G2 (T_RESUMESTATE + RS_G2)
+\#define	T_G3 (T_RESUMESTATE + RS_G3)
+
+_lwp_mutex	MUTEX_LOCK_SIZE
+	_mutex_flags
+	_mutex_lock_un
+	data
+
+_mutex_lock_un	MLOCK_UN_SIZE
+	_mutex_lock
+	_mutex_owner64
+
+_mutex_lock 	MLOCK_SIZE
+	pad		MLOCK_ARRAY
+
+_mutex_flags	FLAGS_SIZE
+	flag1
+	flag2
+	ceiling
+	_mbcp_type_un
+	magic
+
+_mbcp_type_un	MBCP_TYPE_SIZE
+	bcptype
+	_mtype_rcount
+
+_mtype_rcount	MTYPE_RCOUNT_SIZE
+	count_type1
+	count_type2
+
+\#define	MUTEX_LOCK	(MLOCK_ARRAY + (12 * MLOCK_ARRAY_INCR))
+\#define	MUTEX_WAITERS	(MLOCK_ARRAY + (15 * MLOCK_ARRAY_INCR))
+\#define	MUTEX_OWNER	DATA
+\#define	MUTEX_TYPE	(CEILING + 1 + COUNT_TYPE2)
+
+sigjmp_struct_t		SIGJMP_STR_SIZE
+	sjs_flags
+	sjs_sp		SJS_SP
+	sjs_pc		SJS_PC
+	sjs_g2		SJS_G2
+	sjs_g3		SJS_G3

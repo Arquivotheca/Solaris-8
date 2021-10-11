@@ -1,0 +1,95 @@
+#
+# Copyright (c) 1991-1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#pragma ident	"@(#)Makefile.files	1.80	99/06/05 SMI"
+
+#
+#	This Makefile defines all file modules for the directory uts/sun4d
+#	and it's children. These are the source files which are sun4d
+#	"implementation architecture" dependent.
+#
+
+#	this list is broken up by "section", this being either:
+#		conf io ml os vm & finally ../../srmmu/*
+#
+CORE_OBJS +=	confunix.o
+CORE_OBJS +=	genalign.o
+CORE_OBJS +=	hardclk.o
+CORE_OBJS +=	copy.o hwbcopy.o
+CORE_OBJS +=	intr_misc.o mmu_asi.o proc_init.o subr_4d.o swtch.o
+CORE_OBJS +=			\
+	aflt.o			\
+	bootops.o		\
+	cbe.o			\
+	cpu_driver.o		\
+	cpudelay.o		\
+	decode_xdb.o		\
+	ddi_impl.o		\
+	dvma.o			\
+	fillsysinfo.o		\
+	intr.o			\
+	intr15.o		\
+	ioc.o			\
+	iommu.o			\
+	ip_ocsum.o		\
+	led.o			\
+	mach_sysconfig.o	\
+	machdep.o		\
+	mem_config_stubs.o	\
+	memerr.o		\
+	memlist.o		\
+	memscrub.o		\
+	mlsetup.o		\
+	power_off.o		\
+	ppage.o			\
+	startup.o		\
+	trap.o
+
+CORE_OBJS +=		\
+	hat_conf.o	\
+	hat_srmmu.o	\
+	mach_srmmu.o	\
+	mhat.o		\
+	mmu.o		\
+	vm_machdep.o
+
+# os/level15.c
+
+#
+#	locore.o is special. It must be the first file relocated so that it
+#	it is relocated just where its name implies.
+#
+SPECIAL_OBJS +=	locore.o
+
+#
+#			driver modules
+#
+ROOTNEX_OBJS +=	rootnex.o
+#IOMMU_OBJS +=	iommunex.o
+SBI_OBJS +=	sbusnex.o
+BOOTBUS_OBJS +=	bootbus.o
+
+CPUDRIVER_OBJS +=	cpu_wrapper.o
+
+#
+#			Misc modules
+#
+OBPSYM_OBJS += obpsym.o obpsym_obp.o
+BOOTDEV_OBJS	+= bootdev.o
+
+#
+#	Section 3:	Misc.
+#
+ALL_DEFS	+= -Dsun4d
+INC_PATH	+= -I$(UTSBASE)/sun4d
+
+#
+# Since assym.h is a derived file, the dependency must be explicit for
+# all files including this file. (This is only actually required in the
+# instance when the .nse_depinfo file does not exist.) It may seem that
+# the lint targets should also have a similar dependency, but they don't
+# since only C headers are included when #defined(lint) is true.
+#
+ASSYM_DEPS	+= copy.o genalign.o locore.o subr_4d.o swtch.o
+ASSYM_DEPS	+= proc_init.o mmu_asi.o

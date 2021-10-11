@@ -1,0 +1,69 @@
+#!/bin/sh
+#
+#ident	"@(#)i.automaster	1.2	97/02/28 SMI"
+#
+# Copyright (c) 1994, 1997 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+
+CLEANUP_FILE=/tmp/CLEANUP
+PATH="/usr/bin:/usr/sbin:${PATH}"
+export PATH
+
+add_nobrowse_option()
+{
+	sed -e "s%^/net		-hosts		-nosuid$%/net		-hosts		-nosuid,nobrowse%" \
+	    -e "s%^/home		auto_home$%/home		auto_home	-nobrowse%" \
+		${dest} > /tmp/am.$$
+
+	#
+	# Is there a '/net' entry?
+	#
+	grep -s "^[ 	]*/net[ 	\\]" /tmp/am.$$ > /dev/null 2>&1
+	if [ $? = 0 ]; then
+		#
+		# Did we not update the /net entry because it did not
+		# match exactly what we expected?
+		#
+		grep -s "^/net		-hosts		-nosuid,nobrowse$" \
+			/tmp/am.$$ > /dev/null 2>&1
+		if [ $? != 0 ]; then
+			echo "'/net' entry in ${dest} map was not updated to include '-nobrowse' option." >> ${CLEANUP_FILE}
+		fi
+	fi
+
+	#
+	# Is there a '/home' entry?
+	#
+	grep -s "^[ 	]*/home[ 	\\]" /tmp/am.$$ > /dev/null 2>&1
+	if [ $? = 0 ]; then
+		#
+		# Did we not update the /home entry because it did not
+		# match exactly what we expected?
+		#
+		grep -s "^/home		auto_home	-nobrowse$" \
+			/tmp/am.$$ > /dev/null 2>&1
+		if [ $? != 0 ]; then
+			echo "'/home' entry in ${dest} map was not updated to include '-nobrowse' option." >> ${CLEANUP_FILE}
+		fi
+	fi
+
+	cp /tmp/am.$$ ${dest}
+	rm -f /tmp/am.$$
+}
+
+while read src dest
+do
+	if [ ! -f $dest ] ; then
+		cp $src $dest
+	else
+		if grep '^[ 	]*/xfn' $dest 2>&1 >/dev/null; then
+			# No action needed if "/xfn" entry already exists
+			true
+		else
+			echo '/xfn		-xfn' >> $dest
+		fi
+		add_nobrowse_option
+	fi
+done
+exit 0

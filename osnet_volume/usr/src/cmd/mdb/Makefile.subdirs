@@ -1,0 +1,23 @@
+#
+# Copyright (c) 1997-1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#ident	"@(#)Makefile.subdirs	1.1	99/08/11 SMI"
+
+.KEEP_STATE:
+
+all := TARGET = all
+clean.lint := TARGET = clean.lint
+clean := TARGET = clean
+clobber := TARGET = clobber
+dmods := TARGET = dmods
+install := TARGET = install
+install_h := TARGET = install_h
+lint := TARGET = lint
+
+all clean.lint clean clobber dmods install lint: $(SUBDIRS)
+
+$(SUBDIRS): FRC
+	@cd $@; pwd; $(MAKE) $(TARGET)
+
+FRC:

@@ -1,0 +1,39 @@
+#
+# uts/sun4u/quasar/Makefile.quasar
+# Copyright (c) 1999 by Sun Microsystems, Inc.
+#
+#ident	"@(#)Makefile.quasar 1.2     99/07/12 SMI"
+#
+#	Global definitions for sun4u implementation specific modules.
+#
+
+#
+#	Define directories and links.
+#
+QUASAR			= SUNW,Ultra-80
+DARWIN			= SUNW,Ultra-5_10
+
+ROOT_QUASAR_DIR		= $(ROOT_PLAT_DIR)/$(QUASAR)
+ROOT_QUASAR_MOD_DIR	= $(ROOT_QUASAR_DIR)/kernel
+
+ROOT_QUASAR_KERN_DIR_32	= $(ROOT_QUASAR_MOD_DIR)
+ROOT_QUASAR_KERN_DIR_64	= $(ROOT_QUASAR_MOD_DIR)/$(SUBDIR64)
+ROOT_QUASAR_MISC_DIR_32	= $(ROOT_QUASAR_MOD_DIR)/misc
+ROOT_QUASAR_MISC_DIR_64	= $(ROOT_QUASAR_MOD_DIR)/misc/$(SUBDIR64)
+ROOT_QUASAR_MISC_LINK_32= $(ROOT_QUASAR_MISC_DIR_32:$(ROOT_QUASAR_DIR)%=../../../$(DARWIN)%)
+ROOT_QUASAR_MISC_LINK_64= $(ROOT_QUASAR_MISC_DIR_64:$(ROOT_QUASAR_DIR)%=../../../../$(DARWIN)%)
+
+ROOT_QUASAR_KERN_DIR	= $(ROOT_QUASAR_KERN_DIR_$(CLASS))
+ROOT_QUASAR_MISC_DIR	= $(ROOT_QUASAR_MISC_DIR_$(CLASS))
+ROOT_QUASAR_MISC_LINK	= $(ROOT_QUASAR_MISC_LINK_$(CLASS))
+
+ROOT_PLAT_MOD_DIRS	+= $(ROOT_QUASAR_MOD_DIR)
+ROOT_PLAT_MISC_DIRS	+= $(ROOT_QUASAR_MISC_DIR)
+ROOT_PLAT_MISC_DIRS_32	+= $(ROOT_QUASAR_MISC_DIR_32)
+
+USR_QUASAR_DIR		= $(USR_PLAT_DIR)/$(QUASAR)
+
+#
+#	Include common rules.
+#
+include $(UTSBASE)/sun4u/Makefile.sun4u

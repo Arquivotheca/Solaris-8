@@ -1,0 +1,23 @@
+#
+# uts/intel/ia32/Makefile.targ
+# Copyright (c) 1991,1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#pragma ident	"@(#)Makefile.targ	1.3	99/05/04 SMI"
+#
+#	This Makefile defines the set of all required, target containing
+# included Makefiles for the ia32 "implementation architecture".
+#
+
+#
+#	Targets for all implementations:
+#
+include $(UTSBASE)/Makefile.targ
+
+#
+#	Target set for ia32 (order is not important, as it is with the
+# isomorphic Makefile.files set).
+#
+include $(UTSBASE)/intel/Makefile.rules
+include $(UTSBASE)/intel/ia32/Makefile.rules
+include $(UTSBASE)/common/Makefile.rules

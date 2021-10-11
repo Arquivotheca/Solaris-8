@@ -1,0 +1,37 @@
+#!/bin/sh
+#
+#ident	"@(#)i.shadow	1.3	98/01/26 SMI"
+#
+# Copyright (c) 1995, by Sun Microsystems, Inc.
+#
+
+PATH="/usr/bin:/usr/sbin:${PATH}"
+export PATH
+
+while read src dest
+do
+	if [ ! -f $dest ] ; then
+		cp $src $dest
+	else
+		#
+		# 2.6 & earlier versions had an smtp entry; remove it.
+		#
+		sed '/^smtp:/d' $dest > /tmp/d.$$
+		cp /tmp/d.$$ $dest
+		rm -f /tmp/d.$$
+
+		#
+		# Add the 'nobody' user from 4.x so that people don't
+		# assign it to a regular user and confuse themselves
+		#
+		NOBODY4_LINE="nobody4:NP:6445::::::"
+		if grep "$NOBODY4_LINE" $dest 2>&1 >/dev/null; then
+			:
+		else
+			printf '/^noaccess:NP\na\n%s\n.\nw\nq\n' \
+				"$NOBODY4_LINE" | ed -s $dest > /dev/null
+		fi
+	fi
+done
+
+exit 0

@@ -1,0 +1,9 @@
+instance=unique
+partial=ask
+runlevel=nocheck
+idepend=nocheck
+rdepend=nocheck
+space=nocheck
+setuid=nocheck
+conflict=nocheck
+action=nocheck

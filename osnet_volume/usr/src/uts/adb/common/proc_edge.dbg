@@ -1,0 +1,15 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)proc_edge.dbg	1.2	98/01/14 SMI"
+
+#include <sys/flock_impl.h>
+#include "dummy.h"
+
+\
+\
+proc_edge
+        next                    hex             "next edge"
+        refcount                hex
+        to_proc                 hex             "proc vertex"

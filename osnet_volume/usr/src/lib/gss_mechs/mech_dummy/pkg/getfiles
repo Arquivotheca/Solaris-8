@@ -1,0 +1,90 @@
+#!/bin/sh
+#
+# Copyright (c) 1997, by Sun Microsystems, Inc.
+# All rights reserved.
+#
+
+#pragma ident	"@(#)getfiles	1.10	99/07/18 SMI"
+
+Gather() {
+
+	if [ ! -f $1 ]
+	then
+		echo cannot find source file: $1
+		exit 1
+	fi
+
+	if [ ! -d $2 ]
+	then
+		rm -f $2
+	else
+		rm -f $2/`basename $1`
+	fi
+
+	if cp -p $1 $2
+	then
+		true
+	else
+		exit 1
+	fi
+
+}
+
+r=`basename $ROOT`
+
+case $r in
+	*sparc )
+		needv9=1
+		;;
+	*	)
+		needv9=0
+		;;
+esac
+
+if [ ! -d $r ]
+then
+	mkdir $r
+fi
+
+cd $r
+
+dlist="kernel/misc/kgss usr/lib/gss etc etc/gss"
+
+if [ $needv9 -eq 1 ]
+then
+	dlist="$dlist kernel/misc/kgss/sparcv9 usr/lib/sparcv9/gss"
+fi
+
+for i in $dlist
+do
+	if [ ! -d $i ]
+	then
+		mkdir -p $i
+	fi
+done
+
+karch=`uname -p`
+
+if [ $karch = "i386" ]
+then
+	karch=i86
+fi
+
+( cd $SRC/uts/$karch/kmech_dummy ; make do_install )
+Gather $ROOT/kernel/misc/kgss/kmech_dummy kernel/misc/kgss
+Gather $SRC/lib/gss_mechs/mech_dummy/`uname -p`/mech_dummy.so.1 usr/lib/gss
+Gather $SRC/cmd/gss/etc/dummy_nfssec.conf etc/nfssec.conf
+Gather $SRC/cmd/gss/etc/dummy_mech_token.conf etc
+Gather $SRC/cmd/gss/etc/dummy_mech etc/gss/mech
+
+if [ $needv9 -eq 1 ]
+then
+	Gather $ROOT/kernel/misc/kgss/sparcv9/kmech_dummy \
+		kernel/misc/kgss/sparcv9
+
+	Gather $SRC/lib/gss_mechs/mech_dummy/`uname -p`v9/mech_dummy.so.1 \
+		usr/lib/sparcv9/gss
+fi
+
+rm -f $ROOT/kernel/misc/kgss/kmech_dummy \
+	$ROOT/kernel/misc/kgss/sparcv9/kmech_dummy 

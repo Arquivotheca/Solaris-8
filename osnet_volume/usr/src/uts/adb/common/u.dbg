@@ -1,0 +1,73 @@
+\
+\ Copyright (c) 1998-1999 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\ #pragma ident	"@(#)u.dbg	1.47	99/08/17 SMI"
+
+#include <sys/param.h>
+#include <sys/types.h>
+#include <sys/user.h>
+#include "dummy.h"
+
+\	u_nofiles is a 32-bit access.
+\
+user			u_		u
+{adb_inline_begin}
+.>c
+<c+{OFFSET, u_execid}=""
+{adb_inline_end}
+	execid			decimal
+	execsz			hex
+	tsize			hex
+	dsize			hex
+	start			hex
+	ticks			hex
+	cv			hex
+	exdata			.exdata
+#if defined(__i386)
+{adb_inline_begin}
+<c+{OFFSET, u_auxv}/"aux vector"n42Xn
+<c+{OFFSET, u_psargs}=""
+{adb_inline_end}
+#elif defined(__sparcv9) || defined(__sparc)
+{adb_inline_begin}
+<c+{OFFSET, u_auxv}="aux vector"n
+.,0t19/X4+Kn
+<c+{OFFSET, u_psargs}=""n
+{adb_inline_end}
+#elif defined(__sparc)
+{adb_inline_begin}
+<c+{OFFSET, u_auxv}/"aux vector"n38Xn
+<c+{OFFSET, u_psargs}=""
+{adb_inline_end}
+#else
+#error "Unknown ISA"
+#endif
+	psargs			echar
+	comm			echar
+	cdir			hex
+	rdir			hex
+	cmask			hex
+	mem			hex
+	systrap			octal
+	entrymask		hex
+	exitmask		hex
+	signodefer		hex
+	sigonstack		hex
+	sigresethand		hex
+	sigrestart		hex
+	sigmask			hex
+	signal			hex
+	nshmseg			sdecimal
+	acflag			octal
+{adb_inline_begin}
+<c+{OFFSET, u_rlimit}/n"rlimit"n14J
+#if defined(_LP64)
+<c+{OFFSET, u_saved_rlimit}/n"saved_rlimit"n14J
+#else
+<c+{OFFSET, u_saved_lf_rlimit}/n"saved_lf_rlimit"n2J
+#endif
+<c+{OFFSET, u_finfo}>f
+<f$<uf_info
+<c+{SIZEOF}=""
+{adb_inline_end}

@@ -1,0 +1,207 @@
+#ident "@(#)README 1.10 94/06/20"
+README
+
+Overview
+
+    This directory is the location for making the Solaris Driver Update 
+    boot and patch diskettes (the former an MS-DOS format bootable 
+    diskette, the latter a Solaris format cpio archive diskette), and a 
+    Solaris MDB (Multiple Device Boot) diskette.
+
+    In this directory are all of the tools and configuration files required 
+    to make the bootable diskettes and the patch diskette.  The tools, 
+    drvud and mdb, are designed to create separate prototype ("proto") 
+    subdirectories on the hard disk for each of the two different bootable 
+    diskettes and populate each subdirectory to create an image of the file 
+    heirarchy that will be put to each diskette.  (Drvud, in the process of 
+    creating the prototype tree for the Driver Update bootable diskette, 
+    also copies the latest driver patches into a local patch tree.) 
+
+Diskette Building Tools and Files
+
+    move        Move realmode sources and binaries between DOS and Solaris
+
+                A shell script that, given the proper arguments, will 
+                either 1) copy the bootstrap and realmode driver sources 
+                from the local workspace to a DOS-format diskette (for 
+                transfer to the DOS machine for building) or, 2) copy the 
+                bootstrap and realmode driver binaries (.bef files) built 
+                on DOS from a DOS-format diskette to the workspace proto 
+                directory, which then becomes a staging area for the drvud 
+                and mdb scripts.  
+
+    database    Database file for the drvud, mdb, and move shell scripts
+
+                Using shell environment variables, this file organizes the 
+                contents of the Driver Update diskettes to be created into 
+                lists of administrative/installation files, lists of the 
+                DOS-built bootstraps and realmode drivers, and lists of 
+                Solaris-built drivers in the driver patches.  The MDB 
+                diskette contents, being a subset of the lists of DOS-built 
+                binaries, is built using a subset of these lists.  
+
+                Copyright information regarding Driver Update diskette part 
+                and revision numbers, and the release into which the MDB 
+                diskette will be delivered, is included at the beginning of 
+                the file to facilitate easy modification of same.  
+
+                Also lists the source directory location (workspace root) 
+                and source directories/files relevant to the creation of 
+                the source diskette by the move script.  
+
+    drvud       Driver Update
+
+                A shell script that populates/updates the patch tree 
+                (PATCH) with the most current driver patches, then 
+                populates the Driver Update boot driver prototype tree 
+                (BOOT/proto_du) with selected contents of the patch tree 
+                and the proto directory created by move.  This script 
+                derives the location of the the most current driver patches 
+                and the list of DOS-built bootstraps and realmode drivers 
+                from environment variables set within the 'database' file 
+                in the current directory.  Given the '-d' flag, drvud will 
+                create both the Driver Update Patch and Driver Update Boot 
+                diskettes.  Drvud must be executed by the super-user.  
+                Usage information is displayed if the string 'usage' is 
+                given as an argument.  
+
+    mdb         Multiple Device Boot
+
+                A shell script that refers to the 'database' file to 
+                determine which DOS-built bootstraps and realmode drivers 
+                in the proto directory created by move will be used to 
+		populate/update the MDB boot prototype tree (BOOT/proto_mdb).
+                Given the '-d' flag, mdb will create MDB diskette.  Mdb 
+                must be executed by the super-user.  Usage information is 
+                displayed if the string 'usage' is given as an argument.  
+
+    copyright.tmpl
+
+                The copyright text to go onto the diskettes (as 
+                appropriately modified by the drvud and mdb scripts).  
+
+
+Building the Realmode Sources on DOS
+
+    0) Create the realmode sources diskette with the move script.
+
+       cd /<realmode_src_root>/db
+       move -o N
+
+    1) Create a directory on the DOS machine, e.g., DU.MMDDYY, where
+       the suffix is the date.
+
+    2) Insert the realmode source diskette built with the move script
+       into the diskette drive, e.g., a:, and cd to DU.MMDDYY.
+
+    3) Execute the following command for each source diskette to move the
+       sources from the diskettes to the current working directory:
+
+       xcopy a:\*.* c: /s
+
+    4) Execute the following to make the binaries:
+
+       nmake all
+
+    5) cd proto
+
+    6) Insert a blank formatted diskette into the diskette drive and
+       execute the following to write the binaries to the diskette:
+
+       xcopy *.* a:
+
+    7) Extract the contents of the realmode binaries diskette on Solaris
+       with the move script and make the Driver Update and MDB diskettes
+       with the drvud and mdb scripts:
+
+       cd /<realmode_src_root>/db
+       move -i 1
+       drvud -u -d N,N -f
+	 or
+       mdb -u -d N
+
+
+Delivery of MDB Diskette Images to WOS
+
+    Two images must be delivered to the WOS: one image from a 3.5" diskette
+    and another from a 5.25" diskette. To create these images, write protect
+    each diskette, insert each diskette into the appropriate drive, cd to
+    /tmp (or some other appropriate location), and execute:
+
+	dd if=/dev/rfd<drv_num> of=boot.[35] bs=4k
+
+    where <drv_num> is the appropriate drive number (0 to 7) for the size
+    of the diskette from which the image is being written. Move both images
+    to gemini:/export/share/deliver/<release_name>, where <release_name>
+    is the release into which the delivery is being made. These two images
+    may then be delivered to the WOS with the deliverfile script located
+    in gemini:/integration/bin.
+
+
+Adding a Driver to the Driver Update Boot Diskette
+
+    1) Write and debug the Solaris driver, the driver.conf file, and the
+       realmode driver.  For this example we will call the driver "new".
+       Substitute your own driver name in the examples below.
+
+    2) Modify solaris.map to add entries for the new driver. Following
+       examples already in that file, you might add:
+
+	    /kernel/drv/new         \drv\new
+	    /kernel/drv/new.conf    \drv\new.cnf t
+
+    3) Modify nam_maj.txt to add an entry for the new driver.  Choose
+       a new major number that does not conflict with any other major number
+       in this file or in the /etc/name_to_major file in the system on the
+       install CD (or network installation root). E.g.:
+
+       new 128
+
+    4) Modify system.add to include an /etc/system - style "forceload"
+       command for the new module.  E.g.:
+
+       forceload: drv/new
+
+    5) If the driver is a SCSI HBA driver, add an entry for the driver in
+       classes.txt. E.g.:
+
+       new  scsi
+
+    6) Finally, add the name of the realmode driver to the DOS_BOOT_DRVRS
+       list, then determine the patch in which the Solaris driver is 
+       located and insert the appropriate lines for the driver into the 
+       PP<number>_CONTENTS lists that corresponds to that patch.  E.g.: 
+
+       DOS_BOOT_DRVRS="$DOS_BOOT_DRVRS_FCS
+			new.bef"
+
+       PP1=100000-$DU_NUM/SUNWos86r/reloc
+
+       PP1_CONTENTS='kernel/drv/new!kernel/
+		     kernel/drv/new.conf=cnf!kernel/'
+
+
+       Make sure that each line you add in the PP<number>_CONTENTS lists 
+       has whatever suffix changing information is applicable to that 
+       driver name (see the comments in the database file regarding 
+       suffixes).  
+
+
+Booting From the Driver Update Boot Diskette
+
+    Installing the system using a Driver Update Boot diskette is very much 
+    like installing with a regular MDB diskette, except that there will be 
+    many times during the early booting process where the system will read 
+    data from the diskette.  Early in the boot process there will be a few 
+    extra warning messages, but the sequence of interaction with the user 
+    remains the same.  Late in the install process, after all the kernel 
+    files have been installed from the bootable diskette, the packages that 
+    contain the patched drivers will be installed from the Driver Update 
+    Distribution diskette.  At the start of that phase of the Driver Update 
+    installation, one of the install scripts will ask you to insert the 
+    Driver Update Distribution diskette into the drive.  When the packages 
+    containing the patched drivers have all been added, the script will ask 
+    you to remove the diskette from the drive and press "Enter".  
+
+    After this point the system will reboot as usual.  When it comes up the
+    new device drivers should be completely installed and functional.

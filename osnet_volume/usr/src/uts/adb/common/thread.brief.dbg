@@ -1,0 +1,30 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)thread.brief.dbg	1.4	99/07/06 SMI"
+
+\ arg             : address of a struct _kthread
+\ uses            : procargs
+\ registers       : t
+\ description     : prints the process args, lwp pointer, proc
+\                   pointer, wait address, stack pointer and PC
+\                   of the specified thread
+\
+#include <sys/types.h>
+#include <sys/thread.h>
+#include "dummy.h"
+
+_kthread        t_      thread.brief
+{adb_inline_begin}
+.>t
+<t=n"============== thread_id"8t{HEX}
+*(<t+{OFFSET, t_procp})$<<procargs
+<t+{OFFSET, t_lwp}=""
+{adb_inline_end}
+        lwp
+        procp
+	lwpchan.lc_wchan	hex	wchan
+{adb_inline_begin}
+<t+{OFFSET, t_pcb.val}/n"pc"16t"sp"np{HEX}
+{adb_inline_end}

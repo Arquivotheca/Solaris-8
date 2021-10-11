@@ -1,0 +1,10 @@
+#!/bin/sh
+#
+# Copyright (c) 1998-1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#pragma ident	"@(#)req.flg	1.2	99/07/02 SMI"
+
+echo_file usr/src/Makefile.psm
+echo_file usr/src/Makefile.psm.targ
+echo_file usr/src/lib/Makefile.spec.psm

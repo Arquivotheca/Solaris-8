@@ -1,0 +1,11 @@
+#! /bin/sh
+#
+#ident	"@(#)inc.flg	1.2	99/10/12 SMI"
+#
+# Copyright (c) 1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+
+find_files "s.*" usr/src/lib/libdhcp
+exec_file usr/src/lib/req.flg
+find_files "s.*" usr/src/common/net/dhcp

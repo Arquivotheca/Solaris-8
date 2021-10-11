@@ -1,0 +1,18 @@
+#
+# Copyright (c) 1998 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+# interface definition for usr/src/lib/libdevfsevent.
+
+#ident  "@(#)mapfile-vers 1.1     98/07/15 SMI"
+
+SUNWprivate_1.1 {
+	global:
+		request_log_event;
+		cancel_log_event_request;
+		get_log_event_tuple;
+		get_log_event;
+		log_event;
+	local:
+		*;
+};

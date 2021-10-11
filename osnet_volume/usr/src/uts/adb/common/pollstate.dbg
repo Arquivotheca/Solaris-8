@@ -1,0 +1,35 @@
+\
+\ Copyright (c) 1997-1998 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)pollstate.dbg	1.5	98/11/23 SMI"
+
+\       arg             : address of a struct pollstate
+\       uses            : mutex, pollcacheset
+\       registers       : z
+\       description     : prints the contents of pollstate structure
+
+#include <sys/poll_impl.h>
+#include "dummy.h"
+
+\
+\ We execute $<<pollcacheset twice at the end because currently
+\ POLLFDSETS is defined as 2.
+\
+pollstate	ps_
+{adb_inline_begin}
+.>z
+<z+{OFFSET, ps_pollfd}=""
+{adb_inline_end}
+	pollfd			hex
+	nfds			decimal
+	pcache			hex
+	lock			.mutex
+{adb_inline_begin}
+<z+{OFFSET, ps_pcacheset}=""
+{adb_inline_end}
+	pcacheset		hex
+	nsets			sdecimal
+{adb_inline_begin}
+<z+{SIZEOF}=""
+{adb_inline_end}

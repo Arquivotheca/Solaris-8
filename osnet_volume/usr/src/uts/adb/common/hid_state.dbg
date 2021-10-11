@@ -1,0 +1,86 @@
+\
+\ Copyright (c) 1999 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)hid_state.dbg        1.5     99/10/22 SMI"
+
+#include <sys/usb/usba.h>
+#include <sys/usb/usba/usba_types.h>
+#include <sys/usb/clients/hid/hid.h>
+#include <sys/usb/clients/hidparser/hidparser.h>
+#include <sys/usb/clients/hid/hidvar.h>
+#include <sys/usb/clients/hid/hid_polled.h>
+
+#include <sys/stropts.h>
+
+#include <sys/vuid_event.h>
+#include <sys/termios.h>
+#include <sys/termio.h>
+#include <sys/strtty.h>
+#include <sys/msreg.h>
+#include <sys/msio.h>
+#include "dummy.h"
+
+\
+\
+
+hid_state_struct hid_	hid_state
+{adb_inline_begin}
+.>x
+<x+{OFFSET, hid_dip}=""
+{adb_inline_end}
+	dip			hex
+	mutex			.mutex
+	instance		hex
+	attach_flags		hex	attach_flags
+	dev_state		hex
+	default_pipe_flags	hex	default_pipe_flags
+	interrupt_pipe_flags	hex	intr_pipe_flags
+	rq_ptr			hex	rq_ptr
+	wq_ptr			hex	wq_ptr
+	pm			hex	hid_pm
+	config_descr		.usb_config_descr
+{adb_inline_begin}
+<x+{OFFSET, hid_interfaceno}=""
+{adb_inline_end}
+	interfaceno		hex	intf_no
+	interface_descr		.usb_interface_descr
+{adb_inline_begin}
+<x+{OFFSET, hid_hid_descr}=""
+{adb_inline_end}
+	hid_descr		.usb_hid_descr
+{adb_inline_begin}
+<x+{OFFSET, hid_interrupt_ept_descr}=""
+{adb_inline_end}
+	interrupt_ept_descr	.usb_endpoint_descr
+{adb_inline_begin}
+<x+{OFFSET, hid_report_descr}=""
+{adb_inline_end}
+	report_descr		hex
+	default_pipe		hex
+	interrupt_pipe		hex	intr_pipe
+	streams_flags		hex
+	packet_size		hex
+	default_pipe_policy	.usb_pipe_policy
+{adb_inline_begin}
+<x+{OFFSET, hid_intr_pipe_policy}=""
+{adb_inline_end}
+	intr_pipe_policy	.usb_pipe_policy
+{adb_inline_begin}
+<x+{OFFSET, hid_polled_console_info}=""
+{adb_inline_end}
+	polled_console_info	hex
+	polled_raw_buf		hex
+	timeout_id		hex
+	cv_default_pipe		hex
+	cv_interrupt_pipe	hex
+	log_handle		hex
+	remove_cookie		hex
+	insert_cookie		hex
+{adb_inline_begin}
+<x+{SIZEOF}=""
+{adb_inline_end}
+
+\
+\
+

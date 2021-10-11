@@ -1,0 +1,24 @@
+\
+\ Copyright (c) 1999 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)svcmasterxprt_list.nxt.dbg	1.2	99/08/23 SMI"
+
+\       arg             : address of an SVCMASTERXPRT structure
+\       uses            : svcmasterxprt, svcmasterxprt_list.nxt (recursive)
+\       registers       : n, e
+\       description     : prints the contents of SVCMASTERXPRT structure, then
+\			  recurses to the next one
+\
+
+#include "dummy.h"
+
+\
+\
+__dummy		""	svcmasterxprt_list.nxt
+{adb_inline_begin}
+.>n
+<n,#(#(<n))$<<svcmasterxprt
+*(<n)>n
+<n,#(#(<n))&#(#(<n-<e))$<svcmasterxprt_list.nxt
+{adb_inline_end}

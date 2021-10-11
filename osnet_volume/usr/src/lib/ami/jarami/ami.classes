@@ -1,0 +1,109 @@
+#
+# Copyright (c) 1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#pragma ident "@(#)ami.classes	1.1 99/07/11 SMI"
+#
+#	Java source files for AMI
+#
+
+AMIPKGDIR=	com/sun/ami
+
+AMIPROPS=	com/sun/ami/AMI_Messages.properties \
+	com/sun/ami/AMI_Messages_Log.properties
+
+AMISRCS=	AMI_Exception
+
+AMISERV=	AMI_CryptoInfo AMI_EntryInfo AMI_KeyServ AMI_KeyServClient \
+	AMI_KeyServClient_RPC AMI_KeyServImpl AMI_KeyServImpl_RPC \
+	AMI_KeyServer AMI_UnableToGetPrivateKeyException
+
+AMICA=	AMI_CertReq AMI_PKCS7 AMI_CertReqException AMI_RecipientInfo \
+	AMI_CertReqInfo AMI_X509CertImpl AMI_ContentInfo AMI_X509CertInfo \
+	AMI_EncryptedContentInfo AMI_X509Factory AMI_CertificateX509Key
+
+AMICMD=	AMINames AMI_LogoutFromAMIServ AMI_Admin AMI_NoKeyStoreFoundException \
+	AMI_Cert AMI_SignCmd AMI_Certify AMI_UsageException \
+	AMI_DecryptCmd AMI_VerifyCmd AMI_EncryptCmd AlgorithmId \
+	AMI_KeyStoreCmd AMI_Login AMI_LoginToAMIServ AMI_Logout
+
+AMICOMMON=	AMI_AuditTrace AMI_Log AMI_Common AMI_Constants \
+	AMI_Debug SunAMI AMI_DigestInfo
+
+AMICRYPTO=	AMI_Crypto AMI_CryptoException
+
+AMIDCRYPTO=	AMI_RSACipher AMI_RSACrypt AMI_RC2Cipher AMI_RC2Crypt \
+	AMI_RC4Crypt AMI_RC4Cipher AMI_AsymmetricCipher AMI_SymmetricCipher
+
+AMIDH=	AMI_DHKeyFactory AMI_DHPrivateKey AMI_DHKeyGenerationParameter \
+	AMI_DHPrivateKeySpec AMI_DHKeyPairGenerator AMI_DHPublicKey \
+	AMI_DHParameterSpec AMI_DHPublicKeySpec
+
+AMIDIGEST=	AMI_Digest AMI_MD5 AMI_DigestException AMI_MessageDigestSpi \
+	AMI_MD2 AMI_SHA1
+
+AMIKEYGEN=	AMI_DESParameters AMI_RSAKeyPairGenerator \
+	AMI_RSAParameterSpec AMI_IvParameterSpec AMI_RSAParams \
+	AMI_KeyGen AMI_RSAPrivateKey AMI_KeyGenException AMI_KeyUtils \
+	AMI_RSAPublicKey AMI_PrivateKey	AMI_RC2Key AMI_RC2KeyGenerator \
+	AMI_RC2ParameterSpec AMI_RC2Parameters AMI_RC4Key \
+	AMI_RC4KeyGenerator AMI_VirtualHost AMI_RSAKeyFactory
+
+AMISIGN=	AMI_DSASignature AMI_MD2RSASignature \
+	AMI_MD5RSASignature AMI_RSASignature \
+	AMI_SHA1RSASignature AMI_Signature AMI_SignatureException
+
+AMIKEYMGNT=	AMI_KeyMgnt AMI_KeyMgntClient \
+	AMI_KeyMgntCommunicationException \
+	AMI_KeyMgntException AMI_KeyMgntNotFoundException \
+	AMI_KeyMgntOperationNotSupportedException \
+	AMI_KeyMgntPropertyNotFoundException \
+	AMI_KeyMgntSchema AMI_KeyMgntSchemaEntry AMI_KeyMgntSchemaException \
+	AMI_KeyMgntSchemaNotFoundException AMI_KeyMgntSchema_Files_Enumeration \
+	AMI_KeyMgntService AMI_KeyMgntServiceImpl \
+	AMI_KeyMgnt_FILE AMI_KeyMgnt_FNS \
+	AMI_KeyMgnt_FNS_Enumeration \
+	AMI_KeyMgnt_Files_Enumeration AMI_KeyMgnt_JNDI \
+	AMI_KeyProtector AMI_KeyStore \
+	AMI_KeyStore_Certs AMI_UserProfile
+
+AMIUTLS=	AMI_C_Utils DerInputBuffer AMI_GetOpt DerInputStream \
+	AMI_Utils DerOutputStream DerEncoder DerValue DerIndefLenConverter \
+	ObjectIdentifier AMI_C_Certs AMI_asn1_common
+
+
+AMIEXPORT=	AMI_Export
+AMIGEXPORT=	AMI_Global_Export
+AMIDEXPORT=	AMI_Domestic_Export
+
+AMIDRIS=	amiserv/AMI_Store cmd/assignPair cmd/methodMap \
+	cmd/nameMap common/SunAMI*1 \
+	keymgnt/AMI_KeyStore*KeyEntry \
+	keymgnt/AMI_KeyStore*TrustedCertEntry \
+	keymgnt/AMI_KeyMgnt_JNDI_Enumeration
+
+AMIHEADFILES=	../libami/utils/com_sun_ami_cmd_AMI_0005fLogin.h \
+	../libami/encrypt/com_sun_ami_crypto_AMI_0005fCrypto.h \
+	../libami/digest/com_sun_ami_digest_AMI_0005fDigest.h \
+	../libami/keygen/com_sun_ami_keygen_AMI_0005fKeyGen.h \
+	../libami/sign/com_sun_ami_sign_AMI_0005fSignature.h \
+	../libami/amiserv/com_sun_ami_amiserv_AMI_0005fKeyServClient_0005fRPC.h \
+	../libami/keymgnt/com_sun_ami_keymgnt_AMI_0005fKeyMgnt_0005fFNS.h \
+	../libami/keymgnt/com_sun_ami_keymgnt_AMI_0005fKeyMgnt_0005fFNS_0005fEnumeration.h \
+	../libami/keymgnt/com_sun_ami_keymgnt_AMI_0005fKeyMgnt_0005fFILE.h \
+	../libami/utils/com_sun_ami_utils_AMI_0005fC_0005fUtils.h
+
+AMICLASSES=	$(AMISRCS:%=$(AMIPKGDIR)/%) \
+	$(AMISERV:%=$(AMIPKGDIR)/amiserv/%) $(AMICA:%=$(AMIPKGDIR)/ca/%) \
+	$(AMICMD:%=$(AMIPKGDIR)/cmd/%) $(AMICOMMON:%=$(AMIPKGDIR)/common/%) \
+	$(AMICRYPTO:%=$(AMIPKGDIR)/crypto/%) $(AMIDH:%=$(AMIPKGDIR)/dh/%) \
+	$(AMIDIGEST:%=$(AMIPKGDIR)/digest/%) $(AMIKEYGEN:%=$(AMIPKGDIR)/keygen/%) \
+	$(AMIKEYMGNT:%=$(AMIPKGDIR)/keymgnt/%) $(AMISIGN:%=$(AMIPKGDIR)/sign/%) \
+	$(AMIUTLS:%=$(AMIPKGDIR)/utils/%)
+
+AMIDCLASSES=	$(AMIDCRYPTO:%=$(AMIPKGDIR)/crypto/%) \
+	$(AMIDEXPORT:%=$(AMIPKGDIR)/export/%)
+
+AMIGCLASSES=	$(AMIGEXPORT:%=$(AMIPKGDIR)/export/%)
+
+AMIDERIVEDCLASSES=	$(AMIDRIS:%=$(AMIPKGDIR)/%)

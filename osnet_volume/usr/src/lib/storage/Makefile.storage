@@ -1,0 +1,54 @@
+#
+#pragma ident	"@(#)Makefile.storage	1.16	99/08/01 SMI"
+#
+# Copyright (c) 1998-1999 by Sun Microsystems, Inc.
+# All rights reserverd.
+#
+# lib/storage/Makefile.storage
+# Definitions common to storage shared libraries.
+#
+
+
+include $(SRC)/lib/Makefile.lib
+
+STLIBDIR=	$(ROOT)/usr/lib/storage
+STINCDIR=	$(SRC)/lib/storage/common/common/hdrs
+
+CPPFLAGS +=	-I$(STINCDIR)
+
+sparc_C_PICFLAGS=	-K PIC
+
+# base target directories
+ROOTUSER = $(ROOT)/usr
+ROOTUSERINC = $(ROOT)/usr/include
+ROOTUSERLIB = $(ROOT)/usr/lib
+ROOTHDRDIR = $(ROOTUSERINC)/sys/fc4
+ROOTDIRS = $(ROOTUSER) $(ROOTUSERINC) $(ROOTUSERLIB) $(ROOTUSERLIBS9) $(ROOTHDRDIR)
+
+ROOTCLASSD =	$(ROOT)/classes
+
+# documentation (C & Java) target directories
+DOCROOT =	$(ROOT)/doc
+CDOCROOT =	$(DOCROOT)/cdoc
+JDOCROOT =	$(DOCROOT)/javadoc
+
+# MACROS for source directories and others
+SRCROOT = 	$(ROOT)/src
+JARSRCFILES= (cd ${SRC}; find ${SRCDIRS} -name s..del\* -prune -o -name s.\* -print | sed -e 's,SCCS/s.,,g'| sort -u)
+
+# MACROS for gencat
+CP		= cp
+GENCAT		= gencat
+GENMSG		= genmsg
+GENMSGFLAGS	= -d
+#GENMSGFLAGS	= -d -m PRE -M POST 
+GENMSG.c	= $(GENMSG) $(GENMSGFLAGS) -p '$(COMPILE.cpp)'
+
+$(GENMSG_PROG): $(GENMSG_SRCS)
+	$(GENMSG.c) -o $@ $(GENMSG_SRCS)
+
+GENCAT_PROG	= a5k_g_fc_i18n_cat
+GENCAT_PROG_DIR= $(SRC)/lib/storage/common
+
+gencat: $(GENCAT_PROG_DIR)/$(GENCAT_PROG)
+

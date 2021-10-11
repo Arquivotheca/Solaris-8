@@ -1,0 +1,58 @@
+#!/bin/sh
+#
+# Copyright (c) 1993 - 1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#pragma ident	"@(#)postinstall	1.15	99/10/21 SMI"
+#
+# SUNWpmr postinstall script
+
+SHUTDOWN_PATTERN="^[ 	]*autoshutdown[ 	]"
+
+#
+# If the old format of "autoshutdown" is used, upgrade it to the new format.
+#
+/bin/grep -s "${SHUTDOWN_PATTERN}" $BASEDIR/etc/power.conf >/dev/null
+if [ $? = 0 ] ; then
+	set - `/bin/grep "${SHUTDOWN_PATTERN}" $BASEDIR/etc/power.conf`
+	if [ $# -ne 5 ] ; then
+		if [ ${2} -lt 0 ] ; then
+			BEHAVIOR="noshutdown"
+		else
+			BEHAVIOR="shutdown"
+		fi
+		cp $BASEDIR/etc/power.conf /tmp/power.conf
+		( echo "/${SHUTDOWN_PATTERN}"
+		  echo "s/$/		${BEHAVIOR}/"
+		  echo "."; echo "w"; echo "q"
+		) | ed -s $BASEDIR/etc/power.conf > /dev/null
+		if [ $? != 0 ] ; then
+			echo "Updating autoshutdown entry failed."
+			cp /tmp/power.conf $BASEDIR/etc/power.conf
+		fi
+	fi
+fi
+
+#
+# adds sysidpm to the list of applications run out of sysidconfig.
+#
+if [ -x /usr/sbin/sysidconfig ]; then {
+	/usr/sbin/sysidconfig -b "${BASEDIR}" -l | /usr/bin/grep -s sysidpm >/dev/null
+	if [ $? -ne 0 ]; then
+                /usr/sbin/sysidconfig -b "${BASEDIR}" -a /usr/sbin/sysidpm
+        fi
+} else {
+        /usr/bin/grep -s sysidpm ${BASEDIR}/etc/.sysidconfig.apps >/dev/null
+        if [ $? -ne 0 ]; then
+                echo /usr/sbin/sysidpm >> ${BASEDIR}/etc/.sysidconfig.apps
+        fi
+} fi
+
+#
+# .cpr_config file is moved to /etc directory
+#
+if [ -f $BASEDIR/.cpr_config ] ; then
+  /bin/rm -f $BASEDIR/.cpr_config
+fi
+
+exit 0

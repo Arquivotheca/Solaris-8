@@ -1,0 +1,7 @@
+#!/bin/sh
+#
+#pragma ident	"@(#)req.flg	1.1	98/06/05 SMI"
+#
+
+
+echo_file usr/src/lib/libnsl/include/rpcsvc/nis_dhext.h

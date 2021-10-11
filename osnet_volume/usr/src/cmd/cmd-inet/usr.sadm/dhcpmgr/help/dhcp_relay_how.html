@@ -1,0 +1,269 @@
+<!--
+  -- ident	"@(#)dhcp_relay_how.html	1.2	99/06/10 SMI"
+  --
+  -- Copyright (c) 1998-1999 by Sun Microsystems, Inc.
+  -- All rights reserved.
+  -->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+
+<head>
+<title>DHCP Manager Help: How To... Servers and Relays</title>
+<meta NAME="AUTHOR" CONTENT="Electra Coumou">
+<meta NAME="KEYWORDS" CONTENT="DHCP">
+
+</head>
+
+<body bgcolor="#FFFFFF">
+
+<a name="top"></a>
+
+<table border=0 cellspacing=0 cellpadding=0 width=615>
+
+<!-- Start navigation banner -->
+
+<tr><td colspan=4  WIDTH="615" align="center" valign="top"><IMG SRC="art/bannersmc.gif" WIDTH=615 BORDER=0 ALIGN="LEFT" ALT="DHCP Manager Help">
+
+	</td>
+	</tr>
+
+<!-- End navigation banner -->
+
+
+<tr>
+
+<!-- Start contents block -->
+
+	<td colspan=1 valign="top" width=150>
+	<P>&nbsp;</P>
+	<A HREF="dhcp_main_top.html"><STRONG>Overview</STRONG></A><P>
+	<A HREF="dhcp_relay_ref.html"><STRONG>Servers and Relay Agents</STRONG></A><P>
+	<A HREF="dhcp_addr_ref.html"><STRONG>IP Addresses</STRONG></A><P>
+	<A HREF="dhcp_macro_ref.html"><STRONG>Macros</STRONG></A><P>
+	<A HREF="dhcp_option_ref.html"><STRONG>Options</STRONG></A><P>
+		
+	<A HREF="dhcp_main_how.html"><STRONG>How To..</STRONG></A><BR>
+<IMG SRC="art/tip2.gif" WIDTH=12 HEIGHT=10 BORDER=0 ALT="">Servers and Relays<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="#srvr"><EM>Configure DHCP</EM></A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#relay"><EM>Configure BOOTP</EM></a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#ntwrk"><EM>Configure Network</EM></a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#delnet"><EM>Delete Network</EM></a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#adv"><EM>Customize Services</EM></a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#start"><EM>Start/Stop/Restart</EM></a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#dis"><EM>Enable/Disable</EM></a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#uncon"><EM>Unconfigure DHCP</EM></a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#uncon2"><EM>Unconfigure BOOTP</EM></a><BR>
+&nbsp;&nbsp;<A HREF="dhcp_addr_how.html">Addresses</A><BR>
+&nbsp;&nbsp;<A HREF="dhcp_macro_how.html">Macros</A><BR>
+&nbsp;&nbsp;<A HREF="dhcp_option_how.html">Options</A><P>
+
+<A HREF="dhcp_main_idx.html"><STRONG>Index</STRONG></A>
+	
+		</td>
+	
+<!-- End contents block -->
+
+<!-- Start column rule -->
+
+	<td colspan=1 width=5 bgcolor="#CCCCCC">&nbsp;</td>
+
+<!-- End column spacer -->
+
+<!-- Start column spacer -->
+
+	<td colspan=1 width=10 bgcolor="#FFFFFF">&nbsp;</td>
+
+<!-- End column spacer -->
+
+
+
+<!-- Start topic block -->
+
+<td colspan=1 valign="top" bgcolor="#ffffff">
+
+
+	
+<P>&nbsp;</P>
+<H1>How To: Servers and Relays</H1>
+
+<strong><big><a name="srvr">Configure a DHCP Server</A></big></strong><P>
+<OL>
+<LI><STRONG>Select a server from the System Management console and start DHCP Manager.</STRONG><BR>
+If the server has not 
+been previously configured as either a DHCP server or as a BOOTP relay agent, 
+the Choose Server Configuration dialog box is displayed. You can choose to configure a server as either a DHCP server or as a BOOTP relay agent, but not both.<P>
+<LI><STRONG>Select Configure as DHCP Server.</STRONG><BR> 
+The DHCP Server Configuration Wizard starts.</LI><P>
+<LI><STRONG>Step through the configuration, providing the <A HREF="dhcp_config_wiz.html">information</A> requested.</STRONG><BR>
+When the configuration is completed, the DHCP server starts.
+</LI>
+</OL>
+<P>
+To change any of the configuration parameters, you must
+first <A href="#uncon">unconfigure</A> the server and then use the Configuration Wizard to reconfigure the server.<P>
+To customize <A HREF="#adv">DHCP services</A>, select Modify from the Services menu.<P>
+
+<HR NOSHADE>
+<strong><big><A NAME="relay">Configure a BOOTP Relay Agent</A></big></strong><P>
+<OL>
+
+<LI><STRONG>Select a server from the System Management console and start DHCP Manager.</STRONG><BR>
+If the server has not been previously configured as either a DHCP server or as a BOOTP relay agent, the Choose Server Configuration dialog box is displayed. You can choose to configure the server as either a DHCP server or as a BOOTP relay agent.<P></LI>
+
+<LI><STRONG>Select Configure as BOOTP Relay.</STRONG><BR>
+The Configure BOOTP Relay dialog box is displayed.</LI><P>
+
+<LI><STRONG>Enter DHCP servers.</STRONG><BR>
+Enter the names or IP addresses of one or more DHCP servers to which to relay configuration requests.
+
+</LI>
+</OL>
+When the configuration is completed, the BOOTP relay agent starts.<P>
+To customize <A HREF="#adv">BOOTP relay services</A>, select Modify from the Services menu.<P>
+<HR NOSHADE>
+
+<big><STRONG><A NAME="ntwrk">Configure a Network</A></STRONG></big><p>
+When you first configure the DHCP server, the Configuration Wizard configures the first network.  To add additional networks, follow these steps.
+<OL>
+<LI><STRONG>Choose Network Wizard from the Edit menu of the View Addresses window.</STRONG><P></LI>
+<LI><STRONG>Enter configuration <A HREF="dhcp_relay_ref.html#ntwrk">information</A> for the new network.</STRONG><P></LI>
+<LI><STRONG>Click OK to confirm your action.</STRONG><P></LI>
+</OL>
+<HR NOSHADE>
+
+<big><STRONG><A NAME="delnet">Delete a Network</A></STRONG></big><p>
+To delete a network is to remove it from the list of networks monitored by the DHCP server.
+<OL>
+<LI><STRONG>Choose Delete Network from the Edit menu of the View Addresses window.</STRONG><BR>
+The Delete Network dialog box is displayed. Configured networks are listed in the Keep Networks list. <P></LI>
+<LI><STRONG>Select the network to delete and use the arrow keys to move it to the Delete Networks list.</STRONG><P></LI>
+<LI><STRONG>Click OK to confirm your actions.</STRONG><P></LI>
+</OL>
+You cannot add a network using this dialog box.  To add or restore a network to the DHCP server's list of monitored networks, you must configure it using the <A HREF="dhcp_net_wiz.html">Network Wizard</A>.<P>
+<HR NOSHADE>
+
+<big><STRONG><A NAME="adv">Customize Services</A></STRONG></big><p>
+You can configure DHCP or BOOTP services for your server or BOOTP relay agent.
+<OL>
+<LI><STRONG>Choose Modify from the Services menu.</STRONG><br></LI>
+The Modify Service Options dialog is displayed.<P>
+<LI><STRONG>Enter configuration information</strong><BR>
+Use the Modify Service Options dialog to customize the <A HREF="dhcp_server_serv.html">DHCP</A> or <A HREF="dhcp_relay_serv.html">Relay</A> services.<P>
+You can configure options such as BOOTP compatibility mode (for the DHCP server) or modify the list of DHCP servers to which to forward requests (relay agent).<P></LI>
+<LI><STRONG>Click OK.</STRONG></LI>
+</OL><P>
+
+<HR NOSHADE>
+<strong><big><A NAME="start">Start, Stop, or Restart a Server or Relay Agent</A></big></strong><p>
+The DHCP server or BOOTP relay agent starts
+automatically when you have completed the
+initial configuration. You can stop or start the service by
+choosing Stop or Start from the Services menu. This is analogous
+to running the <tt>/etc/init.d/dhcp</tt>
+script with the <tt>stop</tt> or <tt>start</tt> command.
+
+	<ol type=1>
+	
+	<li><STRONG>Choose the Services menu in the main window.</STRONG></LI><p>
+	<li><STRONG>Choose Start, Stop, or Restart from the Service
+menu.</STRONG>
+	<TABLE BORDER="0" CELLSPACING="3" CELLPADDING="3" ALIGN="top" COLS="2">
+	
+<TR ALIGN="LEFT" VALIGN="TOP">
+	<TD WIDTH="60" ALIGN="LEFT" VALIGN="TOP"><STRONG>Start</STRONG></TD>
+	<TD ALIGN="LEFT" VALIGN="TOP">Click Start to start DHCP or BOOTP relay
+service that has been stopped.</TD>
+	</TR>
+	
+	<TR ALIGN="LEFT" VALIGN="TOP">
+	<TD WIDTH="60" ALIGN="LEFT" VALIGN="TOP"><STRONG>Stop</STRONG></TD>
+	<TD ALIGN="LEFT" VALIGN="TOP">Click Stop to stop the DHCP or
+BOOTP daemon.</TD>
+	</TR>
+
+<TR ALIGN="LEFT" VALIGN="TOP">
+	<TD WIDTH="60" ALIGN="LEFT" VALIGN="TOP"><STRONG>Restart</STRONG></TD>
+	<TD ALIGN="LEFT" VALIGN="TOP">Click Restart to force the DHCP server to reread the <tt>dhcptab</tt>.</TD>
+	</TR>
+
+	</TABLE></LI>
+	<LI><STRONG>Click OK to confirm your actions.</STRONG></LI>
+
+	</ol><P>
+	
+	<HR NOSHADE>
+<strong><big><A NAME="dis">Enable or Disable a Server or Relay Agent</A></big></strong><p>
+Choose Disable from the Services menu to remove the DHCP daemon from the boot sequence. When the DHCP service is disabled, it will not start automatically when you reboot the server.<P>
+Choose Enable to restore the DHCP daemon to the boot sequence.<P>
+
+	<ol type=1>
+	
+	<li><STRONG>Choose the Services menu in the main window.</STRONG></LI><p>
+	<li><STRONG>Choose Enable or Disable from the Services menu.</STRONG>
+	<TABLE BORDER="0" CELLSPACING="3" CELLPADDING="3" ALIGN="top" COLS="2">
+	
+<TR ALIGN="LEFT" VALIGN="TOP">
+	<TD WIDTH="60" ALIGN="LEFT" VALIGN="TOP"><STRONG>Enable</STRONG></TD>
+	<TD ALIGN="LEFT" VALIGN="TOP">Click Enable to restore a DHCP service that has been disabled.</TD>
+	</TR>
+	
+	<TR ALIGN="LEFT" VALIGN="TOP">
+	<TD WIDTH="60" ALIGN="LEFT" VALIGN="TOP"><STRONG>Disable</STRONG></TD>
+	<TD ALIGN="LEFT" VALIGN="TOP">Click Disable to remove DHCP service from the boot sequence.</TD>
+	</TR>
+
+	</TABLE></LI>
+	<LI><STRONG>Click OK to confirm your actions.</STRONG></LI>
+	</OL>
+
+	<HR NOSHADE>
+	 	
+<STRONG><FONT SIZE="+1"><a name="uncon">Unconfigure a DHCP Server</a></FONT></STRONG><p>
+In order to change any of the configuration parameters of your DHCP server, you must first unconfigure the server and then rerun the Configuration Wizard.<P>
+<OL>
+<LI><STRONG>From the Services menu, choose Unconfigure.</STRONG><BR>
+The Unconfigure Service dialog box is displayed.</LI><P>
+
+<LI><STRONG>Choose one or both options.</STRONG><BR>
+
+
+<TABLE BORDER="0" CELLSPACING="3" CELLPADDING="3" ALIGN="top" COLS="2">
+	
+<TR ALIGN="LEFT" VALIGN="TOP">
+	<TD WIDTH="160" ALIGN="LEFT" VALIGN="TOP"><STRONG>Remove <tt>dhcptab</tt> and all DHCP network tables</STRONG></TD>
+	<TD ALIGN="LEFT" VALIGN="TOP">Use this option with caution. If you use NIS+, removing these tables may cause a problem for other DHCP servers that share these databases.</TD>
+	</TR>
+	<TR ALIGN="LEFT" VALIGN="TOP">
+	<TD WIDTH="160" ALIGN="LEFT" VALIGN="TOP"><STRONG>Remove all hosts table entries for DHCP addresses</STRONG>
+	</TD>
+
+<TD>Check this box to also remove entries from the server's <tt>hosts</tt> table.</TD></TR>
+</table>
+</LI>
+<LI><STRONG>Click OK to confirm your actions.</STRONG></LI>
+</OL> 
+ <P><HR NOSHADE><P>
+ <STRONG><FONT SIZE="+1"><a name="uncon2">Unconfigure a BOOTP Relay Agent</a></FONT></STRONG><p>
+<OL>
+<LI><STRONG>From the Services menu, choose Unconfigure.</STRONG><BR>
+The Unconfigure Service dialog box is displayed.</LI><P>
+<LI><STRONG>Click OK to confirm your actions.</STRONG></LI>
+</OL> 
+ <P>
+&nbsp;&nbsp;&nbsp;<A HREF="#top"><FONT face="arial, helvetica" size=2>return to top</FONT></A>
+<p>&nbsp;</p>
+
+<!-- Don't go past this line! -->
+
+	</td>
+
+<!-- End topic block -->
+
+</tr>
+
+</table>
+
+<!-- End topic table -->
+
+</body>
+</html>

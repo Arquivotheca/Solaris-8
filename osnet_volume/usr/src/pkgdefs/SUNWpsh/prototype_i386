@@ -1,0 +1,83 @@
+# Copyright (c) 1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#ident	"@(#)prototype_i386	1.23	99/05/04 SMI"
+#
+# This required package information file contains a list of package contents.
+# The 'pkgmk' command uses this file to identify the contents of a package
+# and their location on the development machine when building the package.
+# Can be created via a text editor or through use of the 'pkgproto' command.
+
+#!search <pathname pathname ...>	# where to find pkg objects
+#!include <filename>			# include another 'prototype' file
+#!default <mode> <owner> <group>	# default used if not specified on entry
+#!<param>=<value>			# puts parameter in pkg environment
+
+i copyright
+i pkginfo
+i depend
+#
+# List x86-specific header files here
+#
+# Path names are relative to the prototype root directory
+#
+# SUNWpsh
+#
+d none usr 755 root sys
+d none usr/include 755 root bin
+d none usr/include/sys 755 root bin
+f none usr/include/sys/asy.h 644 root bin
+d none usr/include/sys/dktp 755 root bin
+f none usr/include/sys/dktp/bbh.h 644 root bin
+f none usr/include/sys/dktp/cdtypes.h 644 root bin
+f none usr/include/sys/dktp/cm.h 644 root bin
+f none usr/include/sys/dktp/cmdev.h 644 root bin
+f none usr/include/sys/dktp/cmdk.h 644 root bin
+f none usr/include/sys/dktp/controller.h 644 root bin
+f none usr/include/sys/dktp/dadev.h 644 root bin
+f none usr/include/sys/dktp/dadk.h 644 root bin
+f none usr/include/sys/dktp/dklb.h 644 root bin
+d none usr/include/sys/dktp/dpt 755 root bin
+f none usr/include/sys/dktp/dpt/dpt.h 644 root bin
+f none usr/include/sys/dktp/dpt/dptioctl.h 644 root bin
+f none usr/include/sys/dktp/dpt/dptsig.h 644 root bin
+f none usr/include/sys/dktp/fctypes.h 644 root bin
+f none usr/include/sys/dktp/flowctrl.h 644 root bin
+f none usr/include/sys/dktp/gda.h 644 root bin
+f none usr/include/sys/dktp/hba.h 644 root bin
+d none usr/include/sys/dktp/mlx 755 root bin
+f none usr/include/sys/dktp/mlx/debug.h 644 root bin
+f none usr/include/sys/dktp/mlx/mlx.h 644 root bin
+f none usr/include/sys/dktp/mlx/mlx_dac.h 644 root bin
+f none usr/include/sys/dktp/mlx/mlx_dacioc.h 644 root bin
+f none usr/include/sys/dktp/mlx/mlx_raid.h 644 root bin
+f none usr/include/sys/dktp/mlx/mlx_scsi.h 644 root bin
+f none usr/include/sys/dktp/mlx/mlxdefs.h 644 root bin
+f none usr/include/sys/dktp/mlx/mlxops.h 644 root bin
+f none usr/include/sys/dktp/mscsi.h 644 root bin
+f none usr/include/sys/dktp/objmgr.h 644 root bin
+f none usr/include/sys/dktp/quetypes.h 644 root bin
+f none usr/include/sys/dktp/queue.h 644 root bin
+f none usr/include/sys/dktp/scdk.h 644 root bin
+f none usr/include/sys/dktp/scdkwatch.h 644 root bin
+f none usr/include/sys/dktp/sctarget.h 644 root bin
+f none usr/include/sys/dktp/snlb.h 644 root bin
+f none usr/include/sys/dktp/tgcd.h 644 root bin
+f none usr/include/sys/dktp/tgcom.h 644 root bin
+f none usr/include/sys/dktp/tgdk.h 644 root bin
+f none usr/include/sys/dktp/tgpassthru.h 644 root bin
+f none usr/include/sys/dnet.h 644 root bin
+f none usr/include/sys/elx.h 644 root bin
+f none usr/include/sys/emap.h 644 root bin
+f none usr/include/sys/fd_debug.h 644 root bin
+f none usr/include/sys/fdc.h 644 root bin
+f none usr/include/sys/fdmedia.h 644 root bin
+f none usr/include/sys/ieef.h 644 root bin
+f none usr/include/sys/lp.h 644 root bin
+f none usr/include/sys/mii.h 644 root bin
+f none usr/include/sys/miipriv.h 644 root bin
+f none usr/include/sys/miiregs.h 644 root bin
+f none usr/include/sys/mouse.h 644 root bin
+f none usr/include/sys/mse.h 644 root bin
+f none usr/include/sys/sbpro.h 644 root bin
+f none usr/include/sys/vuidmice.h 644 root bin

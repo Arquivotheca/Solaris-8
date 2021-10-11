@@ -1,0 +1,66 @@
+#!/bin/sh
+#
+# Copyright (c) 1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#pragma ident	"@(#)inc.flg	1.19	99/10/04 SMI" 
+#
+#
+# Find all of the header files
+#
+find_files "s.*.[hx]" \
+	usr/src/head \
+	usr/src/stand/i386 \
+	usr/src/stand/sys \
+	usr/src/uts/common/c2 \
+	usr/src/uts/common/fs/proc \
+	usr/src/uts/common/gssapi \
+	usr/src/uts/common/inet \
+	usr/src/uts/common/kerberos \
+	usr/src/uts/common/net \
+	usr/src/uts/common/netinet \
+	usr/src/uts/common/nfs \
+	usr/src/uts/common/rpc \
+	usr/src/uts/common/rpcsvc \
+	usr/src/uts/common/sys \
+	usr/src/uts/common/vm \
+	usr/src/uts/i86/sys \
+	usr/src/uts/i86pc/sys \
+	usr/src/uts/sfmmu \
+	usr/src/uts/sparc/sys \
+	usr/src/uts/sparc/v7/sys \
+	usr/src/uts/sparc/v9/sys \
+	usr/src/uts/srmmu \
+	usr/src/uts/sun \
+	usr/src/uts/sun4m/sys \
+	usr/src/uts/sun4d/sys \
+	usr/src/uts/sun4u/sys \
+	usr/src/uts/sun4d/vm \
+	usr/src/uts/sun4m/vm \
+	usr/src/uts/sun4u/vm
+
+#
+# These are all of the supporting directories
+#
+find_files "s.*" \
+	usr/src/cmd/adb \
+	usr/src/psm/promif \
+	usr/src/psm/stand/lib \
+	usr/src/psm/stand/sys \
+	usr/src/stand/lib \
+	usr/src/uts/adb \
+	usr/src/uts/common/os \
+	usr/src/uts/i86/promif \
+	usr/src/uts/sparc/os
+
+echo_file usr/src/Makefile.psm
+echo_file usr/src/Makefile.psm.targ
+echo_file usr/src/cmd/Makefile.cmd
+echo_file usr/src/cmd/Makefile.targ
+echo_file usr/src/head/Makefile
+echo_file usr/src/lib/Makefile.lib
+echo_file usr/src/psm/Makefile.psm.64
+echo_file usr/src/uts/Makefile.uts
+echo_file usr/src/uts/Makefile.uts.64
+echo_file usr/src/uts/common/rpc/Makefile
+echo_file usr/src/uts/common/rpcsvc/Makefile

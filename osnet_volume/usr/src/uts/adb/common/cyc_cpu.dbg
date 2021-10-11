@@ -1,0 +1,28 @@
+\
+\ Copyright (c) 1999 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)cyc_cpu.dbg	1.1	99/06/05 SMI"
+
+#include <sys/cyclic_impl.h>
+#include "dummy.h"
+
+cyc_cpu     cyp_
+{adb_inline_begin}
+.>z
+<z=""
+{adb_inline_end}
+	cpu			hex
+	state			decimal
+	heap			hex
+	cyclics			hex
+	nelems			decimal
+	size			decimal
+	backend			hex
+	modify_wait		.sema
+	modify_levels		decimal
+	rpend			decimal
+{adb_inline_begin}
+	<z+{OFFSET, cyp_softbuf[0]}="softbuf (low-level)"nX
+	<z+{OFFSET, cyp_softbuf[1]}="softbuf (lock-level)"nX
+{adb_inline_end}

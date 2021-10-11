@@ -1,0 +1,18 @@
+#
+# Copyright (c) 1997-1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#ident	"@(#)Makefile.ia32	1.1	99/08/11 SMI"
+
+ROOTMOD = $(ROOT)/usr/lib/mdb/$(MDBTGT)
+
+$(ROOTMOD)/%: %
+	$(INS.file)
+
+CCVERBOSE = -v
+COPTFLAG = -xO3
+CFLAGS += $(CCVERBOSE) -xstrconst
+LINTFLAGS = -xerroff=E_BAD_FORMAT_STR2 -n
+
+LFLAGS = -t -v
+YFLAGS = -d -v

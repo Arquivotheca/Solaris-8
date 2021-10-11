@@ -1,0 +1,27 @@
+\
+\ Copyright (c) 1999 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)ddi_dma_cookie.dbg        1.1     99/09/24 SMI"
+
+#include <sys/types.h>
+#include <sys/dditypes.h>
+#include "dummy.h"
+
+\
+\
+
+ddi_dma_cookie_t	""	ddi_dma_cookie
+{adb_inline_begin}
+.>z
+{adb_inline_end}
+	_dmu._dmac_ll	hex	address
+	dmac_size	hex	size
+	dmac_type	hex	type
+{adb_inline_begin}
+<z+{SIZEOF}=""
+{adb_inline_end}
+
+\
+\
+

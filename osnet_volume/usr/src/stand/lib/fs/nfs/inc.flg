@@ -1,0 +1,6 @@
+#!/bin/sh
+#
+#pragma ident   "@(#)inc.flg	1.1	99/02/22 SMI"
+#
+
+find_files "s.*" usr/src/common/net/dhcp

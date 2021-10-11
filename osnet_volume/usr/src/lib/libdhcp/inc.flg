@@ -1,0 +1,8 @@
+#! /bin/sh
+#
+#ident	"@(#)inc.flg	1.2	99/08/16 SMI"
+#
+# Copyright (c) 1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+find_files "s.*" usr/src/common/net/dhcp

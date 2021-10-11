@@ -1,0 +1,76 @@
+#!/sbin/sh
+#
+# Copyright (c) 1993 - 1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#pragma ident	"@(#)power	1.11	99/10/20 SMI"
+#
+# If the /etc/power.conf file does not have a "statefile" entry
+# to specify the pathname of the cpr statefile, build one and
+# add the line.  We choose the largest of the standard Sun partitions.
+
+init_statefile_entry() {
+	[ ! -f /etc/power.conf -o ! -w /etc/power.conf ] && return
+
+	# Whitespace regular expression below is [<TAB><SPACE>]
+
+	pattern="^[ 	]*statefile[	 ][	 ]*/"
+	[ `/usr/bin/grep -c "$pattern" /etc/power.conf` -ge 1 ] && return
+
+	avail=0			# Free blocks in current filesystem
+	max_avail=0		# Most available free blocks encountered so far
+ 	statefile=.CPR		# Default cpr statefile name
+
+	# Remove old statefile (if any) from root
+	[ -f /$statefile ] && /usr/bin/rm -f /$statefile
+
+	/usr/bin/df -k -F ufs |
+	(
+		read line	# Skip past the header line of the df output
+
+		while read device kbytes used avail capacity filesys; do
+			case $filesys in
+			/|/usr|/var|/export/home)
+				if [ $avail -gt $max_avail ]; then
+					max_avail=$avail
+					winner=$filesys
+				fi
+				;;
+			esac
+		done
+
+		if [ $max_avail -gt 0 ]; then
+			echo "statefile		${winner}/${statefile}" \
+			    >>/etc/power.conf
+		fi
+
+		return
+	)
+}
+
+case "$1" in
+'start')
+	[ -z "$_INIT_UTS_MACHINE" ] && _INIT_UTS_MACHINE=`/usr/bin/uname -m`
+	[ -z "$_INIT_UTS_ISA" ] && _INIT_UTS_ISA=`/usr/bin/uname -p`
+
+	if [ $_INIT_UTS_ISA = sparc -a $_INIT_UTS_MACHINE != sun4d ]; then
+		init_statefile_entry
+	fi
+
+	if [ -x /usr/sbin/pmconfig -a -r /etc/power.conf ]; then
+		/usr/sbin/pmconfig >/dev/console 2>&1
+	fi
+	;;
+
+'stop')
+	if [ -x /usr/sbin/pmconfig ]; then 
+		/usr/sbin/pmconfig -r >/dev/null 2>/dev/null
+	fi
+	;;
+
+*)
+	echo "Usage: $0 { start | stop }"
+	exit 1
+	;;
+esac
+exit 0

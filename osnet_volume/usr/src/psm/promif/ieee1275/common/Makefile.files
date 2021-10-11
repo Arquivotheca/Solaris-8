@@ -1,0 +1,51 @@
+# Copyright (c) 1995-1997, by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#pragma ident	"@(#)Makefile.files	1.8	97/11/22 SMI"
+#
+# psm/promif/ieee1275/common/Makefile.files
+#
+#	This Makefile defines all the promif file modules for the 
+#	directory psm/promif/ieee1275/common
+#
+
+#
+#			IEEE 1275-1994 'common' PROM Routines
+#
+
+COMMON_PROM =		\
+	prom_2path.o	\
+	prom_boot.o	\
+	prom_devname.o	\
+	prom_devtype.o	\
+	prom_enter.o	\
+	prom_env.o	\
+	prom_exit.o	\
+	prom_fb.o	\
+	prom_getchar.o	\
+	prom_gettime.o	\
+	prom_handler.o	\
+	prom_inpath.o	\
+	prom_interp.o	\
+	prom_io.o	\
+	prom_kbd.o	\
+	prom_node.o	\
+	prom_outpath.o	\
+	prom_panic.o	\
+	prom_path.o	\
+	prom_phandle.o	\
+	prom_printf.o	\
+	prom_prop.o	\
+	prom_putchar.o	\
+	prom_reboot.o	\
+	prom_stdin.o	\
+	prom_stdout.o	\
+	prom_string.o	\
+	prom_test.o	\
+	prom_trap.o	\
+	prom_version.o	\
+	prom_wrtestr.o
+
+sparc_PROM =
+
+CORE_OBJS += $(COMMON_PROM) $($(MACH)_PROM)

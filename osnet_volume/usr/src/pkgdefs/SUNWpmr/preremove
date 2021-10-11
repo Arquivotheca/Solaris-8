@@ -1,0 +1,18 @@
+#! /bin/sh
+#
+# Copyright (c) 1993 - 1996, by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#ident	"@(#)preremove	1.2	96/04/23 SMI"
+#
+# SUNWpmr preremove script
+
+#
+# Unload power managed devices
+#
+
+if [ "$BASEDIR" = "/" ] ; then
+	/usr/sbin/pmconfig -r
+fi
+
+exit 0

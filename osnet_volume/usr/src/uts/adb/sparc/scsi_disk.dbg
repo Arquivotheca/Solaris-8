@@ -1,0 +1,106 @@
+\
+\ Copyright (c) 1997-1999 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)scsi_disk.dbg	1.32	99/10/22 SMI"
+
+#include <sys/scsi/scsi.h>
+#include <sys/dkio.h>
+#include <sys/scsi/targets/sddef.h>
+#include "dummy.h"
+
+\
+\
+scsi_disk		un_
+{adb_inline_begin}
+.>z
+<z+{OFFSET, un_sd}=""
+{adb_inline_end}
+	sd			hex
+	rqs			hex
+	rqs_bp			hex
+	rqs_sema		.sema
+{adb_inline_begin}
+<z+{OFFSET, un_sbufp}=""
+{adb_inline_end}
+	sbufp			hex
+	srqbufp			hex
+	sbuf_cv			hex
+{adb_inline_begin}
+<z+{OFFSET, un_ocmap}/n"ocmap"n36Bn
+<z+{OFFSET, un_map}=""
+{adb_inline_end}
+	map			hex
+	offset			hex
+	pstats			hex
+	arq_enabled		hex
+	last_pkt_reason		hex
+	ctype			hex
+	options			hex
+	vtoc			.dk_vtoc
+{adb_inline_begin}
+<z+{OFFSET, un_utab}=""
+{adb_inline_end}
+	utab			hex
+{adb_inline_begin}
+<z+{OFFSET, un_stats}=""
+{adb_inline_end}
+	stats			hex
+	g			.dk_geom		geom
+{adb_inline_begin}
+<z+{OFFSET, un_exclopen}=""
+{adb_inline_end}
+	exclopen		hex
+	gvalid			hex
+	semoclose		.sema
+{adb_inline_begin}
+<z+{OFFSET, un_err_blkno}=""
+{adb_inline_end}
+	err_blkno		hex
+	capacity		hex
+	lbasize			hex
+	state			hex
+	last_state		hex
+	format_in_progress	hex
+	start_stop_issued	hex
+	timestamp		hex
+	asciilabel		char
+	throttle		hex
+	save_throttle		hex
+	ncmds			hex
+	tagflags		hex
+	sbuf_busy		hex
+	resvd_status		hex
+	state_cv		hex
+	mediastate		hex
+	specified_mediastate	hex
+	mhd_token		hex
+	cmd_flags		hex
+	cmd_stat_size		hex
+	resvd_timeid		hex
+	reset_throttle_timeid	hex
+	restart_timeid		hex
+	reissued_timeid		hex
+	dcvb_timeid		hex
+	devid			hex
+	swr_token		hex
+	max_xfer_size		hex
+	errstats		hex
+	isatapi			sdecimal
+	isusb			sdecimal
+	suspend_cv		hex
+	disk_busy_cv		hex
+	power_level		hex
+	allow_bus_device_reset	decimal
+	notready_retry_count	hex	notready_retries
+	reservation_type	hex
+	serial_num_buf		char
+	start_stop_cycle_page 	hex
+	pm_timeid		hex
+	flag_busy		hex
+	detach_count		hex
+	layer_count		hex
+	opens_in_progress	hex
+{adb_inline_begin}
+<z+{SIZEOF}=""
+{adb_inline_end}

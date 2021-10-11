@@ -1,0 +1,30 @@
+\
+\ Copyright (c) 1997-1998 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)pathname.dbg	1.6	98/02/09 SMI"
+
+\	arg		: address of a struct pathname
+\	uses		:
+\	registers	: p
+\	description	: prints the contents of pathname structure
+
+#include <sys/types.h>
+#include <sys/pathname.h>
+#include "dummy.h"
+
+\
+\
+pathname
+{adb_inline_begin}
+.>p
+<p+{OFFSET, pn_buf}=""
+{adb_inline_end}
+	pn_buf			hex
+	pn_path			hex
+	pn_pathlen		decimal
+	pn_bufsize		decimal
+{adb_inline_begin}
+(*(<p+{OFFSET, pn_buf}))/s
+(*(<p+{OFFSET, pn_path}))/s
+{adb_inline_end}

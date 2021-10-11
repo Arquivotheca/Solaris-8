@@ -1,0 +1,25 @@
+#!/sbin/sh
+#
+# Copyright (c) 1994-1998 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#ident	"@(#)pcmcia	1.6	98/12/14 SMI"
+
+case "$1" in
+'start')
+	if [ -c /dev/pem -a -f /usr/lib/pcmciad ] ; then
+		/usr/lib/pcmciad 1>/dev/msglog 2>&1 && \
+			echo 'starting PCMCIA user daemon.'
+	fi
+	;;
+
+'stop')
+	/usr/bin/pkill -x -u 0 pcmciad
+	;;
+
+*)
+	echo "Usage: $0 { start | stop }"
+	exit 1
+	;;
+esac
+exit 0

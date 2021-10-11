@@ -1,0 +1,29 @@
+#
+#pragma ident	"@(#)versions	1.2	99/05/04 SMI"
+#
+# Copyright (c) 1998-1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+# vers file for libsec
+#
+# Note: Even though the SUNW_1.1 version now contains no symbols
+# beyond what was present at Solaris 2.5, the SUNW_1.1 version MUST be 
+# present.  This is because applications built on 2.6 Beta 
+# (when it did contain symbols explicitly) may depend on it.
+#
+i386 {
+	SUNW_1.1:	{SUNW_0.9};
+	SUNW_0.9;
+}
+sparcv9 {
+	SUNW_1.1:	{SUNW_0.9};
+	SUNW_0.9;
+}
+sparc {
+	SUNW_1.1:	{SUNW_0.9};
+	SUNW_0.9;
+}
+ia64 {
+	SUNW_1.1:	{SUNW_0.9};
+	SUNW_0.9;
+}

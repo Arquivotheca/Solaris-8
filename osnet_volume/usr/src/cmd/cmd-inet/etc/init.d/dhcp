@@ -1,0 +1,27 @@
+#!/sbin/sh
+#
+# Copyright (c) 1996-1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#ident	"@(#)dhcp	1.17	99/10/23 SMI"
+
+# Make sure that /usr is mounted
+[ ! -d /usr/bin ] && exit 1
+
+case "$1" in
+'start')
+	if [ -x /usr/lib/inet/in.dhcpd ]; then
+		/usr/lib/inet/in.dhcpd > /dev/console 2>&1
+	fi
+	;;
+
+'stop')
+	/usr/bin/pkill -x -u 0 in.dhcpd
+	;;
+
+*)
+	echo "Usage: $0 { start | stop }"
+	exit 1
+	;;
+esac
+exit 0

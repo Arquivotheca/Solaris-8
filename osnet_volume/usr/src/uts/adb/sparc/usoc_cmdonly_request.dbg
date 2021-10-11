@@ -1,0 +1,32 @@
+\
+\ Copyright (c) 1999 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)usoc_cmdonly_request.dbg	1.1	99/07/21 SMI"
+#include <sys/isa_defs.h>
+#include <sys/types.h>
+#include <sys/dditypes.h>
+#include <sys/ddidmareq.h>
+#include <sys/mutex.h>
+#include <sys/semaphore.h>
+#include <sys/condvar.h>
+#include <sys/thread.h>
+#include <sys/devops.h>
+#include <sys/fibre-channel/fc.h>
+#include <sys/fibre-channel/fca/usoc_cq_defs.h>
+#include "dummy.h"
+\
+\
+usoc_cmdonly_request
+{adb_inline_begin}
+.>q
+<q+{OFFSET, scr_usoc_hdr}=""
+{adb_inline_end}
+	scr_usoc_hdr		.usoc_hdr
+{adb_inline_begin}
+<q+{OFFSET, scr_cqhdr}=""
+{adb_inline_end}
+	scr_cqhdr		.cq_hdr
+{adb_inline_begin}
+<q+{SIZEOF}=""
+{adb_inline_end}

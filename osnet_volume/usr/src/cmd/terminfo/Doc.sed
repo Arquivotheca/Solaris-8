@@ -1,0 +1,27 @@
+#ident	"@(#)Doc.sed	1.4	92/07/14 SMI"	SVr4.0 1.4
+#	From:	SVr4.0	terminfo:Doc.sed	1.4
+
+#
+#	This script is used to strip info from the terminfo
+#	source files.
+#
+sed -n '
+	/^# \{1,\}Manufacturer:[ 	]*\(.*\)/s//.M \1/p
+	/^# \{1,\}Class:[ 	]*\(.*\)/s//.C \1/p
+	/^# \{1,\}Author:[ 	]*\(.*\)/s//.A \1/p
+	/^# \{1,\}Info:[ 	]*/,/^[^#][^	]/ {
+		s/^# *Info:/.I/p
+		/^#[	 ]\{1,\}/ {
+			s/#//p
+		}
+		/^#$/ i\
+.IE
+	}
+	/^\([^#	 ][^ 	]*\)|\([^|,]*\),[ 	]*$/ {
+		s//Terminal:\
+	"\2"\
+		\1/
+		s/|/, /g
+		p
+	}
+' $*

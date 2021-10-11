@@ -1,0 +1,13 @@
+#ident	"@(#)Makefile.targ	1.1	99/10/06 SMI"
+#
+# Copyright (c) 1998-1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+# lib/libldap/spec/Makefile.targ
+
+LIBRARY	=	libldap.a
+VERS	=	.3
+
+OBJECTS	=	ldap.o
+
+SPECCPP =	-I.. -I$(SRC)/lib/libldap3/include

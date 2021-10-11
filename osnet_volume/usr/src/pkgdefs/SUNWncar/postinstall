@@ -1,0 +1,24 @@
+#
+#ident	"@(#)postinstall	1.1	99/08/06 SMI"
+#
+# Copyright (c) 1991-1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+# Install NCA driver using add_drv -
+#	assume that we do not have to set the perms
+#
+
+PATH="/usr/bin:/usr/sbin:${PATH}"
+export PATH
+
+not_installed() {
+	driver=$1
+	grep "^${driver} " $BASEDIR/etc/name_to_major > /dev/null 2>&1
+	return $?
+}
+
+EXIT=0
+
+not_installed nca || add_drv -b ${BASEDIR} -n nca || EXIT=1
+
+exit $EXIT

@@ -1,0 +1,33 @@
+\
+\ Copyright (c) 1998 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)dp_entry.dbg	1.1	98/11/23 SMI"
+
+\ arg             : address of dp_entry struct
+\ uses            :
+\ registers       : z
+\ description     : prints the contents of pollcache structure
+
+#include <sys/devpoll.h>
+#include "dummy.h"
+
+\
+\
+dp_entry	dpe_
+{adb_inline_begin}
+.>z
+<z+{OFFSET, dpe_lock}=""
+{adb_inline_end}
+	lock			.mutex
+{adb_inline_begin}
+<z+{OFFSET, dpe_pcache}=""
+{adb_inline_end}
+	pcache			hex
+	refcnt			sdecimal
+	writerwait		sdecimal
+	flag			hex
+	cv			hex
+{adb_inline_begin}
+<z+{SIZEOF}=""
+{adb_inline_end}

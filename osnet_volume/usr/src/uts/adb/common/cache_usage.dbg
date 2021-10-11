@@ -1,0 +1,28 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)cache_usage.dbg	1.3	98/01/19 SMI"
+
+\       arg             : address of cache_usage struct
+\       uses            :
+\       registers       : z
+\       description     : prints the contents of cache_usage structure
+
+#include <sys/fs/cachefs_fs.h>
+#include "dummy.h"
+
+\
+\
+cache_usage             cu_
+{adb_inline_begin}
+.>z
+<z+{OFFSET, cu_blksused}=""
+{adb_inline_end}
+        blksused                sdecimal
+        filesused               sdecimal
+        flags                   hex
+        unique                  decimal
+{adb_inline_begin}
+<z+{SIZEOF}=""
+{adb_inline_end}

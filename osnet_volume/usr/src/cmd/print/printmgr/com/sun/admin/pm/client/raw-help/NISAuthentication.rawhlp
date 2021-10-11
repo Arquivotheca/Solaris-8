@@ -1,0 +1,74 @@
+<TITLE> NIS Authentication</TITLE>
+<!-- Tag=NISAuthentication -->
+
+<CONTENT>
+
+<p>
+
+If you are using the NIS naming service, you will need the root
+password for the NIS master computer to make any changes. The NIS
+Authentication dialog is displayed when you click OK or Apply in a
+dialog.
+
+<p>
+
+1. Enter the password for the NIS master.
+
+<p>
+
+2. Click OK.
+
+<p>
+
+The entries you have made will be saved and the NIS Authentication
+dialog will be dismissed. 
+
+<p> 
+
+Click Cancel if you don't know the password for the NIS master. 
+
+<p>
+
+<b>Note:</b> Keep the following in mind if you are using Solaris Print
+Manager to update printer information in the NIS name service:
+
+<p>
+
+- If your network is set up with NIS master and slave servers, 
+the NIS slaves may not see the updated printer information 
+until the NIS slaves are updated. See ypmake(1M) for more
+information.
+
+<p>
+	
+- If your NIS servers are running Solaris 2.5 and compatible 
+versions, you must have explicit permissions on the NIS master 
+server to update the maps. This means an entry for your system 
+name must reside in root's .rhosts file on the NIS master server.
+
+<p>
+
+- If you have modified the yp makefile to use something other
+than /etc/printers.conf as the source for the NIS map,
+printers.conf.byname, do not use Solaris Print Manager to modify NIS.
+
+</CONTENT>
+
+<p>
+
+<KEYWORDS>
+
+NIS "NIS master" master authentication login password naming "naming
+service" files .rhosts
+
+</KEYWORDS>
+
+<p>
+
+<SEEALSO>
+NameService
+Overview
+MainWindow 
+HelpOnHelp
+</SEEALSO>
+

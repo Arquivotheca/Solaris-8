@@ -1,0 +1,29 @@
+\
+\ Copyright (c) 1999 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\ #pragma ident	"@(#)uf_info.dbg	1.2	99/09/10 SMI"
+
+#include <sys/user.h>
+#include "dummy.h"
+
+\
+\
+uf_info        fi_
+{adb_inline_begin}
+.>s
+<s+{OFFSET, fi_lock}=""
+{adb_inline_end}
+	lock			.mutex
+{adb_inline_begin}
+<s+{OFFSET, fi_nfiles}=""
+{adb_inline_end}
+	nfiles			sdecimal
+	list			hex
+	rlist			hex
+{adb_inline_begin}
+(*(<s+{OFFSET, fi_list}))>f
+(*(<s+{OFFSET, fi_nfiles}))>/i/v
+<f,<v$<<uf_entry
+<s+{SIZEOF}=""
+{adb_inline_end}

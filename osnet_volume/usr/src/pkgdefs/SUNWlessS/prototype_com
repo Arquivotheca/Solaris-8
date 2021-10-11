@@ -1,0 +1,105 @@
+#
+#
+# Copyright (c) 1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#ident	"@(#)prototype_com	1.1	99/10/08 SMI"
+#
+# This required package information file contains a list of package contents.
+# The 'pkgmk' command uses this file to identify the contents of a package
+# and their location on the development machine when building the package.
+# Can be created via a text editor or through use of the 'pkgproto' command.
+
+#!search <pathname pathname ...>	# where to find pkg objects
+#!include <filename>			# include another 'prototype' file
+#!default <mode> <owner> <group>	# default used if not specified on entry
+#!<param>=<value>			# puts parameter in pkg environment
+
+# packaging files
+i pkginfo
+i copyright
+i depend
+#
+# source locations relative to the prototype file
+#
+# SUNWlessS
+#
+d none usr 755 root sys
+d none usr/share 755 root sys
+d none usr/share/src 755 root sys
+d none usr/share/src/less 755 root bin
+f none usr/share/src/less/main.c 444 root bin
+f none usr/share/src/less/screen.c 444 root bin
+f none usr/share/src/less/brac.c 444 root bin
+f none usr/share/src/less/ch.c 444 root bin
+f none usr/share/src/less/charset.c 444 root bin
+f none usr/share/src/less/cmdbuf.c 444 root bin
+f none usr/share/src/less/command.c 444 root bin
+f none usr/share/src/less/decode.c 444 root bin
+f none usr/share/src/less/edit.c 444 root bin
+f none usr/share/src/less/filename.c 444 root bin
+f none usr/share/src/less/forwback.c 444 root bin
+f none usr/share/src/less/help.c 444 root bin
+f none usr/share/src/less/ifile.c 444 root bin
+f none usr/share/src/less/input.c 444 root bin
+f none usr/share/src/less/jump.c 444 root bin
+f none usr/share/src/less/line.c 444 root bin
+f none usr/share/src/less/linenum.c 444 root bin
+f none usr/share/src/less/lsystem.c 444 root bin
+f none usr/share/src/less/mark.c 444 root bin
+f none usr/share/src/less/optfunc.c 444 root bin
+f none usr/share/src/less/option.c 444 root bin
+f none usr/share/src/less/opttbl.c 444 root bin
+f none usr/share/src/less/os.c 444 root bin
+f none usr/share/src/less/output.c 444 root bin
+f none usr/share/src/less/position.c 444 root bin
+f none usr/share/src/less/prompt.c 444 root bin
+f none usr/share/src/less/search.c 444 root bin
+f none usr/share/src/less/signal.c 444 root bin
+f none usr/share/src/less/tags.c 444 root bin
+f none usr/share/src/less/ttyin.c 444 root bin
+f none usr/share/src/less/version.c 444 root bin
+f none usr/share/src/less/regexp.c 444 root bin
+f none usr/share/src/less/regexp.h 444 root bin
+f none usr/share/src/less/INSTALL 444 root bin
+f none usr/share/src/less/Makefile.in 444 root bin
+f none usr/share/src/less/Makefile.aut 444 root bin
+f none usr/share/src/less/README 444 root bin
+f none usr/share/src/less/NEWS 444 root bin
+f none usr/share/src/less/COPYING 444 root bin
+f none usr/share/src/less/configure 555 root bin
+f none usr/share/src/less/configure.in 444 root bin
+f none usr/share/src/less/acconfig.h 444 root bin
+f none usr/share/src/less/lesskey.c 444 root bin
+f none usr/share/src/less/lessecho.c 444 root bin
+f none usr/share/src/less/cmd.h 444 root bin
+f none usr/share/src/less/funcs.h 444 root bin
+f none usr/share/src/less/lglob.h 444 root bin
+f none usr/share/src/less/less.h 444 root bin
+f none usr/share/src/less/lesskey.h 444 root bin
+f none usr/share/src/less/option.h 444 root bin
+f none usr/share/src/less/pckeys.h 444 root bin
+f none usr/share/src/less/position.h 444 root bin
+f none usr/share/src/less/install.sh 444 root bin
+f none usr/share/src/less/defines.h.in 444 root bin
+f none usr/share/src/less/defines.h.top 444 root bin
+f none usr/share/src/less/mkinstalldirs 444 root bin
+f none usr/share/src/less/less.nro 444 root bin
+f none usr/share/src/less/lesskey.nro 444 root bin
+f none usr/share/src/less/less.man 444 root bin
+f none usr/share/src/less/lesskey.man 444 root bin
+f none usr/share/src/less/less.hlp 444 root bin
+f none usr/share/src/less/mkfuncs.awk 444 root bin
+f none usr/share/src/less/mkhelp.c 444 root bin
+f none usr/share/src/less/defines.ds 444 root bin
+f none usr/share/src/less/Makefile.dsb 444 root bin
+f none usr/share/src/less/Makefile.dsg 444 root bin
+f none usr/share/src/less/Makefile.dsm 444 root bin
+f none usr/share/src/less/defines.o2 444 root bin
+f none usr/share/src/less/Makefile.o2e 444 root bin
+f none usr/share/src/less/defines.o9 444 root bin
+f none usr/share/src/less/Makefile.o9c 444 root bin
+f none usr/share/src/less/Makefile.o9u 444 root bin
+f none usr/share/src/less/defines.wn 444 root bin
+f none usr/share/src/less/Makefile.wnm 444 root bin
+f none usr/share/src/less/Makefile.wnb 444 root bin

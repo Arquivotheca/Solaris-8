@@ -1,0 +1,17 @@
+#
+# Copyright (c) 1997, by Sun Microsystems, Inc.
+# All Rights Reserved.
+#
+# DOS makefile for boot menu/configuration program
+#
+#ident	"<@(#)makefile.dos	1.9	97/03/25 SMI>"
+#
+RM = del
+PROTO = ..\proto\bootpart
+DB = $(PROTO)\solaris\devicedb\ 
+
+clean:
+	-$(RM) $(DB)master 
+
+install:
+	copy master $(DB)master 

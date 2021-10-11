@@ -1,0 +1,17 @@
+#
+#ident	"@(#)preremove	1.1	99/08/06 SMI"
+#
+# Copyright (c) 1991-1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+# Remove NCA driver using rem_drv
+#
+
+PATH="/usr/bin:/usr/sbin:${PATH}"
+export PATH
+
+EXIT=0
+
+rem_drv -b ${BASEDIR} nca || EXIT=1
+
+exit $EXIT

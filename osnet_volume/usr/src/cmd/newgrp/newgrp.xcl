@@ -1,0 +1,10 @@
+msgid  "LOGNAME="
+msgid  "HOME="
+msgid  "PATH=:/usr/bin:/bin"
+msgid  "PATH=:/usr/bin:/sbin:/usr/sbin:/etc:/bin"
+msgid  ""
+msgid  "SHELL"
+msgid  "/usr/bin/sh"
+msgid  "-"
+msgid  "%s\n"
+

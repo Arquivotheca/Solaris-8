@@ -1,0 +1,13 @@
+#ident	"@(#)Makefile.targ	1.1	99/01/25 SMI"
+#
+# Copyright (c) 1998-1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+# lib/librt/spec/Makefile.targ
+
+LIBRARY	=	librt.a
+VERS	=	.1
+
+OBJECTS	=	posix4.o
+
+ABIPOSIXLIB=	abi_libposix4.so$(VERS)

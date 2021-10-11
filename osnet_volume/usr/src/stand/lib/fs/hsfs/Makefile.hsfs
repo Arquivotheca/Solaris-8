@@ -1,0 +1,24 @@
+#
+#ident	"@(#)Makefile.hsfs	1.7	96/03/14 SMI"
+#
+# Copyright (c) 1991 by Sun Microsystems, Inc.
+# 
+# stand/lib/fs/hsfs/Makefile.hsfs
+#
+# Standalone Library HSFS makefile
+#
+# This Makefile is included by ../../sparc/Makefile and is used
+# when building $(LIBHSFS). The library is built in ../../sparc.
+#
+
+HSFSOBJ=		hsfsops.o
+HSFSOBJ_L=		hsfsops.ln
+HSFSSRC=		$(HSFSOBJ:%.o=$(HSFSDIR)/%.c)
+
+$(LIBHSFS) :=		FS_OBJECTS=	$(HSFSOBJ)
+$(LIBHSFS_L) :=		FS_OBJECTS_L=	$(HSFSOBJ_L)
+$(LIBHSFS_L) :=		FS_SOURCES=	$(HSFSSRC)
+
+.PARALLEL:      	$(HSFSOBJ:%=objs/%) $(HSFSOBJ_L:%=objs/%)
+.PARALLEL:      	$(HSFSOBJ:%=kadbobjs/%)
+

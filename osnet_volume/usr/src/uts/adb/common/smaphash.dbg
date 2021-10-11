@@ -1,0 +1,33 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)smaphash.dbg	1.3	98/01/19 SMI"
+
+\	arg		: address of a struct smap
+\	uses		:
+\	registers	: n, s
+\	description	: prints the contents of smap structure, then
+\			  recurses following the sm_hash pointer
+
+#include <sys/param.h>
+#include <sys/types.h>
+#include <sys/t_lock.h>
+#include <vm/seg.h>
+#include <vm/seg_map.h>
+#include "dummy.h"
+
+\
+\
+smap		""	smaphash
+{adb_inline_begin}
+.>s
+.+{OFFSET, sm_vp}=""
+{adb_inline_end}
+	sm_vp		hex	vnode
+	sm_off		hex	off
+	sm_hash		hex	hash
+{adb_inline_begin}
+*(<s+{OFFSET, sm_hash})>n
+<n,#(#<n)$<smaphash
+{adb_inline_end}

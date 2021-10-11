@@ -1,0 +1,28 @@
+#
+#	@(#)postinstall	1.2	94/01/07 (c) Sun Microsystems, Inc.
+#
+# Copyright (c) 1993 by Sun Microsystems, Inc.
+#
+# 	add IP/dialup drivers
+#
+
+add_driver(){
+	driver=$1
+	grep "^${driver} " $BASEDIR/etc/name_to_major > /dev/null 2>&1
+	if [ $? != 0 ]; then
+		$ADD_DRV $driver || exit 1
+	fi
+} #add_driver()
+
+if [ "${BASEDIR:=/}" = "/" ]
+then
+	ADD_DRV="add_drv"
+else
+	ADD_DRV="add_drv -b ${BASEDIR}"
+fi
+
+add_driver ipdcm
+add_driver ipdptp
+add_driver ipd
+
+exit 0

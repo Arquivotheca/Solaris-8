@@ -1,0 +1,95 @@
+#
+# uts/intel/ia32/Makefile.files
+# Copyright (c) 1996-1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#pragma ident	"@(#)Makefile.files	1.77	99/08/15 SMI"
+#
+#	This Makefile defines all file modules and build rules for the
+# directory uts/intel/ia32 and it's children. These are the source files
+# which are specific to intel ia32 processor architectures.
+#
+
+#
+#	Core (unix) objects
+#
+CORE_OBJS +=		\
+	cpc_subr.o	\
+	ddi_i86.o	\
+	fpu.o		\
+	i86_vtrace.o	\
+	sysi86.o	\
+	copy.o		\
+	ddi_i86_asm.o	\
+	float.o		\
+	i86_subr.o	\
+	int_entry.o	\
+	lock_prim.o	\
+	swtch.o		\
+	tables2.o
+
+#
+#	file system modules
+#
+CORE_OBJS +=	prmachdep.o
+
+
+#
+#	Generic-unix Module
+#
+GENUNIX_OBJS +=		\
+	archdep.o	\
+	getcontext.o	\
+	prom_alloc.o	\
+	prom_enter.o	\
+	prom_exit.o	\
+	prom_panic.o	\
+	sundep.o	\
+	syscall.o
+
+#
+#	misc. modules
+#
+EMUL_80387_OBJS +=	\
+	arith.o		\
+	dcode.o		\
+	divmul.o	\
+	emul_init.o	\
+	glue.o		\
+	lipsq.o		\
+	reg.o		\
+	remsc.o		\
+	round.o		\
+	status.o	\
+	store.o		\
+	subadd.o	\
+	trans.o
+
+#
+#	special files
+#
+MODSTUB_OBJ =	 modstubs.o
+
+BOOTDEV_OBJS +=		\
+	bootdev.o
+
+#
+#			misc. modules
+#
+KRTLD_BOOT_OBJS +=	kobj_boot.o
+KRTLD_OBJS +=		kobj_crt.o	kobj_reloc.o	kobj_isa.o \
+			doreloc.o	kobj_convrelstr.o
+
+XMEMFS_OBJS +=		xmem_dir.o	xmem_subr.o	xmem_vfsops.o \
+			xmem_vnops.o	seg_xmem.o
+
+#
+#	Build up paths and defines.
+#
+INC_PATH	+= -I$(UTSBASE)/intel
+
+#
+# Inlined assembler routines.
+#
+INLINES +=	$(UTSBASE)/intel/ia32/ml/ia32.il
+

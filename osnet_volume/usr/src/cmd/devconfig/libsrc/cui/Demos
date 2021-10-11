@@ -1,0 +1,27 @@
+! Create a notice to get the localized 'OK' button to appear.
+!ident "@(#)Demos 1.1 93/07/26 SMI"
+
+! assign resources to base window
+
+Anotice.row:					2
+Anotice.col:					20
+Anotice.hPad:					3
+Anotice.vPad:					3
+Anotice.vSpace:					3
+Anotice.title:					"Localization Test"
+
+Notice:						ano
+
+
+
+OblongButton:				apply:Anotice
+Anotice.apply.label:			"apply"
+*apply.popupOnSelect:		ano
+
+OblongButton:				exit:Anotice
+*exit.label:			"Exit"
+*exit.col:			1
+*exit.select:		exitCallback
+
+ano.string: "Look at the OK button!"
+

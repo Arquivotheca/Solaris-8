@@ -1,0 +1,317 @@
+\documentstyle{article}
+
+\title{Device Configuration API}
+\author{Bijan Mottahedeh \\ SunSoft, Inc.}
+\parindent 0pt
+\textwidth 6.5in
+\oddsidemargin 0in
+
+\begin{document}
+\maketitle
+
+The device configuration (DVC) API provides services that enable an
+application to retrieve prototype and actual device configuration data,
+add new devices, unconfigure existing devices, modify attributes of
+existing devices, and to store the new device configuration data.  The
+DVC API gives the application access to two device lists; one, a device
+category list which contains names and titles for all available devices
+and the other, the configured device list which contains device nodes
+for the existing devices in the system.
+
+\section{Device categories}
+
+The device category list contains the names and titles of all devices
+which may be configured in the system.  In the DVC API a distinction is
+made between names and titles. For example, the category name {\bf
+pointer} has the title {\bf Pointing devices}.  The name-title
+translation is performed through a map in the file {\bf
+/usr/lib/devconfig/abbreviations}.  The name  title mapping for
+windowing devices is displayed in figure 1.
+
+\begin{figure}[h]
+\begin{center}
+\begin{tabular}{@{}|l|l|@{}} \hline
+display & Video display adaptors \\ \hline
+keyboard & Keyboards \\ \hline
+pointer & Pointing devices \\ \hline
+\end{tabular} \\
+\caption{Name title mapping for windowing devices}
+\end{center}
+\end{figure}
+
+A device is addressed in the device category list by two indexes; one,
+the category index and the other the device index in that
+category.  For example, in figure 2, the Logitech bus mouse is
+addressed by the index pair \(2,0\) where 2 is the index for the {\bf
+Pointing devices} category in the device category list and 0 is the
+index of the Logitech bus mouse device in the  {\bf Mouse devices} list. \\
+
+\begin{figure}
+\begin{center}
+\begin{tabular}{@{}|l|@{}} \hline
+\multicolumn{1}{|c|}{Device category} \\ \hline
+Keyboards \\
+Video display adaptors \\
+{\bf Pointing devices} \\ \hline
+\end{tabular}
+\raisebox{-1.50cm}{\begin{tabular}{@{}|l|@{}} \hline
+\multicolumn{1}{|c|}{Mouse devices} \\ \hline
+{\bf Logitech bus mouse} \\
+Logitech MouseMan serial mouse \\
+Microsoft serial mouse \\
+Mouse Systems Corp. serial mouse \\ \hline
+\end{tabular}} \\
+\caption{Device category list}
+\end{center}
+\end{figure}
+
+{\small \tt \noindent{\begin{tabular}{@{}ll@{}}
+void & fetch\_cat\_info(void); \\
+void & set\_cat\_idx(int idx); \\
+char* & next\_cat\_title(void); \\
+char* & next\_cat\_dev\_title(void);
+\end{tabular}}} \\
+
+Fetch\_cat\_info() retrieves all device configuration data.  The DVC
+API maintains a {\em current category index} which the application sets
+in order to address a device in a specific category.
+Set\_cat\_idx() sets the current categoy index.  The application builds
+its own device category list.  Next\_cat\_title() returns the next
+category title in the device category list or NULL if at the end of the
+list.  Next\_cat\_dev\_title() returns the next device title in the
+current category or NULL if at the end of the list.  For example, the
+application may build its category list as follows:
+
+{\small \begin{verbatim}
+        for (i = 0; cat_title = next_cat_title(); i++) {
+                set_cat_idx(i);
+                /* Create a new cateogry at index i */
+
+                for (j = 0; dev_title = next_cat_dev_title(); j++)
+                    /* Add the device titles in new category */
+
+        }
+\end{verbatim}}
+
+\section{Configured devices}
+
+The configured device list contains nodes for all the configured
+devices in the system.  A device in the configured device list is
+addressed by its index in the list. In figure 3, the index of
+the mouse device is 4. \\
+
+\begin{figure}
+\begin{center}
+\begin{tabular}{@{}|l|@{}} \hline
+\multicolumn{1}{|c|}{Configured devices} \\ \hline
+AT COM ports\\
+SMC EtherCard PLUS \\
+DPT SmartCache Plus, fourth slot/unit \\
+ATI 8514/A \\
+{\bf Logitech MouseMan serial mouse} \\
+AT 101-key keyboard - US English \\ \hline
+\end{tabular} \\
+\caption{Configured device list}
+\end{center}
+\end{figure}
+
+{\small \tt \noindent{\mbox{typedef struct device\_info \{}} \\
+\begin{tabular}{@{\hspace{1.2cm}}ll@{}}
+struct device\_info* & next; \\
+char* & name; \\
+int & unit; \\
+char* & title; \\
+attr\_list\_t* & dev\_alist; \\
+attr\_list\_t* & typ\_alist; \\
+int & modified; \\
+void* & ui;
+\end{tabular} \\
+\mbox{\} device\_info\_t;}} \\
+
+{\small \tt \noindent{\begin{tabular}{@{}ll@{}}
+char* & next\_dev\_title(void); \\
+device\_info\_t* & make\_dev\_node(int idx); \\
+void & free\_dev\_node(device\_info\_t* dp); \\
+void & add\_dev\_node(device\_info\_t* dp); \\
+void & remove\_dev\_node(int idx); \\
+device\_info\_t* & get\_dev\_node(idx); \\
+char* & get\_dev\_cat(device\_info\_t* dp);
+\end{tabular}}} \\
+
+The application builds its own list of configured devices.
+Next\_dev\_title() returns the title of the next device in the
+configured device list. For example, the application may build its
+configured device list as follows:
+
+{\small \begin{verbatim}
+        while (dev_title = next_dev_title())
+                /* Add the device title to the list */
+\end{verbatim}}
+
+Make\_dev\_node() builds a node for a specified device in the device
+catgory list.  Free\_dev\_node() frees a device node.  Add\_dev\_node()
+adds a device node to the configured device list.  The application must
+not use free\_dev\_node() to free a node in the configured list.  The
+configured device list is maintained in an LRU order so the new device
+is at index 0; Remove\_dev\_node(idx) removes a device from the
+configured device list.  Get\_dev\_node() returns the device node for a
+device in the configured device list or NULL if at  the end of the
+list.  Get\_dev\_cat() returns the category for a device.  For example,
+the application can check whether a device of category {\bf pointer} is
+currently configured as follows:
+
+{\small \begin{verbatim}
+        for (i = 0; dp = get_dev_node(i); i++)
+                dev_cat = get_dev_cat(dp)
+                if (!strcmp(dev_cat, "pointer")
+                        found_pointer++;
+        }
+\end{verbatim}}
+
+The Logitech bus mouse in figure 2 is added to the configured device
+list as follows:
+
+{\small \begin{verbatim}
+        set_cat_idx(2);         /* device category list index */
+        dp = make_dev_node(0);  /* device index in the category */
+
+        /* Allow the user to confirm configuration values */
+
+        add_dev_node(dp);        /* add to the configured device list */
+\end{verbatim}}
+
+A device node contains two attribute lists, one for the device prototype
+data and one for the configured device data.  The attribute list format is
+described in the next section. For an existing device, the
+configured device data is retrieved from the system. For a new device
+the configured device data represents the default choices for the device
+attributes.  The application then allows the user to modify the new
+device's attributes if necessary.  The {\bf ui} field in the device
+node is available for the application and is not used by the DVC API.
+For example, the application may allow the user to set proper attributes
+for the new Logitech bus mouse as follows:
+
+{\small \begin{verbatim}
+        new_device = get_dev_node(0);   /* configured device list index */
+        /* Display device attributes to the user */
+\end{verbatim}}
+
+\section{Device attributes}
+
+{\small \tt \noindent{\mbox{typedef enum \{}} \\
+\begin{tabular}{@{\hspace{1.2cm}}ll@{}}
+VAL\_NUMERIC, \\
+VAL\_STRING
+\end{tabular} \\
+\mbox{\} val\_t;}} \\
+
+{\small \tt \noindent{\mbox{typedef union val\_store \{}} \\
+\begin{tabular}{@{\hspace{1.2cm}}ll@{}}
+char* & string; \\
+int &integer;
+\end{tabular} \\
+\mbox{\} val\_store\_t;}} \\
+
+{\small \tt \noindent{\mbox{typedef struct val\_list \{}} \\
+\begin{tabular}{@{\hspace{1.2cm}}ll@{}}
+struct val\_list* & next; \\
+val\_t & val\_type; \\
+val\_store\_t & val;
+\end{tabular} \\
+\mbox{\} val\_list\_t;}} \\
+
+{\small \tt \noindent{\mbox{typedef struct attr\_list \{}} \\
+\begin{tabular}{@{\hspace{1.2cm}}ll@{}}
+struct attr\_list* & next; \\
+char* & name; \\
+val\_list\_t* & vlist;
+\end{tabular} \\
+\mbox{\} attr\_list\_t;}} \\
+
+{\small \begin{verbatim}
+#define NAME_ATTR       "name"
+#define WNAME_ATTR      "__owname__"
+#define TITLE_ATTR      "__title__"
+#define CAT_ATTR        "__category__"
+#define INST_ATTR       "__instance__"
+#define AUTO_ATTR       "__auto__"
+#define REAL_ATTR       "__real__"
+#define INSTANCE_ATTR   "__instance__"
+#define INTERNAL_ATTR   "^__.*__$"
+
+#define NUMERIC_STRING  "numeric,"
+#define STRING_STRING   "string,"
+#define VAR_STRING      "var,"
+\end{verbatim}}
+
+An attribute may be either a string or a numeric type.  Attributes in a
+prototype list are always strings. These attributes are the {\bf
+cfinfo} entries for the given device.  Attributes may have one or more
+possible values representing user's choices.  The first value of an
+attribute is the default value.  An attribute of type {\bf var}
+specifies a configurable attribute.  An attribute of type {\bf var} has
+for its value the name of the configurable attribute.  When the
+application finds an attribute of type {\bf var}, the application must
+perform the variable substitution and get the attribute data for the
+attribute specified by the {\bf var} attribute.  See {\bf
+device.cfinfo(4)} for details.  The application retrieves the values
+for an attribute with the following routines. \\
+
+{\small \tt \noindent{\begin{tabular}{@{}ll@{}}
+int & count\_numeric(char* fmt); \\
+int & count\_string(char* fmt); \\
+void &next\_numeric(char** var\_fmt, int* pn); \\
+char* & next\_string(char** var\_fmt); \\
+char* & expand\_abbr(char* text);
+\end{tabular}}} \\
+
+Count\_numeric() return the number of choices for a numeric attribute.
+Count\_string() returns the number of choices for a string attribute.
+Next\_numeric() stores the next numeric value of a numeric attribute in
+its argument.  Next\_string() returns the next string value for a
+string attribute.  All attribute names must be expanded via
+expand\_abbr().  For example, the application may process all numerical
+choices in a prototype string as follows:
+
+{\small \begin{verbatim}
+        val_list_t* var_typ,
+        char*       typ_str;
+        int         nchoices;
+        int         n;
+        int         i;
+
+        typ_str = var_typ->val.string;
+        nchoices = count_numeric(var_typ->val.string);
+
+        for (i = 0; i < nchoices; i++) {
+                next_numeric(&typ_str, &n);
+                /* process the value */
+        }
+\end{verbatim}}
+
+\section{Configuration update}
+
+{\small \tt \noindent{\begin{tabular}{@{}ll@{}}
+int & modified\_conf(void); \\
+void & update\_conf(void);
+\end{tabular}}} \\
+
+The application must sync the final device configuration data system
+files.  Modified\_conf() checks if the device configuration data has
+been modified before doing the update.  Update\_conf() does the  actual
+update.
+
+\section{User interface}
+
+The application must provide the following routines for the user
+interface portion of the DVC API. \\
+
+{\small \tt \noindent{\begin{tabular}{@{}ll@{}}
+void & ui\_notice(char *text); \\
+void & ui\_error\_exit(char *text);
+\end{tabular}}} \\
+
+Ui\_notice() gives the user a non-fatal warning message.
+Ui\_error\_exit() gives the user a fatal error and exits.
+
+\end{document}}

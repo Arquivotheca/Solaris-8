@@ -1,0 +1,14 @@
+#include <sys/dada/dada.h>
+#include <sys/dada/adapters/ata_common.h>
+#include <sys/dada/adapters/ghd/ghd.h>
+
+\  uata driver
+ata_controller
+
+ata_drive
+
+ata_pkt
+
+cmd_ctl
+
+ghd_cmd

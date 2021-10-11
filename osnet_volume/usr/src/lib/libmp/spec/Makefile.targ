@@ -1,0 +1,14 @@
+#
+# Copyright (c) 1997-1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#ident	"@(#)Makefile.targ	1.1	99/01/25 SMI"
+#
+# lib/libmp/spec/Makefile.targ
+
+LIBRARY	=	libmp.a
+VERS	=	.2
+
+OBJECTS	=	mp.o
+
+SPECCPP =

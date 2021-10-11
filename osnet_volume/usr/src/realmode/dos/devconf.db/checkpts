@@ -1,0 +1,2619 @@
+VERSION 1
+# Freezepoint File
+#
+# Created by cathleen 01/21/99 02:49:58 PM
+# COMMENT: #ident "@(#)checkpts 1.234 99/01/21 SMI - ALPHA DCB"
+#
+# This freezepoint was created from the SCCS files located under
+# the workspace (or directory):
+
+/la/ws/cathleen/mca28_rm
+
+# To use this freezepoint to extract the specified deltas for the files
+# listed below you must have access to the above directory or some
+# other directory that contains a copy of the same SCCS source hierarchy.
+# The file names listed below are relative to the workspace.
+#
+# This file may be checked in to SCCS.
+# Lines that begin with a # anywhere in the file are ignored.
+#
+# Format:
+# sfilename (previously SID) date time user hex hex hex hex hex hex hex hex
+#
+# First four hex's are the SCCS Mergeable Id of the root delta of the
+# containing delta tree.
+# Last four hex's are the SMID of the desired delta.
+
+#sdata=95/11/21 11:17:12
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 bootconf/notes/misc
+bootconf/notes/misc (previously 1.2) 95/11/21 15:04:26 rgreer b871a65f f05f3a01 c13c3c41 850ee391 817b0f2e faab0707 18017cb9 2e179bc8
+#sdata=95/11/21 11:17:13
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 bootconf/notes/program.devs
+bootconf/notes/program.devs (previously 1.1) 95/11/21 11:17:12 rgreer bb0e7a5a bb635e8a f08e5e95 ce41c08a bb0e7a5a bb635e8a f08e5e95 ce41c08a
+#sdata=95/11/21 11:17:14
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 bootconf/notes/window.conf
+bootconf/notes/window.conf (previously 1.1) 95/11/21 11:17:13 rgreer 270f8125 55bddd3 7a14496 8205bff2 270f8125 55bddd3 7a14496 8205bff2
+#sdata=95/06/14 13:24:47
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 bootconf/README
+bootconf/README (previously 1.6) 99/01/20 14:05:26 cathleen f4c6daac cf7b560a febb69e3 c974890c ac109d74 2c4c0fa0 446cc756 4dfbc5a
+#sdata=96/01/02 11:04:31
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 bootconf/adv.c
+bootconf/adv.c (previously 1.18) 99/01/20 14:00:42 cathleen a754f791 35214fb1 15bcf5b0 a5cfafe9 9443b55a 631960c7 cb0557db 3ec79457
+#sdata=96/01/02 11:04:32
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 bootconf/adv.h
+bootconf/adv.h (previously 1.7) 97/08/27 11:25:49 perrin eb78f4d9 98ec4d9 fdad238d fdb0bcfd 40057ff5 6cc22181 a38e8b9 7341c411
+#sdata=95/06/19 09:54:30
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 bootconf/befext.c
+#leaf=a1e01d45 46e3bc44 a2881fb4 3d91b5a6
+#leaf=fedc2eb 136be98e 1ea0ddcd 83344659
+#leaf=1d744c40 72d85ca2 b1b56c3c 393e394d
+#leaf=5f6b31ec ae14fb33 27d5a73a eef3b536
+bootconf/befext.c (previously 1.43) 98/07/21 16:01:19 tony 383d80b7 8311d8b5 8c06197a c7e9c5b3 bda2df00 c96d293d 4da73a60 a37f1f24
+#sdata=95/06/22 12:54:22
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 bootconf/befinst.c
+#leaf=5999d6f3 b114ab2c 6671ad7a 101da225
+#leaf=3cd29330 f88d2220 8f6d222 bd09717
+#leaf=e5cf3cc4 50ef161e ce736b4c 52483ef
+#leaf=50070873 8d014378 47e10712 ab45958b
+#leaf=dc59b753 bbcbb68e 1ee33eb0 bf7bf7be
+#leaf=41a1e03 f578335 7d0ea27f f9bfef3e
+#leaf=82e6cbbb 1e0a5e0a d327062e 84cb6d20
+bootconf/befinst.c (previously 1.65) 98/07/21 16:02:29 tony 673aaead b3869621 23a39735 380667e3 7c09d5ce 91792029 97985cbe cc726b8c
+#sdata=95/06/27 13:12:22
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 bootconf/befinst.h
+bootconf/befinst.h (previously 1.13) 97/08/27 11:25:49 perrin b32ebcdc 445cac41 62d18ad6 b7d58ac6 eda87cb3 f854ae50 dce2509a a7fab1c3
+#sdata=96/05/30 15:51:19
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 bootconf/bios.c
+bootconf/bios.c (previously 1.18) 99/01/20 14:00:50 cathleen 5b146a8f cfa0d916 1bd416f1 2988ece2 5791bb20 db4c67a1 6e67783e 4e3771fc
+#sdata=96/05/30 15:51:20
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 bootconf/bios.h
+bootconf/bios.h (previously 1.7) 98/07/21 16:07:12 tony 44b271ed 909fb343 bbe065be e4da1410 975c7294 5296c835 5c6c86af b21c9a32
+#sdata=95/07/13 18:07:46
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 bootconf/biosprim.c
+bootconf/biosprim.c (previously 1.51) 97/12/10 20:12:29 cpj 180a6320 dda21b34 7b17a13a 5bf4651 2701c4e3 da611dd9 d0ef3c34 9dac1ccc
+#sdata=95/07/13 18:07:47
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 bootconf/biosprim.h
+bootconf/biosprim.h (previously 1.17) 97/08/27 11:25:50 perrin 347cf251 ab7b5c0a 78f924a dc3a0d63 e65613a 71314691 290c57b 8a703202
+#sdata=95/06/14 13:23:57
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 bootconf/boards.c
+#leaf=fa81ddde 86fbc3e4 230a02e1 f6c58d33
+#leaf=7f5c6a19 e9cb7277 e3a91dac b574133a
+#leaf=9e1a4522 23065208 a529fb0a a4767b7c
+#leaf=3fb2b183 ea5b01df 35b19e9 917741d3
+#leaf=978aa52f 8f59b678 f30b3e93 13b74007
+bootconf/boards.c (previously 1.67) 97/12/10 20:12:31 cpj 2c152c94 a5ab2729 4087c089 d53bdac9 5535e737 17e4c144 9ccf7e99 1116081e
+#sdata=95/06/14 13:23:58
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 bootconf/boards.h
+#leaf=68276de2 fa6038af 5903a574 bd30f0e1
+#leaf=f4a63902 dc488414 d56b8f21 87c6a532
+bootconf/boards.h (previously 1.21) 97/12/10 20:12:32 cpj 595b0f31 2a116ab0 afd43bac 8ebea9f0 df612d2e 55e50a70 c0a7d034 9fe04a75
+#sdata=95/06/14 13:23:59
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 bootconf/boot.c
+#leaf=49f59b58 feb7df23 6f60bfe5 5e4bdf5f
+#leaf=992ca4c 9427df7b 2066d415 56a6e933
+#leaf=58dc2c1b 72598edd 7f253004 4e674305
+#leaf=8a67a828 afea85da d4527d99 8ae6d543
+#leaf=c2f6d47d b18363cf 4871ef34 ea52d9d2
+#leaf=2404c3a7 c24431c7 c726ec3 2e593e98
+#leaf=e5e7132e 6fe7398b 4fd69c76 4a70f428
+#leaf=49ae087e 3414dc51 c70e9d33 80491249
+#leaf=e391b120 4af15ce4 f2595e5d e85648d4
+#leaf=d402a8b0 d2d889f7 f2ad3675 5604d348
+#leaf=acd803a4 6c0b6bd0 10f565d0 514f61f3
+#leaf=d96f418a a2ccf51 9f065ad7 2d84663c
+#leaf=f1748b93 aa2eaa78 1af0a037 5156840a
+#leaf=bd85ba93 b717ad8f d890cd69 fb6d49f0
+#leaf=291798f7 21c88d8 e78ccd78 10f38e6f
+#leaf=1544a0fc 8640d243 1f32b287 1b80462d
+#leaf=4bd4803 a2b578ef c24cb1ab f7b21466
+#leaf=d41b2935 ef3d1603 5013af5 9957daff
+#leaf=3fca6840 748b707d 9b011097 13035700
+#leaf=a36329a7 631c589b e27cc13d b0ff6922
+#leaf=3501ca06 aaa2ab5a 1c9807ba 729c2d3e
+#leaf=1ea4ff0 f35a5dce a8016626 5e2cd82e
+#leaf=55942384 c7e21ec9 6e7041e8 73444f66
+#leaf=f24a63a fb641154 9f452ca7 c99d4fd
+#leaf=edf948ad 8155f23d de2314c7 76ab8efa
+#leaf=493fca46 14d5eb8e 2d087acd b2e6c9aa
+#leaf=e1043ee9 687c62af a97072a9 1793092f
+#leaf=652ee9a2 95ba4c77 b20f4a26 f7b0216d
+#leaf=f7170fcd 378a3771 35ab52ab a7bda121
+#leaf=7f2e8d85 c4d147cb cf8f495c 60b625a9
+#leaf=264ca75 4542c349 9d83a852 54f8b9d6
+#leaf=c1730fa0 9acd2cee 4f83db8b d65aee1c
+#leaf=eb091ffd 8204174a ded144c7 cddf2741
+#leaf=5f6c5495 baf5f4f4 d4809f40 7a6f9fd5
+bootconf/boot.c (previously 1.186) 99/01/20 14:00:56 cathleen ed337c56 86ef1d77 b53d3dbd dd62bdcd b5542436 8e2d08e2 14b6bbeb 714c4f8
+#sdata=95/06/28 16:20:26
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 bootconf/boot.h
+bootconf/boot.h (previously 1.34) 98/06/04 10:34:46 tony 948c1d63 80e18743 9055d272 9c865f95 951017c3 c901e883 3cf08f7 60c8c3c2
+#sdata=95/06/14 13:24:44
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 bootconf/bootconf.txt
+#leaf=3c458c92 ec5b62c7 bf619645 995c9a1c
+#leaf=902fea04 f0ef34aa d4bf0d05 f287272f
+#leaf=ea4ae2ad 888cfbc9 d8657abc 950cc895
+#leaf=4f02e353 4094950f ef748604 62ad9668
+#leaf=ab467c86 fce53c50 b18de9d7 c1d9af60
+#leaf=d76dcef9 d06195f8 afa5dec5 2fa69d44
+#leaf=8e3a70c2 c7801eaa 9df9c5d8 7efac5c0
+#leaf=13a05b42 28c59611 bab6639e 2d706cfb
+#leaf=681a3394 82421ff2 4527486 63bdb73
+#leaf=a8cd279d f76a66a9 f3afe0d3 8a37e649
+#leaf=1b5fbe81 ab657e0a ebbba59f e11b7093
+#leaf=445a17af 7f03705 bcebd679 6dc3b231
+#leaf=35866bcf a412b203 2ca27964 e7e78032
+#leaf=adf147fc 6037f3f2 7c6a7cb8 7b2667a9
+#leaf=a7563c59 7a51b83f b4bcfcbb a8847b89
+#leaf=aec0d69 4c031539 bb910aa1 ff1ad76a
+bootconf/bootconf.txt (previously 1.115) 99/01/20 14:01:15 cathleen 958e29c7 84f53c6e 27c33ebc 28ca0806 ee12d8be d4b975b0 112481b4 6f1adf99
+#sdata=95/06/27 13:11:42
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 bootconf/bop.c
+bootconf/bop.c (previously 1.10) 97/03/21 16:58:26 mcneal 350b53e6 e819456a ed0b00c0 34ef109 29a5f14a faed93b 5b4a7fbe e25edeb
+#sdata=95/06/27 12:28:55
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 bootconf/bop.h
+bootconf/bop.h (previously 1.8) 97/08/27 11:26:41 perrin ffe3810b a4755db1 c7ca5cb1 353013ad b2ce8ae3 4b9db005 86458c4f 9f4a822c
+#sdata=96/05/17 19:16:06
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 bootconf/bus.c
+bootconf/bus.c (previously 1.8) 99/01/21 08:44:22 cathleen e6f971e6 fda4626b 1933bca1 28b4eaed 8a57efe8 3e701af8 5cba425 c0a243b0
+#sdata=96/05/17 19:16:09
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 bootconf/bus.h
+bootconf/bus.h (previously 1.7) 97/08/27 11:26:41 perrin 229f53e8 83269620 e13bf153 721edf3b e51ad901 83f24789 fc18bd16 e5ad452
+#sdata=95/10/31 15:12:39
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 bootconf/cfname.c
+#leaf=eae39ea9 1f37ba5e 40f6a9d3 b4ef4b47
+#leaf=a02a8f0 4d975b3c 17c91ae6 c81f74bd
+#leaf=b66a3fd 6f2d282a d07dfa5e c141f067
+#leaf=4b913ef6 9339329e 521f11d9 b49eb577
+#leaf=9046f082 2a0854d6 9d2a4c81 a06e1f2d
+#leaf=9c38f89b 5f3ee300 7ce87868 947ec138
+#leaf=b0ac8027 e4814a63 aafc2e04 1ef6b73c
+#leaf=5bc956a4 707f1492 4bca126a e5998bd5
+bootconf/cfname.c (previously 1.53) 99/01/20 14:01:37 cathleen 20ad9aab df196b38 b2be77ec 9a813ba4 c25c769b c086d68e c3596bee eef4330a
+#sdata=95/10/31 15:12:39
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 bootconf/cfname.h
+bootconf/cfname.h (previously 1.10) 97/08/27 11:26:42 perrin 72ec63b e12e82d 7043e679 6f849c e00278f 4a7d719 f0d041aa fbaaf74d
+#sdata=95/06/14 13:24:03
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 bootconf/config.c
+#leaf=42cc2a75 61c86247 d895279 2ee7dba3
+#leaf=7fdc996c defc22bc c52fbc88 b80070cb
+#leaf=31e32d19 7dc90e65 6c464508 257d6996
+#leaf=bfca6686 2beefe65 5f28cd05 e41358eb
+#leaf=61bafd77 c7141bff 6143fb58 336c09b0
+#leaf=7f35f588 d390b5e2 52cf47a4 488d6535
+#leaf=3ec43d12 2577a676 545c4d ac8a7b0f
+#leaf=3085464d fb99cb9 36778a87 65235f83
+#leaf=b49a9ab0 c513cca6 6eed72a3 b88ae9f8
+#leaf=c98983ca a01ef3a2 48bc76df 4f4bfa94
+bootconf/config.c (previously 1.91) 99/01/20 14:01:53 cathleen 2a3f5a53 4b2f00b4 8f6ca5ad 1d61840b 3ca46c12 94b99172 bb8cfd39 e4d4ff15
+#sdata=96/01/02 11:14:10
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 bootconf/config.h
+bootconf/config.h (previously 1.7) 97/08/27 11:26:42 perrin d89b9c24 c459d81d 499710db a9649ff2 c2c5b08c dde8c28d f504c965 af85b4ea
+#sdata=95/06/14 13:24:04
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 bootconf/debug.c
+bootconf/debug.c (previously 1.17) 98/05/14 17:22:06 cpj fc8e21cb 39e8359c e99036d3 1fdefc9b 8ebd8048 40a4bcc5 f657875e 5ecf3fb5
+#sdata=95/06/14 13:24:05
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 bootconf/debug.h
+#leaf=a102d80b a5cbba51 ce7dcfb0 64c421fc
+#leaf=bd3b7a46 35fa3548 848b3908 4aa0b192
+bootconf/debug.h (previously 1.25) 99/01/20 14:02:26 cathleen bb01f1fc 6834cf42 ce85237 f1154586 43993ec8 d5534783 5aa94ea5 34971b52
+#sdata=95/06/14 13:24:06
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 bootconf/devdb.c
+#leaf=fb51e46f 3b8be8bd 105151c8 5eb7e388
+#leaf=4d45da6c d908bfb6 b04c8cb0 39dd29dd
+#leaf=12b39884 f47efb67 dcb1877f 645fa753
+#leaf=91d5234c f47abc16 7179b772 f211d419
+#leaf=1715a00f de539831 44ea6512 8c918304
+bootconf/devdb.c (previously 1.92) 99/01/20 14:02:41 cathleen c3209718 1bb56b6b 3c88246f b1ad5b60 3a259b19 882fb5c cde81546 a0db877a
+#sdata=95/06/14 13:24:07
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 bootconf/devdb.h
+#leaf=898b2d08 806b6071 1d39b04b d430993e
+#leaf=15757f69 20d9dbf0 1d48c83e ad971c7a
+#leaf=909e7d37 8897cfc1 d0c9db85 c983be4a
+#leaf=aa967c69 6cd7d776 4c8b2d3a a5394e65
+#leaf=a2512e6f 4c157007 eb3d8188 5fafa22c
+#leaf=cc680e06 45ff698e 586219e 3eae2e2d
+#leaf=9b3a161f 909d4c1e a827ccfa 5b9ddb4
+#leaf=65724cab d2599822 e5fc60b6 baa29a90
+#leaf=e4e17381 f46cca87 4b996875 364ae8bc
+bootconf/devdb.h (previously 1.86) 99/01/21 11:14:39 cathleen 17a9f23d 595b8413 595d2ef8 f8adc5eb 5caeefea ae5c6ad5 219419a0 4f4ebfd6
+#sdata=95/06/14 13:24:08
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 bootconf/dir.c
+bootconf/dir.c (previously 1.8) 97/04/30 18:31:36 perrin 77e405a0 c9b23dbb acb42ae7 9b0c3b30 cec28ae2 76d8c1bb 4689f72 e86486f0
+#sdata=95/06/14 13:24:09
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 bootconf/dir.h
+bootconf/dir.h (previously 1.6) 97/08/27 11:26:43 perrin 5205ca9b 9a5d536 18dbf994 c242c475 dcb066cd f244e209 eaf03dd5 db116f76
+#sdata=95/06/14 13:24:10
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 bootconf/eisa.c
+#leaf=9c0229fd 5dd8a364 cbc8a834 9310aeb3
+#leaf=bce88196 5c338ebd a2d2529f 23a5d84a
+#leaf=6684afa2 b2352203 474b1796 a5fcbe8a
+#leaf=ab48e8a2 9bfa4277 e4dd3106 f8c86b58
+#leaf=9ada2199 2b8254fe cd2d2278 20e8e780
+bootconf/eisa.c (previously 1.49) 97/08/12 15:26:10 stuartm 5690a 23061387 b85bb009 6f59ff37 494e123d 2f295b05 704b52b2 65cd8c93
+#sdata=95/06/14 13:24:11
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 bootconf/eisa.h
+bootconf/eisa.h (previously 1.15) 97/08/27 11:26:43 perrin 29f2f9f7 2a7e17b4 65a0a280 341b9357 42168721 a38fb3ed 8a17e6aa ba7e11f2
+#sdata=95/06/16 17:59:04
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 bootconf/enum.c
+#leaf=d8a9101f 7456545 a559c28f d6de763a
+#leaf=5fc9aaa5 89ec813e 20bcd7b3 b7b34a4d
+bootconf/enum.c (previously 1.50) 99/01/20 14:02:49 cathleen 6e017701 3f2af5bd d6b3e52e aea992ec 750b08de a92dfcc1 2b427a97 d13630da
+#sdata=95/06/19 12:02:03
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 bootconf/enum.h
+bootconf/enum.h (previously 1.19) 98/04/07 15:38:50 cathleen 651ee921 aee3b943 a5d2a332 136f1ce5 704d6caf be3cc4df f6724b0d 5d666083
+#sdata=95/06/14 13:24:12
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 bootconf/eprintf.c
+bootconf/eprintf.c (previously 1.7) 97/03/21 16:58:46 mcneal 7b08a1b7 1cf1d8cb fa442b72 f7b33410 f2c70c19 aadd2ca8 426138be f36f4f12
+#sdata=97/03/03 13:07:35
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 bootconf/eprintf.h
+bootconf/eprintf.h (previously 1.4) 97/08/27 11:26:44 perrin ebb6b94e da488c10 f379e3eb 748726f4 e24849ac 7d8297ad c2f60489 d7e59ed6
+#sdata=95/06/14 13:24:13
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 bootconf/err.c
+bootconf/err.c (previously 1.7) 97/03/21 16:58:47 mcneal 7e188171 cf1a964a 87a2d616 ddbad455 a4907ec9 bb034842 2fb3395f bbbc2544
+#sdata=95/06/14 13:24:14
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 bootconf/err.h
+#leaf=a1574e9b 4d5980d5 934a5369 5d6cc28e
+bootconf/err.h (previously 1.9) 97/08/27 11:26:44 perrin 9d3dc6f2 833482a7 b3b64f0f cf1eb6a3 51c642ca ec3f6ec4 7ffa7c36 d0ea2975
+#sdata=95/06/14 13:24:15
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 bootconf/escd.c
+#leaf=d4fff448 8e73a0d9 1bc8637f 66e618dc
+#leaf=9555ddd6 a52a33d0 1ec14734 870bf1dd
+#leaf=8b6885a3 ec99b1c2 a55fefdb a319f6b1
+#leaf=328fc784 c0bc487c da842491 121e18e3
+#leaf=dd8d572c 998a2ef8 b6d170df 1386a197
+#leaf=bac22c71 1ddd7376 24793e02 96ae7d40
+bootconf/escd.c (previously 1.65) 97/08/12 15:26:20 stuartm 5045f67d 7aec7f52 2edf37c2 4f8974ae 6131d031 9b8812e0 e3cae03a 65eb7129
+#sdata=95/06/14 13:24:16
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 bootconf/escd.h
+bootconf/escd.h (previously 1.30) 97/08/27 11:26:45 perrin 3565d6e9 9ae35e70 a2eb1c2b 1e3b7345 654925e7 f43e1999 f766cd7f 4c03d283
+#sdata=97/03/07 15:03:07
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 bootconf/fdisk.h
+bootconf/fdisk.h (previously 1.4) 97/08/27 11:26:45 perrin 615780ee b7da2f9f 3b427b02 e94e0a0b 7a5ca4e7 8bd7df22 731b135a 4aead11c
+#sdata=97/03/21 17:17:33
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 bootconf/filter.sh
+bootconf/filter.sh (previously 1.3) 97/03/25 13:53:39 perrin c97efa79 45705d3 e92f2bd2 7b42237b ffcefa38 1c606dc5 a6df9189 8449d47c
+#sdata=95/06/14 13:24:17
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 bootconf/fprintf.c
+bootconf/fprintf.c (previously 1.2) 95/11/07 08:02:19 rgreer 56900953 7f37618c 3bbb0b16 c1fe4219 25948078 ab862385 c61dce91 eb64d3ae
+#sdata=95/06/14 13:24:17
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 bootconf/gettext.c
+#leaf=4ecb2e17 d7953858 c0c65a8f 5935be8b
+bootconf/gettext.c (previously 1.10) 97/08/12 15:26:21 stuartm 7484b7ac bf0945f 69df2ca2 e728f50f bc821e2b 473f4058 1daf20d9 fb4e9922
+#sdata=95/06/14 13:24:18
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 bootconf/gettext.h
+#leaf=6fb91083 21511b55 ba86c5c5 6d50c6c4
+bootconf/gettext.h (previously 1.5) 97/08/27 11:26:46 perrin 59afb14f 406151ea 997ccb40 2588cbee bee2e461 2146f10 cffe2c34 9a87ebca
+#sdata=95/06/14 13:24:19
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 bootconf/help.c
+bootconf/help.c (previously 1.9) 97/03/21 16:58:53 mcneal 1454da27 20d6f528 eebff9c7 4609b583 eed2e062 89e96581 6d8d7d15 58f9de73
+#sdata=95/06/14 13:24:20
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 bootconf/help.h
+bootconf/help.h (previously 1.4) 97/08/27 11:26:46 perrin 45578bcc 5e58b05c 3c84e5ce d354295e 912d6f01 4bb223c5 ad0e7847 a6a248a2
+#sdata=95/10/04 19:17:52
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 bootconf/isa1275.c
+#leaf=ff1cf1fa 8fdd2845 1bb74207 52beb5db
+#leaf=58b505d4 1553df3f c4e35066 ed5c1529
+#leaf=2977f4d0 831f1d99 a683083b 6b4cf951
+bootconf/isa1275.c (previously 1.35) 99/01/21 08:44:29 cathleen 3d167fd0 4c9e4005 7ef1079c 328dbef4 d48fc25c e82a495f f860ae73 19ee2eaf
+#sdata=95/10/04 19:17:53
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 bootconf/isa1275.h
+bootconf/isa1275.h (previously 1.9) 97/08/27 11:26:47 perrin 154842e1 43f87a08 e4d3bcb9 51e9eff9 beadb32c 99bdaf76 8d7f0cb8 e8f70805
+#sdata=97/08/13 10:11:33
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 bootconf/itu.c
+#leaf=91198684 e9c9d472 af7c20b9 f9c4e649
+#leaf=79fd526e 76eb6139 cd7991ff dab31e88
+bootconf/itu.c (previously 1.19) 99/01/20 14:02:57 cathleen 4e710c03 b9a70f91 b933d7db 2291a4a 521cc742 ec3948d3 d67f0656 8138f328
+#sdata=97/08/13 10:11:32
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 bootconf/itu.h
+bootconf/itu.h (previously 1.10) 99/01/20 14:03:10 cathleen f957f508 cbc53b96 208093a6 59f800d3 923caffb c2ccb336 b4cc7a6d b36e5bf0
+#sdata=95/10/31 15:12:40
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 bootconf/kbd.c
+#leaf=c629090e f680143a 2b83c74b ca0a66f3
+bootconf/kbd.c (previously 1.25) 99/01/20 14:03:23 cathleen 71b9bd94 ce356eac 59413c1f 2d3ed70d e60aaf23 b619803f 5795d49c 32ef930
+#sdata=95/10/31 15:12:41
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 bootconf/kbd.h
+bootconf/kbd.h (previously 1.6) 97/08/27 11:26:47 perrin 3f1410e2 d961592d a3cb37c5 6f4f5d87 48200039 9d753223 78531ac3 948aa7d4
+#sdata=97/07/17 15:44:59
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 bootconf/link.def
+#leaf=3516b34a 3203e54 ab4105c9 9543828c
+bootconf/link.def (previously 1.10) 99/01/20 14:04:47 cathleen 6577c2f0 4a4e202d de67a31 6b16d084 4defc4ce 8e5d7b35 c9db8bc2 d8384dee
+#sdata=98/05/14 17:24:18
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 bootconf/lint.c
+bootconf/lint.c (previously 1.1) 98/05/14 17:24:17 cpj cae9c5e5 e838fb1d b0777747 5bfb65e6 cae9c5e5 e838fb1d b0777747 5bfb65e6
+#sdata=97/03/21 17:18:01
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 bootconf/lint.gold
+bootconf/lint.gold (previously 1.5) 99/01/20 14:04:55 cathleen 35122461 6ce6f3b bdc3db4f d46c2743 54f0feac 504307ea a4fdbd55 1e10fd57
+#sdata=95/06/14 13:24:23
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 bootconf/main.c
+#leaf=ab800824 9054c90d 464da85b ab1dcaa0
+#leaf=8b7c3351 6f7c427a d2995660 3f9e9bbe
+#leaf=33c6ad4a f4e194d5 9ab45c57 b42dee4a
+#leaf=dd134bbb 91f82dc6 5e6dd9d8 91e1b49e
+#leaf=8422ca53 9dc79256 493cf63 9cdfb703
+#leaf=3a5099ab f11c2c30 80f6a242 83819d1
+#leaf=11bf8b83 313d2e60 8d879239 a35ad8d7
+#leaf=576dc005 b440af86 4f8e2394 c1594064
+#leaf=6e4b0ead 1ab7718 b9ca3ee2 18ec364d
+bootconf/main.c (previously 1.78) 99/01/20 14:04:16 cathleen abd50e6d 8a971c27 91918822 4c4a26b0 fe8deaa5 e68e2f1c b19f585 2854bfd
+#sdata=96/01/04 09:39:26
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 bootconf/main.h
+bootconf/main.h (previously 1.9) 97/08/27 11:26:47 perrin 569b4482 f254fb0b 30632203 c35ae1f4 5e26ec90 4ccd8bb5 4e519c9e 972c8d00
+#sdata=95/06/16 07:11:31
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 bootconf/make.bat
+bootconf/make.bat (previously 1.2) 95/10/31 15:12:19 andy 62dcc7e8 31270c0e 95c04f0f b49da6e ef3986da 4dd42674 64124710 abb3345c
+#sdata=95/06/14 13:25:27
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 bootconf/makecomm.inc
+#leaf=13e79fb2 43716e0b 22905958 4b8ae79
+#leaf=2dcee681 e830e349 6de6beaa aed049a6
+#leaf=66bf4878 fc6ac4d2 d087c406 7235f8b2
+bootconf/makecomm.inc (previously 1.56) 99/01/20 14:05:10 cathleen 17605fd e8390daf c1bfa71e ce580db7 3894c68a 5dbbb2c8 43871b11 d5379260
+#sdata=95/06/16 07:16:58
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 bootconf/makedeps.c
+bootconf/makedeps.c (previously 1.5) 97/03/25 13:46:09 perrin 338f02b 570cad30 d5d84791 dabd6682 cc6bde47 fe545524 185bdce8 2b842fd4
+#sdata=95/06/14 13:24:45
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 2 1 bootconf/makefile.do2
+#sdata=Name history : 1 0 bootconf/makefile.dos
+#leaf=3254132b ef3d6774 c0b465f6 24b1f6b
+#leaf=56f856ed baef743f 4b87d588 97e31997
+#leaf=ae101a23 6411cf85 8a972979 8f12676b
+bootconf/makefile.do2 (previously 1.51) 97/11/14 15:19:59 tony 5492d881 82836b72 cad4796a 5f39d3ab d661fba4 c9095a1c b77c26f1 dd9e0412
+#sdata=95/06/14 13:24:45
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 bootconf/makefile.dos
+#leaf=56f856ed baef743f 4b87d588 97e31997
+#leaf=ae101a23 6411cf85 8a972979 8f12676b
+bootconf/makefile.dos (previously 1.39) 97/02/28 15:32:54 perrin 578c6d04 fe761f2c e23ab7c6 a5eef401 38fd8342 66dc89c d55d615 7ee834b5
+#sdata=97/03/21 17:15:37
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 bootconf/makefile.sol
+#leaf=f74ee92e ebd84b80 a93b0ebd 187a13b3
+bootconf/makefile.sol (previously 1.12) 99/01/20 14:05:18 cathleen fc19ce02 7ad876b a42b7bdf 9c7da833 9d1e639 45b2be19 1af06f21 cc2413ee
+#sdata=95/07/01 20:06:29
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 bootconf/malloc.c
+bootconf/malloc.c (previously 1.11) 95/09/15 07:49:59 rgreer a40e3f79 fe4f760c 80f57c6f c92c3d0 4dd0373c ab03b997 6230f9dd 45010473
+#sdata=95/06/14 13:24:32
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 bootconf/pci.c
+#leaf=9957d1d 7527f8ff 29c300a4 5065c0d0
+#leaf=2db6bd67 4292baf0 98203ac3 3f12222d
+#leaf=fb76dc1c e70fbdcd a4477a32 a173733b
+#leaf=17851c79 5b84a1da 30b967f9 46aeace9
+#leaf=7de1982f 2e7f45a7 e0a5477b bc5e0058
+#leaf=7c3e6be2 b3fddbb7 d603162a cf5d342e
+#leaf=2daf2245 6f79d39b a32d9ca9 87ac8722
+#leaf=5d0e6490 a2266cf 3c3ee026 e5c9174a
+#leaf=dfc01db9 a5460148 dfbf2e1a 33ec5211
+#leaf=22ecdd7f 7becf689 9a225317 e2dc5e1b
+#leaf=4d971005 ab9f0c2 891ccd6 a351745b
+#leaf=a11c4632 94464b72 e60622cb cdb81631
+bootconf/pci.c (previously 1.84) 99/01/07 11:15:03 cathleen 5292acc4 5e1c2a1b ffa0ffcd cc8727e 98a76e2f f450ca61 a119aa1 7676f3ef
+#sdata=95/06/14 13:24:33
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 bootconf/pci.h
+#leaf=14846f5c e229830 dc8f8ed1 cff2798e
+#leaf=833740a5 97850c25 2298331f dc0457b5
+bootconf/pci.h (previously 1.26) 99/01/07 11:04:14 cathleen bfac81dc ccb87d71 800bfe49 2ad3dd56 aa3dde0f 81f3bfdf 6c35c740 c2593eee
+#sdata=95/07/13 13:34:50
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 bootconf/pci1275.c
+#leaf=5e8ca5e6 3c042ad2 b6dc679c a660e5f2
+#leaf=3e25b1c2 e28dccfb f673b861 2d31d2c8
+#leaf=1fb33c2a e570e73f 168e4c2a 8a5d923d
+#leaf=3fb4f277 c3eb80d9 7b7eb11f 48b2b28c
+#leaf=f42d3760 6c2ab793 2fb42fe5 56a3b74d
+#leaf=1a56c4c0 a9d410e da48ac8b f8e3e6ac
+#leaf=8349d99a d6485b1b f0f31f18 c749b20a
+#leaf=3022d481 9d86a6b7 66f68808 233527bb
+#leaf=e7d7b382 d984b26a 94c33314 948184ae
+#leaf=92e73aee 37ad9554 2e78da 8fed8f84
+bootconf/pci1275.c (previously 1.85) 99/01/07 11:15:57 cathleen f366304c a142cfc4 bb644d70 e1a2266b 6fe6cec4 91ab5c91 3a37e3 b05084f8
+#sdata=95/06/14 13:24:26
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 bootconf/menu.c
+#leaf=b63c9a8 db78dd41 7719061 313d3153
+#leaf=6d8f56cd d67dd0ca c49ec8b9 d40883c8
+bootconf/menu.c (previously 1.43) 97/04/10 16:21:57 mcneal 69ba5bb8 89710626 9d4228fe 88747977 8166b318 21a5da0f fe707129 3ac6dcac
+#sdata=95/06/14 13:24:27
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 bootconf/menu.h
+bootconf/menu.h (previously 1.15) 97/08/27 11:26:49 perrin b32bd073 397d81ee bd6e3c19 18a31a80 576e7b24 7836e857 2692f4ff cc24dd3b
+#sdata=95/06/14 13:24:28
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 bootconf/mount.c
+#leaf=e118feec 24a43c41 30f29a0a 471fe916
+bootconf/mount.c (previously 1.30) 97/03/21 16:59:12 mcneal 9eba77ec b019be4f 8b2f72d9 a6eb2b88 46af7500 86787065 f8bdff11 ee61d714
+#sdata=95/06/14 13:24:29
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 bootconf/mount.h
+bootconf/mount.h (previously 1.7) 97/08/27 11:26:49 perrin 5a35b7a 2bc87a93 3f7690cc 5a4f9bae d0a91846 399ce7e0 d8660a12 ecf7d398
+#sdata=95/06/16 07:16:59
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 bootconf/names.c
+bootconf/names.c (previously 1.3) 97/08/27 11:25:48 perrin fd490493 896d41b5 b271b998 3802360e c34b174e c7143867 671b98b7 a63a03a7
+#sdata=95/06/14 13:24:30
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 bootconf/open.c
+bootconf/open.c (previously 1.8) 98/03/12 18:40:47 johnny c9890e70 32a73ed1 b129ffcc e98e4c6d f4b2e382 70947249 f09fe315 c26d0230
+#sdata=95/06/14 13:24:31
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 bootconf/open.h
+bootconf/open.h (previously 1.6) 97/08/27 11:26:50 perrin b3fed136 37c018f0 8982d421 b2da46fd 4347b54e 9842b9a6 15931b1a 7f8328ff
+#sdata=95/07/13 13:34:50
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 bootconf/pci1275.h
+bootconf/pci1275.h (previously 1.17) 97/08/27 11:26:50 perrin 7a8609c4 639d73f9 ad831cd7 f89dfc29 8aaa2e32 c7556b7f 1e719aaa b0e64a61
+#sdata=95/07/14 14:50:41
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 bootconf/pcibios.s
+bootconf/pcibios.s (previously 1.5) 96/01/18 15:49:23 perrin fb6048cf cedf0b9e 32687216 3d8d0d90 405f3b95 684bf90 1182cecd 718c1506
+#sdata=95/07/28 11:26:20
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 bootconf/pciutil.c
+#leaf=d8453570 4fd5b016 30a35691 2ef74f0e
+bootconf/pciutil.c (previously 1.10) 97/03/21 16:59:21 mcneal 5f3268db 311b6b70 4930dbb1 5200267d 3ae6875e e14c03f5 e245ed6d fd68b5d5
+#sdata=95/07/28 11:26:20
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 bootconf/pciutil.h
+bootconf/pciutil.h (previously 1.6) 97/08/27 11:26:50 perrin a6c46485 7c4670fa 7aac8485 9069647 b5dc156d 9df74b5f d07a835d 5d6184ca
+#sdata=95/09/01 07:58:57
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 bootconf/pnp.c
+#leaf=fa0cebc5 75b52c6b 6a132b33 608a8adf
+#leaf=22772943 e2b5421a 99f9a128 4f0f3561
+#leaf=90f84afc ffed6ba8 6b73d498 afab2f98
+#leaf=6bfc388 52aa2201 885be5de 1b3c963a
+bootconf/pnp.c (previously 1.45) 97/08/29 15:42:20 nadkarni 8c9ac738 6d95c0d7 a9123885 679dd0fd f160f371 7cd69463 2de2e2c3 20a27af8
+#sdata=95/09/01 07:56:44
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 bootconf/pnp.h
+bootconf/pnp.h (previously 1.10) 97/08/21 13:27:07 timh e930afa9 fd1af0f0 4210c770 2acbcd9c d4843b73 fdc1afb3 bf36a270 a1c83e1a
+#sdata=96/09/24 15:55:41
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 bootconf/pnp1275.c
+#leaf=a22f0626 97aff17b 96d391bb 953aaf08
+bootconf/pnp1275.c (previously 1.15) 98/08/17 16:01:52 dmick 6c59a681 efa5870 5fd1a60c 4726ff75 712d69a2 fde86ea5 e11d89b5 4990cede
+#sdata=96/09/24 15:55:44
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 bootconf/pnp1275.h
+bootconf/pnp1275.h (previously 1.5) 97/08/27 11:26:51 perrin e24537d d2364198 af27b834 bdceadd2 c9190ad 3cb3a3fd 4f7e6634 2e84b676
+#sdata=96/05/28 12:38:48
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 bootconf/pnpbios.c
+#leaf=391bb5ec dfc626be 1898dc29 14bc61ca
+#leaf=d4a96296 8a9edde 3c49f993 258766be
+bootconf/pnpbios.c (previously 1.23) 97/08/12 15:26:22 stuartm 2de13310 b1a2e414 69de324e 1dbe79e9 321d054c 7f5180f3 433a8fa3 9dafc244
+#sdata=96/05/28 12:38:52
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 bootconf/pnpbios.h
+bootconf/pnpbios.h (previously 1.8) 97/08/27 11:26:51 perrin b8309b9 a23fc59e df9d5f14 e9c528b0 60dfc1ed 71f51ce9 2cc07500 e7e33f0b
+#sdata=95/06/14 13:24:35
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 bootconf/printf.c
+bootconf/printf.c (previously 1.2) 95/11/07 08:02:27 rgreer 612b4db7 8567e4b9 219b5254 437e48 658136cc 87cd39ca 72d4bb22 a3e1856e
+#sdata=95/06/26 18:19:26
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 bootconf/probe.c
+#leaf=645d4373 57bd1452 271ce1bc 2989df29
+#leaf=c96ef47d a8e33bf2 d584e33 e02e1b7c
+#leaf=e98f32e6 abe9f76 9466e8cb a3cbf6af
+#leaf=81c0578a 421fc79d 4e78ae5c 24e0e5ab
+#leaf=3d48dbbc 51eb4a06 c54e3d33 cdc42a2
+#leaf=45c1eb4f acd4f9bd b529e9d6 99118efb
+#leaf=53923c48 42679f00 634e1b52 4603c1b1
+#leaf=f694e61d c4cb08d1 d17e89b6 35df9b7d
+#leaf=5f68e628 a81881da c1f73bc8 dd4c648
+#leaf=2a253135 83be6bbc 70e97910 dc7a8464
+#leaf=dfb6fd5e e60f3855 9f21cf40 6c80e0a9
+#leaf=743f262b b16b8410 da2c9d66 f886a089
+#leaf=c32f6a1 49739d7f 270c7282 e5944bb0
+#leaf=cec99889 7df31d64 7ca8b205 465ef52c
+#leaf=6569b71d 15906abc 53941307 8ebd6809
+#leaf=8dbc4b2f daef992 9e41deb7 68e90997
+#leaf=7effa594 926c434f 36e50fca e75e23ab
+#leaf=e537ab63 1abdcd7 864a4557 327b598e
+bootconf/probe.c (previously 1.96) 99/01/20 14:04:31 cathleen 144c1909 7a5fd9c6 d37cf72b 11930be6 d7c6f7b3 2803c2ae e194ed6 befcdf3f
+#sdata=95/06/26 18:17:58
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 bootconf/probe.h
+bootconf/probe.h (previously 1.14) 98/04/07 15:41:44 cathleen 72b32eae a9b10950 bd224f18 d89452ea 3183cf6 db078ff8 5c10350a 2119986
+#sdata=95/06/14 13:24:02
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 2 1 bootconf/prop.c
+#sdata=Name history : 1 0 bootconf/bootpref.c
+#leaf=9d3f4de6 e0d97b4f a4289803 d0527e18
+#leaf=d530671d 47145eb4 9183c7e2 c46005e8
+#leaf=30acb089 e1a39adf e925fdf1 18619f26
+#leaf=689e09bf 496fbb3a 79d4d015 d585da7c
+bootconf/prop.c (previously 1.32) 98/05/14 17:22:29 cpj df0281e1 37c7fb55 f1fb412 f632dbba addfc9f1 e5e90334 82770672 d43c0535
+#sdata=96/02/13 14:38:08
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 2 1 bootconf/prop.h
+#sdata=Name history : 1 0 bootconf/bootpref.h
+bootconf/prop.h (previously 1.11) 98/05/14 17:22:31 cpj 2042c191 b7545107 5915eaca c7c058fe 137c718d c7156428 a5ab2e09 759da669
+#sdata=95/06/21 15:06:25
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 bootconf/resmgmt.c
+#leaf=cc9fd4f0 2f1bcb5c 68f02ceb 6f32cc61
+bootconf/resmgmt.c (previously 1.27) 97/12/10 20:12:53 cpj 70d78e51 fb39bc4 b89cb62b 9beef895 d288327a 26d8faa7 e7bfbbcb e57d9813
+#sdata=95/06/21 15:06:15
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 bootconf/resmgmt.h
+bootconf/resmgmt.h (previously 1.14) 97/08/27 11:26:52 perrin 85075184 2f877d2 fb0973b1 31e0ce3c f792fef6 1441f353 5d3cc656 f0884402
+#sdata=98/04/01 17:05:16
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 bootconf/rtc.h
+bootconf/rtc.h (previously 1.1) 98/04/01 17:05:15 cpj fde6d5ed ec835baf 807970c3 57995e64 fde6d5ed ec835baf 807970c3 57995e64
+#sdata=95/10/16 12:57:38
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 bootconf/setjmp.h
+bootconf/setjmp.h (previously 1.6) 97/08/27 11:26:53 perrin 8cadef79 7592c3cd 7295c2d5 2a4c5a00 1fb4fc4e 76c4a21b 1b0392bb 66cc2792
+#sdata=95/06/14 13:24:37
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 bootconf/sprintf.c
+bootconf/sprintf.c (previously 1.2) 95/11/07 08:03:39 rgreer 4a4d60d9 2b633500 fc94410e d3ba30ba dab8db92 5dd8ca56 543437f7 8c45f314
+#sdata=95/07/13 13:34:49
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 bootconf/tree.c
+#leaf=d564517f 3ab1e8dc 2464bf51 db4e055f
+#leaf=b5ec5f4b be5331d5 3a10751d 1f49f034
+bootconf/tree.c (previously 1.39) 97/11/14 14:16:22 tony faad9f40 4b70e8d0 1d82a5ce 9f8f80e1 6b5e3717 cfdbecd8 e77fa489 d2b412f6
+#sdata=95/07/13 13:34:49
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 bootconf/tree.h
+bootconf/tree.h (previously 1.9) 97/08/27 11:26:53 perrin f6975d15 1a0a458a 5623a3e4 cd62fa44 1f5a3850 dc7f4732 3175df9 d065b9e6
+#sdata=95/06/14 13:24:38
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 bootconf/tty.h
+bootconf/tty.h (previously 1.15) 97/08/27 11:26:54 perrin ed412bf2 5c3c7863 f3267117 d7cfdbf3 f361adfc 37a0b12 bea3c9c9 a99f4194
+#sdata=95/06/14 13:24:39
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 bootconf/tty_in.c
+bootconf/tty_in.c (previously 1.20) 98/05/14 17:22:32 cpj a0dde2cf 9890850c c6b919bb 8ce23e46 7964554f 34d72762 880c597f 7f2def40
+#sdata=95/06/14 13:24:40
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 bootconf/tty_out.c
+bootconf/tty_out.c (previously 1.34) 97/10/29 12:22:38 cpj 77047258 29dc0a30 b759d317 cfa1862b b928dfea c62c2d89 793dbefa fa8353fe
+#sdata=95/06/19 11:18:22
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 3 2 bootconf/types.h
+#sdata=Name history : 2 1 bootconf/.del-types.h-Mar-20-96
+#sdata=Name history : 1 0 bootconf/types.h
+bootconf/types.h (previously 1.7) 97/11/14 14:08:53 tony 780334a4 bf1d87af d27f03e4 b0a9d8ab 86950627 6f97e52e 51d554fa 60604be3
+#sdata=95/06/27 11:18:58
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 3 2 bootconf/ur.c
+#sdata=Name history : 2 1 bootconf/.del-ur.c-Aug-24-95
+#sdata=Name history : 1 0 bootconf/ur.c
+#leaf=50e41ed6 8c02a1f5 dea58e62 f2eedcbc
+bootconf/ur.c (previously 1.20) 97/08/26 13:03:51 perrin 697801ef 2c661f06 923e805c ee69d5c 790a8b47 316b8166 91ba6507 3ca2067b
+#sdata=95/06/27 11:27:46
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 3 2 bootconf/ur.h
+#sdata=Name history : 2 1 bootconf/.del-ur.h-Aug-24-95
+#sdata=Name history : 1 0 bootconf/ur.h
+bootconf/ur.h (previously 1.12) 99/01/20 14:05:36 cathleen dfab3d9d 969d9ed7 334c9f59 fe5e0c2f acdb8b87 1ee7e0d6 902a12bc 96d45cbe
+#sdata=96/04/02 17:01:17
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 bootconf/version.c
+bootconf/version.c (previously 1.4) 97/03/21 16:59:41 mcneal d891d92c 291dcaf3 e760abba fdf5f900 15553b13 af56139b b37f7d97 f96361f5
+#sdata=96/04/02 17:01:14
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 bootconf/version.h
+bootconf/version.h (previously 1.7) 97/08/27 11:26:55 perrin b41069f7 465df6a 86c3c135 237d23ad 73863a16 7cd40fe7 e3202779 94ecb9ef
+#sdata=95/06/14 13:24:41
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 bootconf/vfprintf.c
+bootconf/vfprintf.c (previously 1.3) 97/03/06 16:40:50 perrin e934d713 ab4d3817 c4a5843f 16c15cca 9d135c26 ac1eadd0 fc05a7a0 68b16161
+#sdata=96/05/02 13:11:24
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 bootconf/vgaprobe.c
+#leaf=4f17bd13 58ba794f 5b0f8e85 3e3cbee
+#leaf=bb709ae6 22443dad d9876b19 69d043d4
+#leaf=5f1040d8 c060947c 820e8a31 ee5fe5f3
+#leaf=4154cded 278d1a08 5141f22c 75876740
+#leaf=d34cc97a 86aaf619 9b87ce35 572904f5
+#leaf=b9809b00 423d8d6c f78067d3 31f42e7f
+#leaf=b661eaaa cbeec5ef 5ecc2ffd 36bd4613
+bootconf/vgaprobe.c (previously 1.30) 99/01/20 14:05:51 cathleen f3ae917 a5cd5575 82764a40 56162067 7b88ad1 d1062493 bf771810 bb3a3d00
+#sdata=96/05/10 11:53:07
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 bootconf/vgaprobe.h
+bootconf/vgaprobe.h (previously 1.6) 97/08/27 11:26:55 perrin 71ee1dce 53307dd1 fb0f3a17 50e97441 31cbb993 beb043d9 bf78f43c 45b80e24
+#sdata=95/06/14 13:24:42
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 bootconf/vprintf.c
+bootconf/vprintf.c (previously 1.2) 95/11/07 08:02:39 rgreer 1b43b56f 910e64f5 1ca1a71c b457f13f 810b4479 c83888df 92bbb98c a4ba6444
+#sdata=95/06/14 13:24:43
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 bootconf/vsprintf.c
+bootconf/vsprintf.c (previously 1.5) 97/03/06 16:40:51 perrin 93622a0 926d7d55 174e3223 7163ea6c 1462b525 eba2a153 7b502b55 12085fe2
+#sdata=97/03/03 13:07:35
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 bootconf/vsprintf.h
+bootconf/vsprintf.h (previously 1.4) 97/08/27 11:26:55 perrin 6818070c d694a1d5 ccea8ea0 dce9f2bc b8fbcae1 1656753d ad474847 37a98a94
+#sdata=97/03/07 15:03:07
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 bootconf/vtoc.h
+bootconf/vtoc.h (previously 1.4) 97/08/27 11:26:56 perrin f9d647b4 c02c205d b21f26ae 92268453 da105a52 f646e71f b56b4a28 bc26705c
+#sdata=97/03/28 12:49:11
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 common/include/befext.h
+common/include/befext.h (previously 1.2) 97/03/28 14:51:10 tony a1f3f809 3152fc6b a4ac6292 56c72b09 64dda1fe d69a7a7d e9e4b2b2 ac1d2323
+#sdata=95/02/23 13:47:27
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 2 1 common/include/biosmap.h
+#sdata=Name history : 1 0 extbios/cassist/biosmap.h
+common/include/biosmap.h (previously 1.10) 97/03/25 13:48:05 perrin a71829dc 2b103bbe 5bd2a1e1 f1f192e 4f79c7e7 b535c0bd 9640c0f5 18e141fd
+#sdata=97/04/07 18:34:02
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 common/include/dostypes.h
+common/include/dostypes.h (previously 1.2) 97/04/07 18:38:42 tony ca4e6da6 9c076563 29994f01 14885dcf 9a8f8dff 7cdb00fc fb67baad f7d01e19
+#sdata=95/06/16 07:16:07
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 2 1 common/include/names.h
+#sdata=Name history : 1 0 bootconf/names.h
+common/include/names.h (previously 1.1) 95/06/16 07:16:06 rgreer ccb5063b 3bc36513 fd2e3f50 222ea7d4 ccb5063b 3bc36513 fd2e3f50 222ea7d4
+#sdata=95/06/16 07:16:09
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 2 1 common/include/values.h
+#sdata=Name history : 1 0 bootconf/values.h
+common/include/values.h (previously 1.1) 95/06/16 07:16:08 rgreer d119931c 64f4f6ce 9d949eb9 f9591a48 d119931c 64f4f6ce 9d949eb9 f9591a48
+#sdata=95/02/16 15:26:10
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 common/lib/befake.c
+common/lib/befake.c (previously 1.6) 95/04/15 14:16:34 rgreer 800c7383 64b4ca60 47d16144 edf95d19 e8009922 25fccd17 8719c05f 1855f493
+#sdata=95/02/23 13:42:52
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 common/lib/befext.c
+common/lib/befext.c (previously 1.8) 95/06/09 13:46:08 rgreer f4cbed4d 55706e4b bc6a0ab9 5e9339b2 f28c3d3d 255b4ded f6b95d8a 753ca8af
+#sdata=95/03/08 11:54:52
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 common/lib/befpath.c
+common/lib/befpath.c (previously 1.5) 95/04/15 14:16:35 rgreer 1f2536b2 8bb8fd21 77f7f822 f075cca8 a99f5839 e722c99d 83ec9442 d3277068
+#sdata=95/02/09 17:12:46
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 2 1 common/lib/biostype.s
+#sdata=Name history : 1 0 common/lib/biostype.asm
+common/lib/biostype.s (previously 1.5) 95/03/23 18:05:19 rgreer c431a339 24e7dc70 b430207c 6d8a2b3f 2e9a654c 27fcbeb5 e7cfae76 f5761f3f
+#sdata=95/03/13 07:41:09
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 common/lib/fprintf.c
+common/lib/fprintf.c (previously 1.2) 95/03/20 14:40:57 rgreer d5f72067 f8c02a52 77aa3169 fd7ec822 19608a8f 4e02b92a 9788396 2ccda86f
+#sdata=95/03/13 07:41:10
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 common/lib/fsprintf.c
+common/lib/fsprintf.c (previously 1.2) 95/03/20 14:40:58 rgreer 11ea162c 8c21304e 2c5642b3 31d017fe cc46b95 82197a29 b0dd913b c5dc67db
+#sdata=95/02/27 14:50:13
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 common/lib/gettext.c
+common/lib/gettext.c (previously 1.8) 95/05/16 14:10:08 andy 3174b977 6563d11d 3136730a 1ac9fe74 b3e4c472 e3bc5aa1 db63f50b c1387393
+#sdata=95/02/09 17:12:51
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 common/lib/makefile
+common/lib/makefile (previously 1.14) 95/04/20 12:29:39 rgreer 8b5acf82 3ac6b75e 85771d8c c7dcef68 2de1a36b 29ad1753 6fab9314 14be894d
+#sdata=95/03/31 12:29:13
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 common/lib/menu.c
+common/lib/menu.c (previously 1.11) 95/05/04 14:03:52 rgreer aa23e489 bb61c992 c0e520de 28d6843 76b67556 6c4edb62 b9d18db1 e6715e88
+#sdata=95/02/21 09:49:38
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 common/lib/names.c
+common/lib/names.c (previously 1.5) 95/03/20 14:41:00 rgreer e74d2ad6 ae3fa20b d48bbc70 22ebbebe 38db436b b2304a10 fc18cdf4 8881430c
+#sdata=95/04/18 13:16:49
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 common/lib/parsemen.c
+common/lib/parsemen.c (previously 1.3) 95/05/04 14:04:14 rgreer 7a7e80df 2db1a3d4 64da8cd5 7813fa96 d04eb24 157e0313 1f30928d dc40a87a
+#sdata=95/03/13 07:41:10
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 common/lib/printf.c
+common/lib/printf.c (previously 1.2) 95/03/20 14:41:01 rgreer b79b9e3d 5fe27fc4 49e231f7 7a731014 a2ae0c23 7142d77 d2e48b05 8cea68df
+#sdata=95/02/09 17:12:57
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 common/lib/readdir.c
+common/lib/readdir.c (previously 1.3) 95/05/07 15:27:02 rgreer 1851bc57 e1f7e67a 99b65741 ba918835 2e58a8cf 7ed70c61 2826a3c5 d6b7c7c
+#sdata=95/02/16 15:26:07
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 common/lib/resfree.c
+common/lib/resfree.c (previously 1.3) 95/06/09 13:46:36 rgreer 2aca06ff 7da124c5 b7df4b8d 6e6d0407 2dc3a948 121ef5de 86b8b9af 50b3040
+#sdata=95/02/12 13:34:24
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 common/lib/reslist.c
+common/lib/reslist.c (previously 1.4) 95/06/09 13:46:35 rgreer 8e928d6 c96fcdba 3eaa9441 42fea4f2 9c6d6027 eecb80b0 8d86c081 bfb1bee8
+#sdata=95/02/12 13:34:25
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 common/lib/resmgmt.c
+common/lib/resmgmt.c (previously 1.7) 95/06/09 13:45:44 rgreer 85f63a18 bc5d7ad5 37bd9fbf d70e23e8 d2abad04 2651d23d 4f9fe6b7 e8b21df5
+#sdata=95/03/13 07:41:11
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 common/lib/sprintf.c
+common/lib/sprintf.c (previously 1.2) 95/03/20 14:41:06 rgreer 34e51926 697ccbe3 db9c838c f1ca4727 8f3cd71 e1039284 e96896f 429eb417
+#sdata=95/03/13 07:41:12
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 common/lib/vfprintf.c
+#leaf=46ec0d27 2294b703 ffb16929 f5e75877
+#leaf=71ef30fd 912ca623 ac65a544 43c43e8a
+common/lib/vfprintf.c (previously 1.9) 95/05/14 12:06:37 rgreer e06debc1 ba7ebf0e 8d0ffc69 65ac8a5b 9f173379 7013f378 892a0d08 17c55231
+#sdata=95/03/13 07:41:13
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 common/lib/vprintf.c
+common/lib/vprintf.c (previously 1.2) 95/03/20 14:41:08 rgreer cfeebb7b 4c4e52ec ad74850b 910254d1 ab82dd9f f7900195 7859b6f3 7f3f149a
+#sdata=95/03/13 07:41:14
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 common/lib/vsprintf.c
+common/lib/vsprintf.c (previously 1.2) 95/03/20 14:41:09 rgreer ed38d5af 7f01e209 ddacf69e 55e1d08c 480aef85 9f95049e 5dd1ba72 e806b9be
+#sdata=96/01/22 13:56:25
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 devconf.db/compatbefs/README
+devconf.db/compatbefs/README (previously 1.1) 96/01/22 13:56:24 timh 48099f3c f71c077 97c44068 499e4d88 48099f3c f71c077 97c44068 499e4d88
+#sdata=95/08/31 13:16:05
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 4 3 devconf.db/generic/boot.rc
+#sdata=Name history : 3 2 devconf.db/single/boot.rc
+#sdata=Name history : 2 1 devconf.db/default/boot.rc
+#sdata=Name history : 1 0 devconf.db/generic/boot.rc
+devconf.db/generic/boot.rc (previously 1.13) 98/03/12 19:10:38 johnny 4c72d8b1 670ac2be db6ce304 ebba2397 fa58a38b 156f70e 2dfd436f 16cbf3f7
+#sdata=95/08/31 13:16:09
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 devconf.db/generic/bootargs.rc
+devconf.db/generic/bootargs.rc (previously 1.1) 95/08/31 13:16:08 timh 56786c64 41effc93 81f81793 40383dd7 56786c64 41effc93 81f81793 40383dd7
+#sdata=95/08/31 13:16:13
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 4 3 devconf.db/generic/bootenv.rc
+#sdata=Name history : 3 2 devconf.db/single/bootenv.rc
+#sdata=Name history : 2 1 devconf.db/default/bootenv.rc
+#sdata=Name history : 1 0 devconf.db/generic/bootenv.rc
+devconf.db/generic/bootenv.rc (previously 1.13) 98/04/22 12:11:43 shidokht 745243df 319ec40c d5b4b692 733bd11f ddbde72f c2682f56 c5aefa4f a0d9d35f
+#sdata=95/11/09 15:25:01
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 devconf.db/generic/feedback.sh
+devconf.db/generic/feedback.sh (previously 1.2) 96/02/28 13:46:05 timh a1674b56 8e9fb3c8 ca75057d ea110dc2 84c44733 957b1ef4 c5176251 d509b441
+#sdata=97/07/23 10:47:39
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 devconf.db/generic/inst9.sh
+devconf.db/generic/inst9.sh (previously 1.17) 98/07/29 13:02:36 cathleen 10b15cf0 24597292 b8a38ee2 28bf6be5 6b7f65f6 f76351fc 2c6b95c1 9667acc
+#sdata=96/06/11 16:13:23
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 devconf.db/generic/rcs3.sh
+devconf.db/generic/rcs3.sh (previously 1.6) 98/03/12 19:12:07 johnny 9f291ad5 ec97a1c db1013f4 ea7d26d7 24939a79 6fa9fdc c4fd3635 d8b55e22
+#sdata=96/06/11 16:13:18
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 devconf.db/generic/rcs9.sh
+#leaf=8038cccf 6b897004 4e7b1719 4f2dd4fa
+#leaf=490e8b02 1329706b 6a9b7dd9 509e9447
+#leaf=66ee4177 180759 b04982ad 6d316a98
+#leaf=3bf3ddb7 c97073bd e709bdea faadcf41
+#leaf=48e352f1 bf04d6c2 32aba3fc 13e5ab9a
+#leaf=1b60c1c2 1d7c67bc d495eb6 2eabcc9a
+#leaf=9b5ecab6 e172b1b2 f1a9fe81 eb223380
+devconf.db/generic/rcs9.sh (previously 1.31) 99/01/20 14:07:33 cathleen 41eebae6 d09d4295 cb725920 c1092e32 6564b8f5 7b23c196 3258665e c673b619
+#sdata=96/10/14 23:17:40
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 devconf.db/esavlb/esavlb.bat
+devconf.db/esavlb/esavlb.bat (previously 1.2) 96/10/18 19:02:09 dmick 11603fe8 fa67c360 37f219d9 65aa8844 8f996257 a61e2ba9 768d1af5 cfddec3f
+#sdata=96/03/29 11:24:00
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 devconf.db/package/SUNWbtx86/Makefile
+devconf.db/package/SUNWbtx86/Makefile (previously 1.1) 96/03/29 11:23:59 timh 393e529 bb66eeb3 75104c90 9fa2bd5c 393e529 bb66eeb3 75104c90 9fa2bd5c
+#sdata=91/12/03 13:55:38
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 4 3 devconf.db/package/SUNWbtx86/copyright
+#sdata=Name history : 3 2 usr/src/pkgdefs/common_files/copyright
+#sdata=Name history : 2 1 usr/src/pkgdefs/copyright.dat
+#sdata=Name history : 1 0 pkgdefs/copyright.dat
+#leaf=c8ce65e1 e94d4049 6ad51679 91a6fd39
+#leaf=43f10aa7 f6d29ca2 ae32a763 8d0c202c
+devconf.db/package/SUNWbtx86/copyright (previously 1.16) 98/11/06 13:58:24 glen b8a29018 1026f8a4 62053fb7 1168f9b9 8707ceee ef4219ac 3219815d fb17b318
+#sdata=91/12/03 14:12:39
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 4 3 devconf.db/package/SUNWbtx86/depend
+#sdata=Name history : 3 2 usr/src/pkgdefs/common_files/depend
+#sdata=Name history : 2 1 usr/src/pkgdefs/depend.dat
+#sdata=Name history : 1 0 pkgdefs/depend.dat
+devconf.db/package/SUNWbtx86/depend (previously 1.3) 94/12/03 14:11:49 tadd 3ec59b86 bf1217c9 f92faf6 8b8f9c14 b8370349 d07aecdd d1423251 78b27818
+#sdata=98/11/02 10:39:12
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 devconf.db/package/SUNWbtx86/pkginfo.1299
+devconf.db/package/SUNWbtx86/pkginfo.1299 (previously 1.2) 98/11/06 13:49:03 glen ea5f5b6a 47e761c8 467c0e79 6a228c80 36f8362 10227b7d 4ebc9c06 e89ff262
+#sdata=98/04/02 15:27:22
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 devconf.db/package/SUNWbtx86/pkginfo.598
+devconf.db/package/SUNWbtx86/pkginfo.598 (previously 1.1) 98/04/02 15:27:21 elayne a77515bd bb2c0a97 f21ac4d1 7eb9be8 a77515bd bb2c0a97 f21ac4d1 7eb9be8
+#sdata=98/04/02 15:27:30
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 devconf.db/package/SUNWbtx86/pkginfo.998
+devconf.db/package/SUNWbtx86/pkginfo.998 (previously 1.4) 98/11/02 10:53:18 maxda b7b5b3e9 61f076b9 fcd07df6 c6897e5d 54301b81 a801e9ee de188fe4 4bc15bdd
+#sdata=96/03/29 11:21:15
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 devconf.db/package/SUNWbtx86/pkginfo.tmpl
+devconf.db/package/SUNWbtx86/pkginfo.tmpl (previously 1.4) 98/11/06 13:57:24 glen 93085d7a b3d90d28 236fd5ee 51bf7274 3806207c 83c74d79 e00f5904 8104e475
+#sdata=96/03/29 11:23:28
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 devconf.db/package/SUNWbtx86/postinstall
+devconf.db/package/SUNWbtx86/postinstall (previously 1.2) 96/04/10 11:37:16 timh 93af22d2 e8c4b6f7 6a88650 3298defb 5da9033b fcf464a4 179e75e9 a525fede
+#sdata=96/03/29 11:23:31
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 devconf.db/package/SUNWbtx86/postremove
+devconf.db/package/SUNWbtx86/postremove (previously 1.3) 96/04/10 11:37:31 timh fc5cc3e2 5e422ac1 1f02190a ed125dc6 475ffd1b 70de5730 d671e77 ee1df2e
+#sdata=96/03/29 11:21:27
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 devconf.db/package/SUNWbtx86/protoinfo.tmpl
+devconf.db/package/SUNWbtx86/protoinfo.tmpl (previously 1.2) 98/04/02 15:27:54 elayne 76c86464 a956913a d7deca7c 6ce717b0 7aa8bb4b 3ab322d 689688ef 1aeb5739
+#sdata=96/03/29 11:13:37
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 devconf.db/package/Makefile
+devconf.db/package/Makefile (previously 1.5) 98/07/07 16:51:09 elayne 7f6e1320 6ba554b3 640091c2 7c603934 d37e7020 e1922713 6beb6e28 59adf57c
+#sdata=93/09/10 09:25:59
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 2 1 devconf.db/package/bld_awk_pkginfo.ksh
+#sdata=Name history : 1 0 usr/src/pkgdefs/bld_awk_pkginfo.ksh
+devconf.db/package/bld_awk_pkginfo.ksh (previously 1.4) 98/06/23 15:52:41 henryz 584ed699 44fcd500 7d310c89 681da3a6 575e4bdc 47d2d124 77466e7d d43cb125
+#sdata=95/08/31 13:16:13
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 5 4 devconf.db/package/bootenv.rc
+#sdata=Name history : 4 3 devconf.db/generic/bootenv.rc
+#sdata=Name history : 3 2 devconf.db/single/bootenv.rc
+#sdata=Name history : 2 1 devconf.db/default/bootenv.rc
+#sdata=Name history : 1 0 devconf.db/generic/bootenv.rc
+devconf.db/package/bootenv.rc (previously 1.16) 99/01/20 14:08:02 cathleen e0b8a58e 8909485e 4c058b32 3d79c206 7acf43a0 2e8c803c 718e0cf8 9669a4c7
+#sdata=95/08/30 23:26:59
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 4 3 devconf.db/package/database
+#sdata=Name history : 3 2 devconf.db/single/database
+#sdata=Name history : 2 1 devconf.db/default/database
+#sdata=Name history : 1 0 devconf.db/database
+#leaf=996ca964 62f0c684 6cdc7ea8 850233af
+#leaf=c6cb8e5d 2b4ac937 98d2fcfd b80b9272
+#leaf=73153fd4 32a4c8ad dc41bd63 be9905a6
+#leaf=15c12cd4 b51bc035 3d164c61 5939e665
+#leaf=5ab5e65b f775cf3 91065e3c 63405839
+#leaf=f3a0a1ae b448a04f d97c7dac d46b787d
+#leaf=cf8d60ff 390a01b0 ef8d960c a20aa22
+#leaf=d52a5f8d 3c8935c9 e2ea93bd e74efc87
+devconf.db/package/database (previously 1.47) 98/07/07 16:51:56 elayne 4a54d1c5 5705d591 ae876640 b667f882 b7dc0a57 28e8dade aff3fe52 bbeea951
+#sdata=96/03/29 11:10:43
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 2 1 devconf.db/package/pkgkit.ksh
+#sdata=Name history : 1 0 devconf.db/package/pkgkit.sh
+devconf.db/package/pkgkit.ksh (previously 1.5) 98/11/06 13:37:48 glen 87dcaa3c a4f6184a 6002be45 746f71f0 796befe5 17aa4d4f b1a73ed8 6e3f5f9e
+#sdata=95/12/18 15:51:53
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 2 1 devconf.db/single/README
+#sdata=Name history : 1 0 devconf.db/default/README
+devconf.db/single/README (previously 1.1) 95/12/18 15:51:52 timh 4781ff1f d3d1c45f 1f5ce817 1d888fc5 4781ff1f d3d1c45f 1f5ce817 1d888fc5
+#sdata=95/08/30 23:26:59
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 3 2 devconf.db/single/database
+#sdata=Name history : 2 1 devconf.db/default/database
+#sdata=Name history : 1 0 devconf.db/database
+#leaf=3d6762ea f1b7b68a d3f000b5 e5c86539
+#leaf=9cb0f480 b2a79a80 4bfb2bfe eedad070
+#leaf=674c37ed 84fb608d 840527e8 89fc0553
+#leaf=b32ad72a 9a818201 67737568 c15af9e5
+#leaf=9bf3dc66 81f14ba4 61aa02de 8a7009a0
+#leaf=aad0304 cd40d4e1 6432edc0 1711c91b
+#leaf=470e8940 3c9c6fb0 6f037f90 6de5bf42
+#leaf=d78a03c 8b384a3a b9b68394 e2ba5195
+#leaf=20d29a54 7538edf9 1ca99962 7f311a8f
+#leaf=4ad1c24f c8fe0e06 2a94a8c7 427ce281
+#leaf=1af96b53 b06451af 69115b81 f5c38b17
+#leaf=4d411655 fbffbe17 a1ce74de 7bc4c579
+#leaf=57d82e0a 9194a4df 25791d08 2ac288e6
+#leaf=8e45975a 58d6b4c1 34c9392b dbfbd790
+#leaf=8a208a27 25914105 3d502c93 d6b1d66
+#leaf=95d060fb acb07781 39cbb2e2 e5e9ab25
+#leaf=e7568030 8037fccc 4a9a0693 1c55bd32
+#leaf=349d83b2 b2af40e9 adc3af5e c3493b26
+#leaf=73153fd4 32a4c8ad dc41bd63 be9905a6
+#leaf=15c12cd4 b51bc035 3d164c61 5939e665
+#leaf=5ab5e65b f775cf3 91065e3c 63405839
+#leaf=f3a0a1ae b448a04f d97c7dac d46b787d
+#leaf=cf8d60ff 390a01b0 ef8d960c a20aa22
+#leaf=d52a5f8d 3c8935c9 e2ea93bd e74efc87
+devconf.db/single/database (previously 1.111) 98/11/05 10:51:03 glen 44c14abd 55ee0bcb 18421fd7 cccf6a7f 85297ecc e4a2891c c95b576f 92809148
+#sdata=94/12/17 14:27:33
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 4 3 devconf.db/single/solaris.map
+#sdata=Name history : 3 2 devconf.db/default/solaris.map
+#sdata=Name history : 2 1 devconf.db/generic/solaris.map
+#sdata=Name history : 1 0 devconf.db/solaris.map
+devconf.db/single/solaris.map (previously 1.10) 98/10/07 11:18:10 glen d8e9e0d 821bc2ea 6457b15c 5003a2ba f96a7a2b 9e0baaa6 fc40b697 673f90b3
+#sdata=95/08/31 10:03:51
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 devconf.db/Makefile
+devconf.db/Makefile (previously 1.7) 98/05/01 19:26:31 cpj 1b9e408c 912fb31d e52d2991 201d7c0e 9254c32f 8ba5baa9 9651dc0e 419e1f1f
+#sdata=95/08/30 14:55:53
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 devconf.db/checkpts
+#leaf=d1425c37 f945d4e7 32ba4a89 efd62655
+#leaf=51a8119f 79fa563e 18bc06c5 1e6430a2
+#leaf=35330439 1bf8ddfe c7773599 9b179776
+#leaf=82f5e057 188055 cacf644e 4d5f8277
+#leaf=bb707d1 38ab9b86 603b1e50 e279a7b1
+#leaf=af2833e3 b0e9d331 65ca95b7 dd53d43b
+#leaf=d70399f7 235a9765 965e9bff c8c0a915
+#leaf=c99c4c10 f1b89b27 25b7f6c7 9db31aec
+#leaf=e4451896 cb237318 8cc53a4d ab52c19
+#leaf=6c4ef53c 96e490d5 24754bc2 c1f6a11a
+#leaf=6ef7b62 2814d8a7 5040ca63 e8e73dcc
+#leaf=b23c4691 8c730a2c e7fe3854 f93f2b44
+#leaf=b75f519a 99f6919b f1ef18f2 6d817036
+#leaf=88a52dfa d052b6f 2b5b42bc 2330765d
+#leaf=2b13e692 1c5494e7 f77a8282 a4ad71f4
+#leaf=c6a7cc07 7f1833e 434ab864 b59da5e6
+#leaf=5837f9 5cab29ae f2733d7b e72a2b93
+devconf.db/checkpts (previously 1.233) 99/01/21 09:49:19 cathleen 758f7aaf 529ae10c 50231b1c 9c792459 d1fa573f 5c5dca4a 24ecfb5c 557e84d2
+#sdata=95/08/30 23:26:52
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 devconf.db/chkpt.sh
+devconf.db/chkpt.sh (previously 1.7) 96/09/25 13:26:32 root 76fc498 29c6a2c5 5e6ae55a 1275c555 83aaba19 5011d3e4 ce31d3d 8967533e
+#sdata=94/01/13 23:11:16
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 2 1 devconf.db/copyright.tmpl
+#sdata=Name history : 1 0 db/copyright.tmpl
+devconf.db/copyright.tmpl (previously 1.9) 98/11/05 13:29:11 glen 30e65660 4c973dea 39450660 c2ddac26 bea3c437 76f8dbfe ab55ac76 8135aa04
+#sdata=95/08/31 09:54:26
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 devconf.db/dcb.sh
+devconf.db/dcb.sh (previously 1.25) 98/10/14 14:43:40 glen b8f89697 7b054bf2 656e9e15 90d8abd5 967ea0dd d03e39a3 3a04abd9 fd14aada
+#sdata=95/08/30 23:27:15
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 devconf.db/ds.sh
+devconf.db/ds.sh (previously 1.3) 95/12/19 16:30:42 timh 7b9e712f 5265b69d 216d8994 fc938c 5196a31e c75c13cd 1eed90fa 10b60e38
+#sdata=94/01/13 23:11:17
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 2 1 devconf.db/ident.tmpl
+#sdata=Name history : 1 0 db/ident.tmpl
+devconf.db/ident.tmpl (previously 1.3) 94/01/27 11:52:34 jeffwi 4108b9c1 5db1536e 21c9d4ae 6ee8f413 2b417ad3 76216f27 d824cbcd 2cff17f
+#sdata=96/12/12 16:18:20
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 devconf.db/move.sh
+devconf.db/move.sh (previously 1.5) 98/04/08 16:40:42 mehran ab9b78bb 7eeb11b 4d19a0e6 16a6bd24 385635ab 514d3b3f e0b1bd51 939677cd
+#sdata=95/08/30 14:40:50
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 devconf.db/ws_list
+#leaf=dac956d4 9037c6f3 3dffadc3 42396391
+#leaf=930d1c64 d20d70ca 7338ad75 b6fd5620
+#leaf=9aba09c4 69112f60 21d2d76f d7cbd6b
+#leaf=9a7e14bc 296c1c90 d9e0c02f fb27f041
+#leaf=e0e2a169 1452d7a0 868d25be 6841018b
+#leaf=12b90b7a 77cf6849 e857df02 f8eafbb8
+#leaf=a5d83487 ed918efc 5a0388e2 714767dd
+#leaf=59cc91ec 549ea71a 9ce05335 f21a34dd
+#leaf=a14c43aa 24ae2ece b4579bb8 c15465cf
+#leaf=e362b538 90e1b564 f032ebf0 72cbcc2
+#leaf=bb2ec996 b4977912 89839080 5c58d5b6
+#leaf=8632a536 22ce591f 6c6f0918 af051560
+#leaf=f3b5832 e0466b9e 76af97a2 e4b11786
+#leaf=b6dc9ef7 e77de9f 59389e84 93648244
+#leaf=cd9fa3ff d53125d2 cd5e7a3d 59f5ae41
+#leaf=89c1c2b3 61505557 f33c6ac2 29fc6329
+#leaf=ec492aad d15ec83c 286303f7 542050cc
+devconf.db/ws_list (previously 1.234) 99/01/21 09:49:39 cathleen 603baf30 2aa8d6b7 548500f6 147fa529 45214a0 70facef8 715d3834 daaa1043
+#sdata=95/08/31 13:20:19
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 2 1 devicedb/make.bat
+#sdata=Name history : 1 0 bootconf/devicedb/make.bat
+devicedb/make.bat (previously 1.1) 95/08/31 13:20:18 timh 755686c0 b86a2e81 2f389cad 465889b4 755686c0 b86a2e81 2f389cad 465889b4
+#sdata=95/08/25 10:52:54
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 2 1 devicedb/makefile.dos
+#sdata=Name history : 1 0 bootconf/devicedb/makefile.dos
+#leaf=e4842637 dc40223 4302708f e329262b
+devicedb/makefile.dos (previously 1.9) 97/03/25 13:49:41 perrin f3306b17 87a2f770 f0a592b1 e979919b 9a8450ad 237e8a7 55bbf817 72cf4cc8
+#sdata=94/12/17 16:02:22
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 3 2 devicedb/master
+#sdata=Name history : 2 1 bootconf/devicedb/master
+#sdata=Name history : 1 0 dtree/devicedb/master
+#leaf=a20b3c82 7f64d0c5 174e3513 8a187835
+#leaf=77711db2 398947f4 3b870a43 e30aabab
+#leaf=dfed000a 2b6c1989 fc2c83 54bafb04
+#leaf=7de6f5c0 c6214f00 6af0ab38 5206e42
+#leaf=149e18a5 91a2b653 22c68f06 3f3c2ef1
+#leaf=bcddd2dc ddf4e4f3 ebfa0843 78f4b0f1
+#leaf=a3f86e48 91eeb586 fcf9de3a ec867d2
+#leaf=321c0f4c e0f5f5fd c5b94a0e f775b355
+#leaf=20ac9d2d 3224df50 9e1556e 2a051d06
+#leaf=1903a994 94fabec0 e27f0381 cf0cbe34
+#leaf=7ccf6617 6fea9425 53b1024b adfd03fd
+#leaf=261e76b8 faa976a2 8f31d07f d153a34f
+#leaf=bc1d6354 76263167 aa8b266b a064f026
+#leaf=2793369c fbfe7661 43a214a1 815832a4
+#leaf=a4be49f8 ef194328 a37dcdbe 8dd6472a
+#leaf=ae9d403 e0a8918d 45e6ee83 d4c9e7e3
+#leaf=eacac63 ff24d9f8 f9cee4ac 3b3aa410
+#leaf=e6352991 9f0f1dc3 d35ed1de 4eb21e8e
+#leaf=fbc51bf7 d9ad3e68 37a93736 949b7297
+#leaf=1cac808c 27b35b3d 208f0402 b779b9dc
+#leaf=fc47d235 9bc26624 77e26d2f 52132264
+#leaf=d4a396d baac3af0 89bcf771 bd391ec6
+#leaf=b10dafa2 ec1e7c60 9c1612d3 27d47fba
+#leaf=583fadd4 e76515f2 e1e554e1 1fd9f25c
+#leaf=db30b5fd 3b976f20 4cdaea7 b2187310
+#leaf=ce5cbf0e c85fc5f7 922eef13 7e4b9862
+#leaf=b6c6d913 40777b6f 1af89e62 3f17250c
+#leaf=985880f9 9e0eaca6 d245b7f4 fb299a38
+#leaf=7a7e3016 722802a4 10b48de3 83b50b09
+devicedb/master (previously 1.181) 99/01/21 11:15:44 cathleen 4f3453b8 77f448ac 3ac44fed e4307456 f7ba18c0 fa7d2c06 e2abbd8c 6364dcc9
+#sdata=93/08/06 13:56:17
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 exe2bin.c
+#leaf=9cf32be2 24bb6c3a c5a7cbf 1f436e2d
+#leaf=2363c978 2c1d96e8 fd729434 f77139d5
+exe2bin.c (previously 1.12) 94/05/23 12:43:22 brucec b9199762 b61568a0 16123884 a99a806d 7926ea19 c64d423c c626b490 bf86390f
+#sdata=95/03/17 14:11:01
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/cassist/common/include/stdio.h
+extbios/cassist/common/include/stdio.h (previously 1.6) 96/08/28 11:29:23 mcneal ddc9d205 eea01004 7707e30c cc549f77 35598590 25153d05 4b72dc78 7e798491
+#sdata=95/03/17 14:11:02
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/cassist/common/include/stdlib.h
+extbios/cassist/common/include/stdlib.h (previously 1.3) 95/04/20 12:31:57 rgreer 73e68fe8 d24d13fc 762a8185 994298a3 fbb03767 359be541 3b605eac a0c40d72
+#sdata=95/03/17 14:11:03
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/cassist/common/include/string.h
+extbios/cassist/common/include/string.h (previously 1.3) 95/04/20 12:31:35 rgreer 1d8f6d52 930a3b19 fe28b762 c90e18ea 324a8fee fc7084f2 b51ac36d 880fa910
+#sdata=95/02/23 13:50:20
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 2 1 extbios/cassist/common/lib/callback.c
+#sdata=Name history : 1 0 extbios/cassist/common/callback.c
+extbios/cassist/common/lib/callback.c (previously 1.8) 98/03/12 18:56:14 johnny 20d9096c 98e987fe b35a432c 746bb08d 3c09363 204cbfb1 f57f562d 9ec4d846
+#sdata=95/02/23 13:50:21
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 2 1 extbios/cassist/common/lib/crt0.s
+#sdata=Name history : 1 0 extbios/cassist/common/crt0.s
+extbios/cassist/common/lib/crt0.s (previously 1.7) 95/10/20 09:48:40 mcneal bb7a4bcb 94fb1ea6 673d520a 8368f421 27eabc15 b177b661 ecee70e3 19a96dbc
+#sdata=95/03/16 14:58:02
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/cassist/common/lib/delay.c
+extbios/cassist/common/lib/delay.c (previously 1.4) 96/05/06 13:16:58 perrin 56024240 2d9e48f8 f33f7951 620a6c 729759f7 580758ce f4993e19 f6120fa8
+#sdata=95/08/14 17:28:40
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/cassist/common/lib/fprintf.c
+extbios/cassist/common/lib/fprintf.c (previously 1.3) 95/11/18 16:30:59 rgreer 2f3fb54 f40fe25e 230ee52e e26256bf eed84230 dd1ab954 122ddeb5 33c7b3e
+#sdata=95/08/14 17:28:41
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/cassist/common/lib/fsprintf.c
+extbios/cassist/common/lib/fsprintf.c (previously 1.4) 95/11/18 16:31:01 rgreer 2b7b7fac 2f7e50eb b596cab2 e81a4254 f662dec5 d84f70fd d91caa30 f266e830
+#sdata=96/04/26 16:12:56
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/cassist/common/lib/int86.s
+extbios/cassist/common/lib/int86.s (previously 1.3) 96/08/19 15:06:38 stuartm 8dd876cd 852208ac 434694b6 1d2707f7 332cec4 303e3a49 f23c4ebd fafc14a0
+#sdata=95/03/17 14:08:19
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/cassist/common/lib/ldiv.c
+extbios/cassist/common/lib/ldiv.c (previously 1.3) 95/08/14 17:27:58 rgreer 3d937fe0 a957c2bf 46e553e0 d35b2b44 64a4b85d 48eec7c2 5f0ea592 7aaffb14
+#sdata=95/08/11 14:06:54
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/cassist/common/lib/ll_shift.s
+extbios/cassist/common/lib/ll_shift.s (previously 1.1) 95/08/11 14:06:53 mcneal f269b878 e624d948 7ee909f1 1df8a71c f269b878 e624d948 7ee909f1 1df8a71c
+#sdata=95/02/23 13:50:19
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 2 1 extbios/cassist/common/lib/makefile
+#sdata=Name history : 1 0 extbios/cassist/common/makefile
+#leaf=60d87c7f 35a870e5 4c3c3591 b1af8714
+extbios/cassist/common/lib/makefile (previously 1.12) 96/04/29 11:36:20 stuartm 4619586b 2734b54d b3c882d3 ada70a8 9a2b9b0 16eb10c7 573299e0 38360f41
+#sdata=95/03/16 14:58:04
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/cassist/common/lib/memcmp.c
+extbios/cassist/common/lib/memcmp.c (previously 1.4) 95/08/14 17:28:01 rgreer b834a16 ffcedd4b 4fa9166e 5215ae5d 3b4f3fbf 9b37fdd4 534cffdd ae5b97f2
+#sdata=95/03/16 14:58:06
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/cassist/common/lib/memcpy.c
+extbios/cassist/common/lib/memcpy.c (previously 1.4) 95/08/14 17:28:03 rgreer bd6b99ed 6835a212 764e1c2c 9b09794c 4fed919b 5f058624 26257f0c 3ae137de
+#sdata=95/04/20 12:33:22
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/cassist/common/lib/memset.c
+extbios/cassist/common/lib/memset.c (previously 1.2) 95/08/14 17:28:05 rgreer ab2ae078 f92e747f 98c8b927 f37dd67a a72789a3 c189f3ba 1d3249b2 6b86b804
+#sdata=95/03/16 14:58:03
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/cassist/common/lib/peek.c
+extbios/cassist/common/lib/peek.c (previously 1.5) 96/04/26 16:19:48 stuartm 1dc90c64 68d16e4b bb2fc48a d7d4c1a7 3b2f29e7 a25c64f2 e917a64 ff829d04
+#sdata=95/08/14 17:28:42
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/cassist/common/lib/printf.c
+extbios/cassist/common/lib/printf.c (previously 1.3) 95/11/18 16:31:03 rgreer a8204b28 9efd2221 412e7f63 40efcfbc f9957654 d4904c12 ab846cd0 851aac21
+#sdata=95/03/13 07:44:04
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 2 1 extbios/cassist/common/lib/putc.c
+#sdata=Name history : 1 0 extbios/cassist/common/putc.c
+extbios/cassist/common/lib/putc.c (previously 1.9) 96/08/28 11:29:04 mcneal f71c2e7b 2bfbe625 e037b03a ef61c76f 275b6115 9f5fd9cd bf851c4c d869ca96
+#sdata=95/03/16 14:57:58
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/cassist/common/lib/qsort.c
+extbios/cassist/common/lib/qsort.c (previously 1.4) 95/08/14 17:28:09 rgreer c56dd829 355896fa dbd15231 fcfdcf0 f2a70733 e43ca608 44f03596 37e87042
+#sdata=95/03/16 14:57:59
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/cassist/common/lib/rand.c
+extbios/cassist/common/lib/rand.c (previously 1.4) 95/08/14 17:28:11 rgreer 9f408ac3 a5ce5326 48fafdaf 85fce10f 15d47225 321548b6 2c535293 dfc8ad0c
+#sdata=95/04/20 12:33:20
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/cassist/common/lib/strchr.c
+extbios/cassist/common/lib/strchr.c (previously 1.2) 95/08/14 17:28:13 rgreer 4cce8e16 df2d5adf 1f837ebf 35012e0d b2487e50 3b12ed53 e478d6b0 d6acc168
+#sdata=95/03/16 14:58:00
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/cassist/common/lib/strcmp.c
+extbios/cassist/common/lib/strcmp.c (previously 1.4) 95/08/14 17:28:16 rgreer 777c1c5e d1c26b5a d64869ab ed8af307 774624a2 4f97347b 9d4c88ad 4fe9c149
+#sdata=95/03/16 14:58:01
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/cassist/common/lib/strcpy.c
+extbios/cassist/common/lib/strcpy.c (previously 1.4) 95/08/14 17:28:18 rgreer 7e122864 f140f361 98aabd67 769e6f15 801a4f56 9538672f 10c06ac9 cd3deb3b
+#sdata=95/03/17 14:08:18
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/cassist/common/lib/strlen.c
+extbios/cassist/common/lib/strlen.c (previously 1.3) 95/08/14 17:28:20 rgreer 60937311 f9903322 98dde4b0 4210f3fb 63c4482d 381c38d5 708bc4d8 2f9c0e8
+#sdata=95/04/20 12:33:21
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/cassist/common/lib/strncpy.c
+extbios/cassist/common/lib/strncpy.c (previously 1.2) 95/08/14 17:28:22 rgreer eb8c62 e3b86a5 554f6dc2 20c79e7a efcf6a62 19cd0bac cedee3e1 dd8da5b6
+#sdata=96/04/09 17:02:28
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/cassist/common/lib/ul_mul.s
+extbios/cassist/common/lib/ul_mul.s (previously 1.4) 97/04/29 15:58:52 mcneal aa1d1f77 940d2110 f93b96d6 76222aee 11181996 95342fb2 866f67e6 5c884bd1
+#sdata=96/04/09 17:02:39
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/cassist/common/lib/us_div.s
+extbios/cassist/common/lib/us_div.s (previously 1.4) 97/04/29 15:58:53 mcneal 3f81840a 60a074ab e3742fce 83e0970d 675faa51 fdd29a60 7f061fa2 518d553a
+#sdata=96/04/09 17:02:39
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/cassist/common/lib/us_mod.s
+extbios/cassist/common/lib/us_mod.s (previously 1.2) 96/04/29 11:07:13 timh b83f512f 2c9b2dbd d55594e4 166a9261 4580f762 971a34f6 c1c8913 30eb74db
+#sdata=95/08/14 17:28:43
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/cassist/common/lib/vfprintf.c
+extbios/cassist/common/lib/vfprintf.c (previously 1.7) 96/08/28 11:29:03 mcneal 9291b73b 7b2a52fa d757c3c8 6d0115dd bf045f48 512327e6 32a1cc4c d388d55f
+#sdata=97/01/27 14:37:06
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/cassist/boca.c
+extbios/cassist/boca.c (previously 1.2) 97/02/11 15:13:33 stuartm 1ea160ee 51f8e9f4 54bfa762 9f0760db 57fce39c 632d5f1e 5dd116a0 b331ade1
+#sdata=95/03/02 16:05:45
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/cassist/com.c
+extbios/cassist/com.c (previously 1.29) 98/05/01 15:51:21 cpj 8e619e5c c96e4192 ba8bb907 5b8dc09 129d01dd c913687c 9d21fe84 ec54cb49
+#sdata=95/02/23 13:47:28
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 2 1 extbios/cassist/fdc.c
+#sdata=Name history : 1 0 extbios/cassist/fd.c
+extbios/cassist/fdc.c (previously 1.20) 97/07/25 12:40:36 ianc 13f00fd3 ca09f8ed acfef283 a912f9a e9a41470 1eb86707 f327da72 e7957aa4
+#sdata=96/05/03 16:34:12
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/cassist/joyst.c
+extbios/cassist/joyst.c (previously 1.4) 96/07/26 14:46:43 perrin 47d68eef 2f97c823 90a9185d d7d6f790 6756d45c 405fbed3 1444f7c4 9ff0281d
+#sdata=95/03/14 05:56:01
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/cassist/key.c
+#leaf=30a7f97a 48b09f32 2bb1ff5c c3e8d4f1
+extbios/cassist/key.c (previously 1.23) 97/04/15 15:03:57 stuartm f5da100 3ddafc95 2e7fc0c5 8ab7fe93 15dce64e be60963c a5946d8b 22a7a74d
+#sdata=96/06/10 15:44:42
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/cassist/logi.c
+extbios/cassist/logi.c (previously 1.3) 96/08/02 19:10:32 perrin 8e04b38 48dcda20 52ad5ca8 5482dbb8 abe166da d210712e dfc6c74f b61f3930
+#sdata=95/02/23 13:47:29
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/cassist/lpt.c
+extbios/cassist/lpt.c (previously 1.14) 96/07/29 15:40:28 perrin c3a71d26 4c8ad985 2d093fd5 ed088863 edc92a31 5506dcab 6100f9c 4852634a
+#sdata=95/02/23 13:47:29
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/cassist/make.bat
+extbios/cassist/make.bat (previously 1.2) 95/03/23 18:08:26 rgreer bba64c6c 13ff9656 287d55f9 e5280bba 5ba91b82 cea1149f 315839d4 6deb71e4
+#sdata=95/02/23 13:47:26
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/cassist/makefile
+#leaf=98a0a3a3 db2c5d88 8147f7ff 223f4bdd
+#leaf=b83caaa5 51f40ad 4360472e c9c3e137
+#leaf=e52fa2d5 dfde6831 989fe8b9 88d40ba5
+extbios/cassist/makefile (previously 1.27) 97/03/11 17:18:30 michelle 40d5a30d 4d381a1a b43c4739 8a3222ab 514d91cc c21b0ddc 15a1acba 7554be1b
+#sdata=96/06/10 15:44:41
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/cassist/msm.c
+extbios/cassist/msm.c (previously 1.3) 96/08/02 19:10:33 perrin 33b1b41f 7d139421 bdbb017c ee551ff6 bdf151cc 9f75d1c3 6d82b0db 96a1f41a
+#sdata=96/12/17 18:52:18
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/cassist/mwss.c
+extbios/cassist/mwss.c (previously 1.2) 97/05/12 13:19:04 daved aa2bfb05 b98f2744 f12e8334 ca6ad4ce d1180cbe 2219ba26 f9e64ee9 a28c050
+#sdata=96/12/17 18:47:39
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/cassist/mwss.h
+extbios/cassist/mwss.h (previously 1.1) 96/12/17 18:47:38 michelle ef172c4f 8791bc2a 73d1deb7 979c1239 ef172c4f 8791bc2a 73d1deb7 979c1239
+#sdata=95/03/04 11:06:36
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/cassist/nop.c
+extbios/cassist/nop.c (previously 1.3) 95/06/28 15:08:01 rgreer fe7175bf a2c0819 a6823562 89c78591 b7ebd8b f47309cd e27ca445 6dc5099d
+#sdata=96/11/21 12:49:43
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/cassist/pcic.c
+extbios/cassist/pcic.c (previously 1.1) 96/11/21 12:49:42 perrin dd94cf36 670438f6 ef6994e0 71705858 dd94cf36 670438f6 ef6994e0 71705858
+#sdata=96/11/21 12:49:43
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/cassist/pcic.h
+extbios/cassist/pcic.h (previously 1.1) 96/11/21 12:49:42 perrin 5387c0fd 467d6882 6e4c1d96 918244d4 5387c0fd 467d6882 6e4c1d96 918244d4
+#sdata=96/05/07 12:06:52
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/cassist/ps2ms.c
+extbios/cassist/ps2ms.c (previously 1.6) 97/01/13 16:16:06 stuartm 971de1f3 8e52bef 9d548a35 7e1767c9 360380ec 26b5ed23 fbf4ae28 1b3006c0
+#sdata=96/05/01 14:05:45
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/cassist/sbpro.c
+extbios/cassist/sbpro.c (previously 1.11) 97/05/12 13:22:28 daved 25b4c317 1151f9e cdb9dde9 9e4116cc 36a196f3 df3eb888 be1e8ea2 cb939f9f
+#sdata=96/05/01 14:05:46
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/cassist/sbpro.h
+extbios/cassist/sbpro.h (previously 1.7) 97/03/11 17:18:31 michelle 3bac4f60 b696d86f 78c8071b 2ad80c3d 53c1ac2 12e4f3fb 3efbff6 ac4b1e06
+#sdata=93/04/08 09:25:03
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/common/__ntohs.s
+extbios/common/__ntohs.s (previously 1.6) 94/05/23 12:43:30 brucec 27c629a9 eee2e67 8c0acef 8b858ad8 b6de77c9 71be1473 2bfb6682 540a88a8
+#sdata=93/04/08 09:25:00
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/common/bef.h
+extbios/common/bef.h (previously 1.13) 96/07/16 10:44:41 mcneal b18d406b ce8d2a70 ebb04bb1 cc505fec 6bab4d61 a9407842 99d76369 57ea3fa0
+#sdata=93/08/24 22:22:27
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/common/common.h
+extbios/common/common.h (previously 1.6) 95/08/18 18:34:53 mcneal 1cb51cf3 156494c6 57f3d8ab cd129a8f baeda1fe 23786d6d e6ac9416 e3f19c
+#sdata=93/04/08 09:25:18
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/common/get_conf.s
+extbios/common/get_conf.s (previously 1.6) 94/05/23 12:43:38 brucec 692456c4 8a9651f0 67b5654c 13000554 3c6086af 6f7c5982 5c1edd1c c61316fb
+#sdata=93/04/08 09:24:58
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/common/is_eisa.c
+extbios/common/is_eisa.c (previously 1.7) 94/05/23 12:43:41 brucec bd275f9e abb98b08 878e26e1 f2bbdcf2 3e82cb2e 75fb5034 ecce6893 c020f924
+#sdata=93/04/08 09:25:07
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/common/is_mc.c
+extbios/common/is_mc.c (previously 1.6) 94/05/23 12:43:43 brucec 381ae320 dd7d414a af74781f 19ef57da 71016eee b4444fcc 898d0cc4 4d85e9b4
+#sdata=93/04/08 09:24:54
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/common/iutil.c
+extbios/common/iutil.c (previously 1.7) 94/05/23 12:43:46 brucec 9362ac5e ada06547 378b90e7 3e3a12e4 99850770 f99c8c32 6690685b 900b744d
+#sdata=93/04/08 09:25:09
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/common/kbchar.s
+extbios/common/kbchar.s (previously 1.6) 94/05/23 12:43:49 brucec 667ac921 262c6149 187a9a33 e1874838 faef727f 7d53b036 90f7655f e72a9d69
+#sdata=93/04/08 09:25:12
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/common/low.s
+extbios/common/low.s (previously 1.8) 95/08/11 14:08:06 mcneal 36725b3a a2b39658 131e35c5 1ff425c 7d652cf9 c051f5a0 a8806773 f15a646d
+#sdata=93/07/15 15:14:09
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/common/makefile
+#leaf=4654fecf c8fd5095 3138b78b a06db044
+extbios/common/makefile (previously 1.9) 95/10/27 17:31:43 rgreer a459dc5e 400e1267 2e68562a ab686031 bb9452b3 9abf64b6 bdde01c4 f96fea00
+#sdata=94/11/21 13:50:25
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/common/pciconf.s
+extbios/common/pciconf.s (previously 1.5) 96/07/16 10:49:22 mcneal af173570 fff3f25c e0fd9a04 d27b79db ab95983d 48d5f55b 93eefb87 f896d78e
+#sdata=93/04/08 09:25:05
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/common/putnum.c
+extbios/common/putnum.c (previously 1.8) 95/10/27 17:31:09 rgreer 90bd8f57 e5247670 c234b80d dedc2d1b 77d977a8 313c3703 4918b2f2 36afbc7
+#sdata=93/04/08 09:25:10
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/common/setup.s
+#leaf=4f27293e 5d13e614 47e3ad68 67891f55
+extbios/common/setup.s (previously 1.9) 95/05/16 23:23:23 dmick 174aa3d7 cbce7d8e 908d9be1 8d838053 4ef16ef3 b84ad4b2 67c4b63 66b04f67
+#sdata=93/07/01 10:59:01
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/common/setvect.c
+extbios/common/setvect.c (previously 1.5) 94/05/23 12:44:00 brucec 2562f69f 1dc0c58b c811c38b bf537597 5a7f5f35 f19dd512 9b319731 4af4bb66
+#sdata=93/04/08 09:25:16
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/common/types.h
+extbios/common/types.h (previously 1.8) 95/10/11 16:12:25 mcneal 42b5356e 71bdbd23 6867de1d 1dfdcf7 9a68b323 d196b2b3 42e7b6b2 bb687815
+#sdata=93/04/08 09:25:14
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/common/util.s
+extbios/common/util.s (previously 1.11) 95/10/27 17:30:55 rgreer f31836ea c97e9e90 ca0cdd45 7f740826 3a61854b 4c9cc29c cbd654b b2eece58
+#sdata=95/03/03 09:47:55
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/intercepts/chario.h
+extbios/intercepts/chario.h (previously 1.2) 95/03/03 09:48:33 mcneal 70500613 6c2087eb 6f2272be 98f49197 820b1e38 f1316122 8dcbd620 37759ca7
+#sdata=95/02/06 11:11:28
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/intercepts/global.h
+extbios/intercepts/global.h (previously 1.2) 95/03/03 09:47:09 mcneal 316e1ad5 e84c599d 9a8d0cb dd30d76 39c896e8 9d83c851 c2a647cc 7619a0e6
+#sdata=95/03/03 09:49:23
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/intercepts/int.s
+extbios/intercepts/int.s (previously 1.2) 95/03/03 09:50:00 mcneal 75a6847 383a4a61 b36fb49 993ed547 876dc8c4 a6ae0385 263dd27b 40188bd4
+#sdata=95/02/06 10:56:42
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/intercepts/inter10.c
+extbios/intercepts/inter10.c (previously 1.4) 95/09/28 16:31:24 perrin ad796bb3 6bbf199d a4d86442 83e12677 b3b9f385 7407cd32 b2e9b71c 55bb5eaa
+#sdata=95/03/03 09:50:25
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/intercepts/inter16.c
+extbios/intercepts/inter16.c (previously 1.4) 95/09/28 16:31:27 perrin eb69f701 e94d2564 c20cc0f0 6c7abc1e ae60e126 e2d1b669 73fdb181 30634738
+#sdata=95/03/03 09:51:06
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/intercepts/low.s
+extbios/intercepts/low.s (previously 1.2) 95/03/03 09:51:55 mcneal 8bf715c1 d7879c9b 9a7407d9 dc5faf17 427ec91d a170a5cf d7e39a2 121f754a
+#sdata=95/03/03 09:52:09
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/intercepts/makefile
+extbios/intercepts/makefile (previously 1.3) 95/09/12 15:22:34 mcneal 2b0789ad ac023d88 90a82810 192138ee ca4e5f7a 6708117d de104052 b2b5b34f
+#sdata=93/04/08 09:25:53
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/network/dssubs.s
+extbios/network/dssubs.s (previously 1.8) 96/07/16 10:50:30 mcneal 4244b6fd 4f42cd36 65ef46fb d926dbce 21db118d a92388b4 611faea7 56f5096c
+#sdata=93/07/15 15:14:28
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/network/makefile
+extbios/network/makefile (previously 1.7) 95/08/31 13:31:28 timh 33e7fe30 198777ff 6e995906 d4f57d1e 23c92af4 c9627041 45ba1410 194c6017
+#sdata=93/04/08 09:26:19
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/network/network.c
+#leaf=9d6535a0 f233aedd 71ca60e e3504682
+#leaf=6af627cf 75ccf65e 18899fd5 510e3ed4
+#leaf=863ea6ca 6ce77827 e39cc1f9 ace106e3
+extbios/network/network.c (previously 1.23) 98/06/04 10:45:20 tony 2edc0c48 81c2d541 e1348510 76a95461 1a0027f3 423979b6 d65629ca 2977ed31
+#sdata=97/04/15 12:19:52
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/onepiece/cnft/cnft.bef
+extbios/onepiece/cnft/cnft.bef (previously 1.3) 97/10/30 09:33:39 jasonk 1bc23f42 8f3e58dd a04ef967 eced0ced ac5c8c04 73192aa9 47aadf78 4e32be22
+#sdata=97/04/15 12:24:56
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/onepiece/cnft/makefile
+extbios/onepiece/cnft/makefile (previously 1.5) 97/05/01 19:02:13 mehran 8b44a55d 4a3abc25 6180ccb8 394afaf ecafee9b 452642c5 194db6ca d88cb47b
+#sdata=95/05/15 19:58:51
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/onepiece/dnet/dnet.c
+#leaf=70a1f894 d29143c1 d53a9fb 8f348ece
+extbios/onepiece/dnet/dnet.c (previously 1.19) 98/02/19 17:53:30 patp eee4dd8a ffa5201e 3ebd0239 af5be50a fdfb044b 7223c8be 4e18da60 6c54587d
+#sdata=95/05/15 19:58:53
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/onepiece/dnet/dnet.h
+extbios/onepiece/dnet/dnet.h (previously 1.16) 97/08/25 19:03:00 daved f6633fe2 309cc9d7 67ff4181 372d4efd 9a3dc784 1c4210fe 49490260 3cfd80ce
+#sdata=96/08/20 20:07:51
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 3 2 extbios/onepiece/dnet/dnetpm.c
+#sdata=Name history : 2 1 extbios/onepiece/dnet/.del-dnetpm.c-Oct-09-96
+#sdata=Name history : 1 0 extbios/onepiece/dnet/dnetpm.c
+extbios/onepiece/dnet/dnetpm.c (previously 1.11) 98/02/19 17:54:59 patp f9c17a6c 7e8ac717 86f22c79 66b919a5 8799976e 2552d4a3 35cd0442 e44f45a0
+#sdata=95/05/15 19:58:55
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/onepiece/dnet/makefile
+extbios/onepiece/dnet/makefile (previously 1.17) 98/05/29 15:49:01 mehran e23b2963 1a8f78a4 16f933dc d0e766c0 92a53245 1a54207 3d176575 e8949863
+#sdata=93/04/13 11:45:46
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/onepiece/elx/eisa_slo.s
+extbios/onepiece/elx/eisa_slo.s (previously 1.5) 94/05/23 12:44:52 brucec 7857d05c b38fb7c6 209393d3 6842718b a24047b1 7914f46f c26b97b8 6f2501d3
+#sdata=93/04/13 11:46:26
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/onepiece/elx/elx.c
+extbios/onepiece/elx/elx.c (previously 1.33) 97/04/14 11:13:04 michelle 9696b614 8992018e cdb194c3 83eec396 ac984ecd b588dd08 c0dc7b98 cb5491b6
+#sdata=93/04/13 11:46:39
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/onepiece/elx/elx.h
+extbios/onepiece/elx/elx.h (previously 1.11) 96/06/17 16:41:09 mcneal 9e5f76bc 2b7adbae 3ced7f28 2fa69056 e41ba073 8c2913a3 7e3ec1e 8927e5b8
+#sdata=95/11/03 16:39:55
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/onepiece/elx/elxmedia.c
+extbios/onepiece/elx/elxmedia.c (previously 1.8) 97/04/14 11:14:38 michelle 566be758 975b9c96 fe3059f9 d47717c4 62ac4f92 92a3ecfc e181d7ec cfdcfdf7
+#sdata=93/04/13 11:46:55
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/onepiece/elx/is_eisa.c
+extbios/onepiece/elx/is_eisa.c (previously 1.5) 94/05/23 12:45:02 brucec 763dfe88 ba7a5a9a 23c2364c 3765dc15 63a3ce6a 641d60ab 9bc14e25 c03e3468
+#sdata=93/04/13 11:47:05
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/onepiece/elx/is_mc.c
+extbios/onepiece/elx/is_mc.c (previously 1.6) 94/05/23 12:45:04 brucec 3803bb90 2a7f55f5 d48aba82 567b6dd0 30ff47b4 f9364380 4eadc981 b079336f
+#sdata=93/07/15 15:14:54
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/onepiece/elx/makefile
+extbios/onepiece/elx/makefile (previously 1.14) 98/05/29 15:54:42 mehran e2265d60 f3f07bc2 8091479 c94e0a5e d7b92bda cab2d41d c5637f9 24966658
+#sdata=93/04/13 11:47:39
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/onepiece/elx/ntohs.c
+extbios/onepiece/elx/ntohs.c (previously 1.6) 95/10/27 17:25:40 rgreer 59b2e7bf 72ed8640 82a59eea 2dcf69e5 dc042620 39382797 40619c33 14f6a5a8
+#sdata=93/04/13 11:47:52
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/onepiece/elx/nvm.h
+extbios/onepiece/elx/nvm.h (previously 1.6) 94/05/23 12:45:10 brucec 5f32ace8 8f90bbf7 80272cc7 9421bd1d ca954431 dbc2755d 3d195240 f50899b9
+#sdata=93/04/13 11:48:07
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/onepiece/elx/repio.s
+extbios/onepiece/elx/repio.s (previously 1.6) 95/11/03 16:32:48 tony 2ad52d52 8899ffbb 3934c7f4 4bbd3f02 60ca5e60 cf301c6f f0169f76 4b7894fe
+#sdata=97/12/02 15:26:41
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/onepiece/elxl/elxl.c
+extbios/onepiece/elxl/elxl.c (previously 1.2) 98/02/23 13:34:31 daved b55c72b4 11c5404f ecb292e1 91fd7161 c1b32d48 776bb537 1728b942 33485227
+#sdata=97/12/02 15:26:41
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/onepiece/elxl/elxl.h
+extbios/onepiece/elxl/elxl.h (previously 1.1) 97/12/02 15:26:40 daved 45fe7691 a0967c1f b5717fc ee343e8c 45fe7691 a0967c1f b5717fc ee343e8c
+#sdata=97/12/02 15:26:41
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/onepiece/elxl/elxl_cmn.c
+extbios/onepiece/elxl/elxl_cmn.c (previously 1.1) 97/12/02 15:26:40 daved 8deb4511 458bd8e4 c32867f4 d53b01fb 8deb4511 458bd8e4 c32867f4 d53b01fb
+#sdata=97/12/02 15:31:21
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/onepiece/elxl/makefile
+extbios/onepiece/elxl/makefile (previously 1.2) 98/05/29 15:49:02 mehran f66ab9e9 f4ac50d3 e8420eac 395cb3b1 da4061ab b41b3451 335ce36c e5b9b692
+#sdata=94/02/08 13:31:48
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/onepiece/ieef/ieef.c
+#leaf=b2b182f6 9353c875 22febba0 652dabac
+extbios/onepiece/ieef/ieef.c (previously 1.24) 96/09/26 17:05:52 michelle 1398cbed 80536fc9 297e4fe6 3c8a0ffa 8f030481 52e40c82 3bfcb1ac 25966cb2
+#sdata=94/02/08 13:31:55
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/onepiece/ieef/ieef.h
+extbios/onepiece/ieef/ieef.h (previously 1.14) 96/09/26 16:54:43 michelle b5ef9c8a 3f4a3b67 e3fc0e42 e6a25be7 30bf4d44 4cfdf749 31a9c528 83378428
+#sdata=94/02/08 13:32:01
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/onepiece/ieef/makefile
+#leaf=c955c8bc 2ae2ad0 3fbd907f d52cee34
+extbios/onepiece/ieef/makefile (previously 1.15) 98/05/29 15:55:56 mehran a742d0ac eaccf130 97c0cc43 3ebd5b8c 86d59a8a 263f9ca4 5c8415f3 79ec2c01
+#sdata=94/06/17 11:01:48
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/onepiece/ieef/spl.s
+extbios/onepiece/ieef/spl.s (previously 1.1) 94/06/17 11:01:47 adler ad354e61 865d33c9 12a53420 1822e72d ad354e61 865d33c9 12a53420 1822e72d
+#sdata=96/09/23 15:46:59
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/onepiece/iprb/iprb.c
+extbios/onepiece/iprb/iprb.c (previously 1.3) 97/04/30 09:47:30 michelle 7a89ce20 d2daf3c7 e5067c89 bbb854a9 1f678310 71f5706c 799b5be9 afb05892
+#sdata=96/09/23 15:47:00
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/onepiece/iprb/iprb.h
+extbios/onepiece/iprb/iprb.h (previously 1.3) 97/04/29 17:33:05 michelle 2bce5e40 67c8b91d db588489 b988220b 14b6fd3 2170caf8 337a6070 f09431e9
+#sdata=96/09/23 15:47:00
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/onepiece/iprb/makefile
+extbios/onepiece/iprb/makefile (previously 1.4) 98/05/29 15:49:03 mehran 6a7e186e 69942dc5 6230aa5e 3b51417b 3dcdb7bf d7e1fbf4 2c279506 5cb15ed0
+#sdata=97/04/30 17:16:03
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/onepiece/mii/mii.c
+#leaf=1e5e6995 91306230 4bf8dc9f 15ec7e6
+extbios/onepiece/mii/mii.c (previously 1.8) 97/10/14 16:40:04 michelle d0d5fe79 418b3afa 27cb939f 4560bf1 7a135469 3cac9f62 1c671cf3 d2d32118
+#sdata=97/04/30 08:25:34
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/onepiece/mii/mii.h
+extbios/onepiece/mii/mii.h (previously 1.1) 97/04/30 08:25:33 michelle 7d953820 f5b5d1c4 7c11e561 d3ee6ebe 7d953820 f5b5d1c4 7c11e561 d3ee6ebe
+#sdata=97/04/29 17:37:21
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/onepiece/mii/miipriv.h
+extbios/onepiece/mii/miipriv.h (previously 1.2) 97/05/29 16:44:00 petere 5942f5ac 52f72ad0 1ff92869 a9ec5dbb bb6b07ba 4e209df3 c161fc82 6c6e54f8
+#sdata=97/04/29 17:37:30
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/onepiece/mii/miiregs.h
+extbios/onepiece/mii/miiregs.h (previously 1.1) 97/04/29 17:37:29 michelle 10f043ce da0a6c92 1ee03ba8 db36c239 10f043ce da0a6c92 1ee03ba8 db36c239
+#sdata=97/08/22 10:10:49
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/onepiece/mtok/README
+extbios/onepiece/mtok/README (previously 1.1) 97/08/22 10:10:48 michelle c9249901 32883f4f d5018e26 1204007f c9249901 32883f4f d5018e26 1204007f
+#sdata=97/08/26 18:33:09
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/onepiece/mtok/makefile
+extbios/onepiece/mtok/makefile (previously 1.1) 97/08/26 18:33:08 michelle 5a9c6f13 b2391d16 5880fb2b 5f9b8fb2 5a9c6f13 b2391d16 5880fb2b 5f9b8fb2
+#sdata=97/08/22 09:16:42
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/onepiece/mtok/mtok.bef
+extbios/onepiece/mtok/mtok.bef (previously 1.2) 97/09/12 18:17:40 daved 1ec0599f 12695b29 5fe3f546 a30809ed dc97ae73 811ba8d4 b26ee99c c71a3156
+#sdata=95/01/09 15:08:59
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/onepiece/pcn/makefile
+extbios/onepiece/pcn/makefile (previously 1.8) 98/05/29 15:57:43 mehran 95129510 684dff02 cd3e1281 4f1069f0 2e7f8494 6412696b d70a4cd7 2b14122c
+#sdata=95/01/09 15:09:00
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/onepiece/pcn/pcn.c
+#leaf=be4780a9 257adb5 eede37ab 95b6955c
+#leaf=a4816f0e 8b604c9f cee34910 3f05c6b6
+#leaf=79debf21 d93cc910 63cc5c0 de07a800
+extbios/onepiece/pcn/pcn.c (previously 1.21) 97/07/07 10:13:19 michelle 3d3bc519 2b5b0c0f d9216673 44e72d7a 7828ff8e 4bd8bf41 ed048a8b af835e4d
+#sdata=95/01/09 15:09:01
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/onepiece/pcn/pcn.h
+extbios/onepiece/pcn/pcn.h (previously 1.4) 97/07/07 10:13:20 michelle 9d1b1184 c7436155 e6ca4a2 54acff6f 76cbf6ad 91552c72 17875234 1ed1ea14
+#sdata=95/07/21 09:46:00
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/onepiece/smcg/repio.s
+extbios/onepiece/smcg/repio.s (previously 1.3) 97/03/11 13:56:24 michelle 502aa6dd 86d88545 cf298423 8e23f518 9c155e66 d2f57591 e9861a1c 86069e1
+#sdata=95/07/19 08:44:48
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/onepiece/smcg/smcgrm.c
+#leaf=23faa27d af0ce20a 7e093369 f4d7911f
+extbios/onepiece/smcg/smcgrm.c (previously 1.12) 97/11/10 12:37:20 daved 20b84176 ab753c4a 2d0d3a43 4adb3340 c3153f6d 91e151d4 c61211d2 fab09b44
+#sdata=95/07/19 08:44:49
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/onepiece/smcg/smcgrm.h
+extbios/onepiece/smcg/smcgrm.h (previously 1.7) 97/11/10 14:01:04 daved 1e4dd1e3 a7be4e19 998f84b8 cc372482 c2c824b0 637782a6 8a981051 29d4069e
+#sdata=97/11/11 09:29:24
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/onepiece/spwr/9432.c
+extbios/onepiece/spwr/9432.c (previously 1.1) 97/11/11 09:29:23 daved a339b019 7aac3102 cb9ea97b 7727f892 a339b019 7aac3102 cb9ea97b 7727f892
+#sdata=97/11/07 16:06:54
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 2 1 extbios/onepiece/spwr/board_id.h
+#sdata=Name history : 1 0 usr/src/uts/i86pc/io/spwr/board_id.h
+extbios/onepiece/spwr/board_id.h (previously 1.2) 97/11/07 17:22:27 daved d9e064cd ee22af04 a7290e1b fb2efc28 2ef4d3dd cba8532 962a3856 a7190b05
+#sdata=97/11/07 16:07:08
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 2 1 extbios/onepiece/spwr/eeprom2.h
+#sdata=Name history : 1 0 usr/src/uts/i86pc/io/spwr/eeprom2.h
+extbios/onepiece/spwr/eeprom2.h (previously 1.2) 97/11/07 17:23:40 daved aff1d6bd 9acf2dd 92db0003 2e1350d4 28228169 76aa5cda aba057a7 9e037c44
+#sdata=97/11/07 16:07:18
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 2 1 extbios/onepiece/spwr/epic100.h
+#sdata=Name history : 1 0 usr/src/uts/i86pc/io/spwr/epic100.h
+extbios/onepiece/spwr/epic100.h (previously 1.2) 97/11/07 17:24:06 daved af768837 78ce057c bace7e34 6b6a91ff 13c69ee9 f971b6d6 39e18d4e 9ecdc477
+#sdata=97/11/07 17:27:41
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 2 1 extbios/onepiece/spwr/epicreg.h
+#sdata=Name history : 1 0 usr/src/uts/i86pc/io/spwr/epicreg.h
+extbios/onepiece/spwr/epicreg.h (previously 1.1) 97/11/07 17:27:40 daved af5af6e3 60e51eb0 95535772 3bf803ba af5af6e3 60e51eb0 95535772 3bf803ba
+#sdata=97/11/07 16:05:50
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 2 1 extbios/onepiece/spwr/lm9432.c
+#sdata=Name history : 1 0 usr/src/uts/i86pc/io/spwr/lm9432.c
+extbios/onepiece/spwr/lm9432.c (previously 1.3) 98/02/09 18:09:11 daved cebdd7ce d90bb8e0 dbef2634 f5fdf10d 24694876 ff6bfdaf 12aa1ca1 f7271f00
+#sdata=97/11/07 16:08:03
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 2 1 extbios/onepiece/spwr/lm9432.h
+#sdata=Name history : 1 0 usr/src/uts/i86pc/io/spwr/lm9432.h
+extbios/onepiece/spwr/lm9432.h (previously 1.2) 97/11/07 17:24:51 daved 129ca8b9 ec0a0dd7 86ee7d82 c5654af3 12de7cb2 13d0e728 d8da2606 3a51043f
+#sdata=97/11/07 16:05:58
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 2 1 extbios/onepiece/spwr/lm9432cf.c
+#sdata=Name history : 1 0 usr/src/uts/i86pc/io/spwr/lm9432cf.c
+extbios/onepiece/spwr/lm9432cf.c (previously 1.2) 97/11/07 17:30:44 daved 5fdee1db 37f0707b b48a6b6c b8a29749 9fbdc93c b0eb9b90 b284ffe6 4609cbe7
+#sdata=97/11/07 16:08:12
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 2 1 extbios/onepiece/spwr/lm_macr.h
+#sdata=Name history : 1 0 usr/src/uts/i86pc/io/spwr/lm_macr.h
+extbios/onepiece/spwr/lm_macr.h (previously 1.2) 97/11/07 17:31:02 daved 46fc43a6 fa27a28c f3959622 8437ec2 dc75448f 2b6ff672 57c59f5f 86a712df
+#sdata=97/11/07 16:08:21
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 2 1 extbios/onepiece/spwr/lmstruct.h
+#sdata=Name history : 1 0 usr/src/uts/i86pc/io/spwr/lmstruct.h
+extbios/onepiece/spwr/lmstruct.h (previously 1.2) 97/11/07 17:32:29 daved 63c7c36c f38ea7ed 58931d3c dc904918 3b6caec7 8ce15fc6 80f94d06 5aa6d215
+#sdata=97/11/10 14:02:14
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/onepiece/spwr/makefile
+extbios/onepiece/spwr/makefile (previously 1.1) 97/11/10 14:02:13 daved 86fcb430 f086374e 4a9e0261 338ffbbd 86fcb430 f086374e 4a9e0261 338ffbbd
+#sdata=97/11/11 09:30:37
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/onepiece/spwr/spwr.c
+extbios/onepiece/spwr/spwr.c (previously 1.1) 97/11/11 09:30:36 daved 78dab70c c3199447 7595993f 90c5e48d 78dab70c c3199447 7595993f 90c5e48d
+#sdata=97/11/11 09:30:37
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/onepiece/spwr/spwr.h
+extbios/onepiece/spwr/spwr.h (previously 1.1) 97/11/11 09:30:36 daved af60fe18 ed34d128 c2bd41b5 9dc49849 af60fe18 ed34d128 c2bd41b5 9dc49849
+#sdata=93/07/15 15:14:39
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/onepiece/makefile
+#leaf=eea7f6b6 9287c13 83e5a323 3a612a27
+#leaf=623bdd5b e464f95c 47747b2b 8a82c7c0
+#leaf=101a0d0b 8aebc761 b376813f 97d095ee
+#leaf=c6b5d155 fcbae3df a4072238 e849260a
+#leaf=c721bc81 db4c952d 1e17b846 b1d2bea6
+extbios/onepiece/makefile (previously 1.44) 98/10/07 10:31:01 maxda 2549b9ba 44385008 be641011 9bbf345 7ba9df36 dbe51f46 3d2f9bf9 3675639
+#sdata=95/08/31 13:32:09
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/onepiece/makesub.bat
+extbios/onepiece/makesub.bat (previously 1.1) 95/08/31 13:32:08 timh f755a5cc 643f6132 f67dfcd1 c890c650 f755a5cc 643f6132 f67dfcd1 c890c650
+#sdata=93/04/08 09:26:50
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/onepiece/rplagent.c
+#leaf=87309361 96423d3e 1579bccd b5ede7ad
+#leaf=a7a4280e 35039f29 8c556f9e be24ee69
+#leaf=4b6313cc 4230807f 8723e4f4 362a6090
+extbios/onepiece/rplagent.c (previously 1.36) 97/04/30 12:11:34 michelle bf03aced a0efdb2c 17fa027e 492b8271 3e94c247 649c50d3 82045f13 8eff3780
+#sdata=93/04/08 09:26:48
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/onepiece/rplagent.h
+extbios/onepiece/rplagent.h (previously 1.12) 95/11/03 12:47:20 mcneal 13f5eb24 de416a23 99dcd7b5 c9186fde ca73fe54 e568f7f3 f9e0ad7 cae47dd1
+#sdata=94/11/09 14:35:49
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/scsi/ata/ata.c
+#leaf=2d01de2c 499194c8 79ae297d 8057df15
+#leaf=4cd2840b 35b1e2a6 ef54ef01 54156fc9
+#leaf=743d0c43 a5172153 345671f8 a53c0ebd
+extbios/scsi/ata/ata.c (previously 1.14) 97/10/01 09:42:51 adler 7e1e70a5 615798d3 3e5befb6 f6c84bdf 2563752f 7a623bd7 9c741154 184f2544
+#sdata=94/11/09 14:37:31
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/scsi/ata/ata.h
+#leaf=75a5c81b 1c102fcf 59163dcb a8dd2d2f
+extbios/scsi/ata/ata.h (previously 1.9) 97/10/01 09:42:54 adler b88bb4d5 66fb93f0 4c20bc83 37466ea7 5be4a48 42d47e54 8eba2beb ae5facd1
+#sdata=97/10/01 09:39:46
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/scsi/ata/ataconf.c
+extbios/scsi/ata/ataconf.c (previously 1.1) 97/10/01 09:39:45 adler 28263338 43f3c39d 268d45bc 33256bf1 28263338 43f3c39d 268d45bc 33256bf1
+#sdata=97/10/01 09:39:47
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/scsi/ata/ataconf.h
+extbios/scsi/ata/ataconf.h (previously 1.1) 97/10/01 09:39:46 adler 7137d6e2 311fff0b 4926c554 16298040 7137d6e2 311fff0b 4926c554 16298040
+#sdata=95/01/04 16:38:52
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/scsi/ata/atapi.c
+extbios/scsi/ata/atapi.c (previously 1.18) 98/02/26 05:24:57 adler 1a6a01b0 a99ef3f6 414af331 e01c65b7 7b3d025d acb61046 ef1407c2 1a4a224a
+#sdata=97/10/01 09:40:23
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/scsi/ata/atapi.h
+extbios/scsi/ata/atapi.h (previously 1.1) 97/10/01 09:40:22 adler 18168d9 de2a30b0 88af6128 5052b372 18168d9 de2a30b0 88af6128 5052b372
+#sdata=97/10/01 09:36:22
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/scsi/ata/ataprobe.c
+extbios/scsi/ata/ataprobe.c (previously 1.2) 98/02/26 05:24:59 adler 61105e85 d5021e74 2f5eb659 1590d361 5f9fc2e0 e2b9401b fe954839 bfcfd539
+#sdata=97/10/01 09:36:33
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/scsi/ata/ataprobe.h
+extbios/scsi/ata/ataprobe.h (previously 1.1) 97/10/01 09:36:32 adler 1a22764e b3e45277 19ac84ef 7e0ce05 1a22764e b3e45277 19ac84ef 7e0ce05
+#sdata=97/10/01 09:41:02
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/scsi/ata/chkext.c
+extbios/scsi/ata/chkext.c (previously 1.1) 97/10/01 09:41:01 adler 9cb70279 821a314c e22ee94f 6b06dd19 9cb70279 821a314c e22ee94f 6b06dd19
+#sdata=95/01/04 16:39:00
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/scsi/ata/main.c
+#leaf=8d61d0aa 3476062f ec7f0250 397b0aca
+#leaf=318d7cad 89008648 242dd9a3 60576a2e
+#leaf=2b5babc5 103ec8fa 1f1f1eb2 fe8bfca
+extbios/scsi/ata/main.c (previously 1.37) 98/05/14 16:04:48 cpj 36a36cfe b2b4049b 6ec632d2 69eaa8f5 f72484c6 b90f8df3 c03e74b8 18d3a6df
+#sdata=94/11/09 14:37:42
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/scsi/ata/makefile
+#leaf=fa72dc8c a4e0cfe9 ae94981b 66ecc16e
+extbios/scsi/ata/makefile (previously 1.11) 98/05/29 15:49:11 mehran ffe980eb c71e5d70 f1ebb5bb 2849398d f4e1703e 11287a05 80be1847 5245613a
+#sdata=94/11/09 14:37:49
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/scsi/ata/readphys.asm
+extbios/scsi/ata/readphys.asm (previously 1.1) 94/11/09 14:37:48 perrin 31d98b2 9b2d2bff dafe44fa b637c565 31d98b2 9b2d2bff dafe44fa b637c565
+#sdata=97/10/01 09:41:53
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/scsi/ata/spl.asm
+extbios/scsi/ata/spl.asm (previously 1.1) 97/10/01 09:41:52 adler 9033ac46 a1ec103e 3189ee98 38ec3cae 9033ac46 a1ec103e 3189ee98 38ec3cae
+#sdata=94/10/31 11:21:26
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/scsi/adp/adp.c
+#leaf=463ac1d5 986cf313 841acdf7 6caa6677
+#leaf=f88f9491 6589c5df a87200e2 80323666
+#leaf=8255e9b2 77b57865 d3d23b09 5c044fe5
+#leaf=b006538a 132585ae 3cf2f1fd 9e739add
+#leaf=4c06cc2d 17408330 db883fd2 641cd803
+#leaf=f3bd081c 1430e7ea 43f627f7 8bbd312b
+#leaf=bc5a0fe9 4da17a3b fb935f23 42c69163
+extbios/scsi/adp/adp.c (previously 1.27) 98/06/04 12:08:46 tony 61625981 9d50e922 935c90c7 b7f0ec01 925c8444 42fea1e9 17a8e7d4 d485f2a2
+#sdata=94/10/31 11:21:30
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/scsi/adp/custom.h
+#leaf=44ca2fb4 cd741f36 b77c8355 5f1b03de
+extbios/scsi/adp/custom.h (previously 2.3) 98/04/03 13:37:28 tony ea7a0078 c28c9514 6f4b525f 4f650b4b 26c6b558 584dca9 bfe7e960 824ac9ef
+#sdata=94/10/31 11:21:36
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/scsi/adp/drvr_mac.h
+extbios/scsi/adp/drvr_mac.h (previously 2.2) 98/04/03 13:37:29 tony 8351cdb4 fcc4af88 54b38f2b 979e491c 2048649a f82952fc 7f207d1 9e4a2c67
+#sdata=94/10/31 11:21:38
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/scsi/adp/him.c
+extbios/scsi/adp/him.c (previously 2.3) 98/04/03 13:37:29 tony c8433081 2d727b2e 143f5c91 56c32c1f fb35e571 b68d943 8c84cf89 dcedf7df
+#sdata=94/10/31 11:21:40
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/scsi/adp/him_equ.h
+extbios/scsi/adp/him_equ.h (previously 2.2) 98/04/03 13:37:31 tony 4bfa6603 3d903f02 e2895645 110491d2 a4f6e356 a2691374 af7d9fc 2abd26f0
+#sdata=94/10/31 11:21:42
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/scsi/adp/him_init.c
+extbios/scsi/adp/him_init.c (previously 2.2) 98/04/03 13:37:32 tony 3acd60f1 30ec29ad 2cc6dbf 7d3ff674 b1f65215 1e7c59ff 88049e99 4e6ab84
+#sdata=94/10/31 11:21:45
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/scsi/adp/him_rel.h
+extbios/scsi/adp/him_rel.h (previously 2.2) 98/04/03 13:37:35 tony 55a9d21e e242555 2980f36a dfb7d765 81ab647a d6334669 6a1ab207 23975775
+#sdata=94/10/31 11:21:46
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/scsi/adp/him_scb.h
+extbios/scsi/adp/him_scb.h (previously 2.3) 98/04/03 13:37:36 tony bfe448aa f3153376 ed58bc55 d948e1d1 9087c8df bf6aa7a a2505644 e19136e1
+#sdata=94/10/31 11:21:49
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/scsi/adp/himd.c
+extbios/scsi/adp/himd.c (previously 2.2) 98/04/03 13:37:37 tony f2f4921d 33bcd438 558d397c c6d8cc15 51ae2dee cc9d0191 a1383cf0 68914c61
+#sdata=94/10/31 11:21:51
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/scsi/adp/himdinit.c
+extbios/scsi/adp/himdinit.c (previously 2.2) 98/04/03 13:37:38 tony 59317ed6 5a830688 8fb518a4 e04dd05 5dd6d1fb 49f18899 1356a9f1 80d8fbf1
+#sdata=94/10/31 11:21:54
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/scsi/adp/himdiopt.c
+extbios/scsi/adp/himdiopt.c (previously 2.2) 98/04/03 13:37:39 tony 8f026268 12fed322 1017e57e 5635b667 a03d80e7 25080cdd aa5a94a5 b5e77b84
+#sdata=94/10/31 11:21:56
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/scsi/adp/himdopt.c
+extbios/scsi/adp/himdopt.c (previously 2.2) 98/04/03 13:37:39 tony a9076e41 2e679489 e754ab4a adaa202e 1fb933f6 da58f4e7 2d39b31e dfe3e9ca
+#sdata=94/10/31 11:22:09
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/scsi/adp/makefile
+#leaf=668ebc57 b9e1f5b5 38644743 a355e021
+extbios/scsi/adp/makefile (previously 1.7) 98/05/29 15:49:10 mehran 29435b1a 4304c85d 3eee47bd 9d277ac9 93680da c865efe6 e56aa164 7209e21e
+#sdata=95/04/20 14:52:04
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 3 2 extbios/scsi/adp/pcibuses.s
+#sdata=Name history : 2 1 deleted_files/extbios/scsi/adp/.del-pcibuses.s-Jun-28-95
+#sdata=Name history : 1 0 extbios/scsi/adp/pcibuses.s
+extbios/scsi/adp/pcibuses.s (previously 1.1) 95/04/20 14:52:03 tony 8e4f5cfe 8c8ccda0 d6b9b5c2 fda60e99 8e4f5cfe 8c8ccda0 d6b9b5c2 fda60e99
+#sdata=94/10/31 11:22:01
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/scsi/adp/seq_01.h
+extbios/scsi/adp/seq_01.h (previously 2.2) 98/04/03 13:37:40 tony 60dce63e 7c406fa2 8995d037 86c54984 d8cbda04 98561248 566987d9 d50d156d
+#sdata=94/10/31 11:22:03
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/scsi/adp/seq_off.h
+extbios/scsi/adp/seq_off.h (previously 2.2) 98/04/03 13:37:41 tony d4f8edc1 47a21e75 978c2ac5 389ff47d 336131e4 516a3b92 5aaf9f30 9e34b41d
+#sdata=94/10/31 11:22:04
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/scsi/adp/sequence.h
+extbios/scsi/adp/sequence.h (previously 2.2) 98/04/03 13:37:41 tony dd9d5337 fe803bc1 d5e5ae5 39a224ed bbd76a27 fb7fba57 e0bb7819 7a8f3774
+#sdata=94/11/09 14:35:49
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 2 1 extbios/scsi/ata.old/ata.c
+#sdata=Name history : 1 0 extbios/scsi/ata/ata.c
+#leaf=2d01de2c 499194c8 79ae297d 8057df15
+#leaf=4cd2840b 35b1e2a6 ef54ef01 54156fc9
+#leaf=743d0c43 a5172153 345671f8 a53c0ebd
+extbios/scsi/ata.old/ata.c (previously 1.13) 97/03/25 13:51:04 perrin d7351ce5 27148ef4 c85e82ab ee8df9d0 4078333f b389c9c8 8457303a b2798bf6
+#sdata=94/11/09 14:37:31
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 2 1 extbios/scsi/ata.old/ata.h
+#sdata=Name history : 1 0 extbios/scsi/ata/ata.h
+#leaf=75a5c81b 1c102fcf 59163dcb a8dd2d2f
+extbios/scsi/ata.old/ata.h (previously 1.8) 96/09/10 16:21:04 tcollins 5f48e958 df94e0fa 8d646fae f946cd01 2015aca7 2c335aab 915ea427 d020244b
+#sdata=95/01/04 16:38:59
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 3 2 extbios/scsi/ata.old/ataframe.c
+#sdata=Name history : 2 1 extbios/scsi/ataframe.c
+#sdata=Name history : 1 0 extbios/scsi/ata/frame.c
+#leaf=e3d32458 c66a14d6 52b1598f c3462c9e
+extbios/scsi/ata.old/ataframe.c (previously 1.29) 97/07/10 14:22:31 perrin 4780af3f a57d6fd 7d8b8cc0 ff349879 9c60b2f2 74c5ba3f f167f057 d8f935af
+#sdata=95/01/04 16:38:52
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 2 1 extbios/scsi/ata.old/atapi.c
+#sdata=Name history : 1 0 extbios/scsi/ata/atapi.c
+extbios/scsi/ata.old/atapi.c (previously 1.15) 96/09/05 11:14:41 tcollins d3fe74bb 2c366766 199b378d 5c176bc fb9d62ff b6a21516 6f38c217 65970f6a
+#sdata=95/01/04 16:39:00
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 2 1 extbios/scsi/ata.old/main.c
+#sdata=Name history : 1 0 extbios/scsi/ata/main.c
+#leaf=8d61d0aa 3476062f ec7f0250 397b0aca
+#leaf=318d7cad 89008648 242dd9a3 60576a2e
+#leaf=2b5babc5 103ec8fa 1f1f1eb2 fe8bfca
+extbios/scsi/ata.old/main.c (previously 1.32) 97/03/25 13:51:04 perrin b70f5c88 acfba885 2f8ce224 d729aeec 5ab09008 5ff5e9bb 15808b27 fc5f4abe
+#sdata=94/11/09 14:37:42
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 2 1 extbios/scsi/ata.old/makefile
+#sdata=Name history : 1 0 extbios/scsi/ata/makefile
+#leaf=fa72dc8c a4e0cfe9 ae94981b 66ecc16e
+extbios/scsi/ata.old/makefile (previously 1.9) 97/12/19 03:49:02 adler fa97be2c 39d38b57 e5356432 e0643f3 1067b0ed cc9892d5 9760b8d7 a0df67c4
+#sdata=94/11/09 14:37:49
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 2 1 extbios/scsi/ata.old/readphys.asm
+#sdata=Name history : 1 0 extbios/scsi/ata/readphys.asm
+extbios/scsi/ata.old/readphys.asm (previously 1.1) 94/11/09 14:37:48 perrin 3cd49893 ca72fb82 5ad0fe18 5767649b 3cd49893 ca72fb82 5ad0fe18 5767649b
+#sdata=96/06/17 15:39:52
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/scsi/chs/chs.c
+extbios/scsi/chs/chs.c (previously 1.13) 97/11/17 16:32:47 tony b6a7b0d af91971d f32046cc 6ea3b81a b4db437e 22fe4a7e 29c57531 5e2a5a9c
+#sdata=96/06/17 15:40:15
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/scsi/chs/chs.h
+extbios/scsi/chs/chs.h (previously 1.7) 97/02/06 11:59:03 cpj 1d2e76af 6ac3651 3f9166e7 2ec0b82c b0bd0d07 ccdc8de3 30825d6e c4d4228d
+#sdata=96/06/18 16:28:50
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/scsi/chs/makefile
+extbios/scsi/chs/makefile (previously 1.3) 98/05/29 15:49:12 mehran ad9b5389 9f577472 c3768715 912fca6e 45f7cdbd 19c34411 c3e727f2 7c5b0ff6
+#sdata=97/05/13 17:58:29
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/scsi/cpqncr/cpqncr.bef
+extbios/scsi/cpqncr/cpqncr.bef (previously 1.4) 98/07/08 19:33:58 jasonk f17baf2d be0bb9e0 dfde81fc 6227503f 699e6881 d853f866 2afe38e5 82971bdf
+#sdata=97/05/14 21:35:02
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/scsi/cpqncr/makefile
+extbios/scsi/cpqncr/makefile (previously 1.1) 97/05/14 21:35:01 jasonk 984450d 99298a7f 6dbdd8f9 d54654cf 984450d 99298a7f 6dbdd8f9 d54654cf
+#sdata=93/04/08 09:25:42
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/scsi/dpt/dpt.h
+#leaf=cb0d11c5 aaf43237 94a1bc79 d9f633d0
+extbios/scsi/dpt/dpt.h (previously 1.12) 97/05/01 15:26:05 cpj e8597f16 f09d0be3 276a71f5 e1543d68 27934801 b9ff8788 2ac0747 8b2faa4a
+#sdata=93/04/08 09:25:41
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 5 2 extbios/scsi/dpt/dptcmd.c
+#sdata=Name history : 4 3 extbios/scsi/dpt/dptcmd.c
+#sdata=Name history : 3 2 deleted_files/extbios/scsi/dpt/.del-dptcmd.c-Dec-21-94
+#sdata=Name history : 2 1 deleted_files/extbios/scsi/dpt/dptcmd.c
+#sdata=Name history : 1 0 extbios/scsi/dpt/dptcmd.c
+#leaf=9b8a67bd 36443a77 84a1411b 118451fe
+#leaf=6ab292ce 421f5487 4a149997 813a04
+#leaf=ca2adfa5 17fc42d9 590f8e58 eefccf09
+#leaf=e18df22 90867ef8 323ed5d7 20294cb5
+#leaf=ff970b1d fcdb7905 45a22198 f12b8ca2
+#leaf=81e5f071 19692e86 ea72ded5 c6b82233
+extbios/scsi/dpt/dptcmd.c (previously 1.27) 98/06/04 10:49:15 tony 38d7f21e 805fd128 61b7d4ea d09a9591 b7616207 6847c458 3519a409 5ae1f50d
+#sdata=93/07/15 15:15:36
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/scsi/dpt/makefile
+#leaf=bfacd4b6 5896efb0 893be765 a2909a3d
+#leaf=bb3a2b29 cbbdb3c5 5e7386c6 f21589d2
+extbios/scsi/dpt/makefile (previously 1.14) 98/05/29 15:49:12 mehran 67fb2f26 a1c3433a 7e746db0 4c4da6a 28dbf573 a1242c35 4deb00d 3d664b19
+#sdata=97/05/13 15:25:22
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/scsi/flashpt/flashpt.bef
+extbios/scsi/flashpt/flashpt.bef (previously 1.1) 97/05/13 15:25:21 jasonk 8cf72d83 e57c53b6 e1cedc6d dd92c6fe 8cf72d83 e57c53b6 e1cedc6d dd92c6fe
+#sdata=97/05/13 15:25:26
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 2 1 extbios/scsi/flashpt/makefile
+#sdata=Name history : 1 0 extbios/scsi/flashpt/Makefile
+extbios/scsi/flashpt/makefile (previously 1.2) 97/05/14 10:25:47 jasonk bccd9ab2 6935e4cf 4236027d 9faa2f12 db1ee28b 359d2997 143cd42e a5347ebb
+#sdata=97/10/30 17:32:10
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/scsi/mega/makefile
+extbios/scsi/mega/makefile (previously 1.1) 97/10/30 17:32:09 jasonk 74ff2ffb ec02c68f 541a7c77 ff1a70b6 74ff2ffb ec02c68f 541a7c77 ff1a70b6
+#sdata=97/10/30 17:32:16
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/scsi/mega/mega.bef
+extbios/scsi/mega/mega.bef (previously 1.1) 97/10/30 17:32:15 jasonk 35d4a448 6efb87c0 1b99c03e a088ce45 35d4a448 6efb87c0 1b99c03e a088ce45
+#sdata=93/08/02 16:08:49
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/scsi/mlx/design
+extbios/scsi/mlx/design (previously 1.5) 94/05/16 13:19:40 maxda 7aff938f 2c4cc49c 67b83691 5e60d3bb 1db2c08e 544aa17f 119dc766 b304c3cc
+#sdata=93/11/10 14:33:03
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/scsi/mlx/makefile
+#leaf=6807236a e88a6645 cb03bed5 72ece12
+#leaf=a430f5e 9f0b7ab5 97ace01 3658bc2b
+extbios/scsi/mlx/makefile (previously 1.11) 98/02/18 11:18:12 ianc 2d909067 54ebf947 6777dec7 26b35f9e e387eb10 c904de86 9bb3b8d9 c190bace
+#sdata=93/09/16 16:33:30
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/scsi/mlx/mlx.c
+#leaf=2f963b5 9154b89c 708de37c fd4f803e
+#leaf=964360a2 fad1f159 e04aa803 e4a4bb81
+#leaf=be3c163b 84c2db85 2700c248 9e105e7b
+extbios/scsi/mlx/mlx.c (previously 1.22) 98/04/17 21:43:47 cpj 23096308 caaa5b29 416df452 4acaf198 4730cf73 5c95b6f4 cc218e3a 71eb1e25
+#sdata=93/09/16 16:33:48
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/scsi/mlx/mlx.h
+extbios/scsi/mlx/mlx.h (previously 1.13) 98/02/18 11:14:17 ianc 2dd78cf9 befd6e12 c9685261 c8c9f059 b4edc9ec b1300d72 e791bded 5689a5af
+#sdata=97/03/24 20:05:52
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/scsi/mlx/mlx_raid.h
+extbios/scsi/mlx/mlx_raid.h (previously 1.2) 98/03/25 15:46:47 alastair 42b79c97 d168cc29 2418003f 1b94fb92 5c7790cd a85a24b7 16a1b30c 3f97dfd4
+#sdata=98/02/18 11:16:57
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/scsi/mlx/pcopy.s
+extbios/scsi/mlx/pcopy.s (previously 1.1) 98/02/18 11:16:56 ianc e41f4eb7 dfcb2dc7 9aa67ac4 bda2a25f e41f4eb7 dfcb2dc7 9aa67ac4 bda2a25f
+#sdata=94/04/05 13:20:56
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/scsi/ncrs/53c710.c
+extbios/scsi/ncrs/53c710.c (previously 1.6) 97/07/21 14:22:59 connie 6c0212f3 29b0094e f9492912 399254a8 f00cad14 2adfb4a2 72fd2629 c9e2f47e
+#sdata=94/04/05 13:20:57
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/scsi/ncrs/53c710.h
+extbios/scsi/ncrs/53c710.h (previously 1.4) 97/07/21 14:23:25 connie dcd3f110 f05f927 4711d364 7ae149eb 5a4bc954 513b551d 6461765c 549c53e2
+#sdata=94/04/05 13:20:58
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/scsi/ncrs/53c810.c
+extbios/scsi/ncrs/53c810.c (previously 1.6) 97/07/21 14:23:41 connie 1c7fc0f3 6eace730 d168b441 fd0c421c 4a0315e9 4b4e4817 f068116 dc16c375
+#sdata=94/04/05 13:20:59
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/scsi/ncrs/53c8xx.h
+extbios/scsi/ncrs/53c8xx.h (previously 1.3) 97/07/21 14:23:59 connie b159d748 69f2a9a6 e9b907af 44d9462b 7a692957 469a6bac 86c6f184 13cb7c44
+#sdata=97/07/21 14:28:51
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/scsi/ncrs/ccb.c
+extbios/scsi/ncrs/ccb.c (previously 1.1) 97/07/21 14:28:50 connie 80266d7b df4225bf 60af81a 48c846d7 80266d7b df4225bf 60af81a 48c846d7
+#sdata=97/07/21 14:41:55
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/scsi/ncrs/debug.h
+extbios/scsi/ncrs/debug.h (previously 1.1) 97/07/21 14:41:54 connie cbbd5813 55a61bfe 97e44725 45daf814 cbbd5813 55a61bfe 97e44725 45daf814
+#sdata=94/04/05 13:21:00
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/scsi/ncrs/init.c
+extbios/scsi/ncrs/init.c (previously 1.5) 97/07/21 14:24:14 connie f5ee2185 cd4bd38 1fd965d3 a1f42ef 56b33794 50b991e9 6b10fa00 fbe828bd
+#sdata=94/04/05 13:21:01
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/scsi/ncrs/intr.c
+extbios/scsi/ncrs/intr.c (previously 1.6) 97/07/21 14:24:28 connie 9a6544dc d2d19d85 43079cb6 73dfb970 5922f837 c4636f17 ca7a66f1 ac428856
+#sdata=94/04/05 13:21:02
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/scsi/ncrs/intr.h
+extbios/scsi/ncrs/intr.h (previously 1.3) 97/07/21 14:25:01 connie 2e744608 656fcb3b 7bb8b905 481a0066 585971bc 2a425d15 e318aa47 800ccaf3
+#sdata=94/04/05 13:21:09
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/scsi/ncrs/makefile
+extbios/scsi/ncrs/makefile (previously 1.15) 98/05/29 15:49:14 mehran 9c920505 d7098481 59c70453 2db5b5fa a98cdefe 8f9097d5 3e87b116 388a3289
+#sdata=94/04/05 13:21:03
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/scsi/ncrs/ncr.c
+#leaf=ba331de5 d0d8a658 bec7300 753b245e
+#leaf=f4a6f9c9 543bcd76 fc95412c 6a6e6bb4
+#leaf=6b1600ac de9b1c3c 7672690b c1c46e8d
+#leaf=98acb69f a2cc2e 9c5195bd aec0b0c1
+#leaf=847aac00 dd4bf478 b20f5ec9 b264ddb9
+extbios/scsi/ncrs/ncr.c (previously 1.27) 98/06/17 10:08:51 michelle d0023c7a 32ff7c90 818e16b6 f959be6d b41af76a a9d380f2 659b9be 38130af9
+#sdata=94/04/05 13:21:04
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/scsi/ncrs/ncr.h
+extbios/scsi/ncrs/ncr.h (previously 1.9) 98/06/17 10:08:52 michelle baa50850 c3bcb6db c1b78473 2b693a68 a49ff39b 54869bfc 85e7831d 4cc40c8
+#sdata=94/04/05 13:21:05
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/scsi/ncrs/ncr_scsi.h
+extbios/scsi/ncrs/ncr_scsi.h (previously 1.3) 97/07/21 14:25:15 connie 45319934 48eeb222 868923e1 25f703cd 469a7fb3 11aaa3b7 39887b75 31095706
+#sdata=94/08/18 14:40:41
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/scsi/ncrs/ncr_sni.h
+extbios/scsi/ncrs/ncr_sni.h (previously 1.2) 97/07/21 14:26:37 connie 7a9536bb bb48a894 5afd4215 71e26274 48140a2f b0a53d8c 2be0eb2d 83e2f891
+#sdata=94/04/05 13:21:06
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/scsi/ncrs/ncrdefs.h
+extbios/scsi/ncrs/ncrdefs.h (previously 1.6) 97/07/21 14:26:11 connie 6bfb884 81dc7e3e 5db052cd 84f4cde3 72697a69 5ebfc45d 3c9a40e4 523068d8
+#sdata=94/04/05 13:21:07
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/scsi/ncrs/ncrops.h
+extbios/scsi/ncrs/ncrops.h (previously 1.5) 97/07/21 14:27:02 connie cea1a983 11fae056 8fdb5877 b7097477 4d3a40d2 b7e6a34a dffc3255 ea54f1df
+#sdata=97/07/21 14:42:14
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/scsi/ncrs/scr.out
+extbios/scsi/ncrs/scr.out (previously 1.1) 97/07/21 14:42:13 connie 563ef308 ca80d4a3 7e58946a c88d780c 563ef308 ca80d4a3 7e58946a c88d780c
+#sdata=97/07/21 14:42:07
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/scsi/ncrs/scr.ss
+extbios/scsi/ncrs/scr.ss (previously 1.1) 97/07/21 14:42:06 connie ac3a18d 78aafe41 c1693f03 c669b6 ac3a18d 78aafe41 c1693f03 c669b6
+#sdata=97/07/21 14:41:36
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/scsi/ncrs/script.c
+extbios/scsi/ncrs/script.c (previously 1.1) 97/07/21 14:41:35 connie 85aa2ab7 d6099134 df9af077 7cda0d85 85aa2ab7 d6099134 df9af077 7cda0d85
+#sdata=94/04/05 13:21:08
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/scsi/ncrs/script.h
+extbios/scsi/ncrs/script.h (previously 1.3) 97/07/21 14:27:44 connie 8fe72534 26280706 38c3c825 52d0fd1d 362beb68 301556db 974039b3 dc48530d
+#sdata=95/03/31 18:40:05
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/scsi/pcscsi/devscsi.c
+extbios/scsi/pcscsi/devscsi.c (previously 1.3) 96/07/16 11:01:48 mcneal 82e02392 e4f34d8f a47625d4 2fb63dd9 a480999a f89bf1f2 5b00fdbe 5004bbc9
+#sdata=95/03/31 18:40:06
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/scsi/pcscsi/ggmini.c
+extbios/scsi/pcscsi/ggmini.c (previously 1.1) 95/03/31 18:40:05 tony c3afa7d7 80ae7191 72b76735 4fb4247 c3afa7d7 80ae7191 72b76735 4fb4247
+#sdata=95/03/31 18:40:09
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/scsi/pcscsi/ggmini.h
+extbios/scsi/pcscsi/ggmini.h (previously 1.1) 95/03/31 18:40:08 tony 30dbe2c2 d8d90305 824036d2 1c4c9bd5 30dbe2c2 d8d90305 824036d2 1c4c9bd5
+#sdata=95/03/31 18:40:11
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/scsi/pcscsi/ggminsol.c
+extbios/scsi/pcscsi/ggminsol.c (previously 1.1) 95/03/31 18:40:10 tony c9120519 8ac9c05d c3958b84 ad837e04 c9120519 8ac9c05d c3958b84 ad837e04
+#sdata=95/03/31 18:40:12
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/scsi/pcscsi/irq_mask.s
+extbios/scsi/pcscsi/irq_mask.s (previously 1.1) 95/03/31 18:40:11 tony 6003f6fe 232aa26e be6c2d51 9869873b 6003f6fe 232aa26e be6c2d51 9869873b
+#sdata=95/03/31 18:40:04
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/scsi/pcscsi/makefile
+extbios/scsi/pcscsi/makefile (previously 1.4) 98/05/29 15:49:15 mehran ecbf6c42 61fcb35d 46be9124 3b9772cf 3a890e3f f0283868 14d710 628dadea
+#sdata=95/03/31 18:40:13
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/scsi/pcscsi/miniport.h
+extbios/scsi/pcscsi/miniport.h (previously 1.1) 95/03/31 18:40:12 tony 87a8d66 9cc6fe4 b86b9cba 99392493 87a8d66 9cc6fe4 b86b9cba 99392493
+#sdata=95/03/31 18:40:14
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/scsi/pcscsi/pcscsi.c
+extbios/scsi/pcscsi/pcscsi.c (previously 1.8) 97/06/12 17:25:02 mehran 8879b57d c260cc9b dd12ab3e fa33ea38 194945c5 f2424f82 bbf9ba97 c70780bc
+#sdata=95/03/31 18:40:15
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/scsi/pcscsi/pcscsi.h
+extbios/scsi/pcscsi/pcscsi.h (previously 1.1) 95/03/31 18:40:14 tony 7f6e100a 7240e868 c29b09d4 2dfe7f2f 7f6e100a 7240e868 c29b09d4 2dfe7f2f
+#sdata=95/03/31 18:40:17
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/scsi/pcscsi/portabil.c
+#leaf=8201177e 8068bff0 db99d6b5 8c1ef8aa
+extbios/scsi/pcscsi/portabil.c (previously 1.6) 97/03/19 12:50:56 theis 41f15241 1fdfd2ba 5ffaf67d 32698e0c e061e33c 8e496085 82725ab4 4d8b6b2b
+#sdata=95/03/31 18:40:18
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/scsi/pcscsi/scsi.h
+extbios/scsi/pcscsi/scsi.h (previously 1.1) 95/03/31 18:40:17 tony b562dd44 7ac3a26c 1cb8a7c4 d878397f b562dd44 7ac3a26c 1cb8a7c4 d878397f
+#sdata=95/03/31 18:40:19
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/scsi/pcscsi/srb.h
+extbios/scsi/pcscsi/srb.h (previously 1.1) 95/03/31 18:40:18 tony 6ecbc064 8fc01d60 7eae6174 2637cd9a 6ecbc064 8fc01d60 7eae6174 2637cd9a
+#sdata=93/10/28 14:50:44
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/scsi/tmc/bcopy.asm
+extbios/scsi/tmc/bcopy.asm (previously 1.2) 94/05/16 13:21:08 maxda 857d3efe 892ca988 4d656ef 49d0405a 1fd2114b 283eb197 38d5e211 9ce98de1
+#sdata=93/10/28 14:50:45
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/scsi/tmc/makefile
+extbios/scsi/tmc/makefile (previously 1.10) 98/05/29 15:49:15 mehran adeec83f bb1514a3 b3613525 6b544a0c 48900bc0 41229067 5d01fb2c 116cabb2
+#sdata=93/10/28 14:50:46
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/scsi/tmc/tmc850.c
+#leaf=4c493211 cf318376 ac0d7f7b 332b7867
+extbios/scsi/tmc/tmc850.c (previously 1.9) 96/07/16 11:02:28 mcneal 66a2891c 7ecba731 4fa95f2 3178cc43 9d2fe2dd b1c83513 bd0fcb08 dc9f98e2
+#sdata=93/10/28 14:50:48
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/scsi/tmc/tmc850.h
+extbios/scsi/tmc/tmc850.h (previously 1.5) 94/05/23 12:51:24 brucec cdc1b994 e6be2005 1fbbd2ec 181d3139 e2276d53 bf3048cc 978ae632 535134fd
+#sdata=94/02/09 23:50:38
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/scsi/usc/makefile
+extbios/scsi/usc/makefile (previously 1.5) 95/08/31 13:40:31 timh 8793d6d6 93b33a56 872cfa3f b35d1e6e 72575119 3b124cbb 5048f88 bff4ac48
+#sdata=94/02/09 23:28:21
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/scsi/usc/usc.bef
+extbios/scsi/usc/usc.bef (previously 1.2) 94/05/16 13:23:05 maxda 5a00bf0e fddca9c4 4c3905fc 52297098 aed2f304 9071be2b 997b7c2e 2ca95a49
+#sdata=93/07/15 15:15:15
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/scsi/makefile
+#leaf=7c81ee8f 73fb0703 8cd64c3a 70334f70
+#leaf=65bcf008 c5fbfc47 2ee2f406 4554d99a
+#leaf=594b9177 a9fb5010 fbd542ba 99f1121
+#leaf=76a25b71 7f6b43d8 efb374e 7b0bb61a
+#leaf=10815e6f 34a4a550 4b9e9ca3 792f1beb
+#leaf=ef6b0c98 1bbca8ab 64fcba11 99ab8c5d
+#leaf=260daf51 dc2f59c9 1d2d725f 59c52d6b
+#leaf=b27901ed b84f9fb1 9a7e8eb6 e162a575
+#leaf=1ff0002d 4b9e9e0d c93594c5 ff816325
+#leaf=dac6122c f9095d9c 3061940b 2689d2d6
+#leaf=c09f0f98 ff083afc cf695503 d27c219f
+extbios/scsi/makefile (previously 1.54) 98/10/07 10:32:06 maxda 358db639 fb5ac69a 67d04945 b7f33682 8df0b42 f34677fb 5460fd9e 3a77674
+#sdata=95/08/31 13:36:51
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/scsi/makesub.bat
+extbios/scsi/makesub.bat (previously 1.1) 95/08/31 13:36:50 timh 82dbe6f1 48b7b690 233ae9d8 934569ff 82dbe6f1 48b7b690 233ae9d8 934569ff
+#sdata=93/04/08 09:25:19
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/scsi/scsi.c
+#leaf=bd770e44 610a7da7 d68ff09a f50ba5c6
+#leaf=9ffb5ddb 1df7e576 e2233100 4ea3f691
+#leaf=577f05d 6da738e6 ae52010e 4e42f93c
+#leaf=659679d4 967409e0 ff717dba f9c27980
+#leaf=f613f4e1 27a4064f daae1144 cb463b41
+#leaf=b580c71d b82e015f 469ea527 7c674847
+extbios/scsi/scsi.c (previously 1.39) 98/06/04 10:46:54 tony 95ae30eb b44800ea 1856c6b5 15c616e9 aa1b983 e474387f f543992c 2b087246
+#sdata=93/04/08 09:25:22
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/scsi/scsi.h
+extbios/scsi/scsi.h (previously 1.9) 97/11/14 15:06:38 tony bc1270e6 83151b36 f7268771 c4055279 e602b441 eb8c0491 afe1f636 33691841
+#sdata=95/08/31 13:27:11
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/make.bat
+extbios/make.bat (previously 1.1) 95/08/31 13:27:10 timh 29c2a573 96802a4 4304c133 55f16ad0 29c2a573 96802a4 4304c133 55f16ad0
+#sdata=93/07/15 15:14:01
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 extbios/makefile
+extbios/makefile (previously 1.6) 95/08/31 13:26:58 timh ede9e88d 922add8d 2e8dfe97 b44a80f3 e6225f48 1ceda129 a43c780b 12d0e65c
+#sdata=93/08/16 17:04:55
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 fd/mdboot/callmdb.s
+fd/mdboot/callmdb.s (previously 1.21) 96/11/04 10:31:08 mcneal d29fb401 8f1baa38 314542c5 9d5ddb3f fbef7cb cab1b5f8 351836b2 902658a5
+#sdata=93/08/24 22:24:04
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 fd/mdboot/makefile
+fd/mdboot/makefile (previously 1.9) 95/08/31 13:44:09 timh 72233bae cbc248ae 83d2cf53 708ace1b 48b6d41d f702f156 b3649e6d 4c4d99b0
+#sdata=95/05/04 15:00:10
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 fd/mdboot/math.s
+fd/mdboot/math.s (previously 1.1) 95/05/04 15:00:09 mcneal 5ff179ff 69ed61e5 6bf3fdb5 bc530d47 5ff179ff 69ed61e5 6bf3fdb5 bc530d47
+#sdata=93/08/16 17:01:58
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 fd/mdboot/mdboot.c
+fd/mdboot/mdboot.c (previously 1.14) 96/11/04 10:31:09 mcneal f46d6dc3 31ac6fba 4b527dd2 fe4cb3bf c7de1381 271f665c 475552be 7f041642
+#sdata=94/05/24 00:11:14
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 fd/mdexec/ata.c
+#leaf=e3c723a5 8c6c7124 3c73533d 392d77f9
+fd/mdexec/ata.c (previously 1.9) 97/10/01 09:16:53 adler fd39871c da88e61e 23408caf 1f827b6a d5dfcf46 37eba82a 3451b1b7 2cd22a3a
+#sdata=94/05/24 00:11:14
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 fd/mdexec/ata.h
+#leaf=5dc52e55 dd78fdc4 ebe58f7e 84b53c6c
+fd/mdexec/ata.h (previously 1.5) 97/10/01 09:16:55 adler 6082c81b 73085a3f 3598361 e050bdbf d87a203c 1e71522d 69edac17 292d6f96
+#sdata=93/08/18 13:56:26
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 2 1 fd/mdexec/bootblk.c
+#sdata=Name history : 1 0 fd/mdexec/blueboot.c
+#leaf=3d5e0fd1 6566b95f af940713 d424b73b
+fd/mdexec/bootblk.c (previously 1.12) 95/09/13 09:25:35 mcneal ccf03663 1829b680 3c0da29c 403f1db5 bbb6d1a3 36f2738a 37413be6 91dc6ec9
+#sdata=93/04/08 09:27:05
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 fd/mdexec/callmdx.s
+fd/mdexec/callmdx.s (previously 1.15) 95/01/27 14:27:52 brucec 4261fe8c 7c9d92a6 f8569091 9fec9b50 2c638e64 83808c04 7a287a2 85da4d42
+#sdata=93/08/18 13:56:37
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 fd/mdexec/devio.c
+fd/mdexec/devio.c (previously 1.9) 94/05/23 12:51:44 brucec b5ebcaf1 99e30ce 5dccbcd3 63ce01cb 164ceabe f0fd0a7a 90262e5f 702f7dd2
+#sdata=93/08/18 14:04:46
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 fd/mdexec/dosfs.c
+#leaf=da242c89 6db7dc74 fdf0a11b bce7aed7
+fd/mdexec/dosfs.c (previously 1.13) 95/08/23 18:59:21 cpj 7c61161b 8f4d1476 bfd06362 f340bd0b dea99a55 50439186 c89b6e04 2565d856
+#sdata=93/08/24 22:25:00
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 fd/mdexec/makefile
+#leaf=18fa4fde f363cc5 a3a8327f f8574ba9
+fd/mdexec/makefile (previously 1.8) 94/12/05 12:45:45 jeffwi 8ffe6bbe 7246e33b 64dd64ce 2d282071 fbaa9e27 d8bc7a34 c027a78 b7f76674
+#sdata=93/04/08 09:27:09
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 fd/mdexec/mdexec.c
+#leaf=3614812b ffda7fdd fdd0e0aa f6b6579e
+#leaf=2529c2d0 3ac0b079 470aa42a 9a88fdd7
+#leaf=d06c8811 75cebdbb 521fc76c 8876abfa
+fd/mdexec/mdexec.c (previously 1.27) 95/08/23 18:59:24 cpj abb0124f 4f8fdbdd 1d90bc2 3b881b5b b47bde32 9fbd996b 4fe42f76 1c5897b4
+#sdata=93/08/18 14:04:53
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 fd/mdexec/reboot.c
+fd/mdexec/reboot.c (previously 1.7) 94/05/23 12:51:53 brucec dc521def 7f14b39c 9c5afc63 1dbac16a 7cf91140 8d283eae fbc6bfd4 724a1d80
+#sdata=95/08/30 11:08:33
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 fd/make.bat
+fd/make.bat (previously 1.1) 95/08/30 11:08:32 timh cbea861 6a241735 20cda784 f9a46fa6 cbea861 6a241735 20cda784 f9a46fa6
+#sdata=93/07/15 15:16:07
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 fd/makefile
+fd/makefile (previously 1.6) 95/08/31 13:41:09 timh 91599529 4a716808 d13eeeac 9ccd5bb8 98f33d22 fba0a4e6 5a62a8c2 6af94bf5
+#sdata=93/08/18 15:10:55
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 fd/solaris.map
+fd/solaris.map (previously 1.3) 94/05/13 16:58:21 brucec 18d29c3c ad994edc 293c23a2 ae6c5b10 389e0310 6143c096 2a827f97 bf5a217c
+#sdata=93/12/06 22:17:46
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 2 1 hd/mboot/makefile
+#sdata=Name history : 1 0 hd/mastboot/makefile
+hd/mboot/makefile (previously 1.5) 96/04/17 15:39:47 timh ec8dadaf b1c78c25 81d6a458 eab1e3fa d579a994 af0a07fc 26931bf1 5cf1715c
+#sdata=93/04/08 09:27:14
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 2 1 hd/mboot/mboot.s
+#sdata=Name history : 1 0 hd/mastboot/mastboot.s
+hd/mboot/mboot.s (previously 1.11) 94/12/05 12:21:34 jeffwi 24cdb067 833bd0c5 48b3b632 22ccf4d6 511855a8 fcd9d45c 7d714d1d 9db145b3
+#sdata=93/04/08 09:27:22
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 2 1 hd/bootblk/bootblk.c
+#sdata=Name history : 1 0 hd/blueboot/blueboot.c
+#leaf=5b76f671 a0e3e65 e1b8816c 5f67437
+#leaf=4030beee db92e531 2a464733 65c7f182
+#leaf=68c04456 6e2ddcaf 2b3545be 25566dcc
+#leaf=72f444d6 1b72bc8a 9cb73e12 8672d208
+#leaf=8e35f5e1 1b8a4742 19cae2ba c7bbf707
+hd/bootblk/bootblk.c (previously 1.19) 98/03/12 19:03:16 johnny 77e22693 c7eba109 516a7c4a 9ada7a26 ffbaa2b1 44c15b84 89cce980 c70502a6
+#sdata=93/04/08 09:27:28
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 2 1 hd/bootblk/callboot.s
+#sdata=Name history : 1 0 hd/blueboot/callblue.s
+hd/bootblk/callboot.s (previously 1.13) 94/12/09 13:16:29 jeffwi 6e25e00e add184af c0165173 46c29f29 891b4497 af10ad0c a0065055 a253b940
+#sdata=93/04/08 09:27:25
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 2 1 hd/bootblk/devio.c
+#sdata=Name history : 1 0 hd/blueboot/devio.c
+hd/bootblk/devio.c (previously 1.9) 94/12/09 13:16:29 jeffwi cea981d1 b1245d30 1e8590e ea85a790 ec8cb94d 2b2b6c22 d274081a dfe53df9
+#sdata=93/04/08 09:27:17
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 2 1 hd/bootblk/iob.h
+#sdata=Name history : 1 0 hd/blueboot/iob.h
+hd/bootblk/iob.h (previously 1.5) 94/05/23 12:52:10 brucec ab3227a3 c76aecf0 34a09e7d 254bdc45 b0a086b9 ae23b980 34d3ece2 7d232759
+#sdata=93/04/08 09:27:19
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 2 1 hd/bootblk/ix_alts.c
+#sdata=Name history : 1 0 hd/blueboot/ix_alts.c
+hd/bootblk/ix_alts.c (previously 1.8) 94/12/09 13:16:30 jeffwi b7f14001 9d1ddb63 c2ac5bcf 97f7b929 657e0b73 437875d 9cf9f022 7cb354e6
+#sdata=93/12/06 22:18:42
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 2 1 hd/bootblk/makefile
+#sdata=Name history : 1 0 hd/blueboot/makefile
+hd/bootblk/makefile (previously 1.9) 98/05/29 15:49:16 mehran 33de9270 e8a6a910 81f2d9b7 18056e9a 51eb841 4778a473 acf7b884 1bf8b179
+#sdata=93/04/08 09:27:27
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 2 1 hd/bootblk/reboot.c
+#sdata=Name history : 1 0 hd/blueboot/reboot.c
+hd/bootblk/reboot.c (previously 1.19) 98/05/06 14:02:33 cathleen ac9010b 385e1064 90a1b451 332c11db 1723e99b 80fcd9f7 1519e206 c8ff0679
+#sdata=93/04/08 09:27:20
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 2 1 hd/bootblk/ufs.c
+#sdata=Name history : 1 0 hd/blueboot/ufs.c
+#leaf=3194c503 5d30d6de 40cb0c48 d610fb18
+hd/bootblk/ufs.c (previously 1.12) 95/02/09 15:15:49 perrin 24ede052 713f5ad 27231b67 b1d7c93c 843c38f 250b69d 80d15140 7f394a8c
+#sdata=93/12/06 22:18:16
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 2 1 hd/pboot/makefile
+#sdata=Name history : 1 0 hd/partboot/makefile
+hd/pboot/makefile (previously 1.5) 96/04/17 15:40:09 timh 3ed4223f dc6f46f3 31193c30 3b426a0f 591ed86b 38749658 aac2898a faf468f
+#sdata=93/04/15 11:19:03
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 2 1 hd/pboot/pboot.s
+#sdata=Name history : 1 0 hd/partboot/partboot.s
+hd/pboot/pboot.s (previously 1.8) 94/12/09 13:03:22 jeffwi 86696fd4 415b681d 15420ff0 84a8161e d8e58323 3d4f8eb6 443223d4 123d0c65
+#sdata=95/08/31 10:19:58
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 2 1 hd/make.bat
+#sdata=Name history : 1 0 make.bat
+hd/make.bat (previously 1.1) 95/08/31 10:19:57 timh d82441a0 1d67557a a6afc4f8 8fd7cfbd d82441a0 1d67557a a6afc4f8 8fd7cfbd
+#sdata=93/12/06 22:17:15
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 hd/makefile
+hd/makefile (previously 1.5) 96/04/17 15:38:56 timh ff0d5bf8 8290cdd7 89870f4 8be25fe7 f404c9aa c60b474a 51900bc1 21acf58b
+#sdata=93/04/08 09:27:33
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 inc/common/sys/fs/ufs_fs.h
+inc/common/sys/fs/ufs_fs.h (previously 1.6) 94/05/23 12:53:17 brucec 2d004a5b 11b7c14d d81afaa3 5485dc96 56d7933f 27d6af03 24798d4d 3afd94b2
+#sdata=93/04/08 09:27:35
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 inc/common/sys/fs/ufs_fsdi.h
+inc/common/sys/fs/ufs_fsdi.h (previously 1.6) 94/05/23 12:53:21 brucec 44d6de4f 4200714d 7e78a818 31f93f9 3982bfac 67db261c f8c01f46 856f7619
+#sdata=93/04/08 09:27:37
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 inc/common/sys/fs/ufs_inod.h
+inc/common/sys/fs/ufs_inod.h (previously 1.6) 94/05/23 12:53:23 brucec 602de99c 8421be60 cdab7b8e 36cac97e 316301c5 e396a414 d9d17030 af2c80de
+#sdata=93/04/08 09:27:42
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 inc/common/sys/fdisk.h
+inc/common/sys/fdisk.h (previously 1.12) 98/05/06 14:08:37 cathleen e53f4e9d 2919967a 20a3cc84 ec8f09e ea062b0f e4d11155 ad74acb7 d659e7a8
+#sdata=93/04/08 09:27:40
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 inc/common/sys/param.h
+inc/common/sys/param.h (previously 1.7) 94/05/23 12:53:02 brucec 49b1fb73 2451decf 364b1786 3d87d36c bd345f98 6ebf4b95 6d640eee 1b45b7ce
+#sdata=93/04/08 09:27:45
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 inc/common/sys/time.h
+inc/common/sys/time.h (previously 1.6) 94/05/23 12:53:05 brucec 8564020e a76dd6e5 d0f33df c1960a91 5c1147f4 28d41d81 d157ee3a 1134f700
+#sdata=93/04/08 09:27:39
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 inc/common/sys/types.h
+inc/common/sys/types.h (previously 1.6) 94/05/23 12:53:07 brucec 2d330101 6094a1c6 68aee141 a4a2d405 f032a686 3eeabf22 4eb0413b 6ae4334b
+#sdata=93/04/08 09:27:43
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 inc/common/sys/vnode.h
+inc/common/sys/vnode.h (previously 1.6) 94/05/23 12:53:10 brucec 55a67122 44754d14 f5db192 9cd1f2cf 27003aea c982be12 97ef7bd8 362cdc9d
+#sdata=93/04/08 09:27:49
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 inc/common/stdio.h
+inc/common/stdio.h (previously 1.5) 94/05/23 12:52:53 brucec 7441f677 e0e1f31a 3f9966a2 88cf4c5f 34c09fd0 d0e8afef f273fbd0 266f755c
+#sdata=93/04/08 09:27:47
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 inc/common/time.h
+inc/common/time.h (previously 1.6) 94/05/23 12:52:55 brucec 6766b2b5 c07ea936 7e31f97b a8ee6d36 d6d84490 8bf6f318 15d41e8b c32337cc
+#sdata=93/04/08 09:27:53
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 inc/i86/sys/dktp/altsctr.h
+inc/i86/sys/dktp/altsctr.h (previously 1.5) 94/05/23 12:53:51 brucec 66503b23 cc56decb 3a63a05c 8b9a2400 dc62ce7d fd07f951 e431c456 544f0bb7
+#sdata=93/04/08 09:27:55
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 inc/i86/sys/dkio.h
+inc/i86/sys/dkio.h (previously 1.6) 94/05/23 12:53:37 brucec 321bb4ea 1d8f6a92 948bd85e 109909a9 640c048f af6e18f2 be90329e bcb89dc3
+#sdata=93/04/08 09:27:58
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 inc/i86/sys/dklabel.h
+inc/i86/sys/dklabel.h (previously 1.6) 94/05/23 12:53:40 brucec 8dfc3e5b 87a4b595 7865f582 99b1ad4 253d53be 1d608ad9 cd5b00b0 2f9dd5f9
+#sdata=93/04/08 09:27:52
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 inc/i86/sys/machtype.h
+inc/i86/sys/machtype.h (previously 1.6) 94/05/23 12:53:43 brucec 7e2d3fb9 28c05702 3f072ac6 af29e1d4 4daac070 e121edd8 dd8087db 6ba58bbf
+#sdata=93/04/08 09:27:57
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 inc/i86/sys/vtoc.h
+inc/i86/sys/vtoc.h (previously 1.7) 94/12/27 13:47:42 perrin e12e1825 63198dad dd1645e2 730aef5a ac214dbc d436dd2 dceb1ecc 10ab963f
+#sdata=93/04/23 09:47:46
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 inc/i86/_locale.h
+inc/i86/_locale.h (previously 1.5) 94/05/23 12:53:29 brucec 7ac367a0 b9c3dd3 4c286029 44c42159 ff9d8ba4 6186b21d 54b32b85 d55081a6
+#sdata=93/04/08 09:28:00
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 inc/i86/ctype.h
+inc/i86/ctype.h (previously 1.6) 94/05/23 12:53:32 brucec 3c72f979 c15cb5f1 b2ff81f7 d4998300 b8015196 334fd8e1 2101835 b8f4a993
+#sdata=93/04/15 11:19:33
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 inc/sun/sys/varargs.h
+inc/sun/sys/varargs.h (previously 1.5) 94/05/23 12:54:00 brucec c66e4d97 11224046 478ec9e4 dc8ef3b9 fd21b3fb 4935f309 535d780c 61dd9fa8
+#sdata=93/04/08 09:27:50
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 inc/stand/sys/saio.h
+inc/stand/sys/saio.h (previously 1.5) 94/05/23 12:53:56 brucec b23228 8c6b6427 d27342eb aab15e93 6b79b24a 54b2332e 19463812 a55f3023
+#sdata=95/02/16 15:23:54
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 2 1 inc/befext.h
+#sdata=Name history : 1 0 common/include/befext.h
+#leaf=91886bb4 f08e8659 816accfb f7670eb9
+#leaf=5a7025e0 a78b36d7 d39af1c6 618c50ae
+#leaf=6447cc46 313a2129 952f9bd4 7defb1e6
+#leaf=e9a922ff 63ed6950 34075d8 115dc73e
+#leaf=8075e907 8e501005 1ac523f 8d10bf85
+inc/befext.h (previously 1.37) 98/03/12 18:59:35 johnny c27e3a4d b9e75c07 6658fef0 2b0d4a5a 46bb6a15 cb5edc8 3c31c563 fc85b3ba
+#sdata=93/04/08 09:28:04
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 inc/bioserv.h
+inc/bioserv.h (previously 1.8) 94/05/23 12:52:36 brucec 93797edc 77650bf9 7e4376a7 ea9fc042 384d92b9 3cc9f02f 8efdb964 a1d61abb
+#sdata=93/04/14 16:54:28
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 inc/bootdefs.h
+inc/bootdefs.h (previously 1.10) 95/06/05 13:11:04 jeffwi 8307ed55 7677334f 79addc1 edaddd2b fd671c79 d3c3620d a7579bbe 95751af
+#sdata=93/04/08 09:28:06
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 inc/bootp2s.h
+inc/bootp2s.h (previously 1.6) 94/05/23 12:52:41 brucec 78982677 f86ea50d ba6cf2ae 2013a4a8 d4fc74d0 f1c6c779 899d9fde 3872a451
+#sdata=93/04/08 09:28:07
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 inc/bpb.h
+inc/bpb.h (previously 1.6) 95/03/03 09:42:17 mcneal ead4cc2c 3dbb0a70 e98b40bb 24c8428a aeff9b79 a44de60e 11763c02 62eb3273
+#sdata=93/04/08 09:28:01
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 inc/dev_info.h
+#leaf=d602f18e dae321df 19777445 1dce411f
+inc/dev_info.h (previously 1.14) 97/11/14 14:05:33 tony 781da316 faa3c486 a12fc2d6 4db29a16 a2328487 f9188fe8 7afeabc7 55a3bffe
+#sdata=95/02/09 17:14:13
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 3 2 inc/dostypes.h
+#sdata=Name history : 2 1 common/include/dostypes.h
+#sdata=Name history : 1 0 cassist/include/dostypes.h
+inc/dostypes.h (previously 1.8) 97/04/08 12:17:34 tony d59a8711 322c45bc 7fbd4980 b990b77f 947b6130 236b5f08 4e8b92c7 2a89a133
+#sdata=93/04/15 11:20:00
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 lib/src/_ctype.c
+lib/src/_ctype.c (previously 1.5) 94/05/23 12:54:05 brucec f49404ce 73b6bc01 268dc0c3 19e28e3 f66046ad 83158126 944fa7f2 1c3f0a43
+#sdata=93/04/15 11:20:02
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 lib/src/ask_disk.s
+lib/src/ask_disk.s (previously 1.7) 94/05/23 12:54:07 brucec 90d50359 4c2c8394 633b2ba8 734cc177 c117745d a423e3c3 b66994d4 ab6cc8df
+#sdata=93/04/15 11:20:05
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 lib/src/ask_page.s
+lib/src/ask_page.s (previously 1.6) 94/05/23 12:54:10 brucec ba544a03 7fb5afcd 581d0f82 971d0568 181654bd 191722fe fd02dae4 6bb303e4
+#sdata=93/04/15 11:20:07
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 lib/src/ask_time.s
+lib/src/ask_time.s (previously 1.5) 94/05/23 12:54:12 brucec af12d11d 445a8224 6dc83001 a8950acb 3962aae6 21892783 e01e7ca8 6e388583
+#sdata=93/04/15 11:20:08
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 lib/src/atoi.c
+lib/src/atoi.c (previously 1.5) 94/05/23 12:54:14 brucec d37e680 cbb095dd 29e59889 637a1da3 af8480e1 ee0b942f 4642745b 272847a4
+#sdata=93/04/15 11:20:10
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 lib/src/atox.c
+lib/src/atox.c (previously 1.5) 94/05/23 12:54:17 brucec e7a3f806 c0a0be08 1d5939b0 dcfdfafd ad988f6e 8adb71de 71593309 100c2354
+#sdata=93/04/15 11:20:11
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 lib/src/bcopy.c
+lib/src/bcopy.c (previously 1.5) 94/05/23 12:54:20 brucec 3d5ab744 6540ed49 de8e6897 7e847ed 62d54ec5 ea42868 847eb9c2 563de08a
+#sdata=93/04/15 11:20:13
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 lib/src/clrscr_c.s
+lib/src/clrscr_c.s (previously 1.5) 94/05/23 12:54:23 brucec 460ad80b e1d1bc0f 22d5a25c 5e255fdd 16185c37 43e06506 bdf0d535 3282ad03
+#sdata=93/04/15 11:20:14
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 lib/src/clrscrn.s
+lib/src/clrscrn.s (previously 1.5) 94/05/23 12:54:25 brucec 79370810 a91a0164 b98b68ce 388c08ee f03a379c 5700d674 996e16ef fbc594f9
+#sdata=93/04/15 11:20:15
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 lib/src/ctypefns.c
+lib/src/ctypefns.c (previously 1.5) 94/05/23 12:54:28 brucec 2be88e0c 45f888cb 8f0f9f8e b210e379 9977ba50 d613542c 6dd6d34f c6c551db
+#sdata=93/04/15 11:20:16
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 lib/src/farbcopy.s
+lib/src/farbcopy.s (previously 1.5) 94/05/23 12:54:30 brucec 340c5f7f 27bbfa2 453c3dbe d6c9ace e61e9604 2e7d6290 f37301e5 e0a644c0
+#sdata=93/04/15 11:20:18
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 lib/src/farbzero.c
+lib/src/farbzero.c (previously 1.5) 94/05/23 12:54:33 brucec bc76a640 7e60e6ac 2224623e c060666d cb382ed8 2997da 9a06baff 90b55163
+#sdata=93/04/15 11:20:19
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 lib/src/flush_kb.s
+lib/src/flush_kb.s (previously 1.5) 94/05/23 12:54:35 brucec 6214cb6 356282ba 51a3f916 40812652 3c6714f7 c6a7b9e3 bf05dcfc 622b0607
+#sdata=93/04/15 11:20:21
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 lib/src/itoa.c
+lib/src/itoa.c (previously 1.5) 94/05/23 12:54:38 brucec 30fd1dd3 4d71a490 2273217d 88c62ac6 40b4dd47 640d6958 a9b43b9c 3a7cf027
+#sdata=93/04/15 11:20:22
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 lib/src/ll_shift.s
+lib/src/ll_shift.s (previously 1.6) 94/05/23 12:54:40 brucec c1e26e2c db77d5ab ed74560c df70f9c5 bc596e43 73257f20 1dba2980 5587f9
+#sdata=93/04/15 11:20:23
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 lib/src/ls_shift.s
+lib/src/ls_shift.s (previously 1.6) 94/05/23 12:54:43 brucec d33509e7 4b485923 c9c619f9 6e44bc72 a72e369d e2c3aaa3 b6179cb4 69fbdba5
+#sdata=93/04/15 11:20:25
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 lib/src/memset.c
+lib/src/memset.c (previously 1.5) 94/05/23 12:54:45 brucec cbad1892 168ab105 4898e56b ae034f8 b0d4a520 40a1bcdb 21382df5 492ca420
+#sdata=93/04/15 11:20:27
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 lib/src/nwrd_key.s
+lib/src/nwrd_key.s (previously 1.5) 94/05/23 12:54:48 brucec a78761c6 2822c466 5adad99c 4dad23a6 8c51c404 a8e24725 52498d58 82831f30
+#sdata=93/04/15 11:20:29
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 lib/src/pause_ms.s
+lib/src/pause_ms.s (previously 1.5) 94/05/23 12:54:51 brucec f152a151 b4107dc6 b8df392e 863b757a 7eb1a025 6358c65e 416f7a53 5fb680e
+#sdata=93/04/15 11:20:31
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 lib/src/printf.c
+lib/src/printf.c (previously 1.5) 94/05/23 12:54:53 brucec 3c0ff400 f57451a1 91d46b3e 13e51239 aa250dd9 fd188ff3 5af1857e d2009d5c
+#sdata=93/04/15 11:20:33
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 lib/src/prtstr_a.s
+lib/src/prtstr_a.s (previously 1.6) 94/05/23 12:54:56 brucec 81ab360a afb637e 47acba3 eca16917 161d1759 2bfcb9b9 ba97a41a 21e50249
+#sdata=93/04/15 11:20:35
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 lib/src/prtstr_p.s
+lib/src/prtstr_p.s (previously 1.6) 94/05/23 12:54:58 brucec d399589c c48a6e2e 2afe9a5 d3c6c3e1 318dd630 16be5674 189d9132 e560c073
+#sdata=93/04/15 11:20:38
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 lib/src/putchar.s
+lib/src/putchar.s (previously 1.5) 94/05/23 12:55:01 brucec 62bbc5d9 647927d3 afa54e18 f9197fff b9106572 dc151152 b3656289 bda785c1
+#sdata=93/04/15 11:20:40
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 lib/src/putstr.c
+lib/src/putstr.c (previously 1.5) 94/05/23 12:55:03 brucec b87913b2 2f60dce 16573e12 df53bbc8 d429b6ae 5d2292fa 2528b4e6 cc6e46ef
+#sdata=93/04/15 11:20:41
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 lib/src/rd_cursr.s
+lib/src/rd_cursr.s (previously 1.6) 94/05/23 12:55:06 brucec 385f6f39 a0f71e87 73be330d dd00d45d f742bf4e 63e8aad2 2ccfe8f2 83b940f9
+#sdata=93/04/15 11:20:43
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 lib/src/rd_disk.s
+lib/src/rd_disk.s (previously 1.6) 94/05/23 12:55:08 brucec b5b484fe ccb2c395 9ce101ba 4d6f8761 c44233b1 f94394e6 ab4601f0 de25f525
+#sdata=93/04/15 11:20:44
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 lib/src/readkey.s
+lib/src/readkey.s (previously 1.5) 94/05/23 12:55:11 brucec c7b48bf1 dda2a91 ead82c88 db518b0f 6081bb86 4af0f2c2 a4307c67 3f3473c9
+#sdata=93/04/15 11:20:46
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 lib/src/rl_shift.s
+lib/src/rl_shift.s (previously 1.6) 94/05/23 12:55:14 brucec d75c4785 eb5ac5a7 57cd79ac 3d963ef5 c4d9fd01 6703376 2b98d088 f99c8982
+#sdata=93/04/15 11:20:48
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 lib/src/rs_shift.s
+lib/src/rs_shift.s (previously 1.6) 94/05/23 12:55:16 brucec 93235c3d 6f082c5a 5ad19800 3253abdb 4fdd67d6 68bb2c58 57da47c7 11525eed
+#sdata=93/04/15 11:20:51
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 lib/src/rsetdisk.s
+lib/src/rsetdisk.s (previously 1.6) 94/05/23 12:55:19 brucec 98a49e07 6f9ba526 bbfa0428 812294f 15dfc7c3 57b5a780 5dcb3698 e809bced
+#sdata=93/04/15 11:20:53
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 lib/src/set_page.s
+lib/src/set_page.s (previously 1.5) 94/05/23 12:55:21 brucec f7234bc1 b6bdb42e e7f5645b 1cbb4ec3 ed6bbef9 de4a2759 5717e6cd 8a8b6db7
+#sdata=93/04/15 11:20:55
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 lib/src/st_cursr.s
+lib/src/st_cursr.s (previously 1.5) 94/05/23 12:55:24 brucec 8558d038 b1790f15 2e7b8782 a739cf54 81ce253b b9912f89 30067bd8 df621cb8
+#sdata=93/04/15 11:20:57
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 lib/src/strcat.c
+lib/src/strcat.c (previously 1.5) 94/05/23 12:55:26 brucec 619dc75a a911a194 67634453 a7acce26 f79b5179 bc1f6a08 f388d0be 68c07af0
+#sdata=93/04/15 11:20:59
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 lib/src/strcmp.c
+lib/src/strcmp.c (previously 1.5) 94/05/23 12:55:29 brucec 94b0952d 99208e88 5172f59b 68e23866 efa28f8f 1e8f898a 59c170d4 c46c9ab5
+#sdata=93/04/15 11:21:01
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 lib/src/strcpy.c
+lib/src/strcpy.c (previously 1.5) 94/05/23 12:55:31 brucec cae783b4 c0dfe9ab 7c57a628 95a9341c 7906f54b db272679 67e0f48c f88d4c58
+#sdata=93/04/15 11:21:03
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 lib/src/strcspn.c
+lib/src/strcspn.c (previously 1.5) 94/05/23 12:55:34 brucec 16e15f4b 8328d383 d334afc1 fc964918 a210f71e a3be5f60 ba2fa9c0 620116f6
+#sdata=93/04/15 11:21:05
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 lib/src/strlen.c
+lib/src/strlen.c (previously 1.5) 94/05/23 12:55:36 brucec 9be7a283 36b818e7 252c1519 1df9fc3e 3afdfbd 56cde944 f385f165 f8b3e7b0
+#sdata=93/04/15 11:21:07
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 lib/src/strncat.c
+lib/src/strncat.c (previously 1.5) 94/05/23 12:55:39 brucec 2a33ffd8 380dbf4c 2cecf117 fbe2bdef 46477c00 b44d5be0 21c52842 ca3dfcd6
+#sdata=93/04/15 11:21:09
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 lib/src/strncmp.c
+lib/src/strncmp.c (previously 1.5) 94/05/23 12:55:41 brucec a7cf56b7 705f0f2f bfbb19c4 6af0764b 59e95e8c b7752fd0 b2053ee 4ba12ce9
+#sdata=93/04/15 11:21:11
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 lib/src/strncpy.c
+lib/src/strncpy.c (previously 1.5) 94/05/23 12:55:44 brucec dbf50086 40524034 5f5e22e8 1bf05e0d 58a4fea0 2b57b2b 7ece2399 c9b54a8c
+#sdata=93/04/15 11:21:13
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 lib/src/testpt.c
+lib/src/testpt.c (previously 1.5) 94/05/23 12:55:46 brucec 58f2993b 133d2b1 947c646b f86f2cd1 72f75108 415b089 dc551c12 9c32e0da
+#sdata=93/04/15 11:21:16
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 lib/src/ul_mul.s
+lib/src/ul_mul.s (previously 1.5) 94/05/23 12:55:49 brucec 4298699c 1187da76 b48c3982 8850730a 2e37545e f330b614 99ce3670 bcaec637
+#sdata=93/04/15 11:21:18
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 lib/src/us_div.s
+lib/src/us_div.s (previously 1.6) 94/05/23 12:55:51 brucec b9410b96 b516d76c 37486dcc c306c570 fa3d84d4 99e38625 2a4bf6a3 25e718e3
+#sdata=93/04/15 11:21:20
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 lib/src/us_mod.s
+lib/src/us_mod.s (previously 1.6) 94/05/23 12:55:54 brucec 962f339 ac6e34bb da6f4b3c f21b2a5e 92dfec3a a867d3fe 9960ca7c 14dd3665
+#sdata=93/04/15 11:21:21
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 lib/src/waitkey.s
+lib/src/waitkey.s (previously 1.5) 94/05/23 12:55:56 brucec 24e45e51 a7e9b083 e7b8334b 6d902fd 6520a118 2d2ddb60 3bfb4dea df3d7b54
+#sdata=93/04/15 11:21:23
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 lib/src/xtoa.c
+lib/src/xtoa.c (previously 1.5) 94/05/23 12:55:59 brucec 744fab17 dd59150b c949d793 dfdc771c 1c5dc581 9434e071 6329901d b9fae474
+#sdata=93/12/06 22:39:10
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 lib/smallobj/makefile
+lib/smallobj/makefile (previously 1.4) 98/05/29 15:49:17 mehran d71ce0e2 1c08deaf bcd18e35 64ee83f0 388ec6df 462f24c4 d63584e3 5b92edcc
+#sdata=93/07/15 15:16:54
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 2 1 lib/tinyobj/makefile
+#sdata=Name history : 1 0 lib/obj/makefile
+lib/tinyobj/makefile (previously 1.8) 98/05/29 15:49:17 mehran bfb6ea99 7b6db627 219505db 95c8fced ce9a9442 c5d878ea 3eb1fabb 8f747cea
+#sdata=95/08/30 11:06:52
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 lib/make.bat
+lib/make.bat (previously 1.1) 95/08/30 11:06:51 timh 5f90c384 1162fcdf 609e8b 8fdda39e 5f90c384 1162fcdf 609e8b 8fdda39e
+#sdata=93/07/15 15:16:46
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 lib/makefile
+lib/makefile (previously 1.6) 95/08/31 13:45:56 timh 7314f4e6 1f7714c 822e6337 ea27a34f 6c823a6 bf302480 7388a79a cac518ae
+#sdata=95/08/31 10:19:58
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 make.bat
+make.bat (previously 1.1) 95/08/31 10:19:57 timh dc628d77 9e9af727 17345d28 17e4ae0 dc628d77 9e9af727 17345d28 17e4ae0
+#sdata=93/07/15 15:13:39
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 makefile
+makefile (previously 1.26) 99/01/20 14:06:54 cathleen c90db3e8 ce36b660 440fefc5 a4cac313 4adb7611 453ab932 6d936173 d8641430
+#sdata=95/08/31 10:20:02
+#sdata=SunPro Code Manager data about conflicts, renames, etc...
+#sdata=Name history : 1 0 makesub.bat
+makesub.bat (previously 1.1) 95/08/31 10:20:01 timh 190b0ff1 569be30b 86d21f09 562b8e09 190b0ff1 569be30b 86d21f09 562b8e09

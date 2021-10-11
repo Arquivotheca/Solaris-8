@@ -1,0 +1,6 @@
+#!/bin/sh
+#
+#pragma ident	"@(#)req.flg	1.1	98/10/09 SMI" 
+
+
+echo_file usr/src/lib/libc/inc/synonyms.h

@@ -1,0 +1,53 @@
+\
+\ Copyright (c) 1998, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)ml_unit.dbg	1.2	98/02/20 SMI"
+
+#include <sys/types.h>
+#include <sys/t_lock.h>
+#include <sys/time.h>
+#include <sys/vnode.h>
+#include <vm/seg.h>
+#include <sys/fs/ufs_log.h>
+#include "dummy.h"
+
+\
+\
+ml_unit			un_
+{adb_inline_begin}
+.>z
+<z+{OFFSET, un_next}=""
+{adb_inline_end}
+	next		hex
+	flags		hex
+	bp		hex
+	ufsvfs		hex
+	dev		hex
+	ebp		hex
+	nbeb		hex
+	deltamap	hex
+	udmap		hex
+	logmap		hex
+	matamap		hex
+	maxresv		hex
+	resv		hex
+	resv_wantin	hex
+	tid		hex
+	rdbuf		.cirbuf
+{adb_inline_begin}
+<z+{OFFSET, un_wrbuf}=""
+{adb_inline_end}
+	wrbuf		.cirbuf
+{adb_inline_begin}
+<z+{OFFSET, un_ut}=""
+{adb_inline_end}
+	ut		hex
+	ondisk		.ml_odunit
+	log_mutex	.mutex
+	state_mutex	.mutex
+{adb_inline_begin}
+<z+{SIZEOF}=""
+{adb_inline_end}
+
+

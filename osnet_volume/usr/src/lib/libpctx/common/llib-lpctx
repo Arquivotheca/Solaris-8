@@ -1,0 +1,26 @@
+/*LINTLIBRARY*/
+/*PROTOLIB1*/
+
+/*
+ * Copyright (c) 1999 by Sun Microsystems, Inc.
+ * All rights reserved.
+ */
+
+#pragma ident	"@(#)llib-lpctx	1.1	99/08/15 SMI"
+
+#include "libpctx.h"
+
+pctx_t *pctx_create(const char *filename, char *const *argv,
+    void *arg, int verbose, pctx_errfn_t *errfn);
+pctx_t *pctx_capture(pid_t pid,
+    void *arg, int verbose, pctx_errfn_t *errfn);
+
+int pctx_set_events(pctx_t *pctx, ...);
+
+int pctx_run(pctx_t *pctx, uint_t msecs, uint_t nsamples,
+    int (*tick)(pctx_t *, pid_t, id_t, void *));
+
+void pctx_release(pctx_t *pctx);
+
+int __pctx_cpc(pctx_t *pctx,
+    int cmd, id_t lwpid, void *data, int flags, size_t size);

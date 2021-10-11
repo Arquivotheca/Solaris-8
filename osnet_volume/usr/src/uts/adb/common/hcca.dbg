@@ -1,0 +1,27 @@
+\
+\ Copyright (c) 1998-1999 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)hcca.dbg	1.1	99/11/05 SMI"
+
+#include <sys/usb/usba.h>
+#include <sys/usb/usba/usba_types.h>
+#include <sys/usb/hcd/openhci/ohci.h>
+#include "dummy.h"
+
+\
+\
+
+hcca	Hcca	
+{adb_inline_begin}
+.>z
+<z+{OFFSET, HccaIntTble}=""
+{adb_inline_end}
+	IntTble			hex
+	FrameNo			hex
+	Pad			hex
+	DoneHead		hex
+	Reserved		hex
+{adb_inline_begin}
+<z+{SIZEOF}=""
+{adb_inline_end}

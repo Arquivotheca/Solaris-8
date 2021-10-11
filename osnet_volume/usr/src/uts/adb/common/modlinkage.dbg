@@ -1,0 +1,14 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)modlinkage.dbg	1.4	98/01/14 SMI"
+
+#include <sys/modctl.h>
+#include "dummy.h"
+
+\
+\
+modlinkage              ml_
+        rev                     sdecimal
+        linkage                 hex             "linkage list"

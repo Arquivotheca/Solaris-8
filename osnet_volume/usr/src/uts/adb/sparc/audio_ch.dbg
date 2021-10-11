@@ -1,0 +1,27 @@
+\
+\ Copyright (c) 1999 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)audio_ch.dbg	1.1	99/05/26 SMI"
+
+#include <sys/audio_impl.h>
+#include "dummy.h"
+
+\
+\
+audio_ch	ch_
+	qptr		hex
+	statep		hex
+	apm_infop	hex
+	wput		hex
+	wsvc		hex
+	rput		hex
+	rsvc		hex
+	dir		hex
+	flags		hex
+	dev		hex
+	private		hex
+	info		.audio_channel
+	dev_info	hex
+	msgs		hex
+	msg_cnt		decimal

@@ -1,0 +1,41 @@
+#
+# Copyright (c) 1990-1993,1998 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#ident	"@(#)prototype_com	1.7	99/03/30 SMI"
+#
+# This required package information file contains a list of package contents.
+# The 'pkgmk' command uses this file to identify the contents of a package
+# and their location on the development machine when building the package.
+# Can be created via a text editor or through use of the 'pkgproto' command.
+
+#!search <pathname pathname ...>	# where to find pkg objects
+#!include <filename>			# include another 'prototype' file
+#!default <mode> <owner> <group>	# default used if not specified on entry
+#!<param>=<value>			# puts parameter in pkg environment
+
+# packaging files
+i pkginfo
+i copyright
+i depend
+#
+# source locations relative to the prototype file
+#
+# SUNWsra
+#
+d none usr 755 root sys
+d none usr/ucblib 755 root bin
+f none usr/ucblib/libcurses.a 644 root bin
+f none usr/ucblib/libdbm.a 644 root bin
+f none usr/ucblib/libtermcap.a 644 root bin
+f none usr/ucblib/libucb.a 644 root bin
+f none usr/ucblib/llib-lcurses 644 root bin
+f none usr/ucblib/llib-lcurses.ln 644 root bin
+f none usr/ucblib/llib-ldbm 644 root bin
+f none usr/ucblib/llib-ldbm.ln 644 root bin
+f none usr/ucblib/llib-lrpcsoc 644 root bin
+f none usr/ucblib/llib-lrpcsoc.ln 644 root bin
+f none usr/ucblib/llib-ltermcap 644 root bin
+f none usr/ucblib/llib-ltermcap.ln 644 root bin
+f none usr/ucblib/llib-lucb 644 root bin
+f none usr/ucblib/llib-lucb.ln 644 root bin

@@ -1,0 +1,31 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)door.dbg	1.6	98/01/19 SMI"
+
+#include <sys/door.h>
+#include "dummy.h"
+
+\
+\
+door_node       door_           door
+{adb_inline_begin}
+.>z
+<z+{OFFSET, door_vnode}=""
+{adb_inline_end}
+        vnode                   .vnode
+{adb_inline_begin}
+<z+{OFFSET, door_target}=""
+{adb_inline_end}
+        target                  hex
+        ulist                   hex
+        pc                      hex
+        data                    hex
+        index                   hex
+        flags                   hex
+        active                  sdecimal
+        servers                 hex
+{adb_inline_begin}
+<z+{SIZEOF}=""
+{adb_inline_end}

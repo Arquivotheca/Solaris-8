@@ -1,0 +1,19 @@
+\
+\ Copyright (c) 1997-1998 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)dispqtrace.list.dbg	1.5	98/02/09 SMI"
+
+#include <sys/thread.h>
+#include "dummy.h"
+
+\
+\
+_kthread	""	dispqtrace.list
+{adb_inline_begin}
+<f$<<qthread.info
+*(<f+{OFFSET, t_pcb.val[1]})$c
+,#(<f-<l)$<
+*(<f+{OFFSET, t_link})>f
+$<dispqtrace.list
+{adb_inline_end}

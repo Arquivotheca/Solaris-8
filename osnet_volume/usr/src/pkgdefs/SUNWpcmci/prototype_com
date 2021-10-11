@@ -1,0 +1,44 @@
+# ident "@(#)prototype_com 1.17	99/08/06 SMI"
+#
+# Copyright (c) 1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+# This required package information file contains a list of package contents.
+# The 'pkgmk' command uses this file to identify the contents of a package
+# and their location on the development machine when building the package.
+# Can be created via a text editor or through use of the 'pkgproto' command.
+
+#!search <pathname pathname ...>        # where to find pkg objects
+#!include <filename>                    # include another 'prototype' file
+#!default <mode> <owner> <group>        # default used if not specified on entry
+#!<param>=<value>                       # puts parameter in pkg environment
+
+i pkginfo
+i copyright
+i depend
+i postinstall
+i preremove
+i preinstall
+i i.initd
+#
+# source locations relative to the prototype file
+#
+# SUNWpcmci
+#
+d none etc 0755 root sys
+d none etc/init.d 0755 root sys
+e initd etc/init.d/initpcmcia=etc/init.d/initpcmcia 0744 root sys
+e initd etc/init.d/pcmcia=etc/init.d/pcmcia 0744 root sys
+d none etc/rc0.d 0755 root sys
+d none etc/rcS.d 0755 root sys
+l initd etc/rcS.d/S10initpcmcia=../../etc/init.d/initpcmcia
+d none kernel 0755 root sys
+d none kernel/drv 0755 root sys
+f none kernel/drv/pcic 0755 root sys
+f none kernel/drv/pcic.conf 0644 root sys
+f none kernel/drv/pcs 0755 root sys
+f none kernel/drv/pem 0755 root sys
+f none kernel/drv/pem.conf 0644 root sys
+d none kernel/misc 0755 root sys
+f none kernel/misc/cis 0755 root sys
+f none kernel/misc/cs 0755 root sys

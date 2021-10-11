@@ -1,0 +1,128 @@
+#!/sbin/sh
+#
+# Copyright (c) 1997-1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#pragma ident	"@(#)nfs.server	1.30	99/06/10 SMI"
+
+[ ! -d /usr/bin ] && exit
+
+# Start/stop processes required for server NFS
+
+case "$1" in
+'start')
+	# Clean up old /etc/dfs/sharetab - remove all nfs entries
+
+	if [ -f /etc/dfs/sharetab ] ; then
+		>/tmp/sharetab.$$
+		while read path res fstype opts desc; do
+			[ "x$fstype" != xnfs ] && \
+				echo "$path\t$res\t$fstype\t$opts\t$desc" \
+				>>/tmp/sharetab.$$
+		done </etc/dfs/sharetab
+
+		# Retain the last modification time so that it can be truncated
+		# by the share command when it is called first time after boot.
+
+		/usr/bin/touch -r /etc/dfs/sharetab /tmp/sharetab.$$
+		/usr/bin/mv -f /tmp/sharetab.$$ /etc/dfs/sharetab
+	fi
+
+	# If /etc/dfs/dfstab exists and has non-blank or non-commented-out
+	# lines, then run shareall to export them, and then start up mountd
+	# and nfsd if anything was successfully exported.
+
+	startnfsd=0
+	if [ -f /etc/dfs/dfstab ] && /usr/bin/egrep -v '^[	 ]*(#|$)' \
+ 	    /etc/dfs/dfstab >/dev/null 2>&1; then
+
+		/usr/sbin/shareall -F nfs
+	
+		if /usr/bin/grep -s nfs /etc/dfs/sharetab >/dev/null; then
+			startnfsd=1
+		fi
+	fi
+
+	# Start nfslogd if /etc/nfs/nfslogtab exists and is not empty
+	# This means that either we just shared new filesystems with
+	# logging enabled, or they were shared in the previous session
+	# and their working buffers haven't been processed yet.
+
+	if [ -s /etc/nfs/nfslogtab ]; then
+		/usr/lib/nfs/nfslogd &
+	fi
+
+	# If /etc/rmmount.conf exists and contains share commands
+	# then start up mountd and nfsd
+
+	if [ $startnfsd -eq 0 -a -f /etc/rmmount.conf ] && \
+	    /usr/bin/grep '^[ 	]*share' \
+	    /etc/rmmount.conf > /dev/null 2>&1; then
+		startnfsd=1
+	fi
+
+	if [ $startnfsd -ne 0 ]; then
+		/usr/lib/nfs/mountd
+		/usr/lib/nfs/nfsd -a 16
+	elif [ ! -n "$_INIT_RUN_LEVEL" ]; then
+		echo "NFS service was not started because" \
+			"/etc/dfs/dfstab has no entries."
+	fi
+
+	# When the system comes up umask is not set; so set the mode now
+
+	[ -f /etc/dfs/sharetab ] && /usr/bin/chmod 644 /etc/dfs/sharetab
+
+	# If /tftpboot exists become a boot server
+
+	if [ -d /tftpboot ]; then
+		/usr/sbin/in.rarpd -a
+		/usr/sbin/rpc.bootparamd
+	fi
+
+	# If /rplboot exists become a boot server for x86 clients
+
+	if [ -d /rplboot ]; then
+		/usr/sbin/rpld -a
+		if [ ! -d /tftpboot ]; then
+			/usr/sbin/in.rarpd -a
+			/usr/sbin/rpc.bootparamd
+		fi
+	fi
+	;;
+
+'stop')
+	/usr/bin/pkill -x -u 0 \
+	    '(nfsd|mountd|rpc\.bootparamd|in\.rarpd|rpld)'
+
+	if /usr/bin/grep -s nfs /etc/dfs/sharetab >/dev/null; then
+		/usr/sbin/unshareall -F nfs
+	fi
+
+	#
+	# Wait up to 10 seconds for nfslogd to gracefully handle SIGHUP
+	#
+	/usr/bin/pkill -HUP -x -u 0 nfslogd
+	wtime=10
+
+	while [ $wtime -gt 0 ]; do
+		/usr/bin/pgrep -x -u 0 nfslogd >/dev/null || break
+		wtime=`expr $wtime - 1`
+		sleep 1
+	done
+
+	#
+	# Kill nfslogd more forcefully if it did not shutdown during
+	# the grace period
+	#
+	if [ $wtime -eq 0 ]; then
+		/usr/bin/pkill -TERM -x -u 0 nfslogd
+	fi
+
+	;;
+*)
+	echo "Usage: $0 { start | stop }"
+	exit 1
+	;;
+esac
+exit 0

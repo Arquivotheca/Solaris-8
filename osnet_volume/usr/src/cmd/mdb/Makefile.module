@@ -1,0 +1,74 @@
+#
+# Copyright (c) 1997-1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#ident	"@(#)Makefile.module	1.1	99/08/11 SMI"
+
+.KEEP_STATE:
+.SUFFIXES:
+
+CFLAGS += -v -K pic -G -xregs=no%appl
+CFLAGS64 += -v -K pic -G -xregs=no%appl
+CPPFLAGS += -D_KERNEL -I../../../common
+LDFLAGS += -z text
+LDFLAGS64 += -z text
+
+#
+# Reset STRIPFLAG to the empty string.  MDB modules are intentionally installed
+# with symbol tables in order to help module developers.
+#
+STRIPFLAG =
+GROUP = sys
+
+MODOBJS = $(MODSRCS:%.c=%.o)
+MODNAME = $(MODULE:%.so=%)
+
+LINTFILES = $(MODSRCS:%.c=%.ln)
+
+all: $(MODULE)
+
+.NO_PARALLEL:
+.PARALLEL: $(MODOBJS) $(LINTFILES)
+
+$(MODULE): $(MODOBJS)
+	$(LINK.c) $(MODOBJS) -o $@ $(LDLIBS)
+	$(POST_PROCESS_SO)
+
+%.o: %.c
+	$(COMPILE.c) $<
+
+%.o: ../%.c
+	$(COMPILE.c) $<
+
+%.o: ../../../common/modules/$(MODNAME)/%.c
+	$(COMPILE.c) $<
+
+clean.lint:
+	$(RM) $(LINTFILES)
+
+clean:
+	$(RM) $(MODOBJS)
+
+clobber: clean clean.lint
+	$(RM) $(MODULE)
+
+%.ln: %.c
+	$(LINT.c) -c $<
+
+%.ln: ../%.c
+	$(LINT.c) -c $<
+
+%.ln: ../../../common/modules/$(MODNAME)/%.c
+	$(LINT.c) -c $<
+
+lint: $(LINTFILES)
+
+$(ROOT)/usr/lib/mdb:
+	$(INS.dir)
+
+$(ROOTMOD): $(ROOT)/usr/lib/mdb
+	$(INS.dir)
+
+install: all $(ROOTMOD) $(ROOTMOD)/$(MODULE)
+
+dmods: install

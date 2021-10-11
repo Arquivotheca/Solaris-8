@@ -1,0 +1,102 @@
+.\"  @(#)scoping.1l 1.1 95/10/16 SMI
+.\" Copyright 1995 SMI
+.\" All rights reserved.
+.TH "scoping tools" 1l "August 1995"
+.SH NAME
+check_mapfile.pl, check_syms.pl, extract_exports.pl, find_bind.pl,
+find_libs.pl, find_scoped.pl, list_scoped.pl, print_globs.pl,
+run_print.pl comment_filter \- Perl scripts used to version/scope OSNET libraries
+.SH SYNOPSIS
+.B check_mapfile.pl
+mapfile ...
+.br
+.B check_syms.pl
+<executable>
+.br
+.B extract_exports.pl
+<binding_file>
+.br
+.B find_bind.pl
+<outfile> <base_directory>
+.br
+.B find_libs.pl
+<base_dir>
+.br
+.B find_scoped.pl
+<base_dir>
+.br
+.B list_scoped.pl
+<executable> ...
+.br
+.B print_globs.pl
+<man_dir> <sym_export_list> <shared_object>
+.br
+.B run_print.bl
+<man_dir> <sym_export_list> <base_dir> ...
+.br
+.B comment_filter
+<files> ...
+.SH DESCRIPTION
+This is the set of perl scripts which were developed
+during the versioning/scoping of the OSNet consolidation.
+These scripts are being provided as an example of what was
+used to identify and version the symbols in OSNet.  Their are
+many 'OSNetisms' encoded in these scripts so some modification
+would probably be required if others were to try to use them.
+Further details can be discovered by reading the scripts themselves.
+.br
+.SS find_bind.pl
+finds all of the bindings for binaries under a 'PROTO' area pointed to by
+the $ROOT environment variable.  The output is all of
+the symbol bindings between the executables and their dynamic
+dependencies.  The resulting output file can be very large if many
+binaries are examined.
+.SS extract_exports.pl
+Examines the output from find_bind.pl and
+extracts a unique list of symbols and libraries that were bound to
+by external objects.  This list of symbols represents the 'exports' for
+a set of binaries.
+.SS print_globs.pl
+This scripts will attempt to classify the symbols found in the 'shared_object'
+into one of three categories, Public, Private, or Scoped.  It will
+do this by examining the 'export_list' built by 'extract_exports.pl', a
+man directory, and the header files under $ROOT/usr/include.  It will
+classify a symbol as PUBLIC if it was found in a header file, or it was
+present in a man page entry.  A symbol will be classified as PRIVATE
+if it's not on the PUBLIC list and either of the following is true.  The
+symbol is listed in the 'export_list' or the symbol is a member
+of a 'weak strong' pair.  For more information about weak symbols refer
+to the Linker & Libraries Manual.  If a symbol is not listed as
+either PUBLIC or PRIVATE it will be added to the SCOPED list.
+.br
+The output of this program are three files, public_syms, private_syms,
+and scoped_syms which hold the PUBLIC, PRIVATE, and SCOPED symbols
+respectivly.  The public_syms and private_syms lists are used
+for the initial construction of a shared objects versioning mapfile.
+.SS run_print.pl
+Run's print_globs.pl on all shared objects in the 'base_dir' directories.
+The *_syms output files are left next to each shared object that
+is found.
+.SS check_syms.pl
+This is a script that is used to audit an executable and it's scoped
+shared objects.  It will examine all of the symbols in the executable
+and its dynamic dependencies and search for 'suspiciously' scoped
+symbols.  A suspicious symbol is a scoped symbol of the same
+name as another symbol.
+.SS find_libs.pl
+A simple script to list all of the 'shared objects' under the specified
+'base_dir'.
+.SS find_scoped.pl
+A simple script which will list all of the shared objects under
+a specified directory and whether or not they are versioned.
+.SS list_scoped.pl
+List all of the symbols that have been scoped to locals in a specified
+dynamic object.
+.SS comment_filter
+small program which will strip all of the /* ... */ comments from
+a C source file.  This program is used by print_globs.pl to examine
+header files.
+.SH "SEE ALSO"
+Linker & Libraries Manual
+.SH QUESTIONS
+Questions about these scripts may be directed to 'Michael.Walker@Eng'.

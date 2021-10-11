@@ -1,0 +1,123 @@
+#
+# Copyright (c) 1990-1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#ident	"@(#)prototype_com	1.58	99/10/03 SMI"
+#
+# This required package information file contains a list of package contents.
+# The 'pkgmk' command uses this file to identify the contents of a package
+# and their location on the development machine when building the package.
+# Can be created via a text editor or through use of the 'pkgproto' command.
+
+#!search <pathname pathname ...>	# where to find pkg objects
+#!include <filename>			# include another 'prototype' file
+#!default <mode> <owner> <group>	# default used if not specified on entry
+#!<param>=<value>			# puts parameter in pkg environment
+
+# packaging files
+i pkginfo
+i copyright
+i postinstall
+i i.preserve
+#
+# source locations relative to the prototype file
+#
+# SUNWcar.u
+#
+# For now, put v9 genunix under platform/sun4u/ 
+d none platform 755 root sys
+d none platform/sun4u 755 root sys
+f none platform/sun4u/ufsboot 644 root sys
+e preserve platform/sun4u/boot.conf 644 root sys
+f none platform/sun4u/kadb 644 root sys
+d none platform/sun4u/kernel 755 root sys
+d none platform/sun4u/kernel/cpu 755 root sys
+d none platform/sun4u/kernel/drv 755 root sys
+d none platform/sun4u/kernel/strmod 755 root sys
+d none platform/sun4u/kernel/misc 755 root sys
+d none platform/sun4u/kernel/tod 755 root sys
+f none platform/sun4u/kernel/cpu/SUNW,UltraSPARC 755 root sys
+s none platform/sun4u/kernel/cpu/SUNW,UltraSPARC-II=SUNW,UltraSPARC
+s none platform/sun4u/kernel/cpu/SUNW,UltraSPARC-IIi=SUNW,UltraSPARC
+d none platform/sun4u/kernel/dacf 755 root sys
+f none platform/sun4u/kernel/dacf/consconfig_dacf 755 root sys
+f none platform/sun4u/kernel/drv/dma 755 root sys
+f none platform/sun4u/kernel/drv/ledma 755 root sys
+f none platform/sun4u/kernel/drv/sbusmem.conf 644 root sys
+f none platform/sun4u/kernel/drv/sbusmem 755 root sys
+f none platform/sun4u/kernel/drv/rootnex 755 root sys
+f none platform/sun4u/kernel/drv/zsh.conf 644 root sys
+f none platform/sun4u/kernel/drv/zsh 755 root sys
+f none platform/sun4u/kernel/drv/zs 755 root sys
+f none platform/sun4u/kernel/drv/pcipsy 755 root sys
+f none platform/sun4u/kernel/drv/pci_pci 755 root sys
+f none platform/sun4u/kernel/drv/simba 755 root sys
+f none platform/sun4u/kernel/drv/ebus 755 root sys
+f none platform/sun4u/kernel/drv/su 755 root sys
+f none platform/sun4u/kernel/drv/sbus 755 root sys
+f none platform/sun4u/kernel/drv/stc.conf 644 root sys
+f none platform/sun4u/kernel/drv/fd 755 root sys
+f none platform/sun4u/kernel/drv/stc 755 root sys
+f none platform/sun4u/kernel/drv/power 755 root sys
+f none platform/sun4u/kernel/misc/forthdebug 755 root sys
+f none platform/sun4u/kernel/misc/consconfig 755 root sys 
+f none platform/sun4u/kernel/misc/obpsym 755 root sys
+f none platform/sun4u/kernel/misc/md5 755 root sys
+f none platform/sun4u/kernel/misc/bootdev 755 root sys
+f none platform/sun4u/kernel/misc/vis 755 root sys
+f none platform/sun4u/kernel/misc/platmod 755 root sys
+f none platform/sun4u/kernel/misc/pcmcia 755 root sys
+f none platform/sun4u/kernel/tod/todmostek 755 root sys
+f none platform/sun4u/kernel/tod/todstarfire 755 root sys
+f none platform/sun4u/kernel/strmod/kb 755 root sys
+f none platform/sun4u/kernel/unix 755 root sys
+f none platform/sun4u/kernel/genunix 755 root sys
+d none platform/SUNW,Ultra-1 755 root sys
+d none platform/SUNW,Ultra-2 755 root sys
+d none platform/SUNW,Ultra-4 755 root sys
+d none platform/SUNW,Ultra-5_10 755 root sys
+d none platform/SUNW,Ultra-30 755 root sys
+d none platform/SUNW,Ultra-60 755 root sys
+d none platform/SUNW,Ultra-80 755 root sys
+d none platform/SUNW,Ultra-4/kernel 755 root sys
+d none platform/SUNW,Ultra-4/kernel/misc 755 root sys
+d none platform/SUNW,Ultra-4/kernel/drv 755 root sys
+f none platform/SUNW,Ultra-4/kernel/misc/platmod 755 root sys
+f none platform/SUNW,Ultra-4/kernel/drv/envctrl 755 root sys
+d none platform/SUNW,Ultra-5_10/kernel 755 root sys
+d none platform/SUNW,Ultra-5_10/kernel/misc 755 root sys
+f none platform/SUNW,Ultra-5_10/kernel/misc/platmod 755 root sys
+d none platform/SUNW,Ultra-80/kernel 755 root sys
+d none platform/SUNW,Ultra-80/kernel/misc 755 root sys
+s none platform/SUNW,Ultra-80/kernel/misc/platmod=../../../SUNW,Ultra-5_10/kernel/misc/platmod
+d none platform/SUNW,Ultra-250 755 root sys
+d none platform/SUNW,Ultra-250/kernel 755 root sys
+d none platform/SUNW,Ultra-250/kernel/misc 755 root sys
+d none platform/SUNW,Ultra-250/kernel/drv 755 root sys
+f none platform/SUNW,Ultra-250/kernel/misc/platmod 755 root sys
+f none platform/SUNW,Ultra-250/kernel/drv/envctrltwo 755 root sys
+d none platform/SUNW,Ultra-Enterprise 755 root sys
+d none platform/SUNW,Ultra-Enterprise/kernel 755 root sys
+d none platform/SUNW,Ultra-Enterprise/kernel/drv 755 root sys
+f none platform/SUNW,Ultra-Enterprise/kernel/drv/ac 755 root sys
+f none platform/SUNW,Ultra-Enterprise/kernel/drv/central 755 root sys
+f none platform/SUNW,Ultra-Enterprise/kernel/drv/environ 755 root sys
+f none platform/SUNW,Ultra-Enterprise/kernel/drv/fhc 755 root sys
+f none platform/SUNW,Ultra-Enterprise/kernel/drv/simmstat 755 root sys
+f none platform/SUNW,Ultra-Enterprise/kernel/drv/sram 755 root sys
+f none platform/SUNW,Ultra-Enterprise/kernel/drv/sysctrl 755 root sys
+d none platform/SUNW,Ultra-Enterprise/kernel/misc 755 root sys
+f none platform/SUNW,Ultra-Enterprise/kernel/misc/platmod 755 root sys
+d none platform/SUNW,Ultra-Enterprise-10000 755 root sys
+f none platform/SUNW,Ultra-Enterprise-10000/kadb 644 root sys
+d none platform/SUNW,Ultra-Enterprise-10000/kernel 755 root sys
+d none platform/SUNW,Ultra-Enterprise-10000/kernel/cpu 755 root sys
+f none platform/SUNW,Ultra-Enterprise-10000/kernel/cpu/SUNW,UltraSPARC 755 root sys
+s none platform/SUNW,Ultra-Enterprise-10000/kernel/cpu/SUNW,UltraSPARC-II=SUNW,UltraSPARC
+d none platform/SUNW,Ultra-Enterprise-10000/kernel/drv 755 root sys
+f none platform/SUNW,Ultra-Enterprise-10000/kernel/drv/rootnex 755 root sys
+f none platform/SUNW,Ultra-Enterprise-10000/kernel/drv/sbus 755 root sys
+f none platform/SUNW,Ultra-Enterprise-10000/kernel/drv/pcipsy 755 root sys
+d none platform/SUNW,Ultra-Enterprise-10000/kernel/misc 755 root sys
+f none platform/SUNW,Ultra-Enterprise-10000/kernel/misc/platmod 755 root sys
+f none platform/SUNW,Ultra-Enterprise-10000/kernel/unix 755 root sys

@@ -1,0 +1,26 @@
+#!/sbin/sh
+#
+# Copyright (c) 1984-1998 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#ident	"@(#)sysetup	1.18	98/10/09 SMI"
+
+if [ -z "$_INIT_PREV_LEVEL" ]; then
+	set -- `/usr/bin/who -r`
+	_INIT_PREV_LEVEL="$9"
+fi
+
+[ $_INIT_PREV_LEVEL != S -a $_INIT_PREV_LEVEL != 1 ] && exit 0
+
+# Uncomment this line to print the complete system configuration on startup
+#[ -x /usr/sbin/prtconf ] && /usr/sbin/prtconf
+
+# If there are trademark files, print them.
+
+[ -d /etc/tm ] && /usr/bin/cat /etc/tm/* 2>/dev/null
+
+#
+# Savecore is enabled by default.
+# See dumpadm(1M) on how to customize
+# system dump configuration.
+#

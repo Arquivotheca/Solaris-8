@@ -1,0 +1,35 @@
+<TITLE> If Login Fails</TITLE>
+<!-- Tag=LoginFailed -->
+
+<CONTENT>
+
+<p>
+
+If the NIS naming service is being used, you will need to know the
+password for the naming service master. For NIS+ and NIS+(xfn) you may need
+to configure permissions to allow updates before the tool is started.
+See the man page for lpadmin(1M) and the help articles, "About Naming
+Services" and "NIS Authentication," for further information.
+
+<p>
+
+</CONTENT>
+
+<p>
+
+<KEYWORDS>
+"login failed" login fail failure
+</KEYWORDS>
+
+<p>
+
+<SEEALSO>
+ToStart
+ToShowCommand
+NISAuthentication
+NameService
+Overview
+MainWindow 
+HelpOnHelp
+</SEEALSO>        
+

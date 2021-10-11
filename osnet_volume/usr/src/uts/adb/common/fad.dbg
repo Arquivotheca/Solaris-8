@@ -1,0 +1,29 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)fad.dbg        1.2     99/10/14 SMI"
+
+#include <sys/param.h>
+#include <sys/types.h>
+#include <sys/user.h>
+#include <sys/cred.h>
+#include <sys/systm.h>
+#include <c2/audit.h>
+#include <c2/audit_kernel.h>
+#include "dummy.h"
+
+\
+\
+f_audit_data		fad_		fad
+        thread              hex
+        auid                decimal
+        mask.am_success     hex
+        mask.am_failure     hex
+        termid.at_port      hex
+        termid.at_type      decimal
+        flags               hex
+        lpbuf               decimal
+        pathlen             decimal
+        path                hex
+        next                hex

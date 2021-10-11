@@ -1,0 +1,29 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)disp.dbg	1.6	98/01/19 SMI"
+
+#include <sys/disp.h>
+#include "dummy.h"
+
+\
+\       this macro is a submacro used by other macros that (possibly)
+\       use the "z" register. Use 'w'.
+\
+_disp           disp_           disp
+{adb_inline_begin}
+.>w
+<w+{OFFSET, disp_lock}=""
+{adb_inline_end}
+        lock                    hex
+        npri                    sdecimal
+        q                       hex             queue
+        q_limit                 hex             limit
+        qactmap                 hex             actmap
+        maxrunpri               sdecimal
+        max_unbound_pri         sdecimal        "max_unb_pri"
+        nrunnable               sdecimal
+{adb_inline_begin}
+<w+{SIZEOF}=""
+{adb_inline_end}

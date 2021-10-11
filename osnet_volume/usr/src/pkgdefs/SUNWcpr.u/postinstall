@@ -1,0 +1,21 @@
+#!/bin/sh
+#
+# Copyright (c) 1995 - 1996, by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#ident	"@(#)postinstall	1.3	96/07/01 SMI"
+#
+# SUNWcpr postinstall script
+
+#
+# Unload old copy of cpr from system
+#
+
+if [ "$BASEDIR" = "/" ] ; then
+	old_cpr=`/usr/sbin/modinfo | grep -w "cpr" | awk '{print $1}'`
+	if [ "X${old_cpr}" != "X" ] ; then
+		/usr/sbin/modunload -i ${old_cpr}
+	fi
+fi
+
+exit 0

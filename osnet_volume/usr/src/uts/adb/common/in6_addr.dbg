@@ -1,0 +1,16 @@
+\
+\ Copyright (c) 1997-1998 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)in6_addr.dbg	1.2	99/08/19 SMI"
+
+#include <netinet/in.h>
+#include "dummy.h"
+
+in6_addr	""	in6_addr
+{adb_inline_begin}
+.>i
+<i+{OFFSET, _S6_un._S6_u32}=""
+<i/4X
+{adb_inline_end}
+

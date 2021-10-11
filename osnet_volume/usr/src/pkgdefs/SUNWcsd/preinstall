@@ -1,0 +1,31 @@
+#
+# Copyright (c) 1994, 1998 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#ident	"@(#)preinstall	1.2	98/07/25 SMI"
+
+#
+# SUNWcsd preinstall script - clean up various existing device entries
+#
+
+#
+# If upgrading from an x86 system which has no st driver, remove
+# any existing /dev/rmt/* nodes.
+#
+if [ ! -f $BASEDIR/kernel/drv/st -a -d $BASEDIR/dev/rmt ]; then
+	rm -f $BASEDIR/dev/rmt/*
+fi
+
+#
+# Remove old pseudo-device entries
+#
+if [ -d $BASEDIR/devices/pseudo -a -c $BASEDIR/devices/pseudo/clone:arp ]; then
+	find $BASEDIR/devices/pseudo/* -type d -prune \
+	    -o \( \( -type b -o -type c \) -print \) | \
+	    grep -v '.*@[0-9][0-9]*:*' | xargs rm -f >/dev/null 2>&1
+fi
+
+[ -c $BASEDIR/devices/pseudo/profile:profile ] && \
+    rm -f $BASEDIR/devices/pseudo/profile:profile
+
+exit 0

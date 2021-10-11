@@ -1,0 +1,22 @@
+#
+# Copyright (c) 1998 by Sun Microsystems, Inc.
+# All rights reserved.
+
+#pragma ident	"@(#)st_with_isp.wlcmd 1.7	98/10/11 SMI"
+
+add scsi_watch_request::swr_callback targets \
+	st.c:st_media_watch_cb
+
+add scsi_pkt::pkt_comp targets \
+        st.c:st_media_watch_cb \
+	scsi_watch.c:scsi_watch_request_intr \
+	st.c:st_intr
+
+one scsi_device
+one isp 
+
+add notify_entry::callback target warlock_dummy
+
+root isp_kmem_cache_constructor isp_kmem_cache_destructor
+root isp.c:isp_scsi_dmafree isp.c:isp_scsi_sync_pkt
+root isp.c:isp_scsi_reset_notify

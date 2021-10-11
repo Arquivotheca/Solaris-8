@@ -1,0 +1,85 @@
+#!/bin/sh
+#
+#ident "@(#)i.bootenvrc 1.5 99/12/06"
+#
+# Copyright (c) 1998 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+while read src dest
+do
+	if [ ! -f $dest ] ; then
+		# Initial installation
+		cp $src $dest
+	else
+		#
+		# Preserve the installed version of
+		# /boot/solaris/bootenv.rc during upgrade
+		#
+		# Try to merge all properties added by the user to
+		# the new version
+		#
+		# Any obsolete properties should be removed explicitly
+		# here:-
+		# Remove target-driver-for-ata property setting since
+		# with the new realmode dualmode ata driver this property
+		# should not be set.
+		#
+		# Also, if any conflicts found between the installed and
+		# the new version, use the one in the installed version
+		#
+
+		merge=/tmp/bootenvrc.merge.$$
+		tmpsrc=/tmp/bootenvrc.src.$$
+		tmpdst=/tmp/bootenvrc.dst.$$
+
+		#
+		# should REMOVE all obsolete setprop here before the merge
+		#
+		egrep -v "setprop[ 	]+target-driver-for-ata[ 	]+"\
+			$dest > $tmpdst
+
+		cp $src $merge
+		#
+		# substitute all tabs to spaces for the grep used later
+		#
+		sed 's/	/ /g' < $merge > $tmpsrc
+
+		while read line
+		do
+			echo $line | grep "^setprop" > /dev/null 2> /dev/null
+			if [ $? -eq 0 ] ;
+			then
+				prop=`echo $line | /usr/bin/nawk '{print $2}'`
+				result=`grep " $prop " $tmpsrc`
+				if [ $? -eq 0 ] ;
+				then
+					dstval=`echo $line | /usr/bin/nawk '{print $3}'`
+					srcval=`echo $result | /usr/bin/nawk '{print $3}'`
+					#
+					# if the values are not the same,
+					# take the installed version
+					if [ "$srcval" != "$dstval" ] ;
+					then
+						grep -v "$result" $merge > \
+								 $merge.tmp
+						cp $merge.tmp $merge
+						rm $merge.tmp
+						echo $line >> $merge
+					fi
+				else
+					#
+					# append new setprop to $merge
+					#
+					echo $line >> $merge
+				fi
+			fi
+		done < $tmpdst
+		
+		#
+		# copy the merged file to $dest
+		#
+		cp $merge $dest
+		rm $tmpsrc $tmpdst $merge
+	fi
+done
+exit 0

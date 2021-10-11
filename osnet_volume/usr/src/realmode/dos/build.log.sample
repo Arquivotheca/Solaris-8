@@ -1,0 +1,741 @@
+	md proto
+	md proto\bootpart
+	md proto\bootpart\solaris
+	md proto\bootpart\solaris\drivers
+	md proto\bootpart\solaris\mca_adf
+	md proto\bootpart\solaris\devicedb
+	makesub.bat lib all
+	makesub.bat hd all
+	cd bootblk
+	NMAKE                all
+	cd ..
+	cd mboot
+	NMAKE                all
+	cd ..
+	cd pboot
+	NMAKE                all
+	cd ..
+	makesub.bat fd all
+	cd mdboot
+	NMAKE                all
+	..\..\exe2bin -strip_to_entry mdboot.exe ..\..\proto\mdboot
+	cd ..
+	makesub.bat net all
+	cd loader
+	NMAKE                all
+	cd ..
+	cd gluecode
+	NMAKE                all
+	cd ..
+	makesub.bat strap all
+	makesub.bat bootconf all
+	makedeps *.c
+	NMAKE -nologo -f makefile.do2 all
+	cl /nologo /Alfu /Gt0 /G3 /Gf /Gs /Gy /Os /Ob1 /D__STDC__ /I..\common\include /I..\inc /DDEBUG  /c boot.c
+boot.c
+	cl /nologo /Alfu /Gt0 /G3 /Gf /Gs /Gy /Os /Ob1 /D__STDC__ /I..\common\include /I..\inc /DDEBUG  /c tty_in.c
+tty_in.c
+	set LINK=/seg:200
+	cl /nologo /F 3000 /Fm  -o bootconf.exe  adv.obj befext.obj befinst.obj bios.obj biosprim.obj boards.obj boot.obj bop.obj bus.obj cfname.obj config.obj debug.obj devdb.obj dir.obj eisa.obj enum.obj eprintf.obj err.obj escd.obj fprintf.obj gettext.obj help.obj isa1275.obj itu.obj kbd.obj main.obj mca.obj menu.obj mount.obj names.obj open.obj pci.obj pci1275.obj pcibios.obj pciutil.obj pnp.obj pnp1275.obj pnpbios.obj printf.obj probe.obj prop.obj resmgmt.obj sprintf.obj tree.obj tty_in.obj tty_out.obj ur.obj version.obj vfprintf.obj vgaprobe.obj vsprintf.obj 
+Object Modules [.obj]: /nologo adv.obj +
+Object Modules [.obj]: "befext.obj" +
+Object Modules [.obj]: "befinst.obj" +
+Object Modules [.obj]: "bios.obj" +
+Object Modules [.obj]: "biosprim.obj" +
+Object Modules [.obj]: "boards.obj" +
+Object Modules [.obj]: "boot.obj" +
+Object Modules [.obj]: "bop.obj" +
+Object Modules [.obj]: "bus.obj" +
+Object Modules [.obj]: "cfname.obj" +
+Object Modules [.obj]: "config.obj" +
+Object Modules [.obj]: "debug.obj" +
+Object Modules [.obj]: "devdb.obj" +
+Object Modules [.obj]: "dir.obj" +
+Object Modules [.obj]: "eisa.obj" +
+Object Modules [.obj]: "enum.obj" +
+Object Modules [.obj]: "eprintf.obj" +
+Object Modules [.obj]: "err.obj" +
+Object Modules [.obj]: "escd.obj" +
+Object Modules [.obj]: "fprintf.obj" +
+Object Modules [.obj]: "gettext.obj" +
+Object Modules [.obj]: "help.obj" +
+Object Modules [.obj]: "isa1275.obj" +
+Object Modules [.obj]: "itu.obj" +
+Object Modules [.obj]: "kbd.obj" +
+Object Modules [.obj]: "main.obj" +
+Object Modules [.obj]: "mca.obj" +
+Object Modules [.obj]: "menu.obj" +
+Object Modules [.obj]: "mount.obj" +
+Object Modules [.obj]: "names.obj" +
+Object Modules [.obj]: "open.obj" +
+Object Modules [.obj]: "pci.obj" +
+Object Modules [.obj]: "pci1275.obj" +
+Object Modules [.obj]: "pcibios.obj" +
+Object Modules [.obj]: "pciutil.obj" +
+Object Modules [.obj]: "pnp.obj" +
+Object Modules [.obj]: "pnp1275.obj" +
+Object Modules [.obj]: "pnpbios.obj" +
+Object Modules [.obj]: "printf.obj" +
+Object Modules [.obj]: "probe.obj" +
+Object Modules [.obj]: "prop.obj" +
+Object Modules [.obj]: "resmgmt.obj" +
+Object Modules [.obj]: "sprintf.obj" +
+Object Modules [.obj]: "tree.obj" +
+Object Modules [.obj]: "tty_in.obj" +
+Object Modules [.obj]: "tty_out.obj" +
+Object Modules [.obj]: "ur.obj" +
+Object Modules [.obj]: "version.obj" +
+Object Modules [.obj]: "vfprintf.obj" +
+Object Modules [.obj]: "vgaprobe.obj" +
+Object Modules [.obj]: "vsprintf.obj" 
+Run File [adv.exe]: 
+"bootconf.exe" /noi /STACK:0x3000
+List File [nul.map]: "bootconf.map" /m
+Libraries [.lib]: 
+Definitions File [nul.def]: ;
+DOSXNT           
+           
+
+:warningDX4020:outoffilehandles.IncreasevalueofFILES=statementinCONFIG.SYSDOSXNT           
+           
+
+:warningDX4020:outoffilehandles.IncreasevalueofFILES=statementinCONFIG.SYSDOSXNT           
+           
+
+:warningDX4020:outoffilehandles.IncreasevalueofFILES=statementinCONFIG.SYSDOSXNT           
+           
+
+:warningDX4020:outoffilehandles.IncreasevalueofFILES=statementinCONFIG.SYSDOSXNT           
+           
+
+:warningDX4020:outoffilehandles.IncreasevalueofFILES=statementinCONFIG.SYSDOSXNT           
+           
+
+:warningDX4020:outoffilehandles.IncreasevalueofFILES=statementinCONFIG.SYSDOSXNT           
+           
+
+:warningDX4020:outoffilehandles.IncreasevalueofFILES=statementinCONFIG.SYSDOSXNT           
+           
+
+:warningDX4020:outoffilehandles.IncreasevalueofFILES=statementinCONFIG.SYSDOSXNT           
+           
+
+:warningDX4020:outoffilehandles.IncreasevalueofFILES=statementinCONFIG.SYSDOSXNT           
+           
+
+:warningDX4020:outoffilehandles.IncreasevalueofFILES=statementinCONFIG.SYSDOSXNT           
+           
+
+:warningDX4020:outoffilehandles.IncreasevalueofFILES=statementinCONFIG.SYSDOSXNT           
+           
+:warningDX4020:outoffilehandles.IncreasevalueofFILES=statementinCONFIG.SYS	del escd.rf
+	makesub.bat extbios all
+	cd common
+	NMAKE                all
+	cd ..
+	cd cassist
+	NMAKE                all
+	cd .\common\lib
+	NMAKE /NOLOGO
+	cd ..\..\.
+	cd ..
+	cd network
+	NMAKE                all
+	cd ..
+	cd onepiece
+	NMAKE                all
+	makesub.bat elx all
+	makesub.bat smc all
+	makesub.bat tr all
+	makesub.bat smce all
+	makesub.bat iee all
+	makesub.bat ieef all
+	makesub.bat eepro all
+	makesub.bat nei all
+	makesub.bat iprb all
+	makesub.bat dnet all
+	makesub.bat nee all
+	makesub.bat nfe all
+	makesub.bat pcn all
+	makesub.bat smcf all
+	makesub.bat smceu all
+	makesub.bat spwr all
+	makesub.bat pe all
+	cd ddk6s
+	NMAKE                -f msc.mk all
+	mkdir objs
+	cd host\ppc
+	NMAKE                -f msc.mk all
+	cd ..\..
+	cd media\pe2
+	NMAKE                -f msc.mk all
+	cd ..\..
+	cd media\pe3
+	NMAKE                -f msc.mk all
+	cd ..\..
+	cd ..
+	cd pe3
+	NMAKE                all
+	cd ..
+	makesub.bat cnft all
+	copy cnft.bef ..\..\..\proto
+        1 file(s) copied
+	makesub.bat mtok all
+	copy mtok.bef ..\..\..\proto
+        1 file(s) copied
+	makesub.bat elxl all
+	cd ..
+	cd scsi
+	NMAKE                all
+	makesub.bat adp all
+	cl /O /Gs /Fm /Fc /c /AS /G2 /X /I..\..\common /I..\..\..\common\include /I..\..\..\inc /I..\..\cassist\common\include adp.c
+adp.c
+	cl /O /Gs /Fm /Fc /c /AS /G2 /X him.c
+him.c
+	cl /O /Gs /Fm /Fc /c /AS /G2 /X himd.c
+himd.c
+	cl /O /Gs /Fm /Fc /c /AS /G2 /X himdopt.c
+himdopt.c
+	cl /O /Gs /Fm /Fc /c /AS /G2 /X him_init.c
+him_init.c
+	cl /O /Gs /Fm /Fc /c /AS /G2 /X himdinit.c
+himdinit.c
+	cl /O /Gs /Fm /Fc /c /AS /G2 /X himdiopt.c
+himdiopt.c
+	ml /Cp /Cx /nologo /c /Sa /DFARCODE=0 /Dmodel=SMALL /Tapcibuses.s
+ Assembling: pcibuses.s
+	link /NOLOGO /M @link.dat
+Object Modules [.obj]: /NOLOGO /M ..\..\cassist\common\lib\crt0.obj  ..\..\common\low.obj  ..\..\common\pciconf.obj  ..\..\common\util.obj  ..\..\common\putnum.obj  ..\..\common\kbchar.obj  adp.obj  him.obj +
+Object Modules [.obj]: himd.obj  himdopt.obj  him_init.obj  himdinit.obj  himdiopt.obj  ..\scsi.obj  pcibuses.obj  ..\..\common\iutil.obj
+Run File [crt0.exe]: adp.bef,
+List File [d:adp.map]: adp.map,
+Libraries [.lib]: ..\..\cassist\common\lib\common + ..\..\cassist\common\lib\slibce;
+LINK : warning L4021: no stack segment
+LINK : warning L4038: program has no starting address
+	makesub.bat aha1540 all
+	makesub.bat aha1740 all
+	makesub.bat aic all
+	makesub.bat ata all
+	makesub.bat blogic all
+	copy blogic.bef ..\..\..\proto
+        1 file(s) copied
+	makesub.bat chs all
+	makesub.bat corvette all
+	makesub.bat cpqncr all
+	copy cpqncr.bef ..\..\..\proto
+        1 file(s) copied
+	makesub.bat dpt all
+	makesub.bat esa all
+	makesub.bat flashpt all
+	copy flashpt.bef ..\..\..\proto
+        1 file(s) copied
+	makesub.bat iss all
+	makesub.bat mcis all
+	makesub.bat mlx all
+	makesub.bat ncrs all
+	makesub.bat pcscsi all
+	makesub.bat tmc all
+	makesub.bat trantor all
+	makesub.bat mega all
+	copy mega.bef ..\..\..\proto
+        1 file(s) copied
+	cd ..
+>>	makesub.bat drivers all
+	if exist lib\makefile makesub.bat lib all
+
+D:\DRIVERScd lib 
+
+D:\DRIVERS\LIBnmake all 
+	cd src
+	NMAKE                all
+	cd ..
+	if exist helpers.lib erase helpers.lib
+	lib /NOLOGO helpers +crt0.obj;
+	if exist msvc\slibce.lib .\modcopy msvc\slibce.lib helpers.lib anldiv anlmul anlrem anlshl anlshr annaldiv annalmul
+	if exist msvc\slibce.lib .\modcopy msvc\slibce.lib helpers.lib annalrem annalshl annalshr annauldi annaulre annaulsh
+	if exist msvc\slibce.lib .\modcopy msvc\slibce.lib helpers.lib anuldiv anulrem anulshr anllrot anlrrot
+>>
+D:\DRIVERS\LIBcd .. 
+
+D:\DRIVERS
+>>	if exist halfbefs\makefile makesub.bat halfbefs all
+
+D:\DRIVERScd halfbefs 
+
+D:\DRIVERS\HALFBEFSnmake all 
+>>
+D:\DRIVERS\HALFBEFScd .. 
+
+D:\DRIVERS
+>>	if exist proto\makefile makesub.bat proto all
+
+D:\DRIVERScd proto 
+
+D:\DRIVERS\PROTOnmake all 
+	link /nologo /NOD /M @link.dat
+Object Modules [.obj]: /nologo /NOD /M ..\lib\crt0.obj ..\main.obj proto.obj 
+Run File [crt0.exe]: proto.bef,
+List File [d:proto.map]: proto.map,
+Libraries [.lib]: ..\lib\common.lib ..\lib\slibce.lib ..\lib\helpers.lib;
+LINK : warning L4021: no stack segment
+LINK : warning L4038: program has no starting address
+>>
+D:\DRIVERS\PROTOcd .. 
+
+D:\DRIVERS
+>>>>	if exist network\makefile makesub.bat network all
+
+D:\DRIVERScd network 
+
+D:\DRIVERS\NETWORKnmake all 
+	if exist pcn\makefile makesub.bat pcn all
+
+D:\DRIVERS\NETWORKcd pcn 
+
+D:\DRIVERS\NETWORK\PCNnmake all 
+	link /nologo /NOD /M @link.dat
+Object Modules [.obj]: /nologo /NOD /M ..\..\lib\crt0.obj ..\..\main.obj ..\..\network\network.obj pcn.obj 
+Run File [crt0.exe]: pcn.bef,
+List File [d:pcn.map]: pcn.map,
+Libraries [.lib]: ..\..\lib\common.lib ..\..\lib\slibce.lib ..\..\lib\helpers.lib;
+LINK : warning L4021: no stack segment
+LINK : warning L4038: program has no starting address
+>>
+D:\DRIVERS\NETWORK\PCNcd .. 
+
+D:\DRIVERS\NETWORK
+>>
+D:\DRIVERS\NETWORKcd .. 
+
+D:\DRIVERS
+>>>>	if exist scsi\makefile makesub.bat scsi all
+
+D:\DRIVERScd scsi 
+
+D:\DRIVERS\SCSInmake all 
+	if exist aha1540\makefile makesub.bat aha1540 all
+
+D:\DRIVERS\SCSIcd aha1540 
+
+D:\DRIVERS\SCSI\AHA1540nmake all 
+	link /nologo /NOD /M @link.dat
+Object Modules [.obj]: /nologo /NOD /M ..\..\lib\crt0.obj ..\..\main.obj ..\..\scsi\scsi.obj aha1540.obj 
+Run File [crt0.exe]: aha1540.bef,
+List File [d:aha1540.map]: aha1540.map,
+Libraries [.lib]: ..\..\lib\common.lib ..\..\lib\slibce.lib ..\..\lib\helpers.lib;
+LINK : warning L4021: no stack segment
+LINK : warning L4038: program has no starting address
+>>
+D:\DRIVERS\SCSI\AHA1540cd .. 
+
+D:\DRIVERS\SCSI
+>>
+D:\DRIVERS\SCSIcd .. 
+
+D:\DRIVERS
+	makesub.bat itu all
+	makesub.bat lib install
+	makesub.bat hd install
+	cd bootblk
+	NMAKE                all
+	cd ..
+	cd mboot
+	NMAKE                all
+	cd ..
+	cd pboot
+	NMAKE                all
+	cd ..
+	cd bootblk
+	NMAKE                install
+	..\..\exe2bin -strip_to_entry bootblk.exe bootblk
+	copy bootblk ..\..\proto
+        1 file(s) copied
+	cd ..
+	cd mboot
+	NMAKE                install
+	copy mboot ..\..\proto
+        1 file(s) copied
+	cd ..
+	cd pboot
+	NMAKE                install
+	copy pboot ..\..\proto
+        1 file(s) copied
+	cd ..
+	makesub.bat fd install
+	cd mdboot
+	NMAKE                install
+	cd ..
+	makesub.bat net install
+	cd loader
+	NMAKE                install
+	cd ..
+	cd gluecode
+	NMAKE                install
+	copy /b ..\loader\loader.bin+gluecode.exe ..\..\proto\gluecode.com
+..\LOADER\LOADER.BIN
+GLUECODE.EXE
+        1 file(s) copied
+	cd ..
+	makesub.bat strap install
+	copy strap.com ..\proto\bootpart
+        1 file(s) copied
+	copy strap.rc ..\proto\bootpart\solaris
+        1 file(s) copied
+	makesub.bat bootconf install
+	NMAKE -nologo -f makefile.do2 install
+	copy bootconf.txt ..\proto\bootpart\solaris
+        1 file(s) copied
+	copy bootconf.exe ..\proto\bootpart\solaris
+        1 file(s) copied
+	makesub.bat extbios install
+	cd common
+	NMAKE                install
+	cd ..
+	cd cassist
+	NMAKE                install
+	cd .\common\lib
+	NMAKE /NOLOGO
+	cd ..\..\.
+	copy com.bef ..\..\proto
+        1 file(s) copied
+	copy fdc.bef ..\..\proto
+        1 file(s) copied
+	copy joyst.bef ..\..\proto
+        1 file(s) copied
+	copy key.bef ..\..\proto
+        1 file(s) copied
+	copy logi.bef ..\..\proto
+        1 file(s) copied
+	copy lpt.bef ..\..\proto
+        1 file(s) copied
+	copy msm.bef ..\..\proto
+        1 file(s) copied
+	copy nop.bef ..\..\proto
+        1 file(s) copied
+	copy pcic.bef ..\..\proto
+        1 file(s) copied
+	copy ps2ms.bef ..\..\proto
+        1 file(s) copied
+	copy sbpro.bef ..\..\proto
+        1 file(s) copied
+	copy mwss.bef ..\..\proto
+        1 file(s) copied
+	copy boca.bef ..\..\proto
+        1 file(s) copied
+	cd ..
+	cd network
+	NMAKE                install
+	cd ..
+	cd onepiece
+	NMAKE                install
+	makesub.bat elx install
+	copy elx.bef ..\..\..\proto\elx.bef;
+        1 file(s) copied
+	makesub.bat smc install
+	copy smc.bef ..\..\..\proto
+        1 file(s) copied
+	makesub.bat tr install
+	copy tr.bef ..\..\..\proto
+        1 file(s) copied
+	makesub.bat smce install
+	copy smce.bef ..\..\..\proto
+        1 file(s) copied
+	makesub.bat iee install
+	copy iee.bef ..\..\..\proto
+        1 file(s) copied
+	makesub.bat ieef install
+	copy ieef.bef ..\..\..\proto
+        1 file(s) copied
+	makesub.bat eepro install
+	copy eepro.bef ..\..\..\proto
+        1 file(s) copied
+	makesub.bat nei install
+	copy nei.bef ..\..\..\proto\nei.bef
+        1 file(s) copied
+	makesub.bat iprb install
+	copy iprb.bef ..\..\..\proto
+        1 file(s) copied
+	makesub.bat dnet install
+	copy dnet.bef ..\..\..\proto
+        1 file(s) copied
+	makesub.bat nee install
+	copy nee.bef ..\..\..\proto
+        1 file(s) copied
+	makesub.bat nfe install
+	copy nfe.bef ..\..\..\proto
+        1 file(s) copied
+	makesub.bat pcn install
+	copy pcn.bef ..\..\..\proto
+        1 file(s) copied
+	makesub.bat smcf install
+	copy smcf.bef ..\..\..\proto
+        1 file(s) copied
+	makesub.bat smceu install
+	copy smceu.bef ..\..\..\proto
+        1 file(s) copied
+	makesub.bat spwr install
+	copy spwr.bef ..\..\..\proto
+        1 file(s) copied
+	makesub.bat pe install
+	cd ddk6s
+	NMAKE                -f msc.mk all
+	mkdir objs
+	cd host\ppc
+	NMAKE                -f msc.mk all
+	cd ..\..
+	cd media\pe2
+	NMAKE                -f msc.mk all
+	cd ..\..
+	cd media\pe3
+	NMAKE                -f msc.mk all
+	cd ..\..
+	cd ..
+	cd pe3
+	NMAKE                all
+	cd ..
+	copy pe3\pe3.bef ..\..\..\proto
+        1 file(s) copied
+	makesub.bat cnft install
+	copy cnft.bef ..\..\..\proto
+        1 file(s) copied
+	makesub.bat mtok install
+	copy mtok.bef ..\..\..\proto
+        1 file(s) copied
+	makesub.bat elxl install
+	copy elxl.bef ..\..\..\proto
+        1 file(s) copied
+	cd ..
+	cd scsi
+	NMAKE                install
+	makesub.bat adp install
+	copy adp.bef ..\..\..\proto
+        1 file(s) copied
+	makesub.bat aha1540 install
+	copy aha1540.bef ..\..\..\proto
+        1 file(s) copied
+	makesub.bat aha1740 install
+	copy aha1740.bef ..\..\..\proto
+        1 file(s) copied
+	makesub.bat aic install
+	copy aic.bef ..\..\..\proto
+        1 file(s) copied
+	makesub.bat ata install
+	copy ata.bef ..\..\..\proto
+        1 file(s) copied
+	makesub.bat blogic install
+	copy blogic.bef ..\..\..\proto
+        1 file(s) copied
+	makesub.bat chs install
+	copy chs.bef ..\..\..\proto
+        1 file(s) copied
+	makesub.bat corvette install
+	copy corvette.bef ..\..\..\proto\corvette.bef
+        1 file(s) copied
+	makesub.bat cpqncr install
+	copy cpqncr.bef ..\..\..\proto
+        1 file(s) copied
+	makesub.bat dpt install
+	copy dpt.bef ..\..\..\proto
+        1 file(s) copied
+	makesub.bat esa install
+	copy esa.bef ..\..\..\proto
+        1 file(s) copied
+	makesub.bat flashpt install
+	copy flashpt.bef ..\..\..\proto
+        1 file(s) copied
+	makesub.bat iss install
+	copy iss.bef ..\..\..\proto
+        1 file(s) copied
+	makesub.bat mcis install
+	copy mcis.bef ..\..\..\proto
+        1 file(s) copied
+	makesub.bat mlx install
+	copy mlx.bef ..\..\..\proto
+        1 file(s) copied
+	makesub.bat ncrs install
+	copy ncrs.bef ..\..\..\proto
+        1 file(s) copied
+	makesub.bat pcscsi install
+	copy pcscsi.bef ..\..\..\proto
+        1 file(s) copied
+	makesub.bat tmc install
+	copy tmc.bef ..\..\..\proto
+        1 file(s) copied
+	makesub.bat trantor install
+	copy trantor.bef ..\..\..\proto
+        1 file(s) copied
+	makesub.bat mega install
+	copy mega.bef ..\..\..\proto
+        1 file(s) copied
+	cd ..
+>>	makesub.bat drivers install
+	if exist lib\makefile makesub.bat lib install
+
+D:\DRIVERScd lib 
+
+D:\DRIVERS\LIBnmake install 
+	cd src
+	NMAKE                all
+	cd ..
+	if exist helpers.lib erase helpers.lib
+	lib /NOLOGO helpers +crt0.obj;
+	if exist msvc\slibce.lib .\modcopy msvc\slibce.lib helpers.lib anldiv anlmul anlrem anlshl anlshr annaldiv annalmul
+	if exist msvc\slibce.lib .\modcopy msvc\slibce.lib helpers.lib annalrem annalshl annalshr annauldi annaulre annaulsh
+	if exist msvc\slibce.lib .\modcopy msvc\slibce.lib helpers.lib anuldiv anulrem anulshr anllrot anlrrot
+>>
+D:\DRIVERS\LIBcd .. 
+
+D:\DRIVERS
+>>	if exist halfbefs\makefile makesub.bat halfbefs install
+
+D:\DRIVERScd halfbefs 
+
+D:\DRIVERS\HALFBEFSnmake install 
+	copy joyst.bef ..\..\proto\joyst.bef
+        1 file(s) copied
+>>
+D:\DRIVERS\HALFBEFScd .. 
+
+D:\DRIVERS
+>>	if exist proto\makefile makesub.bat proto install
+
+D:\DRIVERScd proto 
+
+D:\DRIVERS\PROTOnmake install 
+	link /nologo /NOD /M @link.dat
+Object Modules [.obj]: /nologo /NOD /M ..\lib\crt0.obj ..\main.obj proto.obj 
+Run File [crt0.exe]: proto.bef,
+List File [d:proto.map]: proto.map,
+Libraries [.lib]: ..\lib\common.lib ..\lib\slibce.lib ..\lib\helpers.lib;
+LINK : warning L4021: no stack segment
+LINK : warning L4038: program has no starting address
+>>
+D:\DRIVERS\PROTOcd .. 
+
+D:\DRIVERS
+>>>>	if exist network\makefile makesub.bat network install
+
+D:\DRIVERScd network 
+
+D:\DRIVERS\NETWORKnmake install 
+	if exist pcn\makefile makesub.bat pcn install
+
+D:\DRIVERS\NETWORKcd pcn 
+
+D:\DRIVERS\NETWORK\PCNnmake install 
+	link /nologo /NOD /M @link.dat
+Object Modules [.obj]: /nologo /NOD /M ..\..\lib\crt0.obj ..\..\main.obj ..\..\network\network.obj pcn.obj 
+Run File [crt0.exe]: pcn.bef,
+List File [d:pcn.map]: pcn.map,
+Libraries [.lib]: ..\..\lib\common.lib ..\..\lib\slibce.lib ..\..\lib\helpers.lib;
+LINK : warning L4021: no stack segment
+LINK : warning L4038: program has no starting address
+>>
+D:\DRIVERS\NETWORK\PCNcd .. 
+
+D:\DRIVERS\NETWORK
+>>
+D:\DRIVERS\NETWORKcd .. 
+
+D:\DRIVERS
+>>>>	if exist scsi\makefile makesub.bat scsi install
+
+D:\DRIVERScd scsi 
+
+D:\DRIVERS\SCSInmake install 
+	if exist aha1540\makefile makesub.bat aha1540 install
+
+D:\DRIVERS\SCSIcd aha1540 
+
+D:\DRIVERS\SCSI\AHA1540nmake install 
+	link /nologo /NOD /M @link.dat
+Object Modules [.obj]: /nologo /NOD /M ..\..\lib\crt0.obj ..\..\main.obj ..\..\scsi\scsi.obj aha1540.obj 
+Run File [crt0.exe]: aha1540.bef,
+List File [d:aha1540.map]: aha1540.map,
+Libraries [.lib]: ..\..\lib\common.lib ..\..\lib\slibce.lib ..\..\lib\helpers.lib;
+LINK : warning L4021: no stack segment
+LINK : warning L4038: program has no starting address
+>>
+D:\DRIVERS\SCSI\AHA1540cd .. 
+
+D:\DRIVERS\SCSI
+>>
+D:\DRIVERS\SCSIcd .. 
+
+D:\DRIVERS
+	makesub.bat itu install
+	copy itup2.exe ..\proto\bootpart\solaris
+        1 file(s) copied
+	cd mca_adf
+	nmake install
+	copy *.adf ..\proto\bootpart\solaris\mca_adf
+@8FA4.ADF
+@0708.ADF
+@0F1F.ADF
+@6042.ADF
+@60E9.ADF
+@6127.ADF
+@627C.ADF
+@61C8.ADF
+@61C9.ADF
+@627D.ADF
+@628B.ADF
+@6E6C.ADF
+@6FC0.ADF
+@6FC1.ADF
+@6FC2.ADF
+@80EC.ADF
+@8EFC.ADF
+@8EFE.ADF
+@8EFF.ADF
+@8FA2.ADF
+@8F82.ADF
+@8FA0.ADF
+@8FDA.ADF
+@8FA8.ADF
+@8FBB.ADF
+PE1FE.ADF
+@8FD6.ADF
+@8FDB.ADF
+@90EE.ADF
+@917B.ADF
+@DEFF.ADF
+@E001.ADF
+@EEE7.ADF
+@EEFF.ADF
+@EFEF.ADF
+@EFFD.ADF
+PDEFE.ADF
+PDFFE.ADF
+PDFFF.ADF
+PE0FE.ADF
+PF3FF.ADF
+PE4FE.ADF
+PEE79.ADF
+PEE7A.ADF
+PEE7B.ADF
+PEE7C.ADF
+PF7FF.ADF
+PF9FF.ADF
+PFBFF.ADF
+PFCFF.ADF
+PFE80.ADF
+PFDFF.ADF
+PFEBE.ADF
+PFEE7.ADF
+PFEFF.ADF
+PFF6F.ADF
+PFF9F.ADF
+       57 file(s) copied
+	cd ..
+	copy devconf.db\package\bootenv.rc proto\bootpart\solaris\bootenv.rc
+        1 file(s) copied
+	copy devconf.db\generic\bootargs.rc proto\bootpart\solaris\bootargs.rc
+        1 file(s) copied
+	copy devconf.db\generic\boot.rc proto\bootpart\solaris\boot.rc
+        1 file(s) copied
+	cd devicedb
+	nmake -f makefile.dos install
+	copy master ..\proto\bootpart\solaris\devicedb\master
+        1 file(s) copied
+	cd ..

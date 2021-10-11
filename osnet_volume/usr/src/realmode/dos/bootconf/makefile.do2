@@ -1,0 +1,74 @@
+#
+# Copyright (c) 1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+# DOS makefile for boot menu/configuration program
+#
+#ident "@(#)makefile.do2   1.53   99/09/30 SMI"
+#
+SOL = ..\proto\bootpart\solaris
+
+# Compiler (cl) flags
+#
+# nologo: suppress logo message
+# Alfu: large model with no assumption that stack and data segs are the same
+# Gt0: set the data size threshold to zero
+# G2: use i286 instruction set
+# G3: use i386 instruction set
+# Gf: enable string pooling
+# Gs: turn stack checking off
+# Gy: compile functions packaged for overlaying
+# Os: compile for small size
+# Ob1: only inline functions marked as inline
+# Zi: symbol table for CodeView debugger
+
+#
+# For codeview debugging enable CODEVIEW and disable OPT
+#CODEVIEW =/Zi /D__STDC__
+OPT =/Os /Ob1 /D__STDC__
+
+IFLAGS=/I..\common\include /I..\inc /I..\..\..\psm\stand\boot\i386\common
+CFLAGS = /nologo /Alfu /Gt0 /G3 /Gf /Gs /Gy $(OPT) $(IFLAGS) /DDEBUG $(CODEVIEW)
+
+# Linker flags
+#
+# nologo: suppress logo message
+# F XXXX: set the stacksize to XXXX (hex bytes)
+# Fm: create map file
+# Zi: symbol table for CodeView debugger
+
+LFLAGS  = /nologo /F 3000 /Fm $(CODEVIEW)
+
+# Assembler (ml) flags (from ml -?)
+#
+# nologo: suppress logo message
+# c:  Assemble without linking
+# Zm: Enable MASM 5.10 compatability
+# Cp: Preserve case of user identifiers
+
+AFLAGS = /nologo /Zm /Cp /c
+
+.SUFFIXES: .c .s .obj
+
+.s.obj: 
+	 ml $(AFLAGS) $*.s
+
+all: makecomm.inc bootconf.exe
+
+install: bcinst
+
+bcinst: $(SOL)\bootconf.txt $(SOL)\bootconf.exe
+
+$(SOL)\bootconf.exe: bootconf.exe 
+	copy bootconf.exe $(SOL)\bootconf.exe
+
+$(SOL)\bootconf.txt: bootconf.txt
+	copy bootconf.txt $(SOL)\bootconf.txt
+
+bootconf.exe: makedeps.inc
+
+!include makecomm.inc
+
+$(OBJS) : makefile.do2
+
+!include makedeps.inc

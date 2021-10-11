@@ -1,0 +1,70 @@
+.\" @(#)lsd.1l 1.2 95/03/08 SMI
+.\" Copyright (c) 1995 by Sun Microsystems, Inc.
+.\" All rights reserved.
+.\"
+.TH lsd 1 "5 Jun 1993"
+.SH NAME
+lsd \- list shared object differences
+.SH SYNOPSIS
+.B lsd
+[
+.B \-cp
+]
+.I "old.so new.so"
+.SH DESCRIPTION
+.IX "lsd" "" "\fLlsd\fP \(em list shared object differences"
+.IX "shared objects" "list differences" "" "list shared object differences \(em \fLlsd\fP"
+.B lsd
+compares the static binary interfaces exported by
+.I old.so\^
+and
+.I new.so
+and writes one or more reports to the standard output describing what it
+has found.
+For example:
+.PP
+.RS
+.B "% lsd libc.so.1.old libc.so.1.new"
+.RE
+.PP
+would create a report describing any incompatibilities it has detected between
+two versions of the C library.
+.PP
+Differences noted as incompatible are:
+.PP
+.RS
+.IP \(bu
+entry points in
+.I old.so
+that are missing in
+.IR new.so ;
+.IP \(bu
+a change in type of an entry point from function to an exported
+data structure; and
+.IP \(bu
+a change in the size of an exported data structure.
+.RE
+.PP
+.PP
+``Entry points'' are those items in the name list of the objects that
+are either of function or object types, as represented in their ELF
+symbol table entries, and which are of global scope.  Omitted from these
+are entry points that, by convention, are taken to be internal.  These
+are identifiers matching the regular expression ``_[_A-Z]''.
+.PP
+By default, 
+.B lsd
+will also report any violations of the ANSI-C naming rules in either
+of its arguments.
+.SH OPTIONS
+.TP
+.B \-c
+Suppress the check for ANSI-C namespace violations.  Useful when checking
+the C library.
+.TP
+.B \-p
+Check the full, physical, binary interface\(emdo not suppress comparisons
+for names believed to be internal.
+.SH SEE ALSO
+.BR nm (1),
+.BR dump (1),

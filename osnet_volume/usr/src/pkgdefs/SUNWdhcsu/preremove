@@ -1,0 +1,19 @@
+#!/bin/sh
+#
+#ident	"@(#)preremove	1.2	99/09/20 SMI"
+#
+# Copyright (c) 1996-1999 by Sun Microsystems, Inc.
+# All rights reserved.
+
+if [ "${PKG_INSTALL_ROOT:-/}" = "/" ]
+then
+	# stop daemon
+	if [ -f /etc/init.d/dhcp ]
+	then
+		/etc/init.d/dhcp stop
+	else
+		/usr/bin/pkill -x -u 0 in.dhcpd
+	fi
+fi
+
+exit 0

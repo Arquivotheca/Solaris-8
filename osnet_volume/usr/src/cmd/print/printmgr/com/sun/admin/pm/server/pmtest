@@ -1,0 +1,2 @@
+#!/bin/sh
+/usr/bin/java com.sun.admin.pm.server.Test $1

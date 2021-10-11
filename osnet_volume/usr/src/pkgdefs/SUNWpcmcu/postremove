@@ -1,0 +1,30 @@
+#! /bin/sh
+# Copyright (c) 1996 by Sun Microsystems, Inc.
+# All rights reserved.
+
+# ident "@(#)postremove	1.2	96/05/23 SMI"
+# SUNWpcmcu postremove script
+
+PATH="/usr/bin:/usr/sbin:${PATH}"
+export PATH
+
+PCMCIA_USER_DAEMON=pcmciad
+
+#
+# killproc - kill the named process(es)
+#
+killproc() {            # kill the named process(es)
+	pid=`/usr/bin/ps -e |
+	     /usr/bin/grep $1 |
+	     /usr/bin/sed -e 's/^  *//' -e 's/ .*//'`
+	[ "$pid" != "" ] && kill $pid
+}
+
+#
+# Kill the PCMCIA user daemon if we're modifying the running system
+#
+if [ "$BASEDIR" = "/" ] ; then
+	killproc ${PCMCIA_USER_DAEMON}
+fi
+
+exit 0

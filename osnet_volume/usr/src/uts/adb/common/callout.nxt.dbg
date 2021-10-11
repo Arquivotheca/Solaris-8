@@ -1,0 +1,35 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)callout.nxt.dbg	1.5	98/01/19 SMI"
+
+\ arg             : address of a struct callout
+\ uses            : callout.nxt (recursive call)
+\ registers       : b, c
+\ description     : prints the contents of callout structure, then
+\                   recurses to the next one
+\
+
+#include <sys/types.h>
+#include <sys/thread.h>
+#include <sys/t_lock.h>
+#include <sys/callo.h>
+#include "dummy.h"
+
+callout ""      callout.nxt
+{adb_inline_begin}
+.>c
+(<c+{OFFSET, c_xid})=""
+{adb_inline_end}
+        c_xid           hex             "xid"
+        c_runtime       decimal         "runtime"
+        c_func          symbolic        "func"
+        c_arg           hex             "arg"
+        c_executor      hex             "executor"
+        c_done          hex             "done"
+{adb_inline_begin}
+*(<c+{OFFSET, c_idnext})>c
+,#(<c)$<
+<c,#(#(<c-<b))$<callout.nxt
+{adb_inline_end}

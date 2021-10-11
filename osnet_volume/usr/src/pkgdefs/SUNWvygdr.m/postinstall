@@ -1,0 +1,84 @@
+#!/bin/sh
+#
+# Copyright (c) 1993 - 1996, by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#ident	"@(#)postinstall	1.5	98/06/08 SMI"
+#
+# SUNWvygdr.m postinstall script
+
+
+if /usr/sbin/prtconf -vp | /bin/fgrep -s "SUNW,Sherman"; then
+	if /bin/fgrep -s "	zs	1	0	battery" $BASEDIR/etc/iu.ap ; then
+		exit 0
+	fi
+	if [ "$BASEDIR" = "/" ] ; then
+		/usr/sbin/autopush -r -M 29 -m 0 > /dev/null
+	fi
+	cp $BASEDIR/etc/iu.ap /tmp/iu.ap
+	( echo "/	zs	0	1	ldterm ttcompat"
+	  echo "d"
+	  echo "i"
+	  echo "	zs	0	0	ldterm ttcompat"
+	  echo "	zs	1	0	battery"
+	  echo "." ; echo "w" ; echo "q"
+	) | ed -s $BASEDIR/etc/iu.ap > /dev/null
+	if [ $? != 0 ] ; then
+		echo "$BASEDIR/etc/iu.ap file changing failed"
+		mv /tmp/iu.ap $BASEDIR/etc/iu.ap
+	else
+		ln -s /dev/term/b $BASEDIR/dev/battery
+	fi
+	if [ "$BASEDIR" = "/" ] ; then
+	  	echo "	zs	0	0	ldterm ttcompat" > /tmp/bttry.ap
+	  	echo "	zs	1	0	battery" >> /tmp/bttry.ap
+		/usr/sbin/autopush -f /tmp/bttry.ap > /dev/null
+	fi
+fi
+
+if /usr/sbin/prtconf -vp | /bin/fgrep -s "SUNW,S240"; then
+	if /bin/fgrep -s "	zs	1	0	battery" $BASEDIR/etc/iu.ap ; then
+		exit 0
+	fi
+	if [ "$BASEDIR" = "/" ] ; then
+		/usr/sbin/autopush -r -M 29 -m 0 > /dev/null
+	fi
+	cp $BASEDIR/etc/iu.ap /tmp/iu.ap
+	( echo "/	zs	0	1	ldterm ttcompat"
+	  echo "d"
+	  echo "i"
+	  echo "	zs	0	0	ldterm ttcompat"
+	  echo "	zs	1	0	battery"
+	  echo "." ; echo "w" ; echo "q"
+	) | ed -s $BASEDIR/etc/iu.ap > /dev/null
+	if [ $? != 0 ] ; then
+		echo "$BASEDIR/etc/iu.ap file changing failed"
+		mv /tmp/iu.ap $BASEDIR/etc/iu.ap
+	else
+		ln -s /dev/term/b $BASEDIR/dev/battery
+	fi
+	if [ "$BASEDIR" = "/" ] ; then
+	  	echo "	zs	0	0	ldterm ttcompat" > /tmp/bttry.ap
+	  	echo "	zs	1	0	battery" >> /tmp/bttry.ap
+		/usr/sbin/autopush -f /tmp/bttry.ap > /dev/null
+	fi
+fi
+
+#
+#  Due to a bug in "postremove" of SUNWpmc.m for release 2.4, the
+#  "forceload" entry is not removed on the upgrade. (Bug 1261513)
+#
+/bin/fgrep -s "forceload: drv/pmc" $BASEDIR/etc/system
+if [ $? = 0 ]; then
+	cp $BASEDIR/etc/system /tmp/system
+	( echo "/drv\/pmc"
+	  echo "d"
+	  echo "."; echo "w" ; echo "q"
+	) | ed -s $BASEDIR/etc/system > /dev/null
+	if [ $? != 0 ] ; then
+		echo "$BASEDIR/etc/system file changing failed"
+		mv /tmp/system $BASEDIR/etc/system
+	fi
+fi
+
+exit 0

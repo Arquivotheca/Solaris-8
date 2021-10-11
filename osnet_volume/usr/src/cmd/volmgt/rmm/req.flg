@@ -1,0 +1,5 @@
+#!/bin/sh
+#pragma ident	"@(#)req.flg	1.1	95/12/12 SMI"
+
+echo_file usr/src/cmd/volmgt/Makefile
+echo_file usr/src/cmd/volmgt/Makefile.volmgt

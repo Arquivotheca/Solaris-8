@@ -1,0 +1,201 @@
+version 1.0
+#
+# Copyright (c) 1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#ident "@(#)master   1.189   99/11/17 SMI"
+#
+# Device tree database
+#      - Records in this file can be in an arbitrary order.
+#      - Records are terminated by newlines, and fields are separated
+#        by any number of spaces and/or tabs.
+#      - Quotes can be used in any field to allow white space.
+#      - Other than comments (lines such as this beginning with '#")
+#        and the "Version" string no other tokens are understood.
+#
+# Database format:-
+#
+# <dev ids> <name> <dev type> <bus> <realmode dvr> <dev desc> <properties>
+#
+# Where:-
+#       dev ids         List of unique device identifiers, separated by the
+#			"or" character '|' when more than one ID should
+#			match the same entry.
+#
+#       name            The device name. When the device ID matches
+#			an entry in the device database, the "name"
+#			property is set to this value, and the "compatible"
+#			property is set to the device ID. If no device
+#			database entry matched, then the node will just have
+#			the device ID for the "name" property. This allows
+#			us to specify the Solaris driver name for a device
+#			when we know what it is. PCI devices are typically
+#			listed in /etc/driver_aliases so we just map the
+#			name back to the device ID and let driver_aliases
+#			take care of the driver name mapping.
+#
+#       dev type        The device type.  Valid values are:
+#
+#			    com  ...  Serial ports
+# 			    mem  ...  Memory extender cards
+#			    mfc  ...  Multi-function card
+#			    msd  ...  Mass storage device (eg scsi or ide)
+#			    net  ...  Network devices
+#			    plat ...  Platform bef
+#			    oth  ...  Miscellaneous (including sound cards)
+#			    ptr  ...  Mice, etc.
+#			    vid  ...  Video/graphics cards
+#			    prt  ...  Parallel ports
+#
+#       bus             The bus type (eg all, isa, pnpisa, eisa, pci)
+#
+#       realmode dvr    The realmode driver for bootable devices,
+#                       otherwise "none".
+#
+#       dev desc        Freeform descriptive device text
+#
+#       properties      Optional additional device properties of the form
+#                       name=value eg ipl=3. Properties are added to the
+#                       device tree node passed to the kernel. This field
+#			is also used to make this database "extensible".
+#			Properties which begin with a dollar sign are
+#			are used to pass information to the Configuration
+#			Assistant, but are not added to the device tree.
+#			For example, the $forceload property tells the
+#			Configuration Assistant that it must always load
+#			the specified bef in order for that bef to set
+#			additional properties on the node.
+#
+#
+# ISA/EISA devices
+# id is the config file name (without leading "!" and trailing ".cfg")
+#
+ICU1900|PNP0E00|PNP0E01|PNP0E02 pcic oth all pcic.bef "PCMCIA controller"
+CSC0000|PNPB002|PNPB003|CTL0001|CTL0031|CTL0041|CTL0045|ESS1681|ESS6881 sbpro oth all sbpro.bef "Sound Blaster"
+CSC0001|PNPB02F|CTL7001|CTL7002 joyst oth all joyst.bef "Game port (Joy stick)"
+PNPB006 none oth all none "Audio MIDI interface (MPU401 UART)"
+ALRB200 none oth eisa none "ALR math coprocessor"
+AST8250 none mem eisa none "AST Premmia GX Extended Memory Configuration"
+CPQ4411|CPQ4410|SNIAAC1 ncrs msd eisa ncrs.bef "Compaq 32-Bit Fast-SCSI-2 Controller"
+CPQ4020 csa msd eisa none "Compaq SMART Array Controller"
+DPTA701|ICU00A1|ICU1331 dpt msd all dpt.bef "DPT PM2011/9x SCSI adapter"
+DPT2402|DPTA401|DPTA402|DPTA501|DPTA502 dpt msd eisa dpt.bef "DPT PM2012/9x SCSI adapter"
+DPTA410 dpt msd eisa dpt.bef "DPT PM2022/2122/3122/3222/3332 SCSI Adapter"
+DPTA420 dpt msd eisa dpt.bef "DPT PM2042/2142 SCSI adapter"
+NEC0182 dpt msd eisa dpt.bef "NEC (DPT) SCSI Adapter"
+ICU01F0 mwss oth all mwss.bef "Windows Sound System Compatible"
+PNP0F15|ICU0210 logi ptr all logi.bef "Logitech bus mouse" 
+PNP0F00|ICU0211 msm ptr all msm.bef "Microsoft bus mouse"
+ICU0580 tmc msd all none "Future Domain TMC-850 SCSI controller"
+ICU05F0 usc msd all none "Ultrastor ULTRA14F SCSI Controller"
+INT1010|INT1060|UNB0019|UNB0048 ieef net eisa ieef.bef "Intel EtherExpress Flash network card"
+SUN0005 display vid all none "Sub-VGA Display Adapter"
+SUN0006 display vid all none "XGA Display Adapter" compatible="pnpPNP,900"
+PNP0900|ISY0010 display vid all none "VGA Compatible Display Adapter" compatible="pnpPNP,900"
+PNP0931 display vid all none "Chips & Tech VGA Display Adapter" compatible="pnpPNP,900"
+PNP0500|PNP0501|ISY0020 asy com all com.bef "Serial port" $forceload=yes
+SUN0030 asy com all boca.bef "Boca board serial port" $forceload=yes
+USR0006|USR0002|SUP1381 asy com pnpisa none "Serial port w/ built in modem"
+PNP0F03|PNP0F12|PNP0F1C|PNP0F13|PNP0F19|ISY0030 mouse ptr all ps2ms.bef "PS/2 mouse"
+ISY0040|PNP0600|PNP0680 ata msd all ata.bef "IDE controller"
+ISY0050|PNP0700 fdc oth all fdc.bef "Floppy disk controller"
+ISY0060|PNP0400|PNP0401 lp prt all lpt.bef "Parallel port"
+SUN0010 p9000 vid all none "P9000 VLB VGA graphics adapter"
+SUN0020 p9100 vid all none "P9100 VLB VGA graphics adapter"
+PNP0902 display vid all none "VGA w/ 8514/A compatible graphics adapter" compatible="pnpPNP,900"
+ICU1751 elx net all elx.bef "3Com 3C509 Etherlink"
+PNP80F7|TCM5090|TCM5091|TCM5092|TCM5093|TCM5094|TCM5095 elx net pnpisa elx.bef "3Com 3C509B Etherlink III"
+TCM5090|TCM5091|TCM5094|TCM5095|TCM5092|TCM5093 elx net eisa elx.bef "3Com 3C579 Ethernet"
+TCM5970|TCM5920 elx net eisa elx.bef "3Com 3C592 Bus Master Ethernet"
+WYS7901 none oth eisa none "CPU board"
+WYS7D01 none mem eisa none "Memory board"
+SUN0001 none oth all none "ISA Plug and play configuration ports"
+PNP8231|ATK1500|ADV55AA|PNP828C|CSI2203 pcn net all pcn.bef "AMD PCnet-ISA 79C960/PCnet-32 79C965 Ethernet"
+PNP0301|PNP0303 keyboard key all key.bef "System keyboard"
+SUNFFE1 bios oth all none "Used BIOS memory"
+SUNFFE2 motherboard oth all none "Motherboard"
+SUNFFE3 none oth isa none "Unsupported ISA device"
+CTL0051|PNPFFFF none oth pnpisa none "Unspecified device"
+#
+# PCI devices
+# IEEE 1275 defined name format: pciVVVV,DDDD
+# where VVVV and DDDD are the vendor and device id fields from
+# the configuration space.
+# 
+# Only add entries for devices with befs.
+# Please keep in numeric order.
+#
+pci1000,1 pci1000,1 msd pci ncrs.bef "Symbios Logic 53c810 SCSI"
+pci1000,2 pci1000,2 msd pci ncrs.bef "Symbios Logic 53c820 SCSI"
+pci1000,3 pci1000,3 msd pci ncrs.bef "Symbios Logic 53c825 SCSI"
+pci1000,4 pci1000,4 msd pci ncrs.bef "Symbios Logic 53c815 SCSI"
+pci1000,6 pci1000,6 msd pci ncrs.bef "Symbios Logic 53c865 SCSI"
+pci1000,c pci1000,c msd pci ncrs.bef "Symbios Logic 53c895 SCSI"
+pci1000,f pci1000,f msd pci ncrs.bef "Symbios Logic 53c875 SCSI"
+pci1000,8f pci1000,8f msd pci ncrs.bef "Diamond Fireport 40 (SYM53C876)"
+pci1011,2 pci1011,2 net pci dnet.bef "DEC 21040 Ethernet"
+pci1011,9 pci1011,9 net pci dnet.bef "DEC 21140 Fast Ethernet"
+pci1011,14 pci1011,14 net pci dnet.bef "DEC 21041 Ethernet"
+pci1011,19 pci1011,19 net pci dnet.bef "DEC 21142/21143 Fast Ethernet"
+pci1014,2e pci1014,2e msd pci chs.bef "IBM PC ServeRaid"
+pci1022,2000 pci1022,2000 net pci pcn.bef "AMD 79C970 PCnet Ethernet"
+pci1022,2020 pci1022,2020 msd pci pcscsi.bef "AMD 53C974 PC SCSI"
+pci103c,104c pci103c,104c net pci pcn.bef "HP 'Tweety' PCnet Fast Ethernet"
+pci1044,a400 pci1044,a400 msd pci dpt.bef "DPT SCSI"
+pci10b7,5900 pci10b7,5900 net pci elx.bef "3Com 3C590 Ethernet 10bT"
+pci10b7,5950 pci10b7,5950 net pci elx.bef "3Com 3C595 Ethernet 100bTX"
+pci10b7,9000 pci10b7,9000 net pci elxl.bef "3Com 3C900-TPO Etherlink XL"
+pci10b7,9001 pci10b7,9001 net pci elxl.bef "3Com 3C900-COMBO Etherlink XL"
+pci10b7,9004 pci10b7,9004 net pci elxl.bef "3Com 3C900B-TPO Etherlink XL"
+pci10b7,9005 pci10b7,9005 net pci elxl.bef "3Com 3C900B-COMBO Etherlink XL"
+pci10b7,9006 pci10b7,9006 net pci elxl.bef "3Com 3C900B-TPC Etherlink XL"
+pci10b7,9050 pci10b7,9050 net pci elxl.bef "3Com 3C905-TX Fast Etherlink XL 10/100"
+pci10b7,9051 pci10b7,9051 net pci elxl.bef "3Com 3C905-T4 Fast Etherlink XL 10/100"
+pci10b7,9055 pci10b7,9055 net pci elxl.bef "3Com 3C905B-TX Fast Etherlink XL 10/100"
+pci10b7,9056 pci10b7,9056 net pci elxl.bef "3Com 3C905B-T4 Fast Etherlink XL 10/100"
+pci10b8,2001 pci10b8,2001 net pci dnet.bef "SMC9332BDT Fast Ethernet"
+pci1109,1400 pci1109,1400 net pci dnet.bef "Cogent EM110TX Fast Ethernet"
+pci1109,2400 pci1109,2400 net pci dnet.bef "Cogent EM440 Fast Ethernet"
+pci8086,1227 pci8086,1227 net pci ieef.bef "Intel 82256 EEpro100 Ethernet"
+pci8086,1229 pci8086,1229 net pci iprb.bef "Intel Pro100/B Fast Ethernet"
+pci8086,1029 pci8086,1029 net pci iprb.bef "Intel Pro100/S Server Adapter"
+pci10b8,a011 pci10b8,a011 net pci spwr.bef "SMC EtherPower II 10/100 (9432)"
+pci101a,f2d scsi msd pci none "NCR PDS/PQS 53C896-based PCI SCSI Adapter" compatible="pci101a,f2d"
+pci101a,f2e scsi msd pci none "NCR PDS/PQS 53C896-based PCI SCSI Adapter" compatible="pci101a,f2e"
+pci101a,f2f scsi msd pci none "NCR PDS/PQS 53C896-based PCI SCSI Adapter" compatible="pci101a,f2f"
+
+#
+# Special entry for ncrpqs: node and driver are both named 'ncrpqs'
+# deviceid is vid=illegal PCI vid, did=NCR PQS's vid
+# On resulting devinfo node with no SSVID/SSID:
+# name="ncrpqs"
+# compatible="ncrpqs\0pci1000,f\0pciclass..."
+# on nodes with:
+# compatible="ncrpqs\0pci1000,1000\0pci1000,f\0pciclass..."
+pciffff,101a ncrpqs msd pci none "NCR PDS/PQS 53C875-based PCI SCSI Adapter"
+#
+# pci class entries:
+#
+# Note that there are some entries which may require driver changes to
+# work properly (pciclass,0101[4-6,c-e][0-f]). These say that
+# separately-disableable IDE channels are supported, but the primary
+# and/or secondary channel is disabled.
+#
+pciclass,010100|pciclass,010101|pciclass,010102|pciclass,010103|pciclass,010104|pciclass,010105|pciclass,010106|pciclass,010107|pciclass,010108|pciclass,010109|pciclass,01010a|pciclass,01010b|pciclass,01010c|pciclass,01010d|pciclass,01010e|pciclass,01010f pci-ide msd pciclass ata.bef "IDE controller"
+pciclass,010110|pciclass,010111|pciclass,010112|pciclass,010113|pciclass,010114|pciclass,010115|pciclass,010116|pciclass,010117|pciclass,010118|pciclass,010119|pciclass,01011a|pciclass,01011b|pciclass,01011c|pciclass,01011d|pciclass,01011e|pciclass,01011f pci-ide msd pciclass ata.bef "IDE controller"
+pciclass,010120|pciclass,010121|pciclass,010122|pciclass,010123|pciclass,010124|pciclass,010125|pciclass,010126|pciclass,010127|pciclass,010128|pciclass,010129|pciclass,01012a|pciclass,01012b|pciclass,01012c|pciclass,01012d|pciclass,01012e|pciclass,01012f pci-ide msd pciclass ata.bef "IDE controller"
+pciclass,010130|pciclass,010131|pciclass,010132|pciclass,010133|pciclass,010134|pciclass,010135|pciclass,010136|pciclass,010137|pciclass,010138|pciclass,010139|pciclass,01013a|pciclass,01013b|pciclass,01013c|pciclass,01013d|pciclass,01013e|pciclass,01013f pci-ide msd pciclass ata.bef "IDE controller"
+pciclass,010140|pciclass,010141|pciclass,010142|pciclass,010143|pciclass,010144|pciclass,010145|pciclass,010146|pciclass,010147|pciclass,010148|pciclass,010149|pciclass,01014a|pciclass,01014b|pciclass,01014c|pciclass,01014d|pciclass,01014e|pciclass,01014f pci-ide msd pciclass ata.bef "IDE controller"
+pciclass,010150|pciclass,010151|pciclass,010152|pciclass,010153|pciclass,010154|pciclass,010155|pciclass,010156|pciclass,010157|pciclass,010158|pciclass,010159|pciclass,01015a|pciclass,01015b|pciclass,01015c|pciclass,01015d|pciclass,01015e|pciclass,01015f pci-ide msd pciclass ata.bef "IDE controller"
+pciclass,010160|pciclass,010161|pciclass,010162|pciclass,010163|pciclass,010164|pciclass,010165|pciclass,010166|pciclass,010167|pciclass,010168|pciclass,010169|pciclass,01016a|pciclass,01016b|pciclass,01016c|pciclass,01016d|pciclass,01016e|pciclass,01016f pci-ide msd pciclass ata.bef "IDE controller"
+pciclass,010170|pciclass,010171|pciclass,010172|pciclass,010173|pciclass,010174|pciclass,010175|pciclass,010176|pciclass,010177|pciclass,010178|pciclass,010179|pciclass,01017a|pciclass,01017b|pciclass,01017c|pciclass,01017d|pciclass,01017e|pciclass,01017f pci-ide msd pciclass ata.bef "IDE controller"
+pciclass,010180|pciclass,010181|pciclass,010182|pciclass,010183|pciclass,010184|pciclass,010185|pciclass,010186|pciclass,010187|pciclass,010188|pciclass,010189|pciclass,01018a|pciclass,01018b|pciclass,01018c|pciclass,01018d|pciclass,01018e|pciclass,01018f pci-ide msd pciclass ata.bef "Bus Mastering IDE controller"
+pciclass,010190|pciclass,010191|pciclass,010192|pciclass,010193|pciclass,010194|pciclass,010195|pciclass,010196|pciclass,010197|pciclass,010198|pciclass,010199|pciclass,01019a|pciclass,01019b|pciclass,01019c|pciclass,01019d|pciclass,01019e|pciclass,01019f pci-ide msd pciclass ata.bef "Bus Mastering IDE controller"
+pciclass,0101a0|pciclass,0101a1|pciclass,0101a2|pciclass,0101a3|pciclass,0101a4|pciclass,0101a5|pciclass,0101a6|pciclass,0101a7|pciclass,0101a8|pciclass,0101a9|pciclass,0101aa|pciclass,0101ab|pciclass,0101ac|pciclass,0101ad|pciclass,0101ae|pciclass,0101af pci-ide msd pciclass ata.bef "Bus Mastering IDE controller"
+pciclass,0101b0|pciclass,0101b1|pciclass,0101b2|pciclass,0101b3|pciclass,0101b4|pciclass,0101b5|pciclass,0101b6|pciclass,0101b7|pciclass,0101b8|pciclass,0101b9|pciclass,0101ba|pciclass,0101bb|pciclass,0101bc|pciclass,0101bd|pciclass,0101be|pciclass,0101bf pci-ide msd pciclass ata.bef "Bus Mastering IDE controller"
+pciclass,0101c0|pciclass,0101c1|pciclass,0101c2|pciclass,0101c3|pciclass,0101c4|pciclass,0101c5|pciclass,0101c6|pciclass,0101c7|pciclass,0101c8|pciclass,0101c9|pciclass,0101ca|pciclass,0101cb|pciclass,0101cc|pciclass,0101cd|pciclass,0101ce|pciclass,0101cf pci-ide msd pciclass ata.bef "Bus Mastering IDE controller"
+pciclass,0101d0|pciclass,0101d1|pciclass,0101d2|pciclass,0101d3|pciclass,0101d4|pciclass,0101d5|pciclass,0101d6|pciclass,0101d7|pciclass,0101d8|pciclass,0101d9|pciclass,0101da|pciclass,0101db|pciclass,0101dc|pciclass,0101dd|pciclass,0101de|pciclass,0101df pci-ide msd pciclass ata.bef "Bus Mastering IDE controller"
+pciclass,0101e0|pciclass,0101e1|pciclass,0101e2|pciclass,0101e3|pciclass,0101e4|pciclass,0101e5|pciclass,0101e6|pciclass,0101e7|pciclass,0101e8|pciclass,0101e9|pciclass,0101ea|pciclass,0101eb|pciclass,0101ec|pciclass,0101ed|pciclass,0101ee|pciclass,0101ef pci-ide msd pciclass ata.bef "Bus Mastering IDE controller"
+pciclass,0101f0|pciclass,0101f1|pciclass,0101f2|pciclass,0101f3|pciclass,0101f4|pciclass,0101f5|pciclass,0101f6|pciclass,0101f7|pciclass,0101f8|pciclass,0101f9|pciclass,0101fa|pciclass,0101fb|pciclass,0101fc|pciclass,0101fd|pciclass,0101fe|pciclass,0101ff pci-ide msd pciclass ata.bef "Bus Mastering IDE controller"
+pciclass,030000|pciclass,000100 display vid pciclass none "VGA compatible display adapter"
+pciclass,030001 display vid pciclass none "VGA+8514 compatible display adapter"

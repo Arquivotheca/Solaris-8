@@ -1,0 +1,546 @@
+#!/sbin/sh
+
+#
+# Copyright (c) 1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#ident "@(#)postinstall 1.112 99/07/19"
+#
+
+#
+# postinstall script for SUNWos86r package.
+#
+	
+# This function will check if the module has an entry in etc/name_to_major
+# If not simply calls add_drv with the arguments given. If there is
+# such an entry in name_to_major file, it adds entries in driver_aliases
+# driver_classes and minor_perm if necessary.
+# The syntax of this function is the same as add_drv. 
+
+check_add_drv()
+{
+        basedir=/  
+	alias=""
+	class=""
+	ADD_ALIAS=0
+	ADD_CLASS=0
+	ADD_MINOR=0
+	OPTIND=1
+	IS_NET_DRIVER=0
+
+	cmd="add_drv"
+
+	while getopts i:b:m:c:n  opt
+	do
+		case $opt in
+			i )	ADD_ALIAS=1	
+				alias=$OPTARG
+				cmd=$cmd" -i '$alias'"
+				;;
+			m )	ADD_MINOR=1
+				minor=$OPTARG
+				cmd=$cmd" -m '$minor'"
+				;;
+			c)	ADD_CLASS=1
+				class=$OPTARG
+				cmd=$cmd" -c $class"
+				;;
+			b)	basedir=$OPTARG
+				cmd=$cmd" -b $basedir"
+				;;
+			n)	IS_NET_DRIVER=1
+				;;
+			\?) 	echo "check_add_drv can not handle this option"
+				return
+				;;
+			esac
+	done 
+	shift `/usr/bin/expr $OPTIND - 1`
+	
+	drvname=$1
+
+	cmd=$cmd" "$drvname
+
+	drvname=`echo $drvname | /usr/bin/sed 's;.*/;;g'`
+
+	/usr/bin/grep "^$drvname[ 	]" $basedir/etc/name_to_major >  /dev/null 2>&1
+
+	if [ $? -ne 0 ] 
+	then
+		eval $cmd
+	else	
+		# entry already in name_to_major, add alias, class, minorperm
+		# if necessary
+		if [ $ADD_ALIAS = 1 ]	
+		then
+			for i in $alias
+			do
+				/usr/bin/egrep "^$drvname[ 	]+$i" $basedir/etc/driver_aliases>/dev/null 2>&1
+				if [ $? -ne 0 ]
+				then
+					echo "$drvname $i" >> $basedir/etc/driver_aliases	
+				fi
+			done
+		fi
+
+		if [ $ADD_CLASS = 1 ]
+		then
+			/usr/bin/egrep "^$drvname[ 	]+$class( |	|$)" $basedir/etc/driver_classes > /dev/null 2>&1
+			if [ $? -ne 0 ]
+			then 
+				echo "$drvname\t$class" >> $basedir/etc/driver_classes
+			fi
+		fi
+
+		if [ $ADD_MINOR = 1 ]
+		then
+			/usr/bin/grep "^$drvname:" $basedir/etc/minor_perm > /dev/null 2>&1
+			if [ $? -ne 0 ]
+			then 
+				minorentry="$drvname:$minor"
+				echo $minorentry >> $basedir/etc/minor_perm
+			fi
+		fi
+
+	fi
+
+	# The following clone device/dev is needed for Custom Jumpstart
+
+	if [ $IS_NET_DRIVER -eq 1 ]
+	then
+		CLONE_DEVICE=devices/pseudo/clone@0:$drvname
+		set `/usr/bin/grep "^clone[ 	]" $basedir/etc/name_to_major`
+		CLONE_MAJ=$2
+		set `/usr/bin/grep "^$drvname[ 	]" $basedir/etc/name_to_major`
+		DRIVER_MAJ=$2
+		mknod $basedir/$CLONE_DEVICE c $CLONE_MAJ $DRIVER_MAJ
+		chmod 600 $basedir/$CLONE_DEVICE
+		chgrp sys $basedir/$CLONE_DEVICE
+		chown root $basedir/$CLONE_DEVICE
+		ln -s ../$CLONE_DEVICE $basedir/dev/$drvname
+	fi
+	
+}
+
+
+# This function will check if the module has an entry in etc/name_to_major.
+# If so simply calls rem_drv with the arguments given to remove driver from
+# the system.  The syntax of this function is the same as rem_drv. 
+
+check_rem_drv()
+{
+	basedir=/  
+	OPTIND=1
+
+	cmd="rem_drv"
+
+	while getopts b: opt
+	do
+		case $opt in
+			b)	basedir=$OPTARG
+				cmd=$cmd" -b $basedir"
+				;;
+			\?) 	echo "check_rem_drv can not handle this option"
+				return
+				;;
+			esac
+	done 
+	shift `/usr/bin/expr $OPTIND - 1`
+	
+	drvname=$1
+
+	cmd=$cmd" "$drvname
+
+	drvname=`echo $drvname | /usr/bin/sed 's;.*/;;g'`
+
+	/usr/bin/grep "^$drvname[ 	]" $basedir/etc/name_to_major >  /dev/null 2>&1
+
+	if [ $? -eq 0 ] 
+	then
+		eval $cmd
+	fi
+}
+
+#
+# Update entries in the /etc/driver_classes for drivers which change
+# from class "scsi" to class "dada".
+#
+drvclasses_updates()
+{
+	nawk "
+	BEGIN {
+	  #  Drivers in class "dada"
+	  drv[\"chs\"] = 1
+	  }
+	/^#/ || /^$/ {
+	  print
+	  next
+	  }
+
+	# Advertise the direct-attach drivers as class "dada" 
+
+	drv[\$1] > 0 {
+	  \$2 = \"dada\"
+	  }
+	{ printf \"%s\t%s\n\", \$1, \$2 }" ${BASEDIR}/etc/driver_classes > /tmp/d.$$
+
+	cp /tmp/d.$$ ${BASEDIR}/etc/driver_classes
+	rm /tmp/d.$$
+}
+
+edit_sysfile()
+{
+        editfile=$BASEDIR$1
+        /usr/bin/sed "$2" $editfile > /tmp/$$.sedout
+        cp /tmp/$$.sedout $editfile
+        rm /tmp/$$.sedout
+        return $?
+}
+
+# Rename hostnames, make device tree entries and create devlinks
+update_hostnames_files()
+{
+# File names used
+tempfile=/tmp/$$a.tmp
+temp1file=/tmp/$$b.tmp
+temp2file=/tmp/$$c.tmp
+tempextension=upgrade.temp.$$
+tempscript=/tmp/$$.upgrade.sh
+
+hostname=etc/hostname
+
+
+
+
+
+# Find the ppa and instance numbers and make it easy to sort
+# note: elxl must come before elx
+for driver in elxl elx iprb spwr
+do
+
+  # Fix for BugId 4160438
+  # Test for duplicate instance numbers.
+  # This should not happen but can, if DU3 was applied with a card
+  # present in the machine which was not supported in 2.6 FCS
+  # supported in DU3.  (Only applies to elxl upgrade.)
+  if [ "$driver" = "elxl" ]
+  then
+    P2I=/${BASEDIR}/etc/path_to_inst
+    if [ -n "`grep $driver $P2I | sort +1 -n | awk '{ print $2 }'|uniq -d`" ]
+    then
+      # Correct duplicated instances by renumbering them above the highest
+      # instance number currently in use.
+      echo WARNING: $driver has duplicate instances numbers.... Correcting....
+      echo WARNING: Please check hostname files names are correct for $driver.
+      # Find the highest instance number currently in used for $driver
+      count=`grep $driver $P2I | sort +1 -n | awk '{ print $2 }'|tail -1`
+      for X in `grep $driver $P2I | sort +1 -n | awk '{ print $2 }'|uniq -d`
+      do
+        rm -f $tempfile
+        cat $P2I |sed /' '$X' *\"'$driver'\"'/d > $tempfile
+        # Renumber the duplicate instances.
+        for Y in `cat $P2I |sed -n /' '$X' *\"'$driver'\"'/p | sed s/' '/=/g`
+        do
+          Y=`echo $Y | sed s/=/' '/g`
+          count=`expr $count + 1`
+          echo `echo $Y | awk '{ print $1 }'` $count' "'$driver'"' >> $tempfile
+        done
+      mv -f $tempfile $P2I
+      done
+      chmod 444 $P2I
+    fi
+  fi
+  #  End of fix for BugId 4160438.
+
+
+  # create empty temporary file to stop error messages occuring
+  # should there be no drivers to upgrade.
+  cat /dev/null > $tempfile
+  cat /dev/null > $temp1file
+  cat /dev/null > $temp2file
+  rm -f $tempscript
+
+  # find ppa and instance information for old system.
+
+  # elx upgrade
+  if [ "$driver" = "elx" ]
+  then
+    if [ -z "`ls -L ${BASEDIR}/dev/elxl* 2> /dev/null`" ] # elxl not already there
+    then
+
+      # The next bit is the same as in 2.6 DU3
+      /usr/bin/grep "^elxl[ 	]" $BASEDIR/etc/name_to_major > /dev/null 2>&1
+
+      if [ $? -ne 0 ]
+      then
+	add_drv -b $BASEDIR $BASEDIR/kernel/drv/elxl
+      fi
+
+      edit_sysfile /etc/driver_aliases  "/elx[^l].*pci10b7,90/s/elx/elxl/"
+
+      editfile=${BASEDIR}/etc/driver_aliases
+      for devid in 9000 9001 9004 9005 9006 9050 9051 9055 9056
+      do
+	grep pci10b7,$devid $editfile > /dev/null 2>&1
+	if [ $? -ne 0 ]
+	then
+          echo elxl \"pci10b7,$devid\" >> $editfile
+	fi
+      done
+
+
+      # The elxl driver now supports some devices that were previously
+      # supported by the elx driver.  Thus, some /dev/elx[0-9] devices
+      # will have changed to /dev/elxl[0-9].
+      #
+      # We therefore need to rename nodes under /dev and /devices
+      # and may also need to rename some files /etc/hostname.elx*
+      #
+      # Unfortunately the usual ITU trick of drvconfig -R will not work,
+      # because the elx driver will probably be attached to some of
+      # the nodes which now want to be elxl nodes.
+      #
+      # Example:
+      # There were 3 elx devices in the system before elxl was installed.
+      # Now, /dev/elx1 is being supported by the elxl driver. thus:
+      #
+      #  elx0 remains elx0.
+      #  elx1 becomes elxl0.
+      #  elx2 becomes elx1.
+      # (gld-assigned network PPAs aren't bound to device instances)
+
+
+      ELXCOUNT=0
+      ELXLCOUNT=0
+      DEVICECOUNT=0
+
+      cd ${BASEDIR}/dev
+
+      /usr/bin/ls -l ${BASEDIR}/dev/elx[0-9]* 2> /dev/null | /usr/bin/sed 's/.*->[	 ]*//' | \
+      while read DEVLINK
+      do
+	# Look for elx devices which will remain elx devices
+	ISPCI=`echo $DEVLINK | grep pci`
+	DEVSTRING=`echo $DEVLINK | grep pci10b7,5900``echo $DEVLINK | grep pci10b7,5950`
+	if [ ${DEVSTRING}X != "X" -o ${ISPCI}X = "X" ] 
+	then
+          if [ ${ISPCI}X = "X" -o $ELXCOUNT -eq $DEVICECOUNT ]
+          then
+            ELXCOUNT=`expr $ELXCOUNT + 1`
+            DEVICECOUNT=`expr $DEVICECOUNT + 1`
+            continue;
+          fi
+          NEWNAME=`echo $DEVLINK | /usr/bin/sed 's/[0-9]*$/'$ELXCOUNT/`
+          MAJOR=`cat ${BASEDIR}/etc/name_to_major | \
+          awk '$1 == "elx" { print $2 }'`
+          rm -f ${BASEDIR}/dev/$DEVLINK > /dev/null 2>&1
+          mknod ${BASEDIR}/dev/$NEWNAME c $MAJOR \
+          `expr $ELXCOUNT + 1` > /dev/null 2>&1
+          chmod 600 ${BASEDIR}/dev/$NEWNAME
+          rm -f elx$ELXCOUNT > /dev/null 2>&1
+          ln -s $NEWNAME elx$ELXCOUNT
+          if [ -f ${BASEDIR}/etc/hostname.elx${DEVICECOUNT} ]
+          then
+            mv ${BASEDIR}/etc/hostname.elx${DEVICECOUNT} \
+              ${BASEDIR}/etc/hostname.elx${ELXCOUNT}
+          fi
+          ELXCOUNT=`expr $ELXCOUNT + 1`
+          DEVICECOUNT=`expr $DEVICECOUNT + 1`
+        else
+          NEWNAME=`echo $DEVLINK | /usr/bin/sed 's/[0-9]*$/'l$ELXLCOUNT/`
+          MAJOR=`cat ${BASEDIR}/etc/name_to_major | \
+          awk '$1 == "elxl" { print $2 }'`
+          rm -f ${BASEDIR}/dev/$DEVLINK > /dev/null 2>&1
+          mknod ${BASEDIR}/dev/$NEWNAME c $MAJOR \
+          `expr $ELXLCOUNT + 1` > /dev/null 2>&1
+          chmod 600 ${BASEDIR}/dev/$NEWNAME
+          ln -s $NEWNAME elxl$ELXLCOUNT
+          if [ -f ${BASEDIR}/etc/hostname.elx${DEVICECOUNT} ]
+          then
+            mv ${BASEDIR}/etc/hostname.elx${DEVICECOUNT} \
+              ${BASEDIR}/etc/hostname.elxl${ELXLCOUNT}
+          fi
+          ELXLCOUNT=`expr $ELXLCOUNT + 1`
+          DEVICECOUNT=`expr $DEVICECOUNT + 1`
+	fi
+      done
+
+      # Now handle the generic devices
+      if [ -x ${BASEDIR}/dev/elx0 ]
+      then
+        rm -f ${BASEDIR}/dev/elx > /dev/null 2>&1
+        DEVNAME=`ls -l ${BASEDIR}/dev/elx0 | sed -e 's/.*->[	 ]*//' \
+          -e 's/[0-9]*$//'`
+        MAJOR=`cat ${BASEDIR}/etc/name_to_major | \
+          awk '$1 == "elx" { print $2 }'`
+        mknod $DEVNAME c $MAJOR 0 > /dev/null 2>&1
+        rm -f elx
+        ln -s $DEVNAME elx
+        chmod 600 $DEVNAME
+      fi
+
+      if [ -x ${BASEDIR}/dev/elxl0 ]
+      then
+        DEVNAME=`ls -l ${BASEDIR}/dev/elxl0 | sed -e 's/.*->[	 ]*//' \
+          -e 's/[0-9]*$//'`
+        MAJOR=`cat ${BASEDIR}/etc/name_to_major | \
+          awk '$1 == "elxl" { print $2 }'`
+        mknod $DEVNAME c $MAJOR 0 > /dev/null 2>&1
+        rm -f elxl
+        ln -s $DEVNAME elxl
+        chmod 600 $DEVNAME
+      fi
+      # The end of bit which is the same as in 2.6 DU3
+
+    fi # End of check for elxl absance
+
+  else # non elx upgrade
+    ls -l ${BASEDIR}/dev/$driver?* 2> /dev/null |sed s/' '/=/g > $temp2file
+    echo "#!/sbin/sh" > $tempscript
+    for data in `cat $temp2file`
+    do
+      ppa=`echo $data | sed s/'^.*:'$driver//`
+      path=`echo $data | sed s/':'$driver'.*$'//|sed s/'^.*\/devices'//`
+      ptoinst=`grep $path ${BASEDIR}/etc/path_to_inst`
+      instance=`echo $ptoinst | sed s/'"'$driver'"'//|sed s/'".*"'//`
+      instance=`expr $instance`
+
+      major=`grep "^$driver" ${BASEDIR}/etc/name_to_major | sed s/'^'$driver' *'//`
+      minor=`expr $instance + 1`
+
+      # note ${BASEDIR}/dev/$driver is not touched.
+      # Rename build entries in /devices 
+      rm -f ${BASEDIR}/devices/$path':'$driver$instance
+      mknod ${BASEDIR}/devices/$path':'$driver$instance c $major $minor
+      chmod 600 ${BASEDIR}/devices/$path':'$driver$instance
+
+      # Update devlinks
+      echo "rm -f ${BASEDIR}/dev/$driver$ppa" >> $tempscript           # remove old devlink
+      echo "rm -f ${BASEDIR}/dev/$driver$instance" >> $tempscript
+      echo "ln -s ${BASEDIR}/devices/$path':'$driver$instance ${BASEDIR}/dev/$driver$instance" >> $tempscript
+      
+
+      echo $driver::$ppa==$driver::$instance >> $tempfile  
+    done
+      sort -r $tempscript > $tempscript.$tempextension
+      rm -f $tempscript
+      eval . $tempscript.$tempextension
+      rm -f $tempscript.$tempextension
+  fi # End of check to see if an elx or non-elx is being upgraded
+
+
+
+  # Rename hostfiles to tempory files
+  for data in `cat $tempfile` 
+  do
+    olddata="`echo $data | sed s/'==.*'//`"
+
+    ppa="`echo $olddata|sed s/'.*::'//`"
+    driver="`echo $olddata|sed s/'::.*'//`"
+
+    if ( [ -f ${BASEDIR}/$hostname.$driver$ppa ] ); then
+      mv -f ${BASEDIR}/$hostname.$driver$ppa ${BASEDIR}/$hostname.$driver$ppa.$tempextension
+    fi
+  done  # End of renaming hostname files to tempory files
+
+  # Rename tempory files to hostname.driver_instance 
+  for data in `cat $tempfile` 
+  do
+    olddata="`echo $data | sed s/'==.*'//`"
+    newdata="`echo $data | sed s/'.*=='//`"
+
+    driver="`echo $olddata|sed s/'::.*'//`"
+    ppa="`echo $olddata|sed s/'.*::'//`"
+
+
+    newdriver="`echo $newdata|sed s/'::.*'//`"
+    instance="`echo  $newdata|sed s/'.*::'//`"
+
+    if ( [ -f ${BASEDIR}/$hostname.$driver$ppa.$tempextension ] ); then
+        mv -f ${BASEDIR}/$hostname.$driver$ppa.$tempextension ${BASEDIR}/$hostname.$newdriver$instance
+        echo $hostname.$driver$ppa renamed to $hostname.$newdriver$instance
+    fi
+  done # End of renaming tempory files to new hostname files.
+done # End of looping through driver list.
+
+# make next reboot do a reconfigure
+touch ${BASEDIR}/reconfigure
+
+rm -f $tempfile
+rm -f $temp1file
+rm -f $temp2file
+}
+
+
+
+#
+# Add new device drivers and remove obsolete device drivers
+#
+update_hostnames_files
+
+# Platform-specific drivers
+case "${ARCH}" in
+i386)
+	drvclasses_updates
+	check_add_drv -b "${BASEDIR}" -i '"pci1011,2" "pci1011,9" "pci1011,14" "pci1011,19" "pci1109,1400" "pci1109,2400" "pci10b8,2001" "pci2646,1"' dnet
+	check_add_drv -b "${BASEDIR}" -i '"pci1011,21" "pci1014,22"' pci_pci
+	check_add_drv -b "${BASEDIR}" -i '"pci1022,2000" "pci103c,104c"' pcn
+	check_add_drv -b "${BASEDIR}" -c scsi -i '"pci1022,2020"' pcscsi
+	check_add_drv -b "${BASEDIR}" -i '"pci8086,1227"' ieef
+	check_add_drv -b "${BASEDIR}" -c dada -i '"pci1014,2e"' chs
+	check_add_drv -b "${BASEDIR}" -c scsi \
+		-i '"pci1000,1" "pci1000,2" "pci1000,3" "pci1000,4" "pci1000,6" "pci1000,c" "pci1000,f" "pci1000,8f" ' \
+		ncrs
+	check_add_drv -b "${BASEDIR}" -i '"pci8086,1229" "pci8086,1029"' iprb
+	check_add_drv -b "${BASEDIR}" -i '"pci10b8,a011"' spwr
+
+	# The sd driver should be installed to the system before rcs9.sh
+	# is called.
+	check_add_drv -b "${BASEDIR}" -m '* 0640 root sys' sd
+	
+	# Certain adapters once supported by elx are now supported by elxl
+	TMPFILE=/tmp/elx_tmp
+	cat ${BASEDIR}/etc/driver_aliases \
+		| sed -e '/^elx.*10b7,90../d' > $TMPFILE
+	mv $TMPFILE ${BASEDIR}/etc/driver_aliases
+	check_add_drv -b "${BASEDIR}" -i \
+		'"pci10b7,9000" "pci10b7,9001" "pci10b7,9050" "pci10b7,9051" "pci10b7,9055" "pci10b7,9056" "pci10b7,9004" "pci10b7,9005" "pci10b7,9006"' \
+		elxl > /dev/null 2>&1
+	check_add_drv -b "${BASEDIR}" -i '"pci10b7,5950" "pci10b7,5900"' elx
+
+	# Call the rcs9.sh script to update necessary files in case of upgrade
+	# for the PCI physical device pathname change from 2.4.
+	#
+	# Also used to preserve escd.rf (devconf configuration information)
+	# saved on floppy during an install boot.
+	#
+
+	if [ -s /tmp/diskette_rc.d/rcs9.sh ] 
+	then
+		/sbin/sh /tmp/diskette_rc.d/rcs9.sh "post"
+	fi
+	
+	#
+	# If there is no data in OWconfig, remove it.
+	#
+	OWC=/etc/openwin/server/etc/OWconfig
+	removef $PKGINST $OWC |\
+	while read pathname
+	do
+		if [ ! -s $pathname ]; then 
+			echo Removing empty `basename $pathname`
+			rm -f $pathname
+		fi
+	done	
+	removef -f $PKGINST
+
+	;;
+esac
+
+# Remove erroneous entry for Symbios Logic 53c875/95 (ncrs)
+TMPFILE=/tmp/ncrs_tmp
+sed -e '/^ncrs "pci1000,1000"$/d' ${BASEDIR}/etc/driver_aliases \
+	>$TMPFILE
+mv $TMPFILE ${BASEDIR}/etc/driver_aliases
+
+exit 0

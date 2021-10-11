@@ -1,0 +1,82 @@
+#
+# Copyright (c) 1998 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#pragma ident "@(#)ami.schema	1.1 99/07/11 SMI"
+#
+#		Schema file for AMI objects
+#
+#attrID	binary searchable multiValued ownerChangeable AdminChangable encrypted
+#
+###############################################################################
+#			General AMI Information (for Indexing)
+###############################################################################
+#
+# Various names allowed by AMI
+#
+nameDN false true true false true false		# Distinguished LDAP name
+nameAlias false true false true true false	# User defined Alias (for GUI)
+nameDNS false true true false true false	# <host>.<domain> (or) <user>@<domain>
+nameSKIP false true true false true false	# SKIP name
+nameUser false true true false true false	# Login name of user
+nameHost false true true false true false	# Host name
+nameApplication false true true false true false	# Application name
+#
+###############################################################################
+#			Private AMI Information
+###############################################################################
+#
+# Keystore for AMI objects to store their encrypted private keys
+# and trusted public keys
+#
+keystoreRSA true false false true true false
+keystoreDH true false false true true false
+keystoreDSA true false false true true false
+#
+# Information regarding the default RSA signature
+# and encryption keys, DSA and DH keys
+#
+#defaultRSAsignaturekey false true true true true false
+#defaultRSAencryptionkey false true true true true false
+#defaultDSAkey false true true true true false
+#defaultDHkey false true true true true false
+#
+# Attribute to store Object's profile
+#
+objectProfile true false false true true false
+#
+###############################################################################
+#			Public AMI Information
+###############################################################################
+#
+# Certificates that AMI objects can have
+#
+certX509 true false true true true false
+##certPGP true false true true true false
+##certDNS true false true true true false
+##certDH_PUBLIC true false true true true false
+#
+# Certificate chain that AMI objects can have
+#
+certchainX509 true false true true true false
+##certchainPGP true false true true true false
+##certchainDNS true false true true true false
+##certchainDH_PUBLIC true false true true true false
+#
+# CA Certiifcates
+#
+cacertX509 true false true true true false
+#
+###############################################################################
+#			Semi-private AMI Information
+###############################################################################
+#
+# Certificate requests
+#
+certreqRSA true false true true true false
+certreqDH true false true true true false
+certreqDSA true false true true true false
+#
+# Backup attributes for certReqs and Certificates
+#
+backupCertReqCerts true false true true true false

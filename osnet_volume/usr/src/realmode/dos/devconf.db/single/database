@@ -1,0 +1,272 @@
+#ident "@(#)database 1.112 99/01/22"
+
+# Copyright (c) 1998, by Sun Microsystems, Inc.
+# All rights reserved.
+
+# FOR DCB DISKETTES, CHANGE THE FOLLOWING VARIABLES AS APPROPRIATE:
+    # The release/build with which the diskette corresponds.
+    RELEASE=ALPHA
+    # Solaris release
+    SOL_REL=2.8
+    # PSROOT should point at a CodeManager workspace for a PS consolidation.
+    # We grab the newfs (for pcfs) command from the proto area of
+    # the workspace.
+    PSROOT=`pwd`/../../gate-crank
+
+    # ONROOT should point at a CodeManager workspace for an ON consolidation.
+    # We grab the booter that loads unix from this workspace.
+    ONROOT=/net/re-x28/export/build2/nightly/2.8/on/gate-crank/proto/root_i386
+
+#############################################################################
+#
+# The following variables are generally static and should not require
+# modification by the developer from build to build.
+#
+# Location of the diskette build (db) directory (a subdirectory of the
+# realmode source workspace).
+BASEDIR=`pwd`
+
+# For DCB Boot Diskettes, BOOT_DIR is appended with $RELEASE
+BOOT_DIR=$BASEDIR/BOOT
+
+# The name of the diskette in the copyright notice
+COPYRT_DSKNM_DCB='DCB'
+
+# The name of the release in the copyright notice
+COPYRT_RELNM_DCB="$RELEASE"
+
+# Place where we dump DOS-built drivers for inclusion on DCB boot diskettes.
+PROTO_DOS=$BASEDIR/../proto
+
+# The root directory of the realmode source heirarchy and the source
+# directories/files to move to DOS
+SRC=$BASEDIR/..
+
+# SRC_DIRS_FILES is used in the chkpt script to generate
+# freezepoint files.
+SRC_DIRS_FILES="bootconf
+		common
+		devconf.db
+		devicedb
+		exe2bin.c
+		extbios
+		fd
+		hd
+		inc
+		lib
+		make.bat
+		makefile
+		makesub.bat
+		mca_adf
+		net
+		strap"
+
+# Templates modified for inclusion on DCB Boot diskettes
+TMPL_COPY=$BASEDIR/copyright.tmpl
+TMPL_IDENT=$BASEDIR/ident.tmpl
+
+#############################################################################
+#
+# DevConf Floppy Layout.
+#
+#	Bootable install floppy (boot)
+#       -----------------------------------
+#	\ _____	mdboot*
+#	   |___	strap.com*
+#	   |___	solaris.map
+#	   |___	solaris	_______	boot.bin
+#			   |___	boot.rc
+#			   |___	bootargs.rc
+#			   |___	bootenv.rc
+#			   |___	bootconf.exe
+#			   |___	bootconf.txt
+#			   |___ itup2.exe
+#			   |___	strap.rc
+#			   |___	devicedb _______ master
+#			   |
+#			   |___ drivers  _______ isa.025 _______ xxx.BEF
+#					    |			   ...
+#				            |___ isa.125 _______ xxx.BEF
+#					    |			   ...
+#					    |___ isa.150 _______ xxx.BEF
+#				            |	
+#				            |___ isa.162 _______ xxx.BEF
+#					    |			   ...
+#				            |___ isa.175 _______ xxx.BEF
+#					    |			   ...
+#				            |___ notisa.010 ____ xxx.BEF
+#					    |			   ...
+#				            |___ notisa.020 ____ xxx.BEF
+#
+#	* = Hidden system files installed when the floppy is newfs'ed.
+#
+#	The variables below map out exactly what goes where.  Should
+#	more floppies be needed, the count DCB_VOLUMES can be increased.
+#
+#	The variables that describe floppy contents take the form:
+#	DCB_{floppy name}_{floppy component}_{info-type}
+#
+#	All the floppy names are formed by appending a volume number to
+#	the prefix VOLNAMETAG.  The default value for VOLNAMETAG (if
+#	not specified in this database file) is 'd'.  For MCA floppies,
+#	VOLNAMETAG should be set to 'm'.  The VOLNAMETAG size should be 
+#	limited to 3 or fewer characters to accomodate a date in the 
+#	labels assigned to floppys.
+#
+#	Thus, floppies are referred to as XXX1, XXX2, etc, where XXX
+#	is the VOLNAMETAG value.  The first floppy (XXX1) will be
+#	formatted as bootable. The remaining floppies will NOT be
+#	formatted bootable.
+#
+#	The list of a floppy's components should be specified in the variable
+#	DCB_{floppy name}_PARTS
+#
+#	There are currently 4 info types, PROTO, FILES, DEST, and POST.
+#
+#	The floppy creation algorithm is as follows:
+#
+#		for each floppy
+#		    for each component of the floppy
+#		        copy all FILES from PROTO directory to DEST directory
+#			run POST script (if any)
+#		    endfor
+#		endfor
+#
+DCB_VOLUMES=1
+
+#
+# DevConf Floppies Subdirectories
+#	(all floppies have all subdirectories to avoid floppy switching
+#	for dirent lookups of directory names!)
+#	
+DCB_SUBDIRS='rc.d
+	     solaris
+	     solaris/devicedb
+	     solaris/drivers
+	     solaris/drivers/isa.025
+	     solaris/drivers/isa.125
+	     solaris/drivers/isa.150
+	     solaris/drivers/isa.160
+	     solaris/drivers/isa.162
+	     solaris/drivers/isa.175
+	     solaris/drivers/notisa.010
+	     solaris/drivers/notisa.020
+	     solaris/machines'
+
+#
+# Boot Floppy
+#
+DCB_d1_PARTS='
+	root genbat 
+	strap strap2 rc1 installrc
+	straprc booter devicedb bootconf
+	itu isa025 isa125 isa150 isa160 isa162 isa175
+	notisa010 notisa020'
+
+DCB_d1_root_PROTO=single
+DCB_d1_root_FILES='solaris.map'
+DCB_d1_root_DEST=''
+
+DCB_d1_genbat_PROTO=../db/generic
+DCB_d1_genbat_FILES='	append.bat
+			comment.bat
+			makedir.bat
+			replace.bat'
+DCB_d1_genbat_DEST=''
+
+DCB_d1_strap_PROTO=$PROTO_DOS
+DCB_d1_strap_FILES='mdboot'
+DCB_d1_strap_DEST=''
+
+DCB_d1_strap2_PROTO=$PROTO_DOS/bootpart
+DCB_d1_strap2_FILES='strap.com'
+DCB_d1_strap2_DEST=''
+
+DCB_d1_rc1_PROTO=generic
+DCB_d1_rc1_FILES='boot.rc
+		  bootargs.rc
+		  bootenv.rc'
+DCB_d1_rc1_DEST='solaris'
+
+DCB_d1_installrc_PROTO=generic
+DCB_d1_installrc_FILES='rcs3.sh
+			rcs9.sh
+			inst9.sh'
+DCB_d1_installrc_DEST='rc.d'
+
+DCB_d1_straprc_PROTO=$PROTO_DOS/bootpart/solaris
+DCB_d1_straprc_FILES='strap.rc'
+DCB_d1_straprc_DEST='solaris'
+
+DCB_d1_booter_PROTO=$ONROOT/boot/solaris
+DCB_d1_booter_FILES='boot.bin'
+DCB_d1_booter_DEST='solaris'
+
+DCB_d1_devicedb_PROTO=$PROTO_DOS/bootpart/solaris/devicedb
+DCB_d1_devicedb_FILES='master'
+DCB_d1_devicedb_DEST='solaris/devicedb'
+
+DCB_d1_bootconf_PROTO=$PROTO_DOS/bootpart/solaris
+DCB_d1_bootconf_FILES='bootconf.exe
+		       bootconf.txt'
+DCB_d1_bootconf_DEST='solaris'
+
+DCB_d1_itu_PROTO=$PROTO_DOS/bootpart/solaris
+DCB_d1_itu_FILES='itup2.exe'
+DCB_d1_itu_DEST='solaris'
+
+DCB_d1_isa025_PROTO=$PROTO_DOS
+DCB_d1_isa025_FILES='com.bef
+		     fdc.bef
+		     joyst.bef
+		     key.bef
+		     logi.bef
+		     lpt.bef
+		     msm.bef
+		     ps2ms.bef'
+DCB_d1_isa025_DEST='solaris/drivers/isa.025'
+
+DCB_d1_isa125_PROTO=$PROTO_DOS
+DCB_d1_isa125_FILES='ata.bef
+		     dpt.bef
+		     pcic.bef'
+DCB_d1_isa125_DEST='solaris/drivers/isa.125'
+
+DCB_d1_isa150_PROTO=$PROTO_DOS
+DCB_d1_isa150_FILES='pcn.bef'
+DCB_d1_isa150_DEST='solaris/drivers/isa.150'
+
+DCB_d1_isa160_PROTO=$PROTO_DOS
+DCB_d1_isa160_FILES='mtok.bef'
+DCB_d1_isa160_DEST='solaris/drivers/isa.160'
+
+DCB_d1_isa162_PROTO=$PROTO_DOS
+DCB_d1_isa162_FILES='boca.bef'
+DCB_d1_isa162_DEST='solaris/drivers/isa.162'
+
+DCB_d1_isa175_PROTO=$PROTO_DOS
+DCB_d1_isa175_FILES='elx.bef
+		     mwss.bef
+		     symhisl.bef
+		     sbpro.bef'
+DCB_d1_isa175_DEST='solaris/drivers/isa.175'
+
+DCB_d1_notisa010_PROTO=$PROTO_DOS
+DCB_d1_notisa010_FILES='adp.bef
+			elxl.bef
+			mlx.bef
+			ncrs.bef
+			pcscsi.bef
+			cnft.bef
+			mega.bef
+			dnet.bef
+			ieef.bef
+			spwr.bef'
+DCB_d1_notisa010_DEST='solaris/drivers/notisa.010'
+
+DCB_d1_notisa020_PROTO=$PROTO_DOS
+DCB_d1_notisa020_FILES='iprb.bef
+			chs.bef
+			flashpt.bef
+			cpqncr.bef'
+DCB_d1_notisa020_DEST='solaris/drivers/notisa.020'

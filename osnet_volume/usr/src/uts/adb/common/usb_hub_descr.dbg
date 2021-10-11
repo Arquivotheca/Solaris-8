@@ -1,0 +1,32 @@
+\
+\ Copyright (c) 1999 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)usb_hub_descr.dbg	1.1	99/03/26 SMI"
+
+#include <sys/usb/usba.h>
+#include <sys/usb/usba/usba_types.h>
+#include <sys/usb/usba/usba_impl.h>
+#include <sys/usb/hubd/hub.h>
+#include <sys/usb/hubd/hubdvar.h>
+#include "dummy.h"
+
+\
+\
+
+usb_hub_descr
+{adb_inline_begin}
+.>z
+<z+{OFFSET, bDescLength}=""
+{adb_inline_end}
+	bDescLength		hex	length
+	bDescriptorType		hex	descr_type
+	bNbrPorts		hex	nbrports
+	wHubCharacteristics	hex	hubchar
+	bPwrOn2PwrGood		hex	pwron2pwrgd
+	bHubContrCurrent	hex	currentreq
+	DeviceRemovable		hex	removable
+	PortPwrCtrlMask		hex	pwrctrlmask
+{adb_inline_begin}
+<z+{SIZEOF}=""
+{adb_inline_end}

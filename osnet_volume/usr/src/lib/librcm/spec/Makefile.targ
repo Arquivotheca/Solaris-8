@@ -1,0 +1,14 @@
+#
+# Copyright (c) 1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#pragma ident	"@(#)Makefile.targ	1.1	99/08/10 SMI"
+#
+# lib/librcm/spec/Makefile.targ
+
+LIBRARY	=	librcm.a
+VERS	=	.1
+
+OBJECTS	=	rcm.o rcm_event.o
+
+SPECCPP =	-I../..

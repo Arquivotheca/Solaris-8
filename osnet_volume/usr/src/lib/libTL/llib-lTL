@@ -1,0 +1,146 @@
+/* LINTLIBRARY */
+/* PROTOLIB1 */
+
+/*
+ * Copyright (c) 1997 by Sun Microsystems, Inc.
+ * All rights reserved.
+ */
+#pragma ident	"@(#)llib-lTL	1.1	97/03/12 SMI"
+
+#include <stdlib.h>
+#include <stdio.h>
+#include <ctype.h>
+#include <string.h>
+#include <sys/types.h>
+#include <table.h>
+
+/*
+ * usr/src/lib/libTL
+ */
+
+typedef struct field_s {
+	long count;
+	unsigned char *values[TL_MAXFIELDS];
+} field_t;
+
+typedef struct entry_s {
+	int status;
+	long seekaddr;
+	field_t fields;
+	unsigned char *comment;
+} entry_t;
+
+typedef struct parse_s {
+	int type;
+	unsigned char *comment;
+	field_t fields;
+	TLdesc_t descr;
+} parse_t;
+
+/* TLappend.c */
+int TLappend(int tid, entryno_t entryno, entry_t *entry);
+
+/* TLassign.c */
+int TLassign(int tid, entry_t *entry, unsigned char *fieldname,
+				unsigned char *value);
+
+/* TLclose.c */
+int TLclose(int tid);
+
+/* TLdelete.c */
+int TLdelete(int tid, entryno_t entryno);
+
+/* TLgetentry.c */
+ENTRY TLgetentry(int tid);
+int TLfreeentry(int tid, entry_t *entry);
+
+/* TLgetfield.c */
+unsigned char *TLgetfield(int tid, entry_t *entry, unsigned char *fieldname);
+
+/* TLopen */
+int TLopen(int *tid, unsigned char *filename, TLdesc_t *description,
+			int oflag, int mode);
+
+/* TLread.c */
+int TLread(int tid, entryno_t entryno, entry_t *entry);
+
+/* TLsearches.c */
+int TLsearch1(int tid, TLsearch_t *sarray, entryno_t first, entryno_t last,
+			int how_to_match);
+
+/* TLsubst.c */
+int TLsubst(int tid, entry_t *entry, unsigned char *fieldname,
+			unsigned char *pattern, unsigned char *replace);
+
+/* TLsync.c */
+int TLsync(int tid);
+
+/* TLwrite.c */
+int TLwrite(int tid, entryno_t entryno, entry_t *newentry);
+
+/* description.c */
+void TLd_free(TLdesc_t *desc);
+int TLd_ambiguous(TLdesc_t *d);
+
+/* entry.c */
+entry_t *TLe_malloc(void);
+void TLe_free(entry_t *entry);
+int TLe_pput(int tid, parse_t *pstruct, entryno_t entryno);
+int TLe_copy(entry_t *to, entry_t *from);
+int TLe_write(int fid, int tid, entry_t *entry);
+int TLe_init(int tid);
+int TLe_add(int tid, entryno_t entryno, entry_t *entry);
+int TLe_dfltformat(field_t *fields);
+int TLe_prolog(int tid, TLdesc_t *descr);
+int TLe_delete(int tid, entryno_t entryno);
+int TLe_parse(int tid, entry_t *entry, entryno_t entryno);
+int TLe_getentry(int tid, entryno_t entryno, entry_t **eptr);
+int TLe_find(int tid, entryno_t entryno);
+
+/* field.c */
+void TLf_free(field_t *fields);
+int TLf_copy(field_t *to, field_t *from);
+int TLf_find(field_t *fields, unsigned char *name);
+int TLf_compare(field_t *p, field_t *q);
+int TLf_badsubst(int tid, unsigned char *string, int iscomment);
+int TLf_assign(int tid, entry_t *entry, unsigned char *fieldname,
+		unsigned char *value);
+int TLf_write(int fd, unsigned char *fieldfield, unsigned char *fs,
+		unsigned char *eoe, unsigned char *comment);
+
+/* file.c */
+int TLfl_getentry(int tid, unsigned char *buffer, int count);
+int TLfl_lock(int fid);
+int TLfl_unlock(int fid);
+int TLfl_copy(int to, int from);
+
+/* parse.c */
+unsigned char *TLstrpbrk(unsigned char *s1, unsigned char *s2);
+int TLbparse(int tid, parse_t *pstruct, unsigned char *buffer);
+int TLparse(int tid, parse_t *pstruct, int *size);
+int TLp_iscomment(int tid, unsigned char *ptr);
+int TLp_fieldnames(int tid, unsigned char *buffer);
+
+/* search.c */
+int TLs_search(int tid, TLsearch_t *sarray, entryno_t first, entryno_t last,
+			int how_to_match);
+int TLs_replace(int tid, entry_t *entry, unsigned char *fieldname,
+			unsigned char *pattern, unsigned char *replacetxt);
+
+/* space.c */
+
+/* table.c */
+int TLinit(void);
+int TLt_get(void);
+void TLt_unget(int tid);
+int TLt_init(int tid);
+int TLt_open(int tid, unsigned char *filename, TLdesc_t *descr, int oflag,
+			int mode);
+int TLt_desccmp(TLdesc_t *a, TLdesc_t *b);
+void TLt_free(int tid);
+int TLt_sync(int tid);
+
+/* utils.c */
+int Malloc(int size);
+int Free(char *addr);
+int Realloc(char *ptr, int size);

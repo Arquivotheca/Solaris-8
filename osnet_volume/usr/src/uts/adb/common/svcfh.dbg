@@ -1,0 +1,27 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)svcfh.dbg	1.3	98/01/19 SMI"
+
+#include <rpc/types.h>
+#include <sys/vfs.h>
+#define NFSSERVER
+#include <nfs/nfs.h>
+#include "dummy.h"
+
+\
+\
+svcfh                   fh_
+{adb_inline_begin}
+.>z
+<z+{OFFSET, fh_fsid}=""
+{adb_inline_end}
+        fsid                    hex
+        len                     sdecimal
+        data                    hex
+        xlen                    sdecimal
+        xdata                   hex
+{adb_inline_begin}
+<z+{SIZEOF}=""
+{adb_inline_end}

@@ -1,0 +1,36 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)isp_request.dbg	1.5	98/02/02 SMI"
+
+#include <sys/types.h/>
+#include <sys/scsi/scsi.h>
+#include <sys/scsi/adapters/ispmail.h>
+#include <sys/scsi/adapters/ispvar.h>
+#include "dummy.h"
+
+\
+\
+isp_request             req_
+{adb_inline_begin}
+.>z
+<z+{OFFSET, req_header.cq_entry_count}=""
+{adb_inline_end}
+        header.cq_entry_count   hex
+        header.cq_entry_type    hex
+        header.cq_flags         hex
+        header.cq_seqno         hex
+        token                   hex
+        scsi_id.req_target      hex
+        scsi_id.req_lun_trn     hex
+        cdblen                  hex
+        flags                   hex
+        reserved                hex
+        time                    hex
+        seg_count               hex
+        cdb                     hex
+{adb_inline_begin}
+<z+{OFFSET, req_dataseg}/n"req_dataseg"n8Xn
+<z+{SIZEOF}=""
+{adb_inline_end}

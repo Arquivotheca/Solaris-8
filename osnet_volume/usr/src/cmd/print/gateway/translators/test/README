@@ -1,0 +1,37 @@
+
+		@(#)README	1.2	96/01/22 SunSoft
+
+This file describes how to use the "test" translator...
+
+The "test" translator is design to provide a simple method of testing the
+printing protocol adaptor front-end, and BSD protocol client side functionality.The translator is a loadable module implementing the adaptor API.  It relies
+heavily on the naming interface (printers.conf) to determine the action it
+should take.
+
+The following Keys have been defined:
+
+Key			description
+test-log		log file name (string)
+test-dir		working dir (string)
+test-spooler-available	spooler running (boolean)
+test-access		access allowed (boolean)
+test-restart		restart allowed (boolean)
+test-submit		submission allowed (boolean)
+test-show-queue-state	status line (string)
+test-show-queue-file	status data file (string)
+test-cancel-job-file	cancel data file (string)
+
+a sample entry might look like:
+
+test:\
+	:bsdaddr=test,localhost,Solaris:\
+	:spooling-paradigm=test:\
+	:test-log=/tmp/test_printer/log:\
+	:test-dir=/tmp/test_printer:\
+	:test-access=true:\
+	:test-restart=true:\
+	:test-submit=true:\
+	:test-show-queue-state=out of paper:\
+	:test-show-queue-file=/tmp/test_printer/show-queue:\
+	:test-cancel-job-file=/tmp/test_printer/cancel-job:
+	

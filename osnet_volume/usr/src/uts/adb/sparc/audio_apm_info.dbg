@@ -1,0 +1,24 @@
+\
+\ Copyright (c) 1999 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)audio_apm_info.dbg	1.1	99/05/26 SMI"
+
+#include <sys/audio_impl.h>
+#include "dummy.h"
+
+\
+\
+audio_apm_info	apm_
+	open		hex
+	close		hex
+	info		hex
+	type		decimal
+	private		hex
+	ad_infop	hex
+	ad_state	hex
+	max_chs		decimal
+	in_chs		decimal
+	out_chs		decimal
+	next		hex
+	previous	hex

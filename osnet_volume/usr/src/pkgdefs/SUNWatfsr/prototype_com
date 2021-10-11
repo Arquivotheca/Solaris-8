@@ -1,0 +1,44 @@
+#
+# Copyright (c) 1996, 1997, 1998 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#ident	"@(#)prototype_com	1.4	99/03/30 SMI"
+#
+# This required package information file contains a list of package contents.
+# The 'pkgmk' command uses this file to identify the contents of a package
+# and their location on the development machine when building the package.
+# Can be created via a text editor or through use of the 'pkgproto' command.
+
+#!search <pathname pathname ...>	# where to find pkg objects
+#!include <filename>			# include another 'prototype' file
+#!default <mode> <owner> <group>	# default used if not specified on entry
+#!<param>=<value>			# puts parameter in pkg environment
+
+# packaging files
+i pkginfo
+i copyright
+i i.preserve
+i i.automaster
+i i.initd
+i depend
+#
+# source locations relative to the prototype file
+#
+# SUNWatfsr
+#
+d none etc 755 root sys
+e preserve etc/auto_home 644 root bin
+e automaster etc/auto_master 644 root bin
+d none etc/init.d 755 root sys
+e initd etc/init.d/autofs 744 root sys
+d none etc/rc0.d 755 root sys
+l initd etc/rc0.d/K41autofs=../../etc/init.d/autofs
+d none etc/rc1.d 755 root sys
+l initd etc/rc1.d/K41autofs=../../etc/init.d/autofs
+d none etc/rc2.d 755 root sys
+l initd etc/rc2.d/S74autofs=../../etc/init.d/autofs
+d none etc/rcS.d 755 root sys
+l initd etc/rcS.d/K41autofs=../../etc/init.d/autofs
+d none kernel 755 root sys
+d none kernel/fs 755 root sys
+f none kernel/fs/autofs 755 root sys

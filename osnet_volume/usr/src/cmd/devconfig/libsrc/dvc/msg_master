@@ -1,0 +1,261 @@
+#
+#ident "@(#)msg_master 1.12 95/06/15"
+#
+#
+# Copyright (c) 1995, by Sun Microsystems, Inc.
+# All rights reserved.
+
+# This is the master message file for devconfig.  Any time you create a new
+# message or edit the text for an existing message, you must do it here.
+# see the file `mkmsgs.c' for details on the format for this file.
+# Running the tool on this file will generate 3 files:
+#	dvc_msgs.h
+#	dvc_msgs.c
+#	dvc_message.po
+
+# We don't export any of these codes to the world, so ordering is not important
+# here, and we can let the tool automatically generate the msg codes simply by
+# specifying msg codes of zero.
+
+# Don't worry about format in this file.  All text retrieved from gettext() is
+# automatically formatted for the specific terminal's column width, although
+# you can insert \n & \t whereever you like to override the formatter.
+
+CFILE	DVC_MSGS
+
+PREFIX	DVC
+BASE	0	DVC
+
+#
+# Attribute Names - note the correlation with the names in 
+#                   cfinfo/abbreviations. This is no coincidence!
+
+IOA 0 "I/O address:"
+IRQ 0 "Interrupt (IRQ):"
+IPL 0 "Interrupt (IPL):"
+BUSADDR 0 "Bus Address:"
+MEMADDR 0 "Memory address:"
+MEMSIZE 0 "Memory size:"
+RESOLUTION 0 "Resolution:"
+REF 0 "Refresh rate:"
+SIZE 0 "Screen size:"
+DMA 0 "DMA channel:"
+DMASPEED 0 "DMA speed:"
+NBUTTONS 0 "Buttons:"
+DEVICE 0 "Device:"
+KBD_LAYOUT 0 "Keyboard Localization:"
+DEPTH 0 "Depth Number:"
+DESKTOP 0 "Desktop Size:"
+
+#
+# Category names; also from cfinfo/abbreviations
+#
+
+AUDIO 0 "Audio interface cards"
+DISPLAY 0 "Video display adaptors"
+KEYBOARD 0 "Keyboards"
+LP 0 "Parallel printer port"
+POINTER 0 "Pointing devices"
+SERIAL 0 "Serial communication ports"
+
+#
+# Known device titles - these are echoed in the .cfinfo files.
+#
+
+LOGI_C&_SER 0 "Logitech C-7 or C-5 serial mouse"
+LOGI_MM_SER 0 "Logitech MouseMan serial mouse"
+MICROSO_SER 0 "Microsoft serial mouse"
+MSYSTEM_SER 0 "Mouse Systems Corp. serial mouse"
+AHA154X_DSK 0 "Adaptec 154x SCSI host adaptor"
+SERIAL_PORT 0 "AT COM ports"
+PC_KEYBOARD 0 "AT 101-key keyboard"
+ATA_IDE_DSK 0 "ATA IDE controller"
+DPT_SCP_DSK 0 "DPT SmartCache Plus"
+EHA174X_DSK 0 "Adaptec 174x SCSI host adaptor"
+THRCOM_NETW 0 "3COM EtherLink network card"
+THCOM2_NETW 0 "3COM EtherLink III network card"
+PS2IN_MOUSE 0 "PS/2 style built in mouse"
+LOGI_BMOUSE 0 "Logitec bus mouse"
+PRNTER_PORT 0 "Parallel printer port"
+MICRO_MOUSE 0 "Microsoft bus mouse"
+SBPRO_SOUND 0 "SoundBlaster/PRO"
+SMC_EC_NETW 0 "SMC EtherCard PLUS"
+THCOMT_NETW 0 "3COM TokenLink III network card"
+
+#
+# These are the display titles, taken from the PMI files.
+#
+DISPLAY01 0 "ATI 8514/A"
+DISPLAY02 0 "ATI VGA Wonder XL (43 Hz interlaced vertical refresh)"
+DISPLAY03 0 "ATI VGA Wonder XL (60 Hz vertical refresh)"
+DISPLAY04 0 "ATI VGA Wonder XL (70 Hz vertical refresh)"
+DISPLAY05 0 "ATI VGA Wonder XL -6 (43 Hz vertical refresh)"
+DISPLAY06 0 "ATI VGA Wonder XL -6 (60 Hz vertical refresh)"
+DISPLAY07 0 "ATI VGA Wonder XL -6 (70 Hz vertical refresh)"
+DISPLAY08 0 "ATI VGA Wonder+ (43 Hz interlaced vertical refresh)"
+DISPLAY09 0 "ATI VGA Wonder+ (60 Hz vertical refresh)"
+DISPLAY10 0 "ATI VGA Wonder+ (70 Hz vertical refresh)"
+DISPLAY11 0 "COMPAQ 486C"
+DISPLAY12 0 "Cirrus Logic CL-GD542x VGA (1024 x 768 x 256 x 60Hz mode 60h)"
+DISPLAY13 0 "Compaq Prolinea ET-4000 VGA"
+DISPLAY14 0 "CompuAdd Hi-Rez/Plus VGA (43 Hz vertical refresh)"
+DISPLAY15 0 "CompuAdd Hi-Rez/Plus VGA (60 Hz vertical refresh)"
+DISPLAY16 0 "CompuAdd Hi-Rez/Plus VGA (70 Hz vertical refresh)"
+DISPLAY17 0 "Dell 433DE & 450DE ET-4000 VGA"
+DISPLAY18 0 "Dell 486/M and 486/ME S3 805 (43 Hz vertical refresh)"
+DISPLAY19 0 "Diamond SpeedStar Plus VGA (43 Hz vertical refresh)"
+DISPLAY20 0 "Diamond SpeedStar Plus VGA (60 Hz vertical refresh)"
+DISPLAY21 0 "Diamond SpeedStar Plus VGA (70 Hz vertical refresh)"
+DISPLAY22 0 "Genoa 7000 VGA (43 Hz interlaced vertical refresh)"
+DISPLAY23 0 "Genoa 7000 VGA (60 Hz vertical refresh)"
+DISPLAY24 0 "Genoa 7000 VGA (72 Hz vertical refresh)"
+DISPLAY25 0 "IBM 8514/A"
+DISPLAY26 0 "IBM PS/Valuepoint Display Adapters (43 Hz vertical refresh)"
+DISPLAY27 0 "IBM XGA"
+DISPLAY28 0 "Orchid Prodesigner II VGA (43 Hz interlaced vertical refresh)"
+DISPLAY29 0 "Orchid Prodesigner II VGA (60 Hz vertical refresh)"
+DISPLAY30 0 "Orchid Prodesigner II VGA (72 Hz vertical refresh)"
+DISPLAY31 0 "Orchid Technology Fahrenheit 1280 (43 Hz vertical refresh)"
+DISPLAY32 0 "Orchid Technology Fahrenheit 1280 (60 Hz vertical refresh)"
+DISPLAY33 0 "Orchid Technology Fahrenheit 1280 (70 Hz vertical refresh)"
+DISPLAY34 0 "Orchid Technology Fahrenheit VA (43 Hz vertical refresh)"
+DISPLAY35 0 "Orchid Technology Fahrenheit VA (60 Hz vertical refresh)"
+DISPLAY36 0 "Orchid Technology Fahrenheit VA (70 Hz vertical refresh)"
+DISPLAY37 0 "QVision /1024 Triton VGA (60 Hz vertical refresh)"
+DISPLAY38 0 "QVision /1024 Triton VGA (66 Hz vertical refresh)"
+DISPLAY39 0 "QVision /1024 Triton VGA (72 Hz vertical refresh)"
+DISPLAY40 0 "STB Ergo VGA (60 Hz vertical refresh)"
+DISPLAY41 0 "Western Digital WD90C30 and WD90C31 VGA (43 Hz interlaced)"
+DISPLAY42 0 "Western Digital WD90C30 and WD90C31 VGA (60 Hz vertical refresh)"
+DISPLAY43 0 "Western Digital WD90C30 and WD90C31 VGA (70 Hz vertical refresh)"
+
+#
+# Strings from the source code
+#
+
+MEMERR  0  "Fatal Error -- Out of Memory!!\n"
+
+MKDIR_ERR 0  "Can't create directory %s\n"
+
+DEFERR 0  "Can't find definition for "
+
+INCONFFILE 0  " in configuration file."
+
+CONFBKPERR 0  "Can't make backups for .conf files"
+
+BKPERR 0  "Can't make a backup for "
+
+OPENERR 0  "Can't open "
+
+TOWRITE 0  " to write."
+
+READERR 0  "Can't read file %s, error: %s\n"
+
+NOTITLE 0  "Device %s has no title\n"
+
+NOABBREV 0  "Cannot load abbreviations file.  "
+"The devconfig program may not be "
+"installed correctly, or DEVCONFIGHOME "
+"is not set."
+
+NOCFINFO 0  "Cannot load cfinfo files.  "
+"The devconfig program may not be "
+"installed correctly, or DEVCONFIGHOME "
+"is not set."
+
+NOMASTER 0  "Cannot load master.cfinfo file.  "
+"The devconfig program may not be "
+"installed correctly."
+
+NODENONAME 0  "Device info node with no name.\n"
+
+UNIT 0  " unit"
+
+UNLOADERR 0  "Unable to unload and reload the "
+CONFIGERR 0  "Unable to configure the "
+
+DRIVER 0  " driver.\n"
+
+REBOOT 0  "Changes made to its configuration information "
+"will take effect only after rebooting your computer."
+
+KVM_STRERR 0  "kvm_read error on string data"
+
+KVM_RD_ERR 0  "kvm_read error"
+
+KVM_OPNERR 0  "kvm_open() failure"
+
+BADOP 0  "Operation not supported on this system.\n"
+
+KVM_RDFAIL 0  "kvm_read() of root node pointer failed"
+
+MODCTL_FAIL 0  "modctl failed with return value %d"
+
+MODCTL 0  "modctl()"
+
+BADDIGIT 0  "Bad digit (%c) in base %d number.\n"
+
+NUMERIC1 0  "Expecting numeric value after `-'\n"
+
+NUMERIC2 0  "Expecting numeric value after `~'\n"
+
+NUMERIC3 0  "Expected numeric or string value\n"
+
+EXPECTED 0  "Expected `='\n"
+
+BADTOKEN 0  "Unknown token, type %s, value \"%s\"\n"
+
+CANTREAD 0  "Can't read file %s.\n"
+
+CANTOPEN 0  "Can't open file %s to write.\n"
+
+CANTOPEN_KBD 0 "Can't open /dev/kbd.\n"
+
+CANTKIOCS 0 "Error 0x%x encountered while setting keyboard layout.\n"
+
+BADNODE 0  "Unknown  Node"
+
+ADDSELFID 0 "You do not need to add a self-identifying "
+"device with this program."
+
+RMSELFID 0 "You cannot unconfigure a self-identifying "
+"device with this program."
+
+ENOXDPROTO 0 "Cannot find class XDISPLAY prototype.\n"
+
+EBADXDPROTO 0 "Bad class XDISPLAY prototype.\n"
+
+EBADWCLASS 0 "Bad open window config file entry - check version.\n"
+
+ENOWCFR 0 "Cannot open window config file for reading.\n"
+
+ENOWCFW 0 "Cannot open window config file for writing.\n"
+
+EKBXCNT 0 "Keyboard translation table overflow.\n"
+
+ENOKBATTR 0 "Cannot find keyboard locale data.\n"
+"Defaulting to US English.\n"
+
+EDEFKBOPEN 0 "Cannot open default keyboard file.\n"
+
+EDEFKBWRITE 0 "Cannot write default keyboard file.\n"
+
+EPCMAPKEYS 0 "Error while executing pcmapkeys command.\n"
+
+ELOADKEYS 0 "Error while executing loadkeys command.\n"
+
+EKBCONFIG 0 "The pcmapkeys command was not run because you are "
+"running in windows enviroment.  You must execute this "
+"command when going back to text mode in order for keyboard "
+"configuration changes to take effect.\n"
+
+EDSXCNT 0 "Display translation table overflow - truncated.\n"
+
+EBADRES 0 "Bad resolution specification - ignored.\n"
+
+EBADSIZE 0 "Bad size specification - ignored.\n"
+
+ENOINSTALLMAP 0  "Cannot load install map prototype.\n"
+
+EBADINSTALLMAP 0  "Bad install map prototype.\n"
+

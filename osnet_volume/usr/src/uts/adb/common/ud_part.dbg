@@ -1,0 +1,39 @@
+\
+\ Copyright (c) 1998, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)ud_part.dbg	1.5	98/11/13 SMI"
+
+#include <sys/types.h>
+#include <sys/mutex.h>
+#include <sys/vnode.h>
+#include <vm/page.h>
+#include <sys/fbuf.h>
+#include <sys/fs/udf_volume.h>
+#include <sys/fs/udf_inode.h>
+#include "dummy.h"
+
+\
+\
+ud_part		udp_	ud_part
+{adb_inline_begin}
+.>x
+{adb_inline_end}
+	flags		hex
+	number		hex
+	seqno		hex
+	access		hex
+	start		hex
+	length		hex
+	unall_loc	hex
+	unall_len	hex
+	freed_loc	hex
+	freed_len	hex
+	nfree		hex
+	nblocks		hex
+	last_alloc	hex
+	cache_count	hex
+	cache		hex
+{adb_inline_begin}
+<x+{SIZEOF}=""
+{adb_inline_end}

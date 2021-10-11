@@ -1,0 +1,26 @@
+#!/sbin/sh
+#
+# Copyright (c) 1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#ident	"@(#)slpd	1.1	99/04/02 SMI"
+
+conf=/etc/inet/slp.conf
+
+case "$1" in
+'start')
+	[ -f $conf ] && /usr/lib/inet/slpd -f $conf >/dev/msglog 2>&1 &
+	;;
+
+'stop')
+	/usr/bin/pkill -x -u 0 -P 1 slpd
+	LD_LIBRARY_PATH=/usr/lib /usr/java1.2/jre/bin/java -classpath \
+	    /usr/share/lib/slp/slpd.jar:/usr/share/lib/ami/ami.jar \
+	    com.sun.slp.slpd stop -f $conf >/dev/null 2>&1
+	;;
+*)
+	echo "Usage: $0 { start | stop }"
+	exit 1
+	;;
+esac
+exit 0

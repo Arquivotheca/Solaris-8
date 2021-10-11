@@ -1,0 +1,48 @@
+#
+# /etc/nsswitch.nisplus:
+#
+# An example file that could be copied over to /etc/nsswitch.conf; it
+# uses NIS+ (NIS Version 3) in conjunction with files.
+#
+# "hosts:" and "services:" in this file are used only if the
+# /etc/netconfig file has a "-" for nametoaddr_libs of "inet" transports.
+
+# the following two lines obviate the "+" entry in /etc/passwd and /etc/group.
+passwd:     files nisplus
+group:      files nisplus
+
+# consult /etc "files" only if nisplus is down. 
+hosts:      nisplus [NOTFOUND=return] files
+ipnodes:    files
+# Uncomment the following line and comment out the above to resolve
+# both IPv4 and IPv6 addresses from the ipnodes databases. Note that
+# IPv4 addresses are searched in all of the ipnodes databases before
+# searching the hosts databases. Before turning this option on, consult
+# the Network Administration Guide for more details on using IPv6.
+#ipnodes:    nisplus [NOTFOUND=return] files
+
+#Uncomment the following line, and comment out the above, to use both DNS
+#and NIS+.  You must also set up the /etc/resolv.conf file for DNS name
+#server lookup.  See resolv.conf(4).
+#hosts:     nisplus dns [NOTFOUND=return] files
+
+services:   nisplus [NOTFOUND=return] files
+networks:   nisplus [NOTFOUND=return] files
+protocols:  nisplus [NOTFOUND=return] files
+rpc:        nisplus [NOTFOUND=return] files
+ethers:     nisplus [NOTFOUND=return] files
+netmasks:   nisplus [NOTFOUND=return] files	
+bootparams: nisplus [NOTFOUND=return] files
+
+publickey:  nisplus
+
+netgroup:   nisplus
+
+automount:  files nisplus
+aliases:    files nisplus
+sendmailvars:   files nisplus
+
+printers:	user nisplus files xfn
+
+auth_attr:  files nisplus
+prof_attr:  files nisplus

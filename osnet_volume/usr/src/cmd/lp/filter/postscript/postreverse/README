@@ -1,0 +1,5 @@
+SCCS Revision 1.4 of postrevers.[ch] represents a new implementation of
+postreverse that is more memory/swap efficient as well as a much more efficient
+algorithm for parsing the PostScript files.  The only requirements for a
+document to be parsed is that it contains DSC Page and Trailer comments.  The
+algorithm is documented at the beginning of the code.

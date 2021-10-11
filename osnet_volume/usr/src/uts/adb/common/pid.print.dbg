@@ -1,0 +1,16 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)pid.print.dbg	1.2	98/01/14 SMI"
+
+#include <sys/param.h>
+#include <sys/time.h>
+#include <sys/types.h>
+#include <sys/proc.h>
+#include "dummy.h"
+
+\
+\
+pid     ""      pid.print
+        pid_id          sdecimal        pid

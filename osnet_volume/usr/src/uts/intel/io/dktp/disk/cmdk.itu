@@ -1,0 +1,24 @@
+#
+#  Copyright (c) 1997,1999 by Sun Microsystems, Inc.
+#  All rights reserved.
+#
+#pragma ident	"@(#)cmdk.itu	1.5	99/05/04 SMI"
+name=cmdk
+itu_type=partial
+interface_version=1.0
+patchid=105727-01
+driverpkg=SUNWos86r
+driverpkgvers="1.1.0,REV=1997.06.13.11.51"
+driverpkgdesc="Platform Support, OS Functionality (Root)"
+driver_path=/kernel/drv
+load_always=TRUE
+#
+# evil file_edit commands
+#
+file_edit=/etc/driver_classes "s/^ata[ 	]*scsi/ata	dada/"
+file_edit=/etc/driver_classes "s/^mlx[ 	]*scsi/mlx	dada/"
+file_edit=/etc/driver_classes "s/^chs[ 	]*scsi/chs	dada/"
+file_edit=/etc/driver_classes "s/^dsa[ 	]*scsi/dsa	dada/"
+file_edit=/etc/driver_classes "s/^	dsa[ 	]*scsi/dsa	dada/"
+file_edit=/etc/driver_classes "s/^csa[ 	]*scsi/csa	dada/"
+file_edit=/etc/driver_classes "s/^smartii[ 	]*scsi/smartii	dada/"

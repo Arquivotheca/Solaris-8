@@ -1,0 +1,41 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)calltrace.nxt.dbg	1.6	98/07/19 SMI"
+
+#ifdef __i386
+#include <sys/reg.h>
+#endif
+#include <sys/frame.h>
+#include "dummy.h"
+
+
+\	v9 uses a biased stack (need to add +0t2047 before using it)
+\
+frame		""		calltrace.nxt
+#if defined(__sparcv9)
+{adb_inline_begin}
+(.+0t2047)>f
+<f/16{HEX}n
+<f/16pn
+*(<f+{OFFSET, fr_savpc})/inn
+*(<f+{OFFSET, fr_savfp}),.$<calltrace.nxt
+{adb_inline_end}
+#elif defined(__sparc)
+{adb_inline_begin}
+.>f
+<f/16{HEX}n
+<f/16pn
+*(<f+{OFFSET, fr_savpc})/inn
+*(<f+{OFFSET, fr_savfp}),.$<calltrace.nxt
+{adb_inline_end}
+#elif defined(__i386)
+{adb_inline_begin}
+.>f
+*(<f+{OFFSET, fr_savpc})/inn
+*(<f+{OFFSET, fr_savfp}),.$<calltrace.nxt
+{adb_inline_end}
+#else
+#error "Unknown ISA"
+#endif

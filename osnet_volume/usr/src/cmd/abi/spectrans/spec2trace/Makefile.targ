@@ -1,0 +1,30 @@
+#
+#pragma ident	"@(#)Makefile.targ	1.1	99/01/25 SMI"
+#
+# Copyright (c) 1997-1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+# cmd/abi/spectrans/spec2trace/Makefile.targ
+
+.KEEP_STATE:
+
+PROG	=	spec2trace
+
+YACC_OBJS =	parseproto.o
+
+OBJECTS	=	trace.o		\
+		util.o		\
+		db.o		\
+		symtab.o	\
+		bindings.o	\
+		printfuncs.o	\
+		io.o		\
+		linkage.o	\
+		interceptor.o
+
+include		../../Makefile.cmd
+
+parseproto := RM = @echo keeping	# do not remove generated C code
+parseproto := COPTFLAG = -g -DDEBUG -DMEM_DEBUG -DTRACE
+parseproto:	parseproto.o
+	$(LINK.c) -o parseproto parseproto.o

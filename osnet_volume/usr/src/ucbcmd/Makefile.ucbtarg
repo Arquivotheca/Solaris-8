@@ -1,0 +1,17 @@
+#
+#ident	"@(#)Makefile.ucbtarg	1.2	90/08/19 SMI"
+#
+# Copyright (c) 1990 by Sun Microsystems, Inc.
+#
+# ucbcmd/Makefile.ucbtarg
+#
+# included to define local library targets
+#
+
+# include global targets; SRC should be defined in the shell.
+# SRC is needed until RFE 1026993 is implemented.
+include $(SRC)/cmd/Makefile.targ
+
+# install rules
+$(ROOTBIN):
+	$(INS.dir)

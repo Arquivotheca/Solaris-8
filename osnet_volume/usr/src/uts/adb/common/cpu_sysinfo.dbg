@@ -1,0 +1,79 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)cpu_sysinfo.dbg	1.3	98/01/19 SMI"
+
+\	arg		: address of cpu_sysinfo struct
+\	uses		:
+\	registers	: w
+\	description	: prints the contents of cpu_sysinfo structure
+
+#include <sys/types.h>
+#include <sys/cpuvar.h>
+#include "dummy.h"
+
+\
+\
+cpu_sysinfo
+{adb_inline_begin}
+.>w
+<w+{OFFSET, cpu}/n"cpu"n"idle"16t"user"16t"kernel"16t"wait"n4U
+<w+{OFFSET, wait}/n"wait"n"io"16t"swap"16t"pio"n3D
+<w+{OFFSET, bread}=""
+{adb_inline_end}
+	bread			decimal
+	bwrite			decimal
+	lread			decimal
+	lwrite			decimal
+	phread			decimal
+	phwrite			decimal
+	pswitch			decimal
+	trap			decimal
+	intr			decimal
+	syscall			decimal
+	sysread			decimal
+	syswrite		decimal
+	sysfork			decimal
+	sysvfork		decimal
+	sysexec			decimal
+	readch			decimal
+	writech			decimal
+	rcvint			decimal
+	xmtint			decimal
+	mdmint			decimal
+	rawch			decimal
+	canch			decimal
+	outch			decimal
+	msg			decimal
+	sema			decimal
+	namei			decimal
+	ufsiget			decimal
+	ufsdirblk		decimal
+	ufsipage		decimal
+	ufsinopage		decimal
+	inodeovf		decimal
+	fileovf			decimal
+	procovf			decimal
+	intrthread		decimal
+	intrblk			decimal
+	idlethread		decimal
+	inv_swtch		decimal
+	nthreads		decimal
+	cpumigrate		decimal
+	xcalls			decimal
+	mutex_adenters		decimal
+	rw_rdfails		decimal
+	rw_wrfails		decimal
+	modload			decimal
+	modunload		decimal
+	bawrite			decimal
+	rw_enters		decimal
+	win_uo_cnt		decimal
+	win_uu_cnt		decimal
+	win_so_cnt		decimal
+	win_su_cnt		decimal
+	win_suo_cnt		decimal
+{adb_inline_begin}
+<w+{SIZEOF}=""
+{adb_inline_end}

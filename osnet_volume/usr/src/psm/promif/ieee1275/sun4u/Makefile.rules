@@ -1,0 +1,145 @@
+#
+# Copyright (c) 1992-1998 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#pragma	ident	"@(#)Makefile.rules	1.11	98/01/26 SMI"
+#
+# psm/promif/ieee1275/Makefile.rules
+#
+#	This Makefile defines all build rules for the promif version for
+#	IEEE 1275 compliant firmware (generic portions).
+
+#
+#	This was implemented by pattern matching rules of the form:
+#
+# $(OBJS_DIR)/%.o:	 $(UTSBASE)/common/os/%.c
+#	$(COMPILE.c) -o $@ $<
+#
+# $(LINTS_DIR)/%.ln:	$(UTSBASE)/common/os/%.c
+#	@($(LHEAD) $(LINT.c) $< $(LTAIL))
+#
+#	for each directory containing source. 
+#	This technique proved to be too slow under
+#	Nse because it caused a significant additional number of stats
+#	and stats are real slow under TFS. If TFS performance should
+#	improve, one might consider returning to the former implementation.
+#	In the former implementation, this file (Makefile.rules) was not
+#	needed and the pattern matching rules were in Makefile.files.
+#
+
+#
+#	C object build rules
+#
+#	The following are alphabetized by source file path. Please maintain
+# this ordering.
+#
+
+PROM_PLAT_SRC = $(PSMBASE)/promif/ieee1275/sun4u
+
+$(OBJS_DIR)/prom_alloc.o:	$(PROM_PLAT_SRC)/prom_alloc.c
+	$(COMPILE.c) -o $@ $(PROM_PLAT_SRC)/prom_alloc.c
+
+$(OBJS_DIR)/prom_cpuctl.o:	$(PROM_PLAT_SRC)/prom_cpuctl.c
+	$(COMPILE.c) -o $@ $(PROM_PLAT_SRC)/prom_cpuctl.c
+
+$(OBJS_DIR)/prom_getunum.o:	$(PROM_PLAT_SRC)/prom_getunum.c
+	$(COMPILE.c) -o $@ $(PROM_PLAT_SRC)/prom_getunum.c
+
+$(OBJS_DIR)/prom_heartbeat.o:	$(PROM_PLAT_SRC)/prom_heartbeat.c
+	$(COMPILE.c) -o $@ $(PROM_PLAT_SRC)/prom_heartbeat.c
+
+$(OBJS_DIR)/prom_idprom.o:	$(PROM_PLAT_SRC)/prom_idprom.c
+	$(COMPILE.c) -o $@ $(PROM_PLAT_SRC)/prom_idprom.c
+
+$(OBJS_DIR)/prom_init.o:	$(PROM_PLAT_SRC)/prom_init.c
+	$(COMPILE.c) -o $@ $(PROM_PLAT_SRC)/prom_init.c
+
+$(OBJS_DIR)/prom_macaddr.o:		$(PROM_PLAT_SRC)/prom_macaddr.c
+	$(COMPILE.c) -o $@ $(PROM_PLAT_SRC)/prom_macaddr.c
+
+$(OBJS_DIR)/prom_map.o:		$(PROM_PLAT_SRC)/prom_map.c
+	$(COMPILE.c) -o $@ $(PROM_PLAT_SRC)/prom_map.c
+
+$(OBJS_DIR)/prom_mem.o:		$(PROM_PLAT_SRC)/prom_mem.c
+	$(COMPILE.c) -o $@ $(PROM_PLAT_SRC)/prom_mem.c
+
+$(OBJS_DIR)/prom_mmu.o:		$(PROM_PLAT_SRC)/prom_mmu.c
+	$(COMPILE.c) -o $@ $(PROM_PLAT_SRC)/prom_mmu.c
+
+$(OBJS_DIR)/prom_power_off.o:	$(PROM_PLAT_SRC)/prom_power_off.c
+	$(COMPILE.c) -o $@ $(PROM_PLAT_SRC)/prom_power_off.c
+
+$(OBJS_DIR)/prom_retain.o:	$(PROM_PLAT_SRC)/prom_retain.c
+	$(COMPILE.c) -o $@ $(PROM_PLAT_SRC)/prom_retain.c
+
+$(OBJS_DIR)/prom_set_traptable.o:	$(PROM_PLAT_SRC)/prom_set_traptable.c
+	$(COMPILE.c) -o $@ $(PROM_PLAT_SRC)/prom_set_traptable.c
+
+$(OBJS_DIR)/prom_sparc.o:	$(PROM_PLAT_SRC)/prom_sparc.c
+	$(COMPILE.c) -o $@ $(PROM_PLAT_SRC)/prom_sparc.c
+
+$(OBJS_DIR)/prom_sunfire.o:	$(PROM_PLAT_SRC)/prom_sunfire.c
+	$(COMPILE.c) -o $@ $(PROM_PLAT_SRC)/prom_sunfire.c
+
+$(OBJS_DIR)/prom_vercheck.o:	$(PROM_PLAT_SRC)/prom_vercheck.c
+	$(COMPILE.c) -o $@ $(PROM_PLAT_SRC)/prom_vercheck.c
+
+$(OBJS_DIR)/prom_vername.o:	$(PROM_PLAT_SRC)/prom_vername.c
+	$(COMPILE.c) -o $@ $(PROM_PLAT_SRC)/prom_vername.c
+
+#
+#	Lint `object' build rules
+#
+#	The following are alphabetized by source file path. Please maintain
+# this ordering.
+#
+$(LINTS_DIR)/prom_alloc.ln:	$(PROM_PLAT_SRC)/prom_alloc.c
+	@($(LHEAD) $(LINT.c) $(PROM_PLAT_SRC)/prom_alloc.c $(LTAIL))
+
+$(LINTS_DIR)/prom_cpuctl.ln:	$(PROM_PLAT_SRC)/prom_cpuctl.c
+	@($(LHEAD) $(LINT.c) $(PROM_PLAT_SRC)/prom_cpuctl.c $(LTAIL))
+
+$(LINTS_DIR)/prom_getunum.ln:	$(PROM_PLAT_SRC)/prom_getunum.c
+	@($(LHEAD) $(LINT.c) $(PROM_PLAT_SRC)/prom_getunum.c $(LTAIL))
+
+$(LINTS_DIR)/prom_heartbeat.ln:	$(PROM_PLAT_SRC)/prom_heartbeat.c
+	@($(LHEAD) $(LINT.c) $(PROM_PLAT_SRC)/prom_heartbeat.c $(LTAIL))
+
+$(LINTS_DIR)/prom_idprom.ln:	$(PROM_PLAT_SRC)/prom_idprom.c
+	@($(LHEAD) $(LINT.c) $(PROM_PLAT_SRC)/prom_idprom.c $(LTAIL))
+
+$(LINTS_DIR)/prom_init.ln:	$(PROM_PLAT_SRC)/prom_init.c
+	@($(LHEAD) $(LINT.c) $(PROM_PLAT_SRC)/prom_init.c $(LTAIL))
+
+$(LINTS_DIR)/prom_macaddr.ln:	$(PROM_PLAT_SRC)/prom_macaddr.c
+	@($(LHEAD) $(LINT.c) $(PROM_PLAT_SRC)/prom_macaddr.c $(LTAIL))
+
+$(LINTS_DIR)/prom_map.ln:	$(PROM_PLAT_SRC)/prom_map.c
+	@($(LHEAD) $(LINT.c) $(PROM_PLAT_SRC)/prom_map.c $(LTAIL))
+
+$(LINTS_DIR)/prom_mem.ln:	$(PROM_PLAT_SRC)/prom_mem.c
+	@($(LHEAD) $(LINT.c) $(PROM_PLAT_SRC)/prom_mem.c $(LTAIL))
+
+$(LINTS_DIR)/prom_mmu.ln:	$(PROM_PLAT_SRC)/prom_mmu.c
+	@($(LHEAD) $(LINT.c) $(PROM_PLAT_SRC)/prom_mmu.c $(LTAIL))
+
+$(LINTS_DIR)/prom_power_off.ln:	$(PROM_PLAT_SRC)/prom_power_off.c
+	@($(LHEAD) $(LINT.c) $(PROM_PLAT_SRC)/prom_power_off.c $(LTAIL))
+
+$(LINTS_DIR)/prom_retain.ln:	$(PROM_PLAT_SRC)/prom_retain.c
+	@($(LHEAD) $(LINT.c) $(PROM_PLAT_SRC)/prom_retain.c $(LTAIL))
+
+$(LINTS_DIR)/prom_set_traptable.ln:	$(PROM_PLAT_SRC)/prom_set_traptable.c
+	@($(LHEAD) $(LINT.c) $(PROM_PLAT_SRC)/prom_set_traptable.c $(LTAIL))
+
+$(LINTS_DIR)/prom_sparc.ln:	$(PROM_PLAT_SRC)/prom_sparc.c
+	@($(LHEAD) $(LINT.c) $(PROM_PLAT_SRC)/prom_sparc.c $(LTAIL))
+
+$(LINTS_DIR)/prom_sunfire.ln:	$(PROM_PLAT_SRC)/prom_sunfire.c
+	@($(LHEAD) $(LINT.c) $(PROM_PLAT_SRC)/prom_sunfire.c $(LTAIL))
+
+$(LINTS_DIR)/prom_vercheck.ln:	$(PROM_PLAT_SRC)/prom_vercheck.c
+	@($(LHEAD) $(LINT.c) $(PROM_PLAT_SRC)/prom_vercheck.c $(LTAIL))
+
+$(LINTS_DIR)/prom_vername.ln:	$(PROM_PLAT_SRC)/prom_vername.c
+	@($(LHEAD) $(LINT.c) $(PROM_PLAT_SRC)/prom_vername.c $(LTAIL))

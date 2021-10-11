@@ -1,0 +1,20 @@
+#
+# Copyright (c) 1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#pragma ident "@(#)versions 1.1	99/09/20 SMI"
+#
+# vers file for ucblib/librpcsoc
+#
+sparc {
+	SUNW_1.1:	{SUNW_0.7};
+	SUNW_0.7;
+}
+sparcv9 {
+	SUNW_1.1:	{SUNW_0.7};
+	SUNW_0.7;
+}
+i386 {
+	SUNW_1.1:	{SUNW_0.7};
+	SUNW_0.7;
+}

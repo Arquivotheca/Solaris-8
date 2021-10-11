@@ -1,0 +1,25 @@
+\
+\ Copyright (c) 1997-1998 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)dispqtrace.nxt.dbg	1.5	98/02/09 SMI"
+
+#include <sys/types.h>
+#include <sys/proc.h>
+#include <sys/disp.h>
+#include "dummy.h"
+
+\
+\
+dispq	""	dispqtrace.nxt
+{adb_inline_begin}
+,#(<Q-<q)$<
+<A+(<q*{SIZEOF})>D
+<q+1>q
+*(<D+{OFFSET, dq_first})>f
+*(<D+{OFFSET, dq_last})>l
+,#(<f)$<dispqtrace.nxt
+<q-1="-------- level "X
+$<<dispqtrace.list
+$<dispqtrace.nxt
+{adb_inline_end}

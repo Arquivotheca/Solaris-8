@@ -1,0 +1,52 @@
+/*
+ * Copyright (c) 1997 by Sun Microsystems, Inc.
+ * All rights reserved
+ */
+
+#pragma ident	"@(#)llib-l450 1.1     97/10/07 SMI" 
+
+/*LINTLIBRARY*/
+/*PROTOLIB1*/
+
+#include <stdio.h>
+
+/*arc.c*/
+void arc(short, short, short, short, short, short);
+
+/*box.c*/
+void box(short, short, short, short);
+
+/*circle.c*/
+void circle(short, short, short);
+
+/*close.c*/
+void closelp(void);
+void closevt(void);
+
+/*cont.c*/
+void cont(short, short);
+
+/*erase.c*/
+void erase(void);
+
+/*label.c*/
+void label(char *);
+
+/*line.c*/
+void line(short, short);
+
+/*linmod.c*/
+void linemod(char *);
+
+/*move.c*/
+void move(short, short);
+
+/*open.c*/
+void openpt();
+void openvt();
+
+/*point.c*/
+void point(short, short);
+
+/*space.c*/
+void space(short, short, short, short);

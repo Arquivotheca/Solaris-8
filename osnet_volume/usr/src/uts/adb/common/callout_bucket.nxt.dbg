@@ -1,0 +1,29 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)callout_bucket.nxt.dbg	1.4	98/01/19 SMI"
+
+\ arg             : address of a struct callout_bucket
+\ uses            : callout.nxt, callout_bucket.nxt (recursive call)
+\ registers       : b, c, n
+\ description     : executes callout.nxt on each callout in the
+\                   bucket
+\
+
+#include <sys/types.h>
+#include <sys/thread.h>
+#include <sys/t_lock.h>
+#include <sys/callo.h>
+#include "dummy.h"
+
+__dummy         ""      callout_bucket.nxt
+{adb_inline_begin}
+.>b
+*<b>c
+<c,#(#(<c))$<<callout.nxt
+<b+{PTRSIZE}>b
+,#(<n-1)$<
+<n-1>n
+<b$<callout_bucket.nxt
+{adb_inline_end}

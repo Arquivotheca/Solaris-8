@@ -1,0 +1,30 @@
+<TITLE> To Exit Solaris Print Manager </TITLE>
+<!-- Tag=ToExit -->
+
+<CONTENT>
+
+<p>
+
+1. Choose Exit from the Print Manager menu. 
+
+<p>
+
+The Solaris Print Manager main window and any other open Print Manager
+dialogs are closed. 
+
+<p>
+
+</CONTENT>
+
+<KEYWORDS>
+exit close
+</KEYWORDS>
+
+<p>
+
+<SEEALSO>
+ToStart
+Overview
+MainWindow 
+HelpOnHelp
+</SEEALSO>

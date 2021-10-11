@@ -1,0 +1,22 @@
+\
+\ Copyright (c) 1998 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)task.dbg	1.1	98/10/23 SMI"
+
+#include <sys/taskq_impl.h>
+#include "dummy.h"
+
+task		task_
+{adb_inline_begin}
+.>z
+<_>U;1>_
+<z+{OFFSET, task_next}=""
+{adb_inline_end}
+	next			hex
+	prev			hex
+	func			symbolic
+	arg			hex
+{adb_inline_begin}
+<U>_
+{adb_inline_end}

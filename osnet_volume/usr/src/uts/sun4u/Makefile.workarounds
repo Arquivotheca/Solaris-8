@@ -1,0 +1,44 @@
+#
+# uts/sun4u/Makefile.workarounds
+# Copyright (c) 1996-1998 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#ident	"@(#)Makefile.workarounds	1.8	98/06/04 SMI"
+#
+#
+#	This makefile contains workaround defines to be shared
+#	by Makefile.sun4u and the sun4u genunix Makefile.
+#
+
+# Define the minimum cpu rev this kernel will support
+# (min is 0x11 with all workarounds enabled)
+WORKAROUND_DEFS = -DSPITFIRE_MINREV_SUPPORTED=0x21
+
+# The following are required to support Spitfire <= 2.0
+# WORKAROUND_DEFS += -DSF_ERRATA_23	# call causes illegal-insn
+
+# The following are required to support Spitfire <= 2.1
+WORKAROUND_DEFS += -DSF_ERRATA_30	# call causes fp-disabled
+
+# The following are required to support all(?) Blackbirds
+WORKAROUND_DEFS += -DBB_ERRATA_1	# writes to TICK_COMPARE fail
+
+# The following is required to support all Spitfires and Blackbirds
+WORKAROUND_DEFS += -DSF_ERRATA_32	# need dummy store before ldxa's
+					# from ASI_?TLB_*
+
+# The following is required to support all Spitfires and Blackbirds
+WORKAROUND_DEFS += -DSF_ERRATA_51	# the IMU gets
+					# confused by a membar #Sync
+					# in a delay slot
+
+# The following is required to support all Spitfires and Blackbirds
+WORKAROUND_DEFS += -DSF_ERRATA_54	# membar sync not good enough
+					# before ldxa from ASI_INTR_DISPATCH 
+
+# The following is required to support Spitfires and Blackbirds
+WORKAROUND_DEFS += -DSF_ERRATA_57	# VA Hole
+
+# The following is required to support all Spitfires and Blackbirds
+WORKAROUND_DEFS += -DSF_V9_TABLE_28	# discrepancy in the Sparc V9 docs
+					# on handling of fp underflow/overflow

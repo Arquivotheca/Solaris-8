@@ -1,0 +1,31 @@
+#
+# /etc/nsswitch.files:
+#
+# An example file that could be copied over to /etc/nsswitch.conf; it
+# does not use any naming service.
+#
+# "hosts:" and "services:" in this file are used only if the
+# /etc/netconfig file has a "-" for nametoaddr_libs of "inet" transports.
+
+passwd:     files
+group:      files
+hosts:      files
+ipnodes:    files
+networks:   files
+protocols:  files
+rpc:        files
+ethers:     files
+netmasks:   files	
+bootparams: files
+publickey:  files
+# At present there isn't a 'files' backend for netgroup;  the system will 
+#   figure it out pretty quickly, and won't use netgroups at all.
+netgroup:   files
+automount:  files
+aliases:    files
+services:   files
+sendmailvars:   files
+printers:	user files
+
+auth_attr:  files
+prof_attr:  files

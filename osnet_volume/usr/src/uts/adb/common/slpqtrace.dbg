@@ -1,0 +1,15 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)slpqtrace.dbg	1.3	98/01/19 SMI"
+
+#include "dummy.h"
+
+\
+\
+__dummy         ""      slpqtrace
+{adb_inline_begin}
+0>q
+$<slpqtrace.nxt
+{adb_inline_end}

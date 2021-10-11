@@ -1,0 +1,148 @@
+#
+#
+# Copyright (c) 1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#ident	"@(#)prototype_com	1.1	99/10/08 SMI"
+#
+# This required package information file contains a list of package contents.
+# The 'pkgmk' command uses this file to identify the contents of a package
+# and their location on the development machine when building the package.
+# Can be created via a text editor or through use of the 'pkgproto' command.
+
+#!search <pathname pathname ...>	# where to find pkg objects
+#!include <filename>			# include another 'prototype' file
+#!default <mode> <owner> <group>	# default used if not specified on entry
+#!<param>=<value>			# puts parameter in pkg environment
+
+# packaging files
+i pkginfo
+i copyright
+i depend
+#
+# source locations relative to the prototype file
+#
+# SUNWzshS
+#
+d none usr 755 root sys
+d none usr/share 755 root sys
+d none usr/share/src 755 root sys
+d none usr/share/src/zsh 755 root bin
+f none usr/share/src/zsh/ChangeLog 444 root bin
+d none usr/share/src/zsh/Doc 755 root bin
+f none usr/share/src/zsh/Doc/Makefile.in 444 root bin
+f none usr/share/src/zsh/Doc/ansi2knr.man 444 root bin
+f none usr/share/src/zsh/Doc/intro.ms 444 root bin
+f none usr/share/src/zsh/Doc/zsh.man 444 root bin
+f none usr/share/src/zsh/Doc/zsh.texi 444 root bin
+f none usr/share/src/zsh/Doc/zshall.man 444 root bin
+f none usr/share/src/zsh/Doc/zshbuiltins.man 444 root bin
+f none usr/share/src/zsh/Doc/zshcompctl.man 444 root bin
+f none usr/share/src/zsh/Doc/zshexpn.man 444 root bin
+f none usr/share/src/zsh/Doc/zshmisc.man 444 root bin
+f none usr/share/src/zsh/Doc/zshoptions.man 444 root bin
+f none usr/share/src/zsh/Doc/zshparam.man 444 root bin
+f none usr/share/src/zsh/Doc/zshzle.man 444 root bin
+d none usr/share/src/zsh/Etc 755 root bin
+f none usr/share/src/zsh/Etc/BUGS 444 root bin
+f none usr/share/src/zsh/Etc/CONTRIBUTORS 444 root bin
+f none usr/share/src/zsh/Etc/FAQ 444 root bin
+f none usr/share/src/zsh/Etc/FEATURES 444 root bin
+f none usr/share/src/zsh/Etc/MACHINES 444 root bin
+f none usr/share/src/zsh/Etc/Makefile.in 444 root bin
+f none usr/share/src/zsh/Etc/NEWS 444 root bin
+d none usr/share/src/zsh/Functions 755 root bin
+f none usr/share/src/zsh/Functions/Makefile.in 444 root bin
+f none usr/share/src/zsh/Functions/acx 444 root bin
+f none usr/share/src/zsh/Functions/cat 444 root bin
+f none usr/share/src/zsh/Functions/cdmatch 444 root bin
+f none usr/share/src/zsh/Functions/cdmatch2 444 root bin
+f none usr/share/src/zsh/Functions/checkmail 444 root bin
+f none usr/share/src/zsh/Functions/cx 444 root bin
+f none usr/share/src/zsh/Functions/harden 444 root bin
+f none usr/share/src/zsh/Functions/mere 444 root bin
+f none usr/share/src/zsh/Functions/multicomp 444 root bin
+f none usr/share/src/zsh/Functions/proto 444 root bin
+f none usr/share/src/zsh/Functions/pushd 444 root bin
+f none usr/share/src/zsh/Functions/randline 444 root bin
+f none usr/share/src/zsh/Functions/run-help 444 root bin
+f none usr/share/src/zsh/Functions/yp 444 root bin
+f none usr/share/src/zsh/Functions/yu 444 root bin
+f none usr/share/src/zsh/Functions/zed 444 root bin
+f none usr/share/src/zsh/INSTALL 444 root bin
+f none usr/share/src/zsh/META-FAQ 444 root bin
+f none usr/share/src/zsh/Makefile.in 444 root bin
+d none usr/share/src/zsh/Misc 755 root bin
+f none usr/share/src/zsh/Misc/Makefile.in 444 root bin
+f none usr/share/src/zsh/Misc/c2z 444 root bin
+f none usr/share/src/zsh/Misc/compctl-examples 444 root bin
+f none usr/share/src/zsh/Misc/lete2ctl 444 root bin
+f none usr/share/src/zsh/README 444 root bin
+d none usr/share/src/zsh/Src 755 root bin
+f none usr/share/src/zsh/Src/.indent.pro 444 root bin
+f none usr/share/src/zsh/Src/Makefile.in 444 root bin
+f none usr/share/src/zsh/Src/ansi2knr.c 444 root bin
+f none usr/share/src/zsh/Src/builtin.c 444 root bin
+f none usr/share/src/zsh/Src/compat.c 444 root bin
+f none usr/share/src/zsh/Src/cond.c 444 root bin
+f none usr/share/src/zsh/Src/exec.c 444 root bin
+f none usr/share/src/zsh/Src/glob.c 444 root bin
+f none usr/share/src/zsh/Src/globals.h 444 root bin
+f none usr/share/src/zsh/Src/hashtable.c 444 root bin
+f none usr/share/src/zsh/Src/hashtable.h 444 root bin
+f none usr/share/src/zsh/Src/hist.c 444 root bin
+f none usr/share/src/zsh/Src/init.c 444 root bin
+f none usr/share/src/zsh/Src/input.c 444 root bin
+f none usr/share/src/zsh/Src/jobs.c 444 root bin
+f none usr/share/src/zsh/Src/lex.c 444 root bin
+f none usr/share/src/zsh/Src/linklist.c 444 root bin
+f none usr/share/src/zsh/Src/loop.c 444 root bin
+f none usr/share/src/zsh/Src/makepro.sed 444 root bin
+f none usr/share/src/zsh/Src/math.c 444 root bin
+f none usr/share/src/zsh/Src/mem.c 444 root bin
+f none usr/share/src/zsh/Src/params.c 444 root bin
+f none usr/share/src/zsh/Src/parse.c 444 root bin
+f none usr/share/src/zsh/Src/prototypes.h 444 root bin
+f none usr/share/src/zsh/Src/rlimits.awk 444 root bin
+f none usr/share/src/zsh/Src/signals.c 444 root bin
+f none usr/share/src/zsh/Src/signals.h 444 root bin
+f none usr/share/src/zsh/Src/signames.awk 444 root bin
+f none usr/share/src/zsh/Src/subst.c 444 root bin
+f none usr/share/src/zsh/Src/system.h 444 root bin
+f none usr/share/src/zsh/Src/text.c 444 root bin
+f none usr/share/src/zsh/Src/utils.c 444 root bin
+f none usr/share/src/zsh/Src/version.h 444 root bin
+f none usr/share/src/zsh/Src/watch.c 444 root bin
+f none usr/share/src/zsh/Src/zle.h 444 root bin
+f none usr/share/src/zsh/Src/zle_bindings.c 444 root bin
+f none usr/share/src/zsh/Src/zle_hist.c 444 root bin
+f none usr/share/src/zsh/Src/zle_main.c 444 root bin
+f none usr/share/src/zsh/Src/zle_misc.c 444 root bin
+f none usr/share/src/zsh/Src/zle_move.c 444 root bin
+f none usr/share/src/zsh/Src/zle_refresh.c 444 root bin
+f none usr/share/src/zsh/Src/zle_tricky.c 444 root bin
+f none usr/share/src/zsh/Src/zle_utils.c 444 root bin
+f none usr/share/src/zsh/Src/zle_vi.c 444 root bin
+f none usr/share/src/zsh/Src/zle_word.c 444 root bin
+f none usr/share/src/zsh/Src/zsh.h 444 root bin
+f none usr/share/src/zsh/Src/ztype.h 444 root bin
+d none usr/share/src/zsh/StartupFiles 755 root bin
+f none usr/share/src/zsh/StartupFiles/Makefile.in 444 root bin
+f none usr/share/src/zsh/StartupFiles/zlogin 444 root bin
+f none usr/share/src/zsh/StartupFiles/zshenv 444 root bin
+f none usr/share/src/zsh/StartupFiles/zshrc 444 root bin
+d none usr/share/src/zsh/Util 755 root bin
+f none usr/share/src/zsh/Util/Makefile.in 444 root bin
+f none usr/share/src/zsh/Util/helpfiles 444 root bin
+f none usr/share/src/zsh/Util/reporter 444 root bin
+f none usr/share/src/zsh/Util/zsh-development-guide 444 root bin
+f none usr/share/src/zsh/acconfig.h 444 root bin
+f none usr/share/src/zsh/aclocal.m4 444 root bin
+f none usr/share/src/zsh/config.guess 444 root bin
+f none usr/share/src/zsh/config.h.in 444 root bin
+f none usr/share/src/zsh/config.sub 444 root bin
+f none usr/share/src/zsh/configure 555 root bin
+f none usr/share/src/zsh/configure.in 444 root bin
+f none usr/share/src/zsh/install-sh 444 root bin
+f none usr/share/src/zsh/mkinstalldirs 444 root bin
+f none usr/share/src/zsh/stamp-h.in 444 root bin

@@ -1,0 +1,18 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)memlist.list.dbg	1.5	98/01/19 SMI"
+
+#include <sys/types.h>
+#include <sys/bootconf.h>
+#include "dummy.h"
+
+\
+\
+memlist         ""      memlist.list
+{adb_inline_begin}
+.>m
+<m>e
+,#(#(<m))$<memlist.nxt
+{adb_inline_end}

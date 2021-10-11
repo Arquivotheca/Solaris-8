@@ -1,0 +1,267 @@
+\
+\ Copyright (c) 1997-1999 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)tcp.dbg	1.20	99/11/04 SMI"
+
+#include <sys/types.h>
+#include <sys/stropts.h>
+#include <netinet/in.h>
+#include <sys/stream.h>
+#include <inet/common.h>
+#include <inet/led.h>
+#include <netinet/ip6.h>
+#include <inet/ip.h>
+#include <inet/tcp.h>
+#include "dummy.h"
+
+\
+\
+\ The bit field portion of this macro is a bit complex.  Here is how
+\ the SPARC and X86 architectures store bits in a word.
+\ 
+\			SPARC				x86
+\  byte		bit_number	bit_number	bit_number	bit_number
+\   3		  7		   0		   31		  24
+\   2		  15		   8		   23		  16
+\   1		  23		  16		   15		   8
+\   0		  31		  24		   7		   0
+\
+\
+tcp_s                ""              tcp
+{adb_inline_begin}
+.>z
+<z+{OFFSET, tcp_listen_hash}=""
+{adb_inline_end}
+	tcp_listen_hash		hex	tcp_listen_hash
+	tcp_ptplhn		hex	tcp_ptplhn
+	tcp_acceptor_hash	hex	acceptor_hash
+	tcp_ptpahn		hex	tcp_ptpahn
+	tcp_rq			hex	tcp_rq
+	tcp_wq			hex	tcp_wq
+	tcp_xmit_head		hex	tcp_xmit_head
+	tcp_xmit_last		hex	tcp_xmit_last
+	tcp_unsent		hex	tcp_unsent
+	tcp_xmit_tail		hex	xmit_tail
+	tcp_xmit_tail_unsent	hex	xmit_tail_unsnt
+	tcp_suna		hex	tcp_suna
+	tcp_rexmit_nxt		hex	tcp_rexmit_nxt
+	tcp_rexmit_max		hex	tcp_recmit_max
+	tcp_snd_burst		hex	tcp_snd_burst
+	tcp_cwnd		hex	tcp_cwnd
+	tcp_cwnd_cnt		hex	tcp_cwnd_cnt
+	tcp_ibsegs		hex	tcp_ibsegs
+	tcp_obsegs		hex	tcp_obsegs
+	tcp_naglim		hex	tcp_naglim
+	tcp_valid_bits		hex	tcp_valid_bits
+	tcp_xmit_hiwater	hex	tcp_xmit_hiwater
+	tcp_flow_mp		hex	tcp_flow_mp
+	tcp_timer_mp		hex	tcp_timer_mp
+	tcp_timer_backoff	hex	timer_backoff
+	tcp_last_recv_time	hex	last_recv_time
+	tcp_dack_set_time	hex	dack_set_time
+{adb_inline_begin}
+*(<z+{OFFSET, tcp_urp_last_valid})>/i/t
+#if defined(_BIG_ENDIAN)
+(##(<t&0x80000000))="urp_last_valid"8tB
+(##(<t&0x40000000))="hard_binding"8tB
+(##(<t&0x20000000))="hard_bound"8tB
+(##(<t&0x10000000))="priv_stream"8tB
+(##(<t&0x08000000))="fin_acked"8tB
+(##(<t&0x04000000))="fin_rcvd"8tB
+(##(<t&0x02000000))="fin_sent"8tB
+(##(<t&0x01000000))="ordrel_done"8tB
+(##(<t&0x00800000))="flow_stopped"8tB
+(##(<t&0x00400000))="tcp_debug"8tB
+(##(<t&0x00200000))="dontroute"8tB
+(##(<t&0x00100000))="broadcast"8tB
+(##(<t&0x00080000))="useloopback"8tB
+(##(<t&0x00040000))="oobinline"8tB
+(##(<t&0x00020000))="dgram_errind"8tB
+(##(<t&0x00010000))="detached"8tB
+(##(<t&0x00008000))="bind_pending"8tB
+(##(<t&0x00004000))="unbind_pend"8tB
+(##(<t&0x00002000))="defr_clean_d"8tB
+(##(<t&0x00001000))="co_wakeup_d"8tB
+(##(<t&0x00000800))="co_wakeup_f"8tB
+(##(<t&0x00000400))="co_norm   "8tB
+(##(<t&0x00000200))="co_wakeup_n"8tB
+(##(<t&0x00000100))="conn_def_q0"8tB
+(##(<t&0x00000080))="tracing   "8tB
+(##(<t&0x00000040))="tcp_linger"8tB
+(##(<t&0x00000020))="zero_w_prb"8tB
+(##(<t&0x00000010))="loopback"8tB
+(##(<t&0x00000008))="localnet"8tB
+(##(<t&0x00000004))="syn_defense"8tB
+(##(<t&0x00000002))="set_timer"8tB
+#elif defined(_LITTLE_ENDIAN)
+(##(<t&0x00000001))="urp_last_valid"8tB
+(##(<t&0x00000002))="hard_binding"8tB
+(##(<t&0x00000004))="hard_bound"8tB
+(##(<t&0x00000008))="priv_stream"8tB
+(##(<t&0x00000010))="fin_acked"8tB
+(##(<t&0x00000020))="fin_rcvd"8tB
+(##(<t&0x00000040))="fin_sent"8tB
+(##(<t&0x00000080))="ordrel_done"8tB
+(##(<t&0x00000100))="flow_stopped"8tB
+(##(<t&0x00000200))="tcp_debug"8tB
+(##(<t&0x00000400))="dontroute"8tB
+(##(<t&0x00000800))="broadcast"8tB
+(##(<t&0x00001000))="useloopback"8tB
+(##(<t&0x00002000))="oobinline"8tB
+(##(<t&0x00004000))="dgram_errind"8tB
+(##(<t&0x00008000))="detached"8tB
+(##(<t&0x00010000))="bind_pending"8tB
+(##(<t&0x00020000))="unbind_pend"8tB
+(##(<t&0x00040000))="defr_clean_d"8tB
+(##(<t&0x00080000))="co_wakeup_d"8tB
+(##(<t&0x00100000))="co_wakeup_f"8tB
+(##(<t&0x00200000))="co_norm   "8tB
+(##(<t&0x00400000))="co_wakeup_n"8tB
+(##(<t&0x00800000))="conn_def_q0"8tB
+(##(<t&0x01000000))="tracing   "8tB
+(##(<t&0x02000000))="tcp_linger"8tB
+(##(<t&0x04000000))="zero_w_prb"8tB
+(##(<t&0x08000000))="loopback"8tB
+(##(<t&0x10000000))="localnet"8tB
+(##(<t&0x20000000))="syn_defense"8tB
+(##(<t&0x40000000))="set_timer"8tB
+#endif
+*(<z+{OFFSET, tcp_active_open})>/i/t
+#if defined(_BIG_ENDIAN)
+(##(<t&0x80000000))="active_open"8tB
+(##(<t&0x40000000))="timeout   "8tB
+(##(<t&0x20000000))="ack_timr_r"8tB
+(##(<t&0x10000000))="rexmit    "8tB
+(##(<t&0x08000000))="snd_sack"8tB
+(##(<t&0x04000000))="bind_proxy"8tB
+(##(<t&0x02000000))="recvdstaddr"8tB
+(##(<t&0x01000000))="hwcksum   "8tB
+(##(<t&0x00800000))="ip_forward_progress"8tB
+(##(<t&0x00400000))="tcp_anon_priv_bind"8tB
+#elif defined(_LITTLE_ENDIAN)
+(##(<t&0x00000001))="active_open"8tB
+(##(<t&0x00000002))="timeout   "8tB
+(##(<t&0x00000004))="ack_timr_r"8tB
+(##(<t&0x00000008))="rexmit    "8tB
+(##(<t&0x00000010))="snd_sack"8tB
+(##(<t&0x00000020))="bind_proxy"8tB
+(##(<t&0x00000040))="recvdstaddr"8tB
+(##(<t&0x00000080))="hwcksum   "8tB
+(##(<t&0x00000100))="ip_forward_progress"8tB
+(##(<t&0x00000200))="tcp_anon_priv_bind"8tB
+#endif
+<z+{OFFSET, tcp_if_mtu}=""
+{adb_inline_end}
+	tcp_if_mtu		hex	tcp_if_mtu
+	tcp_reass_head		hex	tcp_reass_head
+	tcp_reass_tail		hex	tcp_reass_tail
+	tcp_sack_info		hex	tcp_sack_info
+	tcp_rcv_list		hex	tcp_rcv_list
+	tcp_rcv_last_head	hex	tcp_rcv_last_head
+	tcp_rcv_last_tail	hex	tcp_rcv_last_tail
+	tcp_rcv_cnt		hex	tcp_rcv_cnt
+	tcp_co_head		hex	tcp_co_head
+	tcp_co_tail		hex	tcp_co_tail
+	tcp_co_tmp		hex	tcp_co_tmp
+	tcp_co_imp		hex	tcp_co_imp
+	tcp_co_tintrvl		hex	tcp_co_intrvl
+	tcp_co_rnxt		hex	tcp_co_rnxt
+	tcp_co_cnt		hex	tcp_co_cnt
+	tcp_cwnd_ssthresh	hex	cwnd_ssthresh
+	tcp_cwnd_max		hex	cwnd_max
+	tcp_csuna		hex	tcp_csuna
+	tcp_rtt_sa		hex	tcp_rtt_sa
+	tcp_rtt_sd		hex	tcp_rtt_sd
+	tcp_rtt_update		hex	tcp_rtt_update
+	tcp_ms_we_have_waited	hex	ms_we_have_waited
+	tcp_swl1		hex	tcp_swl1
+	tcp_swl2		hex	tcp_swl2
+	tcp_rack		hex	tcp_rack
+	tcp_rack_cnt		hex	rack_cnt
+	tcp_rack_cur_max	hex	rack_cur_max
+	tcp_rack_abs_max	hex	rack_abs_max
+	tcp_ack_mp		hex	tcp_ack_mp
+	tcp_max_swnd		hex	tcp_max_swnd
+	tcp_listener		hex	tcp_listener
+	tcp_xmit_lowater	hex	tcp_xmit_lowat
+	tcp_irs			hex	tcp_irs
+	tcp_fss			hex	tcp_fss
+	tcp_urg			hex	tcp_urg
+	tcp_first_timer_threshold	hex	1st_timr_thrsh
+	tcp_second_timer_threshold	hex	2nd_timr_thrsh
+	tcp_first_ctimer_threshold	hex	1st_ctimr_thrsh
+	tcp_second_ctimer_threshold	hex	2nd_ctimr_thrsh
+	tcp_lingertime		hex	tcp_lingertime
+	tcp_urp_last		hex	tcp_urp_last
+	tcp_urp_mp		hex	tcp_urp_mp
+	tcp_urp_mark_mp		hex	tcp_urp_mark_mp
+	tcp_conn_req_cnt_q0	hex	conn_req_cnt_q0
+	tcp_conn_req_cnt_q	hex	conn_req_cnt_q
+	tcp_conn_req_max	hex	conn_req_max
+	tcp_conn_req_seqnum	hex	con_req_seqnum
+	tcp_eager_next_q	hex	eager_next_q
+	tcp_eager_last_q	hex	eager_last_q
+	tcp_eager_next_q0	hex	eager_next_q0
+	tcp_eager_prev_q0	hex	eager_prev_q0
+	tcp_syn_rcvd_timeout	hex	syn_rcvd_timout
+{adb_inline_begin}
+<z+{OFFSET, tcp_conn}/n"tcp_conn"nK
+<z+{OFFSET, tcp_keepalive_intrvl}=""
+{adb_inline_end}
+	tcp_keepalive_intrvl	hex	keepalive_intvl
+	tcp_keepalive_mp	hex	keepalive_mp
+	tcp_client_errno	hex	client_errno
+	tcp_iphc		hex	tcp_iphc
+	tcp_iphc_len		hex	tcp_iphc_len
+	tcp_hdr_len		hex	tcp_hdr_len
+	tcp_ipha		hex	tcp_ipha
+	tcp_ip6h		hex	tcp_ip6h
+	tcp_ip_hdr_len		hex	tcp_ip_hdr_len
+	tcp_tcph		hex	tcp_tcph
+	tcp_tcp_hdr_len		hex	tcp_tcp_hdr_len
+	tcp_sum			hex	tcp_sum
+	tcp_last_sent_len	hex	last_sent_len
+	tcp_dupack_cnt		hex	tcp_dupack_cnt
+	tcp_refcv		hex	tcp_refcv
+	tcp_bind_lockp		hex	bind_lockp
+	tcp_listen_lockp	hex	listen_lockp
+	tcp_conn_lockp		hex	conn_lockp
+	tcp_acceptor_lockp	hex	acceptor_lockp
+	tcp_ordrelid		hex	tcp_ordrelid
+	tcp_acceptor_id		hex	acceptor_id
+	tcp_ipsec_policy	hex	ipsec_policy
+	tcp_ipsec_options_size	hex	ipsec_options_size
+	tcp_base		hex	tcp_base
+	tcp_family		hex	tcp_family
+	tcp_ipv6_recvancillary	hex	ipv6_recvancillary
+	tcp_recvifindex		decimal	recvifindex
+	tcp_recvhops		decimal	recvhops
+	tcp_hopopts		hex	hopopts
+	tcp_dstopts		hex	dstopts
+	tcp_rtdstopts		hex	rtdstopts
+	tcp_rthdr		hex	rthdr
+	tcp_hopoptslen		decimal	hopoptslen
+	tcp_dstoptslen		decimal	dstoptslen
+	tcp_rtdstoptslen	decimal	rtdstoptslen
+	tcp_rthdrlen		decimal	rthdrlen
+	tcp_drop_opt_ack_cnt	decimal	drop_opt_ack_cnt
+	tcp_sticky_ipp.ipp_fields		hex	tcp_ipp_fields
+	tcp_sticky_ipp.ipp_ifindex		decimal	tcp_ipp_ifindex
+	tcp_sticky_ipp.ipp_addr			hex	tcp_ipp_addr
+	tcp_sticky_ipp.ipp_hoplimit		decimal	tcp_ipp_hoplimit
+	tcp_sticky_ipp.ipp_hopoptslen		decimal	tcp_ipp_hopoptslen
+	tcp_sticky_ipp.ipp_rtdstoptslen		decimal	tcp_ipp_rtdstoptslen
+	tcp_sticky_ipp.ipp_rthdrlen		decimal	tcp_ipp_rthdrlen
+	tcp_sticky_ipp.ipp_dstoptslen		decimal	tcp_ipp_dstoptslen
+	tcp_sticky_ipp.ipp_hopopts		hex	tcp_ipp_hopopts
+	tcp_sticky_ipp.ipp_rtdstopts		hex	tcp_ipp_rtdstopts
+	tcp_sticky_ipp.ipp_rthdr		hex	tcp_ipp_rthdr
+	tcp_sticky_ipp.ipp_dstopts		hex	tcp_ipp_dstopts
+	tcp_sticky_ipp.ipp_nexthop		hex	tcp_ipp_nexthop
+{adb_inline_begin}
+=n"tcp_base "n
+*(<z+{OFFSET, tcp_base})>n
+<n$<<tcpb
+<z+{SIZEOF}=""
+{adb_inline_end}

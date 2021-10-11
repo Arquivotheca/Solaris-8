@@ -1,0 +1,19 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)edge.dbg	1.2	98/01/14 SMI"
+
+#include <sys/types.h>
+#include <sys/flock_impl.h>
+#include "dummy.h"
+
+\
+\
+edge
+        edge_adj_next           hex     adj_next
+        edge_adj_prev           hex     adj_prev
+        edge_in_next            hex     in_next
+        edge_in_prev            hex     in_prev
+        from_vertex             hex
+        to_vertex               hex

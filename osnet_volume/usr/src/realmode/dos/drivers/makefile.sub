@@ -1,0 +1,55 @@
+#
+# Copyright (c) 1997 by Sun Microsystems, Inc.
+# All Rights Reserved.
+#
+#
+# ident "@(#)makefile.sub	1.3	97/03/07 SMI\n"
+#
+#################################################################
+#								#
+#	This file contains some contain some obscure		#
+#	incantations to allow directories containing several	#
+#	subdirectories to contain simple lists of those		#
+#	directories.  They also make it possible to ignore	#
+#	directories in the lists if they are not present.	#
+#	That makes it possible to distribute the makefiles	#
+#	containing the full lists in the DDK and not have	#
+#	builds fail due to missing directories.			#
+#								#
+#	Makefiles that use this facility must define		#
+#	DEBUG_DIRS and OTHER_DIRS before including this		#
+#	file.							#
+#								#
+#################################################################
+#
+install.sub: makesub.bat xinstall.sub
+
+xinstall.sub: $(DEBUG_DIRS) $(OTHER_DIRS)
+	!if exist $**\makefile makesub.bat $** install
+
+all.sub: makesub.bat xall.sub
+
+xall.sub: $(DEBUG_DIRS) $(OTHER_DIRS)
+	!if exist $**\makefile makesub.bat $** all
+
+clean.sub: makesub.bat xclean.sub
+
+xclean.sub: $(DEBUG_DIRS) $(OTHER_DIRS)
+	!if exist $**\makefile makesub.bat $** clean
+
+debug.sub: makesub.bat xdebug.sub
+
+xdebug.sub: $(DEBUG_DIRS)
+	!if exist $**\makefile makesub.bat $** debug
+
+# This rule prevents make from reporting that it does not know
+# how to build missing subdirectories.
+$(DEBUG_DIRS) $(OTHER_DIRS):
+
+# This rule builds the makesub.bat file in each directory
+# where it is needed.  Without it we would need to maintain
+# multiple copies of makesub.bat.
+makesub.bat: $(DRIVERS)\makefile.inc
+	echo cd %1 > makesub.bat
+	echo nmake %2 >> makesub.bat
+	echo cd .. >> makesub.bat

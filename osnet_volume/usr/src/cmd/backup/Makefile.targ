@@ -1,0 +1,33 @@
+#
+# "@(#)Makefile.targ 1.7     98/08/24 SMI"
+#
+# Copyright (c) 1993,1998 by Sun Microsystems, Inc.
+#
+# cmd/backup/Makefile.targ
+#
+
+# support for debugging
+debug:=		DUMPLIB= libdump_g.a
+debug:=		CFLAGS= -g -xs -DDEBUG -DFDEBUG -DTDEBUG ${SBFLAGS}
+CCMODE=		-Xa
+CFLAGS +=	-xstrconst
+DEBUGDIR=	.debug
+DEBUGOBJS=	$(OBJECTS:%=$(DEBUGDIR)/%)
+DEBUGPRODUCTS=	$(UFSDEBUGPRODUCT)
+UFSDEBUGPRODUCT= $(PRODUCT:%=%_g)
+UFSDEBUGPROG=	$(PROG:%=%_g)
+
+debug:		$(UFSDEBUGPROG)
+
+$(UFSDEBUGPROG): $(DEBUGDIR) $$(DEBUGOBJS) $$(LIBDUMP)
+	$(LINK.c) -o $@ $(DEBUGOBJS) $(LDLIBS)
+	$(POST_PROCESS)
+
+$(DEBUGDIR)/%.o: %.c
+	$(COMPILE.c) -o $@ $<
+	$(POST_PROCESS_O)
+
+$(DEBUGDIR):
+	-@mkdir -p $@
+
+include $(SRC)/cmd/Makefile.targ

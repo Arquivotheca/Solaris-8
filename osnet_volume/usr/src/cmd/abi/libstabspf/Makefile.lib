@@ -1,0 +1,25 @@
+#
+# Copyright (c) 1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#
+#pragma ident	"@(#)Makefile.lib	1.1	99/05/14 SMI"
+#
+
+.KEEP_STATE:
+
+LIBRARY=	libstabspf.a
+VERS=		.1
+
+OBJECTS=	stabs.o		\
+		type_table.o	\
+		keypair.o	\
+		hash.o		\
+		strings.o	\
+		elf_stabs.o	\
+		printer.o	\
+		spf_prtype.o	\
+		strprint.o	\
+		emit_stabs.o	\
+		safe.o		\
+		init.o

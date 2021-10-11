@@ -1,0 +1,35 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)dk_geom.dbg	1.4	98/01/19 SMI"
+
+#include <sys/scsi/scsi.h>
+#include <sys/dkio.h>
+#include "dummy.h"
+
+\
+\
+dk_geom         	dkg_
+{adb_inline_begin}
+.>w
+<w+{OFFSET, dkg_ncyl}=""
+{adb_inline_end}
+        ncyl                    hex
+        acyl                    hex
+        bcyl                    hex
+        nhead                   hex
+        obs1                    hex             bhead
+        nsect                   hex
+        intrlv                  hex
+        obs2                    hex             gap1
+        obs3                    hex             gap2
+        apc                     hex
+        rpm                     hex
+        pcyl                    hex
+        write_reinstruct        hex
+        read_reinstruct         hex
+        extra                   hex
+{adb_inline_begin}
+<w+{SIZEOF}=""
+{adb_inline_end}

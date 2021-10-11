@@ -1,0 +1,28 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)fas_regs.dbg	1.6	98/01/14 SMI"
+
+#include <sys/scsi/scsi.h>
+#include <sys/scsi/adapters/fasreg.h>
+#include "dummy.h"
+
+\
+\
+fasreg          fas_            fas_regs
+        xcnt_lo
+        xcnt_mid
+        fifo_data
+        cmd
+        stat
+        intr
+        step
+        fifo_flag
+        conf
+        clock_conv
+        test
+        conf2
+        conf3
+        recmd_lo
+        recmd_hi

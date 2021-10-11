@@ -1,0 +1,68 @@
+/*
+ * Copyright (c) 1999 by Sun Microsystems, Inc.
+ * All rights reserved.
+ */
+
+#ident	"@(#)README.pmodes	1.1	99/03/23 SMI"
+
+Pmodes is a program that updates pkgmap files or pkg prototype files.
+
+
+Usage: pmodes [-somwDeNnd] directory ....
+
+
+
+Options that modify what is changed:
+
+	-s 	Strip read and write permissions from setgid/setuid executables.
+	-o	Do not change ownership to root
+	-m	Do not change file permissions (modes)
+	-w 	Do not strip owner write permissions from non-root owned
+		binaries
+	-e	Do not change 'e' or 'v' (editable or volatile) files
+		(they are only affected when owned by bin)
+	-D	Limit changes to directories only.
+	
+Options that modify the output:
+	-n	Create a <file>.new file
+	-N	Overwrite the original pkgmap/proto file with the new file;
+		old pkgmap/proto file saved as file.old
+	-d	Produce "diff-style" output
+
+
+In default mode of operation, pmodes processes each argument as a
+directory.  It will first look in the directory for a "pkgmap" file
+and convert that.  If it cannot find a pkgmap file, it will look for
+a pkginfo file (it needs to know "BASEDIR") and for all prototype_*
+file that have names not containing .old or .new.
+
+Pmodes outputs a line for each change made:
+
+e m 0664 -> 0644 /var/adm/wtmpx
+d m 0775 -> 0755 /usr/lib
+d o bin -> root /usr/include/sys [755]
+f o bin -> root /usr/include/sys/cg6reg.h [0644]
+f o bin -> root /usr/include/sys/cg6var.h [0644]
+
+The first field is the "pkgmap" file type; the second field is the type
+of modification (m for mode, o for ownership).  This is followed by the
+change mode and the pathname.
+
+When ownership is changed, the file permissions are printed in square
+brackets.
+
+Multiple lines of output can be produced for a single file.
+
+With the -d option, output looks like:
+
+< d 0775 root sys /usr
+> d 0755 root sys /usr
+< d 0775 root bin /usr/include
+> d 0755 root bin /usr/include
+< d 1777 bin bin /var/preserve
+> d 1777 root bin /var/preserve
+< e 0664 root sys /etc/vfstab
+> e 0644 root sys /etc/vfstab
+
+And only one line per file is produced.
+

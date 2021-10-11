@@ -1,0 +1,15 @@
+#
+# Copyright (c) 1993-1998 by Sun Microsystems, Inc.
+# All rights reserved.
+# 
+#ident	"@(#)postinstall	1.1	99/01/11 SMI"
+
+# Add the 'gk' account with the same password as root
+grep gk $BASEDIR/etc/passwd >/dev/null 2>&1
+if [ "$?" != "0" ]; then
+	echo "Installing 'gk' account"
+	echo "gk:x:0:1:Gatekeeper:/opt/onbld/gk:/usr/bin/csh" \
+	    >> $BASEDIR/etc/passwd
+	grep "^root:" $BASEDIR/etc/shadow | sed -e 's/^root:/gk:/' \
+	    >> $BASEDIR/etc/shadow
+fi

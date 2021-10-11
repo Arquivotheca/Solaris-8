@@ -1,0 +1,135 @@
+
+#
+# Copyright (c) 1993-1998 by Sun Microsystems, Inc.
+# All rights reserved.
+# 
+#
+#ident	"@(#)wx.README	1.2	98/12/11 SMI"
+#
+=======================================================================
+
+WARNING:
+
+wx is apparently getting much wider use than I ever imagined.  It was
+never designed for this, in the sense that it's easy to hurt yourself.
+wx works the way I think, for better or worse.
+
+That said, you'll generally be safe if you follow two simple rules:
+
+(1) Don't do renames.  wx doesn't understand renames at all.
+
+(2) Don't use reedit.  This is the most useful feature of wx, but
+    it's also the most dangerous.  Don't use reedit unless you've
+    had the caveats explained to you by a wx certified professional.
+
+=======================================================================
+
+What is wx?
+
+wx (workspace extensions) is a simple shell script that automates
+many common workspace operations.  wx keeps a list of "active files",
+i.e. the files you're working on, which you control.  Most wx commands
+apply some simple operation to each active file.
+
+Here are a few examples:
+
+1. Update your active file list:
+
+	wx update
+
+   This seaches your workspace for checked-out files and adds them
+   to the active file list.
+
+2. Take a look at all the changes you've made:
+
+	wx diffs
+
+	applies 'sccs diffs' to each active file
+
+3. To cstyle all of your changes:
+
+	wx cstyle
+
+   Same for hdrchk, makestyle and keywords.  To check all of these
+   little nits at once, you can say:
+
+	wx nits
+
+4. To resync with your parent:
+
+	wx delget		# check in all active files
+	bringover, resolve	# bring down changes, as usual
+	wx edit			# check out all active files
+
+   wx delget uses comments from your active file list, which specifies
+   the sccs delta comment for each file.  This saves a lot of typing,
+   especially if you do frequent bringovers.  wx delget will prompt you
+   for comments if none are there.  To edit the "active" file, utter
+   "wx ea".  The structure of the file is self-explanatory -- just try it.
+
+5. To make backups of your changes:
+
+	wx backup
+
+   This creates tar files of your active s-dot files, active clear files,
+   and the "active" file itself.  Files are saved to:
+   
+	/home/you/wx.backup/wsname/xx.clear.tar
+	/home/you/wx.backup/wsname/xx.sdot.tar
+	/home/you/wx.backup/wsname/xx.active
+
+   where "you" == your username, "wsname" == `basename $CODEMGR_WS`,
+   and "xx" == the version number (incremented on each wx backup).
+
+6. To get rid of "merge turds"
+
+   My typical development cycle is something like this:
+
+	initial bringover
+	check out some files
+	while (not done) {
+		make changes
+		if (it's been a while) {
+			check everything in
+			bringover
+			check it all back out
+		}
+		build
+		test
+	}
+	putback
+
+   I like to do frequent bringovers so I can get the latest fixes,
+   and so I don't get way out of date and have a merge from hell.
+   The problem is, each check-in/bringover/check-out results in
+   either one or two (depending on whether there was a conflict)
+   useless deltas, or as I call them, "merge turds".  I hate this!
+   I want my final putback to appear as a single delta to the parent.
+	
+   This is pretty straightforward to do.  You just merge in all the
+   changes from the parent, check out your files, and then replace
+   all of your s.files with the parent's s.files.  (There's a little
+   finesse required, but not much -- read the script if you're curious.)
+   The "reedit" command does all this for you.  Simply use "wx reedit"
+   after your bringover/resolve instead of "wx edit":
+
+	wx delget		# check in all active files
+	bringover, resolve	# bring down changes, merge, as usual
+	wx reedit		# check out all active files and replace sdot
+				# files with parent's, so there are no
+				# merge turds
+
+   WARNING: you should only use reedit from a leaf workspace!
+
+   WARNING: if you skip the bringover step, wx will drive on regardless,
+	resulting in a "silent mismerge" as described in:
+
+		/ws/on28-gate/public/docs/mismerge
+
+   WARNING: if the parent workspace is not accessible for any reason,
+	all of your files will be checked in as "1.1" deltas.
+
+For a full list of wx commands, just type "wx".
+
+This document is woefully incomplete at present. And should (will)
+be transformed into a man page someday.

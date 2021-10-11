@@ -1,0 +1,14 @@
+#ident	"@(#)Makefile.targ	1.1	99/01/25 SMI"
+#
+# Copyright (c) 1998-1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+# lib/libpthread/spec/Makefile.targ
+
+LIBRARY	=	libpthread.a
+VERS	=	.1
+
+OBJECTS	=	pthread.o	\
+		unix.o		\
+		weak.o
+

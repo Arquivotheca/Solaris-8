@@ -1,0 +1,36 @@
+\
+\ Copyright (c) 1998 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)dcd_pkt.dbg	1.2	98/02/07 SMI"
+
+#include <sys/dada/dada.h>
+#include "dummy.h"
+
+dcd_pkt		pkt_
+{adb_inline_begin}
+.>z
+<z+{OFFSET, pkt_cdbp}=""
+{adb_inline_end}
+	cdbp		hex
+	scbp		hex
+	flags		hex
+	time		hex
+	scblen		hex
+	cdblen		hex
+	state		hex
+	statistics	hex
+	reason		hex
+	secleft		hex
+	comp		hex
+	resid		hex
+	startsec	hex
+	private		hex
+	ha_private	hex
+	passthru	hex
+	address		hex
+	version_no	hex
+	reserved	hex
+{adb_inline_begin}
+<z+{SIZEOF}=""
+{adb_inline_end}

@@ -1,0 +1,50 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)tcpcb.dbg	1.3	98/01/14 SMI"
+
+#include <sys/types.h>
+#include <netinet/tcp_timer.h>
+#include <netinet/tcp.h>
+#include <netinet/tcp_var.h>
+#include "dummy.h"
+
+\
+\
+tcpcb
+        seg_next                hex
+        seg_prev                hex
+        t_state                 sdecimal
+        t_rxtshift              sdecimal
+        t_rxtcur                sdecimal
+        t_dupacks               sdecimal
+        t_maxseg                sdecimal
+        t_force                 octal
+        t_flags                 octal
+        t_template              hex
+        t_inpcb                 hex
+        snd_una                 sdecimal
+        snd_nxt                 sdecimal
+        snd_up                  sdecimal
+        snd_wl1                 sdecimal
+        snd_wl2                 sdecimal
+        iss                     sdecimal
+        snd_wnd                 sdecimal
+        rcv_wnd                 sdecimal
+        rcv_nxt                 sdecimal
+        rcv_up                  sdecimal
+        irs                     sdecimal
+        rcv_adv                 sdecimal
+        snd_max                 sdecimal
+        snd_cwnd                sdecimal
+        snd_ssthresh            sdecimal
+        t_idle                  sdecimal
+        t_rtt                   sdecimal
+        t_rtseq                 sdecimal
+        t_srtt                  sdecimal
+        t_rttvar                sdecimal
+        max_rcvd                sdecimal
+        max_sndwnd              sdecimal
+        t_oobflags              octal
+        t_iobc                  octal

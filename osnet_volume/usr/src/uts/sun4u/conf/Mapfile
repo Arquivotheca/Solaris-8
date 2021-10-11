@@ -1,0 +1,30 @@
+#
+#ident	"@(#)Mapfile	1.10	95/07/12 SMI"
+#
+
+#
+# Some four meg of kernel virtual address space
+# is mapped via a locked 4-meg mapping in the ITLB
+#
+text	= LOAD ?RXN V0x10000000;
+text	| .text;
+text	: $PROGBITS ?A!W;
+
+#
+# Another four meg of kernel virtual address space
+# is mapped via a locked 4-meg mapping in the DTLB
+#
+data	= LOAD ?RWX V0x10400000 A0x00400000;
+data	| .data;
+data	: $PROGBITS ?AW;
+data	: $NOBITS ?AW;
+
+reloc	= LOAD ?RW V0x0;
+reloc	: $DYNSYM;
+reloc	: $HASH;
+reloc	: .dynstr;
+reloc	: .rela.text;
+reloc	: .rela.data;
+
+note	= NOTE;
+note	: $NOTE;

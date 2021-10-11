@@ -1,0 +1,15 @@
+#
+# Copyright (c) 1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#pragma ident	"@(#)Makefile.targ	1.1	99/03/19 SMI"
+#
+# lib/cfgadm_plugins/scsi/spec/Makefile.targ
+
+LIBRARY= scsi.a
+VERS= .1
+
+OBJECTS= cfga_scsi.o
+
+TRANSCPP =
+SPECCPP =

@@ -1,0 +1,16 @@
+#
+# Copyright (c) 1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#ident	"@(#)Makefile.targ	1.1	99/02/17 SMI"
+#
+# cmd/sgs/librtld_db/spec/Makefile.targ
+
+LIBRARY	=	librtld_db.a
+VERS	=	.1
+
+OBJECTS	=	rtld_db.o
+
+SPECCPP =
+
+lint:

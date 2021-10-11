@@ -1,0 +1,42 @@
+#
+#ident	"@(#)ipsecinit.sample	1.4	99/04/28 SMI"
+#
+# Copyright (c) 1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+# This file should be copied to /etc/inet/ipsecinit.conf to enable IPsec.
+# Even if this file has no entries, IPsec will be loaded if
+# /etc/inet/ipsecinit.conf exists.
+#
+# Add entries to protect the traffic using IPSEC. The entries in this
+# file are currently configured using ipsecconf from inetinit script
+# after /usr is mounted.
+#
+# For example,
+#
+#	 {dport 23} apply {encr_algs des encr_auth_algs md5 sa shared}
+#	 {sport 23} permit {encr_algs des encr_auth_algs md5}
+#
+# will protect the telnet traffic to/from the host with ESP using DES and
+# MD5.  Also:
+#
+#	 {daddr 10.5.5.0/24} apply {auth_algs any sa shared}
+#	 {saddr 10.5.5.0/24} permit {auth_algs any}
+#
+# will protect traffic to/from the 10.5.5.0 subnet with AH using any available
+# algorithm.
+#
+#
+# WARNING:	This file is read before default routes are established, and
+#		before any naming services have been started.  The
+#		ipsecconf(1M) command attempts to resolve names, but it will
+#		fail unless the machine uses files, or DNS and the DNS server
+#		is on-subnet (i.e. reachable without a default route).
+#
+#		It is suggested that for this file, use hostnames only if
+#		they are in /etc/hosts, or use numeric IP addresses.
+#
+#		If DNS gets used, the DNS server is implicitly trusted, which
+#		could lead to compromise of this machine if the DNS server
+#		has been compromised.
+#

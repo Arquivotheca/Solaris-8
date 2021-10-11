@@ -1,0 +1,57 @@
+\
+\ Copyright (c) 1997-1998 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\ ident	"@(#)scsi_hba_tran.dbg	1.9	98/10/11 SMI"
+
+\ uses            : mutex
+
+#include <sys/scsi/scsi.h>
+#include "dummy.h"
+
+\
+\
+scsi_hba_tran           tran_
+{adb_inline_begin}
+.>z
+<z+{OFFSET, tran_hba_dip}=""
+{adb_inline_end}
+        hba_dip                 hex
+        hba_private             hex
+        tgt_private             hex
+        sd                      hex
+        tgt_init                hex
+        tgt_probe               hex
+        tgt_free                hex
+        start                   hex
+        reset                   hex
+        abort                   hex
+        getcap                  hex
+        setcap                  hex
+        init_pkt                hex
+        destroy_pkt             hex
+        dmafree                 hex
+        sync_pkt                hex
+        reset_notify            hex
+        get_bus_addr            hex
+        get_name                hex
+        clear_aca               hex
+        clear_task_set          hex
+        terminate_task          hex
+	get_eventcookie		hex
+	add_eventcall		hex
+	remove_eventcall	hex
+	post_event		hex
+	quiesce			hex
+	unquiesce		hex
+	bus_reset		hex
+        hba_flags               hex
+        min_xfer                hex
+        min_burst_size          hex
+        max_burst_size          hex
+	open_lock		.mutex
+	open_flag		hex
+{adb_inline_begin}
+<z+{SIZEOF}=""
+{adb_inline_end}
+

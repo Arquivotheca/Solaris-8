@@ -1,0 +1,25 @@
+#
+# Copyright (c) 1998 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#pragma ident	"@(#)glm.wlcmd	1.5	98/10/11 SMI"
+
+one glm
+
+add scsi_pkt::pkt_comp targets \
+	glm_scsi_destroy_pkt \
+	glm_scsi_init_pkt \
+	glm_scsi_start \
+	glm_scsi_abort \
+	glm_scsi_reset \
+	glm_scsi_setcap \
+	glm_scsi_getcap \
+	glm_scsi_dmafree \
+	glm_scsi_reset_notify \
+	glm_scsi_tgt_init \
+	glm_scsi_tgt_free \
+	glm_scsi_sync_pkt
+
+add notify_entry::callback target warlock_dummy
+
+root glm_kmem_cache_constructor glm_kmem_cache_destructor

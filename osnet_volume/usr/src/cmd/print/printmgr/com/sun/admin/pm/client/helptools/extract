@@ -1,0 +1,22 @@
+#!/bin/ksh
+#
+#ident  "@(#)extract 1.1     99/03/17 SMI"
+# Copyright (c) 1999, by Sun Microsystems, Inc.
+# All rights reserved.
+#
+# This filter accepts a pmHelpResources.java file as input
+# and produces formatted HTML as output.
+# 
+
+while read line; do
+	echo "$line" | grep '^.*{".*\.tag"' > /dev/null
+	if [[ $? == 0 ]]; then
+		print -n "<br> <h2> "
+		print -n `echo "$line" | sed s/'\.'/\ / | \
+				sed s/\"/\ /g | awk '{print \$2}'`
+		print " </h2>"
+	fi
+
+	echo "$line" | grep '^\".*+$' | sed s/^\"//g | sed s/\"\ +\$//
+
+done

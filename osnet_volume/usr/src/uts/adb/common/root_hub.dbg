@@ -1,0 +1,53 @@
+\
+\ Copyright (c) 1999 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)root_hub.dbg        1.2     99/11/18 SMI"
+
+#include <sys/usb/usba.h>
+#include <sys/usb/usba/usba_types.h>
+#include <sys/usb/usba/usba_impl.h>
+#include <sys/usb/clients/hid/hid.h>
+#include <sys/usb/clients/hidparser/hidparser.h>
+#include <sys/usb/clients/hid/hidvar.h>
+#include <sys/usb/clients/hid/hid_polled.h>
+#include <sys/usb/hcd/openhci/ohci.h>
+#include <sys/usb/hcd/openhci/ohcid.h>
+
+#include <sys/stropts.h>
+
+#include <sys/vuid_event.h>
+#include <sys/termios.h>
+#include <sys/termio.h>
+#include <sys/strtty.h>
+#include <sys/msreg.h>
+#include <sys/msio.h>
+#include "dummy.h"
+
+\
+\
+
+root_hub	root_hub_
+{adb_inline_begin}
+.>x
+<x+{OFFSET, root_hub_des_A}=""
+{adb_inline_end}
+	des_A			hex
+	des_B			hex
+	status			hex
+	num_ports		hex
+	port_status		hex
+	potpgt			hex
+	port_state		hex
+	ctrl_pipe_handle	hex
+	intr_pipe_handle	hex
+	descr			.usb_hub_descr
+	ctrl_pipe_state		hex
+	intr_pipe_state		hex
+{adb_inline_begin}
+<x+{SIZEOF}=""
+{adb_inline_end}
+
+\
+\
+

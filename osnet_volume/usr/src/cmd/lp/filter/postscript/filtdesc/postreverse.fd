@@ -1,0 +1,9 @@
+#ident	"@(#)postreverse.fd	1.4	92/07/14 SMI"	/* SVr4.0 1.2	*/
+
+Input types: postscript,post
+Output types: postscript
+Printer types: any
+Printers: any
+Filter type: slow
+Command: /usr/lib/lp/postscript/postreverse
+Options: PAGES * = -o*

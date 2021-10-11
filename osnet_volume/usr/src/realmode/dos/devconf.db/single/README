@@ -1,0 +1,5 @@
+devconf.db/default/README
+
+	This directory contains files for creating the default Device
+Configuration Booter (DCB) floppy.  This is a 3.5" floppy intended for
+install purposes on an EISA/ISA/PCI machine.

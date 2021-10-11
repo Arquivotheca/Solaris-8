@@ -1,0 +1,16 @@
+#
+#ident	"@(#)mapfile-vers	1.1	96/03/18 SMI"
+#
+# Copyright (c) 1996 by Sun Microsystems, Inc.
+# All rights reserved.
+
+# Specify what global symbols we export.  Note that we're not really
+# interested in declaring a version, simply scoping the file is sufficient.
+
+{
+	global:
+		main;			# Provides basic adb symbol offsets
+
+	local:
+		*;
+};

@@ -1,0 +1,6 @@
+
+This directory contains the promif support code for SMCC's OBP 1.x and 2.x
+implementations.  These implementations and the code contained in this
+directory are platform specific to SMCC SPARC, sun4c, sun4e, sun4m and
+sun4d architectures.
+

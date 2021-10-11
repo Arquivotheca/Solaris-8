@@ -1,0 +1,13 @@
+#
+#ident	"@(#)Makefile.targ 1.2 94/12/01 SMI"
+#
+# Copyright (c) 1994 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+# lib/libc_psr/Makefile.targ
+#
+
+include $(SRCDIR)/../Makefile.targ
+include $(SRCDIR)/../../Makefile.psm.targ
+
+pics/%.o := ASFLAGS += -K pic

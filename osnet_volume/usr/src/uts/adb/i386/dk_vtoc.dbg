@@ -1,0 +1,30 @@
+\
+\ Copyright (c) 1999, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)dk_vtoc.dbg	1.1	99/09/14 SMI"
+
+#include <sys/scsi/scsi.h>
+#include <sys/dklabel.h>
+#include "dummy.h"
+
+\
+\
+dk_vtoc         	v_
+{adb_inline_begin}
+.>w
+<w+{OFFSET, v_bootinfo}=""
+{adb_inline_end}
+        bootinfo                hex
+        sanity                  hex
+        version                 hex
+        volume                  char
+        sectorsz                hex
+        nparts                  hex
+        reserved                hex
+        part                    hex
+        timestamp               hex
+        asciilabel              char
+{adb_inline_begin}
+<w+{SIZEOF}=""
+{adb_inline_end}

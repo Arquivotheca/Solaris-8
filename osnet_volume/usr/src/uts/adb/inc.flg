@@ -1,0 +1,6 @@
+#!/bin/sh
+#
+#pragma ident	"@(#)inc.flg	1.1	93/06/23 SMI"
+#
+
+exec_file $CODEMGR_WS_ROOT/usr/src/psm.flg

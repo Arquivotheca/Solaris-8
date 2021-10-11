@@ -1,0 +1,54 @@
+# Copyright (c) 1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#pragma ident	"@(#)prototype_sparc	1.15	99/09/14 SMI"
+#
+# This required package information file contains a list of package contents.
+# The 'pkgmk' command uses this file to identify the contents of a package
+# and their location on the development machine when building the package.
+# Can be created via a text editor or through use of the 'pkgproto' command.
+
+#!search <pathname pathname ...>	# where to find pkg objects
+#!include <filename>			# include another 'prototype' file
+#!default <mode> <owner> <group>	# default used if not specified on entry
+#!<param>=<value>			# puts parameter in pkg environment
+
+!include prototype_com
+
+d none opt/SUNWonld/bin/sparcv9 755 root sys
+f none opt/SUNWonld/bin/sparcv9/rdb 755 root bin
+d none opt/SUNWonld/lib/sparcv9 755 root sys
+f none opt/SUNWonld/lib/sparcv9/libldmake.so.1 755 root bin
+f none opt/SUNWonld/lib/sparcv9/bindings.so.1 755 root bin
+f none opt/SUNWonld/lib/sparcv9/perfcnt.so.1 755 root bin
+f none opt/SUNWonld/lib/sparcv9/symbindrep.so.1 755 root bin
+d none usr/bin/sparcv9 755 root sys
+f none usr/bin/sparcv9/pvs 755 root bin
+d none usr/ccs/bin/sparcv9 755 root bin
+f none usr/ccs/bin/sparcv9/dump 755 root bin
+f none usr/ccs/bin/sparcv9/elfdump 755 root bin
+f none usr/ccs/bin/sparcv9/ld 755 root bin
+f none usr/ccs/bin/sparcv9/mcs 0555 root bin
+l none usr/ccs/bin/sparcv9/strip=../../../../usr/ccs/bin/sparcv9/mcs
+f none usr/ccs/bin/sparcv9/nm 0555 root bin
+f none usr/ccs/bin/sparcv9/size 0555 root bin
+f none usr/lib/ld.so 755 root bin
+d none usr/lib/link_audit/sparcv9 755 root bin
+f none usr/lib/link_audit/sparcv9/ldprof.so.1 755 root bin
+f none usr/lib/link_audit/sparcv9/truss.so.1 755 root bin
+f none usr/lib/link_audit/sparcv9/who.so.1 755 root bin
+d none usr/lib/sparcv9 755 root bin
+f none usr/lib/sparcv9/libcrle.so.1 755 root bin
+f none usr/lib/sparcv9/libld.so.2 755 root bin
+f none usr/lib/sparcv9/libld.so.3 755 root bin
+f none usr/lib/sparcv9/liblddbg.so.4 755 root bin
+f none usr/lib/sparcv9/libldstab.so.1 755 root bin
+f none usr/lib/sparcv9/ld.so.1 755 root bin
+f none usr/lib/sparcv9/libelf.so.1 755 root bin
+s none usr/lib/sparcv9/libelf.so=./libelf.so.1
+f none usr/lib/sparcv9/libdl.so.1 755 root bin
+s none usr/lib/sparcv9/libdl.so=./libdl.so.1
+f none usr/lib/sparcv9/librtld.so.1 755 root bin
+f none usr/lib/sparcv9/librtld_db.so.1 755 root bin
+s none usr/lib/sparcv9/librtld_db.so=./librtld_db.so.1
+f none usr/lib/sparcv9/lddstub 755 root bin

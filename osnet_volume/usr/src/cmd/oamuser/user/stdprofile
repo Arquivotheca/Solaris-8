@@ -1,0 +1,5 @@
+#ident	"@(#)stdprofile	1.3	92/07/14 SMI"       /* SVr4.0 1.1 */
+#	This is the default standard profile provided to a user.
+#	They are expected to edit it to meet their own needs.
+
+MAIL=/usr/mail/${LOGNAME:?}

@@ -1,0 +1,17 @@
+\
+\ Copyright (c) 1999 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\ ident	"@(#)vmem_list.dbg	1.1	99/04/14 SMI"
+
+#include <sys/vmem_impl.h>
+#include "dummy.h"
+
+vmem			vm_		vmem_list
+{adb_inline_begin}
+.>v
+(<v+{OFFSET, vm_name})/s
+*(<v+{OFFSET, vm_next})>v
+,#(<v)$<
+<v$<vmem_list
+{adb_inline_end}

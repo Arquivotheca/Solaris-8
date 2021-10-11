@@ -1,0 +1,40 @@
+\
+\ Copyright (c) 1999 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)hidpers_hdle.dbg        1.2     99/09/24 SMI"
+
+#include <sys/usb/usba.h>
+#include <sys/usb/usba/usba_types.h>
+#include <sys/usb/clients/hid/hid.h>
+#include <sys/usb/clients/hidparser/hidparser.h>
+#include <sys/usb/clients/hid/hidvar.h>
+#include <sys/usb/clients/hidparser/hidparser_impl.h>
+
+#include <sys/stropts.h>
+
+#include <sys/vuid_event.h>
+#include <sys/termios.h>
+#include <sys/termio.h>
+#include <sys/strtty.h>
+#include <sys/msreg.h>
+#include <sys/msio.h>
+#include "dummy.h"
+
+\
+\
+
+hidparser_handle_impl hidparser_handle_ hidpers_hdle
+{adb_inline_begin}
+.>z
+<z+{OFFSET, hidparser_handle_parse_tree}=""
+{adb_inline_end}
+	parse_tree	hex	parse_tree
+	hid_descr	hex	hid_descr
+{adb_inline_begin}
+<z+{SIZEOF}=""
+{adb_inline_end}
+
+\
+\
+

@@ -1,0 +1,16 @@
+#
+#ident	"@(#)Makefile.targ	1.1	99/01/25 SMI"
+#
+# Copyright (c) 1998-1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+# lib/libaio/spec/Makefile.targ
+
+
+.KEEP_STATE:
+
+LIBRARY =	libaio.a
+VERS	=	.1
+
+OBJECTS	=	aio.o
+

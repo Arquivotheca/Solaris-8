@@ -1,0 +1,36 @@
+\
+\ Copyright (c) 1999 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)fc_fca_port_info.dbg	1.1	99/07/21 SMI"
+\
+#include <sys/isa_defs.h>
+#include <sys/types.h>
+#include <sys/dditypes.h>
+#include <sys/ddidmareq.h>
+#include <sys/mutex.h>
+#include <sys/semaphore.h>
+#include <sys/condvar.h>
+#include <sys/thread.h>
+#include <sys/devops.h>
+#include <sys/fibre-channel/fc.h>
+#include <sys/fibre-channel/impl/fc_fcaif.h>
+#include "dummy.h"
+\
+\
+fc_fca_port_info	pi_
+{adb_inline_begin}
+.>w
+<w+{OFFSET, pi_error}=""
+{adb_inline_end}
+	error		hex
+	port_state	hex
+	topology	hex
+	s_id		.port_id
+{adb_inline_begin}
+<w+{OFFSET, pi_login_params}=""
+{adb_inline_end}
+	login_params	.la_els_logi
+{adb_inline_begin}
+<w+{SIZEOF}=""
+{adb_inline_end}

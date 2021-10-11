@@ -1,0 +1,54 @@
+#!/bin/sh
+#
+#ident	"@(#)i.lpsystem	1.3	93/03/22 SMI"
+#
+# Copyright (c) 1993 by Sun Microsystems, Inc.
+#
+
+PATH="/usr/bin:/usr/sbin:${PATH}"
+export PATH
+
+write_sed_script() {
+cat > /tmp/sed.scr.$$ << EOF
+/^######/i\\
+#\\
+#\\
+#	If the first field (I.e. the System Name) contains a "+", then\\
+#	*all* incoming connections will be established, regardless of\\
+#	whether or not there's an entry here for the remote system!\\
+#	This will reduce your maintenance when you have a number of\\
+#	clients, and you don't really care about restricting\\
+#	your printer. Conceivably a print server could just contain \\
+#	a single entry of the following form for both BSD and SVR4 clients:\\
+#\\
+#\\
+#	+:x:-:s5:-:n:10:-:-:Allow all connections
+EOF
+}
+
+while read src dest
+do
+	if [ ! -f $dest ] ; then
+		cp $src $dest
+	else
+		#
+		# Add comments which are new to 2.2
+		#
+		grep '#	If the first field (I.e. the System Name) contains a "+", then' $dest > /dev/null 2>&1
+		if [ $? != 0 ]; then
+			write_sed_script
+			sed -f /tmp/sed.scr.$$ $dest > /tmp/d.$$
+			cp /tmp/d.$$ $dest
+			rm -f /tmp/d.$$ /tmp/sed.scr.$$
+		fi
+		#
+		# add entry which allows all connections. (new in 2.2)
+		#
+		grep '^[ 	]*+:' $dest > /dev/null 2>&1
+		if [ $? != 0 ]; then
+			echo "+:x:-:s5:-:n:10:-:-:Allow all connections" >> $dest
+		fi
+	fi
+done
+
+exit 0

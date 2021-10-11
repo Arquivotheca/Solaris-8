@@ -1,0 +1,27 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)cpupart.dbg	1.3	98/01/19 SMI"
+
+#include <sys/cpupart.h>
+#include "dummy.h"
+
+\
+\
+cpupart         cp_
+{adb_inline_begin}
+.>z
+<z+{OFFSET, cp_id}=""
+{adb_inline_end}
+        id                      sdecimal
+        level                   hex
+        next                    hex
+        prev                    hex
+        base                    hex
+        cpulist                 hex
+        ncpus                   sdecimal
+        kp_queue                .disp
+{adb_inline_begin}
+<z+{SIZEOF}=""
+{adb_inline_end}

@@ -1,0 +1,37 @@
+\
+\ Copyright (c) 1997-1998 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)polldat.dbg	1.5	98/11/23 SMI"
+
+\ arg             : address of polldat struct
+\ uses            : xref
+\ registers       : z
+\ description     : prints the contents of polldat structure
+
+#include <sys/poll_impl.h>
+#include "dummy.h"
+
+\
+\ We execute $<<xref twice because POLLFDSETS is
+\ currently defined as two.
+\
+polldat	pd_
+{adb_inline_begin}
+.>z
+<z+{OFFSET, pd_fd}=""
+{adb_inline_end}
+	fd			sdecimal
+	events			hex
+	fp			hex
+	php			hex
+	thread			hex
+	pcache			hex
+	next			hex
+	hashnext		hex
+	count			sdecimal
+	ref			hex
+	nsets			sdecimal
+{adb_inline_begin}
+<z+{SIZEOF}=""
+{adb_inline_end}

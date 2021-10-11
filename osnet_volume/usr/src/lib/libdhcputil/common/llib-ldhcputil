@@ -1,0 +1,27 @@
+/*
+ * Copyright (c) 1999 by Sun Microsystems, Inc.
+ * All rights reserved.
+ */
+
+#pragma ident	"@(#)llib-ldhcputil	1.1	99/07/26 SMI"
+
+/* LINTLIBRARY */
+/* PROTOLIB1 */
+
+#include <dhcp_inittab.h>
+#include <dhcpmsg.h>
+
+/* dhcp_inittab.c */
+inittab_entry_t	*inittab_load(uchar_t, char, size_t *);
+inittab_entry_t	*inittab_getbyname(uchar_t, char, const char *);
+inittab_entry_t	*inittab_getbycode(uchar_t, char, uint16_t);
+int		 inittab_verify(inittab_entry_t *, inittab_entry_t *);
+uchar_t		*inittab_encode(inittab_entry_t *, const char *,
+ 		    uint16_t *, boolean_t);
+char		*inittab_decode(inittab_entry_t *, uchar_t *, uint16_t,
+		    boolean_t);
+
+/* dhcpmsg.c */
+void		dhcpmsg(int, const char *, ...);
+void		dhcpmsg_init(const char *, boolean_t, boolean_t, int);
+void		dhcpmsg_fini(void);

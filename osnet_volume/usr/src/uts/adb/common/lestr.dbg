@@ -1,0 +1,31 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)lestr.dbg	1.4	98/04/19 SMI"
+
+\ arg		: address of a struct lestr
+\ uses		: mutex
+\ registers	:
+\ description	: prints the contents of lestr structure
+
+#include <sys/types.h>
+#include <sys/stream.h>
+#include <sys/sunddi.h>
+#include <sys/ethernet.h>
+#include <sys/le.h>
+#include "dummy.h"
+
+\
+\
+lestr			sl_
+	nextp			hex
+	rq			hex
+	lep			hex
+	state			decimal
+	sap			decimal
+	flags			hex
+	mccount			decimal
+	mctab			hex
+	minor			decimal
+	lock			.mutex

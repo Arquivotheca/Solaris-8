@@ -1,0 +1,132 @@
+\
+\ Copyright (c) 1997-1999 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\ #pragma ident	"@(#)proc.dbg	1.46	99/08/17 SMI"
+
+\ arg		: address of a struct proc
+\ uses		: mutex
+\ registers	: D, U
+\ description	: prints the contents of proc structure
+\
+
+#include <sys/param.h>
+#include <sys/types.h>
+#include <sys/proc.h>
+#include "dummy.h"
+
+\
+\
+proc			p_
+{adb_inline_begin}
+.>D;<_>U;1>_;<D=a
+<D+{OFFSET, p_exec}=""
+{adb_inline_end}
+	exec			hex
+	as			hex
+	lockp			hex
+	crlock			.mutex
+{adb_inline_begin}
+<D+{OFFSET, p_cred}=""
+{adb_inline_end}
+	cred			hex
+	swapcnt			sdecimal
+	stat			hex
+	wcode			hex
+	pidflag			decimal
+	wdata			hex
+	ppid			decimal
+	link			hex
+	parent			hex
+	child			hex
+	sibling			hex
+	psibling		hex
+	sibling_ns		hex
+	child_ns		hex
+	next			hex
+	prev			hex
+	nextofkin		hex
+	orphan			hex
+	nextorph		hex
+	pglink			hex
+	ppglink			hex
+	sessp			hex
+	pidp			hex
+	pgidp			hex
+	cv			hex
+	flag_cv			hex
+	lwpexit			hex
+	holdlwps		hex
+	flag			hex
+	utime			hex
+	stime			hex
+	cutime			hex
+	cstime			hex
+	segacct			hex
+	brkbase			hex
+	brksize			hex
+	sig			hex
+	ignore			hex
+	siginfo			hex
+	sigqueue		hex
+	sigqhdr			hex
+	signhdr			hex
+	stopsig			octal
+	lwptotal		sdecimal
+	lwpcnt			sdecimal
+	lwprcnt			sdecimal
+	lwpwait			sdecimal
+	zombcnt			sdecimal
+	zomb_max		sdecimal
+	zomb_tid		hex
+	tlist			hex
+	sigmask			hex
+	fltmask			hex
+	trace			hex
+	plist			hex
+	agenttp			hex
+	warea			hex
+	nwarea			sdecimal
+	wpage			hex
+	nwpage			hex
+	mapcnt			sdecimal
+	rlink			hex
+	srwchan_cv		hex
+	stksize			hex
+	mstart			hex
+	mterm			hex
+	mlreal			hex
+	rprof_timerid		sdecimal
+	defunct			decimal
+	pflock			.mutex
+{adb_inline_begin}
+<D+{OFFSET, p_server_threads}=""
+{adb_inline_end}
+	server_threads		hex
+	door_list		hex
+	unref_list		hex
+	server_cv		hex
+	unref_thread		hex
+	tnf_flags		hex
+	audit_data		hex
+	aslwptp			hex
+	swrss			decimal
+	aio			hex
+	itimer			hex
+	notifsigs		hex
+	notifcv			hex
+	alarmid			hex
+	sc_unblocked		hex
+	sc_door			hex
+	usrstack		hex
+	stkprot			hex
+	model			hex
+	lcp			hex
+	lcp_mutexinitlock	.mutex
+	utraps			hex
+	corefile		hex
+	rce			hex
+{adb_inline_begin}
+<U>_
+<D+{SIZEOF}=""
+{adb_inline_end}

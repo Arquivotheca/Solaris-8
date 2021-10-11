@@ -1,0 +1,50 @@
+#! /bin/sh
+#
+# ident  "@(#)postinstall 1.7     99/10/07 SMI"
+#
+# Copyright (c) 1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+ 
+PATH="/usr/bin:/usr/sbin:${PATH}"
+export PATH
+
+# since ohci and uhci are self probing nexus drivers, add_drv -n hid, hubd and
+# usb_mid before add_drv ohci/uhci.
+# ohci/uhci will create the hub and usb,device nodes and attach
+# hubd and usb_mid drivers
+
+not_installed() {
+	driver=$1
+	grep "^${driver} " $BASEDIR/etc/name_to_major > /dev/null 2>&1
+	return $?
+}
+
+EXIT=0
+
+not_installed hid || add_drv -b ${BASEDIR} -i '"usbif,class3.1"' -n hid || 
+EXIT=1
+
+not_installed hubd || add_drv -b ${BASEDIR} -i '"usbif,class9"' -n hubd || 
+EXIT=1
+
+not_installed scsa2usb || add_drv -b ${BASEDIR} -i '"usbif,class8" "usb,class8"' -n scsa2usb || 
+EXIT=1
+
+not_installed usb_mid || add_drv -b ${BASEDIR} -i '"usb,device"' -n usb_mid || 
+EXIT=1
+
+case ${ARCH} in
+	i386)
+		not_installed uhci || \
+		add_drv -b ${BASEDIR} -i '"pciclass,0c0300"' \
+		uhci || EXIT=1
+	;;
+	sparc)
+		not_installed ohci || \
+		add_drv -b ${BASEDIR} -i '"pciclass,0c0310" "pci108e,1103"' \
+		ohci || EXIT=1
+	;;
+esac
+
+exit $EXIT

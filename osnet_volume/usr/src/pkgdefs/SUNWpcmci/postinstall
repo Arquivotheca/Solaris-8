@@ -1,0 +1,63 @@
+#! /bin/sh
+#
+#pragma ident	"@(#)postinstall	1.30	99/10/24 SMI"
+#
+# Copyright (c) 1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+
+PATH=/usr/bin:/usr/sbin:${PATH}
+export PATH
+
+EXIT=0
+
+DEVLINKTB=${BASEDIR}/etc/devlink.tab
+
+TMP=/tmp/$$
+
+#
+# add_devlink - adds an entry to ${DEVLINKTB}
+#
+add_devlink()
+{
+	PATTERN="$1"
+	LINK="$2"
+	PLINK="`echo $LINK | sed 's/[$*^|\]/\\\&/g'`"
+	grep -v "^$PATTERN	$PLINK$" ${DEVLINKTB} >$TMP.devlink
+	echo "$PATTERN\t$LINK" >>$TMP.devlink
+	cp $TMP.devlink ${DEVLINKTB}
+	rm -f $TMP.devlink
+}
+
+grep '^pcs\>' ${BASEDIR}/etc/name_to_major > /dev/null && \
+rem_drv -b ${BASEDIR} pcs
+add_drv -b ${BASEDIR} -n pcs \
+|| EXIT=1
+
+case "${ARCH}" in
+sparc)
+	grep '^stp4020\>' ${BASEDIR}/etc/name_to_major > /dev/null && \
+	rem_drv -b ${BASEDIR} stp4020
+	add_drv -b ${BASEDIR} -n -i 'SUNW,pcmcia' -c 'pcmcia' stp4020 \
+	|| EXIT=1
+	;;
+esac
+
+grep '^pcic\>' ${BASEDIR}/etc/name_to_major > /dev/null && \
+rem_drv -b ${BASEDIR} pcic
+add_drv -b ${BASEDIR} -n -c 'pcmcia' \
+			-i '"pciclass,060500" "pciclass,060700"' pcic \
+|| EXIT=1
+grep '^pem\>' ${BASEDIR}/etc/name_to_major > /dev/null && \
+rem_drv -b ${BASEDIR} pem
+add_drv -b ${BASEDIR} -n -m '* 0666 bin bin' pem \
+|| EXIT=1
+
+#
+# PCI-PCMCIA (generic) bridge PCI class codes
+#
+add_devlink 'type=pcmcia:event;name=pem' 'pem'
+add_devlink 'type=ddi_ctl:devctl;minor=initpcmcia' 'pcmcia/\N0'
+add_devlink 'type=ddi_ctl:devctl;minor=probepcmcia' 'pcmcia/probe_\N0'
+
+exit ${EXIT}

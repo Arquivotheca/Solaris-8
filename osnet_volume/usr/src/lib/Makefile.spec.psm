@@ -1,0 +1,20 @@
+#
+#pragma ident	"@(#)Makefile.spec.psm	1.3	99/07/02 SMI"
+#
+# Copyright (c) 1998-1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+# lib/Makefile.spec.psm
+
+include $(SRC)/Makefile.psm
+
+USR_PSM_ABILIB=		$(USR_PSM_LIB_ABI_DIR)/$(ABILIB)
+USR_PSM_ABILIB64=	$(USR_PSM_LIB_ABI_DIR_64)/$(ABILIB)
+
+$(USR_PSM_ABILIB):	$(USR_PSM_LIB_ABI_DIR) .WAIT $(SPECMAP) $(ABILIB)
+	$(INS.file) $(ABILIB)
+
+$(USR_PSM_ABILIB64): $(USR_PSM_LIB_ABI_DIR_64) .WAIT $(SPECMAP) $(ABILIB)
+	$(INS.file) $(ABILIB)
+
+include $(SRC)/Makefile.psm.targ

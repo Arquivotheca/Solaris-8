@@ -1,0 +1,5 @@
+
+#ident	"@(#)aliases	1.2	92/07/14 SMI"
+
+# Aliases file- database of full length and truncated length domain and 
+#map names.  Accessed by YP commands.  

@@ -1,0 +1,43 @@
+#
+# postremove script for SUNWos86r package.
+#
+# Copyright (c) 1998, by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#ident "@(#)postremove 1.61 99/03/02"
+#
+
+# 
+# Unload and remove nolonger present drivers
+#
+
+# Platform-specific drivers
+case "${ARCH}" in
+i386)
+	# removes kdmconfig from the list of applications 
+	# run out of sysidconfig
+	#
+	
+	if [ -x /usr/sbin/sysidconfig ]; then
+	        /usr/sbin/sysidconfig -b "${BASEDIR}" -r /sbin/kdmconfig              #
+	else
+		ed ${BASEDIR}/etc/.sysidconfig.apps <<-STOP
+	/\/sbin\/kdmconfig/d
+	w
+	q
+	STOP
+	fi
+	
+	rem_drv -b "${BASEDIR}" dnet
+	rem_drv -b "${BASEDIR}" ieef
+	rem_drv -b "${BASEDIR}" pcn
+	rem_drv -b "${BASEDIR}" ncrs
+	rem_drv -b "${BASEDIR}" pcscsi
+	rem_drv -b "${BASEDIR}" iprb
+	rem_drv -b "${BASEDIR}" chs
+	rem_drv -b "${BASEDIR}" sd
+	rem_drv -b "${BASEDIR}" spwr
+	rem_drv -b "${BASEDIR}" elx
+	rem_drv -b "${BASEDIR}" elxl
+	;;
+esac

@@ -1,0 +1,13 @@
+#
+# Copyright (c) 1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#"@(#)mapfile	1.2	99/09/16 SMI"
+#
+pam_roles.so.1 {
+	global:
+		# Published PAM service module interfaces
+		pam_sm_acct_mgmt;
+	local:
+		*;
+};

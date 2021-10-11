@@ -1,0 +1,17 @@
+#ident	"@(#)Makefile.targ	1.1	99/10/14 SMI"
+#
+# Copyright (c) 1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+# lib/liblwp/spec/Makefile.targ
+
+LIBRARY	=	libthread.a
+VERS	=	.1
+
+OBJECTS	=	pthread.o	\
+		thread.o	\
+		unix.o
+
+TRANSCPP =
+
+SPECCPP =	-I..

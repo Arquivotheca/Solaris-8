@@ -1,0 +1,253 @@
+#
+# Copyright (c) 1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#ident	"@(#)prototype_com	1.3	99/11/24 SMI"
+#
+# This required package information file contains a list of package contents.
+# The 'pkgmk' command uses this file to identify the contents of a package
+# and their location on the development machine when building the package.
+# Can be created via a text editor or through use of the 'pkgproto' command.
+
+#!search <pathname pathname ...>	# where to find pkg objects
+#!include <filename>			# include another 'prototype' file
+#!default <mode> <owner> <group>	# default used if not specified on entry
+#!<param>=<value>			# puts parameter in pkg environment
+
+# packaging files
+i pkginfo
+i copyright
+i depend
+#
+# source locations relative to the prototype file
+#
+# SUNWpl5u
+#
+d none usr 755 root sys
+d none usr/bin 755 root bin
+d none usr/perl5 755 root bin
+d none usr/perl5/5.00503 755 root bin
+d none usr/perl5/5.00503/bin 755 root bin
+s none usr/perl5/bin=./5.00503/bin
+f none usr/perl5/5.00503/bin/perl5.00503 555 root bin
+l none usr/perl5/5.00503/bin/perl=./perl5.00503
+l none usr/bin/perl=../perl5/5.00503/bin/perl5.00503
+f none usr/perl5/5.00503/bin/a2p 555 root bin
+f none usr/perl5/5.00503/bin/c2ph 555 root bin
+l none usr/perl5/5.00503/bin/pstruct=./c2ph
+f none usr/perl5/5.00503/bin/h2ph 555 root bin
+f none usr/perl5/5.00503/bin/h2xs 555 root bin
+f none usr/perl5/5.00503/bin/perlbug 555 root bin
+f none usr/perl5/5.00503/bin/perldoc 555 root bin
+f none usr/perl5/5.00503/bin/pl2pm 555 root bin
+f none usr/perl5/5.00503/bin/splain 555 root bin
+f none usr/perl5/5.00503/bin/perlcc 555 root bin
+f none usr/perl5/5.00503/bin/s2p 555 root bin
+f none usr/perl5/5.00503/bin/find2perl 555 root bin
+f none usr/perl5/5.00503/bin/pod2man 555 root bin
+f none usr/perl5/5.00503/bin/pod2html 555 root bin
+f none usr/perl5/5.00503/bin/pod2latex 555 root bin
+f none usr/perl5/5.00503/bin/pod2text 555 root bin
+f none usr/perl5/5.00503/AnyDBM_File.pm 444 root bin
+f none usr/perl5/5.00503/AutoLoader.pm 444 root bin
+f none usr/perl5/5.00503/AutoSplit.pm 444 root bin
+f none usr/perl5/5.00503/Benchmark.pm 444 root bin
+f none usr/perl5/5.00503/CGI.pm 444 root bin
+d none usr/perl5/5.00503/CGI 755 root bin
+f none usr/perl5/5.00503/CGI/Apache.pm 444 root bin
+f none usr/perl5/5.00503/CGI/Carp.pm 444 root bin
+f none usr/perl5/5.00503/CGI/Cookie.pm 444 root bin
+f none usr/perl5/5.00503/CGI/Fast.pm 444 root bin
+f none usr/perl5/5.00503/CGI/Push.pm 444 root bin
+f none usr/perl5/5.00503/CGI/Switch.pm 444 root bin
+f none usr/perl5/5.00503/CPAN.pm 444 root bin
+d none usr/perl5/5.00503/CPAN 755 root bin
+f none usr/perl5/5.00503/CPAN/FirstTime.pm 444 root bin
+f none usr/perl5/5.00503/CPAN/Nox.pm 444 root bin
+f none usr/perl5/5.00503/Carp.pm 444 root bin
+d none usr/perl5/5.00503/Class 755 root bin
+f none usr/perl5/5.00503/Class/Struct.pm 444 root bin
+f none usr/perl5/5.00503/Cwd.pm 444 root bin
+d none usr/perl5/5.00503/Devel 755 root bin
+f none usr/perl5/5.00503/Devel/SelfStubber.pm 444 root bin
+f none usr/perl5/5.00503/DirHandle.pm 444 root bin
+f none usr/perl5/5.00503/Dumpvalue.pm 444 root bin
+f none usr/perl5/5.00503/English.pm 444 root bin
+f none usr/perl5/5.00503/Env.pm 444 root bin
+f none usr/perl5/5.00503/Exporter.pm 444 root bin
+d none usr/perl5/5.00503/ExtUtils 755 root bin
+f none usr/perl5/5.00503/ExtUtils/Command.pm 444 root bin
+f none usr/perl5/5.00503/ExtUtils/Embed.pm 444 root bin
+f none usr/perl5/5.00503/ExtUtils/Install.pm 444 root bin
+f none usr/perl5/5.00503/ExtUtils/Installed.pm 444 root bin
+f none usr/perl5/5.00503/ExtUtils/Liblist.pm 444 root bin
+f none usr/perl5/5.00503/ExtUtils/Miniperl.pm 444 root bin
+f none usr/perl5/5.00503/ExtUtils/MM_OS2.pm 444 root bin
+f none usr/perl5/5.00503/ExtUtils/MM_Unix.pm 444 root bin
+f none usr/perl5/5.00503/ExtUtils/MM_VMS.pm 444 root bin
+f none usr/perl5/5.00503/ExtUtils/MM_Win32.pm 444 root bin
+f none usr/perl5/5.00503/ExtUtils/MakeMaker.pm 444 root bin
+f none usr/perl5/5.00503/ExtUtils/Manifest.pm 444 root bin
+f none usr/perl5/5.00503/ExtUtils/Mkbootstrap.pm 444 root bin
+f none usr/perl5/5.00503/ExtUtils/Mksymlists.pm 444 root bin
+f none usr/perl5/5.00503/ExtUtils/Packlist.pm 444 root bin
+f none usr/perl5/5.00503/ExtUtils/inst 444 root bin
+f none usr/perl5/5.00503/ExtUtils/testlib.pm 444 root bin
+f none usr/perl5/5.00503/ExtUtils/typemap 444 root bin
+f none usr/perl5/5.00503/ExtUtils/xsubpp 444 root bin
+f none usr/perl5/5.00503/Fatal.pm 444 root bin
+d none usr/perl5/5.00503/File 755 root bin
+f none usr/perl5/5.00503/File/Basename.pm 444 root bin
+f none usr/perl5/5.00503/File/CheckTree.pm 444 root bin
+f none usr/perl5/5.00503/File/Compare.pm 444 root bin
+f none usr/perl5/5.00503/File/Copy.pm 444 root bin
+f none usr/perl5/5.00503/File/DosGlob.pm 444 root bin
+f none usr/perl5/5.00503/File/Find.pm 444 root bin
+f none usr/perl5/5.00503/File/Path.pm 444 root bin
+f none usr/perl5/5.00503/File/Spec.pm 444 root bin
+d none usr/perl5/5.00503/File/Spec 755 root bin
+f none usr/perl5/5.00503/File/Spec/Mac.pm 444 root bin
+f none usr/perl5/5.00503/File/Spec/OS2.pm 444 root bin
+f none usr/perl5/5.00503/File/Spec/Unix.pm 444 root bin
+f none usr/perl5/5.00503/File/Spec/VMS.pm 444 root bin
+f none usr/perl5/5.00503/File/Spec/Win32.pm 444 root bin
+f none usr/perl5/5.00503/File/stat.pm 444 root bin
+f none usr/perl5/5.00503/FileCache.pm 444 root bin
+f none usr/perl5/5.00503/FileHandle.pm 444 root bin
+f none usr/perl5/5.00503/FindBin.pm 444 root bin
+d none usr/perl5/5.00503/Getopt 755 root bin
+f none usr/perl5/5.00503/Getopt/Long.pm 444 root bin
+f none usr/perl5/5.00503/Getopt/Std.pm 444 root bin
+d none usr/perl5/5.00503/I18N 755 root bin
+f none usr/perl5/5.00503/I18N/Collate.pm 444 root bin
+d none usr/perl5/5.00503/IPC 755 root bin
+f none usr/perl5/5.00503/IPC/Open2.pm 444 root bin
+f none usr/perl5/5.00503/IPC/Open3.pm 444 root bin
+f none usr/perl5/5.00503/IPC/SysV.pm 444 root bin
+f none usr/perl5/5.00503/IPC/Msg.pm 444 root bin
+f none usr/perl5/5.00503/IPC/Semaphore.pm 444 root bin
+d none usr/perl5/5.00503/Math 755 root bin
+f none usr/perl5/5.00503/Math/BigFloat.pm 444 root bin
+f none usr/perl5/5.00503/Math/BigInt.pm 444 root bin
+f none usr/perl5/5.00503/Math/Complex.pm 444 root bin
+f none usr/perl5/5.00503/Math/Trig.pm 444 root bin
+d none usr/perl5/5.00503/Net 755 root bin
+f none usr/perl5/5.00503/Net/Ping.pm 444 root bin
+f none usr/perl5/5.00503/Net/hostent.pm 444 root bin
+f none usr/perl5/5.00503/Net/netent.pm 444 root bin
+f none usr/perl5/5.00503/Net/protoent.pm 444 root bin
+f none usr/perl5/5.00503/Net/servent.pm 444 root bin
+d none usr/perl5/5.00503/Pod 755 root bin
+f none usr/perl5/5.00503/Pod/Functions.pm 444 root bin
+f none usr/perl5/5.00503/Pod/Html.pm 444 root bin
+f none usr/perl5/5.00503/Pod/Text.pm 444 root bin
+d none usr/perl5/5.00503/Search 755 root bin
+f none usr/perl5/5.00503/Search/Dict.pm 444 root bin
+f none usr/perl5/5.00503/SelectSaver.pm 444 root bin
+f none usr/perl5/5.00503/SelfLoader.pm 444 root bin
+f none usr/perl5/5.00503/Shell.pm 444 root bin
+d none usr/perl5/5.00503/Sun 755 root bin
+d none usr/perl5/5.00503/Sun/Solaris 755 root bin
+f none usr/perl5/5.00503/Sun/Solaris/Kstat.pm 444 root bin
+f none usr/perl5/5.00503/Sun/Solaris/Utils.pm 444 root bin
+f none usr/perl5/5.00503/Symbol.pm 444 root bin
+d none usr/perl5/5.00503/Sys 755 root bin
+f none usr/perl5/5.00503/Sys/Hostname.pm 444 root bin
+f none usr/perl5/5.00503/Sys/Syslog.pm 444 root bin
+d none usr/perl5/5.00503/Term 755 root bin
+f none usr/perl5/5.00503/Term/Cap.pm 444 root bin
+f none usr/perl5/5.00503/Term/Complete.pm 444 root bin
+f none usr/perl5/5.00503/Term/ReadLine.pm 444 root bin
+f none usr/perl5/5.00503/Test.pm 444 root bin
+d none usr/perl5/5.00503/Test 755 root bin
+f none usr/perl5/5.00503/Test/Harness.pm 444 root bin
+d none usr/perl5/5.00503/Text 755 root bin
+f none usr/perl5/5.00503/Text/Abbrev.pm 444 root bin
+f none usr/perl5/5.00503/Text/ParseWords.pm 444 root bin
+f none usr/perl5/5.00503/Text/Soundex.pm 444 root bin
+f none usr/perl5/5.00503/Text/Tabs.pm 444 root bin
+f none usr/perl5/5.00503/Text/Wrap.pm 444 root bin
+d none usr/perl5/5.00503/Tie 755 root bin
+f none usr/perl5/5.00503/Tie/Array.pm 444 root bin
+f none usr/perl5/5.00503/Tie/Handle.pm 444 root bin
+f none usr/perl5/5.00503/Tie/Hash.pm 444 root bin
+f none usr/perl5/5.00503/Tie/RefHash.pm 444 root bin
+f none usr/perl5/5.00503/Tie/Scalar.pm 444 root bin
+f none usr/perl5/5.00503/Tie/SubstrHash.pm 444 root bin
+d none usr/perl5/5.00503/Time 755 root bin
+f none usr/perl5/5.00503/Time/Local.pm 444 root bin
+f none usr/perl5/5.00503/Time/gmtime.pm 444 root bin
+f none usr/perl5/5.00503/Time/localtime.pm 444 root bin
+f none usr/perl5/5.00503/Time/tm.pm 444 root bin
+f none usr/perl5/5.00503/UNIVERSAL.pm 444 root bin
+d none usr/perl5/5.00503/User 755 root bin
+f none usr/perl5/5.00503/User/grent.pm 444 root bin
+f none usr/perl5/5.00503/User/pwent.pm 444 root bin
+f none usr/perl5/5.00503/abbrev.pl 444 root bin
+f none usr/perl5/5.00503/assert.pl 444 root bin
+f none usr/perl5/5.00503/autouse.pm 444 root bin
+f none usr/perl5/5.00503/base.pm 444 root bin
+f none usr/perl5/5.00503/bigfloat.pl 444 root bin
+f none usr/perl5/5.00503/bigint.pl 444 root bin
+f none usr/perl5/5.00503/bigrat.pl 444 root bin
+f none usr/perl5/5.00503/blib.pm 444 root bin
+f none usr/perl5/5.00503/cacheout.pl 444 root bin
+f none usr/perl5/5.00503/chat2.pl 444 root bin
+f none usr/perl5/5.00503/complete.pl 444 root bin
+f none usr/perl5/5.00503/constant.pm 444 root bin
+f none usr/perl5/5.00503/ctime.pl 444 root bin
+f none usr/perl5/5.00503/diagnostics.pm 444 root bin
+f none usr/perl5/5.00503/dotsh.pl 444 root bin
+f none usr/perl5/5.00503/dumpvar.pl 444 root bin
+f none usr/perl5/5.00503/exceptions.pl 444 root bin
+f none usr/perl5/5.00503/fastcwd.pl 444 root bin
+f none usr/perl5/5.00503/fields.pm 444 root bin
+f none usr/perl5/5.00503/find.pl 444 root bin
+f none usr/perl5/5.00503/finddepth.pl 444 root bin
+f none usr/perl5/5.00503/flush.pl 444 root bin
+f none usr/perl5/5.00503/ftp.pl 444 root bin
+f none usr/perl5/5.00503/getcwd.pl 444 root bin
+f none usr/perl5/5.00503/getopt.pl 444 root bin
+f none usr/perl5/5.00503/getopts.pl 444 root bin
+f none usr/perl5/5.00503/hostname.pl 444 root bin
+f none usr/perl5/5.00503/importenv.pl 444 root bin
+f none usr/perl5/5.00503/integer.pm 444 root bin
+f none usr/perl5/5.00503/less.pm 444 root bin
+f none usr/perl5/5.00503/lib.pm 444 root bin
+f none usr/perl5/5.00503/locale.pm 444 root bin
+f none usr/perl5/5.00503/look.pl 444 root bin
+f none usr/perl5/5.00503/newgetopt.pl 444 root bin
+d none usr/perl5/5.00503/B 755 root bin
+f none usr/perl5/5.00503/B/makeliblinks 444 root bin
+f none usr/perl5/5.00503/B/cc_harness 444 root bin
+f none usr/perl5/5.00503/B/disassemble 444 root bin
+f none usr/perl5/5.00503/B/assemble 444 root bin
+f none usr/perl5/5.00503/open2.pl 444 root bin
+f none usr/perl5/5.00503/open3.pl 444 root bin
+f none usr/perl5/5.00503/overload.pm 444 root bin
+f none usr/perl5/5.00503/perl5db.pl 444 root bin
+f none usr/perl5/5.00503/pwd.pl 444 root bin
+f none usr/perl5/5.00503/shellwords.pl 444 root bin
+f none usr/perl5/5.00503/sigtrap.pm 444 root bin
+f none usr/perl5/5.00503/stat.pl 444 root bin
+f none usr/perl5/5.00503/strict.pm 444 root bin
+f none usr/perl5/5.00503/subs.pm 444 root bin
+f none usr/perl5/5.00503/syslog.pl 444 root bin
+f none usr/perl5/5.00503/tainted.pl 444 root bin
+f none usr/perl5/5.00503/termcap.pl 444 root bin
+f none usr/perl5/5.00503/timelocal.pl 444 root bin
+f none usr/perl5/5.00503/validate.pl 444 root bin
+f none usr/perl5/5.00503/vars.pm 444 root bin
+d none usr/perl5/5.00503/auto 755 root bin
+d none usr/perl5/5.00503/auto/Getopt 755 root bin
+d none usr/perl5/5.00503/auto/Getopt/Long 755 root bin
+f none usr/perl5/5.00503/auto/Getopt/Long/GetOptions.al 444 root bin
+f none usr/perl5/5.00503/auto/Getopt/Long/FindOption.al 444 root bin
+f none usr/perl5/5.00503/auto/Getopt/Long/Configure.al 444 root bin
+f none usr/perl5/5.00503/auto/Getopt/Long/config.al 444 root bin
+f none usr/perl5/5.00503/auto/Getopt/Long/Croak.al 444 root bin
+f none usr/perl5/5.00503/auto/Getopt/Long/autosplit.ix 444 root bin
+d none usr/perl5/5.00503/Data 755 root bin
+f none usr/perl5/5.00503/Data/Dumper.pm 444 root bin
+d none usr/perl5/site_perl 755 root bin
+d none usr/perl5/site_perl/5.005 755 root bin

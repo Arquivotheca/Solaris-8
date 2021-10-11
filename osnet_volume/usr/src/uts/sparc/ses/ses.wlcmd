@@ -1,0 +1,40 @@
+#
+# Copyright (c) 1998 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#ident  "@(#)ses.wlcmd 1.6     99/03/02 SMI"
+#
+ 
+one scsi_device 
+
+### Give warlock a dummy target for each of the function
+### pointers in the scsi_hba_tran structure.
+for ptr in `funcptrs | grep '^scsi_hba_tran::'`
+do
+        add $ptr target warlock_dummy
+done
+ 
+
+root ses_runcmd
+
+add ses_softc::ses_vec.get_encstat target safte_get_encstat
+add ses_softc::ses_vec.get_objstat target safte_get_objstat
+add ses_softc::ses_vec.init_enc    target safte_init_enc
+add ses_softc::ses_vec.set_encstat target safte_set_encstat
+add ses_softc::ses_vec.set_objstat target safte_set_objstat
+add ses_softc::ses_vec.softc_init  target safte_softc_init
+
+add ses_softc::ses_vec.get_encstat target sen_get_encstat
+add ses_softc::ses_vec.get_objstat target sen_get_objstat
+add ses_softc::ses_vec.init_enc    target sen_init_enc
+add ses_softc::ses_vec.set_encstat target sen_set_encstat
+add ses_softc::ses_vec.set_objstat target sen_set_objstat
+add ses_softc::ses_vec.softc_init  target sen_softc_init
+
+add ses_softc::ses_vec.get_encstat target ses_get_encstat
+add ses_softc::ses_vec.get_objstat target ses_get_objstat
+add ses_softc::ses_vec.init_enc    target ses_init_enc
+add ses_softc::ses_vec.set_encstat target ses_set_encstat
+add ses_softc::ses_vec.set_objstat target ses_set_objstat
+add ses_softc::ses_vec.softc_init  target ses_softc_init
+

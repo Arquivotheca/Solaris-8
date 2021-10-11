@@ -1,0 +1,33 @@
+\
+\ Copyright (c) 1999 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)soft_attach.dbg	1.1	99/07/21 SMI"
+\
+#include <sys/isa_defs.h>
+#include <sys/types.h>
+#include <sys/dditypes.h>
+#include <sys/ddidmareq.h>
+#include <sys/mutex.h>
+#include <sys/semaphore.h>
+#include <sys/condvar.h>
+#include <sys/thread.h>
+#include <sys/devops.h>
+#include <sys/fibre-channel/fcio.h>
+#include <sys/fibre-channel/fc.h>
+#include <sys/fibre-channel/impl/fc_ulpif.h>
+#include <sys/fibre-channel/impl/fc_portif.h>
+#include <sys/fibre-channel/impl/fp.h>
+#include "dummy.h"
+\
+\
+soft_attach		att_
+{adb_inline_begin}
+.>w
+<w+{OFFSET, att_cmd}=""
+{adb_inline_end}
+	cmd		hex
+	port		hex
+{adb_inline_begin}
+<w+{SIZEOF}=""
+{adb_inline_end}

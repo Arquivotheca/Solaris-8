@@ -1,0 +1,12 @@
+#
+# Copyright 1990, 1991 Sun Microsystems, Inc.  All Rights Reserved.
+#
+#
+# sccsid = @(#) uid_aliases 1.1 1/2/91 14:39:52
+#
+# format:
+#      uid=alias1=alias2=alias3= ...
+# allows users "alias1", "aliase2", "alias3" to share the same uid.
+
+0=+=root=checkfsys=makefsys=mountfsys=powerdown=setup=smtp=sysadm=umountfsys
+1=sync=daemon

@@ -1,0 +1,52 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)cnode.dbg	1.8	98/01/19 SMI"
+
+#include <sys/fs/cachefs_fs.h>
+#include "dummy.h"
+
+\
+\
+cnode           c_
+{adb_inline_begin}
+.>z
+<z+{OFFSET, c_flags}=""
+{adb_inline_end}
+        flags                   hex
+        frontvp                 hex
+        backvp                  hex
+        acldirvp                hex
+        size                    hex
+        filegrp                 hex
+        id                      hex
+        invals                  sdecimal
+        id.cid_flags            hex
+        usage                   sdecimal
+        vnode                   .vnode
+{adb_inline_begin}
+<z+{OFFSET, c_metadata}=""
+{adb_inline_end}
+        metadata                .cachefsmeta
+{adb_inline_begin}
+<z+{OFFSET, c_error}=""
+{adb_inline_end}
+        error                   sdecimal
+        statelock               .mutex
+{adb_inline_begin}
+<z+{OFFSET, c_rwlock}=""
+{adb_inline_end}
+        rwlock                  .rwlock
+{adb_inline_begin}
+<z+{OFFSET, c_unldvp}=""
+{adb_inline_end}
+        unldvp                  hex
+        unlname                 hex
+        unlcred                 hex
+        nio                     sdecimal
+        ioflags                 hex
+        cred                    hex
+{adb_inline_begin}
+<z+{SIZEOF}=""
+{adb_inline_end}

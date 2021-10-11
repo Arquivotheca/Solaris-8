@@ -1,0 +1,104 @@
+\
+\ Copyright (c) 1999 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)fc_port.dbg	1.1	99/07/21 SMI"
+\
+#include <sys/isa_defs.h>
+#include <sys/types.h>
+#include <sys/dditypes.h>
+#include <sys/ddidmareq.h>
+#include <sys/mutex.h>
+#include <sys/semaphore.h>
+#include <sys/condvar.h>
+#include <sys/thread.h>
+#include <sys/devops.h>
+#include <sys/fibre-channel/fc.h>
+#include "dummy.h"
+\
+\
+fc_port				fp_
+{adb_inline_begin}
+.>d
+<d+{OFFSET, fp_mutex}=""
+{adb_inline_end}
+	mutex			.mutex
+{adb_inline_begin}
+<d+{OFFSET, fp_state}=""
+{adb_inline_end}
+	state			hex
+	port_id			.port_id
+{adb_inline_begin}
+<d+{OFFSET, fp_fca_handle}=""
+{adb_inline_end}
+	fca_handle		hex
+	fca_tran		hex
+	job_head		hex
+	job_tail		hex
+	wait_head		hex
+	wait_tail		hex
+	topology		hex
+	task			hex
+	last_task		hex
+	soft_state		hex
+	restore			hex
+	flag			hex
+	verbose			hex
+	ns_login_class		hex
+	sym_port_namelen	hex
+	cos			hex
+	did_table		hex
+	pwwn_table		hex
+	pkt_cache		hex
+	statec_busy		hex
+	port_num		hex
+	els_resp_pkt		hex
+	instance		hex
+	ulp_attach		hex
+	dev_count		hex
+	ptpt_master		hex
+	ulp_nload		hex
+	total_devices		hex
+	els_resp_pkt_busy	hex
+	bind_state		hex
+	options			hex
+	port_type		.port_type
+{adb_inline_begin}
+<d+{OFFSET, fp_ub_count}=""
+{adb_inline_end}
+	ub_count		hex	
+	active_ubs		hex
+	ub_tokens		hex
+	ulp_majors		hex
+	thread			hex
+	cv			hex
+	attach_cv		hex
+	port_dip		hex
+	fca_dip			hex
+	softid			hex
+	wait_tid		hex
+	offline_tid		hex
+	lilp_map		.fc_lilpmap
+{adb_inline_begin}
+<d+{OFFSET, fp_service_params}=""
+{adb_inline_end}
+	service_params		.la_els_logi
+{adb_inline_begin}
+<d+{OFFSET, fp_reset_action}=""
+{adb_inline_end}
+	reset_action
+	sym_node_namelen	hex
+	ipa			hex
+	ip_addr			hex
+	fc4_types		hex
+	orphan_list		hex
+	orphan_count		hex
+	hard_addr		.hard_addr
+{adb_inline_begin}
+<d+{OFFSET, fp_sym_port_name}=""
+{adb_inline_end}
+	sym_port_name		hex
+	sym_node_name		hex
+{adb_inline_begin}
+<d+{SIZEOF}=""
+{adb_inline_end}

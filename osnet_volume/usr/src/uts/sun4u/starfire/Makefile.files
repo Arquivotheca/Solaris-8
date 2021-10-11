@@ -1,0 +1,49 @@
+#
+# ident	"@(#)Makefile.files	1.14	99/04/05 SMI"
+#
+# Copyright (c) 1997-1998 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#	This Makefile defines all file modules for the directory
+#	uts/sun4u/starfire and its children. These are the source files which
+#	are starfire "implementation architecture" dependent.
+#
+
+#
+# Object lists
+#
+# Starfire specific kernel modules
+
+CORE_OBJS +=	cpu_sgnblk.o bbus_intr.o portctrl.o
+#CORE_OBJS +=	cpu_sgnblk.o bbus_intr.o portctrl.o memctrl.o pda.o
+
+# Starfire specific driver related modules
+#
+CVC_OBJS +=	cvc.o
+
+CVCREDIR_OBJS +=	cvcredir.o
+
+DR_OBJS +=	dr.o
+
+DRMACH_OBJS +=	sfdr.o sfdr_hw.o sfdr_mem.o sfdr_quiesce.o sfdr_cpu.o \
+		sfdr_asm.o memctrl.o pda.o
+#DRMACH_OBJS +=	sfdr.o sfdr_hw.o sfdr_mem.o sfdr_quiesce.o sfdr_cpu.o
+
+IDN_OBJS +=	idn.o idn_proto.o idn_dlpi.o idn_xf.o idn_smr.o idn_asm.o \
+		mi.o nd.o \
+		memctrl.o pda.o
+IDN_DEPS +=	idn_asm.o
+
+#
+# Miscellaneous
+#
+INC_PATH	+= -I$(UTSBASE)/sun4u/starfire
+
+#
+# Since assym.h is a derived file, the dependency must be explicit for
+# all files including this file. (This is only actually required in the
+# instance when the .nse_depinfo file does not exist.) It may seem that
+# the lint targets should also have a similar dependency, but they don't
+# since only C headers are included when #defined(lint) is true.
+#
+ASSYM_DEPS	+= sfdr_asm.o idn_asm.o

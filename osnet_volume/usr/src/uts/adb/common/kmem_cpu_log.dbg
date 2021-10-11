@@ -1,0 +1,25 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)kmem_cpu_log.dbg	1.3	98/01/19 SMI"
+
+#include <sys/kmem.h>
+#include <sys/kmem_impl.h>
+#include "dummy.h"
+
+\
+\
+kmem_cpu_log_header     clh_    kmem_cpu_log
+{adb_inline_begin}
+.>z
+<z+{OFFSET, clh_lock}=""
+{adb_inline_end}
+        lock                    .mutex
+{adb_inline_begin}
+<z+{OFFSET, clh_current}=""
+{adb_inline_end}
+        current                 hex
+        avail                   sdecimal
+        chunk                   sdecimal
+        hits                    sdecimal

@@ -1,0 +1,28 @@
+#
+# Copyright (c) 1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#ident	"@(#)prototype_sparc	1.3	99/09/23 SMI"
+
+!include prototype_com
+
+d none usr/bin/sparcv9 755 root bin
+f none usr/bin/sparcv9/mdb 555 root bin
+d none usr/lib/mdb/kvm/sparcv9 755 root sys
+f none usr/lib/mdb/kvm/sparcv9/genunix.so 555 root sys
+f none usr/lib/mdb/kvm/sparcv9/ip.so 555 root sys
+f none usr/lib/mdb/kvm/sparcv9/ipc.so 555 root sys
+f none usr/lib/mdb/kvm/sparcv9/krtld.so 555 root sys
+f none usr/lib/mdb/kvm/sparcv9/lofs.so 555 root sys
+f none usr/lib/mdb/kvm/sparcv9/logindmux.so 555 root sys
+f none usr/lib/mdb/kvm/sparcv9/mdb_ks.so 555 root sys
+f none usr/lib/mdb/kvm/sparcv9/nfs.so 555 root sys
+f none usr/lib/mdb/kvm/sparcv9/ptm.so 555 root sys
+d none usr/lib/mdb/proc/sparcv9 755 root sys
+f none usr/lib/mdb/proc/sparcv9/mdb_ds.so 555 root sys
+d none usr/platform/sun4u 755 root sys
+d none usr/platform/sun4u/lib 755 root bin
+d none usr/platform/sun4u/lib/mdb 755 root sys
+d none usr/platform/sun4u/lib/mdb/kvm 755 root sys
+d none usr/platform/sun4u/lib/mdb/kvm/sparcv9 755 root sys
+f none usr/platform/sun4u/lib/mdb/kvm/sparcv9/unix.so 555 root sys

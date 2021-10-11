@@ -1,0 +1,27 @@
+#
+# Copyright (c) 1997-1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#ident	"@(#)Makefile.lib.64	1.4	99/01/25 SMI"
+
+#
+# Include overrides for library builds of 64-bit objects
+#
+include	$(SRC)/Makefile.master.64
+
+PIC_PLIB64=
+$(BUILD_PROFS)PIC_PLIB64=	libp/$(DYNLIB)
+ROOTPIC_PLIB64=
+$(BUILD_PROFS)ROOTPIC_PLIB64= $(ROOTLIBDIR64)/$(PIC_PLIB64)
+$(MACHPIC_PLIB64) := sparc_CFLAGS += -xregs=no%appl -K pic
+$(MACHPIC_PLIB64) := i386_CFLAGS += -K pic
+$(MACHPIC_PLIB64) := sparcv9_CFLAGS += -xregs=no%appl -K PIC
+$(MACHPIC_PLIB64) := CPPFLAGS += -DPIC -D_TS_ERRNO
+$(PIC_PLIB64)  := CFLAGS64 += -p
+$(PIC_PLIB64)  := BUILD.SO = $(CC) $(CFLAGS) -o $@ \
+		-G $(DYNFLAGS) -M ../../mapfile_profile \
+		$(PIC_PROFS) -L $(ROOTLIBDIR64) $(LDLIBS)
+#
+# Spectranslator Target Architecture
+#
+TRANSMACH=	$(MACH64)

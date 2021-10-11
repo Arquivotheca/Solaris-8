@@ -1,0 +1,25 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)modinfo.dbg	1.6	98/01/19 SMI"
+
+#include <sys/modctl.h>
+#include "dummy.h"
+
+\
+\
+modinfo                 mi_
+{adb_inline_begin}
+.>z
+<z+{OFFSET, mi_id}=""
+{adb_inline_end}
+        id                      sdecimal
+        nextid                  sdecimal
+        base                    hex
+        size                    decimal
+        rev                     sdecimal
+        name                    echar
+{adb_inline_begin}
+<z+{OFFSET, mi_msinfo}/n"mods_info"16tn32C
+{adb_inline_end}

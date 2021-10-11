@@ -1,0 +1,35 @@
+#!/bin/sh
+#
+# Copyright (c) 1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#	"@(#)i.ncakmod	1.1	99/08/06 SMI"
+#
+
+PATH="/usr/bin:/usr/sbin:${PATH}"
+export PATH
+
+while read src dest
+do
+	if [ ! -f $dest ] ; then
+		cp $src $dest
+	else
+		# Check if this is a new style config file. It should contain
+		# name value pair in 'name = value' format. Just check for
+		# one such pair.
+		egrep '^status[ 	]*=' $dest > /dev/null 2>&1
+		if [ $? = 0 ] ; then
+			# Its a new style file. Do nothing.
+			continue
+		fi
+
+		# So its old style config file. Change it.
+		sed 	-e 's/^status[ 	]*/status=/' \
+			-e 's/^httpd_door_path[ 	]*\/tmp/httpd_door_path=\/var\/run/' \
+			$dest > /tmp/tmp.$$
+
+		cp /tmp/tmp.$$ $dest
+		rm -f /tmp/tmp.$$
+	fi
+done
+

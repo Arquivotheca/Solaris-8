@@ -1,0 +1,23 @@
+#!/sbin/sh
+#
+# Copyright (c) 1993, 1997 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#ident	"@(#)ufs_quota	1.2	97/12/08 SMI"
+
+case "$1" in
+'start')
+	/usr/sbin/quotacheck -a
+	/usr/sbin/quotaon -a
+	;;
+
+'stop')
+	/usr/sbin/quotaoff -a
+	;;
+
+*)
+	echo "Usage: $0 { start | stop }"
+	exit 1
+	;;
+esac
+exit 0

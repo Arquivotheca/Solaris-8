@@ -1,0 +1,12 @@
+\ Copyright 1999 Sun Microsystems, Inc.
+\ All rights reserved.
+
+#ident	"@(#)usb_mid.fdbg	1.2	99/09/24 SMI"
+
+#include <sys/usb/usba.h>
+#include <sys/usb/usba/usba_types.h>
+#include <sys/usb/usb_mid/usb_midvar.h>
+
+usb_mid_power_t
+
+usb_mid

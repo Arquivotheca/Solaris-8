@@ -1,0 +1,12 @@
+#
+#
+# Copyright (c) 1998-1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#pragma ident   "@(#)versions 1.1     99/03/11 SMI"
+#
+# vers file for pci.so.1
+#
+i386 {
+	SUNWprivate_1.1;
+}

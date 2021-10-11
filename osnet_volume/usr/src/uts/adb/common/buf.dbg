@@ -1,0 +1,27 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)buf.dbg	1.3	98/01/14 SMI"
+
+#include <sys/buf.h>
+#include "dummy.h"
+
+\
+\
+buf     	b_
+        flags           hex
+        forw            hex
+        back            hex
+        av_*            hex
+        bcount          sdecimal
+        bufsize         sdecimal
+        error           sdecimal
+        edev            hex
+        un.b_addr       hex
+        _b_blkno        hex
+        resid           sdecimal
+        proc            hex
+        iodone          hex
+        vp              hex
+        pages           hex

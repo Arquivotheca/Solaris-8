@@ -1,0 +1,32 @@
+#
+# Copyright (c) 1998-1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#pragma ident	"@(#)versions	1.2	99/05/04 SMI"
+#
+# vers file for libdevinfo
+#
+# SUNW_1.2: Public (evolving) PSARC 1997/302 (clustering DDI hooks)
+# SUNW_1.1: Public (evolving) PSARC 1997/127
+#
+
+sparc {
+	SUNW_1.2:	{SUNW_1.1};
+	SUNW_1.1;
+	SUNWprivate_1.1;
+}
+sparcv9 {
+	SUNW_1.2:	{SUNW_1.1};
+	SUNW_1.1;
+	SUNWprivate_1.1;
+}
+i386 {
+	SUNW_1.2:	{SUNW_1.1};
+	SUNW_1.1;
+	SUNWprivate_1.1;
+}
+ia64 {
+	SUNW_1.2:	{SUNW_1.1};
+	SUNW_1.1;
+	SUNWprivate_1.1;
+}

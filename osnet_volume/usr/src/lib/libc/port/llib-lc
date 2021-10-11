@@ -1,0 +1,1463 @@
+/*
+ * Copyright (c) 1997-1999 by Sun Microsystems, Inc.
+ * All rights reserved.
+ */
+
+/* LINTLIBRARY */
+/* PROTOLIB1 */
+
+#pragma ident	"@(#)llib-lc	1.57	99/10/11 SMI"
+
+#ifdef	_REENTRANT
+#undef	_REENTRANT
+#endif
+
+#include <alloca.h>
+#include <ctype.h>
+#include <dirent.h>
+#include <dlfcn.h>
+#include <sys/errno.h>
+#include <euc.h>
+#include <fcntl.h>
+#include <float.h>
+#include <fmtmsg.h>
+#include <ftw.h>
+#include <getwidth.h>
+#include <grp.h>
+#include <iconv.h>
+#include <langinfo.h>
+#include <libgen.h>
+#include <libw.h>
+#include <locale.h>
+#include <memory.h>
+#include <mon.h>
+#include <nan.h>
+#include <ndbm.h>
+#include <limits.h>
+#include <nl_types.h>
+#include <pwd.h>
+#ifdef REGEXP
+#include <regexp.h>
+#endif
+#include <rpcsvc/ypclnt.h>
+#include <search.h>
+#include <setjmp.h>
+#include <shadow.h>
+#include <siginfo.h>
+#include <signal.h>
+#ifdef __STDC__
+#include <stdarg.h>
+#else
+#include <varargs.h>
+#endif
+#include <unistd.h>
+#include <stddef.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <stropts.h>
+#include <synch.h>
+#include <sys/byteorder.h>
+#include <sys/corectl.h>
+#include <sys/dl.h>
+#include <sys/errno.h>
+#include <sys/fcntl.h>
+#include <sys/file.h>
+#include <sys/vnode.h>
+#include <sys/fs/namenode.h>
+#include <sys/ipc.h>
+#include <sys/lwp.h>
+#include <sys/mkdev.h>
+#include <sys/mman.h>
+#include <sys/mnttab.h>
+#include <sys/mount.h>
+#include <sys/msg.h>
+#include <sys/param.h>
+#include <sys/poll.h>
+#include <sys/priocntl.h>
+#include <sys/procset.h>
+#include <sys/processor.h>
+#include <sys/pset.h>
+#include <sys/sem.h>
+#include <sys/shm.h>
+#include <sys/signal.h>
+#include <sys/stat.h>
+#include <sys/statvfs.h>
+#include <sys/strlog.h>
+#include <sys/stropts.h>
+#include <sys/sysconfig.h>
+#include <sys/syslog.h>
+#include <sys/systeminfo.h>
+#include <sys/termio.h>
+#include <sys/termios.h>
+#include <sys/time.h>
+#include <sys/timeb.h>
+#include <sys/times.h>
+#include <sys/types.h>
+#include <sys/utsname.h>
+#include <sys/vfstab.h>
+#include <termio.h>
+#include <time.h>
+#include <tzfile.h>
+#include <ucontext.h>
+#include <utmpx.h>
+#include <values.h>
+#include <wait.h>
+#include <wchar.h>
+#include <wctype.h>
+#include <widec.h>
+
+/*
+ * /usr/src/lib/libc/port/gen routines
+ */
+
+/* _ctype.c */
+
+/* _loc_data.c */
+
+/* _locale.c */
+
+/* _set_tab.c */
+int _set_tab(const char *loc, int cat);
+
+/* _xftw.c */
+int _xftw(int ver, const char *path, int (*fn)(), int depth);
+
+/* a64l.c */
+long a64l(const char *);
+
+/* abort.c */
+void abort(void);
+
+/* abs.c */
+int abs(int arg);
+long labs(long int arg);
+
+/* assert.c */
+void _assert(char *assertion, char *filename, int line_num);
+
+/* atexit.c */
+int atexit(void(*func)());
+void _exithandle(void);
+
+/* atof.c */
+double atof(const char *p);
+
+/* atoi.c */
+int atoi(const char *p);
+
+/* atol.c */
+long atol(const char *p);
+
+/* basename.c */
+char *basename(char *s);
+
+/* bcmp.c */
+int bcmp(const void *s1, const void *s2, size_t len);
+
+/* bcopy.c */
+void bcopy(const void *s1, void *s2, size_t len);
+
+/* bsearch.c */
+void *bsearch(const void *ky, const void *bs, size_t nel,
+		size_t width, int (*compar)());
+
+/* bzero.c */
+void bzero(void *sp, size_t len);
+
+/* calloc.c */
+void *calloc(size_t num, size_t size);
+
+/* catclose.c */
+int catclose(nl_catd catd);
+
+/* catgets.c */
+char *catgets(nl_catd catd, int set_num, int msg_num, const char *s);
+
+/* catopen.c */
+nl_catd catopen(const char *name, int mode);
+
+/* cfgetispeed.c */
+speed_t cfgetispeed(const struct termios *termios_p);
+
+/* cfgetospeed.c */
+speed_t cfgetospeed(const struct termios *termios_p);
+
+/* cfree.c */
+void cfree(void *p, unsigned num, unsigned size);
+
+/* cfsetispeed.c */
+int cfsetispeed(struct termios *termios_p, speed_t speed);
+
+/* cfsetospeed.c */
+int cfsetospeed(struct termios *termios_p, speed_t speed);
+
+/* cftime.c */
+int cftime(char *buf, char *format, const time_t *t);
+int ascftime(char *buf, const char *format, const struct tm *tm);
+
+/* clock.c */
+clock_t clock(void);
+
+/* closedir.c */
+int closedir(DIR *dirp);
+
+/* crypt.c */
+void setkey(const char *key);
+void encrypt(char *block, int fake);
+char *crypt(const char *key, const char *salt);
+
+/* csetlen.c */
+int csetlen(int cset);
+int csetcol(int cset);
+
+/* ctime.c */
+char *ctime(const time_t *t);
+char *asctime(const struct tm *t);
+
+/* ctypefcns.c */
+int isalpha(int c);
+int isupper(int c);
+int islower(int c);
+int isdigit(int c);
+int isxdigit(int c);
+int isalnum(int c);
+int isspace(int c);
+int ispunct(int c);
+int isprint(int c);
+int isgraph(int c);
+int iscntrl(int c);
+int isascii(int c);
+int _toupper(int c);
+int _tolower(int c);
+int toascii(int c);
+
+/* directio.c */
+int directio(int filedes, int advice);
+
+/* dirname.c */
+char *dirname(char *s);
+
+/* div.c */
+div_t div(int numer, int denom);
+ldiv_t ldiv(long int numer, long int denom);
+
+/* drand48.c */
+double drand48(void);
+double erand48(unsigned short *xsubi);
+long krand48(unsigned short *xsubi, unsigned int m);
+long lrand48(void);
+long mrand48(void);
+void srand48(long seedval);
+unsigned short *seed48(unsigned short seed16v[3]);
+void lcong48(unsigned short param[7]);
+long nrand48(unsigned short *xsubi);
+long jrand48(unsigned short *xsubi);
+
+/* dup2.c */
+int dup2(int fildes, int fildes2);
+
+/* ecvt.c */
+char *ecvt(double value, int ndigit, int *decpt, int *sign);
+char *fcvt(double value, int ndigit, int *decpt, int *sign);
+
+/* errlst.c */
+
+/* euclen.c */
+int euccol(const unsigned char *s);
+int euclen(const unsigned char *s);
+int eucscol(const unsigned char *s);
+
+/* execvp.c */
+/* VARARGS1 */
+int execlp(const char *, const char *, ...);
+int execvp(const char *name, char *const *argv);
+
+/* fattach.c */
+int fattach(int fildes, const char *path);
+
+/* fdetach.c */
+int fdetach(const char *path);
+
+/* ffs.c */
+int ffs(int field);
+
+/* fmtmsg.c */
+int addseverity(int value, const char *string);
+int fmtmsg(long class, const char *label, int severity, const char *text,
+		const char *action, const char *tag);
+
+/* frexp.c */
+double frexp(double value, int *eptr);
+
+/* ftime.c */
+int ftime(struct timeb *tp);
+
+/* ftok.c */
+key_t ftok(const char *path, int id);
+
+/* gcvt.c */
+char *gcvt(double number, int ndigit, char *buf);
+
+/* getcwd.c */
+char *getcwd(char *str, size_t size);
+
+/* getdate.c */
+struct tm *getdate(const char *expression);
+
+/* getdate_data.c */
+
+/* getdate_gd.c */
+
+/* getdtblsize.c */
+int getdtablesize(void);
+
+/* getenv.c */
+char *getenv(const char *name);
+
+/* getexecname.c */
+const char *getexecname(void);
+
+/* getgrnam.c */
+struct group *getgrnam(const char *name);
+struct group *getgrgid(gid_t gid);
+
+/* gethostid.c */
+long gethostid(void);
+
+/* gethz.c */
+int gethz(void);
+
+/* getlogin.c */
+char *getlogin(void);
+
+/* getmntent.c */
+int getmntany(FILE *fd, struct mnttab *mgetp, struct mnttab *mrefp);
+int getmntent(FILE *fd, struct mnttab *mp);
+
+/* getnetgrent.c */
+int setnetgrent(const char *grp);
+int endnetgrent(void);
+int getnetgrent(char **machinep, char **namep, char **domainp);
+
+/* getopt.c */
+int getopt(int argc, char *const *argv, const char *opts);
+
+/* getpagesize.c */
+int getpagesize(void);
+
+/* getpw.c */
+int getpw(uid_t uid, char *buf);
+
+/* getpwnam.c */
+struct passwd *getpwnam(const char *name);
+struct passwd *getpwuid(uid_t uid);
+
+/* getrusage.c */
+int getrusage(int who, struct rusage *rusage);
+
+/* gettimeofday.c */
+int gettimeofday(struct timeval *tp, void *);
+
+/* getspent.c */
+void setspent(void);
+void endspent(void);
+struct spwd *getspent(void);
+struct spwd *fgetspent(FILE *f);
+struct spwd *getspnam(const char *name);
+int putspent(const struct spwd *p, FILE *f);
+
+/* getsubopt.c */
+int getsubopt(char **optionsp, char *const *tokens, char **valuep);
+
+/* gettxt.c */
+char *gettxt(const char *msg_id, const char *dflt_str);
+
+/* getut.c */
+struct utmp *getutent(void);
+struct utmp *getutid(const struct utmp *entry);
+struct utmp *getutline(const struct utmp *entry);
+struct utmp *pututline(const struct utmp *entry);
+void setutent(void);
+void endutent(void);
+int utmpname(const char *newfile);
+void updwtmp(const char *file, struct utmp *ut);
+void getutmp(const struct utmpx *utx, struct utmp *ut);
+void getutmpx(const struct utmp *ut, struct utmpx *utx);
+struct utmp *makeut(struct utmp *utmp);
+
+/* getutx.c */
+struct utmpx *getutxent(void);
+struct utmpx *getutxid(const struct utmpx *entry);
+struct utmpx *getutxline(const struct utmpx *entry);
+struct utmpx *pututxline(const struct utmpx *entry);
+void setutxent(void);
+void endutxent(void);
+int utmpxname(const char *newfile);
+void updwtmpx(const char *filex, struct utmpx *utx);
+struct utmpx *makeutx(const struct utmpx *utmp);
+struct utmpx *modutx(const struct utmpx *utp);
+
+/* getvfsent.c */
+int getvfsspec(FILE *fd, struct vfstab *vp, char *special);
+int getvfsfile(FILE *fd, struct vfstab *vp, char *mountp);
+int getvfsany(FILE *fd, struct vfstab *vgetp, struct vfstab *vrefp);
+int getvfsent(FILE *fd, struct vfstab *vp);
+
+/* getwd.c */
+char *getwd(char *pathname);
+
+/* getwidth.c */
+void getwidth(eucwidth_t *eucstruct);
+
+/* hsearch.c */
+int hcreate(size_t size);
+void hdestroy(void);
+ENTRY *hsearch(ENTRY item, ACTION action);
+
+/* iconv.c  */
+size_t iconv(iconv_t cd, const char **inbuf, size_t *inbytesleft,
+    char **outbuf, size_t *outbytesleft);
+int iconv_close(iconv_t cd);
+iconv_t iconv_open(const char *tocode, const char *fromcode);
+
+/* import_def.c */
+
+/* index.c */
+char *index(const char *sp, int c);
+
+/* initgroups.c */
+int initgroups(const char *uname, gid_t agroup);
+
+/* innetgr.c */
+int innetgr(const char *group, const char *machine, const char *name,
+    const char *domain);
+
+/* insque.c */
+void insque(void *elem, void *pred);
+void remque(void *elem);
+
+/* isaexec.c */
+int isaexec(const char *, char *const *, char *const *);
+
+/* isastream.c */
+int isastream(int fd);
+
+/* isatty.c */
+int isatty(int f);
+
+/* killpg.c */
+int killpg(pid_t pgrp, int sig);
+
+/* l64a.c */
+char *l64a(long lg);
+
+/* lckpwdf.c */
+int lckpwdf(void);
+int ulckpwdf(void);
+
+/* ldexp.c */
+double ldexp(double value, int exp);
+
+/* lfind.c */
+void * lfind(const void *ky, const void *bs, size_t *nelp,
+		size_t width, int (*compar)());
+
+/* loadtab.c */
+int _loadtab(void);
+
+/* localeconv.c */
+struct lconv *localeconv(void);
+
+/* lsearch.c */
+void * lsearch(const void *ky, void *bs, size_t *nelp,
+		size_t width, int (*compar)());
+
+/* madvise.c */
+int madvise(caddr_t addr, size_t len, int advice);
+
+/* malloc.c */
+void *malloc(size_t size);
+void *realloc(void *old, size_t size);
+void free(void *old);
+
+/* mbstowcs.c */
+size_t mbstowcs(wchar_t *pwcs, const char *s, size_t n);
+
+/* mbtowc.c */
+int mbtowc(wchar_t *wchar, const char *s, size_t n);
+int mblen(const char *s, size_t n);
+
+/* memalign.c */
+void *memalign(size_t align, size_t nbytes);
+
+/* memccpy.c */
+void *memccpy(void *s, const void *s0, int c, size_t n);
+
+/* memchr.c */
+void *memchr(const void *sptr, int c1, size_t n);
+
+/* memcmp.c */
+int memcmp(const void *s1, const void *s2, size_t n);
+
+/* memcpy.c */
+void *memcpy(void *s, const void *s0, size_t n);
+
+/* memmove.c */
+void *memmove(void *s, const void *s0, size_t n);
+
+/* memset.c */
+void *memset(void *sp1, int c, size_t n);
+
+/* mkdev.c */
+dev_t __makedev(const int version, const major_t majdev,
+		const minor_t mindev);
+major_t __major(const int version, const dev_t devnum);
+minor_t __minor(const int version, const dev_t devnum);
+
+/* mkfifo.c */
+int mkfifo(const char *path, mode_t mode);
+
+/* mktemp.c */
+char *mktemp(char *as);
+
+/* mlock.c */
+int mlock(caddr_t addr, size_t len);
+
+/* mlockall.c */
+int mlockall(int flags);
+
+/* modf.c */
+double modf(double value, double *iptr);
+
+/* modff.c */
+float modff(float value, float *iptr);
+
+/* mon.c */
+void monitor(int (*alowpc)(), int (*ahighpc)(), WORD *buffer,
+		size_t bufsize, size_t nfunc);
+
+/* msync.c */
+int msync(caddr_t addr, size_t len, int flags);
+
+/* munlock.c */
+int munlock(caddr_t addr, size_t len);
+
+/* munlockall.c */
+int munlockall(void);
+
+/* ndbm.c */
+int dbm_setdefwrite(DBM *db);
+int dbm_flush(DBM *db);
+int dbm_flushpag(DBM *db);
+DBM *dbm_open(const char *file, int flags, mode_t mode);
+void dbm_close(DBM *db);
+int dbm_close_status(DBM *db);
+datum dbm_fetch(DBM *db, datum key);
+int dbm_delete(DBM *db, datum key);
+int dbm_store(DBM *db, datum key, datum dat, int replace);
+datum dbm_firstkey(DBM *db);
+datum dbm_nextkey(DBM *db);
+datum dbm_do_nextkey(DBM *db, datum inkey);
+
+/* new_list.c */
+
+/* nftw.c */
+int nftw(const char *path, int (*fn)(), int depth, int flags);
+
+/* nl_langinfo.c */
+char *nl_langinfo(nl_item item);
+
+/* opendir.c */
+DIR *opendir(const char *filename);
+
+/* opt_data.c */
+
+/* perror.c */
+void perror(const char *s);
+
+/* priocntl.c */
+long __priocntl(int pc_version, idtype_t idtype, id_t id, int cmd,
+		caddr_t arg);
+
+/* psiginfo.c */
+void psiginfo(siginfo_t *sip, char *s);
+
+/* psignal.c */
+void psignal(int sig, const char *s);
+
+/* pt.c */
+char *ptsname(int fd);
+int unlockpt(int fd);
+int grantpt(int fd);
+
+/* putenv.c */
+int putenv(char *change);
+
+/* putpwent.c */
+int putpwent(const struct passwd *p, FILE *f);
+
+/* qsort.c */
+void qsort(void *base, size_t n, size_t size, int (*compar)());
+
+/* raise.c */
+int raise(int sig);
+
+/* rand.c */
+void srand(unsigned x);
+int rand(void);
+
+/* random.c */
+void srandom(unsigned x);
+char *initstate(unsigned seed, char *arg_state, size_t n);
+char *setstate(const char *arg_state);
+long random(void);
+
+/* readdir.c */
+struct dirent *readdir(DIR *dirp);
+
+/* realpath.c */
+char *realpath(const char *raw, char *canon);
+
+/* regexpr.c */
+char *re_comp(char *sp);
+int re_exec(char *p1);
+
+/* rindex.c */
+char *rindex(const char *sp, int c);
+
+/* rename.c */
+int remove(const char *filename);
+int rename(const char *old, const char *new);
+
+/* rewinddir.c */
+void _rewinddir(DIR *dirp);
+
+/* scrwidth.c */
+int scrwidth(wchar_t c);
+
+/* seekdir.c */
+void seekdir(DIR *dirp, long loc);
+
+/* select.c */
+int select(int nfds, fd_set *in0, fd_set *out0, fd_set *ex0,
+		struct timeval *tv);
+
+/* setlocale.c */
+char *setlocale(int cat, const char *loc);
+
+/* setpriority.c */
+int getpriority(int which, id_t who);
+int setpriority(int which, id_t who, int prio);
+
+/* settimeofday.c */
+int settimeofday(struct timeval *tp, void *);
+
+/* sigflag.c */
+int sigflag(int sig, int flag, int on);
+
+/* siglist.c */
+
+/* sigsend.c */
+int sigsend(idtype_t idtype, id_t id, int sig);
+
+/* sigsetops.c */
+int sigfillset(sigset_t *set);
+int sigemptyset(sigset_t *set);
+int sigaddset(sigset_t *set, int sig);
+int sigdelset(sigset_t *set, int sig);
+int sigismember(const sigset_t *set, int sig);
+
+/* sleep.c */
+unsigned sleep(unsigned sleep_tm);
+
+/* ssignal.c */
+int (*ssignal(int sig, int (*fn)())) ();
+int gsignal(int sig);
+
+/* str2id.c */
+
+/* str2sig.c */
+int str2sig(const char *s, int *sigp);
+int sig2str(int i, char *s);
+
+/* strcat.c */
+char *strcat(char *s1, const char *s2);
+
+/* strchr.c */
+char *strchr(const char *sp, int c);
+
+/* strcmp.c */
+int strcmp(const char *s1, const char *s2);
+
+/* strcpy.c */
+char *strcpy(char *s1, const char *s2);
+
+/* strcspn.c */
+size_t strcspn(const char *string, const char *charset);
+
+/* strdup.c */
+char *strdup(const char *s1);
+
+/* strerror.c */
+char *strerror(int errnum);
+
+/* strftime.c */
+size_t strftime(char *s, size_t maxsize, const char *format,
+		const struct tm *tm);
+
+/* strlen.c */
+size_t strlen(const char *s);
+
+/* strncat.c */
+char *strncat(char *s1, const char *s2, size_t n);
+
+/* strncmp.c */
+int strncmp(const char *s1, const char *s2, size_t n);
+
+/* strncpy.c */
+char *strncpy(char *s1, const char *s2, size_t n);
+
+/* strpbrk.c */
+char *strpbrk(const char *string, const char *brkset);
+
+/* strrchr.c */
+char *strrchr(const char *sp, int c);
+
+/* strspn.c */
+size_t strspn(const char *string, const char *charset);
+
+/* strstr.c */
+char *strstr(const char *as1, const char *as2);
+
+/* strtod.c */
+char *strtok(char *string, const char *sepset);
+
+/* strtok.c */
+char *strtok(char *string, const char *sepset);
+
+/* strtol.c */
+long strtol(const char *str, char **nptr, int base);
+
+/* strtoul.c */
+unsigned long strtoul(const char *str, char **nptr, int base);
+
+/* strxfrm.c */
+size_t strxfrm(char *s1, const char *s2, size_t n);
+int strcoll(const char *s1, const char *s2);
+
+/* swab.c */
+void swab(const char *from, char *to, ssize_t n);
+
+/* swapctl.c */
+int swapctl(int cmd, void *arg);
+
+/* sysconf.c */
+long sysconf(int name);
+
+/* syslog.c */
+/* VARARGS2 */
+void syslog(int pri, const char *fmt, ...);
+void vsyslog(int pri, const char *fmt, va_list ap);
+void openlog(const char *ident, int logstat, int logfac);
+void closelog(void);
+int setlogmask(int pmask);
+
+/* tcdrain.c */
+int tcdrain(int fildes);
+
+/* tcflow.c */
+int tcflow(int fildes, int action);
+
+/* tcflush.c */
+int tcflush(int fildes, int queue_selector);
+
+/* tcgetattr.c */
+int tcgetattr(int fildes, struct termios *termios_p);
+
+/* tcgetpgrp.c */
+pid_t tcgetpgrp(int fd);
+
+/* tcgetsid.c */
+pid_t tcgetsid(int fd);
+
+/* tcsendbreak.c */
+int tcsendbreak(int fildes, int duration);
+
+/* tcsetattr.c */
+int tcsetattr(int fildes, int optional_actions,
+		const struct termios *termios_p);
+
+/* tcsetpgrp.c */
+int tcsetpgrp(int fd, pid_t pgrp);
+
+/* tell.c */
+long tell(int f);
+
+/* telldir.c */
+long telldir(DIR *dirp);
+
+/* tfind.c */
+void *tfind(const void *ky, void *const *rtp, int (*compar)());
+
+/* time_comm.c */
+struct tm *localtime(const time_t *timep);
+struct tm *gmtime(const time_t *clock);
+double difftime(time_t time1, time_t time0);
+time_t mktime(struct tm *timeptr);
+void _ltzset(time_t tim);
+void tzset(void);
+
+/* time_data.c */
+
+/* time_gdata.c */
+
+/* tolower.c */
+int tolower(int c);
+
+/* toupper.c */
+int toupper(int c);
+
+/* truncate.c */
+int ftruncate(int fildes, off_t len);
+int truncate(const char *path, off_t len);
+
+/* tsearch.c */
+void *tsearch(const void *ky, void **rtp, int (*compar)());
+void *tdelete(const void *ky, void **rtp, int (*compar)());
+void twalk(const void *rt, void (*action)());
+
+/* ttyname.c */
+char *ttyname(int f);
+
+/* ttyslot.c */
+int ttyslot(void);
+
+/* ualarm.c */
+unsigned ualarm(unsigned usecs, unsigned reload);
+
+/* usleep.c */
+int usleep(unsigned n);
+
+/* valloc.c */
+void *valloc(size_t size);
+
+/* values-Xa.c */
+
+/* values-Xc.c */
+
+/* values-Xs.c */
+
+/* values-Xt.c */
+
+/* wait3.c */
+pid_t wait3(int *status, int options, struct rusage *rp);
+
+/* wait4.c */
+pid_t wait4(pid_t pid, int *status, int options, struct rusage *rusage);
+
+/* waitpid.c */
+pid_t waitpid(pid_t pid, int *stat_loc, int options);
+
+/* wcstombs.c */
+size_t wcstombs(char *s, const wchar_t *pwcs, size_t n);
+
+/* wctomb.c */
+int wctomb(char *s, wchar_t wchar);
+
+/* wdata.c */
+
+/* wisprint.c */
+int wisprint(wchar_t c);
+
+/* xgetwidth.c */
+void _xgetwidth(void);
+
+/* yp_stubs.c */
+
+/*
+ * /usr/src/lib/libc/port/intl routines
+ */
+
+/* gettext.c */
+char *bindtextdomain(const char *domain, const char *binding);
+char *dcgettext(const char *domain, const char *msg_id, const int category);
+char *dgettext(const char *domain, const char *msg_id);
+char *gettext(const char *msg_id);
+char *textdomain(const char *domain);
+
+/*
+ * /usr/src/lib/libc/port/print routines
+ */
+
+/* fprintf.c */
+/* VARARGS2 */
+int fprintf(FILE *iop, const char *format, ...);
+
+/* printf.c */
+/* VARARGS1 */
+int printf(const char *format, ...);
+
+/* snprintf.c */
+/* VARARGS2 */
+int snprintf(char *string, size_t n, const char *format, ...);
+
+/* sprintf.c */
+/* VARARGS2 */
+int sprintf(char *string, const char *format, ...);
+
+/* vfprintf.c */
+/* VARARGS2 */
+int vfprintf(FILE *iop, const char *format, va_list);
+
+/* vprintf.c */
+/* VARARGS1 */
+int vprintf(const char *format, va_list);
+
+/* vsnprintf.c */
+/* VARARGS2 */
+int vsnprintf(char *string, size_t n, const char *format, va_list);
+
+/* vsprintf.c */
+/* VARARGS2 */
+int vsprintf(char *string, const char *format, va_list);
+
+/*
+ * /usr/src/lib/libc/port/regex routines
+ */
+
+/* regex.c */
+char *regex(const char *regexp, const char *stringp, ...);
+
+/* regcmp.c */
+char *regcmp(const char *regexp, ...);
+
+/*
+ * /usr/src/lib/libc/port/stdio routines
+ */
+
+/* _filbuf.c */
+int _filbuf(FILE *iop);
+
+/* _flsbuf.c */
+int _flsbuf(int ch, FILE *iop);
+
+/* _wrtchk.c */
+int _wrtchk(FILE *iop);
+
+/* clearerr.c */
+void clearerr(FILE *iop);
+
+/* ctermid.c */
+char *ctermid(char *s);
+
+/* cuserid.c */
+char *cuserid(char *s);
+
+/* data.c */
+
+/* doscan.c */
+int _doscan(FILE *iop, unsigned char *fmt, va_list va_alist);
+
+/* fdopen.c */
+FILE *fdopen(int fd, const char *type);
+
+/* feof.c */
+int feof(FILE *iop);
+
+/* ferror.c */
+int ferror(FILE *iop);
+
+/* fgetc.c */
+int fgetc(FILE *iop);
+
+/* fgets.c */
+char *fgets(char *buf, int size, FILE *iop);
+
+/* fileno.c */
+int _fileno(int iop);
+
+/* flush.c */
+void _cleanup(void);
+FILE *_findiop(void);
+typedef unsigned char Uchar;
+void _setbufend(FILE *iop, Uchar *end);
+Uchar *_realbufend(FILE *iop);
+void _bufsync(FILE *iop, Uchar *bufend);
+int _xflsbuf(FILE *iop);
+int fflush(FILE *iop);
+int fclose(FILE *iop);
+
+/* fopen.c */
+FILE *fopen(const char *name, const char *type);
+FILE *freopen(const char *name, const char *type, FILE *iop);
+
+/* fpos.c */
+int fgetpos(FILE *stream, fpos_t *pos);
+int fsetpos(FILE *stream, const fpos_t *pos);
+
+/* fputc.c */
+int fputc(int ch, FILE *iop);
+
+/* fputs.c */
+int fputs(const char *ptr, FILE *iop);
+
+/* fread.c */
+size_t fread(void *ptr, size_t size, size_t count, FILE *iop);
+
+/* fseek.c */
+int fseek(FILE *iop, long offset, int ptrname);
+
+/* ftell.c */
+long ftell(FILE *iop);
+
+/* fwrite.c */
+size_t fwrite(const void *ptr1, size_t size, size_t count, FILE *iop);
+
+/* getc.c */
+int getc(FILE *iop);
+
+/* getchar.c */
+int getchar(void);
+
+/* getpass.c */
+char *getpass(const char *prompt);
+
+/* getpass.c */
+char *getpassphrase(const char *prompt);
+
+/* gets.c */
+char *gets(char *buf);
+
+/* getw.c */
+int getw(FILE *stream);
+
+/* popen.c */
+FILE *popen(const char *cmd, const char *mode);
+int pclose(FILE *ptr);
+
+/* putc.c */
+int putc(int ch, FILE *iop);
+
+/* putchar.c */
+int putchar(int ch);
+
+/* puts.c */
+int puts(const char *ptr);
+
+/* putw.c */
+int putw(int w, FILE *stream);
+
+/* rewind.c */
+void rewind(FILE *iop);
+
+/* scanf.c */
+/* VARARGS1 */
+int scanf(const char *fmt, ...);
+
+/* VARARGS2 */
+int fscanf(FILE *iop, const char *fmt, ...);
+
+/* VARARGS2 */
+int sscanf(const char *str, const char *fmt, ...);
+
+/* setbuf.c */
+void setbuf(FILE *iop, char *abuf);
+
+/* setvbuf.c */
+int setvbuf(FILE *iop, char *abuf, int type, size_t size);
+
+/* system.c */
+int system(const char *s);
+
+/* tempnam.c */
+char *tempnam(const char *dir, const char *pfx);
+
+/* tmpfile.c */
+FILE *tmpfile(void);
+
+/* tmpnam.c */
+char *tmpnam(char *s);
+
+/* ungetc.c */
+int ungetc(int c, FILE *iop);
+
+/*
+ * /usr/src/lib/libc/port/sys routines
+ */
+
+/* execl.c */
+/* VARARGS1 */
+int execl(const char *name, const char *, ...);
+
+/* execle.c */
+int execle(const char *, const char *file, ...);
+
+/* execv.c */
+int execv(const char *file, char *const *argv);
+
+/* lockf.c */
+int lockf(int fildes, int function, off_t size);
+
+/* msgsys.c */
+int msgget(key_t key, int msgflg);
+int msgctl(int msqid, int cmd, struct msqid_ds *buf);
+ssize_t msgrcv(int msqid, void *msgp, size_t msgsz, long msgtyp, int msgflg);
+int msgsnd(int msqid, const void *msgp, size_t msgsz, int msgflg);
+
+/* nfssys.c */
+/*
+int exportfs(char *dir, struct export *ep);
+int nfs_getfh(char *path, fhandle_t *fhp);
+int nfssvc(int fd);
+*/
+
+/* psetsys.c */
+int pset_create(psetid_t *npset);
+int pset_destroy(psetid_t pset);
+int pset_assign(psetid_t pset, processorid_t cpu, psetid_t *opset);
+int pset_info(psetid_t pset, int *type, u_int *numcpus, processorid_t *cpulist);
+int pset_bind(psetid_t pset, idtype_t idtype, id_t id, psetid_t *opset);
+
+/* semsys.c */
+int semctl(int semid, int semnum, int cmd, ...);
+int semget(key_t key, int nsems, int semflg);
+int semop(int semid, struct sembuf *sops, size_t nsops);
+
+/* shmsys.c */
+void *shmat(int shmid, const void *shmaddr, int shmflg);
+int shmctl(int shmid, int cmd, struct shmid_ds *buf);
+#if defined(_XOPEN_SOURCE) && (_XOPEN_VERSION - 0 == 4)
+int shmdt(const void *);
+#else
+int shmdt(char *);
+#endif /* defined(_XOPEN_SOURCE) && (_XOPEN_VERSION - 0 == 4) */
+int shmget(key_t key, size_t size, int shmflg);
+
+/*
+ * /usr/src/lib/libc/port/widec routines
+ */
+
+/* fgetws.c */
+wchar_t *fgetws(wchar_t *ptr, int  size, FILE *iop);
+
+/* fputwc.c */
+wint_t fputwc(wint_t wc, FILE *iop);
+wint_t putwc(wint_t wc, FILE *iop);
+
+/* fputws.c */
+int fputws(const wchar_t *ptr, FILE *iop);
+
+/* getwchar.c */
+wint_t getwchar(void);
+
+/* getwidth.c */
+void getwidth(eucwidth_t *eucstruct);
+
+/* getws.c */
+wchar_t *getws(wchar_t *ptr);
+
+/* iswctype.c */
+int iswctype(wint_t wc, wctype_t charclass);
+int iswalpha(wint_t c);
+int iswupper(wint_t c);
+int iswlower(wint_t c);
+int iswdigit(wint_t c);
+int iswxdigit(wint_t c);
+int iswalnum(wint_t c);
+int iswspace(wint_t c);
+int iswpunct(wint_t c);
+int iswprint(wint_t c);
+int iswgraph(wint_t c);
+int iswcntrl(wint_t c);
+int isphonogram(wint_t c);
+int isideogram(wint_t c);
+int isenglish(wint_t c);
+int isnumber(wint_t c);
+int isspecial(wint_t c);
+
+/* libwcollate.c */
+
+/* putwchar.c */
+wint_t putwchar(wint_t c);
+
+/* putws.c */
+int putws(const wchar_t *ptr);
+
+/* scrwidth.c */
+
+/* strtows.c */
+wchar_t *strtows(wchar_t *s1, char *s2);
+char *wstostr(char *s1, wchar_t *s2);
+
+/* trwctype.c */
+wint_t towupper(wint_t c);
+wint_t towlower(wint_t c);
+
+/* ungetwc.c */
+wint_t ungetwc(wint_t wc, FILE *iop);
+
+/* wcollate.c */
+size_t wcsxfrm(wchar_t *s1, const wchar_t *s2, size_t n);
+int wcscoll(const wchar_t *s1, const wchar_t *s2);
+
+/* wcsftime.c */
+size_t wcsftime(wchar_t *wcs, size_t maxsize, const wchar_t *format,
+	const struct tm *timeptr);
+
+/* wcstoul.c */
+unsigned long wcstoul(const wchar_t *str, wchar_t **ptr, int base);
+
+/* wcstring.c */
+wint_t fgetwc(FILE *iop);
+wint_t getwc(FILE *iop);
+int wcwidth(wchar_t wc);
+int wcswidth(const wchar_t *pwcs, size_t n);
+
+/* wcswcs.c */
+wchar_t *wcswcs(const wchar_t *ws1, const wchar_t *ws2);
+
+/* wcsxfrm.c - empty file! */
+
+/* wcsxfrm.xpg4.c */
+
+/* wisprint.c */
+int wisprint(wchar_t c);
+
+/* wscasecmp.c */
+int wscasecmp(const wchar_t *s1, const wchar_t *s2);
+
+/* wscat.c */
+wchar_t *wcscat(wchar_t *s1, const wchar_t *s2);
+wchar_t *wscat(wchar_t *s1, const wchar_t *s2);
+
+/* wschr.c */
+wchar_t *wcschr(const wchar_t *sp, wchar_t c);
+wchar_t *wschr(const wchar_t *sp, wchar_t c);
+
+/* wscmp.c */
+int wcscmp(const wchar_t *s1, const wchar_t *s2);
+int wscmp(const wchar_t *s1, const wchar_t *s2);
+
+/* wscol.c */
+int wscol(const wchar_t *s1);
+
+/* wscpy.c */
+wchar_t *wcscpy(wchar_t *s1, const wchar_t *s2);
+wchar_t *wscpy(wchar_t *s1, const wchar_t *s2);
+
+/* wscspn.c */
+size_t wcscspn(const wchar_t *string, const wchar_t *charset);
+size_t wscspn(const wchar_t *string, const wchar_t *charset);
+
+/* wsdup.c */
+wchar_t *wsdup(const wchar_t *s1);
+
+/* wslen.c */
+size_t wcslen(const wchar_t *s);
+size_t wslen(const wchar_t *s);
+
+/* wsncasecmp.c */
+int wsncasecmp(const wchar_t *s1, const wchar_t *s2, size_t n);
+
+/* wsncat.c */
+wchar_t *wcsncat(wchar_t *s1, const wchar_t *s2, size_t n);
+wchar_t *wsncat(wchar_t *s1, const wchar_t *s2, size_t n);
+
+/* wsncmp.c */
+int wcsncmp(const wchar_t *s1, const wchar_t *s2, size_t n);
+int wsncmp(const wchar_t *s1, const wchar_t *s2, size_t n);
+
+/* wsncpy.c */
+wchar_t *wcsncpy(wchar_t *s1, const wchar_t *s2, size_t n);
+wchar_t *wsncpy(wchar_t *s1, const wchar_t *s2, size_t n);
+
+/* wspbrk.c */
+wchar_t *wcspbrk(const wchar_t *string, const wchar_t *brkset);
+wchar_t *wspbrk(const wchar_t *string, const wchar_t *brkset);
+
+/* wsprintf.c */
+int wsprintf(wchar_t *wstring, const char *format, ...);
+
+/* wsrchr.c */
+wchar_t *wcsrchr(const wchar_t *sp, wchar_t c);
+wchar_t *wsrchr(const wchar_t *sp, wchar_t c);
+
+/* wsscanf.c */
+int wsscanf(wchar_t *s, const char *format, ...);
+
+/* wssize.c */
+
+/* wsspn.c */
+size_t wcsspn(const wchar_t *string, const wchar_t *charset);
+size_t wsspn(const wchar_t *string, const wchar_t *charset);
+
+/* wstod.c */
+double wcstod(const wchar_t *cp, wchar_t **ptr);
+double wstod(const wchar_t *cp, wchar_t **ptr);
+
+/* wstok.c */
+wchar_t *wcstok(wchar_t *string, const wchar_t *sepset, wchar_t **ptr);
+wchar_t *wstok(wchar_t *string, const wchar_t *sepset);
+
+/* wstol.c */
+long wcstol(const wchar_t *str, wchar_t **ptr, int base);
+long wstol(const wchar_t *str, wchar_t **ptr, int base);
+
+/* wstoll.c */
+long long wstoll(const wchar_t *str, wchar_t **ptr, int base);
+long long watoll(const wchar_t *p);
+
+/* wsxfrm.c */
+size_t wsxfrm(wchar_t *s1, const wchar_t *s2, size_t n);
+int wscoll(const wchar_t *s1, const wchar_t *s2);
+
+/*
+ * /usr/src/lib/libc/$MACH/gen routines
+ */
+
+/* alloca.s */
+
+void *__builtin_alloca(size_t);
+
+/*
+ * modctl(int arg, ...) is not available from a header file, but our utilities
+ * which make use of it should be able to be lint clean.
+ */
+int modctl(int arg, ...);
+
+
+typedef float single;
+typedef unsigned extended[3];
+typedef long double quadruple;
+typedef unsigned fp_exception_field_type;
+
+typedef char decimal_string[512];
+
+enum fp_class_type {
+	fp_zero	 = 0,
+	fp_subnormal    = 1,
+	fp_normal	= 2,
+	fp_infinity	= 3,
+	fp_quiet	= 4,
+	fp_signaling    = 5
+};
+
+enum fp_direction_type {
+	fp_nearest	= 0,
+	fp_tozero	= 1,
+	fp_positive	= 2,
+	fp_negative	= 3
+};
+
+typedef struct {
+	enum fp_class_type fpclass;
+	int sign;
+	int exponent;
+	decimal_string ds;
+	int more;
+	int ndigits;
+} decimal_record;
+
+enum decimal_form {
+	fixed_form,
+	floating_form
+};
+
+typedef struct {
+	enum fp_direction_type rd;
+	enum decimal_form df;
+	int ndigits;
+} decimal_mode;
+
+enum decimal_string_form {
+	invalid_form,
+	whitespace_form,
+	fixed_int_form,
+	fixed_intdot_form,
+	fixed_dotfrac_form,
+	fixed_intdotfrac_form,
+	floating_int_form,
+	floating_intdot_form,
+	floating_dotfrac_form,
+	floating_intdotfrac_form,
+	inf_form,
+	infinity_form,
+	nan_form,
+	nanstring_form
+};
+
+typedef int sigfpe_code_type;
+
+typedef void (*sigfpe_handler_type)();
+
+extern sigfpe_handler_type sigfpe(sigfpe_code_type, sigfpe_handler_type);
+
+extern void single_to_decimal(single *, decimal_mode *, decimal_record *,
+				fp_exception_field_type *);
+
+extern void double_to_decimal(double *, decimal_mode *, decimal_record *,
+				fp_exception_field_type *);
+extern void extended_to_decimal(extended *, decimal_mode *,
+				decimal_record *, fp_exception_field_type *);
+extern void quadruple_to_decimal(quadruple *, decimal_mode *,
+				decimal_record *, fp_exception_field_type *);
+extern void decimal_to_single(single *, decimal_mode *, decimal_record *,
+				fp_exception_field_type *);
+extern void decimal_to_double(double *, decimal_mode *, decimal_record *,
+				fp_exception_field_type *);
+extern void decimal_to_extended(extended *, decimal_mode *,
+				decimal_record *, fp_exception_field_type *);
+extern void decimal_to_quadruple(quadruple *, decimal_mode *,
+				decimal_record *, fp_exception_field_type *);
+extern void string_to_decimal(char **, int, int, decimal_record *,
+				enum decimal_string_form *, char **);
+extern void func_to_decimal(char **, int, int, decimal_record *,
+				enum decimal_string_form *, char **,
+				int (*)(void), int *, int (*)(int));
+extern void file_to_decimal(char **, int, int, decimal_record *,
+				enum decimal_string_form *, char **,
+				FILE *, int *);
+extern char *seconvert(single *, int, int *, int *, char *);
+extern char *sfconvert(single *, int, int *, int *, char *);
+extern char *sgconvert(single *, int, int, char *);
+extern char *econvert(double, int, int *, int *, char *);
+extern char *fconvert(double, int, int *, int *, char *);
+extern char *gconvert(double, int, int, char *);
+extern char *qeconvert(quadruple *, int, int *, int *, char *);
+extern char *qfconvert(quadruple *, int, int *, int *, char *);
+extern char *qgconvert(quadruple *, int, int, char *);
+
+extern void __assert(const char *, const char *, int);
+
+extern int setjmp(jmp_buf);
+extern void longjmp(jmp_buf, int);
+extern int sigsetjmp(sigjmp_buf, int);
+extern void siglongjmp(sigjmp_buf, int);
+
+int uname(struct utsname *);
+int _uname(struct utsname *);
+
+extern int errno;
+extern int *___errno();
+
+extern int getloadavg(double [], int);
+
+extern long pcsample(uintptr_t [], long);
+
+extern size_t __fbufsize(FILE *stream);
+extern int __freading(FILE *stream);
+extern int __fwriting(FILE *stream);
+extern int __freadable(FILE *stream);
+extern int __fwritable(FILE *stream);
+extern int __flbf(FILE *stream);
+extern void __fpurge(FILE *stream);
+extern size_t __fpending(FILE *stream);
+extern void _flushlbf(void);
+
+#ifdef __i386
+int fstat(int, struct stat *);
+int stat(const char *, struct stat *);
+int lstat(const char *, struct stat *);
+int mknod(const char *, mode_t, dev_t);
+#endif

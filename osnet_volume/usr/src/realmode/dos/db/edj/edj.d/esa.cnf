@@ -1,0 +1,118 @@
+#
+# Copyright (c) 1995 Sun Microsystems, Inc.  All Rights Reserved.
+#
+
+#ident "@(#)esa.cnf        1.2     95/06/05 SMI"
+
+name="esa" class="sysbus" 
+	interrupts=5,9,5,10,5,11,5,12,5,13,5,14,5,15 reg=0x1c00,0,0
+	ioaddr=0x1c00 channel=0 
+	flow_control="dmult" queue="qsort" disk="scdk" tape="sctp";
+name="esa" class="sysbus" 
+	interrupts=5,9,5,10,5,11,5,12,5,13,5,14,5,15 reg=0x1c01,0,0
+	ioaddr=0x1c00 channel=8 
+	flow_control="dmult" queue="qsort" disk="scdk" tape="sctp";
+name="esa" class="sysbus" 
+	interrupts=5,9,5,10,5,11,5,12,5,13,5,14,5,15 reg=0x2c00,0,0
+	ioaddr=0x2c00 channel=0 
+	flow_control="dmult" queue="qsort" disk="scdk" tape="sctp";
+name="esa" class="sysbus" 
+	interrupts=5,9,5,10,5,11,5,12,5,13,5,14,5,15 reg=0x2c01,0,0
+	ioaddr=0x2c00 channel=8 
+	flow_control="dmult" queue="qsort" disk="scdk" tape="sctp";
+name="esa" class="sysbus" 
+	interrupts=5,9,5,10,5,11,5,12,5,13,5,14,5,15 reg=0x3c00,0,0
+	ioaddr=0x3c00 channel=0 
+	flow_control="dmult" queue="qsort" disk="scdk" tape="sctp";
+name="esa" class="sysbus" 
+	interrupts=5,9,5,10,5,11,5,12,5,13,5,14,5,15 reg=0x3c01,0,0
+	ioaddr=0x3c00 channel=8 
+	flow_control="dmult" queue="qsort" disk="scdk" tape="sctp";
+name="esa" class="sysbus" 
+	interrupts=5,9,5,10,5,11,5,12,5,13,5,14,5,15 reg=0x4c00,0,0
+	ioaddr=0x4c00 channel=0 
+	flow_control="dmult" queue="qsort" disk="scdk" tape="sctp";
+name="esa" class="sysbus" 
+	interrupts=5,9,5,10,5,11,5,12,5,13,5,14,5,15 reg=0x4c01,0,0
+	ioaddr=0x4c00 channel=8 
+	flow_control="dmult" queue="qsort" disk="scdk" tape="sctp";
+name="esa" class="sysbus" 
+	interrupts=5,9,5,10,5,11,5,12,5,13,5,14,5,15 reg=0x5c00,0,0
+	ioaddr=0x5c00 channel=0 
+	flow_control="dmult" queue="qsort" disk="scdk" tape="sctp";
+name="esa" class="sysbus" 
+	interrupts=5,9,5,10,5,11,5,12,5,13,5,14,5,15 reg=0x5c01,0,0
+	ioaddr=0x5c00 channel=8 
+	flow_control="dmult" queue="qsort" disk="scdk" tape="sctp";
+name="esa" class="sysbus" 
+	interrupts=5,9,5,10,5,11,5,12,5,13,5,14,5,15 reg=0x6c00,0,0
+	ioaddr=0x6c00 channel=0 
+	flow_control="dmult" queue="qsort" disk="scdk" tape="sctp";
+name="esa" class="sysbus" 
+	interrupts=5,9,5,10,5,11,5,12,5,13,5,14,5,15 reg=0x6c01,0,0
+	ioaddr=0x6c00 channel=8 
+	flow_control="dmult" queue="qsort" disk="scdk" tape="sctp";
+name="esa" class="sysbus" 
+	interrupts=5,9,5,10,5,11,5,12,5,13,5,14,5,15 reg=0x7c00,0,0
+	ioaddr=0x7c00 channel=0 
+	flow_control="dmult" queue="qsort" disk="scdk" tape="sctp";
+name="esa" class="sysbus" 
+	interrupts=5,9,5,10,5,11,5,12,5,13,5,14,5,15 reg=0x7c01,0,0
+	ioaddr=0x7c00 channel=8 
+	flow_control="dmult" queue="qsort" disk="scdk" tape="sctp";
+name="esa" class="sysbus" 
+	interrupts=5,9,5,10,5,11,5,12,5,13,5,14,5,15 reg=0x8c00,0,0
+	ioaddr=0x8c00 channel=0 
+	flow_control="dmult" queue="qsort" disk="scdk" tape="sctp";
+name="esa" class="sysbus" 
+	interrupts=5,9,5,10,5,11,5,12,5,13,5,14,5,15 reg=0x8c01,0,0
+	ioaddr=0x8c00 channel=8 
+	flow_control="dmult" queue="qsort" disk="scdk" tape="sctp";
+name="esa" class="sysbus" 
+	interrupts=5,9,5,10,5,11,5,12,5,13,5,14,5,15 reg=0x9c00,0,0
+	ioaddr=0x9c00 channel=0 
+	flow_control="dmult" queue="qsort" disk="scdk" tape="sctp";
+name="esa" class="sysbus" 
+	interrupts=5,9,5,10,5,11,5,12,5,13,5,14,5,15 reg=0x9c01,0,0
+	ioaddr=0x9c00 channel=8 
+	flow_control="dmult" queue="qsort" disk="scdk" tape="sctp";
+#name="esa" class="sysbus" 
+#	interrupts=5,9,5,10,5,11,5,12,5,13,5,14,5,15 reg=0xac00,0,0
+#	ioaddr=0xac00 channel=0 
+#	flow_control="dmult" queue="qsort" disk="scdk" tape="sctp";
+#name="esa" class="sysbus" 
+#	interrupts=5,9,5,10,5,11,5,12,5,13,5,14,5,15 reg=0xac01,0,0
+#	ioaddr=0xac00 channel=8 
+#	flow_control="dmult" queue="qsort" disk="scdk" tape="sctp";
+#name="esa" class="sysbus" 
+#	interrupts=5,9,5,10,5,11,5,12,5,13,5,14,5,15 reg=0xbc00,0,0
+#	ioaddr=0xbc00 channel=0 
+#	flow_control="dmult" queue="qsort" disk="scdk" tape="sctp";
+#name="esa" class="sysbus" 
+#	interrupts=5,9,5,10,5,11,5,12,5,13,5,14,5,15 reg=0xbc01,0,0
+#	ioaddr=0xbc00 channel=8 
+#	flow_control="dmult" queue="qsort" disk="scdk" tape="sctp";
+#name="esa" class="sysbus" 
+#	interrupts=5,9,5,10,5,11,5,12,5,13,5,14,5,15 reg=0xcc00,0,0
+#	ioaddr=0xcc00 channel=0 
+#	flow_control="dmult" queue="qsort" disk="scdk" tape="sctp";
+#name="esa" class="sysbus" 
+#	interrupts=5,9,5,10,5,11,5,12,5,13,5,14,5,15 reg=0xcc01,0,0
+#	ioaddr=0xcc00 channel=8 
+#	flow_control="dmult" queue="qsort" disk="scdk" tape="sctp";
+#name="esa" class="sysbus" 
+#	interrupts=5,9,5,10,5,11,5,12,5,13,5,14,5,15 reg=0xdc00,0,0
+#	ioaddr=0xdc00 channel=0 
+#	flow_control="dmult" queue="qsort" disk="scdk" tape="sctp";
+#name="esa" class="sysbus" 
+#	interrupts=5,9,5,10,5,11,5,12,5,13,5,14,5,15 reg=0xdc01,0,0
+#	ioaddr=0xdc00 channel=8 
+#	flow_control="dmult" queue="qsort" disk="scdk" tape="sctp";
+#name="esa" class="sysbus" 
+#	interrupts=5,9,5,10,5,11,5,12,5,13,5,14,5,15 reg=0xec00,0,0
+#	ioaddr=0xec00 channel=0 
+#	flow_control="dmult" queue="qsort" disk="scdk" tape="sctp";
+#name="esa" class="sysbus" 
+#	interrupts=5,9,5,10,5,11,5,12,5,13,5,14,5,15 reg=0xec01,0,0
+#	ioaddr=0xec00 channel=8 
+#	flow_control="dmult" queue="qsort" disk="scdk" tape="sctp";

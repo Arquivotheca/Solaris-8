@@ -1,0 +1,13 @@
+#!/sbin/sh
+#
+# Copyright (c) 1995, 1997 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#ident	"@(#)cachefs.root	1.2	97/12/08 SMI"
+
+# If the root is a cachefs file system, start the cachefsd for it.
+# If the root is not disconnectable then the cachefsd exits.
+
+if [ "x`/usr/lib/fs/cachefs/cfsfstype -r 2>/dev/null`" = xcachefs ]; then
+	/usr/lib/fs/cachefs/cachefsd -r /.cache/rootcache
+fi

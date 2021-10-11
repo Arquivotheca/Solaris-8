@@ -1,0 +1,14 @@
+#
+# Copyright (c) 1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#pragma ident   "@(#)Makefile.targ 1.1     99/03/11 SMI"
+#
+# lib/cfgadm_plugins/pci/spec/Makefile.targ
+
+LIBRARY	=	pci.a
+VERS	=	.1
+
+OBJECTS	=	pci.o
+
+SPECCPP =

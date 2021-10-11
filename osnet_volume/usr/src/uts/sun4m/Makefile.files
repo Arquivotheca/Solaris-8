@@ -1,0 +1,150 @@
+#
+# Copyright (c) 1991-1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#pragma ident	"@(#)Makefile.files	1.71	99/10/22 SMI"
+#
+#	This Makefile defines all file modules for the directory uts/sun4m
+#	and it's children. These are the source files which are sun4m
+#	"implementation architecture" dependent.
+#
+
+#
+#	object lists
+#
+CORE_OBJS +=			\
+	bootops.o		\
+	cbe.o			\
+	confunix.o		\
+	copy.o			\
+	ddi_impl.o		\
+	dvma.o			\
+	fillsysinfo.o		\
+	genalign.o		\
+	hardclk.o		\
+	hat_conf.o		\
+	hat_srmmu.o		\
+	hat_sx.o		\
+	iommu.o			\
+	ip_ocsum.o		\
+	mach_4m.o		\
+	mach_small4m.o		\
+	mach_srmmu.o		\
+	mach_sysconfig.o	\
+	machdep.o		\
+	mem_config_stubs.o	\
+	memlist.o		\
+	mhat.o			\
+	mlsetup.o		\
+	mmu.o			\
+	module.o		\
+	module_asm.o		\
+	module_mp.o		\
+	module_mp_asm.o		\
+	mp_call.o		\
+	mp_startup.o		\
+	ppage.o			\
+	proc_init.o		\
+	srmmu_asm.o		\
+	startup.o		\
+	subr_4m.o		\
+	subr_small4m.o		\
+	swtch.o			\
+	trap.o			\
+	vm_machdep.o		\
+	x_call.o
+
+#
+#	locore.o is special. It must be the first file relocated so that it
+#	it is relocated just where its name implies.
+#
+SPECIAL_OBJS +=	locore.o
+
+#
+#			driver modules
+#
+ROOTNEX_OBJS +=	rootnex.o
+IOMMU_OBJS +=	iommunex.o
+SX_OBJS +=	sx.o
+SX_CMEM_OBJS +=	sx_cmem.o
+PMC_OBJS +=     pmc.o
+BATTERY_OBJS +=	battery.o
+MIC_OBJS +=	mic.o
+
+#
+#			Misc modules
+#
+OBPSYM_OBJS +=	obpsym.o obpsym_obp.o
+BOOTDEV_OBJS	+= bootdev.o
+
+
+#
+#	checkpoint-resume platform dependent objects
+#
+CPR_IMPL_OBJS	+= cpr_impl.o cpr_resume_setup.o
+
+#
+#			cpu modules
+#
+CPU_OBJ		= cpu_module.o
+DEFAULT_OBJS =			\
+	module_conf.o		\
+	ross605.o		\
+	ross605_asm.o		\
+	ross625.o		\
+	ross625_asm.o		\
+	ross625_overflow.o	\
+	ross625_underflow.o	\
+	swift.o			\
+	swift_asm.o		\
+	tsu.o			\
+	tsu_asm.o		\
+	vik.o			\
+	vik_asm.o		\
+	vik_overflow.o		\
+	vik_underflow.o
+COLO_OBJS =			\
+	ross625.o		\
+	ross625_asm.o		\
+	ross625_module.o	\
+	ross625_overflow.o	\
+	ross625_underflow.o
+SWIFT_OBJS	= swift.o swift_asm.o swift_module.o
+TSU_OBJS	= tsu.o tsu_asm.o tsu_module.o
+VIK_OBJS	= vik.o vik_asm.o vik_overflow.o vik_underflow.o vik_module.o
+
+#
+#	Section 3:	Misc.
+#
+ALL_DEFS	+= -Dsun4m
+INC_PATH	+= -I$(UTSBASE)/sun4m
+
+#
+# Since assym.h is a derived file, the dependency must be explicit for
+# all files including this file. (This is only actually required in the
+# instance when the .nse_depinfo file does not exist.) It may seem that
+# the lint targets should also have a similar dependency, but they don't
+# since only C headers are included when #defined(lint) is true.
+#
+ASSYM_DEPS +=		\
+	copy.o		\
+	genalign.o	\
+	locore.o	\
+	map.o		\
+	proc_init.o	\
+	subr_4m.o	\
+	subr_small4m.o	\
+	swtch.o
+ASSYM_DEPS +=			\
+	module_asm.o		\
+	module_mp_asm.o		\
+	ross605_asm.o		\
+	ross625_asm.o		\
+	ross625_overflow.o	\
+	ross625_underflow.o	\
+	srmmu_asm.o		\
+	swift_asm.o		\
+	tsu_asm.o		\
+	vik_asm.o		\
+	vik_overflow.o		\
+	vik_underflow.o

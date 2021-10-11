@@ -1,0 +1,6 @@
+#!/bin/sh
+# ident	"@(#)inc.flg	1.1	93/08/18 SMI"
+
+
+echo_file usr/src/lib/Makefile.lib
+echo_file usr/src/lib/Makefile.targ

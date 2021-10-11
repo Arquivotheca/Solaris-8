@@ -1,0 +1,26 @@
+\
+\ Copyright (c) 1997-1998 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)cglistchk.nxt.dbg	1.7	98/07/19 SMI"
+
+#include <sys/types.h>
+#include <sys/t_lock.h>
+#include <sys/time.h>
+#include <sys/vnode.h>
+#include <vm/seg.h>
+#include <sys/fs/ufs_fs.h>
+#include "dummy.h"
+
+\
+\
+cg	""	cglistchk.nxt
+{adb_inline_begin}
+*(<C+{OFFSET, cg_magic})>/i/M
+<C,#(#(<M-90255))$<
+="dev"
+<D={HEX}
+<C+{OFFSET, cg_cgx}=""
+{adb_inline_end}
+	cg_cgx		sdecimal	"cgx"
+	cg_time		date		"time"

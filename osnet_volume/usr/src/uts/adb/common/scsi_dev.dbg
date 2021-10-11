@@ -1,0 +1,32 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)scsi_dev.dbg	1.5	98/01/19 SMI"
+
+#include <sys/scsi/scsi.h>
+#include "dummy.h"
+
+\
+\
+scsi_device             sd_             scsi_dev
+{adb_inline_begin}
+.>z
+<z+{OFFSET, sd_address}=""
+{adb_inline_end}
+        address                 .scsi_addr
+{adb_inline_begin}
+<z+{OFFSET, sd_dev}=""
+{adb_inline_end}
+        dev                     hex
+        mutex                   .mutex
+{adb_inline_begin}
+<z+{OFFSET, sd_reserved}=""
+{adb_inline_end}
+        reserved                hex
+        inq                     hex
+        sense                   hex
+        private                 hex
+{adb_inline_begin}
+<z+{SIZEOF}=""
+{adb_inline_end}

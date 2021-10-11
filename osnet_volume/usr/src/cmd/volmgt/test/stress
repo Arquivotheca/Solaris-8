@@ -1,0 +1,44 @@
+#!/bin/csh
+
+# "@(#)stress 1.3     93/03/06 SMI"
+
+#
+# Copyright (c) 1992 by Sun Microsystems, Inc.
+#
+
+#
+# Volume management stress test
+#
+
+set path=($path .)
+
+#
+# Have 50 processes concurrently read and write 10Mbytes 
+# on 25 test units.
+echo big read/write
+/bin/time vttest -n 25 -r -w -b 10240
+echo ejecting
+eject /vol/rdsk/unit*
+#
+# Insert/eject 1,000 times on 25 units, and every 10 iterations,
+# we remove all the volumes.
+#
+@ i = 0
+while ($i < 500)
+	@ j = 0
+	while ($j < 2) 
+		echo inserting i=$i j=$j
+		/bin/time vttest -n 25 -r -w -b 1
+		echo ejecting i=$i j=$j
+		eject /vol/rdsk/unit*
+		@ j = $j + 1
+	end
+	echo renaming
+	foreach n (/vol/rdsk/unit*)
+		mv $n /vol/rdsk/foo_`basename $n`
+	end
+	echo removing i=$i j=$j
+	rm /vol/rdsk/foo*
+	@ i = $i + 1
+end
+

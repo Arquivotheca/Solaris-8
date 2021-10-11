@@ -1,0 +1,33 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)segkp_data.dbg	1.5	98/02/04 SMI"
+
+\ arg             : address of a struct segkp_data
+\ uses            : mutex
+\ registers       : z
+\ description     : prints the contents of segkp_data structure
+
+#include <sys/types.h>
+#include <vm/seg_kp.h>
+#include "dummy.h"
+
+\
+\
+segkp_data              kp_
+{adb_inline_begin}
+.>z
+<z+{OFFSET, kp_lock}=""
+{adb_inline_end}
+        lock                    .mutex
+{adb_inline_begin}
+<z+{OFFSET, kp_base}=""
+{adb_inline_end}
+        base                    hex
+        len                     sdecimal
+        flags                   hex
+        cookie                  sdecimal
+        anon_idx                decimal
+        anon			hex
+        next                    hex

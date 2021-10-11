@@ -1,0 +1,47 @@
+#
+# Copyright (c) 1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+
+# ident	"@(#)prototype_sparc	1.3	99/10/07 SMI"
+
+#
+# This required package information file contains a list of package contents.
+# The 'pkgmk' command uses this file to identify the contents of a package
+# and their location on the development machine when building the package.
+# Can be created via a text editor or through use of the 'pkgproto' command.
+
+#!search <pathname pathname ...>	# where to find pkg objects
+#!include <filename>			# include another 'prototype' file
+#!default <mode> <owner> <group>	# default used if not specified on entry
+#!<param>=<value>			# puts parameter in pkg environment
+
+#
+# Include ISA independent files (prototype_com)
+#
+!include prototype_com
+#
+#
+# List files which are SPARC specific here
+#
+# source locations relative to the prototype file
+#
+#
+# SUNWusbx
+d none kernel 0755 root sys
+d none kernel/drv 0755 root sys
+d none kernel/drv/sparcv9 0755 root sys
+f none kernel/drv/sparcv9/ohci 0755 root sys
+f none kernel/drv/sparcv9/hubd 0755 root sys
+f none kernel/drv/sparcv9/hid 0755 root sys
+f none kernel/drv/sparcv9/usb_mid 0755 root sys
+f none kernel/drv/sparcv9/scsa2usb 0755 root sys
+d none kernel/misc 0755 root sys
+d none kernel/misc/sparcv9 0755 root sys
+f none kernel/misc/sparcv9/usba 0755 root sys
+f none kernel/misc/sparcv9/kbtrans 0755 root sys
+f none kernel/misc/sparcv9/hidparser 0755 root sys
+d none kernel/strmod 0755 root sys
+d none kernel/strmod/sparcv9 0755 root sys
+f none kernel/strmod/sparcv9/usbkbm 0755 root sys
+f none kernel/strmod/sparcv9/usbms 0755 root sys

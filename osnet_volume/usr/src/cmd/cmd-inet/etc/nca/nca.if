@@ -1,0 +1,9 @@
+#
+# Copyright (c) 1998-1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#ident	"@(#)nca.if	1.1	99/08/06 SMI"
+#
+# NCA feature interface configuration file
+#
+# Use this file to tell the NCA feature which interfaces to listen on

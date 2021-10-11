@@ -1,0 +1,19 @@
+#! /bin/sh
+#
+# ident "@(#)postinstall 1.4	99/05/27 SMI"
+#
+# Copyright (c) 1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+
+PATH="/bin:/usr/bin:/usr/sbin:${PATH}"
+export PATH
+
+EXIT=0
+
+grep '^pcelx\>' ${BASEDIR}/etc/name_to_major > /dev/null && \
+rem_drv -b ${BASEDIR} pcelx
+add_drv -b ${BASEDIR} -n -i '"pccard101,589" "pccard101,562,0"' pcelx \
+|| EXIT=1
+
+exit ${EXIT}

@@ -1,0 +1,36 @@
+#
+# Copyright (c) 1996,1998 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#ident	"@(#)prototype_com	1.6	99/05/20 SMI"
+#
+# This required package information file contains a list of package contents.
+# The 'pkgmk' command uses this file to identify the contents of a package
+# and their location on the development machine when building the package.
+# Can be created via a text editor or through use of the 'pkgproto' command.
+
+#!search <pathname pathname ...>	# where to find pkg objects
+#!include <filename>			# include another 'prototype' file
+#!default <mode> <owner> <group>	# default used if not specified on entry
+#!<param>=<value>			# puts parameter in pkg environment
+
+# packaging files
+i pkginfo
+i copyright
+i depend
+i preremove
+i preinstall
+i i.initd
+#
+# source locations relative to the prototype file
+#
+# SUNWdhcsr
+#
+d none etc 755 root sys
+d none etc/init.d 755 root sys
+d none etc/rc0.d 755 root sys
+d none etc/rc1.d 755 root sys
+d none etc/rc2.d 755 root sys
+d none etc/rc3.d 755 root sys
+e initd etc/init.d/dhcp 744 root sys
+d none etc/default 755 root sys

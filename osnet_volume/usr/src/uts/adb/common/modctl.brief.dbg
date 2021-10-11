@@ -1,0 +1,28 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)modctl.brief.dbg	1.3	98/01/19 SMI"
+
+\ arg             : address of a struct modctl
+\ uses            :
+\ registers       : m
+\ description     : prints the flags, module and filename from
+\                   the modctl structure
+\ comments        : changed mod_<flags> offset from mod_stub+4 to
+\                   mod_loaded
+
+#include <sys/modctl.h>
+#include "dummy.h"
+
+\
+\
+modctl          ""      modctl.brief
+{adb_inline_begin}
+.>m
+<m+{OFFSET, mod_id}/n"id"16tD
+(<m+{OFFSET, mod_loaded})/n"flags"16tX
+*(<m+{OFFSET, mod_modname})/n"module"16t"`"s"'"
+*(<m+{OFFSET, mod_filename})/n"file  "16t"`"s"'"
+<m+{SIZEOF}=""
+{adb_inline_end}

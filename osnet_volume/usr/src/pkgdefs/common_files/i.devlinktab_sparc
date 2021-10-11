@@ -1,0 +1,149 @@
+#!/bin/sh
+#
+#ident	"@(#)i.devlinktab_sparc	1.28	99/02/15 SMI"
+#
+# Copyright (c) 1998 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+
+PATH="/usr/bin:/usr/sbin:${PATH}"
+export PATH
+
+while read src dest
+do
+	if [ ! -f $dest ] ; then
+		cp $src $dest
+	else
+		grep '^#ident[	]*"@(#)devlink.tab' $src \
+		    > /tmp/newident.$$ 2>/dev/null
+		egrep -v '^#(pragma ident|ident)[	]*"@\(#\)devlink.tab' $dest \
+		    > /tmp/rest.$$ 2>/dev/null
+		cat /tmp/newident.$$ /tmp/rest.$$ > $dest
+		sed -e '/^type=ddi_pseudo;name=app	/d' \
+		    -e '/^type=ddi_pseudo;name=sw	/d' \
+		    -e '/^type=ddi_pseudo;name=consfb;minor=consfb	/d' \
+		    -e '/^type=ddi_pseudo;name=win	/d' \
+		    -e '/^type=ddi_pseudo;name=winlock	/d' \
+		    -e '/^type=ddi_pseudo;name=mm	/d' \
+		    -e '/^type=ddi_pseudo;name=conskbd	/d' \
+		    -e '/^type=ddi_pseudo;name=consms	/d' \
+		    -e '/^type=ddi_pseudo;name=wc	/d' \
+		    -e '/^type=ddi_pseudo;name=dump	/d' \
+		    -e '/^type=ddi_pseudo;name=cn	/d' \
+		    -e '/^type=ddi_pseudo;name=lo	/d' \
+		    -e '/^type=ddi_pseudo;name=ptm	/d' \
+		    -e '/^type=ddi_pseudo;name=ptc	/d' \
+		    -e '/^type=ddi_pseudo;name=pts	/d' \
+		    -e '/^type=ddi_pseudo;name=ptsl	/d' \
+		    -e '/^type=ddi_pseudo;name=log	/d' \
+		    -e '/^type=ddi_pseudo;name=sad	/d' \
+		    -e '/^type=ddi_pseudo;name=sy	/d' \
+		    -e '/^type=ddi_pseudo;name=clone	/d' \
+		    -e '/^type=ddi_network	/d' \
+		    -e '/^type=ddi_pseudo;name=openeepr	/d' \
+		    -e '/^type=ddi_pseudo;name=lockstat	/d' \
+		    -e '/^type=ddi_pseudo;name=kstat	/d' \
+		    -e '/^type=ddi_pseudo;name=ksyms	/d' \
+		    -e '/^type=ddi_display	/d' \
+		    -e '/^type=ddi_pseudo;name=clone;minor=icmp	/d' \
+		    -e '/^type=ddi_pseudo;name=SUNW,bpp	/d' \
+		    -e '/^type=ddi_pseudo;name=eeprom	/d' \
+		    -e '/^type=ddi_pseudo;name=clone;minor=ipdcm	/d' \
+		    -e '/^type=ddi_pseudo;name=vol	/d' \
+		    -e '/^type=ddi_pseudo;name=profile	/d' \
+		    -e '/^type=ddi_parallel;name=mcpp	/d' \
+		    -e '/^type=ddi_pseudo;name=zsh	/d' \
+		    -e '/^type=ddi_pseudo;name=clone;minor=zsh	/d' \
+		    -e '/^type=ddi_pseudo;name=SUNW,sx	/d' \
+		    -e '/^type=ddi_pseudo;name=sx_cmem	/d' \
+		    -e '/^type=ddi_parallel;name=SUNW,spif;minor=stclp	/d' \
+		    -e '/^type=ddi_pseudo;name=SUNW,spif;minor=stc	/d' \
+		    -e '/^type=ddi_pseudo;name=tl;minor=ticots	/d' \
+		    -e '/^type=ddi_pseudo;name=tl;minor=ticotsord	/d' \
+		    -e '/^type=ddi_pseudo;name=tl;minor=ticlts	/d' \
+		    -e '/^type=ddi_pseudo;name=tnf	/d' \
+		    -e '/^type=ddi_pseudo;name=pm	/d' \
+		    -e '/^type=ddi_pseudo;name=winlock	/d' \
+		    -e '/^type=ddi_pseudo;name=mm	/d' \
+		    -e '/^type=ddi_pseudo;name=conskbd	/d' \
+		    -e '/^type=ddi_pseudo;name=consms	/d' \
+		    -e '/^type=ddi_pseudo;name=wc	/d' \
+		    -e '/^type=ddi_pseudo;name=dump	/d' \
+		    -e '/^type=ddi_pseudo;name=cn	/d' \
+		    -e '/^type=ddi_pseudo;name=lo	/d' \
+		    -e '/^type=ddi_pseudo;name=ptm	/d' \
+		    -e '/^type=ddi_pseudo;name=ptc	/d' \
+		    -e '/^type=ddi_pseudo;name=pts	/d' \
+		    -e '/^type=ddi_pseudo;name=ptsl	/d' \
+		    -e '/^type=ddi_pseudo;name=log	/d' \
+		    -e '/^type=ddi_pseudo;name=sad	/d' \
+		    -e '/^type=ddi_pseudo;name=sy	/d' \
+		    -e '/^type=ddi_pseudo;name=clone	/d' \
+		    -e '/^type=ddi_network	/d' \
+		    -e '/^type=ddi_pseudo;name=openeepr	/d' \
+		    -e '/^type=ddi_pseudo;name=lockstat	/d' \
+		    -e '/^type=ddi_pseudo;name=kstat	/d' \
+		    -e '/^type=ddi_pseudo;name=ksyms	/d' \
+		    -e '/^type=ddi_display	/d' \
+		    -e '/^type=ddi_pseudo;name=clone;minor=icmp	/d' \
+		    -e '/^type=ddi_pseudo;name=SUNW,bpp	/d' \
+		    -e '/^type=ddi_pseudo;name=eeprom	/d' \
+		    -e '/^type=ddi_pseudo;name=clone;minor=ipdcm	/d' \
+		    -e '/^type=ddi_pseudo;name=vol	/d' \
+		    -e '/^type=ddi_pseudo;name=profile	/d' \
+		    -e '/^type=ddi_parallel;name=mcpp	/d' \
+		    -e '/^type=ddi_pseudo;name=zsh	/d' \
+		    -e '/^type=ddi_pseudo;name=clone;minor=zsh	/d' \
+		    -e '/^type=ddi_pseudo;name=SUNW,sx	/d' \
+		    -e '/^type=ddi_pseudo;name=sx_cmem	/d' \
+		    -e '/^type=ddi_parallel;name=SUNW,spif;minor=stclp	/d' \
+		    -e '/^type=ddi_pseudo;name=SUNW,spif;minor=stc	/d' \
+		    -e '/^type=ddi_pseudo;name=tl;minor=ticots	/d' \
+		    -e '/^type=ddi_pseudo;name=tl;minor=ticotsord	/d' \
+		    -e '/^type=ddi_pseudo;name=tl;minor=ticlts	/d' \
+		    -e '/^type=ddi_pseudo;name=tnf	/d' \
+		    -e '/^type=ddi_pseudo;name=pm	/d' \
+		    -e '/^type=ddi_block:diskette;minor=c	/d' \
+		    -e '/^type=ddi_block:diskette;minor=c,raw	/d' \
+		    -e '/^type=ddi_block:diskette;minor=c	/d' \
+		    -e '/^type=ddi_block:diskette;minor=c,raw	/d' \
+		    -e '/^type=ddi_pseudo;name=tod	/d' \
+		    -e '/^type=ddi_other;name=SUNW,pmc	/d' \
+		    -e '/^type=ddi_other;name=SUNW,mic	/d' \
+		    -e '/^type=ddi_pseudo;name=SUNW,envctrl	/d' \
+		    -e '/^type=ddi_other;name=power	/d' \
+		    -e '/^type=ddi_pseudo;name=SUNW,envctrltwo	/d' \
+		    -e 's,sys/obpdefs.h,<sys/sunddi.h>,' $dest > /tmp/d.$$
+
+		#
+		# Add 'md' entries back if removed
+		#
+		grep 'type=ddi_pseudo;name=md;minor=admin' \
+			/tmp/d.$$ >/dev/null 2>&1
+		if [ $? -ne 0 ]; then
+			cat >>/tmp/d.$$ <<-EOM
+			type=ddi_pseudo;name=md;minor=admin	md/admin
+			EOM
+		fi
+		grep 'type=ddi_pseudo;name=md;minor2=blk' \
+			/tmp/d.$$ >/dev/null 2>&1
+		if [ $? -ne 0 ]; then
+			cat >>/tmp/d.$$ <<-EOM
+			type=ddi_pseudo;name=md;minor2=blk	md/dsk/d\M1
+			EOM
+		fi
+		grep 'type=ddi_pseudo;name=md;minor2=raw' \
+			/tmp/d.$$ >/dev/null 2>&1
+		if [ $? -ne 0 ]; then
+			cat >>/tmp/d.$$ <<-EOM
+			type=ddi_pseudo;name=md;minor2=raw	md/rdsk/d\M1
+			EOM
+		fi
+
+		cp /tmp/d.$$ $dest
+		rm -f /tmp/d.$$ /tmp/newident.$$ /tmp/rest.$$
+	fi
+done
+
+exit 0
+

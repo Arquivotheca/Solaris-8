@@ -1,0 +1,32 @@
+#!/sbin/sh
+#
+# Copyright (c) 1997-1998 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#ident	"@(#)cron	1.13	98/04/19 SMI"
+
+case "$1" in
+'start')
+	if [ -p /etc/cron.d/FIFO ]; then
+		if /usr/bin/pgrep -x -u 0 -P 1 cron >/dev/null 2>&1; then
+			echo "$0: cron is already running"
+			exit 0
+		fi
+	fi
+
+	if [ -x /usr/sbin/cron ]; then
+		/usr/bin/rm -f /etc/cron.d/FIFO
+		/usr/sbin/cron &
+	fi
+	;;
+
+'stop')
+	/usr/bin/pkill -x -u 0 -P 1 cron
+	;;
+
+*)
+	echo "Usage: $0 { start | stop }"
+	exit 1
+	;;
+esac
+exit 0

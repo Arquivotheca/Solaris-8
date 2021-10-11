@@ -1,0 +1,79 @@
+#########################################################################
+#									#
+#	Copyright (c) 1997 by Sun Microsystems, Inc.			#
+#	All Rights Reserved.						#
+#									#
+#	@(#)readme.dbg	1.8	97/04/19 SMI				#
+#									#
+#########################################################################
+
+Instructions for installation of Realmode DDK Debug Files
+=========================================================
+
+This document assumes that you are familiar with the SunSoft Solaris x86
+Realmode Driver white paper and the Realmode Driver External Interface
+Specification.
+
+The file DEBUG.ZIP contains a package to help debug real mode drivers
+built from the files supplied in the basic development kit (BASIC.ZIP).
+You should have already installed the basic development files.
+
+Download this file (README.DBG) and DEBUG.ZIP and copy them into the
+root of your realmode development tree (usually C:\BOOT).  Extract the
+files from DEBUG.ZIP such that the directory hierarchy is preserved.
+Some extraction tools require an argument to prevent all the files from
+being placed in the local directory.  You should have the following
+directory hierarchy after extraction:
+
+C:\BOOT
+    +--	INC
+    |
+    +--	DRIVERS
+	 +----- BEFDEBUG
+	 |
+	 +-----	HALFBEFS
+	 |
+	 +-----	INCLUDE
+	 |
+	 +-----	LIB
+	 |
+	 +-----	NETWORK
+	 |	 +-----	PCN
+	 |
+	 +----- PROTO
+	 |
+	 +-----	SCSI
+		 +-----	AHA1540
+
+See the Realmode Drivers white paper for details of using BEFDEBUG.
+The BEFDEBUG executable, and its sources, can be found in
+C:\BOOT\DRIVERS\BEFDEBUG.  If, for any reason, you need to rebuild
+BEFDEBUG you may need to edit C:\BOOT\DRIVERS\BEFDEBUG\MAKEFILE
+to describe the location of the MSVC include and library files.
+See the comments in the MAKEFILE for full details.
+
+Release Notes
+=============
+
+A new command line option has been added to BEFDEBUG to make it easier to
+read large volumes of output.  The -pNN option causes BEFDEBUG to pause
+after every NN lines of output and wait for a keystroke before resuming.
+The -p option with no numerical suffix uses a default value, presently 20.
+
+The BEFDEBUG program attempts to distinguish driver output from its own
+output.  Driver output that is handled by BEFDEBUG is enclosed by "<<" and
+">>".  This mechanism works best for full lines of output, so you should
+consider using line-oriented error and/or progress debugging messages.  Note
+that only driver output from the probe and install functions passes through
+BEFDEBUG.  Driver output during service interrupt handling is not handled by
+BEFDEBUG and will not be delimited by "<<" and ">>".
+
+If you try to build debug drivers using the files distributed with the DDK,
+you might see an error message related to signatures in MSVC.PDB files.  If
+this occurs, change directory to DRIVERS then run "NMAKE CLEAN" and "NMAKE
+DEBUG" before attempting to build your driver.  This step ensures that the
+debugging objects *.DBJ are consistent with your system.
+
+The BEFDEBUG program is not fully implemented.  It does not yet handle an
+input data file for the "probe" function.  This limitation will be removed
+in a future version.

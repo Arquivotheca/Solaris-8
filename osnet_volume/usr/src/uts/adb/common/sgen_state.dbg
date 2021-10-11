@@ -1,0 +1,29 @@
+\
+\ Copyright (c) 1999 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)sgen_state.dbg	1.1	99/09/23 SMI"
+
+#include <sys/scsi/targets/sgendef.h>
+#include "dummy.h"
+
+\
+\
+sgen_state	sgen_	sgen_state 
+{adb_inline_begin}
+.>z
+{adb_inline_end}
+	scsidev			hex
+	ucmd			hex
+	cmdbuf			hex
+	cmdpkt			hex
+	cmdbuf_cv		hex
+	flags			hex
+	rqspkt			hex
+	rqsbuf			hex
+	arq_enabled		hex
+	diag			hex
+	restart_timeid		hex
+{adb_inline_begin}
+<z+{SIZEOF}=""
+{adb_inline_end}

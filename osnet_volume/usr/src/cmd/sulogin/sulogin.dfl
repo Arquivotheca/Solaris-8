@@ -1,0 +1,6 @@
+#ident  "@(#)sulogin.dfl 1.1     95/02/23 SMI"
+
+# Uncomment the following line if your machine is physically secure
+# and you want to let this machine be booted in single user without
+# requiring a passwd.
+#PASSREQ=NO

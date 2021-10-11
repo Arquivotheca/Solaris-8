@@ -1,0 +1,33 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)inodelistiter.nxt.dbg	1.4	98/01/19 SMI"
+
+#include <sys/types.h>
+#include <sys/t_lock.h>
+#include <sys/time.h>
+#include <sys/vnode.h>
+#include <vm/seg.h>
+#include <sys/fs/ufs_inode.h>
+#include "dummy.h"
+
+\
+\
+inode	""	inodelistiter.nxt
+{adb_inline_begin}
+<F+{OFFSET, i_number}=""
+{adb_inline_end}
+	i_number	sdecimal	INODE
+{adb_inline_begin}
+<F+{OFFSET, i_flag}=""n
+{adb_inline_end}
+	i_flag		hex		flag
+	i_ic.ic_smode	octal		mode
+	i_dev		hex		dev
+	i_ic.ic_lsize	hex		size
+{adb_inline_begin}
+*(<F+{OFFSET, i_chain[0]})>F
+,(<F-<S)$<inodelistiter.nxt
+$<inodelist.nxt
+{adb_inline_end}

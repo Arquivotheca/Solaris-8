@@ -1,0 +1,27 @@
+/* LINTLIBRARY */
+/* PROTOLIB1 */
+
+/*
+ * Copyright (c) 1998 by Sun Microsystems, Inc.
+ * All rights reserved.
+ */
+#pragma ident   "@(#)llib-llpsec 1.1     98/07/10 SMI"
+
+#include "sys/types.h"
+
+typedef struct SECURE {
+    uid_t	uid;
+    gid_t	gid;
+    off_t	size;
+    time_t	date;
+    char	*system;
+    char	*user;
+    char	*req_id;
+}			SECURE;
+
+
+SECURE *	getsecure ( char * );
+int		putsecure ( char *, SECURE * );
+int		rmsecure (char *);
+void		freesecure ( SECURE * );
+

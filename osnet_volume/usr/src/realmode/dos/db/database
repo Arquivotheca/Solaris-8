@@ -1,0 +1,273 @@
+#ident "@(#)database 1.90 96/03/13"
+# Copyright (c) 1995 Sun Microsystems, Inc. 
+# All rights reserved.
+#
+# FOR DRIVER UPDATES, CHANGE THE FOLLOWING VARIABLES AS APPROPRIATE:
+    # Current Driver Update number. Increment the release number in
+    # DU_NUM for each official DU release.  Increment the level number
+    # for each internal DU build. (DU_NUM=Release.Level)
+    DU_NUM=DU1.03
+    # The part number suffix which increments for each DU.
+
+    PNS=NN
+    PART_NUM_FIRST_BOOT_3=258-5221-$PNS   # Increment $PNS for each DU release.
+    PART_NUM_SECOND_BOOT_3=258-5233-$PNS
+    PART_NUM_FIRST_BOOT_5=258-5047-$PNS
+    PART_NUM_SECOND_BOOT_5=258-5048-$PNS
+    PART_NUM_PATCH_3=258-5222-$PNS
+    PART_NUM_PATCH_5=258-4722-$PNS
+
+    #
+    # Patched Packages (PP) included in Driver Updates
+    # If existing patches are revised, change -NN as appropriate.
+    # If new patches added, add appropriate PP<n>_CONTENTS list below
+    # and add "$PP<n>" to the assignment of "PP_ALL" below.
+
+    PP1=102568-02/SUNWpsdir/reloc/platform/i86pc # ON ata and mscsi driver patch
+    PP2=102569-01/SUNWpsdcr/reloc/platform/i86pc # ON mlx driver patch
+    PP3=102570-01/SUNWpsdcr/reloc/platform/i86pc # ON asy driver patch
+    PP4=102571-01/SUNWos86r/reloc # PS dnet pcplusmp syspro driver patch
+    PP5=102572-01/SUNWpsdcr/reloc/platform/i86pc # ON kd driver patch
+
+    #
+    # Patches which are copied wholesale with no special processing onto the
+    # patch diskette(s), e.g., a patch which contains only inetboot, man pages,
+    # or PMI files. Call them "P<n>" because they're not "Patched Packages" but
+    # just patches; start after PP<n> numbers for clarity. Add "$P<n>" to the
+    # assignment of the "P_ALL" variable below.
+
+
+    #
+    # NOTE: only add drivers in this _CONTENTS section that are bootable 
+    # drivers; for example, don't list sbpro, or st, they are not drivers 
+    # that can be used to boot the system.
+    #
+    # The PP<n>_CONTENTS list(s) must also be modified to include or remove
+    # drivers as appropriate:
+    # '+' add the following suffix to the file name when copying into boot proto
+    # '=' change the existing suffix to the following suffix
+    # '!' remove the indicated part of the path when copying into boot proto
+    # Adding and changing a suffix not allowed.
+    # Changing and adding suffix not allowed.
+    # The suffix change indicator must follow the file name
+    # kernel/mach/pcplusmp not needed for boot
+
+    PP1_CONTENTS='kernel/drv/ata!kernel/
+		  kernel/drv/mscsi!kernel/
+		  kernel/drv/mscsi.conf=cnf!kernel/
+                 '
+    PP2_CONTENTS='kernel/drv/mlx!kernel/
+		  kernel/drv/mlx.conf=cnf!kernel/
+		 '
+    #PP3 is asy - DON'T PUT ON THE BOOT DISK!
+
+    PP4_CONTENTS='kernel/drv/dnet!kernel/
+		  kernel/mach/pcplusmp!kernel/
+		  kernel/mach/syspro!kernel/
+		 '
+    PP5_CONTENTS='kernel/drv/kd!kernel/
+		 '
+
+    #
+    #
+    # To add a new patch like the inetboot patch or the PMI file patch which
+    # just gets copied onto the end of the Driver Update set,
+    # look for P2; add something like it, and add that to P_ALL
+    #
+    # Don't change (') to (")!!! These are used to index back into their
+    # associated _CONTENTS lists.
+    PP_ALL='$PP1 $PP2 $PP3 $PP4 $PP5'
+    #
+
+# FOR FCS BOOT DISKETTES, UPDATE THE FOLLOWING VARIABLES AS APPROPRIATE:
+# These drivers are included in subsequent DU boot diskettes (and this
+# list remains static past FCS):
+    DOS_DSK_BOOT_DRVRS_FCS='adp.bef
+			    aha1540.bef
+			    aha1740.bef
+			    aic.bef
+			    ata.bef
+			    blogic.bef
+			    corvette.bef
+			    esavlb.xxx
+			    dpt.bef
+			    esa.bef
+			    iss.bef
+			    mcis.bef
+			    mlx.bef
+			    ncrs.bef
+			    pcscsi.bef
+			    trantor.bef'
+
+    DOS_NET_BOOT_DRVRS_FCS='dnet.bef
+			    eepro.bef
+			    el.bef
+			    elink.bef
+			    elx.bef
+			    iee.bef
+			    ieef.bef
+			    nee.bef
+			    nei.xxx
+			    nfe.bef
+			    pcn.bef
+			    pe3.bef
+			    riles.bef
+			    smc.bef
+			    smce.bef
+			    smceu.bef
+			    smcf.bef
+			    tr.bef'
+
+# FOR DU BOOT DISKETTES, UPDATE THE FOLLOWING VARIABLES AS APPROPRIATE:
+    # Inclusion or removal of drivers in/from these lists must be done
+    # coincidentally with changes to the PP<n>_CONTENTS lists above.
+    DOS_DSK_BOOT_DRVRS_DU=''
+
+    DOS_NET_BOOT_DRVRS_DU=''
+
+# FOR MDB DISKETTES, CHANGE THE FOLLOWING VARIABLE AS APPROPRIATE:
+    # The release/build with which the diskette corresponds (remains
+    # static past FCS).
+    RELEASE='2.5.1'
+
+#############################################################################
+#
+# The following variables are generally static and should not require
+# modification by the developer from build to build of either the DUs or
+# MDB diskettes.
+#
+# Location of the diskette build (db) directory (a subdirectory of the
+# realmode source workspace).
+BASEDIR=`pwd`
+# For Driver Updates, BOOT_DIR and PATCH_DIR are appended with $DU_NUM
+# For MDB Boot Diskettes, BOOT_DIR is appended with $RELEASE
+BOOT_DIR=$BASEDIR/BOOT
+PATCH_DIR=$BASEDIR/PATCH
+# The name of the diskette in the copyright notice
+COPYRT_DSKNM_DU='Driver Update'
+COPYRT_DSKNM_MDB='MDB'
+# The name of the release in the copyright notice
+COPYRT_RELNM_DU='2.5.1 for x86'
+COPYRT_RELNM_MDB="$RELEASE"
+# Place where we dump DOS-built drivers for inclusion on Driver Update Boot
+# and/or MDB Boot diskettes
+PROTO_DOS=$BASEDIR/../proto
+# The root directory of the realmode source heirarchy and the source
+# directories/files to move to DOS
+SRC=$BASEDIR/..
+SRC_DIRS_FILES='db
+		exe2bin.c
+		extbios
+		fd
+		hd
+		inc
+		lib
+		makefile
+		net'
+# Templates modified for inclusion on Driver Update and MDB Boot diskettes
+TMPL_COPY=$BASEDIR/copyright.tmpl
+TMPL_IDENT=$BASEDIR/ident.tmpl
+
+# Administrative files for Driver Update boot diskette
+GENERIC_ADMIN_LOC=generic # Files/dirs below are cp'd verbatim to boot diskette
+GENERIC_ADMIN_DRVR='generic/solaris.map
+		    generic/append.bat
+		    generic/comment.bat
+		    generic/makedir.bat
+		    generic/renbef.bat
+		    generic/replace.bat
+		    generic/solaris/classes.txt
+		    generic/solaris/nam_maj.txt
+		    generic/solaris/system.add'
+GENERIC_ADMIN_INST='generic/rc.d/inst9.sh'
+MDB_ADMIN_INST='rc.d/rcs9.sh
+	       append.bat
+	       comment.bat
+	       makedir.bat
+	       renbef.bat
+               replace.bat'
+###########################################################################
+# exclude the el and elink drivers on the Unisys U6000/DT2
+# see bug #1171933
+UNISYS_ADMIN_LOC=unisys   # Files/dirs below are cp'd verbatim to boot diskette
+UNISYS_ADMIN_DRVR='unisys/unisys.bat
+		   unisys/unisys.d/solaris.map
+		   unisys/unisys.d/system.add'
+UNISYS_ADMIN_INST='unisys/unisys.d/inst9.sh'
+###########################################################################
+###########################################################################
+# exclude the eepro, el, elink and smc drivers with the Novell 2000/2000plus
+# see bug #1171933
+NOV2000_ADMIN_LOC=nov2000 # Files/dirs below are cp'd verbatim to boot diskette
+NOV2000_ADMIN_DRVR='nov2000/nov2000.bat
+                   nov2000/nov2000.d/solaris.map
+                   nov2000/nov2000.d/system.add'
+NOV2000_ADMIN_INST='nov2000/nov2000.d/inst9.sh'
+###########################################################################
+# exclude the elink drivers for users of PCnet
+PCNET_ADMIN_LOC=pcnet   # Files/dirs below are cp'd verbatim to boot diskette
+PCNET_ADMIN_DRVR='pcnet/pcnet.bat
+                   pcnet/pcnet.d/solaris.map
+                   pcnet/pcnet.d/system.add'
+PCNET_ADMIN_INST='pcnet/pcnet.d/inst9.sh'
+###########################################################################
+# exclude the mcis driver for users of Corvette
+CORVETTE_ADMIN_LOC=corvette   # Files/dirs copied'd verbatim to boot diskette
+CORVETTE_ADMIN_DRVR='corvette/corvette.bat
+		   corvette/corvette.d/solaris.map
+		   corvette/corvette.d/system.add'
+CORVETTE_ADMIN_INST='corvette/corvette.d/inst9.sh'
+###########################################################################
+# exclude parts of the esa/pcplusmp/ncrs driver for users of EDJ
+EDJ_ADMIN_LOC=edj   # Files/dirs copied'd verbatim to boot diskette
+EDJ_ADMIN_DRVR='edj/edj.bat
+		   edj/edj.d/solaris.map
+		   edj/edj.d/system.add'
+EDJ_ADMIN_INST='edj/edj.d/inst9.sh'
+###########################################################################
+# exclude parts of the esa/ncrs driver for users of INTRGRPH
+INTRGRPH_ADMIN_LOC=intrgrph   # Files/dirs copied'd verbatim to boot diskette
+INTRGRPH_ADMIN_DRVR='intrgrph/intrgrph.bat
+		   intrgrph/intrgrph.d/solaris.map
+		   intrgrph/intrgrph.d/system.add'
+INTRGRPH_ADMIN_INST='intrgrph/intrgrph.d/inst9.sh'
+###########################################################################
+###########################################################################
+# enable esa vlb probe
+ESAVLB_ADMIN_LOC=esavlb
+ESAVLB_ADMIN_DRVR='esavlb/esavlb.bat
+		   esavlb/esavlb.d/solaris.map
+		   esavlb/esavlb.d/system.add'
+ESAVLB_ADMIN_INST='esavlb/esavlb.d/inst9.sh'
+###########################################################################
+WEIRD_ADMIN_LOCS="$UNISYS_ADMIN_LOC $NOV2000_ADMIN_LOC $PCNET_ADMIN_LOC
+		  $CORVETTE_ADMIN_LOC $EDJ_ADMIN_LOC $INTRGRPH_ADMIN_LOC
+		  $ESAVLB_ADMIN_LOC $GENERIC_ADMIN_LOC"
+ALL_ADMIN_LOCS="$WEIRD_ADMIN_LOCS"
+MDB_ADMIN_LOCS="$UNISYS_ADMIN_LOC $NOV2000_ADMIN_LOC $PCNET_ADMIN_LOC
+		$CORVETTE_ADMIN_LOC $EDJ_ADMIN_LOC $INTRGRPH_ADMIN_LOC
+		$ESAVLB_ADMIN_LOC"
+# Any script that must be executable on the boot or patch distribution
+# diskette must be listed here.
+BOOT_SCRIPTS="$GENERIC_ADMIN_INST $UNISYS_ADMIN_INST $NOV2000_ADMIN_INST
+	      $PCNET_ADMIN_INST $CORVETTE_ADMIN_INST
+	      $EDJ_ADMIN_INST $INTRGRPH_ADMIN_INST 
+	      $ESAVLB_ADMIN_LOC"
+PATCH_SCRIPTS="installdu.sh"
+
+# DOS-built MDB objects
+DOS_BOOTSTRAPS='mdboot
+		mdexec'
+# All DOS-built objects
+DOS_DSK_BOOT_DRVRS="$DOS_DSK_BOOT_DRVRS_FCS
+		    $DOS_DSK_BOOT_DRVRS_DU"
+
+DOS_NET_BOOT_DRVRS="$DOS_NET_BOOT_DRVRS_FCS
+		    $DOS_NET_BOOT_DRVRS_DU"
+
+DOS_BOOT_DRVRS_ALL="$DOS_DSK_BOOT_DRVRS
+		    $DOS_NET_BOOT_DRVRS"
+
+DOS_BOOT_ALL="$DOS_BOOTSTRAPS
+	      $DOS_DSK_BOOT_DRVRS
+	      $DOS_NET_BOOT_DRVRS"

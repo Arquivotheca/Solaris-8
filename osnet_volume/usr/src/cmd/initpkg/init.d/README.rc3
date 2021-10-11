@@ -1,0 +1,33 @@
+#ident	"@(#)README.rc3	1.2	93/03/01 SMI"
+Copyright (c) 1993, by Sun Microsystems, Inc.
+
+This README file hopes to provide guidance for developers who need to provide
+scripts to start up their product as the init state changes to multiuser mode,
+with network resources exported (run level 3).  Run level 3 is the default
+run level.  Note that the transition to run level 3 from run levels S, 0, or
+1 includes a transition through run level 2.  Therefore, links to scripts in
+/etc/rc2.d should not be duplicated in /etc/rc3.d.  Only those services which
+are running in run level 3 but not in run level 2 should be started by scripts
+in /etc/rc3.d.
+
+For a general discussion of the mechanism used to invoke these scripts see
+the file /etc/init.d/README.
+
+Note that the sequencing is unstable at this time. As such, only minimal
+definitions are provided.  SunSoft reserves the right to change these
+definitions in a minor release.  However, SunSoft will make every effort
+to preserve the minimal definitions presented; they were chosen in a hope
+to fulfill the goal of not changing them.  In the future, it is intended
+that a stronger commitment will be made to these interface definitions
+which will guarantee them across minor releases.  It is also planned that
+additional points in the sequence will be defined.
+
+The following sequence points are defined for the transition to single user
+mode:
+
+	The base system will not alter the rc2 state in the range S00 to
+	S09. (This is to allow an opportunity for someone to do something
+	for run level 3 before system supplied scripts alter the system.)
+
+	After the S25 scripts have executed, all bundled, enabled, distributed 
+	file systems are exporting resources.

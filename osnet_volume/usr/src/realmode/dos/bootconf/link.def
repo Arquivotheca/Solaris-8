@@ -1,0 +1,316 @@
+#
+# Copyright (c) 1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+# "@(#)link.def	1.10	99/01/20 SMI"
+#
+SEGMENTS PCI_TEXT OVL:2
+FUNCTIONS:0
+	_find_pci_slot
+	_init_pci
+	_pci_slot_names_prop
+	_program_pci
+FUNCTIONS:2
+	_enumerator_pci
+	_get_configured_dev_resources
+	_new_func_pci
+	_save_bus_path_pci
+	_already_configured_pci
+	_create_config_ports_board_pci
+	_device_is_compaq_8x5
+	_save_ranges_pci
+	_pci_is_cyrix
+	_pci_is_mercury
+
+SEGMENTS PNPBIOS_TEXT OVL:3
+FUNCTIONS:0
+	_init_pnpbios
+	_get_pnp_info_pnpbios
+FUNCTIONS:3
+	_enumerator_pnpbios
+	_extract_resources_pnpbios
+	_GetLargeResource
+	_GetSmallResource
+	_add_weak_attr_pnpbios
+
+SEGMENTS VGAPROBE_TEXT OVL:4
+FUNCTIONS:4
+	_enumerator_vgaprobe
+	_find_video_board
+	_find_vga_bios
+	_findstr
+	_p9x00_check
+	_probe8514
+	_create_subvga_node
+	_is_xga_base_valid
+	_create_xga_node
+	_create_vga_node
+	_do_ati_probe
+	_do_genoa_probe
+	_get_mode_info
+	_get_vga_properties
+
+SEGMENTS EISA_TEXT OVL:5
+FUNCTIONS:0
+	_init_eisa
+FUNCTIONS:5
+	_enumerator_eisa
+	_GetEisaFctnTab
+	_readEISAid
+	_ReadEisaNvram
+	_AddFunction_eisa
+	_iss_fixup
+
+SEGMENTS PROBE_TEXT OVL:6
+FUNCTIONS:6
+	_badbef
+	_setres
+	_relres
+	_resource
+	_node
+	_property
+	_load
+	_FindAny
+	_try
+	_permute
+	_assign_prog_probe
+	_deassign_prog_probe
+	_device_probe
+	_resource_probe
+	_primary_probe
+	_ask_all_probe
+	_handle_conflicts
+	_do_all_probe
+	_do_selected_probe
+	_remove_devs_probe
+
+SEGMENTS BOOT_TEXT OVL:7
+SEGMENTS CFNAME_TEXT OVL:7
+FUNCTIONS:0
+	_init_boot
+	_init_cfname
+	_check_auto_boot
+	_fini_boot
+FUNCTIONS:7
+	_get_id
+	_gather_devinfo
+	_menu_boot
+	_auto_boot
+	_check_for_keypress
+	_flush_keyboard
+	_auto_boot_timeout
+	_make_boot_desc
+	_make_boot_list
+	_get_bootpath
+	_parse_bootpath
+	_get_dev_type
+	_is_default_dev
+	_save_bef_info
+	_copy_bdev_info
+	_save_bef_1
+	_save_bef_2
+	_used_port
+	_match_bdp_to_bp
+	_get_path_from_bdp
+	_sanitise_devices
+	_order_devices
+	_install_boot_bef
+	_add_dev80
+	_parse_target
+	_forceload
+	_set_stdin
+	_save_cfname
+	_delete_cfname
+	_dup_cfname
+	_set_default_boot_dev
+	_free_boot_list
+	_save_prop
+	_ab_onoff_prop
+	_timeout_prop
+	_bootdev_prop
+	_auto_boot_cfname
+	_copy_file_cfname
+
+SEGMENTS CONFIG_TEXT OVL:8
+FUNCTIONS:8
+	_ResourceName
+	_Adjust
+	_ListResources
+	_do_config
+	_GetResource
+	_DefineBoard
+	_add_config
+
+SEGMENTS ESCD_TEXT OVL:9
+FUNCTIONS:0
+	_MotherBoard
+FUNCTIONS:9
+	_ExtMemSize
+	_AddFunction_escd
+	_CvtBoardRecord
+	_read_cfg_escd
+	_write_escd
+	_read_escd
+
+SEGMENTS PNP_TEXT OVL:10
+FUNCTIONS:0
+	_init_pnp
+	_ResetCards
+	_FindNextCard
+	_delay
+FUNCTIONS:10
+	_SetReadPort
+	_ReadResource
+	_AnyUnitResource
+	_AnyRangeResource
+	_GetSmallResourcePnp
+	_GetLargeResourcePnp
+	_ExtractResources
+	_enumerator_pnp
+	_copyout
+	_copyin
+	_program_res
+	_get_programmed_pnp
+	_program_pnp
+	_unprogram_pnp
+	_ReadBits
+	_CheckSum
+	_IsolateCard
+	_clear_config_pnp
+
+SEGMENTS HELP_TEXT OVL:11
+FUNCTIONS:11
+	_menu_help
+
+SEGMENTS ADV_TEXT OVL:12
+FUNCTIONS:12
+	_menu_adv
+	_boot_tasks_adv
+
+SEGMENTS BIOS_TEXT OVL:13
+FUNCTIONS:13
+	_enumerator_bios
+	_found_bios
+
+SEGMENTS GETTEXT_TEXT OVL:14
+FUNCTIONS:0
+	_gettext
+	_fini_gettext
+FUNCTIONS:14
+	_compile_text
+	_init_gettext
+
+SEGMENTS KBD_TEXT OVL:15
+FUNCTIONS:0
+	_check_kbd
+FUNCTIONS:15
+	_ask_kbd
+
+SEGMENTS TREE_TEXT OVL:16
+SEGMENTS PCI1275_TEXT OVL:16
+SEGMENTS ISA1275_TEXT OVL:16
+SEGMENTS PNP1275_TEXT OVL:16
+FUNCTIONS:0
+	_ffbs
+	_weak_binding_tree
+FUNCTIONS:16
+	_init_tree
+	_reset_tree
+	_build_tree
+	_add_boot_interface
+	_reset_pci1275
+	_init_pci1275
+	_build_node_pci1275
+	_build_bus_nodes_pci1275
+	_create_bus_node_pci
+	_add_bus_props_pci1275
+	_add_node_pci1275
+	_add_regs_pci1275
+	_add_ppb_props_pci1275
+	_add_other_props_pci1275
+	_add_available_pci1275
+	_get_desc_pci
+	_bp_to_desc_pci1275
+	_bp_to_name_pci1275
+	_parse_bootpath_pci1275
+	_is_bdp_bootpath_pci1275
+	_is_bp_bootpath_pci1275
+	_get_path_from_bdp_pci1275
+	_reset_isa1275
+	_init_isa1275
+	_build_node_isa1275
+	_build_bus_node_isa1275
+	_build_child_node
+	_parse_bootpath_isa1275
+	_is_bdp_bootpath_isa1275
+	_is_bp_bootpath_isa1275
+	_get_path_from_bdp_isa1275
+	_bp_to_desc_isa1275
+	_build_node_pnp1275
+	_build_child_node_pnp
+	_parse_bootpath_pnp1275
+	_is_bdp_bootpath_pnp1275
+	_is_bp_bootpath_pnp1275
+	_get_path_from_bdp_pnp1275
+	_id_to_str_pnp1275
+	_str_to_id_pnp1275
+	_bp_to_desc_pnp1275
+	_link_range_pci1275
+
+SEGMENTS UR_TEXT OVL:17
+FUNCTIONS:17
+	_used_resources_ur
+	_used_irq_ur
+	_used_dma_ur
+	_used_io_ur
+	_used_mem_ur
+	_used_range_ur
+	_used_resources_node_ur
+	_gather_used_resources_ur
+
+SEGMENTS PROP_TEXT OVL:18
+FUNCTIONS:0
+	_store_prop
+	_read_prop
+	_update_prop
+	_set_boot_control_props
+FUNCTIONS:18
+	_build_menu_prop
+	_menu_prop
+SEGMENTS ITU OVL:19
+FUNCTIONS:0
+	_output_drvinfo
+FUNCTIONS:19
+	_ask_for_itu
+	_cpy_token
+	_insert_entry
+	_reset_keyval_instances
+	_free_drvlist
+	_free_entries
+	_free_all_ituconfigs
+	_free_itu
+	_free_db
+	_conv_num_to_dotnum
+	_conv_dotnum_to_num
+	_add_db_entries
+	_write_prop
+	_menu_list_ituos
+	_output_maps
+	_create_kernel_files
+	_read_itu_floppy
+	_get_itu_bef_paths
+	_getkeyword
+	_check_token
+	_check_dbes
+	_cache_file
+	_have_read_this_floppy
+	_check_default_release
+	_token_is_whitespace
+	_device_exists
+	_is_pciclass
+	_get_itu_info
+	_get_volname
+	_get_os_ver
+	_add_db_entry
+	_get_quoted_tok
+

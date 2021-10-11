@@ -1,0 +1,12 @@
+#
+#ident	"@(#)Makefile.targ 1.1 99/09/09 SMI"
+#
+# Copyright (c) 1994 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+# lib/libprtdiag/Makefile.targ
+#
+
+include $(SRCDIR)/../Makefile.targ
+include $(SRCDIR)/../../Makefile.psm.targ
+

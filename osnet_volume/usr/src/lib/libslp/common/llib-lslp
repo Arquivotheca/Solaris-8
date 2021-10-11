@@ -1,0 +1,59 @@
+/* LINTLIBRARY */
+/* PROTOLIB1 */
+
+/*
+ * Copyright (c) 1999 by Sun Microsystems, Inc.
+ * All rights reserved.
+ */
+
+#pragma ident	"@(#)llib-lslp	1.2	99/10/08 SMI"
+
+#include <slp.h>
+
+SLPError SLPOpen(const char *pcLang, SLPBoolean isAsync, SLPHandle *phSLP);
+
+void SLPClose(SLPHandle hSLP);
+
+SLPError SLPReg(SLPHandle   hSLP, const char  *pcSrvURL,
+		const unsigned short usLifetime,
+		const char  *pcSrvType,
+		const char  *pcAttrs, SLPBoolean  fresh,
+		SLPRegReport callback, void *pvUser);
+
+SLPError SLPDereg(SLPHandle hSLP, const char *pURL,
+			SLPRegReport callback, void *pvUser);
+
+SLPError SLPDelAttrs(SLPHandle hSLP, const char *pURL,
+			const char *pcAttrs,
+			SLPRegReport callback, void *pvUser);
+
+
+SLPError SLPFindSrvTypes(SLPHandle hSLP, const char *pcNamingAuthority,
+				const char *pcScopeList,
+				SLPSrvTypeCallback callback, void *pvUser);
+
+SLPError SLPFindSrvs(SLPHandle hSLP, const char *pcServiceType,
+			const char *pcScope, const char *pcSearchFilter,
+			SLPSrvURLCallback callback, void *pvUser);
+
+SLPError SLPFindAttrs(SLPHandle hSLP, const char *pcURL, const char *pcScope,
+			const char *pcAttrIds,
+			SLPAttrCallback callback, void *pvUser);
+
+unsigned short SLPGetRefreshInterval(void);
+
+SLPError SLPFindScopes(SLPHandle hSLP, char **ppcScopes);
+
+SLPError SLPEscape(const char *pcInbuf, char **ppcOutBuf, SLPBoolean isTag);
+
+SLPError SLPUnescape(const char *pcInbuf, char **ppcOutBuf, SLPBoolean isTag);
+
+void SLPSetProperty(const char *pcName, const char *pcValue);
+
+const char *SLPGetProperty(const char *pcName);
+
+void SLPFree(void *pvMem);
+
+SLPError SLPParseSrvURL(char *pcSrvURL, SLPSrvURL** ppSrvURL);
+
+const char *slp_strerror(SLPError err);

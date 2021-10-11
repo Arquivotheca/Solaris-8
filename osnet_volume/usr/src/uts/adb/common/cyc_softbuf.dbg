@@ -1,0 +1,23 @@
+\
+\ Copyright (c) 1999 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)cyc_softbuf.dbg	1.1	99/06/05 SMI"
+
+#include <sys/cyclic_impl.h>
+#include "dummy.h"
+
+cyc_softbuf	cys_
+{adb_inline_begin}
+.>t
+<t="Software interrupt level buffer"
+{adb_inline_end}
+	hard		decimal
+	soft		decimal
+{adb_inline_begin}
+	<t=""
+	1>z
+	<t+{OFFSET, cys_buf[0]}$<<cyc_pcbuffer
+	0>z
+	<t+{OFFSET, cys_buf[1]}$<<cyc_pcbuffer
+{adb_inline_end}

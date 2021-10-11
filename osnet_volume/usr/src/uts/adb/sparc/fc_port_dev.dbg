@@ -1,0 +1,43 @@
+\
+\ Copyright (c) 1999 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)fc_port_dev.dbg	1.1	99/07/21 SMI"
+\
+#include <sys/isa_defs.h>
+#include <sys/types.h>
+#include <sys/dditypes.h>
+#include <sys/ddidmareq.h>
+#include <sys/mutex.h>
+#include <sys/semaphore.h>
+#include <sys/condvar.h>
+#include <sys/thread.h>
+#include <sys/devops.h>
+#include <sys/fibre-channel/fcio.h>
+#include "dummy.h"
+\
+\
+fc_port_dev		dev_
+{adb_inline_begin}
+.>l
+<l+{OFFSET, dev_dtype}=""
+{adb_inline_end}
+	dtype		hex
+	type		hex
+	state		hex
+	did		.port_id
+{adb_inline_begin}
+<l+{OFFSET, dev_hard_addr}=""
+{adb_inline_end}
+	hard_addr	.hard_addr
+{adb_inline_begin}
+<l+{OFFSET, dev_pwwn}=""
+{adb_inline_end}
+	pwwn		.la_wwn
+{adb_inline_begin}
+<l+{OFFSET, dev_nwwn}=""
+{adb_inline_end}
+	nwwn		.la_wwn
+{adb_inline_begin}
+<l+{SIZEOF}=""
+{adb_inline_end}

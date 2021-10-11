@@ -1,0 +1,21 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)slab.dbg	1.2	98/01/14 SMI"
+
+#include <sys/kmem.h>
+#include <sys/kmem_impl.h>
+#include "dummy.h"
+
+\
+\
+kmem_slab               slab_           slab
+        cache                   hex
+        base                    hex
+        next                    hex
+        prev                    hex
+        head                    hex
+        tail                    hex
+        refcnt                  sdecimal
+        chunks                  sdecimal

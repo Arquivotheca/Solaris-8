@@ -1,0 +1,37 @@
+\
+\ Copyright (c) 1999 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)usoc_timetag.dbg	1.2	99/09/28 SMI"
+#include <sys/isa_defs.h>
+#include <sys/types.h>
+#include <sys/dditypes.h>
+#include <sys/ddidmareq.h>
+#include <sys/mutex.h>
+#include <sys/semaphore.h>
+#include <sys/condvar.h>
+#include <sys/thread.h>
+#include <sys/devops.h>
+#include <sys/taskq.h>
+#include <sys/fibre-channel/fc.h>
+#include <sys/fibre-channel/fca/usoc_cq_defs.h>
+#include <sys/fibre-channel/fca/usocio.h>
+#include <sys/fibre-channel/fca/usocreg.h>
+#include <sys/fibre-channel/fca/usocvar.h>
+#include "dummy.h"
+\
+\
+usoc_timetag				sto_
+{adb_inline_begin}
+.>a
+<a+{OFFSET, sto_func}=""
+{adb_inline_end}
+	func				hex
+	pkt				hex
+	ticks				hex
+	next				hex
+	prev				hex
+	tonext				hex
+{adb_inline_begin}
+<a+{SIZEOF}=""
+{adb_inline_end}

@@ -1,0 +1,28 @@
+\
+\ Copyright (c) 1997-1998 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)dispq.nxt.dbg	1.5	98/02/09 SMI"
+
+#include <sys/types.h>
+#include <sys/proc.h>
+#include <sys/disp.h>
+#include "dummy.h"
+
+\
+\
+dispq		""	dispq.nxt
+{adb_inline_begin}
+.>p
+,#(<p+1)$<
+*dispq+(<p*{SIZEOF})>q
+<p-1>p
+<p,#(*(<q+{OFFSET, dq_first}))$<dispq.nxt
+<q+{OFFSET, dq_first}=""
+{adb_inline_end}
+	dq_first	hex		"first"
+	dq_last		hex		"last"
+	dq_sruncnt	sdecimal	"sruncnt"
+{adb_inline_begin}
+<p$<dispq.nxt
+{adb_inline_end}

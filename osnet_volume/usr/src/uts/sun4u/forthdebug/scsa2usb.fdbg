@@ -1,0 +1,23 @@
+\ Copyright 1999 Sun Microsystems, Inc.
+\ All rights reserved.
+
+#ident	"@(#)scsa2usb.fdbg	1.2	99/10/22 SMI"
+
+#include <sys/usb/usba.h>
+#include <sys/scsi/scsi.h>
+#include <sys/sunndi.h>
+#include <sys/ddi_impldefs.h>
+#include <sys/ndi_impldefs.h>
+#include <sys/callb.h>
+#include <sys/usb/clients/mass_storage/usb_bulkonly.h>
+#include <sys/usb/scsa2usb/scsa2usb.h>
+
+
+
+scsa2usb_state
+
+scsa2usb_cmd
+
+usb_bulk_cbw
+
+usb_bulk_csw

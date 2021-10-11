@@ -1,0 +1,17 @@
+#
+# Copyright (c) 1992-1995, by Sun Microsystems, Inc.
+# All rights reserved.
+#
+# pragma ident "@(#)Makefile.objs	1.1 99/07/11 SMI"
+
+SCHOBJECTS= ami_authenticate.o \
+	    ami_setcred.o \
+	    ami_chauthtok.o \
+	    ami_utils.o
+
+DEFOBJECTS=$(SCHOBJECTS:%=def_%)
+
+DEFOBJS=$(DEFOBJECTS:%=objs/%)
+
+DEFPICS=$(DEFOBJECTS:%=pics/%)
+

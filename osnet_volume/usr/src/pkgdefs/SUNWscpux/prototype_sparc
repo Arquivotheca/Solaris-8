@@ -1,0 +1,52 @@
+#
+# Copyright (c) 1990-1998 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#ident	"@(#)prototype_sparc	1.6	99/03/30 SMI"
+#
+# This required package information file contains a list of package contents.
+# The 'pkgmk' command uses this file to identify the contents of a package
+# and their location on the development machine when building the package.
+# Can be created via a text editor or through use of the 'pkgproto' command.
+
+#!search <pathname pathname ...>	# where to find pkg objects
+#!include <filename>			# include another 'prototype' file
+#!default <mode> <owner> <group>	# default used if not specified on entry
+#!<param>=<value>			# puts parameter in pkg environment
+
+#
+# Include ISA independent files (prototype_com)
+#
+!include prototype_com
+#
+#
+#
+# List files which are SPARC specific here
+#
+# source locations relative to the prototype file
+#
+#
+# SUNWscpux
+#
+d none usr/ucb/sparcv9 755 root bin
+f none usr/ucb/sparcv9/ps 4555 root sys
+d none usr/ucblib/sparcv9 755 root bin
+s none usr/ucblib/sparcv9/libcurses.so=./libcurses.so.1
+f none usr/ucblib/sparcv9/libcurses.so.1 755 root bin
+s none usr/ucblib/sparcv9/libdbm.so=./libdbm.so.1
+f none usr/ucblib/sparcv9/libdbm.so.1 755 root bin
+s none usr/ucblib/sparcv9/librpcsoc.so=./librpcsoc.so.1
+f none usr/ucblib/sparcv9/librpcsoc.so.1 755 root bin
+s none usr/ucblib/sparcv9/libtermcap.so=./libtermcap.so.1
+f none usr/ucblib/sparcv9/libtermcap.so.1 755 root bin
+s none usr/ucblib/sparcv9/libucb.so=./libucb.so.1
+f none usr/ucblib/sparcv9/libucb.so.1 755 root bin
+f none usr/ucblib/sparcv9/llib-lcurses 644 root bin
+f none usr/ucblib/sparcv9/llib-lcurses.ln 644 root bin
+f none usr/ucblib/sparcv9/llib-ldbm 644 root bin
+f none usr/ucblib/sparcv9/llib-ldbm.ln 644 root bin
+f none usr/ucblib/sparcv9/llib-lrpcsoc.ln 644 root bin
+f none usr/ucblib/sparcv9/llib-ltermcap 644 root bin
+f none usr/ucblib/sparcv9/llib-ltermcap.ln 644 root bin
+f none usr/ucblib/sparcv9/llib-lucb 644 root bin
+f none usr/ucblib/sparcv9/llib-lucb.ln 644 root bin

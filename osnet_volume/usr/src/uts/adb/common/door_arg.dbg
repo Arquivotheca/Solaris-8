@@ -1,0 +1,27 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)door_arg.dbg	1.3	98/01/19 SMI"
+
+#include <sys/door.h>
+#include "dummy.h"
+
+\
+\ this macro is a submacro used by other macros that (possibly)
+\ use the "z" register. Use 'w'.
+\
+door_arg
+{adb_inline_begin}
+.>w
+<w+{OFFSET, data_ptr}=""
+{adb_inline_end}
+        data_ptr                hex
+        data_size               sdecimal
+        desc_ptr                hex
+        desc_num                sdecimal
+        rbuf                    hex
+        rsize                   sdecimal
+{adb_inline_begin}
+<w+{SIZEOF}=""
+{adb_inline_end}

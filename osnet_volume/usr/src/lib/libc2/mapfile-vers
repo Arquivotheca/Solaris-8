@@ -1,0 +1,123 @@
+# ident	"@(#)mapfile-vers	1.1	98/08/17 SMI"
+# Copyright (c) 1998 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+# Interface definition for /usr/lib/libc2stubs.so.1
+
+#
+# For information regarding the establishment of versioned definitions see:
+#	The Linker and Libraries Manual (version 2.5 or greater)
+# This is part of the Developers Guide in the Answerbook.  Specifically refer
+# to Chapter 2 under section "Defining Additional Symbols" through section
+# "Reducing Symbol Scope", and Chapter 5 "Versioning".
+#
+# For specific rules for the modification (evolution) of these version
+# definitions see:
+#	psarc_1995_14: Integration of Scoped Libraries
+#		(/shared/sac/PSARC/1995/014)
+#	Policy for Shared Library Version Names and Interface Definitions
+#		(/shared/ON/general_docs/scoping-rules.ps)
+
+SUNW_1.1 {
+	global:
+};
+
+SUNWprivate_1.1 {
+	global:
+		audit_accton_ckfile;
+		audit_accton_ckfile1;
+		audit_accton_ckfile2;
+		audit_accton_main;
+		audit_accton_main1;
+		audit_accton_main2;
+		audit_accton_main3;
+		audit_accton_main4;
+		audit_accton_main5;
+		audit_clri_main;
+		audit_cron_session;
+		audit_fsck_main;
+		audit_fsdb_main;
+		audit_ftpd_bad_pw;
+		audit_ftpd_excluded;
+		audit_ftpd_failure;
+		audit_ftpd_no_anon;
+		audit_ftpd_sav_data;
+		audit_ftpd_success;
+		audit_ftpd_unknown;
+		audit_halt_main;
+		audit_halt_main1;
+		audit_halt_main2;
+		audit_halt_main3;
+		audit_halt_reboot;
+		audit_halt_reboot1;
+		audit_halt_success;
+		audit_inetd_config;
+		audit_inetd_service;
+		audit_login_bad_dialup;
+		audit_login_bad_pw;
+		audit_login_maxtrys;
+		audit_login_not_console;
+		audit_login_save_flags;
+		audit_login_save_host;
+		audit_login_save_machine;
+		audit_login_save_port;
+		audit_login_save_pw;
+		audit_login_save_ttyn;
+		audit_login_success;
+		audit_logins_main;
+		audit_mountd_mount;
+		audit_mountd_setup;
+		audit_mountd_umount;
+		audit_ncheck_main;
+		audit_newgrp_chkgrp;
+		audit_newgrp_chkgrp1;
+		audit_newgrp_main;
+		audit_newgrp_main1;
+		audit_newgrp_main2;
+		audit_passwd;
+		audit_passwd_attributes_sorf;
+		audit_passwd_sorf;
+		audit_pmadm_main;
+		audit_pmadm_main1;
+		audit_pmadm_main2;
+		audit_pmadm_main3;
+		audit_pmadm_main4;
+		audit_priocntl_main;
+		audit_pt_chmod_main;
+		audit_reboot_main;
+		audit_reboot_main1;
+		audit_reboot_main2;
+		audit_reboot_reboot;
+		audit_reboot_reboot1;
+		audit_reboot_success;
+		audit_rexd_fail;
+		audit_rexd_setup;
+		audit_rexd_success;
+		audit_rexecd_fail;
+		audit_rexecd_setup;
+		audit_rexecd_success;
+		audit_rshd_fail;
+		audit_rshd_setup;
+		audit_rshd_success;
+		audit_sacadm_main;
+		audit_sacadm_main1;
+		audit_sacadm_main2;
+		audit_sacadm_main3;
+		audit_sacadm_main4;
+		audit_su;
+		audit_su_bad_authentication;
+		audit_su_bad_uid;
+		audit_su_bad_username;
+		audit_su_reset_ai;
+		audit_su_success;
+		audit_su_unknown_failure;
+		audit_sulogin_main;
+		audit_sulogin_main1;
+		audit_sulogin_main2;
+		audit_sulogin_main3;
+		audit_sulogin_main4;
+		audit_sulogin_main5;
+		audit_sulogin_main6;
+	local:
+		*;	# symbols not mentioned in this file are scoped out
+};

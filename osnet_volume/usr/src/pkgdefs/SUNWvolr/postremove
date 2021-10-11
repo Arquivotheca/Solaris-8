@@ -1,0 +1,30 @@
+#!/bin/sh
+#
+#ident	"@(#)postremove	1.1	94/05/14 SunSoft"
+#
+# Copyright (c) 1994 by Sun Microsystems, Inc.
+#
+#
+# remove the volume management device (and the symlink to it)
+#
+
+# the volctl device
+sdev="$BASEDIR/dev/volctl"
+
+# find where the deivce points
+if [ -h "$sdev" ] ; then
+
+	# the symlink exists
+	
+	# get the symlink value
+	ldev="`/bin/ls -l $sdev | awk '{print $NF}'"
+
+	# convert the symlink value into an absolute path
+	rdev="`dirname $sdev`/$ldev"
+
+	# now remove it
+	rm -f $rdev
+fi
+
+# now remove the volctl device (or symlink)
+rm -f "$sdev"

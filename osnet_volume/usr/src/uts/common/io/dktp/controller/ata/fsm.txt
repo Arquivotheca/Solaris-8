@@ -1,0 +1,47 @@
+
+
+	/*
+	 * The interrupt reason can be interpreted
+	 * from other bits as follows:
+	 *
+	 *  DRQ  IO  CoD
+	 *  ---  --  ---
+	 *    0   0    1  Idle
+	 *    1   0    1  Send ATAPI CDB to device
+	 *    1   1    0  Data from device
+	 *    1   0    0  Data to device
+	 *    1   1    1  Future use
+	 *    0   1    1  Status ready
+	 *
+	 */
+
+			ACTION
+
+			ATAPI Status Bits
+Current	|			
+State	|	idle	cdb	datain		dataout		status
+        |-----------------------------------------------------------------
+idle	|	cmd	cmd	cmd		cmd		cmd
+command	|	*	sendcdb	*		*		rd-intr-reason
+cdb	|	*	*	start-xfer	start-xfer	rd-intr-reason	
+datain	|	*	*	continue-xfer	*		rd-intr-reason
+dataout	|	*	*	*		continue-xfer	rd-intr-reason
+
+
+
+			NEXT-STATE
+
+			ATAPI Status Bits
+Current	|			
+State	|	idle	cdb	datain		dataout		status
+ 	|-----------------------------------------------------------------
+idle	|	command	command	command		command		command
+command	|	*	cdb	*		*		*
+cdb	|	*	*	datain		dataout		(idle)
+datain	|	*	*	datain		*		(idle)
+dataout	|	*	*	*		dataout		(idle)
+
+
+
+States marked '*' should be invalid but some non-complaint drives
+don't transition correctly between states. 

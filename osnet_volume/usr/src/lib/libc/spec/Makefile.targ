@@ -1,0 +1,29 @@
+#ident	"@(#)Makefile.targ	1.2	99/09/08 SMI"
+#
+# Copyright (c) 1998-1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+# lib/libc/spec/Makefile.targ
+
+LIBRARY	=	libc.a
+VERS	=	.1
+
+OBJECTS	=	data.o		\
+		fmtmsg.o	\
+		fp.o		\
+		gen.o		\
+		i18n.o		\
+		interface64.o	\
+		missing.o	\
+		print.o		\
+		private.o	\
+		privatedata.o	\
+		regex.o		\
+		stdio.o		\
+		stubs.o		\
+		sys.o		\
+		widec.o
+
+TRANSCPP =
+
+SPECCPP =	-I.. -I../../inc

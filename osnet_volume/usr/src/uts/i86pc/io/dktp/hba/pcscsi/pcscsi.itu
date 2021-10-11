@@ -1,0 +1,16 @@
+#
+#  Copyright (c) 1997, by Sun Microsystems, Inc.
+#  All rights reserved.
+#
+# @(#)pcscsi.itu        1.3     97/12/02 SMI
+#
+interface_version = 1.0
+itu_type = partial
+name = pcscsi
+driver_path=/kernel/drv
+class = scsi
+patchid=105656-02
+driverpkg=SUNWos86r
+driverpkgvers="1.1.0,REV=1997.06.13.11.51"
+driverpkgdesc="pcscsi"
+

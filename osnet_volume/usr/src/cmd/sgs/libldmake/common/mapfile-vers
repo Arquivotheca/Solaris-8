@@ -1,0 +1,15 @@
+#
+#ident	"@(#)mapfile-vers	1.6	98/08/28 SMI"
+#
+# Copyright (c) 1995 by Sun Microsystems, Inc.
+# All rights reserved.
+
+SUNWprivate_1.1 {
+	global:
+		ld_file;
+		ld_atexit;
+		ld_file64;
+		ld_atexit64;
+	local:
+		*;
+};

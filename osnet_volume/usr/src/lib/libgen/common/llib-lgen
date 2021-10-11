@@ -1,0 +1,107 @@
+/* LINTLIBRARY */
+/* PROTOLIB1 */
+
+/*
+ * Copyright (c) 1997 by Sun Microsystems, Inc.
+ * All rights reserved.
+ */
+#pragma ident	"@(#)llib-lgen	1.2	97/10/08 SMI"
+
+#include <stdlib.h>
+#include <stdio.h>
+#include <ctype.h>
+#include <string.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+
+/*
+ * usr/src/lib/libgen
+ */
+
+/* bgets.c */
+char *bgets(char *buf, size_t count, FILE *fp, char *stopstr);
+char *_bgets(char *buf, size_t count, FILE *fp, char *stopstr);
+
+/* bufsplit.c */
+size_t bufsplit(char *buf, size_t dim, char *array[]);
+size_t _bufsplit(char *buf, size_t dim, char *array[]);
+
+/* copylist.c */
+char *_copylist64(const char *filenm, off64_t *szptr);
+char *_copylist(const char *filenm, off_t *szptr);
+
+
+/* eaccess.c */
+int eaccess(const char *path, int amode);
+int _eaccess(const char *path, int amode);
+
+
+/* gmatch.c */
+int gmatch(const char *s, const char *p);
+int _gmatch(const char *s, const char *p);
+
+/* isencrypt.c */
+int isencrypt(const char *fbuf, size_t ninbuf);
+int _isencrypt(const char *fbuf, size_t ninbuf);
+
+/* mkdirp.c */
+int mkdirp(const char *d, mode_t mode);
+int _mkdirp(const char *d, mode_t mode);
+
+
+/* p2open.c */
+int p2open(const char *cmd, FILE *fp[2]);
+int p2close(FILE *fp[2]);
+int _p2open(const char *cmd, FILE *fp[2]);
+int _p2close(FILE *fp[2]);
+
+
+/* pathfind.c */
+char *pathfind(const char *path, const char *name, const char *mode);
+char *_pathfind(const char *path, const char *name, const char *mode);
+
+/* reg_compile.c */
+int *___nbra(void);
+int *___regerrno(void);
+int *___reglength(void);
+char *compile(const char *sp, char *ep, char *endbuf);
+char *_compile(const char *sp, char *ep, char *endbuf, int viflag);
+char *__compile(const char *sp, char *ep, char *endbuf);
+
+/* reg_step.c */
+char **___braslist(void);
+char **___braelist(void);
+char **___loc1(void);
+char **___loc2(void);
+char **___locs(void);
+int step(char *p1, char *p2);
+int advance(char *lp, char *ep);
+int _radvance(char *lp, char *ep);
+
+/* rmdirp.c */
+int rmdirp(char *d, char *d1);
+int _rmdirp(char *d, char *d1);
+
+/* strccpy.c */
+char *strccpy(char *pout, const char *pin);
+char *strcadd(char *pout, const char *pin);
+char *_strccpy(char *pout, const char *pin);
+char *_strcadd(char *pout, const char *pin);
+
+/* strecpy.c */
+char *strecpy(char *pout, const char *pin, const char *except);
+char *streadd(char *pout, const char *pin, const char *except);
+char *_strecpy(char *pout, const char *pin, const char *except);
+char *_streadd(char *pout, const char *pin, const char *except);
+
+/* strfind.c */
+int strfind(const char *as1, const char *as2);
+int _strfind(const char *as1, const char *as2);
+
+/* strrspn.c */
+char *strrspn(const char *string, const char *tc);
+char *_strrspn(const char *string, const char *tc);
+
+/* strtrns.c */
+char *strtrns(const char *str, const char *old, const char *new, char *result);
+char *_strtrns(const char *str, const char *old, const char *new, char *result);

@@ -1,0 +1,14 @@
+#
+#  Copyright (c) 1997, by Sun Microsystems, Inc.
+#  All rights reserved.
+#
+# @(#)strategy.itu        1.2     97/12/10 SMI
+itu_type=partial
+name=strategy
+interface_version = 1.0
+driver_path=/kernel/misc
+driverpkg=SUNWpsdcr
+driverpkgvers="1.1.0,REV=1997.06.13.11.51"
+driverpkgdesc="Platform Support, Bus-independent Device Drivers (Root)"
+patchid=105730-01
+load_always=TRUE

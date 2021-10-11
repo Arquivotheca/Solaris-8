@@ -1,0 +1,21 @@
+/* LINTLIBRARY */
+/* PROTOLIB1 */
+
+/*
+ * Copyright (c) 1999, by Sun Microsystems, Inc.
+ * All rights reserved.
+ */
+#pragma ident	"@(#)llib-lmail	1.1	99/03/09 SMI"
+
+#include <stdlib.h>
+#include <stdio.h>
+#include <maillock.h>
+
+/*
+ * usr/src/lib/libmail
+ */
+
+/* maillock.c */
+int maillock(char *, int);
+void mailunlock(void);
+void touchlock(void);

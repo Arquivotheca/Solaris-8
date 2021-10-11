@@ -1,0 +1,10 @@
+#!/bin/sh
+#
+#pragma ident	"@(#)req.flg	1.1	98/10/01 SMI" 
+
+
+echo_file usr/src/lib/libc/sparc/inc/SYS.h
+echo_file usr/src/lib/libc/sparc/inc/PIC.h
+echo_file usr/src/lib/libc/inc/synonyms.h
+echo_file usr/src/lib/libc/sparcv9/inc/SYS.h
+echo_file usr/src/lib/libc/sparcv9/inc/PIC.h

@@ -1,0 +1,15 @@
+#
+#  Copyright (c) 1997, by Sun Microsystems, Inc.
+#  All rights reserved.
+#
+# @(#)pcplusmp.itu        1.3     97/11/18 SMI
+interface_version = 1.0
+itu_type=partial
+name = pcplusmp
+load_always=TRUE
+patchid=105596-01
+driver_path=/kernel/mach
+mach_entry="pcplusmp"
+driverpkg=SUNWos86r
+driverpkgvers="1.1.0,REV=1997.06.13.11.51"
+driverpkgdesc="Platform Support, OS Functionality (Root)"

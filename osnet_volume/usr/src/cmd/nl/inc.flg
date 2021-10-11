@@ -1,0 +1,4 @@
+#!/bin/sh
+#ident	"@(#)inc.flg	1.1	95/01/25 SMI"
+
+echo_file usr/src/cmd/expr/compile.c

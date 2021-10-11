@@ -1,0 +1,25 @@
+#
+#ident	"@(#)README	1.3	00/09/14 SMI"
+#
+# Copyright (c) 1992 by Sun Microsystems, Inc.
+#
+# xmod/README
+
+
+	The contents of this xmod directory should only be of interest
+to those who build releases and deliver source files for the source
+product to release engineering.  Most developers will want to ignore
+this directory unless they are responsible for internal source that
+should be excluded from binary and source products.
+
+    xmod_files - files deleted by 'make EXPORT_SRC' in usr/src
+    cry_files - files saved after 'make CRYPT_SRC' in usr/src. They can
+                then be added to the result of 'make EXPORT_SRC' and built
+                to generate the domestic source product. Note that some of
+		these files are not touched by 'make CRYPT_SRC', but are
+		files that are renamed during the export build (see obj_files)
+		and thus must be restored to the crypt build.
+    obj_files - files to save from the normal build and restore into
+		the export build, and to rename to <name>.export -
+		we have to rename them so that 'make' doesn't helpfully
+		rebuild them (which it will because of .make.state).

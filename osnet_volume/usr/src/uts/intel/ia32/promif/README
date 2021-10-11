@@ -1,0 +1,39 @@
+#pragma ident	"@(#)README	1.3	99/05/04 SMI"
+
+usr/src/uts/i86/promif for x86			(please update as required)
+
+Merge work (here and stand.i386/boot/promif) is done in July 1994.
+
+1) The merge is mechanic and textual, no attempt in re-design this interface.
+   There are other projects that will replace this piece of code.
+
+2) Three kind of binaries are generated:
+	#if defined(KADB)
+		for kadb to use and linked together as libkadbprom.a
+	#if defined(I386BOOT)
+		for booters (inetboot and ufsboot) to use and linked
+		together as libprom.a
+	#if !defined(KADB) && !defined(I386BOOT)
+		for kernel to use in *.o form
+
+ ------------------------------------------------------------------------------
+
+9 Jan, 1994:
+
+    The new plan is to do away with most of the prom lib, keeping only those
+routines that are truely common to the three prom clients (kernel, kadb, and
+second level boot).  The modules that remain are:
+
+	prom_printf.c
+	prom_getchar.c
+	prom_putchar.c
+	prom_getverion.c
+	prom_init.c
+
+Everything else (which used the 3-way #ifdef's described above), has been
+moved off into client-specific modules:
+
+	.../psm/stand/boot/i386/prom.c
+	.../psm/stand/kadb/i386/prom.c
+
+								-- Reg

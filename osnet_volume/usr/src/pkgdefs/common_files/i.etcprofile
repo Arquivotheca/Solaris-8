@@ -1,0 +1,30 @@
+#!/bin/sh
+#
+#pragma ident	"@(#)i.etcprofile	1.5	99/03/27 SMI"
+#
+# Copyright (c) 1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+
+PATH="/usr/bin:/usr/sbin:${PATH}" export PATH
+
+while read src dest
+do
+	if [ ! -f $dest ] ; then
+		cp $src $dest
+	else
+		(
+			# Get the SCCS ID from the source.
+			grep '^#.*ident.*@(#)profile' $src
+
+			# Remove the SCCS ID from the destination.
+			# Solaris/Intel console type now "sun-color".
+			sed -e '/^#.*ident.*@(#)profile/d' \
+			    -e 's/TERM=AT386/TERM=sun-color/' $dest
+		) > /tmp/prof.$$
+		cp /tmp/prof.$$ $dest
+		rm -f /tmp/prof.$$
+	fi
+done
+
+exit 0

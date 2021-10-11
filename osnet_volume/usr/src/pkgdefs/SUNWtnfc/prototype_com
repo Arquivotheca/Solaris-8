@@ -1,0 +1,41 @@
+#
+# Copyright (c) 1990-1993,1998 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#ident	"@(#)prototype_com	1.8	99/03/30 SMI"
+#
+# This required package information file contains a list of package contents.
+# The 'pkgmk' command uses this file to identify the contents of a package
+# and their location on the development machine when building the package.
+# Can be created via a text editor or through use of the 'pkgproto' command.
+
+#!search <pathname pathname ...>	# where to find pkg objects
+#!include <filename>			# include another 'prototype' file
+#!default <mode> <owner> <group>	# default used if not specified on entry
+#!<param>=<value>			# puts parameter in pkg environment
+
+# packaging files
+i pkginfo
+i copyright
+i depend
+#
+# source locations relative to the prototype file
+#
+# SUNWtnfc
+#
+d none usr 755 root sys
+d none usr/bin 755 root bin
+l none usr/bin/prex=../lib/isaexec
+l none usr/bin/tnfxtract=../lib/isaexec
+d none usr/include 755 root bin
+d none usr/include/tnf 755 root bin
+f none usr/include/tnf/tnfctl.h 644 root bin
+d none usr/lib 755 root bin
+f none usr/lib/libtnfprobe.so.1 755 root bin
+s none usr/lib/libtnfprobe.so=./libtnfprobe.so.1
+f none usr/lib/libtnfctl.so.1 755 root bin
+s none usr/lib/libtnfctl.so=./libtnfctl.so.1
+d none usr/kernel 755 root sys
+d none usr/kernel/drv 755 root sys
+f none usr/kernel/drv/tnf 755 root sys
+f none usr/kernel/drv/tnf.conf 644 root sys

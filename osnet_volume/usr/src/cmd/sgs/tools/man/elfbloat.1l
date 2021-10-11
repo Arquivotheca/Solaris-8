@@ -1,0 +1,53 @@
+.\" @(#)elfbloat.1l 1.1 96/11/07 SMI
+.\" Copyright (c) 1996 by Sun Microsystems, Inc.
+.\" All rights reserved.
+.\"
+.TH elfbloat 1l "Nov 6 1996"
+.SH NAME
+elfbloat \- promote a class-32 Elf object to Elf class-64
+.SH SYNOPSIS
+.\".nr C 0
+.\".nr D 0
+.\".nr E 0
+.\".nr F 0
+.\".nr G 0
+.\".nr H 0
+.B elfbloat
+[
+.B \-v
+]
+[
+.B \-i input file
+] [
+.B \-o output file
+] 
+.SH DESCRIPTION
+.LP
+\f4elfbloat\f1
+reads in an Elf class-32 object and writes out the same object as an
+Elf class-64 object.  The significant contents of a section are not
+modified.  The resulting object conforms to the draft Elf64 specification,
+however it is not fully compliant with the SPARC V9 ABI.  
+.IR \&elfbloat
+is therefore a simple bootstrap tool for the Wyoming project.
+.SH OPTIONS
+.TP 10
+.B \-i input file
+An Elf class-32 object.  If not specified, the
+.IR \&stdin
+file is used.
+.TP
+.B \-o output file
+The name of the Elf class-64 output file.  If not specified, the
+.IR \&stdout
+file is used.
+.TP
+.B \-v
+Verbose mode.
+.sp
+.PD
+.SH "SEE ALSO" 
+.BR elfdump (1),
+.BR dump (1)
+.LP
+.TZ LLM

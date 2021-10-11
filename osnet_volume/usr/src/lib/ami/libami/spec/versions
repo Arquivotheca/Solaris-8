@@ -1,0 +1,21 @@
+#
+# Copyright (c) 1998 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#pragma ident "@(#)versions	1.1 99/07/11 SMI"
+#
+# lib/ami/spec/Makefile
+# vers file for libami
+
+sparc {
+	SUNW_1.1;
+	SUNWprivate_1.1;
+}
+sparcv9 {
+	SUNW_1.1;
+	SUNWprivate_1.1;
+}
+i386 {
+	SUNW_1.1;
+	SUNWprivate_1.1;
+}

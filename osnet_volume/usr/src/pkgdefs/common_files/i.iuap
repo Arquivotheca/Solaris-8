@@ -1,0 +1,84 @@
+#!/bin/sh
+#
+#ident	"@(#)i.iuap	1.16	99/04/27 SMI"
+#
+# Copyright (c) 1998-1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+
+add_driver() {
+	grep "^[ 	]*$1[ 	]" $dest > /dev/null 2>&1
+	if [ $? != 0 ] ; then
+		grep "^[ 	]*$1[ 	]" $src >> $dest
+	fi
+}
+
+remove_driver() {
+	grep "^[ 	]*$1[ 	]" $dest > /dev/null 2>&1
+	if [ $? = 0 ] ; then
+		grep -v "^[ 	]*$1[ 	]" $dest > /tmp/x.$$
+		cp /tmp/x.$$ $dest
+		rm -f /tmp/x.$$
+	fi
+}
+
+while read src dest
+do
+	if [ ! -f $dest ] ; then
+		cp $src $dest
+	else
+		grep '^[ 	]*mcpzsa[ 	]' $dest > /dev/null 2>&1
+		if [ $? != 0 ] ; then
+			grep '^[ 	]*mcpzsa[ 	]' $src >> $dest
+		fi
+		grep '^[ 	]*stc[ 	]' $dest > /dev/null 2>&1
+		if [ $? != 0 ] ; then
+			grep '^[ 	]*stc[ 	]' $src >> $dest
+		fi
+		grep '^[ 	]*ptsl[ 	][ 	]*0[ 	][ 	]*15[ 	]' \
+			$dest > /dev/null 2>&1
+		if [ $? = 0 ] ; then
+			sed "/^[ 	]*ptsl/s/15/47/" $dest > /tmp/x.$$
+			cp /tmp/x.$$ $dest
+			rm -f /tmp/xx.$$
+		fi
+		grep '^[ 	]*se[ 	]' $dest > /dev/null 2>&1
+		if [ $? = 0 ] ; then
+			grep -v '^[ 	]*se[ 	]' $dest > /tmp/x.$$
+			grep '^[ 	]*se[ 	]' $src >> /tmp/x.$$
+			cp /tmp/x.$$ $dest
+		fi
+		grep '^[ 	]*su[ 	]' $dest > /dev/null 2>&1
+		if [ $? = 0 ] ; then
+			grep -v '^[ 	]*su[ 	]' $dest > /tmp/x.$$
+			grep '^[ 	]*su[ 	]' $src >> /tmp/x.$$
+			cp /tmp/x.$$ $dest
+		fi
+		grep '^[ 	]*rts[ 	]' $dest > /dev/null 2>&1
+		if [ $? != 0 ] ; then
+			grep '^[ 	]*rts[ 	]'  $src >> $dest
+		fi
+		grep '^[ 	]*ipsecah[ 	]' $dest > /dev/null 2>&1
+		if [ $? != 0 ] ; then
+			grep '^[ 	]*ipsecah[ 	]'  $src >> $dest
+		fi
+		grep '^[ 	]*ipsecesp[ 	]' $dest > /dev/null 2>&1
+		if [ $? != 0 ] ; then
+			grep '^[ 	]*ipsecesp[ 	]'  $src >> $dest
+		fi
+		grep '	zs	0	1' $dest > /dev/null 2>&1
+		if [ $? = 0 ] ; then
+			grep -v '	zs	' $dest > /tmp/x.$$
+			grep '	zs	' $src >> /tmp/x.$$
+			cp /tmp/x.$$ $dest
+		fi
+		grep '^[ 	]*cvc[ 	]' $dest > /dev/null 2>&1
+		if [ $? != 0 ] ; then
+			grep '^[ 	]*cvc[ 	]'  $src >> $dest
+		fi
+		add_driver wc
+		remove_driver chanmux
+	fi
+done
+
+exit 0

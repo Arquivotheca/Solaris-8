@@ -1,0 +1,36 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)devinfo.dbg	1.7	98/01/19 SMI"
+
+#include <sys/types.h>
+#include <sys/dditypes.h>
+#include <sys/ddidmareq.h>
+#include <sys/ddi_impldefs.h>
+#include "dummy.h"
+
+\
+\
+dev_info		devi_		devinfo
+{adb_inline_begin}
+.>z
+(*(<z+{OFFSET, devi_binding_name}))/n"name: "8tns
+<z+{OFFSET, devi_parent}=""
+{adb_inline_end}
+	parent		hex
+	child		hex
+	sibling		hex
+	addr		hex
+	nodeid		hex
+	instance	hex
+	ops		symbolic
+	parent_data	hex
+	driver_data	hex
+	drv_prop_ptr	hex
+	sys_prop_ptr	hex
+	minor		hex
+	next		hex
+{adb_inline_begin}
+<z+{SIZEOF}=""
+{adb_inline_end}

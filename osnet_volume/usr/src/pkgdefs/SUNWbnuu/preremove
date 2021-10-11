@@ -1,0 +1,21 @@
+#!/bin/sh
+#
+#ident	"@(#)preremove	1.2	93/06/23 SMI"
+#
+# Copyright (c) 1993 by Sun Microsystems, Inc.
+#
+#
+#	remove crontab file for uucp
+#	use crontab command if cron is running
+
+ps -e | egrep -s ' cron$'
+CRONRUNNING=$?
+
+if [ \( $CRONRUNNING -eq 0 \) -a \( "$BASEDIR" = "/" \) ]
+then
+	crontab -r uucp
+else
+	rm -f $BASEDIR/var/spool/cron/crontabs/uucp
+fi
+
+exit 0

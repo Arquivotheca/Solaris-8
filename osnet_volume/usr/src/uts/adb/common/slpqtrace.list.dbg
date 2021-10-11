@@ -1,0 +1,21 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)slpqtrace.list.dbg	1.6	98/01/19 SMI"
+
+#include <sys/types.h>
+#include <sys/t_lock.h>
+#include <sys/thread.h>
+#include "dummy.h"
+
+\
+\
+_kthread	""	slpqtrace.list
+{adb_inline_begin}
+<f$<<qthread.info
+(*(<f+{OFFSET, t_pcb.val[1]}))$c
+*(<f+{OFFSET, t_link})>f
+,#(<f)$<slpqtrace.nxt
+$<slpqtrace.list
+{adb_inline_end}

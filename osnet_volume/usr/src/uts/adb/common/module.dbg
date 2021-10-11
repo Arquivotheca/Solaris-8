@@ -1,0 +1,43 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)module.dbg	1.7	98/01/19 SMI"
+
+#include <sys/kobj.h>
+#include "dummy.h"
+
+\
+\
+module
+{adb_inline_begin}
+.>K
+<K+{OFFSET, total_allocated}=""
+{adb_inline_end}
+	total_allocated		hex
+	shdrs			hex
+	symhdr			hex
+	strhdr			hex
+	depends_on		hex
+	symsize			decimal
+	symspace		hex
+	flags			hex
+	text_size		decimal
+	data_size		decimal
+	text			hex
+	data			hex
+	symtbl_section		decimal
+	symtbl			hex
+	strings			hex
+	hashsize		decimal
+	buckets			hex
+	chains			hex
+	nsyms			decimal
+	bss_align		decimal
+	bss_size		decimal
+	bss			hex
+	head			hex
+	tail			hex
+{adb_inline_begin}
+(*(<K+{OFFSET, filename}))/"filename"ns
+{adb_inline_end}

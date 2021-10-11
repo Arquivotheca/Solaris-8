@@ -1,0 +1,115 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)le.dbg	1.5	98/04/19 SMI"
+
+
+\ arg		: address of a struct le
+\ uses		: mutex
+\ registers	: z
+\ description	: prints the contents of le structure
+
+#include <sys/types.h>
+#include <sys/stream.h>
+#include <sys/sunddi.h>
+#include <sys/ethernet.h>
+#include <sys/le.h>
+#include "dummy.h"
+
+\
+\
+le			le_
+{adb_inline_begin}
+.>z
+<z+{OFFSET, le_nextp}=""
+{adb_inline_end}
+	nextp			hex
+	regsp			hex
+	flags			hex
+	dip			hex
+	ouraddr			hex
+	cookie			hex
+	xmitlock		.mutex
+{adb_inline_begin}
+<z+{OFFSET, le_intrlock}=""
+{adb_inline_end}
+	intrlock		.mutex
+{adb_inline_begin}
+<z+{OFFSET, le_buflock}=""
+{adb_inline_end}
+	buflock			.mutex
+{adb_inline_begin}
+<z+{OFFSET, le_ibp}=""
+{adb_inline_end}
+	ibp			hex
+	rmdp			hex
+	rmdlimp			hex
+	nrmdp2			sdecimal
+	nrmds			sdecimal
+	tmdp			hex
+	tmdlimp			hex
+	ntmdp2			sdecimal
+	ntmds			sdecimal
+	rnextp			hex
+	tnextp			hex
+	tcurp			hex
+	wantw			decimal
+	membase			decimal
+	memsize			sdecimal
+	init			symbolic
+	intr			symbolic
+	arg			hex
+	nbufs			sdecimal
+	bufbase			hex
+	buflim			hex
+	buftab			hex
+	bufi			sdecimal
+	tpe			sdecimal
+	autosel			sdecimal
+	oopkts			sdecimal
+	intr_flag		sdecimal
+	iopbhandle		hex
+	iopbkbase		decimal
+	iopbiobase		decimal
+	ipq			hex
+	bufhandle		hex
+	bufkbase		decimal
+	bufiobase		decimal
+	intrstats		hex
+	ksp			hex
+	ipackets		decimal
+	ierrors			decimal
+	opackets		decimal
+	oerrors			decimal
+	collisions		decimal
+	defer			decimal
+	fram			decimal
+	crc			decimal
+	oflo			decimal
+	uflo			decimal
+	missed			decimal
+	tlcol			decimal
+	trtry			decimal
+	tnocar			decimal
+	inits			decimal
+	notmds			decimal
+	notbufs			decimal
+	norbufs			decimal
+	nocanput		decimal
+	allocbfail		decimal
+	timeout_id		decimal
+	tx_lbolt		sdecimal
+	rx_lbolt		sdecimal
+	dma2_tcsr		hex
+	rcvbytes		decimal
+	xmtbytes		decimal
+	multircv		decimal
+	multixmt		decimal
+	brdcstrcv		decimal
+	brdcstxmt		decimal
+	norcvbuf		decimal
+	noxmtbuf		decimal
+{adb_inline_begin}
+<z+{SIZEOF}=""
+{adb_inline_end}

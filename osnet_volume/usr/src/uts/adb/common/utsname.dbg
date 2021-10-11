@@ -1,0 +1,20 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)utsname.dbg	1.3	98/01/19 SMI"
+
+#include <sys/utsname.h>
+#include "dummy.h"
+
+\
+\
+utsname
+{adb_inline_begin}
+utsname+{OFFSET, sysname}=""
+{adb_inline_end}
+        sysname         char    sys
+        nodename        char    node
+        release         char    release
+        version         char    version
+        machine         char    machine

@@ -1,0 +1,91 @@
+#
+#pragma ident	"@(#)Makefile.targ	1.18	99/05/04 SMI"
+#
+# Copyright (c) 1990-1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+# uts/adb/platform/Makefile.targ
+#
+
+include $(SRC)/Makefile.psm.targ
+
+NATIVEDIR	= $(ADB_BASE_DIR)/native/$(NATIVE_MACH)
+
+MACROGEN=	macrogen
+MGENPP=		mgenpp
+NATIVEMGENDIR	= $(ADB_BASE_DIR)/macrogen/$(NATIVE_MACH)
+NATIVEMACROGEN	= $(MACROGEN:%=$(NATIVEMGENDIR)/%)
+NATIVEMGENPP	= $(MGENPP:%=$(NATIVEMGENDIR)/%)
+
+# add commondir for including dummy.h
+INCLUDES += -I$(COMMONDIR)
+
+#
+# rules to generate adb scripts using macrogen
+#
+%:	$(COMMONDIR)/%.dbg
+	cat $< | $(NATIVEMGENPP) $(NATIVEDEFS) > $(MACTMP)/$@.tdbg
+	grep '^#' $(MACTMP)/$@.tdbg > $(MACTMP)/$@.c
+	$(CC) -O ${ARCHOPTS} $(NATIVEDEFS) $(INCLUDES) $(CCYFLAG)$(INCDIR) \
+		$(CFLAGS) -g -S -o $(MACTMP)/$@.s $(MACTMP)/$@.c
+	grep -v '^#' $(MACTMP)/$@.tdbg > $(MACTMP)/$@.tmp
+	$(NATIVEMACROGEN) $(MACTMP)/$@.tmp < $(MACTMP)/$@.s > $(MACTMP)/$@.res
+	-$(RM) $(MACTMP)/$@.res $(MACTMP)/$@.tmp $(MACTMP)/$@.s \
+					$(MACTMP)/$@.c $(MACTMP)/$@.tdbg
+
+%:	$(ISADIR)/%.dbg
+	cat $< | $(NATIVEMGENPP) $(NATIVEDEFS) > $(MACTMP)/$@.tdbg
+	grep '^#' $(MACTMP)/$@.tdbg > $(MACTMP)/$@.c
+	$(CC) -O ${ARCHOPTS} $(NATIVEDEFS) $(INCLUDES) $(CCYFLAG)$(INCDIR) \
+		$(CFLAGS) -g -S -o $(MACTMP)/$@.s $(MACTMP)/$@.c
+	grep -v '^#' $(MACTMP)/$@.tdbg > $(MACTMP)/$@.tmp
+	$(NATIVEMACROGEN) $(MACTMP)/$@.tmp < $(MACTMP)/$@.s > $(MACTMP)/$@.res
+	-$(RM) $(MACTMP)/$@.res $(MACTMP)/$@.tmp $(MACTMP)/$@.s \
+					$(MACTMP)/$@.c $(MACTMP)/$@.tdbg
+
+$(DUMMIES): FRC
+	@(: > $@)
+
+
+# install rules
+#
+$(USR_PSM_ADB_DIR):	$(USR_PSM_LIB_DIR)
+	-$(INS.dir.root.bin)
+
+$(USR_PSM_ADB_DIR)/%:	% $(USR_PSM_ADB_DIR)
+	$(INS.file)
+
+$(USR_PSM_ADB_DIR_64):	$(USR_PSM_ADB_DIR)
+	-$(INS.dir.root.bin)
+
+$(USR_PSM_ADB_DIR_64)/%:	% $(USR_PSM_ADB_DIR_64)
+	$(INS.file)
+
+clobber: clean
+	-$(RM) $(SCRIPTS) $(DUMMIES)
+	-$(RM) $(MACTMP)/*.res $(MACTMP)/*.tmp $(MACTMP)/*.s \
+					    $(MACTMP)/*.c $(MACTMP)/*.tdbg
+	@(cd $(NATIVEMGENDIR); pwd; $(MAKE) $@)
+
+clean:
+	@(cd $(NATIVEMGENDIR); pwd; $(MAKE) $@)
+
+# the macro list is platform-architecture specific too.
+#
+maclist1:
+	@(dir=`pwd`; \
+	for i in $(SCRIPTS) $(DUMMIES); do \
+		echo "$$dir $$i"; \
+	done)
+
+maclist:
+	@(dir=`pwd`; bdir=`(cd $(ISADIR); pwd)`; \
+	if [ "`basename $$dir`" != "`basename $$bdir`" ]; then \
+		(cd $(ISADIR); $(MAKE) maclist1); \
+	fi ; \
+	$(MAKE) maclist1) | sort +1 | sed -e "s/ /\//"
+
+$(MACTMP):
+	@pwd; mkdir -p $@
+
+FRC:

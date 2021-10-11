@@ -1,0 +1,24 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)kstat_char.dbg	1.3	98/01/19 SMI"
+
+\ arg             : address of a struct kstat_named
+\ uses            :
+\ registers       : z
+\ description     : prints the contents of kstat_named structure
+\                   as a 16-byte char string
+\
+\
+#include <sys/kstat.h>
+#include "dummy.h"
+
+\
+\
+kstat_named     ""      kstat_char
+{adb_inline_begin}
+.>z
+<z+{OFFSET, value.c}/"c"n16c
+<z+{SIZEOF}=""
+{adb_inline_end}

@@ -1,0 +1,44 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)dino.dbg	1.10	98/01/28 SMI"
+
+#include <sys/types.h>
+#include <sys/time.h>
+#include <sys/vnode.h>
+#include <sys/thread.h>
+#include <vm/seg.h>
+#include <sys/fs/ufs_inode.h>
+#include "dummy.h"
+
+\
+\
+icommon         ""      	dino
+{adb_inline_begin}
+.>w
+<w+{OFFSET, ic_smode}=""
+{adb_inline_end}
+        ic_smode                octal
+        ic_nlink                sdecimal
+        ic_suid                 sdecimal
+        ic_sgid                 sdecimal
+        ic_lsize                hex
+        ic_atime.tv_sec         hex		atime_sec
+        ic_atime.tv_usec        hex		atime_usec
+        ic_mtime.tv_sec         hex		mtime_sec
+        ic_mtime.tv_usec        hex		mtime_usec
+        ic_ctime.tv_sec         hex		ctime_sec
+        ic_ctime.tv_usec        hex		ctime_usec
+        ic_db                   hex             direct_blocks
+        ic_ib                   hex             indirect_blocks
+        ic_flags                hex
+        ic_blocks               sdecimal
+        ic_gen                  sdecimal
+        ic_shadow               hex
+        ic_uid                  sdecimal
+        ic_gid                  sdecimal
+        ic_oeftflag             hex
+{adb_inline_begin}
+<w+{SIZEOF}=""
+{adb_inline_end}

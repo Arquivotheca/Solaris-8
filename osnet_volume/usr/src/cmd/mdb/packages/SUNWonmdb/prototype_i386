@@ -1,0 +1,15 @@
+#
+# Copyright (c) 1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#ident	"@(#)prototype_i386	1.1	99/08/11 SMI"
+
+!include prototype_com
+
+d none usr/bin/i86 755 root bin
+f none usr/bin/i86/mdb 555 root bin
+d none usr/platform/i86pc 755 root sys
+d none usr/platform/i86pc/lib 755 root bin
+d none usr/platform/i86pc/lib/mdb 755 root sys
+d none usr/platform/i86pc/lib/mdb/kvm 755 root sys
+f none usr/platform/i86pc/lib/mdb/kvm/unix.so 555 root sys

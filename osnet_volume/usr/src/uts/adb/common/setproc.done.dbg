@@ -1,0 +1,16 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)setproc.done.dbg	1.3	98/01/19 SMI"
+
+#include "dummy.h"
+
+\
+\
+__dummy         ""      setproc.done
+{adb_inline_begin}
+.>f
+<p="pid "D
+<f$p
+{adb_inline_end}

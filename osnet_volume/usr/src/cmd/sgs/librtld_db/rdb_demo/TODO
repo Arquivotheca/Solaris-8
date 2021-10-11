@@ -1,0 +1,15 @@
+#pragma	ident	"@(#)TODO	1.1	95/08/16 SMI"
+
+Features yet to be impelemented for rdb:
+
+
+* Displaying of registers for x86
+* Displaying of registers for ppc
+* libdis for ppc
+* libdis for x86
+* stack trace for x86
+* stack trace for ppc
+* ability to read in command file while entering commands from
+  the keyboard (ie: adb's $<'file').
+* add support for the multiple run-time linkers that are loaded
+  when sbcp is invoked

@@ -1,0 +1,55 @@
+\
+\ Copyright (c) 1997-1999 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)cpu.dbg	1.21	99/07/27 SMI"
+
+#include <sys/cpuvar.h>
+#include "dummy.h"
+
+\
+\
+cpu     cpu_
+{adb_inline_begin}
+.>z
+<z+{OFFSET, cpu_id}=""
+{adb_inline_end}
+        id                      sdecimal
+        seqid                   sdecimal
+        flags                   hex
+        thread                  hex
+        idle_thread             hex
+        pause_thread            hex
+        lwp                     hex
+        fpowner                 hex
+        part                    hex
+        next                    hex
+        prev                    hex
+        next_onln               hex
+        prev_onln               hex
+        next_part               hex
+        prev_part               hex
+        disp                    .disp
+{adb_inline_begin}
+<z+{OFFSET, cpu_runrun}=""
+{adb_inline_end}
+        runrun                  hex
+        kprunrun                hex
+        chosen_level            sdecimal
+        dispthread              hex
+        thread_lock             hex
+        last_swtch              hex
+        intr_stack              hex
+        on_intr                 hex
+        intr_thread             hex
+        intr_actv               hex
+        base_spl                sdecimal
+	profile_cyclic_id	hex
+	profile_pc		symbolic
+	profile_pil		decimal
+	profile_when		hex
+	profile_ilate		decimal
+	cyclic			hex	cyc_cpu
+{adb_inline_begin}
+<z+{SIZEOF}=""
+{adb_inline_end}

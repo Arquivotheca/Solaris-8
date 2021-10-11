@@ -1,0 +1,49 @@
+# Copyright (c) 1990-1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#ident	"@(#)prototype_sparc	1.7	99/09/16 SMI"
+#
+# This required package information file contains a list of package contents.
+# The 'pkgmk' command uses this file to identify the contents of a package
+# and their location on the development machine when building the package.
+# Can be created via a text editor or through use of the 'pkgproto' command.
+
+#!search <pathname pathname ...>	# where to find pkg objects
+#!include <filename>			# include another 'prototype' file
+#!default <mode> <owner> <group>	# default used if not specified on entry
+#!<param>=<value>			# puts parameter in pkg environment
+
+#
+# Include ISA independent files (prototype_com)
+#
+!include prototype_com
+#
+#
+#
+# List files which are SPARC specific here
+#
+# source locations relative to the prototype file
+#
+#
+# SUNWesxu
+#
+d none usr/bin/sparcv9 755 root bin
+f none usr/bin/sparcv9/pcred 555 root bin
+f none usr/bin/sparcv9/pfiles 555 root bin
+f none usr/bin/sparcv9/pflags 555 root bin
+f none usr/bin/sparcv9/pldd 555 root bin
+f none usr/bin/sparcv9/pmap 555 root bin
+f none usr/bin/sparcv9/prun 555 root bin
+f none usr/bin/sparcv9/psig 555 root bin
+f none usr/bin/sparcv9/pstack 555 root bin
+f none usr/bin/sparcv9/pstop 555 root bin
+f none usr/bin/sparcv9/ptime 555 root bin
+f none usr/bin/sparcv9/ptree 555 root bin
+f none usr/bin/sparcv9/pwait 555 root bin
+f none usr/bin/sparcv9/pwdx 555 root bin
+f none usr/bin/sparcv9/sort 555 root bin
+d none usr/lib 755 root bin
+d none usr/lib/adb 755 root sys
+d none usr/lib/adb/sparcv9 755 root sys
+f none usr/lib/adb/sparcv9/adbsub.o 644 root sys
+d none usr/sbin/sparcv9 755 root bin

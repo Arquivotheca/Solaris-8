@@ -1,0 +1,35 @@
+#!/bin/sh
+#
+# Copyright (c) 1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#	"@(#)i.ncalogd	1.1	99/08/06 SMI"
+#
+
+PATH="/usr/bin:/usr/sbin:${PATH}"
+export PATH
+
+while read src dest
+do
+	if [ ! -f $dest ] ; then
+		cp $src $dest
+	else
+		# Check if this is a new style config file. It should contain
+		# name value pair in 'name = value' format. Just check for
+		# one such pair.
+		egrep '^status[ 	]*=' $dest > /dev/null 2>&1
+		if [ $? = 0 ] ; then
+			# Its a new style file. Do nothing.
+			continue
+		fi
+
+		# So its old style config file. Change it.
+		sed 	-e 's/^status[ 	]*/status=/' \
+			-e 's/^logd_path_name[ 	]*\(.*\)/logd_path_name="\1"/' \
+			-e 's/^logd_file_size[ 	]*/logd_file_size=/' $dest > /tmp/tmp.$$
+
+		cp /tmp/tmp.$$ $dest
+		rm -f /tmp/tmp.$$
+	fi
+done
+

@@ -1,0 +1,19 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)putbuf.dbg	1.4	98/07/19 SMI"
+
+#include "dummy.h"
+
+\
+\
+__dummy		""	putbuf
+{adb_inline_begin}
+#if defined(_LP64)
+*putbuf,(*putbufwpos-*putbufrpos)&8000000000000000$<putbuf.wrap
+#else
+*putbuf,(*putbufwpos-*putbufrpos)&80000000$<putbuf.wrap
+#endif
+*putbuf+(*putbufrpos),(*putbufwpos-*putbufrpos)/c
+{adb_inline_end}

@@ -1,0 +1,28 @@
+#!/sbin/sh
+#
+# Copyright (c) 1994-1997 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#ident	"@(#)initpcmcia	1.6	97/12/08 SMI"
+
+case "$1" in
+'start')
+	# Force the nexus in and then wait a while for stabilization
+
+	pcmdevs=`echo /dev/pcmcia/*`
+	[ "$pcmdevs" = '/dev/pcmcia/*' ] && exit 0
+
+	for dev in $pcmdevs; do
+		sh -c "echo < $dev" >/dev/null 2>&1
+	done
+	;;
+
+'stop')
+	;;
+
+*)
+	echo "Usage: $0 { start | stop }"
+	exit 1
+	;;
+esac
+exit 0

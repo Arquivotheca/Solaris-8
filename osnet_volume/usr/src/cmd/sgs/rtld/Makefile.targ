@@ -1,0 +1,79 @@
+#
+#pragma ident	"@(#)Makefile.targ	1.25	99/06/23 SMI"
+#
+# Copyright (c) 1998-1999 by Sun Microsystems, Inc.
+# All rights reserved.
+
+
+# Get rid of new compiler warnings
+pics/getcwd.o	:=	WARNFLAGS=-erroff=E_STATEMENT_NOT_REACHED
+pics/profile.o	:=	WARNFLAGS=-erroff=E_EMPTY_TRANSLATION_UNIT
+
+pics/%.o:	%.s
+		$(BUILD.s)
+		$(POST_PROCESS_O)
+
+pics/%.o:	%.c
+		$(COMPILE.c) -o $@ $< $(WARNFLAGS)
+		$(POST_PROCESS_O)
+
+pics/%.o:	../common/%.c
+		$(COMPILE.c) -o $@ $<  $(WARNFLAGS)
+		$(POST_PROCESS_O)
+
+pics/%.o:	$(SRCBASE)/uts/$(PLAT)/krtld/%.c
+		$(COMPILE.c) -o $@ $<  $(WARNFLAGS)
+		$(POST_PROCESS_O)
+
+adb/%:		../adbmacros/%.adb
+		$(ADBGEN1) < $< > $@.c
+		$(LINK.c) $(ADBGENFLAGS) -o $@.run $(ADBSUB) $@.c
+		$@.run | $(ADBGEN3) | $(ADBGEN4) > $@
+		rm -f $@.run $@.c
+
+$(RTLD):	pics $(PICS) $(CRTS) $(MAPFILE)
+		$(SGSPROTO)/ld -o $@ -dy -G $(DYNFLAGS) $(CRTI) $(PICS) $(LDLIBS) $(CRTN)
+		$(POST_PROCESS_SO)
+#		@ if (dump -rv $@ | fgrep "  R_" | \
+#			egrep -v "RELATIVE|JMP_SLOT" ) then \
+#			echo "fatal: invalid relocations found in ld.so.1" ; \
+#			exit 1 ; \
+#		else \
+#			exit 0 ; \
+#		fi
+
+
+adb:
+		-@mkdir -p $@
+
+delete:
+		-$(RM) $(RTLD)
+
+lint:		$(SGSLINTOUT)
+
+lint :=		CLIB=-lc
+
+$(ETCLIBDIR)/%:	%
+		$(INS.file)
+
+$(SGSONLD)/lib/adb/%: adb/%
+		$(INS.file)
+
+include		$(SRC)/lib/Makefile.targ
+include		$(SRC)/cmd/sgs/Makefile.targ
+
+# Derived source and header files (messaging).
+
+catalog:	$(BLTMESG)
+
+chkmsg :=	SGSMSGCHK=../common/rtld.chk.msg
+
+chkmsg:		$(SRCS) $(CHKSRCS)
+		-sh $(CHKMSG) $(CHKMSGFLAGS) $(SRCS) $(CHKSRCS)
+
+$(BLTDEFS) + \
+$(BLTDATA) :	$(SGSMSGTARG)
+		$(SGSMSG) $(SGSMSGFLAGS2) $(SGSMSGTARG)
+
+$(BLTMESG) :	$(SGSMSGALL)
+		$(SGSMSG) $(SGSMSGFLAGS1) $(SGSMSGALL)

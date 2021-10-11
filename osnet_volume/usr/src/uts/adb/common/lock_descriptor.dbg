@@ -1,0 +1,41 @@
+\
+\ Copyright (c) 1997-1998 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)lock_descriptor.dbg	1.5	98/07/17 SMI"
+
+#include <sys/types.h>
+#include <sys/flock_impl.h>
+#include "dummy.h"
+
+\
+\
+lock_descriptor         l_
+{adb_inline_begin}
+.>z
+<z+{OFFSET, l_next}=""
+{adb_inline_end}
+        next                    hex
+        prev                    hex
+        edge                    .edge
+{adb_inline_begin}
+<z+{OFFSET, l_stack}=""
+{adb_inline_end}
+        stack                   hex
+        stack1                  hex
+        dstack                  hex
+        sedge                   hex
+        index                   hex             "barrier count"
+        graph                   hex
+        vnode                   hex
+        type                    hex
+	state			hex
+        start                   hex
+        len                     hex             end
+        flock.l_whence          hex
+        flock.l_start           hex
+        flock.l_len             hex
+        flock.l_pid             hex
+        flock.l_sysid           hex
+        pvertex                 hex
+	status			hex

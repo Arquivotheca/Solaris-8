@@ -1,0 +1,30 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)stackcalls.dbg	1.3	98/01/19 SMI"
+
+\ arg             : stack pointer
+\ uses            : stackcalls
+\ registers       : f
+\ description     : prints the return addresses from a stack; this
+\                   can be used if adb's $c command stops
+\                   prematurely
+\
+#include <sys/frame.h>
+#include "dummy.h"
+
+\
+\       v9 has a biased stack. Add 0t2047 before using stack pointer
+\
+frame           ""      stackcalls
+{adb_inline_begin}
+(.+0t2047)>f
+,#(*(<f+{OFFSET, fr_savpc}))$<
+<f+{OFFSET, fr_savpc}=""
+{adb_inline_end}
+        fr_savpc        symbolic        ""
+{adb_inline_begin}
+,#(*(<f+{OFFSET, fr_savfp}))$<
+(*(<f+{OFFSET, fr_savfp}))$<stackcalls
+{adb_inline_end}

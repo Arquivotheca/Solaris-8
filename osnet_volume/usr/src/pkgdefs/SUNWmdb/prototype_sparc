@@ -1,0 +1,50 @@
+#
+# Copyright (c) 1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#ident	"@(#)prototype_sparc	1.2	99/09/15 SMI"
+
+!include prototype_com
+
+d none usr/bin/sparcv7 755 root bin
+f none usr/bin/sparcv7/mdb 555 root bin
+d none usr/platform/sun4d 755 root sys
+d none usr/platform/sun4d/lib 755 root bin
+d none usr/platform/sun4d/lib/mdb 755 root sys
+d none usr/platform/sun4d/lib/mdb/kvm 755 root sys
+f none usr/platform/sun4d/lib/mdb/kvm/unix.so 555 root sys
+d none usr/platform/sun4m 755 root sys
+d none usr/platform/sun4m/lib 755 root bin
+d none usr/platform/sun4m/lib/mdb 755 root sys
+d none usr/platform/sun4m/lib/mdb/kvm 755 root sys
+f none usr/platform/sun4m/lib/mdb/kvm/unix.so 555 root sys
+d none usr/platform/sun4u 755 root sys
+d none usr/platform/sun4u/lib 755 root bin
+#
+# create other sun4u platform directories
+#
+d none usr/platform/SUNW,Ultra-1 755 root sys
+d none usr/platform/SUNW,Ultra-250 755 root sys
+d none usr/platform/SUNW,Ultra-4 755 root sys
+d none usr/platform/SUNW,Ultra-Enterprise 755 root sys
+d none usr/platform/SUNW,Ultra-Enterprise-10000 755 root sys
+#
+# create other sun4u platform/lib directories
+#
+d none usr/platform/SUNW,Ultra-1/lib 755 root bin
+d none usr/platform/SUNW,Ultra-250/lib 755 root bin
+d none usr/platform/SUNW,Ultra-4/lib 755 root bin
+d none usr/platform/SUNW,Ultra-Enterprise/lib 755 root bin
+d none usr/platform/SUNW,Ultra-Enterprise-10000/lib 755 root bin
+#
+# create sun4u/lib/mdb and links to it for each sun4u platform
+#
+d none usr/platform/sun4u/lib/mdb 755 root sys
+s none usr/platform/SUNW,Ultra-1/lib/mdb=../../sun4u/lib/mdb
+s none usr/platform/SUNW,Ultra-250/lib/mdb=../../sun4u/lib/mdb
+s none usr/platform/SUNW,Ultra-4/lib/mdb=../../sun4u/lib/mdb
+s none usr/platform/SUNW,Ultra-Enterprise/lib/mdb=../../sun4u/lib/mdb
+s none usr/platform/SUNW,Ultra-Enterprise-10000/lib/mdb=../../sun4u/lib/mdb
+#
+d none usr/platform/sun4u/lib/mdb/kvm 755 root sys
+f none usr/platform/sun4u/lib/mdb/kvm/unix.so 555 root sys

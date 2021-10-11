@@ -1,0 +1,4 @@
+devices/pseudo/clone@0:qe       	0       1
+devices/pseudo/clone@0:hme      	0       1
+devices/pseudo/clone@0:rts      	0       1
+devices/pseudo/devinfo@0:devinfo        0       1

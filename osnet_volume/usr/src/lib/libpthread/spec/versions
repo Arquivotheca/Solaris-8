@@ -1,0 +1,35 @@
+#
+# Copyright (c) 1998-1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#pragma ident	"@(#)versions	1.2	99/10/25 SMI"
+#
+# vers file for libpthread
+#
+# Note: Even though the SUNW_1.1 version now contains no symbols
+# beyond what was present at Solaris 2.5, the SUNW_1.1 version MUST be 
+# present.  This is because applications built on 2.6 Beta 
+# (when it did contain symbols explicitly) may depend on it.
+#
+
+sparc {
+	SUNW_1.3:	{SUNW_1.2};
+	SUNW_1.2:	{SUNW_1.1};
+	SUNW_1.1:	{SUNW_0.9};
+	SUNW_0.9;
+	SUNWprivate_1.1;
+}
+sparcv9 {
+	SUNW_1.3:	{SUNW_1.2};
+	SUNW_1.2:	{SUNW_1.1};
+	SUNW_1.1:	{SUNW_0.9};
+	SUNW_0.9;
+	SUNWprivate_1.1;
+}
+i386 {
+	SUNW_1.3:	{SUNW_1.2};
+	SUNW_1.2:	{SUNW_1.1};
+	SUNW_1.1:	{SUNW_0.9};
+	SUNW_0.9;
+	SUNWprivate_1.1;
+}

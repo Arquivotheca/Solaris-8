@@ -1,0 +1,134 @@
+#
+# Copyright (c) 1994-1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#pragma ident	"@(#)Makefile.files	1.87	99/10/03 SMI"
+#
+#	This Makefile defines all file modules for the directory uts/sun4u
+#	and it's children. These are the source files which are sun4u
+#	"implementation architecture" dependent.
+#
+
+#
+#	object lists
+#
+CORE_OBJS +=	beep.o
+CORE_OBJS +=	bootops.o
+CORE_OBJS +=	cbe.o
+CORE_OBJS +=	confunix.o
+CORE_OBJS +=	copy.o
+CORE_OBJS +=	cpc_hwreg.o
+CORE_OBJS +=	cpc_subr.o
+CORE_OBJS +=	cpu_states.o
+CORE_OBJS +=	ddi_impl.o
+CORE_OBJS +=	dmv.o
+CORE_OBJS +=	dvma.o
+CORE_OBJS +=	ecc.o
+CORE_OBJS +=	fillsysinfo.o
+CORE_OBJS +=	genalign.o
+CORE_OBJS +=	hardclk.o
+CORE_OBJS +=	hat_sfmmu.o
+CORE_OBJS +=	intr.o
+CORE_OBJS +=	ivintr.o
+CORE_OBJS +=	ip_ocsum.o
+CORE_OBJS +=	mach_float.o
+CORE_OBJS +=	mach_sfmmu.o
+CORE_OBJS +=	mach_sysconfig.o
+CORE_OBJS +=	machdep.o
+CORE_OBJS +=	mem_cage.o
+CORE_OBJS +=	mem_config.o
+CORE_OBJS +=	mem_config_arch.o
+CORE_OBJS +=	memlist_new.o
+CORE_OBJS +=	memlist.o
+CORE_OBJS +=	memscrub.o
+CORE_OBJS +=	memscrub_asm.o
+CORE_OBJS +=	mlsetup.o
+CORE_OBJS +=	mp_call.o
+CORE_OBJS +=	mp_startup.o
+CORE_OBJS +=	mp_states.o
+CORE_OBJS +=	polled_io.o
+CORE_OBJS +=	ppage.o
+CORE_OBJS +=	proc_init.o
+CORE_OBJS +=	prom_subr.o
+CORE_OBJS +=	startup.o
+CORE_OBJS +=	subr_4u.o
+CORE_OBJS +=	swtch.o
+CORE_OBJS +=	trap.o
+CORE_OBJS +=	vm_machdep.o
+CORE_OBJS +=	x_call.o
+CORE_OBJS +=	xc.o
+
+#
+#	Some objects must be linked at the front of the image (or
+#	near other objects at the front of the image).
+#
+SPECIAL_OBJS +=	trap_table.o
+SPECIAL_OBJS +=	locore.o
+SPECIAL_OBJS +=	sfmmu_asm.o
+SPECIAL_OBJS +=	interrupt.o
+SPECIAL_OBJS +=	wbuf.o
+
+#
+#			driver modules
+#
+ROOTNEX_OBJS	+= rootnex.o
+SYSIO_SBUS_OBJS	+= iommu.o sysioerr.o sysiosbus.o iocache.o
+PCI_COMMON_OBJS	+= pci.o pci_dma.o pci_devctl.o pci_fdvma.o pci_iommu.o \
+			pci_sc.o pci_debug.o pci_cb.o pci_ib.o pci_ecc.o \
+			pci_pbm.o pci_intr.o pci_util.o pci_space.o
+PSYCHO_PCI_OBJS	+= $(PCI_COMMON_OBJS) pcipsy.o
+SIMBA_PCI_OBJS	+= simba.o
+PCI_PCI_OBJS	+= pci_pci.o
+EBUS_OBJS	+= ebus.o
+SU_OBJS		+= su_driver.o
+VIS_OBJS	+= visinstr.o
+TOD_OBJS	+= tod.o
+POWER_OBJS	+= power.o
+
+#
+#			tod modules
+#
+TODMOSTEK_OBJS	+= todmostek.o
+TODSTARFIRE_OBJS += todstarfire.o
+
+#
+#			Misc modules
+#
+OBPSYM_OBJS	+= obpsym.o obpsym_1275.o
+BOOTDEV_OBJS	+= bootdev.o
+#
+CONSCONFIG_SUN4U_OBJS  += consconfig.o consplat.o consconfig_util.o
+CONSCONFIG_DACF_OBJS  +=  consconfig_dacf.o consconfig_util.o
+
+CPR_FIRST_OBJS	= cpr_resume_setup.o
+CPR_IMPL_OBJS	= cpr_impl.o
+
+#
+#			cpu modules
+#
+CPU_OBJ		= cpu_module.o
+SPITFIRE_OBJS 	= spitfire.o spitfire_asm.o common_asm.o
+
+#
+#			platform module
+#
+PLATMOD_OBJS	= platmod.o
+
+#	Section 3:	Misc.
+#
+ALL_DEFS	+= -Dsun4u
+INC_PATH	+= -I$(UTSBASE)/sun4u
+
+#
+# Since assym.h is a derived file, the dependency must be explicit for
+# all files including this file. (This is only actually required in the
+# instance when the .make.state file does not exist.) It may seem that
+# the lint targets should also have a similar dependency, but they don't
+# since only C headers are included when #defined(lint) is true.
+#
+ASSYM_DEPS	+= genalign.o copy.o ip_ocsum.o
+ASSYM_DEPS	+= locore.o mach_float.o
+ASSYM_DEPS	+= module_sfmmu_asm.o spitfire_asm.o
+ASSYM_DEPS	+= proc_init.o subr_4u.o swtch.o
+ASSYM_DEPS	+= interrupt.o xc.o trap_table.o wbuf.o
+ASSYM_DEPS	+= sfmmu_asm.o memscrub_asm.o

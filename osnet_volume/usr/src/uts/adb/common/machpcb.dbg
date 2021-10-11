@@ -1,0 +1,32 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)machpcb.dbg	1.4	98/01/19 SMI"
+
+#include <sys/param.h>
+#include <sys/types.h>
+#include <sys/thread.h>
+#include <sys/regset.h>
+#include <sys/machpcb.h>
+#include "dummy.h"
+
+\
+\
+machpcb                 mpcb_
+{adb_inline_begin}
+.>z
+<z+{OFFSET, mpcb_spbuf}=""
+{adb_inline_end}
+        spbuf                   hex
+#if !defined(sun4u)
+        uwm                     hex
+        swm                     hex
+#endif
+        wbcnt                   sdecimal
+        flags                   sdecimal
+        wocnt                   sdecimal
+        wucnt                   sdecimal
+{adb_inline_begin}
+<z+{SIZEOF}=""
+{adb_inline_end}

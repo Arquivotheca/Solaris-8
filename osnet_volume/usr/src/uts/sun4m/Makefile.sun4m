@@ -1,0 +1,249 @@
+#
+# uts/sun4m/Makefile.sun4m
+# Copyright (c) 1991-1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#ident	"@(#)Makefile.sun4m	1.77	99/08/06 SMI"
+#
+#	This makefile contains the common definitions for the sun4m unix
+#	and all sun4m implementation architecturedependent modules.
+#
+
+#
+#	Machine type (implementation architecture):
+#
+PLATFORM	 = sun4m
+PROMIF		 = obp
+PSMBASE		 = $(UTSBASE)/../psm
+
+#
+#	Define supported builds
+#
+DEF_BUILDS	= $(DEF_BUILDS32)
+ALL_BUILDS	= $(ALL_BUILDS32)
+
+#
+#	Everybody needs to know how to build modstubs.o and to locate unix.o
+#
+UNIX_DIR	 = $(UTSBASE)/$(PLATFORM)/unix
+GENLIB_DIR	 = $(UTSBASE)/sparc/genunix
+MODSTUBS_DIR	 = $(UNIX_DIR)
+DSF_DIR		 = $(UTSBASE)/$(PLATFORM)/genassym
+LINTS_DIR	 = $(OBJS_DIR)
+LINT_LIB_DIR	 = $(UTSBASE)/$(PLATFORM)/lint-libs/$(OBJS_DIR)
+GEN_LINT_LIB_DIR = $(UTSBASE)/sparc/lint-libs/$(OBJS_DIR)
+
+UNIX_O		 = $(UNIX_DIR)/$(OBJS_DIR)/unix.o
+MODSTUBS_O	 = $(MODSTUBS_DIR)/$(OBJS_DIR)/modstubs.o
+GENLIB	 	 = $(GENLIB_DIR)/$(OBJS_DIR)/libgenunix.so
+LINT_LIB	 = $(LINT_LIB_DIR)/llib-lunix.ln
+GEN_LINT_LIB	 = $(GEN_LINT_LIB_DIR)/llib-lgenunix.ln
+
+#
+#	cpu modules need to know how to build their own symcheck module
+#
+CPUNAME		= cpu
+CPULIB		= $(OBJS_DIR)/libcpu.so
+CPUSYM_MOD	= $(OBJS_DIR)/unix.cpu
+
+#
+#	Include the makefiles which define build rule templates, the
+#	collection of files per module, and a few specific flags. Note
+#	that order is significant, just as with an include path. The
+#	first build rule template which matches the files name will be
+#	used. By including these in order from most machine dependent
+#	to most machine independent, we allow a machine dependent file
+#	to be used in preference over a machine independent version
+#	(Such as a machine specific optimization, which preserves the
+#	interfaces.)
+#
+include $(UTSBASE)/$(PLATFORM)/Makefile.files
+include $(UTSBASE)/srmmu/Makefile.files
+include $(UTSBASE)/sparc/v7/Makefile.files
+include $(UTSBASE)/sparc/Makefile.files
+include $(UTSBASE)/sun/Makefile.files
+include $(SRC)/psm/promif/$(PROMIF)/Makefile.files
+include $(UTSBASE)/common/Makefile.files
+
+#
+#	Include machine independent rules. Note that this does not imply
+#	that the resulting module from rules in Makefile.uts is	machine
+#	independent. Only that the build rules are machine independent.
+#
+include $(UTSBASE)/Makefile.uts
+
+#
+#	machine specific optimization, override default in Makefile.master
+#
+XARCH		= -xarch=v8
+COPTIMIZE	= -xO3 -xchip=super
+CCMODE		= -Xt
+
+CFLAGS		= $(XARCH)
+CFLAGS		+= $(COPTIMIZE)
+CFLAGS		+= $(EXTRA_CFLAGS)
+CFLAGS		+= $(XAOPT)
+CFLAGS		+= $(INLINES)
+CFLAGS		+= $(CCMODE)
+CFLAGS		+= $(SPACEFLAG)
+
+ASFLAGS		+= $(XARCH)
+
+AS_INC_PATH	+= -I$(DSF_DIR)/$(OBJS_DIR)
+
+#
+#	The following must be defined for all implementations:
+#
+#	MAPFILE:	ld mapfile for the build of kernel/unix.
+#	MODSTUBS:	Module stubs source file.
+#	GENASSYM_SRC:	genassym.c
+#	FDOFFSETS:	fd_offsets.in
+#
+MAPFILE		 = $(UTSBASE)/$(PLATFORM)/conf/Mapfile
+MODSTUBS	 = $(UTSBASE)/sparc/ml/modstubs.s
+GENASSYM_SRC	 = $(UTSBASE)/$(PLATFORM)/ml/genassym.c
+FDOFFSETS 	 = $(UTSBASE)/sun/io/fd_offsets.in
+
+#
+#	Define the actual specific platforms
+#
+MACHINE_DEFS	 = -D$(PLATFORM) -D_MACHDEP -DSRMMU -DBCOPY_BUF
+
+#
+#	Debugging level
+#
+#	Special knowledge of which special debugging options effect which
+#	file is used to optimize the build if these flags are changed.
+#
+#	XXX: The above could possibly be done for more flags and files, but
+#	     is left as an experiment to the interested reader. Be forewarned,
+#	     that excessive use could lead to maintenance difficulties.
+#
+#	Note: kslice can be enabled for the sun4m, but is disabled by default
+#	      in all cases.
+#
+
+DEBUG_DEFS_OBJ32	=
+DEBUG_DEFS_DBG32	= -DDEBUG
+DEBUG_DEFS		= $(DEBUG_DEFS_$(BUILD_TYPE))
+
+DEBUG_COND_OBJ32	:sh = echo \\043
+DEBUG_COND_DBG32	= 
+IF_DEBUG_OBJ		= $(DEBUG_COND_$(BUILD_TYPE))$(OBJS_DIR)/
+
+$(IF_DEBUG_OBJ)trap.o		:=	DEBUG_DEFS	+= -DTRAPDEBUG
+$(IF_DEBUG_OBJ)syscall_trap.o	:=	DEBUG_DEFS	+= -DSYSCALLTRACE
+$(IF_DEBUG_OBJ)locore.o		:=	DEBUG_DEFS	+= -DTRAPTRACE
+$(IF_DEBUG_OBJ)syscall_trap.o	:=	DEBUG_DEFS	+= -DTRAPTRACE
+#$(IF_DEBUG_OBJ)overflow.o	:=	DEBUG_DEFS	+= -DTRAPTRACE
+#$(IF_DEBUG_OBJ)underflow.o	:=	DEBUG_DEFS	+= -DTRAPTRACE
+$(IF_DEBUG_OBJ)locore.o		:=	DEBUG_DEFS	+= -DSNOOPING
+
+# Comment these out if you don't want dispatcher lock statistics.
+
+#$(IF_DEBUG_OBJ)lock_prim.o	:= DEBUG_DEFS	+= -DDISP_LOCK_STATS
+#$(IF_DEBUG_OBJ)disp.o		:= DEBUG_DEFS	+= -DDISP_LOCK_STATS
+
+# Comment these out if you don't want dispatcher debugging 
+
+#$(IF_DEBUG_OBJ)lock_prim.o	:= DEBUG_DEFS	+= -DDISP_DEBUG
+
+#
+#	Build `options'. These are mostly historical and the need for these
+#	is largely removed by the module technology. However, the static
+#	build will continue to require these.
+#
+OPTION_DEFS	 = -DSYSACCT -DC2_AUDIT
+
+#       Viking bug workaround options
+#
+# "make VIKING_DEFS=" gets you a kernel without workarounds
+#
+
+VIKING_DEFS     = -DVIKING_BUG_16
+MACHINE_DEFS += $(VIKING_DEFS)
+
+#
+#	Collect the preprocessor definitions to be associated with *all*
+#	files.
+#
+ALL_DEFS	 = $(MACHINE_DEFS) $(DEBUG_DEFS) $(OPTION_DEFS)
+GENASSYM_DEFS	 = $(MACHINE_DEFS) $(OPTION_DEFS)
+
+#
+# ----- TRANSITIONAL SECTION --------------------------------------------------
+#
+
+#
+#	Not everything which *should* be a module is a module yet. The
+#	following is a list of such objects which are currently part of
+#	the base kernel but should soon become kmods.
+#
+MACH_NOT_YET_KMODS	 = $(AUTOCONF_OBJS)
+
+#
+# ----- END OF TRANSITIONAL SECTION -------------------------------------------
+#
+
+#
+#	The kernels modules which are "implementation architecture"
+#	specific for this machine are enumerated below. Note that most
+#	of these modules must exist (in one form or another) for each
+#	architecture.
+#
+#	Common Drivers (usually pseudo drivers) (/kernel/drv):
+#
+DRV_KMODS	+=
+
+#
+#	Machine Specific Driver Modules (/kernel/drv):
+#
+#	XXX: How many of these are really machine specific?
+#
+DRV_KMODS	+= bwtwo cgeight cgsix cgfourteen cgthree
+DRV_KMODS	+= dma fd iommu
+DRV_KMODS	+= ledma obio
+DRV_KMODS	+= rootnex sbus sbusmem stc zs zsh
+DRV_KMODS	+= sx sx_cmem
+
+#
+#	Exec Class Modules (/kernel/exec):
+#
+EXEC_KMODS	+=
+
+#
+#	Scheduling Class Modules (/kernel/sched):
+#
+SCHED_KMODS	+=
+
+#
+#	File System Modules (/kernel/fs):
+#
+FS_KMODS	+=
+
+#
+#	Streams Modules (/kernel/strmod):
+#
+STRMOD_KMODS	+= kb
+
+#
+#	'System' Modules (/kernel/sys):
+#
+SYS_KMODS	+=
+
+#
+#	Modules eXcluded from the product:
+#
+XMODS		+= battery pmc mic
+
+#
+#	Misc Modules (/kernel/misc):
+#
+MISC_KMODS	+= obpsym cpr bootdev pcmcia
+
+#
+#	CPU specific modules (/kernel/cpu):
+#
+#	NOTE:  These can not be built in parallel
+#
+CPU_KMODS_SERIAL = colorado default swift tsunami viking

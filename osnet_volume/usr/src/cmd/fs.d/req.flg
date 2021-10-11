@@ -1,0 +1,5 @@
+#!/bin/sh
+#pragma ident "@(#)req.flg	1.3	95/11/05 SMI" 
+
+echo_file usr/src/cmd/fs.d/Makefile.fstype
+echo_file usr/src/cmd/fs.d/preenlib.c

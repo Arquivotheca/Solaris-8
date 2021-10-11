@@ -1,0 +1,37 @@
+#!/bin/sh
+#
+#ident "@(#)i.mach 1.1 98/12/17"
+#
+# Copyright (c) 1998, by Sun Microsystems, Inc.
+# All rights reserved.
+#
+
+PATH="/usr/bin:/usr/sbin:${PATH}"
+export PATH
+
+
+while read src dest
+do
+	if [ ! -f $dest ] ; then
+		cp $src $dest
+	else
+		grep '^#pragma' $src > /tmp/newident.$$ 2>/dev/null
+		sed -e '/^ast/d' \
+		    -e '/^syspro/d' \
+		    -e '/^tpf/d' \
+		    -e '/^wysemp/d' \
+		$dest > /tmp/m.$$
+	   if cmp -s /tmp/m.$$	$dest  > /dev/null 2>&1
+           then
+		:
+	   else
+		cat /tmp/newident.$$ > /tmp/rest.$$
+		sed '/^#pragma.*/d' /tmp/m.$$ >> /tmp/rest.$$
+		cp /tmp/rest.$$ $dest
+	   fi
+	   rm -f /tmp/m.$$ /tmp/rest.$$ /tmp/newident.$$
+	fi
+
+done
+
+exit 0

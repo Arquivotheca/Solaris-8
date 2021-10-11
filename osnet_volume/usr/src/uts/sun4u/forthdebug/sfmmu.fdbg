@@ -1,0 +1,396 @@
+
+#ident	"@(#)sfmmu.fdbg	1.23	99/10/04 SMI"
+
+#include <sys/param.h>
+#include <sys/types.h>
+#include <sys/user.h>
+#include <sys/cred.h>
+#include <sys/proc.h>
+#include <sys/cpuvar.h>
+#include <sys/thread.h>
+#include <sys/sysinfo.h>
+#include <sys/vfs.h>
+#include <sys/time.h>
+#include <sys/vnode.h>
+#include <sys/disp.h>
+#include <sys/var.h>
+#include <sys/ts.h>
+#include <sys/kstat.h>
+#include <vm/hat_sfmmu.h>
+#include <sys/ivintr.h>
+#include <sys/intr.h>
+#include <sys/machcpuvar.h>
+#include <sys/sysiosbus.h>
+#include <sys/iommu.h>
+#include <sys/iocache.h>
+#include <vm/anon.h>
+#include <vm/as.h>
+#include <vm/hat.h>
+#include <vm/page.h>
+#include <vm/pvn.h>
+#include <vm/seg.h>
+#include <vm/seg_dev.h>
+#include <vm/seg_enum.h>
+#include <vm/seg_kp.h>
+#include <vm/seg_map.h>
+#include <vm/seg_vn.h>
+#include <sys/mutex_impl.h>
+#include <sys/rwlock_impl.h>
+#include <sys/callo.h>
+#include <sys/ddi_impldefs.h>
+#include <sys/kmem_impl.h>
+#include <sys/siginfo.h>
+#include <sys/memlist.h>
+#include <sys/modctl.h>
+#include <sys/kobj.h>
+#include <sys/privregs.h>
+#include <sys/machpcb.h>
+#include <sys/traptrace.h>
+#include <vm/mach_page.h>
+
+hat.h_un
+	sfmmu_iblkp	x
+
+hat
+	sfmmu_mutex	.mutex
+	sfmmu_cpusran	x
+	sfmmu_as	x
+	sfmmu_rss	d
+	sfmmu_lttecnt	d
+	h_un		.hat.h_un
+	sfmmu_free	x
+	sfmmu_ismhat	x
+	sfmmu_rmstat	x
+	sfmmu_clrstart	x
+	sfmmu_clrbin	x
+	sfmmu_cnum	x
+
+tte
+	v	x
+	sz	x
+	nfo	x
+	ie	x
+	hmenum	x
+	lockcnt	x
+	pahi	x
+	palo	x
+	ref	x
+	wr_perm	x
+	no_sync	x
+	exec_perm x
+	l	x
+	cp	x
+	cv	x
+	e	x
+	p	x
+	w	x
+	g	x
+
+hmehash_bucket
+	hmehash_mutex	.mutex
+	hmeh_nextpa	x
+	hmeblkp		x
+
+hmeblk_tag
+	htag_tag	x
+
+hme_blk.hblk_misc
+
+
+hme_blk.hblk_un
+
+hme_blk
+	hblk_nextpa	x
+	hblk_tag	.hmeblk_tag
+	hblk_next	x
+	hblk_shadow	x
+	hblk_span	d
+	hblk_misc	.hme_blk.hblk_misc
+	hblk_un		.hme_blk.hblk_un
+
+sf_hment
+	hme_page	x
+	hme_next	x
+	hme_prev	x
+	hme_tte		.tte
+
+ctx.c_un
+	c_sfmmup	.x
+
+ctx
+	c_un		.ctx.c_un
+	c_flags		.x
+	c_refcnt	.x
+	c_ismblkpa	.x
+
+sfmmu_global_stat
+	sf_slow_tsbmiss		d
+	sf_pagefaults		d
+	sf_uhash_searches	d
+	sf_uhash_links		d
+	sf_khash_searches	d
+	sf_khash_links		d
+	sf_ctxfree		d
+	sf_ctxdirty		d
+	sf_ctxsteal		d
+	sf_tteload8k		d
+	sf_tteload64k		d
+	sf_tteload512k		d
+	sf_tteload4m		d
+	sf_hblk_hit		d
+	sf_hblk8_nalloc		d
+	sf_hblk8_dalloc		d
+	sf_hblk8_dfree		d
+	sf_hblk1_nalloc		d
+	sf_hblk1_dalloc		d
+	sf_hblk1_dfree		d
+	sf_hblk8_startup_use	d
+	sf_pgcolor_conflict	d
+	sf_uncache_conflict	d
+	sf_unload_conflict	d
+	sf_ism_uncache		d
+	sf_ism_recache		d
+	sf_recache		d
+	sf_steal_count		d
+	sf_mlist_enter		d
+	sf_mlist_exit		d
+	sf_pagesync		d
+	sf_pagesync_invalid	d
+	sf_kernel_xcalls	d
+	sf_user_xcalls		d
+	sf_tsb_resize		d
+	sf_tsb_resize_failures	d
+	sf_user_vtop		d
+
+memseg
+
+machpage
+	p_paget		.page
+	p_mapping	.x
+	p_pagenum	.x
+	p_nrm		.x
+	p_vcolor	.x
+	p_index		.x
+	p_share		.x
+
+
+tsbmiss
+
+ism_blk
+
+ism_map
+
+ism_ment
+
+forth_start
+
+
+( given a pfn will display machpage struct )
+: .page-n ( n -- )
+   [ also machpage-words ]
+   [ also memseg-words ]
+   symbol memsegs p@                   ( n memseg )
+   begin  ?dup  while                  ( n memseg )
+      2dup                             ( n memseg n memseg )
+      dup pages_base swap pages_end    ( n memseg n base end )
+      within  if                       ( n memseg )
+         2dup pages_base -             ( n memseg noff )
+         ['] .machpage sizeof * swap	( n poff memseg )
+         pages + dup		 	( page )
+	 ." page " .x cr		( page )
+	 .machpage drop exit		( )
+      then                             ( n memseg )
+      next                             ( n memseg' )
+   repeat                              ( n )
+   . ." not found"                     ( )
+   [ previous ]
+   [ previous ]
+;
+
+: .memseg-list ( -- )
+   [ also memseg-words ]
+   symbol memsegs p@        ( memseg )
+   begin  ?dup  while       ( memseg )
+      dup .memseg cr next   ( memseg' )
+   repeat
+   [ previous ]
+;
+
+: .memlist-list ( memlist -- )
+   [ also memlist-words ]
+   begin  ?dup  while        ( memlist )
+      dup .memlist cr next   ( memlist' )
+   repeat                    ( )
+   [ previous ]
+;
+
+: .sfmmu-cnum ( cnum -- )
+   [ also ctx-words ]
+   [ also ctx.c_un-words ]
+   ['] .ctx sizeof *		( coff )
+   symbol ctxs p@ + c_sfmmup	( hat )
+   ." sfmmu " dup .x cr		( hat )
+   ?dup if .hat then		( )
+   [ previous ]
+;
+
+: .hmeb-shift ( sfmmu addr shift -- )
+   >> over xor swap                 ( hash sfmmu )
+   symbol ksfmmup p@ <>  if               ( hash )
+      symbol uhmehash_num l@ and    ( bucket )
+      ['] .hmehash_bucket sizeof *  ( index )
+      symbol uhme_hash p@ +         ( hmeb )
+   else                             ( hash )
+      symbol khmehash_num l@ and    ( bucket )
+      ['] .hmehash_bucket sizeof *  ( index )
+      symbol khme_hash p@ +         ( hmeb )
+   then                             ( hmeb )
+   ." hmeb " dup .x cr              ( hmeb )
+   .hmehash_bucket                  ( )
+;
+
+: .hmeb-8k ( sfmmup addr -- ) d# 16 .hmeb-shift ;
+
+alias .hmeb-64k .hmeb-8k
+
+: .hmeb-512k ( sfmmup addr -- ) d# 19 .hmeb-shift ;
+
+: .hmeb-4m ( sfmmup addr -- ) d# 22 .hmeb-shift ;
+
+: .hmeblk-list ( hmeblk -- )
+   [ also hme_blk-words ]
+   begin  ?dup  while             ( hmeblk )
+      dup .hme_blk cr hblk_next   ( hmeblk' )
+   repeat                         ( )
+   [ previous ]
+;
+
+: .pmap-list ( sfhme -- )
+   [ also sf_hment-words ]
+   begin  ?dup  while            ( sfhme )
+      dup .sf_hment cr hme_next  ( sfhme' )
+   repeat                        ( )
+   [ previous ]
+;
+
+: clr_mmustats ( -- )
+	[ also sfmmu_global_stat-words ]
+	[ also tsbmiss-words ]
+	symbol sfmmu_global_stat 
+	dup 0 to sf_slow_tsbmiss
+	dup 0 to sf_pagefaults
+	dup 0 to sf_uhash_searches
+	dup 0 to sf_uhash_links
+	dup 0 to sf_khash_searches
+	dup 0 to sf_khash_links
+	dup 0 to sf_ctxfree
+	dup 0 to sf_ctxdirty
+	dup 0 to sf_ctxsteal
+	dup 0 to sf_tteload8k
+	dup 0 to sf_tteload64k
+	dup 0 to sf_tteload512k
+	dup 0 to sf_tteload4m
+	dup 0 to sf_hblk_hit
+	dup 0 to sf_hblk8_nalloc
+	dup 0 to sf_hblk8_dalloc
+	dup 0 to sf_hblk8_dfree
+	dup 0 to sf_hblk1_nalloc
+	dup 0 to sf_hblk1_dalloc
+	dup 0 to sf_hblk1_dfree
+	dup 0 to sf_hblk8_startup_use
+	dup 0 to sf_pgcolor_conflict
+	dup 0 to sf_uncache_conflict
+	dup 0 to sf_unload_conflict
+	dup 0 to sf_steal_count
+	dup 0 to sf_mlist_enter
+	dup 0 to sf_mlist_exit
+	dup 0 to sf_pagesync
+	dup 0 to sf_pagesync_invalid
+	dup 0 to sf_kernel_xcalls
+	dup 0 to sf_user_xcalls
+	dup 0 to sf_tsb_resize
+	dup 0 to sf_user_vtop
+	symbol tsbmiss_area
+	20 1 do
+		dup 0 to itlb_misses
+		dup 0 to dtlb_misses
+		dup 0 to utsb_misses
+		dup 0 to ktsb_misses
+		dup 0 to uprot_traps
+		dup 0 to kprot_traps
+		['] .tsbmiss sizeof +
+	loop
+	[ previous ]
+	[ previous ]
+;
+
+0 value itlbmis_total
+0 value dtlbmis_total
+0 value utsbmis_total
+0 value ktsbmis_total
+0 value kprot_total
+0 value uprot_total
+0 value thisarea
+1 value hatstatcpu
+
+: prt_mmustats ( -- )
+	[ also sfmmu_global_stat-words ]
+	[ also tsbmiss-words ]
+	symbol sfmmu_global_stat .sfmmu_global_stat 
+	0 to itlbmis_total
+	0 to dtlbmis_total
+	0 to utsbmis_total
+	0 to ktsbmis_total
+	0 to uprot_total
+	0 to kprot_total
+	1 to hatstatcpu
+	symbol tsbmiss_area to thisarea
+	20 1 do i
+		symbol cpu_ready_set l@ hatstatcpu and
+		0 <> if 
+			thisarea itlb_misses itlbmis_total + to itlbmis_total
+			thisarea dtlb_misses dtlbmis_total + to dtlbmis_total
+			thisarea utsb_misses utsbmis_total + to utsbmis_total
+			thisarea ktsb_misses ktsbmis_total + to ktsbmis_total
+			thisarea uprot_traps uprot_total + to uprot_total
+			thisarea kprot_traps kprot_total + to kprot_total
+		then
+		thisarea
+		['] .tsbmiss sizeof + to thisarea
+		hatstatcpu 1 lshift to hatstatcpu
+	loop
+	." inst tlb misses = " itlbmis_total .d cr
+	." data tlb misses = " dtlbmis_total .d cr
+	." u tsb misses = " utsbmis_total .d cr
+	." k tsb misses = " ktsbmis_total .d cr
+	." u prot misses = " uprot_total .d cr
+	." k prot misses = " kprot_total .d cr
+	[ previous ]
+	[ previous ]
+;
+
+\
+\ Utilities
+\
+ 
+h# 58 constant ASI_DMMU
+h#  8 constant MMU_PCONTEXT
+h# 10 constant MMU_SCONTEXT
+ 
+: sctx@
+        MMU_SCONTEXT ASI_DMMU spacex@
+;
+: pctx@
+        MMU_PCONTEXT ASI_DMMU spacex@
+;
+ 
+: umap? ( uvaddr -- )
+        sctx@ unix-tte if               \ false | tte-data true
+          tte> drop             \ pa
+          ." pa = " . cr
+        else
+          ." no translation" cr
+        then
+;
+
+forth_end

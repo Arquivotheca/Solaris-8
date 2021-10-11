@@ -1,0 +1,13 @@
+#!/bin/sh
+#
+# Copyright (c) 1994, 1995, 1996 by Sun Microsystems, Inc.
+# All Rights Reserved
+#
+#	@(#)lpsystem	1.2	96/04/22 SMI
+#
+
+cmd_name=`basename $0`
+
+if [ -f /usr/lib/lp/local/$cmd_name ] ; then
+	exec /usr/lib/lp/local/$cmd_name $*
+fi

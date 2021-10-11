@@ -1,0 +1,11 @@
+domain "SUNW_BSM_ALLOCATE"
+msgid "fd_clean [-s|-f|-i] device info_label"
+msgstr
+msgid "Operator must label media remaining in %s with information label: %s"
+msgstr
+msgid "Error cleaning up device %s, information label: %s\n"
+msgstr
+msgid "Please label the media removed from %s with information label %s\n"
+msgstr
+msgid "Please inform system administrator\n"
+msgstr

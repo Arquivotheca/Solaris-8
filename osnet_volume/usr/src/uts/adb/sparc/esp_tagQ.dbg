@@ -1,0 +1,26 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)esp_tagQ.dbg	1.5	98/01/19 SMI"
+
+#include <sys/kmem.h>
+#include <sys/kmem_impl.h>
+#include <sys/scsi/adapters/espvar.h>
+#include "dummy.h"
+
+\
+\
+t_slots         	""      	esp_tagQ
+{adb_inline_begin}
+.>z
+<z+{OFFSET, e_dups}=""
+{adb_inline_end}
+        e_dups                  hex
+        e_tags                  hex
+        e_timeout               hex
+        e_timebase              hex
+        t_slot                  hex
+{adb_inline_begin}
+<z+{SIZEOF}=""
+{adb_inline_end}

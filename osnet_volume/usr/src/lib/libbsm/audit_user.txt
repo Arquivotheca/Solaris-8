@@ -1,0 +1,13 @@
+#
+# Copyright (c) 1988 by Sun Microsystems, Inc.
+#
+#ident  @(#)audit_user.txt  1.5     97/01/08 SMI
+#
+#
+# User Level Audit User File
+#
+# File Format
+#
+#	username:always:never
+#
+root:lo:no

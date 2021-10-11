@@ -1,0 +1,34 @@
+#
+#ident	"@(#)Makefile.1275	1.2	94/11/29 SMI"
+#
+# Copyright (c) 1994, by Sun Microsystems, Inc.
+#
+# psm/stand/bootblks/Makefile.1275
+#
+
+#
+# Sources and objects used to build the Forth-based bootblock
+# for all Sun OpenFirmware machines (IEEE Std. 1275)
+#
+# Same names for both filesystems.
+#
+FORTH_SRC	= boot_1275.fth
+FORTH_FCODE	= $(FORTH_SRC:%.fth=%.fcode)
+
+#
+# Targets
+#
+$(PROG): $(FORTH_FCODE)
+	@-$(RM) $@
+	cp -p $(FORTH_FCODE) $@
+
+clean:
+	-$(RM) $(FORTH_FCODE)
+
+clobber: clean
+	-$(RM) $(PROG)
+
+lint:	FRC
+
+FRC:
+

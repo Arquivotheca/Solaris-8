@@ -1,0 +1,24 @@
+\
+\ Copyright (c) 1999 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)svcpool_list.nxt.dbg	1.2	99/08/23 SMI"
+
+\       arg             : address of an SVCPOOL structure
+\       uses            : svcpool, svcpool_list.nxt (recursive call)
+\       registers       : n
+\	description     : prints the contents of SVCPOOL structure, then
+\			  recurses to the next one
+\
+
+#include "dummy.h"
+
+\
+\
+__dummy		""	svcpool_list.nxt
+{adb_inline_begin}
+.>n
+,#(#(<n))$<<svcpool
+*(<n)>n
+<n,#(#(<n))$<svcpool_list.nxt
+{adb_inline_end}

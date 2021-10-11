@@ -1,0 +1,128 @@
+#
+#
+# Copyright (c) 1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#ident	"@(#)prototype_com	1.1	99/10/08 SMI"
+#
+# This required package information file contains a list of package contents.
+# The 'pkgmk' command uses this file to identify the contents of a package
+# and their location on the development machine when building the package.
+# Can be created via a text editor or through use of the 'pkgproto' command.
+
+#!search <pathname pathname ...>	# where to find pkg objects
+#!include <filename>			# include another 'prototype' file
+#!default <mode> <owner> <group>	# default used if not specified on entry
+#!<param>=<value>			# puts parameter in pkg environment
+
+# packaging files
+i pkginfo
+i copyright
+i depend
+#
+# source locations relative to the prototype file
+#
+# SUNWgzipS
+#
+d none usr 755 root sys
+d none usr/share 755 root sys
+d none usr/share/src 755 root sys
+d none usr/share/src/gzip 755 root bin
+f none usr/share/src/gzip/COPYING 444 root bin
+f none usr/share/src/gzip/ChangeLog 444 root bin
+f none usr/share/src/gzip/INSTALL 444 root bin
+f none usr/share/src/gzip/Makefile.in 444 root bin
+f none usr/share/src/gzip/NEWS 444 root bin
+f none usr/share/src/gzip/README 444 root bin
+f none usr/share/src/gzip/THANKS 444 root bin
+f none usr/share/src/gzip/TODO 444 root bin
+f none usr/share/src/gzip/algorithm.doc 444 root bin
+f none usr/share/src/gzip/bits.c 444 root bin
+f none usr/share/src/gzip/configure 555 root bin
+f none usr/share/src/gzip/configure.in 444 root bin
+f none usr/share/src/gzip/crypt.c 444 root bin
+f none usr/share/src/gzip/crypt.h 444 root bin
+f none usr/share/src/gzip/deflate.c 444 root bin
+f none usr/share/src/gzip/getopt.c 444 root bin
+f none usr/share/src/gzip/getopt.h 444 root bin
+f none usr/share/src/gzip/gpl.texinfo 444 root bin
+f none usr/share/src/gzip/gzexe.1 444 root bin
+f none usr/share/src/gzip/gzexe.in 444 root bin
+f none usr/share/src/gzip/gzip.1 444 root bin
+f none usr/share/src/gzip/gzip.c 444 root bin
+f none usr/share/src/gzip/gzip.doc 444 root bin
+f none usr/share/src/gzip/gzip.h 444 root bin
+f none usr/share/src/gzip/gzip.info 444 root bin
+f none usr/share/src/gzip/gzip.texi 444 root bin
+f none usr/share/src/gzip/inflate.c 444 root bin
+f none usr/share/src/gzip/lzw.c 444 root bin
+f none usr/share/src/gzip/lzw.h 444 root bin
+f none usr/share/src/gzip/match.S 444 root bin
+f none usr/share/src/gzip/revision.h 444 root bin
+f none usr/share/src/gzip/tailor.h 444 root bin
+f none usr/share/src/gzip/texinfo.tex 444 root bin
+f none usr/share/src/gzip/trees.c 444 root bin
+f none usr/share/src/gzip/unlzh.c 444 root bin
+f none usr/share/src/gzip/unlzw.c 444 root bin
+f none usr/share/src/gzip/unpack.c 444 root bin
+f none usr/share/src/gzip/unzip.c 444 root bin
+f none usr/share/src/gzip/util.c 444 root bin
+f none usr/share/src/gzip/zdiff.1 444 root bin
+f none usr/share/src/gzip/zdiff.in 444 root bin
+f none usr/share/src/gzip/zforce.1 444 root bin
+f none usr/share/src/gzip/zforce.in 444 root bin
+f none usr/share/src/gzip/zgrep.1 444 root bin
+f none usr/share/src/gzip/zgrep.in 444 root bin
+f none usr/share/src/gzip/zip.c 444 root bin
+f none usr/share/src/gzip/zmore.1 444 root bin
+f none usr/share/src/gzip/zmore.in 444 root bin
+f none usr/share/src/gzip/znew.1 444 root bin
+f none usr/share/src/gzip/znew.in 444 root bin
+d none usr/share/src/gzip/amiga 755 root bin
+f none usr/share/src/gzip/amiga/Makefile.gcc 444 root bin
+f none usr/share/src/gzip/amiga/Makefile.sasc 444 root bin
+f none usr/share/src/gzip/amiga/match.a 444 root bin
+f none usr/share/src/gzip/amiga/tailor.c 444 root bin
+f none usr/share/src/gzip/amiga/utime.h 444 root bin
+d none usr/share/src/gzip/atari 755 root bin
+f none usr/share/src/gzip/atari/Makefile.st 444 root bin
+d none usr/share/src/gzip/msdos 755 root bin
+f none usr/share/src/gzip/msdos/Makefile.bor 444 root bin
+f none usr/share/src/gzip/msdos/Makefile.djg 444 root bin
+f none usr/share/src/gzip/msdos/Makefile.msc 444 root bin
+f none usr/share/src/gzip/msdos/doturboc.bat 444 root bin
+f none usr/share/src/gzip/msdos/gzip.prj 444 root bin
+f none usr/share/src/gzip/msdos/match.asm 444 root bin
+f none usr/share/src/gzip/msdos/tailor.c 444 root bin
+d none usr/share/src/gzip/nt 755 root bin
+f none usr/share/src/gzip/nt/Makefile.nt 444 root bin
+d none usr/share/src/gzip/os2 755 root bin
+f none usr/share/src/gzip/os2/Makefile.os2 444 root bin
+f none usr/share/src/gzip/os2/gzip.def 444 root bin
+f none usr/share/src/gzip/os2/gzip16.def 444 root bin
+d none usr/share/src/gzip/primos 755 root bin
+f none usr/share/src/gzip/primos/build.cpl 444 root bin
+f none usr/share/src/gzip/primos/ci.opts 444 root bin
+f none usr/share/src/gzip/primos/primos.c 444 root bin
+f none usr/share/src/gzip/primos/readme 444 root bin
+d none usr/share/src/gzip/primos/include 755 root bin
+f none usr/share/src/gzip/primos/include/errno.h 444 root bin
+f none usr/share/src/gzip/primos/include/fcntl.h 444 root bin
+f none usr/share/src/gzip/primos/include/stdlib.h 444 root bin
+f none usr/share/src/gzip/primos/include/sysStat.h 444 root bin
+f none usr/share/src/gzip/primos/include/sysTypes.h 444 root bin
+d none usr/share/src/gzip/sample 755 root bin
+f none usr/share/src/gzip/sample/add.c 444 root bin
+f none usr/share/src/gzip/sample/makecrc.c 444 root bin
+f none usr/share/src/gzip/sample/sub.c 444 root bin
+f none usr/share/src/gzip/sample/zfile 444 root bin
+f none usr/share/src/gzip/sample/zread.c 444 root bin
+f none usr/share/src/gzip/sample/ztouch 444 root bin
+d none usr/share/src/gzip/vms 755 root bin
+f none usr/share/src/gzip/vms/Makefile.gcc 444 root bin
+f none usr/share/src/gzip/vms/Makefile.mms 444 root bin
+f none usr/share/src/gzip/vms/Makefile.vms 444 root bin
+f none usr/share/src/gzip/vms/Readme.vms 444 root bin
+f none usr/share/src/gzip/vms/gzip.hlp 444 root bin
+f none usr/share/src/gzip/vms/makegzip.com 444 root bin
+f none usr/share/src/gzip/vms/vms.c 444 root bin

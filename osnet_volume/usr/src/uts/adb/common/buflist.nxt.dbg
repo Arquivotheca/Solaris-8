@@ -1,0 +1,20 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)buflist.nxt.dbg	1.3	98/01/19 SMI"
+
+#include <sys/types.h>
+#include <sys/buf.h>
+#include "dummy.h"
+
+\
+\
+hbuf    ""      buflist.nxt
+{adb_inline_begin}
+<H+({SIZEOF}*<I)>B
+*(<B+{OFFSET, b_forw})>S
+(<I+1)>I
+,#(#(<B-<S))$<buflistiter.nxt
+,#(<V-<I)$<
+{adb_inline_end}

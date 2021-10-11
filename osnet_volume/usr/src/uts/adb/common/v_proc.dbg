@@ -1,0 +1,17 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)v_proc.dbg	1.6	98/07/19 SMI"
+
+#include <sys/types.h>
+#include <sys/var.h>
+#include "dummy.h"
+
+\       v_proc in struct var is an integer
+\
+var             ""      v_proc
+{adb_inline_begin}
+v>e
+*(<e+{OFFSET, v_proc})>/i/e
+{adb_inline_end}

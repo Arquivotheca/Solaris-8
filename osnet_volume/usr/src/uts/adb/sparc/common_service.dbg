@@ -1,0 +1,35 @@
+\
+\ Copyright (c) 1999 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)common_service.dbg	1.1	99/07/21 SMI"
+\
+#include <sys/isa_defs.h>
+#include <sys/types.h>
+#include <sys/dditypes.h>
+#include <sys/ddidmareq.h>
+#include <sys/mutex.h>
+#include <sys/semaphore.h>
+#include <sys/condvar.h>
+#include <sys/thread.h>
+#include <sys/devops.h>
+#include <sys/fibre-channel/fc.h>
+#include <sys/fibre-channel/impl/fc_ulpif.h>
+#include "dummy.h"
+\
+\
+common_service
+{adb_inline_begin}
+.>h
+<h+{OFFSET, fcph_version}=""
+{adb_inline_end}
+	fcph_version		hex		fcph
+	btob_credit		hex		ptpt_bb_crdt
+	cmn_features		hex		common_features
+	rx_bufsize		hex
+	conc_sequences		hex
+	relative_offset		hex
+	e_d_tov			hex		ptpt_e_d_tov
+{adb_inline_begin}
+<h+{SIZEOF}=""
+{adb_inline_end}

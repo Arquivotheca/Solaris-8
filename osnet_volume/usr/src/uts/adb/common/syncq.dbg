@@ -1,0 +1,56 @@
+\
+\ Copyright (c) 1997-1999 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)syncq.dbg	1.5	99/07/30 SMI"
+
+
+\ arg             : address of a struct syncq
+\ uses            : mutex
+\ registers       : z
+\ description     : prints the contents of syncq structure
+
+#include <sys/types.h>
+#include <sys/thread.h>
+#include <sys/stream.h>
+#include <sys/strsubr.h>
+#include "dummy.h"
+
+\
+\
+syncq                   sq_
+{adb_inline_begin}
+.>z
+<z+{OFFSET, sq_lock}=""
+{adb_inline_end}
+        lock                    .mutex
+{adb_inline_begin}
+<z+{OFFSET, sq_count}=""
+{adb_inline_end}
+        count                   decimal
+        flags                   hex
+        head                    hex
+        tail                    hex
+	evhead			hex
+	evtail			hex
+	nqueues			decimal
+        type                    hex
+        occount                 decimal
+        wait                    hex
+        exitwait                hex
+        callbflags              hex
+        cancelid                sdecimal
+        callbpend               hex
+        outer                   hex
+        onext                   hex
+        oprev                   hex
+	ciputctrl		hex
+	nciputctrl		decimal
+	needexcl		decimal
+	private			hex
+	next			hex
+	svcflags		hex
+	pri			decimal
+{adb_inline_begin}
+<z+{SIZEOF}=""
+{adb_inline_end}

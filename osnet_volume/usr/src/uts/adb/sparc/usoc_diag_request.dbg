@@ -1,0 +1,33 @@
+\
+\ Copyright (c) 1999 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)usoc_diag_request.dbg	1.1	99/07/21 SMI"
+#include <sys/isa_defs.h>
+#include <sys/types.h>
+#include <sys/dditypes.h>
+#include <sys/ddidmareq.h>
+#include <sys/mutex.h>
+#include <sys/semaphore.h>
+#include <sys/condvar.h>
+#include <sys/thread.h>
+#include <sys/devops.h>
+#include <sys/fibre-channel/fc.h>
+#include <sys/fibre-channel/fca/usoc_cq_defs.h>
+#include "dummy.h"
+\
+\
+usoc_diag_request
+{adb_inline_begin}
+.>q
+<q+{OFFSET, sdr_usoc_hdr}=""
+{adb_inline_end}
+	sdr_usoc_hdr		.usoc_hdr
+{adb_inline_begin}
+<q+{OFFSET, sdr_diag_cmd}=""
+{adb_inline_end}
+	sdr_diag_cmd		hex
+	sdr_cqhdr		.cq_hdr
+{adb_inline_begin}
+<q+{SIZEOF}=""
+{adb_inline_end}

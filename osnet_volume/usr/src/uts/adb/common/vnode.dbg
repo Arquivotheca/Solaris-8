@@ -1,0 +1,34 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)vnode.dbg	1.10	98/01/19 SMI"
+
+#include <sys/types.h>
+#include <sys/time.h>
+#include <sys/vnode.h>
+#include "dummy.h"
+
+\
+\
+vnode                   v_
+{adb_inline_begin}
+.>D;<_>U;1>_
+<D+{OFFSET, v_flag}=""
+{adb_inline_end}
+        flag                    hex
+        count                   sdecimal        refcnt
+        vfsmountedhere          hex             vfsmnt
+        op                      symbolic
+        vfsp                    hex
+        stream                  hex
+        pages                   hex
+        type                    sdecimal
+        rdev                    hex
+        data                    hex
+        filocks                 hex
+        shrlocks                hex
+{adb_inline_begin}
+<U>_
+<D+{SIZEOF}=""
+{adb_inline_end}

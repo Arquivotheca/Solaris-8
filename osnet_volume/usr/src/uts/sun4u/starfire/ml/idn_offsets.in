@@ -1,0 +1,39 @@
+\ Copyright (c) 1999 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\ Based on sun4u/ml/offsets.in.
+\
+\ Definitions needed by IDN send-mondo support.
+\
+\ Offset definitions for low-level idn_dmv_handler() (assembly code)
+\
+
+#pragma ident	"@(#)idn_offsets.in	1.3	99/05/31 SMI"
+
+#include <sys/types.h>
+#include <sys/sysmacros.h>
+#include <sys/param.h>
+#include <sys/machparam.h>
+#include <sys/systm.h>
+#include <sys/machsystm.h>
+#include <sys/cpuvar.h>
+
+#include <sys/idn.h>
+
+idn_dmv_cpu_t	IDN_DMV_CPU_SIZE
+	idn_dmv_current
+	idn_dmv_active
+	idn_dmv_lostintr
+
+idn_dmv_data_t	IDN_DMV_DATA_SIZE
+	idn_soft_inum
+	idn_dmv_qbase
+	idn_dmv_cpu
+
+idn_dmv_msg_t	IDN_DMV_MSG_SIZE
+	iv_next
+	iv_inuse
+	iv_ready
+	iv_head
+	iv_xargs0
+	iv_xargs2

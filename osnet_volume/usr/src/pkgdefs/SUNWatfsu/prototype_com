@@ -1,0 +1,41 @@
+#
+# Copyright (c) 1996, 1998-1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#ident	"@(#)prototype_com	1.5	99/05/24 SMI"
+#
+# This required package information file contains a list of package contents.
+# The 'pkgmk' command uses this file to identify the contents of a package
+# and their location on the development machine when building the package.
+# Can be created via a text editor or through use of the 'pkgproto' command.
+
+#!search <pathname pathname ...>	# where to find pkg objects
+#!include <filename>			# include another 'prototype' file
+#!default <mode> <owner> <group>	# default used if not specified on entry
+#!<param>=<value>			# puts parameter in pkg environment
+
+# packaging files
+i pkginfo
+i copyright
+i depend
+#
+# source locations relative to the prototype file
+#
+# SUNWatfsu
+#
+d none usr 755 root sys
+d none usr/lib 755 root bin
+d none usr/lib/autofs 755 root sys
+f none usr/lib/autofs/automountd 555 root bin
+d none usr/lib/fs 755 root sys
+d none usr/lib/fs/autofs 755 root sys
+f none usr/lib/fs/autofs/automount 555 root bin
+f none usr/lib/fs/autofs/dfshares 555 root bin
+f none usr/lib/fs/autofs/mount 555 root bin
+f none usr/lib/fs/autofs/share 555 root bin
+f none usr/lib/fs/autofs/unshare 555 root bin
+f none usr/lib/fs/autofs/fn.so.2 555 root bin
+d none usr/lib/adb 755 root sys
+f none usr/lib/adb/fnnode 644 root sys
+d none usr/sbin 755 root bin
+s none usr/sbin/automount=../lib/fs/autofs/automount

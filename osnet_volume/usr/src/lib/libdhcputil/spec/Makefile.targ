@@ -1,0 +1,14 @@
+#
+# Copyright (c) 1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#ident	"@(#)Makefile.targ	1.1	99/01/29 SMI"
+#
+# lib/libdhcputil/spec/Makefile.targ
+
+LIBRARY =       libdhcputil.a
+VERS    =       .1
+
+OBJECTS =       dhcputil.o
+
+SPECCPP =       -I../..

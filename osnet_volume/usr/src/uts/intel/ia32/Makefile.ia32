@@ -1,0 +1,170 @@
+#
+# uts/intel/ia32/Makefile.ia32
+# Copyright (c) 1995-1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#pragma ident	"@(#)Makefile.ia32	1.95	99/08/15 SMI"
+#
+#	This makefile contains the common definitions for all ia32
+#	implementation architecture independent modules.
+#
+
+#
+#	Machine type (implementation architecture):
+#
+PLATFORM	 = i86pc
+
+#
+#	Everybody needs to know how to build modstubs.o and to locate unix.o.
+#	Note that unix.o must currently be selected from among the possible
+#	"implementation architectures". Note further, that unix.o is only
+#	used as an optional error check for undefines so (theoretically)
+#	any "implementation architectures" could be used. We choose i86pc
+#	because it is the reference port.
+#
+UNIX_DIR	 = $(UTSBASE)/i86pc/unix
+GENLIB_DIR	 = $(UTSBASE)/intel/ia32/genunix
+MODSTUBS_DIR	 = $(UNIX_DIR)
+DSF_DIR		 = $(UTSBASE)/$(PLATFORM)/genassym
+LINTS_DIR	 = $(OBJS_DIR)
+LINT_LIB_DIR	 = $(UTSBASE)/intel/ia32/lint-libs/$(OBJS_DIR)
+
+UNIX_O		 = $(UNIX_DIR)/$(OBJS_DIR)/unix.o
+GENLIB		 = $(GENLIB_DIR)/$(OBJS_DIR)/libgenunix.so
+MODSTUBS_O	 = $(MODSTUBS_DIR)/$(OBJS_DIR)/modstubs.o
+LINT_LIB	 = $(UTSBASE)/i86pc/lint-libs/$(OBJS_DIR)/llib-lunix.ln
+GEN_LINT_LIB	 = $(LINT_LIB_DIR)/llib-lgenunix.ln
+
+#
+#	Define the base directory for installation.
+#
+BASE_INS_DIR	 = $(ROOT)
+
+#
+#	Include the makefiles which define build rule templates, the
+#	collection of files per module, and a few specific flags. Note
+#	that order is significant, just as with an include path. The
+#	first build rule template which matches the files name will be
+#	used. By including these in order from most machine dependent
+#	to most machine independent, we allow a machine dependent file
+#	to be used in preference over a machine independent version
+#	(Such as a machine specific optimization, which preserves the
+#	interfaces.)
+#
+include $(UTSBASE)/intel/ia32/Makefile.files
+include $(UTSBASE)/intel/Makefile.files
+include $(UTSBASE)/common/Makefile.files
+
+#
+#	Include machine independent rules. Note that this does not imply
+#	that the resulting module from rules in Makefile.uts is	machine
+#	independent. Only that the build rules are machine independent.
+#
+include $(UTSBASE)/Makefile.uts
+
+#
+#     Define supported builds
+#
+DEF_BUILDS			= obj32
+$(NOT_RELEASE_BUILD)DEF_BUILDS	= debug32
+ALL_BUILDS			= obj32 debug32
+
+#
+#	Define the actual specific platforms - obviously none.
+#
+MACHINE_DEFS	 =
+
+#
+#	Debugging level
+#
+#	Special knowledge of which special debugging options affect which
+#	file is used to optimize the build if these flags are changed.
+#
+DEBUG_DEFS_OBJ32	=
+DEBUG_DEFS_DBG32	= -DDEBUG
+DEBUG_DEFS		= $(DEBUG_DEFS_$(BUILD_TYPE))
+
+DEBUG_COND_OBJ32	:sh = echo \\043
+DEBUG_COND_DBG32	=
+IF_DEBUG_OBJ		= $(DEBUG_COND_$(BUILD_TYPE))$(OBJS_DIR)/
+
+$(IF_DEBUG_OBJ)syscall.o	:=	DEBUG_DEFS	+= -DSYSCALLTRACE
+$(IF_DEBUG_OBJ)clock.o		:=	DEBUG_DEFS	+= -DKSLICE=1
+
+#
+#	Build `options'. These are mostly historical and the need for these
+#	is largely removed by the module technology. However, the static
+#	build will continue to require these.
+#
+OPTION_DEFS	 = -DSYSACCT -DC2_AUDIT
+
+#
+#	Collect the preprocessor definitions to be associated with *all*
+#	files.
+#
+ALL_DEFS	 = $(MACHINE_DEFS) $(DEBUG_DEFS) $(OPTION_DEFS)
+
+#
+# ----- TRANSITIONAL SECTION --------------------------------------------------
+#
+
+#
+#	Not everything which *should* be a module is a module yet. The
+#	following is a list of such objects which are currently part of
+#	the base kernel but should soon become kmods.
+#
+NOT_YET_KMODS	 = $(OLDPTY_OBJS) $(PTY_OBJS) $(MOD_OBJS)
+
+#
+# ----- END OF TRANSITIONAL SECTION -------------------------------------------
+
+#
+#	The kernels modules which are "implementation architecture"
+#	specific for this machine are enumerated below. Note that most
+#	of these modules must exist (in one form or another) for each
+#	architecture.
+#
+#
+#	Machine Specific Driver Modules (/kernel/drv):
+#
+DRV_KMODS	+=
+
+#
+#	Exec Class Modules (/kernel/exec):
+#
+EXEC_KMODS	+=
+
+#
+#	Scheduling Class Modules (/kernel/sched):
+#
+SCHED_KMODS	+=
+
+#
+#	File System Modules (/kernel/fs):
+#
+FS_KMODS	+=	xmemfs
+
+#
+#	Streams Modules (/kernel/strmod):
+#
+STRMOD_KMODS	+=
+
+#
+#	'System' Modules (/kernel/sys):
+#
+SYS_KMODS	+=
+
+#
+#	'Misc' Modules (/kernel/misc):
+#
+MISC_KMODS	+= krtld
+
+#
+#	generic-unix module (/kernel/genunix):
+#
+GENUNIX_KMODS	+= genunix
+
+#
+#	Modules eXcluded from the product:
+#
+XMODS		+=

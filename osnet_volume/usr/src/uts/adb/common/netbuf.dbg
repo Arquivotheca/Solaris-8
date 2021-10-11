@@ -1,0 +1,22 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)netbuf.dbg	1.3	98/01/19 SMI"
+
+#include <sys/tiuser.h>
+#include "dummy.h"
+
+\
+\
+netbuf
+{adb_inline_begin}
+.>z
+<z+{OFFSET, maxlen}=""
+{adb_inline_end}
+        maxlen                  hex
+        len                     hex
+        buf                     hex
+{adb_inline_begin}
+<z+{SIZEOF}=""
+{adb_inline_end}

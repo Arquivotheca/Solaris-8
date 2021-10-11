@@ -1,0 +1,94 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)fs.dbg	1.5	98/07/19 SMI"
+
+#include <sys/types.h>
+#include <sys/t_lock.h>
+#include <sys/time.h>
+#include <sys/vnode.h>
+#include <vm/seg.h>
+#include <sys/fs/ufs_fs.h>
+#include "dummy.h"
+
+
+fs		fs_
+{adb_inline_begin}
+.>z
+<z+{OFFSET, fs_link}=""
+{adb_inline_end}
+	link			hex
+	rlink			hex
+	sblkno			hex
+	cblkno			hex
+	iblkno			hex
+	dblkno			hex
+	cgoffset		hex
+	cgmask			hex
+	time			date
+	size			hex
+	dsize			hex
+	ncg			hex
+	bsize			hex
+	fsize			hex
+	frag			hex
+	minfree			hex
+	rotdelay		hex
+	rps			hex
+	bmask			hex
+	fmask			hex
+	bshift			hex
+	fshift			hex
+	maxcontig		hex
+	maxbpg			hex
+	fragshift		hex
+	fsbtodb			hex
+	sbsize			hex
+	csmask			hex
+	csshift			hex
+	nindir			hex
+	inopb			hex
+	nspf			hex
+	optim			hex
+#if defined(_LITTLE_ENDIAN)
+	state			hex
+#elif defined(_BIG_ENDIAN)
+	npsect			hex
+#endif
+	interleave		hex
+	trackskew		hex
+{adb_inline_begin}
+<z+{OFFSET, fs_id}/n"id0"16t"id1"16tnXX
+<z+{OFFSET, fs_csaddr}=""
+{adb_inline_end}
+	csaddr			hex
+	cssize			hex
+	cgsize			hex
+	ntrak			hex
+	nsect			hex
+	spc			hex
+	ncyl			hex
+	cpg			hex
+	ipg			hex
+	fpg			hex
+	cstotal			.csum
+{adb_inline_begin}
+<z+{OFFSET, fs_fmod}=""
+{adb_inline_end}
+	fmod			octal
+	clean			octal
+	ronly			octal
+	flags			octal
+	fsmnt			echar
+	cgrotor			hex
+	cpc			hex
+#if defined(_LITTLE_ENDIAN)
+	npsect			hex
+#elif defined(_BIG_ENDIAN)
+	state			hex
+#endif
+	nrpos			hex
+	postbloff		hex
+	rotbloff		hex
+	magic			hex

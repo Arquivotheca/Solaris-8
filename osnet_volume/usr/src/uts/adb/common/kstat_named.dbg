@@ -1,0 +1,35 @@
+\
+\ Copyright (c) 1997-1999 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)kstat_named.dbg	1.8	99/04/14 SMI"
+
+\ arg		: address of a struct kstat_named
+\ uses		: kstat_ui64, kstat_i64, kstat_ui32, kstat_i32,
+\ 		  kstat_char
+\ registers	: k, t
+\ description	: executes the proper kstat_ macro to print the
+\ 		  contents of the supplied structure as the
+\ 		  appropriate data type
+\
+#include <sys/kstat.h>
+#include "dummy.h"
+
+\ data_type is a single-byte access
+\
+kstat_named
+{adb_inline_begin}
+.>k
+(*(.+{OFFSET, data_type}))>/c/t
+<k+{OFFSET, name}=""
+{adb_inline_end}
+	name			char
+	data_type		hex
+{adb_inline_begin}
+<k,#(<t-4)$<kstat_ui64
+<k,#(<t-3)$<kstat_i64
+<k,#(<t-2)$<kstat_ui32
+<k,#(<t-1)$<kstat_i32
+<k,#(<t+0)$<kstat_char
+<k+{SIZEOF}=""
+{adb_inline_end}

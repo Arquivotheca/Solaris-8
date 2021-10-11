@@ -1,0 +1,45 @@
+\
+\ Copyright (c) 1999 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)usb_hcdi_ops.dbg	1.2	99/10/22 SMI"
+
+#include <sys/usb/usba.h>
+#include <sys/usb/usba/usba_types.h>
+#include <sys/usb/usba/usba_impl.h>
+#include "dummy.h"
+
+\
+\
+usb_hcdi_ops
+{adb_inline_begin}
+.>z
+<z+{OFFSET, hcdi_ops_version}=""
+{adb_inline_end}
+	hcdi_ops_version			hex		version
+	usb_hcdi_client_init			symbolic	client_init
+	usb_hcdi_client_free			symbolic	client_free
+	usb_hcdi_pipe_open			symbolic	pipe_open
+	usb_hcdi_pipe_close			symbolic	pipe_close
+	usb_hcdi_pipe_start_polling		symbolic	start_poll
+	usb_hcdi_pipe_stop_polling		symbolic	stop_poll
+	usb_hcdi_pipe_get_policy		symbolic	get_pipe_policy
+	usb_hcdi_pipe_set_policy		symbolic	set_pipe_policy
+	usb_hcdi_pipe_abort			symbolic	pipe_abort
+	usb_hcdi_pipe_reset			symbolic	pipe_reset
+	usb_hcdi_pipe_device_ctrl_receive	symbolic	recve_ctrl
+	usb_hcdi_pipe_device_ctrl_send		symbolic	send_ctrl
+	usb_hcdi_bulk_transfer_size		symbolic	bulk_size
+	usb_hcdi_pipe_receive_bulk_data		symbolic	recve_bulk
+	usb_hcdi_pipe_send_bulk_data		symbolic	send_bulk
+	usb_hcdi_pipe_send_isoc_data		symbolic	send_isoc
+	usb_hcdi_console_input_init		symbolic	consi/p_init
+	usb_hcdi_console_input_fini		symbolic	consi/p_fini
+	usb_hcdi_console_input_enter		symbolic	consi/p_enter
+	usb_hcdi_console_read			symbolic	cons_read
+	usb_hcdi_console_input_exit		symbolic	consi/p_exit
+	hcdi_usba_private			hex		private
+	hcdi_pm_enable				hex		pm_enable
+{adb_inline_begin}
+<z+{SIZEOF}=""   
+{adb_inline_end}	

@@ -1,0 +1,19 @@
+\
+\ Copyright (c) 1997,1999 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\ #pragma ident	"@(#)regs.dbg	1.17	99/05/04 SMI"
+
+#include <sys/types.h>
+#if defined(__sparc)
+#include <sys/privregs.h>
+#elif defined(__i386) || defined(__ia64)
+#include <sys/reg.h>
+#else
+#error "Unknown ISA"
+#endif
+#include "dummy.h"
+
+\
+\
+regs		r_

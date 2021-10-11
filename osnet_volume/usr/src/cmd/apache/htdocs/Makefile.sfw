@@ -1,0 +1,175 @@
+#
+#ident	"@(#)Makefile.sfw	1.1	99/10/20 SMI"
+#
+# Copyright (c) 1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+
+include ../Makefile.paths
+include ../../Makefile.cmd
+
+FILEMODE = 0644
+
+HTDOCS=	index.html 			\
+	apache_pb.gif 			
+
+MANUAL=					\
+	manual/LICENSE			\
+	manual/bind.html		\
+	manual/cgi_path.html		\
+	manual/content-negotiation.html	\
+	manual/custom-error.html	\
+	manual/dns-caveats.html		\
+	manual/dso.html			\
+	manual/ebcdic.html		\
+	manual/env.html			\
+	manual/footer.html		\
+	manual/handler.html		\
+	manual/header.html		\
+	manual/index.html		\
+	manual/install-tpf.html		\
+	manual/install.html		\
+	manual/invoking.html		\
+	manual/keepalive.html		\
+	manual/location.html		\
+	manual/man-template.html	\
+	manual/multilogs.html		\
+	manual/new_features_1_0.html	\
+	manual/new_features_1_1.html	\
+	manual/new_features_1_2.html	\
+	manual/new_features_1_3.html	\
+	manual/process-model.html	\
+	manual/readme-tpf.html		\
+	manual/sections.html		\
+	manual/sourcereorg.html		\
+	manual/stopping.html		\
+	manual/suexec.html		\
+	manual/suexec_1_2.html		\
+	manual/unixware.html		\
+	manual/upgrading_to_1_3.html	\
+	manual/windows.html		\
+	manual/mod/core.html	\
+	manual/mod/directive-dict.html	\
+	manual/mod/directives.html	\
+	manual/mod/footer.html	\
+	manual/mod/header.html	\
+	manual/mod/index.html	\
+	manual/mod/mod_access.html	\
+	manual/mod/mod_actions.html	\
+	manual/mod/mod_alias.html	\
+	manual/mod/mod_asis.html	\
+	manual/mod/mod_auth.html	\
+	manual/mod/mod_auth_anon.html	\
+	manual/mod/mod_auth_db.html	\
+	manual/mod/mod_auth_dbm.html	\
+	manual/mod/mod_auth_digest.html	\
+	manual/mod/mod_autoindex.html	\
+	manual/mod/mod_browser.html	\
+	manual/mod/mod_cern_meta.html	\
+	manual/mod/mod_cgi.html	\
+	manual/mod/mod_cookies.html	\
+	manual/mod/mod_digest.html	\
+	manual/mod/mod_dir.html	\
+	manual/mod/mod_dld.html	\
+	manual/mod/mod_dll.html	\
+	manual/mod/mod_env.html	\
+	manual/mod/mod_example.html	\
+	manual/mod/mod_expires.html	\
+	manual/mod/mod_headers.html	\
+	manual/mod/mod_imap.html	\
+	manual/mod/mod_include.html	\
+	manual/mod/mod_info.html	\
+	manual/mod/mod_isapi.html	\
+	manual/mod/mod_log_agent.html	\
+	manual/mod/mod_log_common.html	\
+	manual/mod/mod_log_config.html	\
+	manual/mod/mod_log_referer.html	\
+	manual/mod/mod_mime.html	\
+	manual/mod/mod_mime_magic.html	\
+	manual/mod/mod_mmap_static.html	\
+	manual/mod/mod_negotiation.html	\
+	manual/mod/mod_proxy.html	\
+	manual/mod/mod_rewrite.html	\
+	manual/mod/mod_setenvif.html	\
+	manual/mod/mod_so.html	\
+	manual/mod/mod_speling.html	\
+	manual/mod/mod_status.html	\
+	manual/mod/mod_unique_id.html	\
+	manual/mod/mod_userdir.html	\
+	manual/mod/mod_usertrack.html	\
+	manual/mod/mod_vhost_alias.html	\
+	manual/images/custom_errordocs.gif	\
+	manual/images/home.gif	\
+	manual/images/index.gif	\
+	manual/images/mod_rewrite_fig1.fig	\
+	manual/images/mod_rewrite_fig1.gif	\
+	manual/images/mod_rewrite_fig2.fig	\
+	manual/images/mod_rewrite_fig2.gif	\
+	manual/images/sub.gif	\
+	manual/misc/API.html	\
+	manual/misc/FAQ.html	\
+	manual/misc/HTTP_Features.tsv	\
+	manual/misc/client_block_api.html	\
+	manual/misc/compat_notes.html	\
+	manual/misc/custom_errordocs.html	\
+	manual/misc/descriptors.html	\
+	manual/misc/fin_wait_2.html	\
+	manual/misc/footer.html	\
+	manual/misc/header.html	\
+	manual/misc/howto.html	\
+	manual/misc/index.html	\
+	manual/misc/known_client_problems.html	\
+	manual/misc/nopgp.html	\
+	manual/misc/perf-bsd44.html	\
+	manual/misc/perf-dec.html	\
+	manual/misc/perf-hp.html	\
+	manual/misc/perf-tuning.html	\
+	manual/misc/perf.html	\
+	manual/misc/security_tips.html	\
+	manual/misc/vif-info.html	\
+	manual/misc/windoz_keepalive.html	\
+	manual/search/manual-index.cgi	\
+	manual/vhosts/details.html	\
+	manual/vhosts/details_1_2.html	\
+	manual/vhosts/examples.html	\
+	manual/vhosts/fd-limits.html	\
+	manual/vhosts/footer.html	\
+	manual/vhosts/header.html	\
+	manual/vhosts/host.html	\
+	manual/vhosts/index.html	\
+	manual/vhosts/ip-based.html	\
+	manual/vhosts/mass.html	\
+	manual/vhosts/name-based.html	\
+	manual/vhosts/vhosts-in-depth.html	\
+	manual/vhosts/virtual-host.html
+
+HTDOCDIRS= manual manual/images manual/misc manual/mod  \
+	   manual/search manual/vhosts
+
+ROOTHTDOCS=$(HTDOCS:%=$(ROOTHTTPDDOCROOT)/%)
+USRHTDOCS=$(MANUAL:%=$(USRHTTPDDOCROOT)/%)
+
+USRHTDOCDIRS=$(HTDOCDIRS:%=$(USRHTTPDDOCROOT)/%)
+
+.NO_PARALLEL: $(USRHTDOCDIRS)
+.KEEP_STATE:
+
+all:
+
+install: $(ROOTHTTPDDOCROOT) $(USRHTTPDDOCROOT) .WAIT $(USRHTDOCDIRS) \
+	 .WAIT $(ROOTHTDOCS) $(USRHTDOCS)
+
+$(ROOTHTTPDDOCROOT) $(USRHTDOCDIRS) $(USRHTTPDDOCROOT):
+	$(INS.dir)
+
+$(ROOTHTTPDDOCROOT)/%: %
+	$(INS.file)
+
+$(USRHTTPDDOCROOT)/manual/search/manual-index.cgi:=	FILEMODE=0755
+
+$(USRHTTPDDOCROOT)/%: %
+	$(INS.file)
+
+clean lint:
+
+include ../../Makefile.targ

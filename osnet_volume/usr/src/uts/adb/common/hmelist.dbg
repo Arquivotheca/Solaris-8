@@ -1,0 +1,16 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)hmelist.dbg	1.3	98/01/19 SMI"
+
+#include <vm/hat.h>
+#include "dummy.h"
+
+\
+\
+__dummy         ""      hmelist
+{adb_inline_begin}
+.>h
+,#(#(<h))$<hmelist.nxt
+{adb_inline_end}

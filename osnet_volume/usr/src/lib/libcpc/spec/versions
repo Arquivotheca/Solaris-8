@@ -1,0 +1,20 @@
+#
+# Copyright (c) 1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#ident	"@(#)versions	1.1	99/08/15 SMI"
+#
+# vers file for libcpc
+#
+i386 {
+	SUNW_1.1;
+	SUNWprivate_1.1;
+}
+sparc {
+	SUNW_1.1;
+	SUNWprivate_1.1;
+}
+sparcv9 {
+	SUNW_1.1;
+	SUNWprivate_1.1;
+}

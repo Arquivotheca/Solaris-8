@@ -1,0 +1,4 @@
+#pragma indent	"@(#)README	1.1	99/02/22 SMI"
+
+
+This directory hierarchy is intended to hold sources used in common between commands/libraries, standalones, and the kernel.

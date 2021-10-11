@@ -1,0 +1,61 @@
+#
+#ident	"@(#)Makefile.targ	1.5	99/09/14 SMI"
+#
+# Copyright (c) 1997-1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#	Common targets for sun4u starfire implementation specific modules.
+#
+
+.KEEP_STATE:
+
+#
+# Rules for implementation subdirectories.
+#
+$(ROOT_STARFIRE_DIR): $(ROOT_PLAT_DIR)
+	-$(INS.dir.root.sys)
+
+$(ROOT_STARFIRE_KERN_DIR): $(ROOT_STARFIRE_DIR)
+	-$(INS.dir.root.sys)
+
+$(ROOT_STARFIRE_DRV_DIR): $(ROOT_STARFIRE_MOD_DIR)
+	-$(INS.dir.root.sys)
+
+$(ROOT_STARFIRE_CPU_DIR): $(ROOT_STARFIRE_MOD_DIR)
+	-$(INS.dir.root.sys)
+
+$(ROOT_STARFIRE_MISC_DIR): $(ROOT_STARFIRE_MOD_DIR)
+	-$(INS.dir.root.sys)
+
+$(USR_STARFIRE_DIR): $(USR_PLAT_DIR)
+	-$(INS.dir.root.sys)
+
+$(USR_STARFIRE_INC_DIR): $(USR_STARFIRE_DIR) $(USR_PSM_INCL_DIR)
+	$(INS.slink4)
+
+$(USR_STARFIRE_SBIN_DIR):	$(USR_STARFIRE_DIR) $(USR_PSM_SBIN_DIR)
+	-$(INS.slink5)
+
+$(USR_STARFIRE_LIB_DIR):	$(USR_STARFIRE_DIR) $(USR_PSM_LIB_DIR)
+	-$(INS.dir.root.bin)
+
+$(USR_STARFIRE_ISYS_DIR): $(USR_STARFIRE_INC_DIR)
+	$(INS.dir.root.bin)
+
+$(ROOT_STARFIRE_KERN_DIR)/%: $(OBJS_DIR)/% $(ROOT_STARFIRE_KERN_DIR)
+	$(INS.file)
+
+$(ROOT_STARFIRE_DRV_DIR)/%: $(OBJS_DIR)/% $(ROOT_STARFIRE_DRV_DIR)
+	$(INS.file)
+
+$(ROOT_STARFIRE_CPU_DIR)/%: $(OBJS_DIR)/% $(ROOT_STARFIRE_CPU_DIR)
+	$(INS.file)
+
+$(ROOT_STARFIRE_MISC_DIR)/%: $(OBJS_DIR)/% $(ROOT_STARFIRE_MISC_DIR)
+	$(INS.file)
+
+#
+#	Include common targets.
+#
+include $(UTSBASE)/sun4u/starfire/Makefile.rules
+include $(UTSBASE)/sun4u/Makefile.targ

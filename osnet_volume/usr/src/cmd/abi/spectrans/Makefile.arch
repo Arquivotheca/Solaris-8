@@ -1,0 +1,28 @@
+#
+#ident	"@(#)Makefile.arch	1.1	99/01/25 SMI"
+#
+# Copyright (c) 1998-1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+# cmd/abi/daa2x/Makefile.arch
+
+i386_ARCHITECTURES =	i386
+sparc_ARCHITECTURES =	sparc
+ALL_ARCHITECTURES =	$(i386_ARCHITECTURES) \
+			$(sparc_ARCHITECTURES)
+
+all		:=	TARGET= all
+install		:=	TARGET= install
+clean		:=	TARGET= clean
+clobber		:=	TARGET= clobber
+lint		:=	TARGET= lint
+
+.KEEP_STATE:
+
+all install clean clobber lint: $($(MACH)_ARCHITECTURES)
+
+$($(MACH)_ARCHITECTURES): FRC
+	@cd $@; pwd; $(MAKE) $(TARGET)
+
+FRC:
+

@@ -1,0 +1,39 @@
+#
+#pragma ident	"@(#)prototype_com	1.8	99/04/01 SMI"
+#
+# Copyright (c) 1997, by Sun Microsystems, Inc.
+# All rights reserved.
+#
+# This required package information file contains a list of package contents.
+# The 'pkgmk' command uses this file to identify the contents of a package
+# and their location on the development machine when building the package.
+# Can be created via a text editor or through use of the 'pkgproto' command.
+
+#!search <pathname pathname ...>	# where to find pkg objects
+#!include <filename>			# include another 'prototype' file
+#!default <mode> <owner> <group>	# default used if not specified on entry
+#!<param>=<value>			# puts parameter in pkg environment
+
+# packaging files
+i pkginfo
+i copyright
+i depend
+i i.gss
+i r.gss
+#
+# source locations relative to the prototype file
+#
+d none etc 755 root sys
+f none etc/dummy_mech_token.conf 644 root sys
+d none etc/gss 0755 root sys
+e gss etc/gss/mech 0644 root sys
+e gss etc/nfssec.conf 644 root sys
+d none kernel 755 root sys
+d none kernel/misc 755 root sys
+d none kernel/misc/kgss 755 root sys
+f none kernel/misc/kgss/kmech_dummy 0755 root bin
+d none usr 755 root sys
+d none usr/lib 755 root bin
+d none usr/lib/gss 0755 root bin
+f none usr/lib/gss/mech_dummy.so.1 0755 root bin
+s none usr/lib/gss/mech_dummy.so=mech_dummy.so.1

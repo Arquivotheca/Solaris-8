@@ -1,0 +1,40 @@
+#!/sbin/sh
+#
+# Copyright (c) 1984, 1986, 1987, 1988, 1989 AT&T.
+# All rights reserved.
+#
+# THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF AT&T
+# The copyright notice above does not evidence any
+# actual or intended publication of such source code.
+#
+# Copyright (c) 1991-93, 1997 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#ident	"@(#)devlinks	1.6	97/12/08 SMI"
+
+if [ -n "$_INIT_RECONFIG" ]; then
+	echo 'Configuring the /dev directory'
+
+	/usr/sbin/devlinks
+	/usr/sbin/disks
+	/usr/sbin/ports
+	/usr/sbin/tapes
+	/usr/sbin/audlinks
+
+	if [ -x /usr/ucb/ucblinks -a -f /usr/ucblib/ucblinks.awk ]; then
+		echo 'Configuring the /dev directory (compatibility devices)'
+		/usr/ucb/ucblinks >/dev/null 2>&1
+	fi
+fi
+
+# Establish the default framebuffer name.
+
+fbdev=`/usr/sbin/prtconf -F 2>/dev/null`
+
+if [ $? -eq 0 ]; then
+	set -- /devices$fbdev*
+	if [ -c $1 ]; then
+		rm -f /dev/fb
+		ln -s $1 /dev/fb
+	fi
+fi

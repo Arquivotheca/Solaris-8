@@ -1,0 +1,36 @@
+#	/*
+#	 * TRANSLATION_NOTE:
+#	 * These are messages of bsmunconv command
+#	 */
+msgid  "%s: ERROR: you must be super-user to run this script."
+msgstr
+msgid  "This script is used to disable the Basic Security Module (BSM).\n"
+msgstr
+msgid  "Shall we continue the reversion to a non-BSM system now? [y/n]"
+msgstr
+msgid  "y"
+msgstr
+msgid  "n"
+msgstr
+msgid  "%s: INFO: aborted, due to user request."
+msgstr
+msgid  "%s: INFO: moving aside %s/etc/security/audit_startup."
+msgstr
+msgid  "%s: INFO: restore %s/etc/rc2.d/S92volmgt."
+msgstr
+msgid  "%s: INFO: unable to restore file %s/etc/rc2.d/S92volmgt."
+msgstr
+msgid  "%s: INFO: removing c2audit:audit_load from %s/etc/system."
+msgstr
+msgid  "%s: ERROR: can't find %s/etc/system."
+msgstr
+msgid  "%s: ERROR: audit module may not be disabled."
+msgstr
+msgid  "The Basic Security Module has been disabled.\n"
+msgstr
+msgid  "Reboot this system now to come up without BSM.\n"
+msgstr
+msgid  "The Basic Security Module has been disabled.\n"
+msgstr
+msgid  "Reboot each system that was disabled to come up without BSM.\n"
+msgstr

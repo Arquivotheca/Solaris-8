@@ -1,0 +1,23 @@
+#!/bin/sh
+#
+#pragma ident   "@(#)i.ypnicknames 1.1     99/03/21 SMI"
+#
+# Copyright (c) 1996-1997 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+
+PATH="/usr/bin:/usr/sbin:${PATH}" export PATH
+
+while read src dest
+do
+	if [ ! -f $dest ] ; then
+		cp $src $dest
+	else
+		grep 'ipnodes' $dest > /dev/null 2>&1
+		if [ $? != 0 ]; then
+			grep 'ipnodes' $src >> $dest
+		fi
+	fi
+done
+
+exit 0

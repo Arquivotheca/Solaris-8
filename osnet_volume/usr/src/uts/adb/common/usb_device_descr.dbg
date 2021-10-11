@@ -1,0 +1,52 @@
+\
+\ Copyright (c) 1999 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)usb_device_descr.dbg        1.1     99/09/24 SMI"
+
+#include <sys/usb/usba.h>
+#include <sys/usb/usba/usba_types.h>
+#include <sys/usb/clients/hid/hid.h>
+#include <sys/usb/clients/hidparser/hidparser.h>
+#include <sys/usb/clients/hid/hidvar.h>
+#include <sys/usb/clients/hid/hid_polled.h>
+
+#include <sys/stropts.h>
+
+#include <sys/vuid_event.h>
+#include <sys/termios.h>
+#include <sys/termio.h>
+#include <sys/strtty.h>
+#include <sys/msreg.h>
+#include <sys/msio.h>
+#include "dummy.h"
+
+\
+\
+
+usb_device_descr
+{adb_inline_begin}
+.>z
+<z+{OFFSET, bLength}=""
+{adb_inline_end}
+	bLength		hex	length
+	bDescriptorType	hex	descrtype
+	bcdUSB		hex	USB
+	bDeviceClass	hex	class
+	bDeviceSubClass	hex	sub-class
+	bDeviceProtocol	hex	protocol
+	bMaxPacketSize0	hex	ep0-mps
+	idVendor	hex	vendor
+	idProduct	hex	product-id
+	bcdDevice	hex	release
+	iManufacturer	hex	manufacturer
+	iProduct	hex	product-str
+	iSerialNumber	hex	serial
+	bNumConfigurations	hex	num-configs
+{adb_inline_begin}
+<z+{SIZEOF}=""
+{adb_inline_end}
+
+\
+\
+

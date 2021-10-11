@@ -1,0 +1,17 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)mblk.nxt.dbg	1.4	98/01/19 SMI"
+
+#include "dummy.h"
+
+\
+\
+__dummy		""		mblk.nxt
+{adb_inline_begin}
+.>m
+<m/3{HEX}n3{HEX}
+*<m>m
+<m,##<m$<mblk.nxt
+{adb_inline_end}

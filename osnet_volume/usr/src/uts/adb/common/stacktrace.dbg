@@ -1,0 +1,31 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)stacktrace.dbg	1.4	98/07/19 SMI"
+
+#include "dummy.h"
+
+\       v9 uses a biased stack (need to add +0t2047 before using it)
+\
+__dummy           ""      	stacktrace
+#if defined(__sparcv9)
+{adb_inline_begin}
+.>z
+<z+0t2047=16t"l0"16t"l1"16t"l2"16t"l3"n16t"l4"16t"l5"16t"l6"16t"l7"
+.=16t"i0"16t"i1"16t"i2"16t"i3"n16t"i4"16t"i5"16t"i6"16t"i7"nn
+<z,<z$<stacktrace.nxt
+{adb_inline_end}
+#elif defined(__sparc)
+{adb_inline_begin}
+.=16t"l0"16t"l1"16t"l2"16t"l3"n16t"l4"16t"l5"16t"l6"16t"l7"
+.=16t"i0"16t"i1"16t"i2"16t"i3"n16t"i4"16t"i5"16t"i6"16t"i7"nn
+.,.$<stacktrace.nxt
+{adb_inline_end}
+#elif defined(__i386)
+{adb_inline_begin}
+.,.$<stacktrace.nxt
+{adb_inline_end}
+#else
+#error "Unknown ISA"
+#endif

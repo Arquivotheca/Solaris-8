@@ -1,0 +1,48 @@
+/*LINTLIBRARY*/
+/*PROTOLIB1*/
+
+/*
+ * Copyright (c) 1999 by Sun Microsystems, Inc.
+ * All rights reserved.
+ */
+
+#pragma ident	"@(#)llib-lcpc	1.1	99/08/15 SMI"
+
+#include "libcpc.h"
+
+uint_t cpc_version(uint_t ver);
+
+int cpc_getcpuver(void);
+const char *cpc_getcciname(int cpuver);
+const char *cpc_getcpuref(int cpuver);
+const char *cpc_getusage(int cpuver);
+uint_t cpc_getnpic(int cpuver);
+void cpc_walk_names(int cpuver, int regno, void *arg,
+    void (*action)(void *arg, int regno, const char *name, uint8_t bits));
+
+void cpc_seterrfn(cpc_errfn_t *errfn);
+
+int cpc_strtoevent(int cpuver, const char *spec, cpc_event_t *event);
+char *cpc_eventtostr(cpc_event_t *event);
+
+void cpc_event_accum(cpc_event_t *accum, cpc_event_t *event);
+void cpc_event_diff(cpc_event_t *diff, cpc_event_t *left, cpc_event_t *right);
+
+int cpc_access(void);
+int cpc_bind_event(cpc_event_t *event, int flags);
+int cpc_take_sample(cpc_event_t *event);
+int cpc_count_usr_events(int enable);
+int cpc_count_sys_events(int enable);
+int cpc_rele(void);
+
+int cpc_pctx_bind_event(pctx_t *pctx,
+    id_t lwpid, cpc_event_t *event, int flags);
+int cpc_pctx_take_sample(pctx_t *pctx, id_t lwpid, cpc_event_t *event);
+int cpc_pctx_rele(pctx_t *pctx, id_t lwpid);
+int cpc_pctx_invalidate(pctx_t *pctx, id_t lwpid);
+
+int cpc_shared_open(void);
+void cpc_shared_close(int fd);
+int cpc_shared_bind_event(int fd, cpc_event_t *event, int flags);
+int cpc_shared_take_sample(int fd, cpc_event_t *event);
+int cpc_sys_rele(int fd);

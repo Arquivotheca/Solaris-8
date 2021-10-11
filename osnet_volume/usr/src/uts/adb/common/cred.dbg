@@ -1,0 +1,31 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)cred.dbg	1.6	98/01/19 SMI"
+
+#include <sys/param.h>
+#include <sys/types.h>
+#include <sys/user.h>
+#include <sys/cred.h>
+#include "dummy.h"
+
+\
+\
+cred    	cr_
+{adb_inline_begin}
+.>z
+<z+{OFFSET, cr_ref}=""
+{adb_inline_end}
+        ref                     decimal
+        ngroups                 decimal
+        uid                     decimal
+        gid                     decimal
+        ruid                    decimal
+        rgid                    decimal
+        suid                    sdecimal
+        sgid                    decimal
+        groups                  decimal
+{adb_inline_begin}
+<z+{SIZEOF}=""
+{adb_inline_end}

@@ -1,0 +1,35 @@
+\ Copyright 1999 Sun Microsystems, Inc.
+\ All rights reserved.
+
+#ident	"@(#)usoc.fdbg	1.2	99/07/29 SMI"
+
+\
+\ SOC+ Fibre Channel Adapter driver macros
+\
+
+#include <sys/fibre-channel/fc.h>
+#include <sys/taskq.h>
+#include <sys/fibre-channel/impl/fc_fcaif.h>
+#include <sys/fibre-channel/fca/usoc_cq_defs.h>
+#include <sys/fibre-channel/fca/usocio.h>
+#include <sys/fibre-channel/fca/usocreg.h>
+#include <sys/fibre-channel/fca/usocvar.h>
+
+cq_hdr
+cqe
+cq
+usoc_cmdonly_request
+usoc_data_request
+usoc_diag_request
+usoc_hdr
+usoc_kernel_cq
+usoc_pkt_priv
+usoc_pool_request
+usoc_port
+usoc_priv_cmd
+usoc_request
+usoc_request_descriptor
+usoc_response
+usoc_state
+usoc_ub_priv
+usoc_unsol_cb

@@ -1,0 +1,28 @@
+#!/bin/sh
+#
+#pragma ident	"@(#)inc.flg	1.2	93/03/18 SMI"
+#
+
+# Find the NFS sources.
+
+find_files "s.*" usr/src/uts/common/fs/nfs
+
+# Find header files.
+
+find_files "s.*.h" \
+	usr/src/uts/common/fs \
+	usr/src/uts/common/kerberos \
+	usr/src/uts/common/klm \
+	usr/src/uts/common/netinet \
+	usr/src/uts/common/nfs \
+	usr/src/uts/common/rpc \
+	usr/src/uts/common/sys \
+	usr/src/uts/common/vm \
+	usr/src/uts/sparc/sys \
+	usr/src/uts/sun/sys \
+	usr/src/uts/sun/vm
+
+# Find RPC .x files and Makefile so that "make all_h" works.
+
+find_files "s.*.x" usr/src/uts/common/rpc
+echo_file usr/src/uts/common/rpc/Makefile

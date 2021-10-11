@@ -1,0 +1,301 @@
+#
+# Copyright (c) 1988 by Sun Microsystems, Inc.
+#
+#ident  @(#)audit_event.txt  1.52     99/10/14 SMI
+#
+# Audit Event Database
+#
+# File Format:
+#
+# event number:event name:event description:event classes (comma separated)
+#
+# Used by praudit and auditreduce to map events to classes.
+# Used by TCB programs that write audit records to preselect audit events
+#     based on event to class mappings.
+#
+# System Adminstrators: Do NOT modify or add events with an event number less
+#   than 32768. These are reserved by the system.
+#
+#     0		Reserved as an invalid event number.
+#     1 - 2047	Reserved for the SunOS kernel.
+#  2048 - 32767	Reserved for the SunOS TCB programs.
+# 32768 - 65535	Available for third party TCB applications.
+#
+# 6144 - 32767  SunOS 5.X user level audit events
+#
+#
+# kernel audit events
+#
+0:AUE_NULL:indir system call:no
+1:AUE_EXIT:exit(2):pc
+2:AUE_FORK:fork(2):pc
+3:AUE_OPEN:open(2) - place holder:fa
+4:AUE_CREAT:creat(2):fc
+5:AUE_LINK:link(2):fc
+6:AUE_UNLINK:unlink(2):fd
+7:AUE_EXEC:exec(2):pc,ex
+8:AUE_CHDIR:chdir(2):pc
+9:AUE_MKNOD:mknod(2):ad
+10:AUE_CHMOD:chmod(2):fm
+11:AUE_CHOWN:chown(2):fm
+12:AUE_UMOUNT:umount(2) - old version:ad
+13:AUE_JUNK:junk:no
+14:AUE_ACCESS:access(2):fa
+15:AUE_KILL:kill(2):pc
+16:AUE_STAT:stat(2):fa
+17:AUE_LSTAT:lstat(2):fa
+18:AUE_ACCT:acct(2):ad
+19:AUE_MCTL:mctl(2):fm
+20:AUE_REBOOT:reboot(2):ad
+21:AUE_SYMLINK:symlink(2):fc
+22:AUE_READLINK:readlink(2):fr
+23:AUE_EXECVE:execve(2):pc,ex
+24:AUE_CHROOT:chroot(2):pc
+25:AUE_VFORK:vfork(2):pc
+26:AUE_SETGROUPS:setgroups(2):pc
+27:AUE_SETPGRP:setpgrp(2):pc
+28:AUE_SWAPON:swapon(2):ad
+29:AUE_SETHOSTNAME:sethostname(2):ad
+30:AUE_FCNTL:fcntl(2):fm
+31:AUE_SETPRIORITY:setpriority(2):pc
+32:AUE_CONNECT:connect(2):nt
+33:AUE_ACCEPT:accept(2):nt
+34:AUE_BIND:bind(2):nt
+35:AUE_SETSOCKOPT:setsockopt(2):nt
+36:AUE_VTRACE:vtrace(2):pc
+37:AUE_SETTIMEOFDAY:settimeofday(2):ad
+38:AUE_FCHOWN:fchown(2):fm
+39:AUE_FCHMOD:fchmod(2):fm
+40:AUE_SETREUID:setreuid(2):pc
+41:AUE_SETREGID:setregid(2):pc
+42:AUE_RENAME:rename(2):fc,fd
+43:AUE_TRUNCATE:truncate(2):fd
+44:AUE_FTRUNCATE:ftruncate(2):fd
+45:AUE_FLOCK:flock(2):fm
+46:AUE_SHUTDOWN:shutdown(2):nt
+47:AUE_MKDIR:mkdir(2):fc
+48:AUE_RMDIR:rmdir(2):fc
+49:AUE_UTIMES:utimes(2):fm
+50:AUE_ADJTIME:adjtime(2):ad
+51:AUE_SETRLIMIT:setrlimit(2):ad
+52:AUE_KILLPG:killpg(2):pc
+53:AUE_NFS_SVC:nfs_svc(2):ad
+54:AUE_STATFS:statfs(2):fa
+55:AUE_FSTATFS:fstatfs(2):fa
+56:AUE_UNMOUNT:unmount(2):ad
+57:AUE_ASYNC_DAEMON:async_daemon(2):ad
+58:AUE_NFS_GETFH:nfs_getfh(2):ad
+59:AUE_SETDOMAINNAME:setdomainname(2):ad
+60:AUE_QUOTACTL:quotactl(2):ad
+61:AUE_EXPORTFS:exportfs(2):ad
+62:AUE_MOUNT:mount(2):ad
+63:AUE_SEMSYS:semsys(2) - place holder:fa
+64:AUE_MSGSYS:msgsys(2) - place holder:fa
+65:AUE_SHMSYS:shmsys(2) - place holder:fa
+66:AUE_BSMSYS:bsmsys(2) - place holder:fa
+67:AUE_RFSSYS:rfssys(2) - place holder:fa
+68:AUE_FCHDIR:fchdir(2):pc
+69:AUE_FCHROOT:fchroot(2):pc
+70:AUE_VPIXSYS:vpixsys(2) - place holder:fa
+71:AUE_PATHCONF:pathconf(2):fa
+72:AUE_OPEN_R:open(2) - read:fr
+73:AUE_OPEN_RC:open(2) - read,creat:fc,fr
+74:AUE_OPEN_RT:open(2) - read,trunc:fd,fr
+75:AUE_OPEN_RTC:open(2) - read,creat,trunc:fc,fd,fr
+76:AUE_OPEN_W:open(2) - write:fw
+77:AUE_OPEN_WC:open(2) - write,creat:fc,fw
+78:AUE_OPEN_WT:open(2) - write,trunc:fd,fw
+79:AUE_OPEN_WTC:open(2) - write,creat,trunc:fc,fd,fw
+80:AUE_OPEN_RW:open(2) - read,write:fr,fw
+81:AUE_OPEN_RWC:open(2) - read,write,creat:fc,fw,fr
+82:AUE_OPEN_RWT:open(2) - read,write,trunc:fd,fr,fw
+83:AUE_OPEN_RWTC:open(2) - read,write,creat,trunc:fc,fd,fw,fr
+84:AUE_MSGCTL:msgctl(2) - illegal command:ip
+85:AUE_MSGCTL_RMID:msgctl(2) - IPC_RMID command:ip
+86:AUE_MSGCTL_SET:msgctl(2) - IPC_SET command:ip
+87:AUE_MSGCTL_STAT:msgctl(2) - IPC_STAT command:ip
+88:AUE_MSGGET:msgget(2):ip
+89:AUE_MSGRCV:msgrcv(2):ip
+90:AUE_MSGSND:msgsnd(2):ip
+91:AUE_SHMCTL:shmctl(2) - illegal command:ip
+92:AUE_SHMCTL_RMID:shmctl(2) - IPC_RMID command:ip
+93:AUE_SHMCTL_SET:shmctl(2) - IPC_SET command:ip
+94:AUE_SHMCTL_STAT:shmctl(2) - IPC_STAT command:ip
+95:AUE_SHMGET:shmget(2):ip
+96:AUE_SHMAT:shmat(2):ip
+97:AUE_SHMDT:shmdt(2):ip
+98:AUE_SEMCTL:semctl(2) - illegal command:ip
+99:AUE_SEMCTL_RMID:semctl(2) - IPC_RMID command:ip
+100:AUE_SEMCTL_SET:semctl(2) - IPC_SET command:ip
+101:AUE_SEMCTL_STAT:semctl(2) - IPC_STAT command:ip
+102:AUE_SEMCTL_GETNCNT:semctl(2) - GETNCNT command:ip
+103:AUE_SEMCTL_GETPID:semctl(2) - GETPID command:ip
+104:AUE_SEMCTL_GETVAL:semctl(2) - GETVAL command:ip
+105:AUE_SEMCTL_GETALL:semctl(2) - GETALL command:ip
+106:AUE_SEMCTL_GETZCNT:semctl(2) - GETZCNT command:ip
+107:AUE_SEMCTL_SETVAL:semctl(2) - SETVAL command:ip
+108:AUE_SEMCTL_SETALL:semctl(2) - SETALL command:ip
+109:AUE_SEMGET:semget(2):ip
+110:AUE_SEMOP:semop(2):ip
+111:AUE_CORE:process dumped core:fc
+112:AUE_CLOSE:close(2):cl
+113:AUE_SYSTEMBOOT:system booted:na
+114:AUE_ASYNC_DAEMON_EXIT:async_daemon(2) exited:ad
+115:AUE_NFSSVC_EXIT:nfssvc(2) exited:ad
+128:AUE_WRITEL:writel(2):sl
+129:AUE_WRITEVL:writevl(2):sl
+130:AUE_GETAUID:getauid(2):ad
+131:AUE_SETAUID:setauid(2):ad
+132:AUE_GETAUDIT:getaudit(2):ad
+133:AUE_SETAUDIT:setaudit(2):ad
+134:AUE_GETUSERAUDIT:getuseraudit(2):ad
+135:AUE_SETUSERAUDIT:setuseraudit(2):ad
+136:AUE_AUDITSVC:auditsvc(2):ad
+138:AUE_AUDITON:auditon(2):ad
+139:AUE_AUDITON_GTERMID:auditon(2) - GETTERMID command:ad
+140:AUE_AUDITON_STERMID:auditon(2) - SETTERMID command:ad
+141:AUE_AUDITON_GPOLICY:auditon(2) - GPOLICY command:ad
+142:AUE_AUDITON_SPOLICY:auditon(2) - SPOLICY command:ad
+143:AUE_AUDITON_GESTATE:auditon(2) - GESTATE command:ad
+144:AUE_AUDITON_SESTATE:auditon(2) - SESTATE command:ad
+145:AUE_AUDITON_GQCTRL:auditon(2) - GQCTRL command:ad
+146:AUE_AUDITON_SQCTRL:auditon(2) - SQCTRL command:ad
+147:AUE_GETKERNSTATE:getkernstate(2):ad
+148:AUE_SETKERNSTATE:setkernstate(2):ad
+149:AUE_GETPORTAUDIT:getportaudit(2):ad
+150:AUE_AUDITSTAT:auditstat(2):ad
+153:AUE_ENTERPROM:enter prom:na
+154:AUE_EXITPROM:exit prom:na
+158:AUE_IOCTL:ioctl(2):io
+173:AUE_ONESIDE:one-sided session record:nt
+174:AUE_MSGGETL:msggetl(2):ip
+175:AUE_MSGRCVL:msgrcvl(2):ip
+176:AUE_MSGSNDL:msgsndl(2):ip
+177:AUE_SEMGETL:semgetl(2):ip
+178:AUE_SHMGETL:shmgetl(2):ip
+183:AUE_SOCKET:socket(2):nt
+184:AUE_SENDTO:sendto(2):nt
+185:AUE_PIPE:pipe(2):no
+186:AUE_SOCKETPAIR:socketpair(2):no
+187:AUE_SEND:send(2):no
+188:AUE_SENDMSG:sendmsg(2):nt
+189:AUE_RECV:recv(2):no
+190:AUE_RECVMSG:recvmsg(2):nt
+191:AUE_RECVFROM:recvfrom(2):nt
+192:AUE_READ:read(2):no
+193:AUE_GETDENTS:getdents(2):no
+194:AUE_LSEEK:lseek(2):no
+195:AUE_WRITE:write(2):no
+196:AUE_WRITEV:writev(2):no
+197:AUE_NFS:nfs server:no
+198:AUE_READV:readv(2):no
+199:AUE_OSTAT:old stat(2):fa
+200:AUE_OSETUID:old setuid(2):pc
+201:AUE_STIME:old stime(2):ad
+202:AUE_UTIME:old utime(2):fm
+203:AUE_NICE:old nice(2):pc
+204:AUE_OSETPGRP:old setpgrp(2):pc
+205:AUE_SETGID:old setgid(2):pc
+206:AUE_READL:readl(2):no
+207:AUE_READVL:readvl(2):no
+208:AUE_FSTAT:fstat(2):no
+209:AUE_DUP2:dup2(2):no
+210:AUE_MMAP:mmap(2):no
+211:AUE_AUDIT:audit(2):no
+212:AUE_PRIOCNTLSYS:priocntlsys(2):pc
+213:AUE_MUNMAP:munmap(2):cl
+214:AUE_SETEGID:setegid(2):pc
+215:AUE_SETEUID:seteuid(2):pc
+216:AUE_PUTMSG:putmsg(2):nt
+217:AUE_GETMSG:getmsg(2):nt
+218:AUE_PUTPMSG:putpmsg(2):nt
+219:AUE_GETPMSG:getpmsg(2):nt
+220:AUE_AUDITSYS:audit system calls place holder:fa
+221:AUE_AUDITON_GETKMASK:auditon(2) - get kernel mask:ad
+222:AUE_AUDITON_SETKMASK:auditon(2) - set kernel mask:ad
+223:AUE_AUDITON_GETCWD:auditon(2) - get cwd:ad
+224:AUE_AUDITON_GETCAR:auditon(2) - get car:ad
+225:AUE_AUDITON_GETSTAT:auditon(2) - get audit statistics:ad
+226:AUE_AUDITON_SETSTAT:auditon(2) - reset audit statistics:ad
+227:AUE_AUDITON_SETUMASK:auditon(2) - set mask per uid:ad
+228:AUE_AUDITON_SETSMASK:auditon(2) - set mask per session ID:ad
+229:AUE_AUDITON_GETCOND:auditon(2) - get audit state:ad
+230:AUE_AUDITON_SETCOND:auditon(2) - set audit state:ad
+231:AUE_AUDITON_GETCLASS:auditon(2) - get event class:ad
+232:AUE_AUDITON_SETCLASS:auditon(2) - set event class:ad
+233:AUE_UTSSYS:utssys(2) - fusers:ad
+234:AUE_STATVFS:statvfs(2):fa
+235:AUE_XSTAT:xstat(2):fa
+236:AUE_LXSTAT:lx6stat(2):fa
+237:AUE_LCHOWN:lchown(2):fm
+238:AUE_MEMCNTL:memcntl(2):ot
+239:AUE_SYSINFO:sysinfo(2):ad
+240:AUE_XMKNOD:xmknod(2):fc
+241:AUE_FORK1:fork1(2):pc
+242:AUE_MODCTL:modctl(2) system call place holder:no
+243:AUE_MODLOAD:modctl(2) - load module:ad
+244:AUE_MODUNLOAD:modctl(2) - unload module:ad
+245:AUE_MODCONFIG:modctl(2) - configure module:ad
+246:AUE_MODADDMAJ:modctl(2) - bind module:ad
+247:AUE_SOCKACCEPT:getmsg-accept:nt
+248:AUE_SOCKCONNECT:putmsg-connect:nt
+249:AUE_SOCKSEND:putmsg-send:nt
+250:AUE_SOCKRECEIVE:getmsg-receive:nt
+251:AUE_ACLSET:acl(2) - SETACL comand:fm
+252:AUE_FACLSET:facl(2) - SETACL command:fm
+253:AUE_DOORFS:doorfs(2) - system call place holder:no
+254:AUE_DOORFS_DOOR_CALL:doorfs(2) - DOOR_CALL:ip
+255:AUE_DOORFS_DOOR_RETURN:doorfs(2) - DOOR_RETURN:ip
+256:AUE_DOORFS_DOOR_CREATE:doorfs(2) - DOOR_CREATE:ip
+257:AUE_DOORFS_DOOR_REVOKE:doorfs(2) - DOOR_REVOKE:ip
+258:AUE_DOORFS_DOOR_INFO:doorfs(2) - DOOR_INFO:ip
+259:AUE_DOORFS_DOOR_CRED:doorfs(2) - DOOR_CRED:ip
+260:AUE_DOORFS_DOOR_BIND:doorfs(2) - DOOR_BIND:ip
+261:AUE_DOORFS_DOOR_UNBIND:doorfs(2) - DOOR_UNBIND:ip
+262:AUE_P_ONLINE:p_online(2):ad
+263:AUE_PROCESSOR_BIND:processor_bind(2):ad
+264:AUE_INST_SYNC:inst_sync(2):as
+265:AUE_SOCKCONFIG:configure socket:nt
+266:AUE_SETAUDIT_ADDR:setaudit_addr(2):ad
+267:AUE_GETAUDIT_ADDR:getaudit_addr(2):ad
+#
+# user level audit events
+#
+6144:AUE_at_create:at-create atjob:ad
+6145:AUE_at_delete:at-delete atjob (at or atrm):ad
+6146:AUE_at_perm:at-permission:ad
+6147:AUE_cron_invoke:cron-invoke:ad
+6148:AUE_crontab_create:crontab-crontab created:ad
+6149:AUE_crontab_delete:crontab-crontab deleted:ad
+6150:AUE_crontab_perm:crontab-persmisson:ad
+6151:AUE_inetd_connect:inetd:na
+6152:AUE_login:login - local:lo
+6153:AUE_logout:logout:lo
+6154:AUE_telnet:login - telnet:lo
+6155:AUE_rlogin:login - rlogin:lo
+6156:AUE_mountd_mount:mount:na
+6157:AUE_mountd_umount:unmount:na
+6158:AUE_rshd:rsh access:lo
+6159:AUE_su:su:lo
+6160:AUE_halt_solaris:halt(1m):ad
+6161:AUE_reboot_solaris:reboot(1m):ad
+6162:AUE_rexecd:rexecd:lo
+6163:AUE_passwd:passwd:lo
+6164:AUE_rexd:rexd:lo
+6165:AUE_ftpd:ftp access:lo
+6166:AUE_init_solaris:init(1m):ad
+6167:AUE_uadmin_solaris:uadmin(1m):ad
+6168:AUE_shutdown_solaris:shutdown(1b):ad
+6169:AUE_poweroff_solaris:poweroff(1m):ad
+6170:AUE_crontab_mod:crontab-modify:ad
+6200:AUE_allocate_succ:allocate-device success:ad
+6201:AUE_allocate_fail:allocate-device failure:ad
+6202:AUE_deallocate_succ:deallocate-device success:ad
+6203:AUE_deallocate_fail:deallocate-device failure:ad
+6205:AUE_listdevice_succ:allocate-list devices success:ad
+6206:AUE_listdevice_fail:allocate-list devices failure:ad
+6207:AUE_create_user:create user:ad
+6208:AUE_modify_user:modify user:ad
+6209:AUE_delete_user:delete user:ad
+6210:AUE_disable_user:disable user:ad
+6211:AUE_enable_user:enable user:ad

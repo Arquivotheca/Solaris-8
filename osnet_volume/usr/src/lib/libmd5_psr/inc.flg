@@ -1,0 +1,9 @@
+#!/bin/sh
+#
+# Copyright (c) 1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#pragma ident	"@(#)inc.flg	1.1	99/07/02 SMI"
+
+find_files "s.*" \
+	usr/src/common/md5

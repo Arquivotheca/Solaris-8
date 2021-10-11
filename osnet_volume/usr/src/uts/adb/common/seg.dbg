@@ -1,0 +1,28 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)seg.dbg	1.5	98/01/19 SMI"
+
+#include <sys/param.h>
+#include <sys/types.h>
+#include <vm/seg.h>
+#include "dummy.h"
+
+\
+\
+seg                     s_
+{adb_inline_begin}
+.>z
+<z+{OFFSET, s_base}=""
+{adb_inline_end}
+        base                    hex
+        size                    hex
+        as                      hex
+        next                    hex
+        prev                    hex
+        ops                     symbolic
+        data                    hex
+{adb_inline_begin}
+<z+{SIZEOF}=""
+{adb_inline_end}

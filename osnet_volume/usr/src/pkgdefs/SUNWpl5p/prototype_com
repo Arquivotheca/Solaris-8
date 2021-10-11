@@ -1,0 +1,84 @@
+#
+# Copyright (c) 1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#ident	"@(#)prototype_com	1.1	99/06/04 SMI"
+#
+# This required package information file contains a list of package contents.
+# The 'pkgmk' command uses this file to identify the contents of a package
+# and their location on the development machine when building the package.
+# Can be created via a text editor or through use of the 'pkgproto' command.
+
+#!search <pathname pathname ...>	# where to find pkg objects
+#!include <filename>			# include another 'prototype' file
+#!default <mode> <owner> <group>	# default used if not specified on entry
+#!<param>=<value>			# puts parameter in pkg environment
+
+# packaging files
+i pkginfo
+i copyright
+i depend
+#
+# source locations relative to the prototype file
+#
+# SUNWpl5p
+#
+d none usr 755 root sys
+d none usr/perl5 755 root bin
+d none usr/perl5/5.00503 755 root bin
+d none usr/perl5/5.00503/pod 755 root bin
+s none usr/perl5/pod=./5.00503/pod
+f none usr/perl5/5.00503/pod/a2p.pod 444 root bin
+f none usr/perl5/5.00503/pod/perl.pod 444 root bin
+f none usr/perl5/5.00503/pod/perl5004delta.pod 444 root bin
+f none usr/perl5/5.00503/pod/perlapio.pod 444 root bin
+f none usr/perl5/5.00503/pod/perlbook.pod 444 root bin
+f none usr/perl5/5.00503/pod/perlbot.pod 444 root bin
+f none usr/perl5/5.00503/pod/perlcall.pod 444 root bin
+f none usr/perl5/5.00503/pod/perldata.pod 444 root bin
+f none usr/perl5/5.00503/pod/perldebug.pod 444 root bin
+f none usr/perl5/5.00503/pod/perldelta.pod 444 root bin
+f none usr/perl5/5.00503/pod/perldiag.pod 444 root bin
+f none usr/perl5/5.00503/pod/perldsc.pod 444 root bin
+f none usr/perl5/5.00503/pod/perlembed.pod 444 root bin
+f none usr/perl5/5.00503/pod/perlfaq.pod 444 root bin
+f none usr/perl5/5.00503/pod/perlfaq1.pod 444 root bin
+f none usr/perl5/5.00503/pod/perlfaq2.pod 444 root bin
+f none usr/perl5/5.00503/pod/perlfaq3.pod 444 root bin
+f none usr/perl5/5.00503/pod/perlfaq4.pod 444 root bin
+f none usr/perl5/5.00503/pod/perlfaq5.pod 444 root bin
+f none usr/perl5/5.00503/pod/perlfaq6.pod 444 root bin
+f none usr/perl5/5.00503/pod/perlfaq7.pod 444 root bin
+f none usr/perl5/5.00503/pod/perlipc.pod 444 root bin
+f none usr/perl5/5.00503/pod/perlfaq8.pod 444 root bin
+f none usr/perl5/5.00503/pod/perlfaq9.pod 444 root bin
+f none usr/perl5/5.00503/pod/perlform.pod 444 root bin
+f none usr/perl5/5.00503/pod/perlfunc.pod 444 root bin
+f none usr/perl5/5.00503/pod/perlguts.pod 444 root bin
+f none usr/perl5/5.00503/pod/perlhist.pod 444 root bin
+f none usr/perl5/5.00503/pod/perllocale.pod 444 root bin
+f none usr/perl5/5.00503/pod/perllol.pod 444 root bin
+f none usr/perl5/5.00503/pod/perlmod.pod 444 root bin
+f none usr/perl5/5.00503/pod/perlmodinstall.pod 444 root bin
+f none usr/perl5/5.00503/pod/perlmodlib.pod 444 root bin
+f none usr/perl5/5.00503/pod/perlobj.pod 444 root bin
+f none usr/perl5/5.00503/pod/perlop.pod 444 root bin
+f none usr/perl5/5.00503/pod/perlopentut.pod 444 root bin
+f none usr/perl5/5.00503/pod/perlpod.pod 444 root bin
+f none usr/perl5/5.00503/pod/perlport.pod 444 root bin
+f none usr/perl5/5.00503/pod/perlre.pod 444 root bin
+f none usr/perl5/5.00503/pod/perlref.pod 444 root bin
+f none usr/perl5/5.00503/pod/perlreftut.pod 444 root bin
+f none usr/perl5/5.00503/pod/perlrun.pod 444 root bin
+f none usr/perl5/5.00503/pod/perlsec.pod 444 root bin
+f none usr/perl5/5.00503/pod/perlstyle.pod 444 root bin
+f none usr/perl5/5.00503/pod/perlsub.pod 444 root bin
+f none usr/perl5/5.00503/pod/perlsyn.pod 444 root bin
+f none usr/perl5/5.00503/pod/perlthrtut.pod 444 root bin
+f none usr/perl5/5.00503/pod/perltie.pod 444 root bin
+f none usr/perl5/5.00503/pod/perltoc.pod 444 root bin
+f none usr/perl5/5.00503/pod/perltoot.pod 444 root bin
+f none usr/perl5/5.00503/pod/perltrap.pod 444 root bin
+f none usr/perl5/5.00503/pod/perlvar.pod 444 root bin
+f none usr/perl5/5.00503/pod/perlxs.pod 444 root bin
+f none usr/perl5/5.00503/pod/perlxstut.pod 444 root bin

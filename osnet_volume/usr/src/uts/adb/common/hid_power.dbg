@@ -1,0 +1,44 @@
+\
+\ Copyright (c) 1999 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)hid_power.dbg        1.2     99/10/22 SMI"
+
+#include <sys/usb/usba.h>
+#include <sys/usb/usba/usba_types.h>
+#include <sys/usb/clients/hid/hid.h>
+#include <sys/usb/clients/hidparser/hidparser.h>
+#include <sys/usb/clients/hid/hidvar.h>
+#include <sys/usb/clients/hid/hid_polled.h>
+
+#include <sys/stropts.h>
+
+#include <sys/vuid_event.h>
+#include <sys/termios.h>
+#include <sys/termio.h>
+#include <sys/strtty.h>
+#include <sys/msreg.h>
+#include <sys/msio.h>
+#include "dummy.h"
+
+\
+\
+
+hid_power_struct	hid_	hid_power
+{adb_inline_begin}
+.>z
+<z+{OFFSET, hid_state}=""
+{adb_inline_end}
+	state			hex	hid_state
+	wakeup_enabled		hex	wakeup_enabled
+	pwr_states		hex	pwr_states
+	pm_capabilities		hex	pmcap
+	raise_power		hex	raise_power
+	current_power		hex	current_power
+{adb_inline_begin}
+<z+{SIZEOF}=""
+{adb_inline_end}
+
+\
+\
+

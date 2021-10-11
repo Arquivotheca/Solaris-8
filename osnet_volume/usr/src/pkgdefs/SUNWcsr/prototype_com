@@ -1,0 +1,609 @@
+#
+# Copyright (c) 1990-1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#pragma ident	"@(#)prototype_com	1.235	99/11/24 SMI"
+#
+# This required package information file contains a list of package contents.
+# The 'pkgmk' command uses this file to identify the contents of a package
+# and their location on the development machine when building the package.
+# Can be created via a text editor or through use of the 'pkgproto' command.
+
+#!search <pathname pathname ...>	# where to find pkg objects
+#!include <filename>			# include another 'prototype' file
+#!default <mode> <owner> <group>	# default used if not specified on entry
+#!<param>=<value>			# puts parameter in pkg environment
+
+# packaging files
+i pkginfo
+i copyright
+i postinstall
+i preinstall
+i i.preserve
+i i.renamenew
+i i.tiservices
+i i.devlinktab
+i i.nametomajor
+i i.minorperm
+i i.inetdconf
+i i.etcsystem
+i i.definit
+i i.cronroot
+i i.passwd
+i i.shadow
+i i.drvalias
+i i.kclasses
+i i.etcremote
+i i.nsswitch
+i i.nscd
+i i.netconfig
+i i.iuap
+i i.deflogin
+i i.defsu
+i i.syslogconf
+i i.ttysrch
+i i.group
+i i.etcrpc
+i i.etcprofile
+i i.mailxrc
+i i.voldconf
+i i.rmmconf
+i i.sock2path
+i i.protocols
+i i.initd
+i i.locallogin
+i i.localprofile
+i i.fstypes
+i i.pamconf
+i i.nfssecconf
+i i.services
+#
+# source locations relative to the prototype file
+#
+# SUNWcsr
+#
+s none bin=./usr/bin
+d none dev 755 root sys
+d none dev/sad 755 root sys
+d none devices 755 root sys
+d none devices/pseudo 755 root sys
+d none etc 755 root sys
+f renamenew etc/.login 644 root sys
+d none etc/krb5 755 root sys
+e preserve etc/krb5/krb5.conf 644 root sys
+e preserve etc/krb5/warn.conf 644 root sys
+e nscd etc/nscd.conf 644 root sys
+s none etc/TIMEZONE=./default/init
+s none etc/autopush=../sbin/autopush
+s none etc/cfgadm=../usr/sbin/cfgadm
+s none etc/clri=../usr/sbin/clri
+s none etc/crash=../usr/sbin/crash
+s none etc/cron=../usr/sbin/cron
+d none etc/cron.d 755 root sys
+f none etc/cron.d/.proto 744 root sys
+e preserve etc/cron.d/at.deny 644 root sys
+e preserve etc/cron.d/cron.deny 644 root sys
+f none etc/cron.d/logchecker 555 root bin
+f none etc/cron.d/queuedefs 644 root sys
+f none etc/dacf.conf 644 root sys
+s none etc/dcopy=../usr/sbin/dcopy
+d none etc/default 755 root sys
+e preserve etc/default/cron 555 root bin
+e preserve etc/default/devfsadm 444 root sys
+e preserve etc/default/dhcpagent 444 root sys
+e preserve etc/default/fs 444 root bin
+e definit etc/default/init 555 root sys
+e preserve etc/default/kbd 444 root sys
+e deflogin etc/default/login 444 root sys
+e preserve etc/default/nfslogd 444 root bin
+e preserve etc/default/passwd 444 root sys
+e defsu etc/default/su 444 root sys
+e preserve etc/default/tar 444 root sys
+e preserve etc/default/utmpd 444 root sys
+e preserve etc/default/inetinit 444 root sys
+e preserve etc/device.tab 444 root root
+e devlinktab etc/devlink.tab 644 root sys
+d none etc/dfs 755 root sys
+e preserve etc/dfs/dfstab 644 root sys
+e preserve etc/dgroup.tab 444 root sys
+d none etc/dhcp 755 root sys
+e preserve etc/dhcp/inittab 644 root sys
+e drvalias etc/driver_aliases 644 root sys
+e kclasses etc/driver_classes 644 root sys
+e preserve etc/dumpdates 664 root sys
+s none etc/ff=../usr/sbin/ff
+s none etc/fmthard=../usr/sbin/fmthard
+s none etc/format=../usr/sbin/format
+v none etc/format.dat 644 root sys
+d none etc/fs 755 root sys
+d none etc/fs/hsfs 755 root sys
+f none etc/fs/hsfs/mount 555 root bin
+d none etc/fs/nfs 755 root sys
+f none etc/fs/nfs/mount 555 root bin
+d none etc/fs/proc 755 root sys
+d none etc/fs/ufs 755 root sys
+f none etc/fs/ufs/mount 555 root bin
+s none etc/fsck=../usr/sbin/fsck
+s none etc/fsdb=../usr/sbin/fsdb
+s none etc/fstyp=../usr/sbin/fstyp
+s none etc/getty=../usr/lib/saf/ttymon
+e group etc/group 644 root sys
+s none etc/grpck=../usr/sbin/grpck
+s none etc/halt=../usr/sbin/halt
+s none etc/hosts=./inet/hosts
+d none etc/inet 755 root sys
+e preserve etc/inet/hosts 444 root sys
+e preserve etc/inet/ipnodes 444 root sys
+e inetdconf etc/inet/inetd.conf 444 root sys
+e sock2path etc/inet/sock2path 444 root sys
+f none etc/inet/datemsk.ndpd 444 root sys
+f none etc/inet/ipsecinit.sample 444 root sys
+e preserve etc/inet/netmasks 444 root sys
+e preserve etc/inet/networks 444 root sys
+e preserve etc/path_to_inst 644 root sys
+e protocols etc/inet/protocols 444 root sys
+e services etc/inet/services 444 root sys
+s none etc/inetd.conf=./inet/inetd.conf
+s none etc/sock2path=./inet/sock2path
+s none etc/init=../sbin/init
+d none etc/init.d 755 root sys
+e initd etc/init.d/ANNOUNCE 744 root sys
+e initd etc/init.d/MOUNTFSYS 744 root sys
+e initd etc/init.d/PRESERVE 744 root sys
+e initd etc/init.d/README 644 root sys
+e initd etc/init.d/RMTMPFILES 744 root sys
+e initd etc/init.d/audit 744 root sys
+e initd etc/init.d/buildmnttab 744 root sys
+e initd etc/init.d/coreadm 744 root sys
+e initd etc/init.d/keymap 744 root sys
+e initd etc/init.d/cachefs.daemon 744 root sys
+e initd etc/init.d/cachefs.root 744 root sys
+e initd etc/init.d/cacheos 744 root sys
+e initd etc/init.d/cacheos.finish 744 root sys
+e initd etc/init.d/cron 744 root sys
+e initd etc/init.d/devfsadm 744 root sys
+e initd etc/init.d/devlinks 744 root sys
+e initd etc/init.d/dhcpagent 744 root sys
+e initd etc/init.d/drvconfig 744 root sys
+e initd etc/init.d/inetinit 744 root sys
+e initd etc/init.d/inetsvc 744 root sys
+e initd etc/init.d/ldap.client 744 root sys
+e initd etc/init.d/mkdtab 744 root sys
+e initd etc/init.d/nfs.client 744 root sys
+e initd etc/init.d/nfs.server 744 root sys
+e initd etc/init.d/network 744 root sys
+e initd etc/init.d/rootusr 744 root sys
+e initd etc/init.d/rpc 744 root sys
+e initd etc/init.d/savecore 744 root sys
+e initd etc/init.d/standardmounts 744 root sys
+e initd etc/init.d/sysetup 744 root sys
+e initd etc/init.d/syslog 744 root sys
+e initd etc/init.d/ufs_quota 744 root sys
+e initd etc/init.d/utmpd 744 root sys
+e initd etc/init.d/nscd 744 root sys
+f none etc/inittab 644 root sys
+s none etc/install=../usr/sbin/install
+e preserve etc/ioctl.syscon 644 root sys
+e iuap etc/iu.ap 644 root sys
+s none etc/killall=../usr/sbin/killall
+s none etc/labelit=../usr/sbin/labelit
+d none etc/lib 755 root sys
+f none etc/lib/ld.so.1 755 root bin
+f none etc/lib/libdl.so.1 755 root bin
+f none etc/lib/nss_files.so.1 755 root bin
+s none etc/log=../var/adm/log
+e preserve etc/logindevperm 644 root sys
+f none etc/magic 444 root bin
+d none etc/mail 755 root mail
+e mailxrc etc/mail/mailx.rc 644 root bin
+e minorperm etc/minor_perm 644 root sys
+s none etc/mkfs=../usr/sbin/mkfs
+s none etc/mknod=../usr/sbin/mknod
+f none etc/mnttab 444 root root
+f none etc/motd 644 root sys
+s none etc/mount=../usr/sbin/mount
+s none etc/mountall=../sbin/mountall
+e nametomajor etc/name_to_major 644 root sys
+f none etc/name_to_sysnum 644 root sys
+s none etc/ncheck=../usr/sbin/ncheck
+d none etc/net 755 root sys
+d none etc/net/ticlts 755 root sys
+e preserve etc/net/ticlts/hosts 644 root sys
+e tiservices etc/net/ticlts/services 644 root sys
+d none etc/net/ticots 755 root sys
+e preserve etc/net/ticots/hosts 644 root sys
+e tiservices etc/net/ticots/services 644 root sys
+d none etc/net/ticotsord 755 root sys
+e preserve etc/net/ticotsord/hosts 644 root sys
+e tiservices etc/net/ticotsord/services 644 root sys
+e netconfig etc/netconfig 644 root sys
+s none etc/netmasks=./inet/netmasks
+s none etc/networks=./inet/networks
+d none etc/nfs 755 root sys
+e preserve etc/nfs/nfslog.conf 644 root sys
+e nfssecconf etc/nfssec.conf 644 root sys
+e nsswitch etc/nsswitch.conf 644 root sys
+f none etc/nsswitch.files 644 root sys
+f none etc/nsswitch.ldap 644 root sys
+f none etc/nsswitch.nis 644 root sys
+f none etc/nsswitch.nisplus 644 root sys
+f none etc/nsswitch.dns 644 root sys
+d none etc/opt 755 root sys
+e passwd etc/passwd 644 root sys
+e etcprofile etc/profile 644 root sys
+s none etc/protocols=./inet/protocols
+s none etc/prtconf=../usr/sbin/prtconf
+s none etc/prtvtoc=../usr/sbin/prtvtoc
+s none etc/rc0=../sbin/rc0
+d none etc/rc0.d 755 root sys
+l initd etc/rc0.d/K00ANNOUNCE=../../etc/init.d/ANNOUNCE
+l initd etc/rc0.d/K28nfs.server=../../etc/init.d/nfs.server
+l initd etc/rc0.d/K33audit=../../etc/init.d/audit
+l initd etc/rc0.d/K36utmpd=../../etc/init.d/utmpd
+l initd etc/rc0.d/K40cron=../../etc/init.d/cron
+l initd etc/rc0.d/K40nscd=../../etc/init.d/nscd
+l initd etc/rc0.d/K40syslog=../../etc/init.d/syslog
+l initd etc/rc0.d/K41ldap.client=../../etc/init.d/ldap.client
+l initd etc/rc0.d/K41nfs.client=../../etc/init.d/nfs.client
+l initd etc/rc0.d/K41rpc=../../etc/init.d/rpc
+l initd etc/rc0.d/K42inetsvc=../../etc/init.d/inetsvc
+l initd etc/rc0.d/K43inet=../../etc/init.d/inetinit
+l initd etc/rc0.d/K83devfsadm=../../etc/init.d/devfsadm
+l initd etc/rc0.d/K90dhcpagent=../../etc/init.d/dhcpagent
+s none etc/rc1=../sbin/rc1
+d none etc/rc1.d 755 root sys
+l initd etc/rc1.d/K00ANNOUNCE=../../etc/init.d/ANNOUNCE
+l initd etc/rc1.d/K28nfs.server=../../etc/init.d/nfs.server
+l initd etc/rc1.d/K33audit=../../etc/init.d/audit
+l initd etc/rc1.d/K36utmpd=../../etc/init.d/utmpd
+l initd etc/rc1.d/K40cron=../../etc/init.d/cron
+l initd etc/rc1.d/K40nscd=../../etc/init.d/nscd
+l initd etc/rc1.d/K40syslog=../../etc/init.d/syslog
+l initd etc/rc1.d/K41ldap.client=../../etc/init.d/ldap.client
+l initd etc/rc1.d/K41rpc=../../etc/init.d/rpc
+l initd etc/rc1.d/K42inetsvc=../../etc/init.d/inetsvc
+l initd etc/rc1.d/K43inet=../../etc/init.d/inetinit
+l initd etc/rc1.d/S01MOUNTFSYS=../../etc/init.d/MOUNTFSYS
+s none etc/rc2=../sbin/rc2
+d none etc/rc2.d 755 root sys
+l initd etc/rc2.d/K28nfs.server=../../etc/init.d/nfs.server
+f none etc/rc2.d/README 644 root sys
+l initd etc/rc2.d/S01MOUNTFSYS=../../etc/init.d/MOUNTFSYS
+l initd etc/rc2.d/S05RMTMPFILES=../../etc/init.d/RMTMPFILES
+l initd etc/rc2.d/S20sysetup=../../etc/init.d/sysetup
+l initd etc/rc2.d/S99audit=../../etc/init.d/audit
+l initd etc/rc2.d/S69inet=../../etc/init.d/inetinit
+l initd etc/rc2.d/S71ldap.client=../../etc/init.d/ldap.client
+l initd etc/rc2.d/S71rpc=../../etc/init.d/rpc
+l initd etc/rc2.d/S72inetsvc=../../etc/init.d/inetsvc
+l initd etc/rc2.d/S73cachefs.daemon=../../etc/init.d/cachefs.daemon
+l initd etc/rc2.d/S73nfs.client=../../etc/init.d/nfs.client
+l initd etc/rc2.d/S74syslog=../../etc/init.d/syslog
+l initd etc/rc2.d/S75cron=../../etc/init.d/cron
+l initd etc/rc2.d/S75savecore=../../etc/init.d/savecore
+l initd etc/rc2.d/S76nscd=../../etc/init.d/nscd
+l initd etc/rc2.d/S80PRESERVE=../../etc/init.d/PRESERVE
+l initd etc/rc2.d/S82mkdtab=../../etc/init.d/mkdtab
+l initd etc/rc2.d/S88utmpd=../../etc/init.d/utmpd
+l initd etc/rc2.d/S93cacheos.finish=../../etc/init.d/cacheos.finish
+s none etc/rc3=../sbin/rc3
+d none etc/rc3.d 755 root sys
+f none etc/rc3.d/README 644 root sys
+l initd etc/rc3.d/S15nfs.server=../../etc/init.d/nfs.server
+s none etc/rc5=../sbin/rc5
+s none etc/rc6=../sbin/rc6
+s none etc/rcS=../sbin/rcS
+d none etc/rcS.d 755 root sys
+l initd etc/rcS.d/K28nfs.server=../../etc/init.d/nfs.server
+l initd etc/rcS.d/K33audit=../../etc/init.d/audit
+l initd etc/rcS.d/K36utmpd=../../etc/init.d/utmpd
+l initd etc/rcS.d/K40cron=../../etc/init.d/cron
+l initd etc/rcS.d/K40nscd=../../etc/init.d/nscd
+l initd etc/rcS.d/K40syslog=../../etc/init.d/syslog
+l initd etc/rcS.d/K41ldap.client=../../etc/init.d/ldap.client
+l initd etc/rcS.d/K41rpc=../../etc/init.d/rpc
+l initd etc/rcS.d/K42inetsvc=../../etc/init.d/inetsvc
+l initd etc/rcS.d/K43inet=../../etc/init.d/inetinit
+f none etc/rcS.d/README 644 root sys
+l initd etc/rcS.d/S30network.sh=../../etc/init.d/network
+l initd etc/rcS.d/S30rootusr.sh=../../etc/init.d/rootusr
+l initd etc/rcS.d/S33keymap.sh=../../etc/init.d/keymap
+l initd etc/rcS.d/S35cacheos.sh=../../etc/init.d/cacheos
+l initd etc/rcS.d/S40standardmounts.sh=../../etc/init.d/standardmounts
+l initd etc/rcS.d/S41cachefs.root=../../etc/init.d/cachefs.root
+l initd etc/rcS.d/S42coreadm=../../etc/init.d/coreadm
+l initd etc/rcS.d/S50devfsadm=../../etc/init.d/devfsadm
+l initd etc/rcS.d/S70buildmnttab.sh=../../etc/init.d/buildmnttab
+s none etc/reboot=../usr/sbin/halt
+e etcremote etc/remote 644 root bin
+s none etc/rmt=../usr/sbin/rmt
+e etcrpc etc/rpc 644 root sys
+d none etc/saf 755 root bin
+e preserve etc/saf/_sactab 644 root sys
+e preserve etc/saf/_sysconfig 644 root sys
+d none etc/saf/zsmon 755 root sys
+e preserve etc/saf/zsmon/_pmtab 644 root sys
+d none etc/security 755 root sys
+d none etc/security/spool 755 root sys
+d none etc/security/audit 755 root sys
+d none etc/security/audit/localhost 755 root sys
+s none etc/security/audit/localhost/files=../../../../var/audit
+f none etc/security/audit_class 644 root sys
+f none etc/security/audit_control 640 root sys
+f none etc/security/audit_event 644 root sys
+f none etc/security/audit_user 640 root sys
+f none etc/security/audit_warn 740 root sys
+f none etc/security/bsmconv 740 root sys
+f none etc/security/bsmunconv 740 root sys
+e preserve etc/security/policy.conf 644 root sys
+d none etc/security/dev 755 root sys
+f none etc/security/dev/audio 400 root bin
+f none etc/security/dev/fd0 400 root bin
+f none etc/security/dev/sr0 400 root bin
+f none etc/security/dev/st0 400 root bin
+f none etc/security/dev/st1 400 root bin
+d none etc/security/lib 755 root sys
+f none etc/security/lib/audio_clean 751 root sys
+f none etc/security/lib/fd_clean 751 root sys
+f none etc/security/lib/sr_clean 751 root sys
+f none etc/security/lib/st_clean 751 root sys
+e preserve etc/security/auth_attr 644 root sys
+e preserve etc/security/exec_attr 644 root sys
+e preserve etc/security/prof_attr 644 root sys
+e preserve etc/user_attr 644 root sys
+e pamconf etc/pam.conf 644 root sys
+s none etc/services=./inet/services
+s none etc/setmnt=../usr/sbin/setmnt
+e shadow etc/shadow 400 root sys
+s none etc/shutdown=../usr/sbin/shutdown
+d none etc/skel 755 root sys
+e preserve etc/skel/.profile 644 root other
+e preserve etc/skel/local.cshrc 644 root sys
+f locallogin etc/skel/local.login 644 root sys
+f localprofile etc/skel/local.profile 644 root sys
+s none etc/sulogin=../sbin/sulogin
+s none etc/swap=../usr/sbin/swap
+s none etc/swapadd=../sbin/swapadd
+s none etc/sysdef=../usr/sbin/sysdef
+e syslogconf etc/syslog.conf 644 root sys
+e etcsystem etc/system 644 root sys
+s none etc/tar=../usr/sbin/tar
+s none etc/telinit=../sbin/init
+d none etc/tm 755 root sys
+f none etc/ttydefs 644 root sys
+e ttysrch etc/ttysrch 644 root sys
+s none etc/uadmin=../sbin/uadmin
+s none etc/umount=../usr/sbin/umount
+s none etc/umountall=../sbin/umountall
+s none etc/utmpx=../var/adm/utmpx
+e preserve etc/vfstab 644 root sys
+s none etc/volcopy=../usr/sbin/volcopy
+s none etc/wall=../usr/sbin/wall
+s none etc/whodo=../usr/sbin/whodo
+s none etc/wtmpx=../var/adm/wtmpx
+d none etc/rpcsec 755 root sys
+d none kernel 755 root sys
+d none kernel/drv 755 root sys
+f none kernel/drv/arp 755 root sys
+f none kernel/drv/arp.conf 644 root sys
+f none kernel/drv/clone 755 root sys
+f none kernel/drv/clone.conf 644 root sys
+f none kernel/drv/cn 755 root sys
+f none kernel/drv/cn.conf 644 root sys
+f none kernel/drv/conskbd 755 root sys
+f none kernel/drv/conskbd.conf 644 root sys
+f none kernel/drv/consms 755 root sys
+f none kernel/drv/consms.conf 644 root sys
+f none kernel/drv/devinfo 755 root sys
+f none kernel/drv/devinfo.conf 644 root sys
+f none kernel/drv/icmp 755 root sys
+f none kernel/drv/icmp.conf 644 root sys
+f none kernel/drv/icmp6 755 root sys
+f none kernel/drv/icmp6.conf 644 root sys
+f none kernel/drv/ip 755 root sys
+f none kernel/drv/ip.conf 644 root sys
+f none kernel/drv/ip6 755 root sys
+f none kernel/drv/ip6.conf 644 root sys
+f none kernel/drv/ipsecah 755 root sys
+f none kernel/drv/ipsecah.conf 644 root sys
+f none kernel/drv/ipsecesp 755 root sys
+f none kernel/drv/ipsecesp.conf 644 root sys
+f none kernel/drv/iwscn 755 root sys
+f none kernel/drv/iwscn.conf 644 root sys
+f none kernel/drv/keysock 755 root sys
+f none kernel/drv/keysock.conf 644 root sys
+f none kernel/drv/llc1 755 root sys
+f none kernel/drv/llc1.conf 644 root sys
+f none kernel/drv/lofi 755 root sys
+f none kernel/drv/lofi.conf 644 root sys
+f none kernel/drv/log 755 root sys
+f none kernel/drv/log.conf 644 root sys
+f none kernel/drv/mm 755 root sys
+f none kernel/drv/mm.conf 644 root sys
+f none kernel/drv/openeepr 755 root sys
+f none kernel/drv/openeepr.conf 644 root sys
+f none kernel/drv/options 755 root sys
+f none kernel/drv/options.conf 644 root sys
+f none kernel/drv/poll 755 root sys
+f none kernel/drv/poll.conf 644 root sys
+f none kernel/drv/pseudo 755 root sys
+f none kernel/drv/pseudo.conf 644 root sys
+f none kernel/drv/rts 755 root sys
+f none kernel/drv/rts.conf 644 root sys
+f none kernel/drv/sad 755 root sys
+f none kernel/drv/sad.conf 644 root sys
+f none kernel/drv/sgen 755 root sys
+e preserve kernel/drv/sgen.conf 644 root sys
+f none kernel/drv/st 755 root sys
+v none kernel/drv/st.conf 644 root sys
+f none kernel/drv/sy 755 root sys
+f none kernel/drv/sy.conf 644 root sys
+f none kernel/drv/sysmsg 755 root sys
+f none kernel/drv/sysmsg.conf 644 root sys
+f none kernel/drv/tl 755 root sys
+f none kernel/drv/tl.conf 644 root sys
+f none kernel/drv/tcp 755 root sys
+f none kernel/drv/tcp.conf 644 root sys
+f none kernel/drv/tcp6 755 root sys
+f none kernel/drv/tcp6.conf 644 root sys
+f none kernel/drv/udp 755 root sys
+f none kernel/drv/udp.conf 644 root sys
+f none kernel/drv/udp6 755 root sys
+f none kernel/drv/udp6.conf 644 root sys
+f none kernel/drv/wc 755 root sys
+f none kernel/drv/wc.conf 644 root sys
+f none kernel/drv/ptc 755 root sys
+f none kernel/drv/ptc.conf 644 root sys
+f none kernel/drv/ptsl 755 root sys
+f none kernel/drv/ptsl.conf 644 root sys
+d none kernel/exec 755 root sys
+f none kernel/exec/elfexec 755 root sys
+f none kernel/exec/intpexec 755 root sys
+d none kernel/fs 755 root sys
+f none kernel/fs/cachefs 755 root sys
+f none kernel/fs/fifofs 755 root sys
+f none kernel/fs/hsfs 755 root sys
+f none kernel/fs/lofs 755 root sys
+f none kernel/fs/mntfs 755 root sys
+f none kernel/fs/nfs 755 root sys
+f none kernel/fs/procfs 755 root sys
+f none kernel/fs/sockfs 755 root sys
+f none kernel/fs/specfs 755 root sys
+f none kernel/fs/tmpfs 755 root sys
+f none kernel/fs/ufs 755 root sys
+f none kernel/genunix 755 root sys
+d none kernel/misc 755 root sys
+f none kernel/misc/busra 0755 root sys
+f none kernel/misc/consconfig 755 root sys
+f none kernel/misc/des 755 root sys
+f none kernel/misc/ipc 755 root sys
+f none kernel/misc/krtld 755 root sys
+f none kernel/misc/md5 755 root sys
+f none kernel/misc/nfs_dlboot 755 root sys
+f none kernel/misc/nfssrv 755 root sys
+f none kernel/misc/scsi 755 root sys
+f none kernel/misc/strplumb 755 root sys
+f none kernel/misc/swapgeneric 755 root sys
+f none kernel/misc/ufs_log 755 root sys
+f none kernel/misc/klmmod 755 root sys
+f none kernel/misc/klmops 755 root sys
+f none kernel/misc/rpcsec 755 root sys
+f none kernel/misc/seg_drv 0755 root sys
+f none kernel/misc/seg_mapdev 0755 root sys
+f none kernel/misc/tlimod 755 root sys
+d none kernel/sched 755 root sys
+f none kernel/sched/TS 755 root sys
+f none kernel/sched/TS_DPTBL 755 root sys
+d none kernel/strmod 755 root sys
+l none kernel/strmod/arp=../../kernel/drv/arp
+f none kernel/strmod/atun 755 root sys
+f none kernel/strmod/authmd5h 755 root sys
+f none kernel/strmod/authsha1 755 root sys
+f none kernel/strmod/bufmod 755 root sys
+f none kernel/strmod/connld 755 root sys
+f none kernel/strmod/dedump 755 root sys
+f none kernel/strmod/ldterm 755 root sys
+f none kernel/strmod/pckt 755 root sys
+f none kernel/strmod/pfmod 755 root sys
+f none kernel/strmod/pipemod 755 root sys
+f none kernel/strmod/ptem 755 root sys
+f none kernel/strmod/redirmod 755 root sys
+f none kernel/strmod/rpcmod 755 root sys
+f none kernel/strmod/timod 755 root sys
+f none kernel/strmod/tirdwr 755 root sys
+f none kernel/strmod/ttcompat 755 root sys
+f none kernel/strmod/tun 755 root sys
+d none kernel/sys 755 root sys
+f none kernel/sys/c2audit 755 root sys
+f none kernel/sys/doorfs 755 root sys
+f none kernel/sys/kaio 755 root sys
+f none kernel/sys/pipe 755 root sys
+f none kernel/sys/pset 755 root sys
+f none kernel/sys/inst_sync 755 root sys
+f none kernel/sys/msgsys 755 root sys
+l none kernel/sys/nfs=../../kernel/fs/nfs
+l none kernel/sys/rpcmod=../../kernel/strmod/rpcmod
+f none kernel/sys/semsys 755 root sys
+f none kernel/sys/shmsys 755 root sys
+s none lib=./usr/lib
+d none mnt 755 root sys
+d none opt 755 root sys
+d none proc 555 root root
+d none sbin 755 root sys
+f none sbin/autopush 555 root bin
+f none sbin/dhcpagent 555 root bin
+f none sbin/dhcpinfo 555 root bin
+f none sbin/hostconfig 555 root bin
+f none sbin/ifconfig 555 root bin
+f none sbin/soconfig 555 root bin
+f none sbin/init 555 root sys
+f none sbin/jsh 555 root root
+f none sbin/mount 555 root bin
+f none sbin/mountall 555 root sys
+f none sbin/netstrategy 555 root bin
+f none sbin/rc0 744 root sys
+f none sbin/rc1 744 root sys
+f none sbin/rc2 744 root sys
+f none sbin/rc3 744 root sys
+l none sbin/rc5=../sbin/rc0
+l none sbin/rc6=../sbin/rc0
+f none sbin/rcS 744 root sys
+l none sbin/sh=../sbin/jsh
+f none sbin/sulogin 555 root bin
+f none sbin/su.static 555 root sys
+s none sbin/su=../usr/bin/su
+f none sbin/swapadd 744 root sys
+f none sbin/sync 555 root bin
+f none sbin/uadmin 555 root sys
+f none sbin/umount 555 root bin
+f none sbin/umountall 555 root sys
+f none sbin/uname 555 root bin
+d none tmp 1777 root sys
+d none usr 755 root sys
+d none var 755 root sys
+d none var/adm 775 root sys
+e preserve var/adm/aculog 600 uucp bin
+d none var/adm/log 755 adm adm
+d none var/adm/passwd 755 adm adm
+e preserve var/adm/spellhist 666 root bin
+d none var/adm/streams 755 root sys
+e preserve var/adm/utmpx 644 root bin
+e preserve var/adm/wtmpx 644 adm adm
+d none var/audit 755 root sys
+d none var/cron 755 root sys
+d none var/inet 755 root sys
+d none var/ld 755 root bin
+s none var/ld/32=.
+d none var/log 755 root sys
+e preserve var/log/syslog 644 root sys
+e preserve var/log/authlog 600 root sys
+d none var/mail 1777 root mail
+d none var/mail/:saved 775 root mail
+d none var/news 755 root bin
+d none var/nfs 755 root bin
+d none var/opt 755 root sys
+d none var/preserve 1777 root bin
+d none var/run 755 root sys
+d none var/sadm 755 root sys
+d none var/sadm/install 555 root bin
+d none var/sadm/install/admin 555 root bin
+f none var/sadm/install/admin/default 444 root sys
+d none var/sadm/install/logs 555 root bin
+d none var/sadm/pkg 555 root sys
+d none var/saf 755 root bin
+d none var/saf/zsmon 755 root sys
+e preserve var/saf/zsmon/log 644 root sys
+d none var/spool 755 root bin
+d none var/spool/cron 755 root sys
+d none var/spool/cron/atjobs 755 root sys
+d none var/spool/cron/crontabs 755 root sys
+e preserve var/spool/cron/crontabs/adm 644 root sys
+e preserve var/spool/cron/crontabs/lp 444 root root
+e cronroot var/spool/cron/crontabs/root 644 root sys
+e fstypes etc/dfs/fstypes 644 root root
+d none var/spool/locks 755 uucp uucp
+d none var/spool/pkg 1777 root bin
+d none var/tmp 1777 root sys
+f none etc/rpld.conf 644 root sys
+e rmmconf etc/rmmount.conf 444 root bin
+e voldconf etc/vold.conf 444 root bin

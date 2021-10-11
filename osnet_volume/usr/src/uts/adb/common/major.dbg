@@ -1,0 +1,22 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)major.dbg	1.3	98/01/19 SMI"
+
+\ arg		: major device number
+\ uses		: dev_ops
+\ registers	: m
+\ description	: prints the contents of dev_ops structure
+\ 		  associated with the specified major device
+\ 		  (needs a dummy structure name)
+
+#include "dummy.h"
+
+\
+\
+__dummy		""		major
+{adb_inline_begin}
+.>m
+*(*devopsp+(<m*{PTRSIZE}))$<dev_ops
+{adb_inline_end}

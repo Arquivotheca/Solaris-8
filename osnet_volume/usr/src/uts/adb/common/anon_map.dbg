@@ -1,0 +1,38 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)anon_map.dbg	1.5	98/02/04 SMI"
+
+\       arg             : address of anon_map struct
+\       uses            : mutex
+\       registers       : z
+\       description     : prints the contents of anon_map structure
+\
+
+#include <sys/types.h>
+#include <vm/anon.h>
+#include "dummy.h"
+
+\
+\
+anon_map
+{adb_inline_begin}
+.>z
+<z+{OFFSET, serial_lock}=""
+{adb_inline_end}
+        serial_lock             .mutex
+{adb_inline_begin}
+<z+{OFFSET, lock}=""
+{adb_inline_end}
+        lock                    .mutex
+{adb_inline_begin}
+<z+{OFFSET, refcnt}=""
+{adb_inline_end}
+        refcnt                  decimal
+        size                    decimal
+        ahp			hex
+        swresv                  decimal
+{adb_inline_begin}
+<z+{SIZEOF}=""
+{adb_inline_end}

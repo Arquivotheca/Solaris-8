@@ -1,0 +1,8 @@
+#!/sbin/sh
+#
+# Copyright (c) 1997 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#ident	"@(#)ANNOUNCE	1.7	97/12/08 SMI"
+
+echo 'System services are now being stopped.'

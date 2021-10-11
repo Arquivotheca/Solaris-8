@@ -1,0 +1,91 @@
+\
+\ Copyright (c) 1997-1999 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)stdata.dbg	1.10	99/07/30 SMI"
+
+\ arg		: address of a struct stdata
+\ uses		: mutex, pollhead
+\ registers	: z
+\ description	: prints the contents of stdata structure
+\
+
+#include <sys/param.h>
+#include <sys/types.h>
+#include <sys/thread.h>
+#include <sys/stream.h>
+#include <sys/strsubr.h>
+#include "dummy.h"
+
+\
+\
+stdata			sd_
+{adb_inline_begin}
+.>z
+<z+{OFFSET, sd_wrq}=""
+{adb_inline_end}
+	wrq			hex
+	iocblk			hex
+	vnode			hex
+	strtab			hex
+	flag			hex
+	iocid			hex
+	sidp			hex
+	pgidp			hex
+	wroff			decimal
+	rerror			sdecimal
+	werror			sdecimal
+	pushcnt			sdecimal
+	sigflags		hex
+	siglist			hex
+	pollist			.pollhead
+{adb_inline_begin}
+<z+{OFFSET, sd_mark}=""
+{adb_inline_end}
+	mark			hex
+	closetime		hex
+	lock			.mutex
+{adb_inline_begin}
+<z+{OFFSET, sd_monitor}=""
+{adb_inline_end}
+	monitor			hex
+	iocmonitor		hex
+	qn_minpsz		sdecimal
+	qn_maxpsz		sdecimal
+	mate			hex
+	freezer			hex
+	reflock			.mutex
+{adb_inline_begin}
+<z+{OFFSET, sd_refcnt}=""
+{adb_inline_end}
+	refcnt			sdecimal
+	next			hex
+	prev			hex
+	wakeq			hex
+	struiordq		hex
+	struiowrq		hex
+	struiodnak		hex
+	struionak		hex
+	t_audit_data		hex
+	vnfifo			hex
+	maxblk			sdecimal
+	kcp			hex
+	rput_opt		hex
+	wput_opt		hex
+	read_opt		hex
+	rprotofunc		symbolic
+	rmiscfunc		symbolic
+	rderrfunc		symbolic
+	wrerrfunc		symbolic
+	ciputctrl		hex
+	nciputctrl		decimal
+	anchor			sdecimal
+	stnext			hex
+	stprev			hex
+	qhead			hex
+	svcpri			decimal
+	ftflags			hex
+	ftflw_head		hex
+{adb_inline_begin}
+<z+{SIZEOF}=""
+{adb_inline_end}

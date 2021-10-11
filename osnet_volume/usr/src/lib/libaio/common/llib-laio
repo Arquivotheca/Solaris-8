@@ -1,0 +1,67 @@
+/* LINTLIBRARY */
+/* PROTOLIB1 */
+
+/*
+ * Copyright (c) 1997 by Sun Microsystems, Inc. 
+ * All rights reserved. 
+ */ 
+#pragma ident	"@(#)llib-laio	1.3	98/12/22 SMI"
+
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <sys/time.h>
+#include <signal.h>
+#include <libaio.h>
+
+/*
+ * usr/src/lib/libaio/common
+ */
+
+/* aio.c */
+int aioread(int fd, caddr_t buf, int bufsz, off_t offset, int whence,
+			aio_result_t *resultp);
+int aiowrite(int fd, caddr_t buf, int bufsz, off_t offset, int whence,
+			aio_result_t *resultp);
+int aioread64(int fd, caddr_t buf, int bufsz, off64_t offset, int whence,
+			aio_result_t *resultp);
+int aiowrite64(int fd, caddr_t buf, int bufsz, off64_t offset, int whence,
+			aio_result_t *resultp);
+int aiocancel(aio_result_t *resultp);
+aio_result_t *aiowait(struct timeval *uwait);
+
+/* scalls.c */
+int _libaio_close(int fd);
+int _libaio_fork(void);
+int _libaio_fsync(int fd);
+
+/* ma.c */
+
+/* posix_aio.c */
+int __aio_read(aiocb_t *cb);
+int __aio_write(aiocb_t *cb);
+int __lio_listio(int mode, aiocb_t * const list[],
+			int nent, struct sigevent *sig);
+int __aio_suspend(aiocb_t *list[], int nent, const timespec_t *timo);
+int __aio_error(aiocb_t *cb);
+int __aio_return(aiocb_t *cb);
+int __aio_fsync(int op, aiocb_t *aiocbp, int waitflg);
+int __aio_cancel(int fd, aiocb_t *aiocbp);
+int __aio_read64(aiocb64_t *cb);
+int __aio_write64(aiocb64_t *cb);
+int __lio_listio64(int mode, aiocb64_t *const list[],
+			int nent, struct sigevent *sig);
+int __aio_suspend64(aiocb64_t *list[], int nent, const timespec_t *timo);
+int __aio_error64(aiocb64_t *cb);
+int __aio_return64(aiocb64_t *cb);
+int __aio_fsync64(int op, aiocb64_t *aiocbp, int waitflg);
+int __aio_cancel64(int fd, aiocb64_t *aiocbp);
+
+/* sig.c */
+int _aiosigaction(int sig, const struct sigaction *nact,
+			struct sigaction *oact);
+void(*signal(int sig, void(*func)(int)))(int);
+int sigignore(int sig);
+void(*sigset(int sig, void(*func)(int)))(int);
+
+/* subr.c */
+int assfail(char *a, char *f, int l);

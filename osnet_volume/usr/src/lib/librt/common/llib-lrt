@@ -1,0 +1,83 @@
+/*
+ * Copyright (c) 1997-1999 by Sun Microsystems, Inc.
+ * All rights reserved.
+ */
+
+/*LINTLIBRARY*/
+/* PROTOLIB1 */
+
+#pragma ident	"@(#)llib-lrt 1.5	99/08/13 SMI"
+
+#include <sys/types.h>
+#include <unistd.h>
+#include <sys/fcntl.h>
+#include <aio.h>
+#include <mqueue.h>
+#include <sched.h>
+#include <semaphore.h>
+
+int	aio_cancel64(int, aiocb64_t *);
+int	aio_error64(const aiocb64_t *);
+int	aio_fsync64(int, aiocb64_t *);
+int	aio_read64(aiocb64_t *);
+ssize_t	aio_return64(aiocb64_t *);
+int	aio_suspend64(const aiocb64_t * const list[],
+		int, const struct timespec *);
+int	aio_write64(aiocb64_t *);
+int	lio_listio64(int, aiocb64_t * const list[], int,
+		struct sigevent *);
+
+int	aio_cancel(int, aiocb_t *);
+int	aio_error(const aiocb_t *);
+int	aio_fsync(int op, aiocb_t *);
+int	aio_read(aiocb_t *);
+ssize_t	aio_return(aiocb_t *);
+int	aio_suspend(const aiocb_t * const list[],
+		int, const struct timespec *);
+int	aio_write(aiocb_t *aiocb_tp);
+int	clock_getres(clockid_t, struct timespec *);
+int	clock_gettime(clockid_t, struct timespec *);
+int	clock_settime(clockid_t, const struct timespec *);
+int	fdatasync(int);
+int	lio_listio(int, aiocb_t * const list[], int,
+		struct sigevent *);
+mqd_t	mq_open(const char *, int, ...);
+int	mq_close(mqd_t);
+int	mq_unlink(const char *);
+int	mq_send(mqd_t, const char *, size_t, unsigned int);
+ssize_t	mq_receive(mqd_t, char *, size_t, unsigned int *);
+int	mq_notify(mqd_t, const struct sigevent *);
+int	mq_getattr(mqd_t, struct mq_attr *);
+int	mq_setattr(mqd_t, const struct mq_attr *,
+		struct mq_attr *);
+int	nanosleep(const struct timespec *, struct timespec *);
+int	sched_getparam(pid_t, struct sched_param *);
+int	sched_setparam(pid_t, const struct sched_param *);
+int	sched_getscheduler(pid_t);
+int	sched_setscheduler(pid_t, int,
+	    const struct sched_param *);
+int	sched_yield(void);
+int	sched_get_priority_max(int);
+int	sched_get_priority_min(int);
+int	sched_rr_get_interval(pid_t, struct timespec *);
+int	sem_init(sem_t *, int, unsigned int);
+int	sem_destroy(sem_t *);
+sem_t	*sem_open(const char *, int, ...);
+int	sem_close(sem_t *);
+int	sem_getvalue(sem_t *, int *);
+int	sem_post(sem_t *);
+int	sem_trywait(sem_t *);
+int	sem_unlink(const char *);
+int	sem_wait(sem_t *);
+int	shm_open(const char *, int, mode_t);
+int	shm_unlink(const char *);
+int	sigwaitinfo(const sigset_t *, siginfo_t *);
+int	sigtimedwait(const sigset_t *, siginfo_t *,
+	    const struct timespec *);
+int	sigqueue(pid_t, int, const union sigval);
+int	timer_create(clockid_t, struct sigevent *, timer_t *);
+int	timer_delete(timer_t);
+int	timer_getoverrun(timer_t);
+int	timer_gettime(timer_t, struct itimerspec *);
+int	timer_settime(timer_t, int, const struct itimerspec *,
+		struct itimerspec *);

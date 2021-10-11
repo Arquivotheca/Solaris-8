@@ -1,0 +1,13 @@
+#ident	"@(#)dgroup.tab	1.3	92/07/14 SMI"       /* SVr4.0 1.2 */
+#
+#	Device group table.
+#
+#  Format:  colon-list
+#  name:members
+#	name		Name of the device group (max len 14 chars)
+#	members		Comma-list of members in the group.  A member is the
+#			device alias of the device that belongs in the group
+#
+ctape:ctape1,ctape2
+diskette:diskette1
+disk:disk1,disk2

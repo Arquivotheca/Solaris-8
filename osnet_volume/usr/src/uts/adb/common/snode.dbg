@@ -1,0 +1,36 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)snode.dbg	1.5	98/01/19 SMI"
+
+#include <sys/types.h>
+#include <sys/time.h>
+#include <sys/vnode.h>
+#include <sys/fs/snode.h>
+#include "dummy.h"
+
+\
+\
+snode                   s_
+{adb_inline_begin}
+.>z
+<z+{OFFSET, s_next}=""
+{adb_inline_end}
+        next                    hex
+        vnode                   .vnode
+{adb_inline_begin}
+<z+{OFFSET, s_realvp}=""
+{adb_inline_end}
+        realvp                  hex
+        commonvp                hex
+        flag                    hex
+        dev                     hex
+        fsid                    hex
+        nextr                   hex
+        size                    hex
+        atime                   date
+        mtime                   date
+        ctime                   date
+        count                   sdecimal
+        mapcnt                  sdecimal

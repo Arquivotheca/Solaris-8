@@ -1,0 +1,28 @@
+#
+#ident	"@(#)mapfile-vers	1.4	96/01/04 SMI"
+#
+# Copyright (c) 1998 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#
+# Generic interface definition for usr/src/lib/nsswitch/compat.
+#
+# For information regarding the establishment of versioned definitions see:
+#	The Linker and Libraries Manual (version 2.5 or greater)
+# This is part of the Developers Guide in the Answerbook.  Specifically refer
+# to Chapter 2 under section "Defining Additional Symbols" through section
+# "Reducing Symbol Scope", and Chapter 5 "Versioning".
+#
+# For specific OSNET rules for the modification (evolution) of these version
+# definitions see:
+#	Policy for Shared Library Version Names and Interface Definitions
+
+
+SUNWprivate_1.1 {
+	global:
+		_nss_compat_group_constr;
+		_nss_compat_passwd_constr;
+		_nss_compat_shadow_constr;
+	local:
+		*;
+};

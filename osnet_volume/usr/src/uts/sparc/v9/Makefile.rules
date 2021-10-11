@@ -1,0 +1,136 @@
+#
+# uts/sparc/v9/Makefile.rules
+# Copyright (c) 1991, 1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#ident	"@(#)Makefile.rules	1.14	99/08/15 SMI"
+#
+#	This Makefile defines all file modules and build rules for the
+# directory uts/sparc/v9 and it's children. These are the source files which
+# are specific to the sparcv9 processor.
+#
+
+#
+#	This was implemented by pattern matching rules of the form:
+#
+# $(OBJS_DIR)/%.o:	 $(UTSBASE)/common/os/%.c
+#	$(COMPILE.c) -o $@ $<
+#
+# $(LINTS_DIR)/%.ln:	$(UTSBASE)/common/os/%.c
+#	@($(LHEAD) $(LINT.c) $< $(LTAIL))
+#
+#	For each directory containing source. This proved to slow under
+#	Nse because it caused a significant additional number of stats
+#	and stats are real slow under TFS. If TFS performance should
+#	improve, one might consider returning to the former implementation.
+#	In the former implementation, this file (Makefile.rules) was not
+#	needed and the pattern matching rules were in Makefile.files.
+#
+
+#
+#	C object build rules
+#
+#	The following are alphabetized by source file path. Please maintain
+# this ordering.
+#
+$(OBJS_DIR)/fpu.o:		$(UTSBASE)/sparc/v9/fpu/fpu.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sparc/v9/fpu/fpu.c
+
+$(OBJS_DIR)/uword.o:		$(UTSBASE)/sparc/v9/fpu/uword.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sparc/v9/fpu/uword.c
+
+$(OBJS_DIR)/v9instr.o:		$(UTSBASE)/sparc/v9/fpu/v9instr.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sparc/v9/fpu/v9instr.c
+
+$(OBJS_DIR)/crt.o:		$(UTSBASE)/sparc/v9/ml/crt.s
+	$(COMPILE.s) -o $@ $(UTSBASE)/sparc/v9/ml/crt.s
+
+$(OBJS_DIR)/ddi_v9_asm.o:	$(UTSBASE)/sparc/v9/ml/ddi_v9_asm.s
+	$(COMPILE.s) -o $@ $(UTSBASE)/sparc/v9/ml/ddi_v9_asm.s
+
+$(OBJS_DIR)/float.o:		$(UTSBASE)/sparc/v9/ml/float.s
+	$(COMPILE.s) -o $@ $(UTSBASE)/sparc/v9/ml/float.s
+
+$(OBJS_DIR)/hwmuldiv.o:		$(UTSBASE)/sparc/v9/ml/hwmuldiv.s
+	$(COMPILE.s) -o $@ $(UTSBASE)/sparc/v9/ml/hwmuldiv.s
+
+$(OBJS_DIR)/lock_prim.o:	$(UTSBASE)/sparc/v9/ml/lock_prim.s
+	$(COMPILE.s) -o $@ $(UTSBASE)/sparc/v9/ml/lock_prim.s
+
+$(OBJS_DIR)/sparcv9_subr.o:	$(UTSBASE)/sparc/v9/ml/sparcv9_subr.s
+	$(COMPILE.s) -o $@ $(UTSBASE)/sparc/v9/ml/sparcv9_subr.s
+
+$(OBJS_DIR)/syscall_trap.o:	$(UTSBASE)/sparc/v9/ml/syscall_trap.s
+	$(COMPILE.s) -o $@ $(UTSBASE)/sparc/v9/ml/syscall_trap.s
+
+$(OBJS_DIR)/simulator.o:	$(UTSBASE)/sparc/v9/os/simulator.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sparc/v9/os/simulator.c
+
+$(OBJS_DIR)/v9dep.o:		$(UTSBASE)/sparc/v9/os/v9dep.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sparc/v9/os/v9dep.c
+
+$(OBJS_DIR)/xregs.o:		$(UTSBASE)/sparc/v9/os/xregs.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sparc/v9/os/xregs.c
+
+$(OBJS_DIR)/install_utrap.o:	$(UTSBASE)/sparc/v9/syscall/install_utrap.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sparc/v9/syscall/install_utrap.c
+
+$(OBJS_DIR)/seg_nf.o:		$(UTSBASE)/sparc/v9/vm/seg_nf.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sparc/v9/vm/seg_nf.c
+
+#
+#	Lint `object' build rules.
+#
+#	The following are alphabetized by source file path. Please maintain
+# this ordering.
+#
+$(LINTS_DIR)/fpu.ln:		$(UTSBASE)/sparc/v9/fpu/fpu.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sparc/v9/fpu/fpu.c $(LTAIL))
+
+$(LINTS_DIR)/uword.ln:		$(UTSBASE)/sparc/v9/fpu/uword.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sparc/v9/fpu/uword.c $(LTAIL))
+
+$(LINTS_DIR)/v9instr.ln:	$(UTSBASE)/sparc/v9/fpu/v9instr.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sparc/v9/fpu/v9instr.c $(LTAIL))
+
+$(LINTS_DIR)/crt.ln:		$(UTSBASE)/sparc/v9/ml/crt.s
+	@($(LHEAD) $(LINT.s) $(UTSBASE)/sparc/v9/ml/crt.s $(LTAIL))
+
+$(LINTS_DIR)/ddi_v9_asm.ln:	$(UTSBASE)/sparc/v9/ml/ddi_v9_asm.s
+	@($(LHEAD) $(LINT.s) $(UTSBASE)/sparc/v9/ml/ddi_v9_asm.s $(LTAIL))
+
+$(LINTS_DIR)/float.ln:		$(UTSBASE)/sparc/v9/ml/float.s
+	@($(LHEAD) $(LINT.s) $(UTSBASE)/sparc/v9/ml/float.s $(LTAIL))
+
+$(LINTS_DIR)/hwmuldiv.ln:	$(UTSBASE)/sparc/v9/ml/hwmuldiv.s
+	@($(LHEAD) $(LINT.s) $(UTSBASE)/sparc/v9/ml/hwmuldiv.s $(LTAIL))
+
+$(LINTS_DIR)/lock_prim.ln:	$(UTSBASE)/sparc/v9/ml/lock_prim.s
+	@($(LHEAD) $(LINT.s) $(UTSBASE)/sparc/v9/ml/lock_prim.s $(LTAIL))
+
+$(LINTS_DIR)/sparc_subr.ln:	$(UTSBASE)/sparc/v9/ml/sparc_subr.s
+	@($(LHEAD) $(LINT.s) $(UTSBASE)/sparc/v9/ml/sparc_subr.s $(LTAIL))
+
+$(LINTS_DIR)/sparcv9_subr.ln:	$(UTSBASE)/sparc/v9/ml/sparcv9_subr.s
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sparc/v9/ml/sparcv9_subr.s $(LTAIL))
+
+$(LINTS_DIR)/syscall_trap.ln:	$(UTSBASE)/sparc/v9/ml/syscall_trap.s
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sparc/v9/ml/syscall_trap.s $(LTAIL))
+
+$(LINTS_DIR)/simulator.ln:	$(UTSBASE)/sparc/v9/os/simulator.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sparc/v9/os/simulator.c $(LTAIL))
+
+$(LINTS_DIR)/v9dep.ln:		$(UTSBASE)/sparc/v9/os/v9dep.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sparc/v9/os/v9dep.c $(LTAIL))
+
+$(LINTS_DIR)/v9door.ln:		$(UTSBASE)/sparc/v9/os/v9door.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sparc/v9/os/v9door.c $(LTAIL))
+
+$(LINTS_DIR)/xregs.ln:		$(UTSBASE)/sparc/v9/os/xregs.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sparc/v9/os/xregs.c $(LTAIL))
+
+$(LINTS_DIR)/install_utrap.ln:	$(UTSBASE)/sparc/v9/syscall/install_utrap.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sparc/v9/syscall/install_utrap.c $(LTAIL))
+$(LINTS_DIR)/seg_nf.ln:		$(UTSBASE)/sparc/v9/vm/seg_nf.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sparc/v9/vm/seg_nf.c $(LTAIL))
+

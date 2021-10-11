@@ -1,0 +1,24 @@
+#!/bin/sh
+#
+#ident	 "@(#)i.etcremote 1.1 93/05/19 SMI"
+#
+# Copyright (c) 1993 by Sun Microsystems, Inc.
+#
+
+PATH="/usr/bin:/usr/sbin:${PATH}"
+export PATH
+
+while read src dest
+do
+	if [ ! -f $dest ] ; then
+		cp $src $dest
+	else
+		sed -e '/^cu300:tc=UNIX-300:/d' \
+		    -e '/^cu1200:tc=UNIX-1200:/d' \
+		    -e '/^cu0|cu2400:tc=UNIX-2400:/d' $dest > /tmp/tmp.$$
+		cp /tmp/tmp.$$ $dest
+		rm -f /tmp/tmp.$$
+	fi
+done
+
+exit 0

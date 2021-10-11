@@ -1,0 +1,53 @@
+#ident	"@(#)SUNWonmdb-README	1.1	99/08/11 SMI"
+#
+# Copyright (c) 1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+--------------------------------------------------------------------------------
+SUNWonmdb - modular debugger development package
+--------------------------------------------------------------------------------
+
+The SUNWonmdb package is an internal development package containing the most
+recent copy of MDB and the associated debugger modules.  The intent of this
+package is to provide early access to new features and bug fixes as a package
+that can be installed locally, or accessed from mdb.eng.
+
+Information about MDB and using MDB on the SWAN can be found at:
+    http://mdb.eng/
+
+Comments and questions can be addressed to:
+    Mike Shapiro (mws@eng)
+
+Contents of package:
+
+    /opt/SUNWonmdb/bin/mdb
+        This is a copy of the MDB wrapper script, which is installed as
+        /net/mdb.eng/bin/mdb and in the gate's public/bin directory.
+        The wrapper script is needed to point MDB at the module archives for
+        older OS builds.  If the CODEMGR_WS environment variable is set and
+        the proto area of the corresponding workspace contains an MDB binary,
+        the script will execute that MDB binary; by default the binary on
+        the local machine is executed.
+
+    /opt/SUNWonmdb/bin/mkmodules
+        The mkmodules script is used to build the MDB modules present in an
+        MDB workspace against the set of include files saved in an MDB "root",
+        created with the mkroot script.  The compiled modules are then
+        installed into the root so that it can be used as an argument to
+        the ``mdb -R'' option.
+
+    /opt/SUNWonmdb/bin/mkroot
+        The mkroot script populates an MDB "root" from a given set of BFU
+        archives.  The root is created relative to the current directory.
+        Relevant shared libraries, adb(1) macros, and include files are
+        extracted by the script.
+
+    /usr/bin/mdb
+        The latest copy of MDB itself is installed into the appropriate
+        ISA subdirectories of /usr/bin, and /usr/bin/mdb is created as a
+        link to /usr/lib/isaexec.
+
+    /usr/lib/mdb
+    /usr/platform/`uname -i`/lib/mdb
+        The MDB modules for the most recent ON build are installed into
+        /usr/lib/mdb and platform library subdirectories as appropriate.

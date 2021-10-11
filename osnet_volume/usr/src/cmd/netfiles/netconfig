@@ -1,0 +1,25 @@
+#pragma ident	"@(#)netconfig	1.16	99/10/25 SMI"
+#
+# The "Network Configuration" File.
+#
+# Each entry is of the form:
+#
+#       <network_id> <semantics> <flags> <protofamily> <protoname> \
+#               <device> <nametoaddr_libs>
+#
+# The "-" in <nametoaddr_libs> for inet family transports indicates
+# redirection to the name service switch policies for "hosts" and
+# "services". The "-" may be replaced by nametoaddr libraries that
+# comply with the SVr4 specs, in which case the name service switch
+# will not be used for netdir_getbyname, netdir_getbyaddr,
+# gethostbyname, gethostbyaddr, getservbyname, and getservbyport.
+# There are no nametoaddr_libs for the inet family in Solaris anymore.
+#
+udp6       tpi_clts      v     inet6   udp    /dev/udp6       -
+tcp6       tpi_cots_ord  v     inet6   tcp    /dev/tcp6       -
+udp        tpi_clts      v     inet    udp    /dev/udp        -
+tcp        tpi_cots_ord  v     inet    tcp    /dev/tcp        -
+rawip      tpi_raw       -     inet    -      /dev/rawip      -
+ticlts     tpi_clts      v    loopback -      /dev/ticlts     straddr.so
+ticotsord  tpi_cots_ord  v    loopback -      /dev/ticotsord  straddr.so
+ticots     tpi_cots      v    loopback -      /dev/ticots     straddr.so

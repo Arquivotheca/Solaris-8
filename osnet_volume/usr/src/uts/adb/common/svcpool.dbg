@@ -1,0 +1,99 @@
+\
+\ Copyright (c) 1999 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)svcpool.dbg	1.2	99/08/23 SMI"
+
+\       arg             : address of an SVCPOOL strycture
+\       uses            : mutex, rwlock
+\       registers       : z, x
+\       description     : prints the contents of SVCPOOL structure
+\
+
+#include <sys/types.h>
+#include <rpc/types.h>
+#include <rpc/xdr.h>
+#include <rpc/auth.h>
+#include <rpc/svc.h>
+#include "dummy.h"
+
+\
+\
+__svcpool	p_	svcpool
+{adb_inline_begin}
+.>z
+*(<z+{OFFSET,p_id})>/i/x
+<z+0,(2-<x)="====== NFS ==================================================="
+<z+0,(<x-1)="====== NLM ==================================================="
+{adb_inline_end}
+	next			hex
+	prev			hex
+{adb_inline_begin}
+<z+{OFFSET,p_threads}=""
+{adb_inline_end}
+	threads			decimal
+	detached_threads	decimal
+	maxthreads		decimal
+	redline			decimal
+	reserved_threads	decimal
+{adb_inline_begin}
+<z+{OFFSET,p_asleep}=""
+{adb_inline_end}
+	asleep			decimal
+	drowsy			decimal
+{adb_inline_begin}
+<z+{OFFSET,p_thread_lock}=""
+{adb_inline_end}
+	thread_lock		.mutex	"thread_lock (mutex)"
+{adb_inline_begin}
+<z+{OFFSET,p_reqs}=""
+{adb_inline_end}
+	reqs			decimal
+	walkers			decimal
+{adb_inline_begin}
+<z+{OFFSET,p_req_lock}=""
+{adb_inline_end}
+	req_lock		.mutex	"req_lock (mutex)"
+{adb_inline_begin}
+<z+{OFFSET,p_timeout}=""
+{adb_inline_end}
+	timeout			decimal
+{adb_inline_begin}
+<z+{OFFSET,p_max_same_xprt}=""
+{adb_inline_end}
+	max_same_xprt		decimal
+	stksize			decimal
+{adb_inline_begin}
+<z+{OFFSET,p_closing}=""
+*(.)>/i/x
+#ifdef __i386
+(<x&0x7)="flags (closing=1, creator_signaled=2, creator_exit=4)"nX
+#else
+(<x%0x20000000)="flags (closing=4, creator_signaled=2, creator_exit=1)"nX
+#endif
+{adb_inline_end}
+{adb_inline_begin}
+<z+{OFFSET,p_creator_lock}=""
+{adb_inline_end}
+	creator_lock		.mutex	"creator_lock (mutex)"
+{adb_inline_begin}
+<z+{OFFSET,p_lcount}=""
+{adb_inline_end}
+	lcount			decimal
+	lhead			hex	"lhead (SVCMASTERXPRT)"
+	lrwlock			.rwlock	"lrwlock (rwlock)"
+{adb_inline_begin}
+<z+{OFFSET,p_qsize}=""
+{adb_inline_end}
+	qsize			decimal
+	qoverflow		decimal
+{adb_inline_begin}
+<z+{OFFSET,p_qbody}=""
+{adb_inline_end}
+	qbody			hex
+	qtop			hex
+	qend			hex
+	qend_lock		.mutex	"qend_lock (mutex)"
+{adb_inline_begin}
+<z+{SIZEOF}=""
+{adb_inline_end}

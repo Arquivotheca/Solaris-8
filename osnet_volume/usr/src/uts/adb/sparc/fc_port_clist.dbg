@@ -1,0 +1,35 @@
+\
+\ Copyright (c) 1999 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)fc_port_clist.dbg	1.1	99/07/21 SMI"
+\
+#include <sys/isa_defs.h>
+#include <sys/types.h>
+#include <sys/dditypes.h>
+#include <sys/ddidmareq.h>
+#include <sys/mutex.h>
+#include <sys/semaphore.h>
+#include <sys/condvar.h>
+#include <sys/thread.h>
+#include <sys/devops.h>
+#include <sys/fibre-channel/fc.h>
+#include <sys/fibre-channel/impl/fc_ulpif.h>
+#include <sys/fibre-channel/impl/fc_portif.h>
+#include "dummy.h"
+\
+\
+fc_port_clist	clist_
+{adb_inline_begin}
+.>w
+<w+{OFFSET, clist_port}=""
+{adb_inline_end}
+	port			hex
+	state			hex
+	len			hex
+	size			hex
+	map			hex
+	flags			hex
+{adb_inline_begin}
+<w+{SIZEOF}=""
+{adb_inline_end}

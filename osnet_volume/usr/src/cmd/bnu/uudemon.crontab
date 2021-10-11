@@ -1,0 +1,12 @@
+#
+#ident	"@(#)uudemon.crontab	1.5	97/12/09 SMI"
+#
+# This crontab is provided as a sample. For systems
+# running UUCP edit the time schedule to suit, uncomment 
+# the following lines, and use crontab(1) to activate the
+# new schedule.
+#
+#48 8,12,16 * * * /usr/lib/uucp/uudemon.admin
+#20 3 * * * /usr/lib/uucp/uudemon.cleanup
+#0 * * * * /usr/lib/uucp/uudemon.poll
+#11,41 * * * * /usr/lib/uucp/uudemon.hour

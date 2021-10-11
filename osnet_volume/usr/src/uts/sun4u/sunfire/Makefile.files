@@ -1,0 +1,36 @@
+#
+# uts/sun4u/sunfire/Makefile.files
+# Copyright (c) 1994, 1995, 1996 - 1998 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#ident	"@(#)Makefile.files	1.1	99/10/03 SMI"
+#
+#	This Makefile defines all file modules for the directory
+#	ust/sun4u/sunfire and it's children. These are the source files
+#	which are sun4u "implementation architecture" dependent.
+#
+
+#
+#	object lists
+#
+# Sunfire specific driver relate modules
+#
+
+FHC_OBJS	+= fhc.o fhc_bd.o jtag.o fhc_asm.o
+
+CENTRAL_OBJS	+= central.o
+
+ENVIRON_OBJS	+= environ.o
+
+SYSCTRL_OBJS	+= sysctrl.o sysctrl_quiesce.o sysctrl_dr.o sysctrl_asm.o
+
+AC_OBJS		+= ac.o ac_stat.o ac_add.o ac_del.o ac_test.o ac_asm.o
+
+SRAM_OBJS	+= sram.o
+
+SIMMSTAT_OBJS	+= simmstat.o
+
+#
+# Miscellaneous
+#
+INC_PATH	+= -I$(UTSBASE)/sun4u/sunfire

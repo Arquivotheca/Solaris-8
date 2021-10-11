@@ -1,0 +1,22 @@
+\
+\ Copyright (c) 1999 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)cyc_pcbuffer.dbg	1.1	99/06/05 SMI"
+
+#include <sys/cyclic_impl.h>
+#include "dummy.h"
+
+cyc_pcbuffer	cypc_
+{adb_inline_begin}
+.>x
+<x,<z="Producer/consumer buffer 0"
+<x,1-<z="Producer/consumer buffer 1"
+{adb_inline_end}
+	buf		hex
+	prodndx		decimal
+	consndx		decimal
+	sizemask	hex
+{adb_inline_begin}
+<x=""
+{adb_inline_end}

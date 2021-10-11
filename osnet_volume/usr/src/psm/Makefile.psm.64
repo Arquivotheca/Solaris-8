@@ -1,0 +1,28 @@
+#
+# Copyright (c) 1997-1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#pragma ident	"@(#)Makefile.psm.64	1.3	99/05/04 SMI"
+#
+# psm/Makefile.psm.64
+#
+#	This makefile contains the compiler fiddling needed to build
+#	64-bit objects.
+#
+# Include overrides for builds of 64-bit objects
+#
+include $(SRC)/Makefile.master.64
+
+# XX64 all the stuff below this line should go away once the tools are fixed
+# XXX Merced --- hack this stuff to build ia64 stuff
+# SPARC_BLD is '#' for an Intel build.
+ 
+SPARC_BLD:sh=	if [ "$MACH" = "i386" ]; \
+		then echo \\043; \
+		fi
+
+$(SPARC_BLD)ALWAYS_DEFS	+= -D__sparc -D__sparcv9 -D_SYSCALL32_IMPL
+$(SPARC_BLD)AS_DEFS		+= -D__sparc -D__sparcv9
+$(SPARC_BLD)CPPFLAGS	+= -D__sparc -D__sparcv9 -D_SYSCALL32 
+$(SPARC_BLD)ASFLAGS		+= -D__sparc -D__sparcv9
+$(SPARC_BLD)LINTFLAGS64	+= -errchk=longptr64

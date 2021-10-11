@@ -1,0 +1,11 @@
+#!/bin/sh
+#
+#pragma ident	"@(#)req.flg	1.7	97/09/18 SMI" 
+#
+
+echo_file usr/src/uts/Makefile
+echo_file usr/src/uts/Makefile.targ
+echo_file usr/src/uts/Makefile.uts
+echo_file usr/src/Targetdirs
+echo_file usr/src/Makefile
+find_files "s.*" usr/src/psm/promif

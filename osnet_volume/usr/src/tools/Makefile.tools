@@ -1,0 +1,46 @@
+#
+# Copyright (c) 1998 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#ident	"@(#)Makefile.tools	1.1	99/01/11 SMI"
+#
+# Definitions common to tool source.
+#
+include $(SRC)/Makefile.master
+
+FILEMODE=	0555
+
+ROOTONBLD=		$(ROOT)/opt/onbld
+ROOTONBLDBIN=		$(ROOT)/opt/onbld/bin
+ROOTONBLDBINMACH=	$(ROOT)/opt/onbld/bin/$(MACH)
+ROOTONBLDENV=		$(ROOT)/opt/onbld/env
+ROOTONBLDGK=		$(ROOT)/opt/onbld/gk
+ROOTONBLDMAN=		$(ROOT)/opt/onbld/man
+ROOTONBLDMAN1=		$(ROOT)/opt/onbld/man/man1
+
+LDLIBS=		$(ENVLDLIBS1)  $(ENVLDLIBS2)  $(ENVLDLIBS3)
+LDFLAGS=	$(STRIPFLAG) $(ENVLDFLAGS1) $(ENVLDFLAGS2) $(ENVLDFLAGS3)
+
+ROOTONBLDPROG=		$(PROG:%=$(ROOTONBLDBIN)/%)
+ROOTONBLDMACHPROG=	$(PROG:%=$(ROOTONBLDBINMACH)/%)
+ROOTONBLDSHFILES=	$(SHFILES:%=$(ROOTONBLDBIN)/%)
+ROOTONBLDMACHSHFILES=	$(SHFILES:%=$(ROOTONBLDBINMACH)/%)
+ROOTONBLDMACHBINARIES=	$(BINARIES:%=$(ROOTONBLDBINMACH)/%)
+ROOTONBLDENVFILES=	$(ENVFILES:%=$(ROOTONBLDENV)/%)
+ROOTONBLDGKFILES=	$(GKFILES:%=$(ROOTONBLDGK)/.%)
+ROOTONBLDMAN1FILES=	$(MAN1FILES:%=$(ROOTONBLDMAN1)/%)
+
+$(ROOTONBLDBIN)/%: %
+	$(INS.file)
+
+$(ROOTONBLDBINMACH)/%: %
+	$(INS.file)
+
+$(ROOTONBLDMAN1)/%: %
+	$(INS.file)
+
+$(ROOTONBLDENV)/%: %
+	$(INS.file)
+
+$(ROOTONBLDGK)/.%: %
+	$(INS.rename)

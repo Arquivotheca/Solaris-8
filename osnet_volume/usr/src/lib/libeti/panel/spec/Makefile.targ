@@ -1,0 +1,15 @@
+#
+# Copyright (c) 1997-1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#pragma ident	"@(#)Makefile.targ	1.1	99/01/25 SMI"
+#
+# lib/libeti/panel/spec/Makefile.targ
+
+LIBRARY	=	libpanel.a
+VERS	=	.1
+
+OBJECTS	=	panel.o
+
+TRANSCPP =
+SPECCPP =

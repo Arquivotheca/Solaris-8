@@ -1,0 +1,32 @@
+\
+\ Copyright (c) 1999 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)usoc_hdr.dbg	1.2	99/09/28 SMI"
+#include <sys/isa_defs.h>
+#include <sys/types.h>
+#include <sys/dditypes.h>
+#include <sys/ddidmareq.h>
+#include <sys/mutex.h>
+#include <sys/semaphore.h>
+#include <sys/condvar.h>
+#include <sys/thread.h>
+#include <sys/devops.h>
+#include <sys/fibre-channel/fc.h>
+#include <sys/fibre-channel/fca/usoc_cq_defs.h>
+#include "dummy.h"
+\
+\
+usoc_hdr		sh_
+{adb_inline_begin}
+.>s
+<s+{OFFSET, sh_request_token}=""
+{adb_inline_end}
+	request_token		hex
+	flags			hex
+	class			hex
+	seg_cnt			hex
+	byte_cnt		hex
+{adb_inline_begin}
+<s+{SIZEOF}=""
+{adb_inline_end}

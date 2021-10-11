@@ -1,0 +1,34 @@
+#
+# Copyright (c) 1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#pragma ident	"@(#)versions	1.1	99/10/14 SMI"
+#
+# vers file for libthread_db.so.1
+#
+# Note: Even though the SUNW_1.2 version now contains no symbols
+# beyond what was present at Solaris 2.6, the SUNW_1.2 version MUST be 
+# present.  This is because applications built on 2.6 Beta 
+# (when it did contain symbols explicitly) may depend on it.
+#
+
+i386 {
+	SUNW_1.2:	{SUNW_1.1};
+	SUNW_1.1:	{SUNW_0.9};
+	SUNW_0.9;
+	SUNWprivate_1.1;
+}
+
+sparc {
+	SUNW_1.2:	{SUNW_1.1};
+	SUNW_1.1:	{SUNW_0.9};
+	SUNW_0.9;
+	SUNWprivate_1.1;
+}
+
+sparcv9 {
+	SUNW_1.2:	{SUNW_1.1};
+	SUNW_1.1:	{SUNW_0.9};
+	SUNW_0.9;
+	SUNWprivate_1.1;
+}

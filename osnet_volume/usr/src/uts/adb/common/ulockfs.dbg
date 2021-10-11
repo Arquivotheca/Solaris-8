@@ -1,0 +1,32 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)ulockfs.dbg	1.3	98/01/19 SMI"
+
+#include <sys/types.h>
+#include <sys/t_lock.h>
+#include <sys/time.h>
+#include <sys/vnode.h>
+#include <vm/seg.h>
+#include <sys/fs/ufs_inode.h>
+#include "dummy.h"
+
+\
+\
+ulockfs                 ul_
+{adb_inline_begin}
+.>w
+<w+{OFFSET, ul_flag}=""
+{adb_inline_end}
+        flag                    hex
+        fs_lock                 hex
+        fs_mod                  hex
+        vnops_cnt               sdecimal
+        lock                    .mutex
+{adb_inline_begin}
+<w+{OFFSET, ul_cv}=""
+{adb_inline_end}
+        cv                      hex
+        sbowner                 hex
+        lockfs                  .lockfs

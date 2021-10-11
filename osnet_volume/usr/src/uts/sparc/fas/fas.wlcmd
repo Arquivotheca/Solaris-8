@@ -1,0 +1,23 @@
+#
+# Copyright (c) 1998 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#ident	"@(#)fas.wlcmd 1.4	98/10/11 SMI"
+
+one fas 
+
+add scsi_pkt::pkt_comp targets \
+	fas_scsi_destroy_pkt \
+	fas_scsi_init_pkt \
+	fas_scsi_start \
+	fas_scsi_abort \
+	fas_scsi_reset \
+	fas_scsi_setcap \
+	fas_scsi_getcap \
+	fas_scsi_dmafree \
+	fas_scsi_reset_notify \
+	fas_scsi_sync_pkt
+
+add notify_entry::callback target warlock_dummy
+
+root fas_kmem_cache_constructor fas_kmem_cache_destructor

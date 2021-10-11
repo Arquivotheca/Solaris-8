@@ -1,0 +1,22 @@
+#
+#ident	"@(#)Mapfile	1.11	95/03/14 SMI"
+#
+
+text	= LOAD ?RXN V0xf0040000;
+text	| .text;
+text	: $PROGBITS ?A!W;
+
+data	= LOAD ?RWX V0xf0240000 A0x2000;
+data	| .data;
+data	: $PROGBITS ?AW;
+data	: $NOBITS ?AW;
+
+reloc	= LOAD ?RW V0x0;
+reloc	: $DYNSYM;
+reloc	: $HASH;
+reloc	: .dynstr;
+reloc	: .rela.text;
+reloc	: .rela.data;
+
+note	= NOTE;
+note	: $NOTE;

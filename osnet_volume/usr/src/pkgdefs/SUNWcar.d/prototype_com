@@ -1,0 +1,51 @@
+#
+# Copyright (c) 1990-1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#ident	"@(#)prototype_com	1.31	99/08/06 SMI"
+#
+# This required package information file contains a list of package contents.
+# The 'pkgmk' command uses this file to identify the contents of a package
+# and their location on the development machine when building the package.
+# Can be created via a text editor or through use of the 'pkgproto' command.
+
+#!search <pathname pathname ...>	# where to find pkg objects
+#!include <filename>			# include another 'prototype' file
+#!default <mode> <owner> <group>	# default used if not specified on entry
+#!<param>=<value>			# puts parameter in pkg environment
+
+# packaging files
+i pkginfo
+i copyright
+#
+# source locations relative to the prototype file
+#
+# SUNWcar.d
+#
+d none platform 755 root sys
+d none platform/sun4d 755 root sys
+f none platform/sun4d/ufsboot 644 root sys
+f none platform/sun4d/kadb 644 root sys
+d none platform/sun4d/kernel 755 root sys
+d none platform/sun4d/kernel/drv 755 root sys
+f none platform/sun4d/kernel/drv/bootbus 755 root sys
+f none platform/sun4d/kernel/drv/cpu 755 root sys
+f none platform/sun4d/kernel/drv/dma 755 root sys
+f none platform/sun4d/kernel/drv/rootnex 755 root sys
+f none platform/sun4d/kernel/drv/sbi 755 root sys
+f none platform/sun4d/kernel/drv/sbusmem 755 root sys
+f none platform/sun4d/kernel/drv/sbusmem.conf 644 root sys
+f none platform/sun4d/kernel/drv/stc 755 root sys
+f none platform/sun4d/kernel/drv/stc.conf 644 root sys 
+f none platform/sun4d/kernel/drv/zs 755 root sys
+f none platform/sun4d/kernel/drv/zsh 755 root sys
+f none platform/sun4d/kernel/drv/zsh.conf 644 root sys
+d none platform/sun4d/kernel/misc 755 root sys
+f none platform/sun4d/kernel/misc/obpsym 755 root sys
+f none platform/sun4d/kernel/misc/bootdev 755 root sys
+f none platform/sun4d/kernel/misc/pcmcia 755 root sys
+d none platform/sun4d/kernel/strmod 755 root sys
+f none platform/sun4d/kernel/strmod/kb 755 root sys
+f none platform/sun4d/kernel/unix 755 root sys
+s none platform/SUNW,SPARCcenter-2000=sun4d
+s none platform/SUNW,SPARCserver-1000=sun4d

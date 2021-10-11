@@ -1,0 +1,28 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)fas_tagQ.dbg	1.7	98/01/19 SMI"
+
+#include <sys/scsi/scsi.h>
+#include <sys/scsi/adapters/fasreg.h>
+#include <sys/scsi/adapters/fasvar.h>
+#include "dummy.h"
+
+\
+\
+f_slots         	f_              fas_tagQ
+{adb_inline_begin}
+.>z
+<z+{OFFSET, f_dups}=""
+{adb_inline_end}
+        dups
+        tags
+        timeout
+        timebase
+        n_slots
+        size
+        slot		hex		f_slots
+{adb_inline_begin}
+<z+{SIZEOF}=""
+{adb_inline_end}

@@ -1,0 +1,22 @@
+#
+#ident	"@(#)Makefile.targ	1.3	94/05/18 SMI"
+#
+# Copyright (c) 1994 by Sun Microsystems, Inc.
+#
+
+lint:		$(LINTLIB)
+
+pics/%.o:	../common/%.c
+		$(COMPILE.c) -o $@ $<
+		$(POST_PROCESS_O)
+
+%.o:		../common/%.c
+		$(COMPILE.c) -o $@ $<
+		$(POST_PROCESS_O)
+
+delete:
+		-$(RM) $(DYNLIB)
+
+$(DYNLIB):	$(MAPFILE)
+
+include		../../../../lib/Makefile.targ

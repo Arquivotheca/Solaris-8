@@ -1,0 +1,18 @@
+#
+#ident	"@(#)mapfile-vers	1.2	98/01/21 SMI"
+#
+# Copyright (c) 1997-1998 by Sun Microsystems, Inc.
+# All rights reserved.
+
+SUNWprivate_1.1 {
+	global:
+		cfga_change_state;
+		cfga_private_func;
+		cfga_test;
+		cfga_stat;
+		cfga_list;
+		cfga_help;
+		cfga_ap_id_cmp;
+	local:
+		*;
+};

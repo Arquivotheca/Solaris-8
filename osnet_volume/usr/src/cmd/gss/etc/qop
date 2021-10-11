@@ -1,0 +1,12 @@
+# 
+# Copyright (c) 1997, by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#ident  "@(#)qop 1.5     99/07/20 SMI" 
+#
+# This file contains information about the GSS-API based quality of
+# protection (QOP), its string name and its value (32-bit integer).
+#
+# QOP string			QOP Value	Mechanism Name
+#
+GSS_KRB5_INTEG_C_QOP_DES_MD5	0		kerberos_v5

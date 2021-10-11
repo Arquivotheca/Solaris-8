@@ -1,0 +1,23 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)callout.dbg	1.6	98/01/14 SMI"
+
+#include <sys/thread.h>
+#include <sys/callo.h>
+#include "dummy.h"
+
+\
+\
+callout         c_
+        idnext                  hex
+        idprev                  hex
+        lbnext                  hex
+        lbprev                  hex
+        xid                     hex
+        runtime                 hex
+        arg                     hex
+        executor                hex
+        done                    hex
+        func                    symbolic

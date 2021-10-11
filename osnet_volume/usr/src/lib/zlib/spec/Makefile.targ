@@ -1,0 +1,9 @@
+#ident	"@(#)Makefile.targ	1.1	99/10/08 SMI"
+#
+# lib/zlib/spec/Makefile.targ
+
+LIBRARY	=	libz.a
+VERS	=	.1
+
+OBJECTS	=	zlib.o
+

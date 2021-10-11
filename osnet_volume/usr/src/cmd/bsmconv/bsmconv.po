@@ -1,0 +1,56 @@
+#	/*
+#	 * TRANSLATION_NOTE:
+#	 * These are messages of bsmconv command
+#	 */
+msgid  "%s: ERROR: you must be super-user to run this script."
+msgstr
+msgid  "This script is used to enable the Basic Security Module (BSM).\n"
+msgstr
+msgid  "Shall we continue with the conversion now? [y/n]"
+msgstr
+msgid  "y"
+msgstr
+msgid  "n"
+msgstr
+msgid  "%s: INFO: aborted, due to user request."
+msgstr
+msgid  "%s: ERROR: %s doesn't look like a client's root."
+msgstr
+msgid  "%s: ABORTED: nothing done."
+msgstr
+msgid  "%s: INFO: checking startup file."
+msgstr
+msgid  "%s: ERROR: no %s file."
+msgstr
+msgid  "%s: INFO: turning on audit module."
+msgstr
+msgid  "%s: ERROR: cannot 'set c2audit:audit_load = 1' in %s/etc/system."
+msgstr
+msgid  "%s: Continuing ..."
+msgstr
+msgid  "%s: INFO: move aside %s/etc/rc2.d/S92volmgt."
+msgstr
+msgid  "%s: ERROR: unable to create %s/etc/security/spool"
+msgstr
+msgid  "%s: INFO: initializing device allocation files."
+msgstr
+msgid  "The Basic Security Module is ready.\n"
+msgstr
+msgid  "If there were any errors, please fix them now.\n"
+msgstr
+msgid  "Configure BSM by editing files located in /etc/security.\n"
+msgstr
+msgid  "Reboot this system now to come up with BSM enabled.\n"
+msgstr
+msgid  "%s: INFO: converting host %s ..."
+msgstr
+msgid  "%s: INFO: done with host %s."
+msgstr
+msgid  "Configure BSM by editing files located in /etc/security.\n"
+msgstr
+msgid  "in the root directories of each host converted.\n"
+msgstr
+msgid  "Reboot each system converted to come up with BSM active.\n"
+msgstr
+
+

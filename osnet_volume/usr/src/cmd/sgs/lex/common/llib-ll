@@ -1,0 +1,25 @@
+/*	Copyright (c) 1989 AT&T	*/
+/*	  All Rights Reserved  	*/
+
+/*	THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF AT&T	*/
+/*	The copyright notice above does not evidence any   	*/
+/*	actual or intended publication of such source code.	*/
+
+#pragma ident	"@(#)llib-ll	1.4	97/12/08 SMI"
+/* LINTLIBRARY */
+/* PROTOLIB1 */
+
+/* from libl/common/allprint.c */
+extern void allprint(char);
+extern void sprint(char *);
+extern int printable(int);
+
+/* from libl/common/reject.c */
+extern int yyreject(void);
+extern int yyracc(int);
+
+/* from libl/common/yyless.c */
+extern int yyless(int);
+
+/* from libl/common/yywrap.c */
+extern int yywrap(void);

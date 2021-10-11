@@ -1,0 +1,17 @@
+#
+# The netmasks file associates Internet Protocol (IP) address
+# masks with IP network numbers.
+# 
+# 	network-number	netmask
+#
+# The term network-number refers to a number obtained from the Internet Network
+# Information Center.  Currently this number is restricted to being a class
+# A, B, or C network number.  In the future we should be able to support
+# arbitrary network numbers per the Classless Internet Domain Routing
+# guidelines.
+#
+# Both the network-number and the netmasks are specified in
+# "decimal dot" notation, e.g:
+#
+# 		128.32.0.0 255.255.255.0
+#

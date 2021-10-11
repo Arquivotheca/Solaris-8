@@ -1,0 +1,19 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)thread.trace.dbg	1.4	98/01/19 SMI"
+
+#include <sys/thread.h>
+#include "dummy.h"
+
+\
+\
+_kthread	""	thread.trace
+{adb_inline_begin}
+.>f
+,#(<f)$<
+<f$<<qthread.info
+(*(<f+{OFFSET, t_pcb.val[1]}))$c
+$<
+{adb_inline_end}

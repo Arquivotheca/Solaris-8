@@ -1,0 +1,27 @@
+#
+#ident	"@(#)Makefile.targ 1.1	95/03/13 SMI"
+#
+# Copyright (c) 1995 by Sun Microsystems, Inc.
+#
+# cmd/prtdiag/Makefile.targ
+#
+
+install: all $(USR_PSM_SBIN_PROG) $(USR_PSM_SBIN_PROG_LINKS)
+
+$(PROG): $(OBJS)
+	$(LINK.c) -o $@ $(OBJS) $(LDLIBS)
+	$(POST_PROCESS)
+
+clean:
+	-$(RM) $(OBJS)
+	-$(RM) $(LINT_OBJS)
+
+lint: $(LINT_OBJS)
+	$(LINT.c) $(LINT_OBJS)
+
+$(POFILE):	$(POFILES)
+	$(RM)	$@
+	cat	$(POFILES) >	$@
+
+include $(SRCDIR)/../Makefile.targ
+include $(SRCDIR)/../../Makefile.psm.targ

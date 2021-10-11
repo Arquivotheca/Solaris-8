@@ -1,0 +1,4 @@
+exclude: drv/esa
+* Note that this variable keep ncrs from unloading at forceload time
+set ncrs:ncr_forceload = 2
+set pcplusmp:apic_forceload = -1

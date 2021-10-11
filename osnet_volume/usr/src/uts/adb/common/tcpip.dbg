@@ -1,0 +1,30 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)tcpip.dbg	1.3	98/01/14 SMI"
+
+#include <sys/types.h>
+#include <netinet/in.h>
+#include <netinet/tcp.h>
+#include <netinet/ip_var.h>
+#include <netinet/tcpip.h>
+#include "dummy.h"
+
+\
+\
+tcpiphdr                ""              tcpip
+        ti_i.ih_next            hex		next
+        ti_i.ih_prev            hex		prev
+        ti_i.ih_pr              octal		pr
+        ti_i.ih_len             sdecimal	len
+        ti_i.ih_src.S_un.S_addr sdecimal	src
+        ti_i.ih_dst.S_un.S_addr sdecimal	dst
+        ti_t.th_sport           sdecimal	sport
+        ti_t.th_dport           sdecimal	dport
+        ti_t.th_seq             sdecimal	seq
+        ti_t.th_ack             sdecimal	ack
+        ti_t.th_flags           octal		flags
+        ti_t.th_win             hex		win
+        ti_t.th_sum             hex		sum
+        ti_t.th_urp             hex		urp

@@ -1,0 +1,86 @@
+\
+\ Copyright (c) 1998, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)ifp_full.dbg	1.2	98/07/19 SMI"
+
+#include <sys/types.h>
+#include <sys/dditypes.h>
+#include <sys/mutex.h>
+#include <sys/scsi/scsi.h>
+#include <sys/scsi/adapters/ifpmail.h>
+#include <sys/fc4/fcp.h>
+#include <sys/fc4/fcal_linkapp.h>
+#include <sys/scsi/adapters/ifpio.h>
+#include <sys/scsi/adapters/ifpvar.h>
+#include <sys/scsi/adapters/ifpcmd.h>
+#include <sys/scsi/adapters/ifpmail.h>
+#include "dummy.h"
+
+\ Print the full version of the ifp structure
+ifp		ifp_	ifp_full
+{adb_inline_begin}
+.>z
+<z+{OFFSET, ifp_tran}=""
+{adb_inline_end}
+	tran			hex
+	dip			hex
+	iblock			hex
+	next			hex
+	major_rev		hex
+	minor_rev		hex
+	scsi_reset_delay	hex
+	suspended		hex
+	biu_reg			hex
+	icb			.ifp_icb
+	mbox			hex
+{adb_inline_begin}
+<z+{OFFSET, ifp_polled_intr}=""
+{adb_inline_end}
+	polled_intr		hex
+	shutdown		hex
+	handling_fatal_aen	hex
+	alive			hex
+	que_inited		hex
+	waitq_mutex		.mutex
+	waitf			hex
+	waitb			hex
+	burst_size		hex
+	targets			hex
+	wwn_lists		hex
+	lip_cnt			hex
+	loop_map		hex
+	portdb			.ifp_portdb
+{adb_inline_begin}
+<z+{OFFSET, ifp_my_alpa}=""
+{adb_inline_end}
+	my_alpa			hex
+	queue_space		hex
+	request_mutex		.mutex
+	response_mutex		.mutex
+	request_in		hex
+	request_out		hex
+	response_in		hex
+	response_out		hex
+	request_ptr		hex
+	request_base		hex
+	response_ptr		hex
+	response_base		hex
+	ksp			hex
+	softstate		hex
+	state			hex
+	lip_state		hex
+	free_slot		hex
+	last_slot_watched	hex
+	reset_notify_listf	hex
+	kmem_cache		hex
+	fcal_map		hex
+	hp_thread_go_away	hex
+	hp_daemon_mutex		.mutex
+	hp_elem_head		hex
+	hp_elem_tail		hex
+	running_diags		hex
+{adb_inline_begin}
+<z+{OFFSET, ifp_slots}="addr of slots:  "K
+<z+{SIZEOF}=""
+{adb_inline_end}

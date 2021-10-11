@@ -1,0 +1,24 @@
+#
+#ident	"@(#)Makefile.ufs	1.8	96/03/14 SMI"
+#
+# Copyright (c) 1991-1994 by Sun Microsystems, Inc.
+# 
+# stand/lib/fs/ufs/Makefile.ufs
+#
+# Standalone Library UFS makefile
+#
+# This Makefile is included by ../../[sparc,i386]/Makefile and is used
+# when building $(LIBUFS).  The library is built in ../../[sparc,i386].
+#
+
+UFSOBJ=		ufsops.o
+UFSOBJ_L=	ufsops.ln
+UFSSRC=		$(UFSOBJ:%.o=$(UFSDIR)/%.c)
+
+$(LIBUFS) :=	FS_OBJECTS=	$(UFSOBJ)
+$(LIBUFS_L) :=	FS_OBJECTS_L=	$(UFSOBJ_L)
+$(LIBUFS_L) :=	FS_SOURCES=	$(UFSSRC)
+
+.PARALLEL:      $(UFSOBJ:%=objs/%) $(UFSOBJ_L:%=objs/%)
+.PARALLEL:      $(UFSOBJ:%=kadbobjs/%)
+

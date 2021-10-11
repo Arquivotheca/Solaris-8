@@ -1,0 +1,52 @@
+#
+#ident	"@(#)Makefile.targ	1.6	99/06/23 SMI"
+#
+# Copyright (c) 1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+# cmd/sgs/messages/Makefile.targ
+
+include		$(SRC)/cmd/Makefile.targ
+
+
+all:		$(POFILE)
+
+catalog \
+install:	$(MSGDOMAIN)/$(POFILE)
+
+$(MSGDOMAIN)/$(POFILE): \
+		$(MSGDOMAIN) $(POFILE)
+		$(RM) $(MSGDOMAIN)/$(POFILE)
+		cp $(POFILE) $(MSGDOMAIN)
+
+delete lint:
+
+clean:
+		$(RM) $(CLEANFILES)
+
+$(POFILE):	$(POFILES)
+		$(RM) $(POFILE)
+		cat $(POFILES) > $(POFILE)
+
+
+# Install a local version of the message catalog.  Test using: LANG=jive
+
+test:		$(MSGDIR)/$(TEST_MOFILE)
+
+$(MSGDIR)/$(TEST_MOFILE): \
+		$(MSGDIR) $(TEST_MSGID) $(TEST_MSGSTR)
+		$(RM) $(MSGDIR)/$(TEXT_DOMAIN).mo
+		sort $(TEST_MSGID) $(TEST_MSGSTR) | \
+			sed -e "s/ *[0-9]*	//" > $(TEST_POFILE)
+		$(MSGFMT) -o $(MSGDIR)/$(TEST_MOFILE) $(TEST_POFILE)
+
+$(TEST_MSGID):	$(POFILE)
+		grep "^msgid" $(POFILE) | nl -v1 -i2 > $(TEST_MSGID)
+
+$(TEST_MSGSTR):	$(POFILE)
+		cat $(POFILE) | tr "\\045" X | $(SGSTOOLS)/$(MACH)/jive | \
+		    tr X "\\045" | grep "^msgid" | sed -e "s/^msgid/msgstr/" | \
+		    nl -v2 -i2 > $(TEST_MSGSTR)
+
+$(MSGDIR):
+		-@mkdir -p $(MSGDIR)

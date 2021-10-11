@@ -1,0 +1,10 @@
+#!/bin/sh
+#pragma ident	"@(#)req.flg	1.5	99/03/10 SMI"
+# Copyright (c) 1992,1999 by Sun Microsystems, Inc.
+# All rights reserved.
+
+echo_file usr/src/cmd/Makefile.cmd
+echo_file usr/src/cmd/Makefile.targ
+echo_file usr/src/cmd/Makefile.cmd.64
+echo_file usr/src/cmd/mapfile_pga_i386
+echo_file usr/src/cmd/mapfile_pga_sparc

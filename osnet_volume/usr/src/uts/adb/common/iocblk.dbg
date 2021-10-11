@@ -1,0 +1,25 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)iocblk.dbg	1.4	98/01/19 SMI"
+
+#include <sys/stream.h>
+#include "dummy.h"
+
+\
+\
+iocblk          ioc_
+{adb_inline_begin}
+.>z
+<z+{OFFSET, ioc_cmd}=""
+{adb_inline_end}
+        cmd                     hex
+        cr                      hex
+        id                      decimal
+        count                   decimal
+        error                   sdecimal
+        rval                    sdecimal
+{adb_inline_begin}
+<z+{SIZEOF}=""
+{adb_inline_end}

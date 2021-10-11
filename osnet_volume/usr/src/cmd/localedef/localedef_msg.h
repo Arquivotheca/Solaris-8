@@ -1,0 +1,117 @@
+/*
+ * Copyright (c) 1996-1998 by Sun Microsystems, Inc.
+ * All rights reserved.
+ */
+#pragma	ident	"@(#)localedef_msg.h 1.10	98/04/18  SMI"
+
+#ifndef _H_LOCALEDEF_MSG
+#define	_H_LOCALEDEF_MSG
+#include <limits.h>
+#include <nl_types.h>
+#define	MF_LOCALEDEF "localedef.cat"
+
+
+
+/* The following was generated from localedef.msg. */
+
+
+/* definitions for set LOCALEDEF */
+#define	LOCALEDEF 1
+
+#define	ERR_WRONG_SYM_TYPE 1
+#define	ERR_OPEN_READ 2
+#define	ERR_INTERNAL 3
+#define	ERR_N_SARGS 4
+#define	ERR_ILL_RANGE_SPEC 5
+#define	ERR_MEM_ALLOC_FAIL 6
+#define	ERR_WRT_PERM 7
+#define	ERR_CHAR_TOO_LONG 8
+#define	ERR_SYM_UNDEF 9
+#define	ERR_INVAL_COLL_RANGE 10
+#define	ERR_INVALID_SYM_RNG 11
+#define	ERR_BAD_STR_FMT 12
+#define	ERR_PC_COLLISION 13
+#define	ERR_DUP_CHR_SYMBOL 14
+#define	ERR_NO_UNDEFINED 15
+#define	ERR_ILL_DEC_CONST 16
+#define	ERR_ILL_OCT_CONST 17
+#define	ERR_ILL_HEX_CONST 18
+#define	ERR_MISSING_QUOTE 19
+#define	ERR_ILL_CHAR 20
+#define	ERR_ESC_CHAR_MISSING 21
+#define	ERR_COM_CHAR_MISSING 22
+#define	ERR_CHAR_NOT_PCS 23
+#define	ERR_ILL_CHAR_SYM 24
+#define	ERR_UNKNOWN_KWD 25
+#define	ERR_UNDEF_RANGE_SYM 26
+#define	ERR_UNSUP_ENC 27
+#define	ERR_DUP_COLL_SPEC 28
+#define	ERR_DUP_COLL_RNG_SPEC 29
+#define	ERR_TOUPPER_NOT_OPT 30
+#define	ERR_CODESET_DEP 31
+#define	ERR_ILL_COLL_SUBS 32
+#define	ERR_FORWARD_REF 33
+#define	ERR_USAGE 34
+#define	ERR_ERROR 35
+#define	ERR_WARNING 36
+#define	ERR_SYNTAX 37
+#define	ERR_TOO_MANY_ORDERS 38
+#define	ERR_BAD_CHDR 39
+#define	ERR_INV_MB_CUR_MIN 40
+#define	ERR_INV_CODE_SET_NAME 41
+#define	ERR_FORWARD_BACKWARD 42
+#define	ERR_TOO_MANY_ARGS 43
+#define	ERR_DUP_CATEGORY 44
+#define	ERR_EMPTY_CAT 45
+#define	ERR_UNDEF_CAT 46
+#define	ERR_USER_DEF 47
+#define	ERR_DIGIT_FC_BAD 48
+#define	ERR_DIGIT_PC_BAD 49
+#define	ERR_DUP_COLL_SYM 50
+#define	ERR_INVALID_UPPER 51
+#define	ERR_INVALID_LOWER 52
+#define	ERR_INVALID_ALPHA 53
+#define	ERR_INVALID_SPACE 54
+#define	ERR_INVALID_CNTRL 55
+#define	ERR_INVALID_PUNCT 56
+#define	ERR_INVALID_GRAPH 57
+#define	ERR_INVALID_PRINT 58
+#define	ERR_MIN_UPPER 59
+#define	ERR_MIN_LOWER 60
+#define	ERR_MIN_SPACE 61
+#define	ERR_INV_DIGIT 62
+#define	ERR_INV_XDIGIT 63
+#define	ERR_COLL_WEIGHTS 64
+#define	ERR_NOSHELL 65
+#define	ERR_LOAD_FAIL 66
+#define	ERR_METHOD_REQUIRED 67
+#define	CANT_LOAD_LOCALE 68
+#define	NAME_TOO_LONG 69
+#define	ERR_MB_LEN_MAX_TOO_BIG 70
+#define	ERR_TOO_MANY_CODESETS 71
+#define	ERR_MISSING_CHAR 72
+#define	ERR_MISSING_CHARCLASS 73
+#define	ERR_REDEFINE_CHARCLASS 74
+#define	ERR_TOU_TOL_ILL_DEFINED 75
+#define	ERR_MULTI_FILE_CODE	76
+#define	ERR_MULTI_PROC_CODE	77
+#define	ERR_NO_CSWIDTH	78
+#define	ERR_INV_CSWIDTH	79
+#define	ERR_PROC_FILE_MISMATCH	80
+#define	ERR_LP64_WITH_OLD_EXT	81
+#define	ERR_MIX_NEW_OLD_EXT	82
+#define	ERR_INVAL_COLL_RANGE2	83
+#define	ERR_INVAL_COLL	84
+#define	ERR_INVAL_CTYPE	85
+#define	ERR_INVAL_CTYPE_RANGE1	86
+#define	ERR_INVAL_CTYPE_RANGE2	87
+#define	ERR_INVAL_CTYPE_RANGE3	88
+#define	ERR_INVAL_XLAT	89
+#define	ERR_INVAL_EUCINFO	90
+#define	ERR_CSNAME_MISMATCH	91
+#define	ERR_FCTYPE_MISMATCH	92
+#define	ERR_PCTYPE_MISMATCH	93
+#define	ERR_MBMAX_MISMATCH	94
+#define	ERR_MBMIN_MISMATCH	95
+#define	ERR_MAXDISP_MISMATCH	96
+#endif

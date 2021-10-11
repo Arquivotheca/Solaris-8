@@ -1,0 +1,45 @@
+\
+\ Copyright (c) 1998, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)ifp_cmd.dbg	1.1	98/07/13 SMI"
+
+#include <sys/types.h>
+#include <sys/dditypes.h>
+#include <sys/mutex.h>
+#include <sys/scsi/scsi.h>
+#include <sys/scsi/adapters/ifpmail.h>
+#include <sys/fc4/fcp.h>
+#include <sys/fc4/fcal_linkapp.h>
+#include <sys/scsi/adapters/ifpio.h>
+#include <sys/scsi/adapters/ifpvar.h>
+#include <sys/scsi/adapters/ifpcmd.h>
+#include <sys/scsi/adapters/ifpmail.h>
+#include "dummy.h"
+
+\ Print the command structure.
+ifp_cmd                 cmd_
+{adb_inline_begin}
+.>z
+<z+{OFFSET, cmd_ifp_request}=""
+{adb_inline_end}
+	ifp_request		.ifp_request	
+	ifp_response		.ifp_response
+        pkt                     hex
+        forw                    hex
+        cdbp                    hex
+        scbp                    hex
+        dmacount                hex
+        dmahandle               hex
+        start_time              hex
+        deadline                hex
+        cdb                     hex
+        flags                   hex
+        slot                    hex
+        cdblen                  hex
+        scblen                  hex
+        privlen                 hex
+        pkt_private             hex
+{adb_inline_begin}
+<z+{SIZEOF}=""
+{adb_inline_end}

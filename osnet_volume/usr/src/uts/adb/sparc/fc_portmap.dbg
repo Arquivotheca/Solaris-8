@@ -1,0 +1,48 @@
+\
+\ Copyright (c) 1999 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)fc_portmap.dbg	1.1	99/07/21 SMI"
+\
+#include <sys/isa_defs.h>
+#include <sys/types.h>
+#include <sys/dditypes.h>
+#include <sys/ddidmareq.h>
+#include <sys/mutex.h>
+#include <sys/semaphore.h>
+#include <sys/condvar.h>
+#include <sys/thread.h>
+#include <sys/devops.h>
+#include <sys/fibre-channel/fc.h>
+#include <sys/fibre-channel/impl/fc_ulpif.h>
+#include "dummy.h"
+\
+\
+fc_portmap		map_
+{adb_inline_begin}
+.>f
+<f+{OFFSET, map_state}=""
+{adb_inline_end}
+	state		hex
+	flags		hex		port_device_qualifier
+	fc4_types	hex
+	pwwn		.la_wwn
+{adb_inline_begin}
+<f+{OFFSET, map_nwwn}=""
+{adb_inline_end}
+	nwwn		.la_wwn
+{adb_inline_begin}
+<f+{OFFSET, map_did}=""
+{adb_inline_end}
+	did		.port_id
+{adb_inline_begin}
+<f+{OFFSET, map_hard_addr}=""
+{adb_inline_end}
+	hard_addr	.hard_addr
+{adb_inline_begin}
+<f+{OFFSET, map_pd}=""
+{adb_inline_end}
+	pd		hex
+{adb_inline_begin}
+<f+{SIZEOF}=""
+{adb_inline_end}

@@ -1,0 +1,1 @@
+.\" "@(#)prototype.man	1.4	99/01/13 SMI

@@ -1,0 +1,104 @@
+#
+#ident	"@(#)Makefile.sfw	1.2	99/11/10 SMI"
+#
+# Copyright (c) 1999 ny Sun Microsystems, Inc.
+# All rights reserved.
+#
+include ../../../Makefile.paths
+include $(SRC)/cmd/perl/Makefile.locns
+
+LIBPERL=libperl.so
+ROOTLIBPERL=$(LIBPERL:%=$(ROOTHTTPDLIBEXECDIR)/%)
+
+PERL=/usr/bin/perl
+XSUBPP= $(PERL_REAL_ROOT)/$(PERL_MAINTENANCE_VERSION)/ExtUtils/xsubpp
+TYPEMAP= $(PERL_REAL_ROOT)/$(PERL_MAINTENANCE_VERSION)/ExtUtils/typemap
+
+#
+# we keep our perl modules separate from the normal perl
+# installation
+#
+APACHE_PERL5LIB=/$(PREFIX)/perl5/$(PERL_VERSION)/$(PERL_ARCH)-solaris
+ROOTAPACHE_PERL5LIB=$(ROOT)/$(APACHE_PERL5LIB)
+
+SRCDIR=../../../src
+OSDIR=$(SRCDIR)/os/unix
+
+include ../../../../Makefile.cmd
+
+PERLCGEN =		\
+	Apache.c	\
+	Connection.c	\
+	Constants.c	\
+	File.c		\
+	Log.c		\
+	ModuleConfig.c	\
+	Server.c	\
+	Table.c		\
+	URI.c		\
+	Util.c
+
+PERLCSRC=$(PERLCGEN:%.c=%.xs)
+
+PERLOBJS =              \
+	Apache.o        \
+	Connection.o    \
+	Constants.o     \
+	File.o          \
+	Log.o           \
+	ModuleConfig.o  \
+	Server.o        \
+	Table.o         \
+	URI.o           \
+	Util.o          \
+	mod_perl.o      \
+	mod_perl_opmask.o \
+	perl_config.o   \
+	perl_util.o     \
+	perlio.o        \
+	perlxsi.o
+
+PERLSRCS=$(PERLOBJS:%.o=%.c)
+
+.PARALLEL: $(PERLCGEN) $(PERLOBJS)
+
+.KEEP_STATE:
+
+CPPFLAGS = -I$(PERL_CORE_DIR) -DMOD_PERL
+#CPPFLAGS = -I/usr/perl5/5.00503/$(PERL_ARCH)-solaris/CORE -DMOD_PERL
+CPPFLAGS += -I$(SRCDIR)/include -I$(OSDIR) -I .
+
+CFLAGS += -G -Kpic
+
+DYNALOADER.A=/usr/perl5/5.00503/$(PERL_ARCH)-solaris/auto/DynaLoader/DynaLoader.a
+
+LDLIBS= -R$(PERL_REAL_LIB_DIR) $(DYNALOADER.A) -L$(PERL_REAL_LIB_DIR) \
+	-lperl -lsocket -lnsl -ldl -lm -lc -lcrypt
+
+CLOBBERFILES = $(PERLCGEN) $(PERLOBJS)
+
+mod_perl.o := CPPFLAGS +=  -DAPACHE_PERL5LIB=\"$(APACHE_PERL5LIB)\"
+perl_util.o:= CPPFLAGS +=  -errtags=yes -erroff=E_STATEMENT_NOT_REACHED
+
+all:	$(LIBPERL)
+
+install: all $(ROOTHTTPDLIBEXECDIR) .WAIT $(ROOTLIBPERL)
+
+$(LIBPERL):	$(PERLOBJS)
+	$(LINK.c) -G -o $@ $(PERLOBJS) $(LDLIBS)
+
+$(PERLOBJS):	$(PERLCGEN) typemap
+
+%.c: %.xs
+	$(PERL) $(XSUBPP) -typemap $(TYPEMAP) $< > $@
+
+$(ROOTHTTPDLIBEXECDIR):
+	$(INS.dir)
+
+$(ROOTHTTPDLIBEXECDIR)/%: %
+	$(INS.file)
+
+clean clobber:
+	-$(RM) $(PERLCGEN) $(PERLOBJS)
+
+lint:

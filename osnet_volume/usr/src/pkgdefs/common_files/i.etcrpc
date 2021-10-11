@@ -1,0 +1,91 @@
+#!/bin/sh
+#
+#ident	"@(#)i.etcrpc	1.6	99/07/29 SMI"
+#
+# Copyright (c) 1994 by Sun Microsystems, Inc.
+#
+
+PATH="/usr/bin:/usr/sbin:${PATH}"
+export PATH
+
+while read src dest
+do
+	if [ ! -f $dest ] ; then
+		cp $src $dest
+	else
+		#
+		# determine whether existing /etc/rpc file is based on
+		# the same one being installed.  If so, no need to update it.
+		#
+		newrev=`sed -n 's/^.*\(@(#)rpc.*\)\".*/\1/p' $src`
+		oldrev=`sed -n 's/^.*\(@(#)rpc.*\)\".*/\1/p' $dest`
+		if [ "$oldrev" != "$newrev" ] ; then
+			grep '^#ident[ 	]*\"@(#)rpc' $src \
+						> /tmp/newident.$$ 2>/dev/null
+			grep -v '^#ident[ 	]*\"@(#)rpc' $dest \
+						> /tmp/rest.$$ 2>/dev/null
+			cat /tmp/newident.$$ /tmp/rest.$$ > $dest
+			rm -f /tmp/newident.$$ /tmp/rest.$$
+		fi
+
+		# add the entry for nispasswd used by rpc.nispasswdd
+		# even if sccsid is wrong it might still be there
+		# we do not get fancy and try to add it at the "right"
+		# location.  putting it on the end works just fine.
+
+		grep 'nispasswd' $dest > /dev/null 2>&1
+		if [ $? -ne 0 ] ; then
+			echo 'nispasswd	100303	rpc.nispasswdd' >> $dest
+		fi
+
+		# Add solstice admind entry
+ 		grep '100087' $dest > /dev/null 2>&1
+ 		if [ $? -eq 0 ] ; then
+
+			sed 's/.*100087.*/sadmind		100232/' $dest > /tmp/r.$$
+			cp /tmp/r.$$ $dest
+			rm -f /tmp/r.$$
+		fi
+
+		# Add nfs_acl entry
+		grep 'nfs_acl' $dest > /dev/null 2>&1
+		if [ $? -ne 0 ] ; then
+			echo 'nfs_acl		100227' >> $dest
+		fi
+
+		# Delete beta ufsd entry
+		grep 'ufsd[ 	]*100999[ 	]*ufsd' $dest >/dev/null 2>&1
+		if [ $? -eq 0 ] ; then
+			grep -v 'ufsd[ 	]*100999[ 	]*ufsd' $dest \
+					 >/tmp/etcrpc.$$ 2>/dev/null
+			cp /tmp/etcrpc.$$ $dest
+			rm -f /tmp/etcrpc.$$
+		fi
+
+		# Add ufsd entry
+		grep 'ufsd' $dest > /dev/null 2>&1
+		if [ $? -ne 0 ] ; then
+			echo 'ufsd		100233	ufsd' >> $dest
+		fi
+
+		# Add amiserv entry
+		grep 'amiserv' $dest > /dev/null 2>&1
+		if [ $? -ne 0 ] ; then
+			echo 'amiserv		100146' >> $dest
+		fi
+
+		# Add amiaux entry
+		grep 'amiaux' $dest > /dev/null 2>&1
+		if [ $? -ne 0 ] ; then
+			echo 'amiaux		100147' >> $dest
+		fi
+
+		# Add ocfserv entry
+		grep 'ocfserv' $dest > /dev/null 2>&1
+		if [ $? -ne 0 ] ; then
+			echo 'ocfserv		100150' >> $dest
+		fi
+	fi
+done
+
+exit 0

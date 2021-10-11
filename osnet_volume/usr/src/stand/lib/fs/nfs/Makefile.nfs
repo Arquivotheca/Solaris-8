@@ -1,0 +1,42 @@
+#
+# Copyright (c) 1991-1999 by Sun Microsystems, Inc.
+# All Rights Reserved.
+# 
+#ident	"@(#)Makefile.nfs	1.24	99/02/23 SMI"
+#
+# usr/src/stand/lib/fs/nfs/Makefile.nfs
+#
+# NFS using internet/DARPA protocols filesystem boot specific library.
+#
+# This Makefile is included by ../../[sparc,i386]/Makefile and is used
+# when building $(LIBNFS).  The library is built in ../../[sparc,i386].
+#
+
+NFS_LOCALOBJ= 	auth_none.o auth_unix.o bootparams.o dhcpv4.o ethernet.o \
+		getdents.o icmp4.o ipv4.o lookup.o mac.o mount.o nfsops.o \
+		pathname.o pmap.o rpc.o rpc_prot.o socket.o udp.o \
+		xdr.o xdr_array.o xdr_mem.o xdr_refer.o
+
+DHCP_CMNOBJ=	ipv4_sum.o octet.o scan.o udp_sum.o
+
+NFSOBJ_L= 	$(NFS_LOCALOBJ:%.o=%.ln) $(DHCP_CMNOBJ:%.o=%.ln)
+NFSSRC=	$(NFS_LOCALOBJ:%.o=$(NFSDIR)/%.c) \
+	$(DHCP_CMNOBJ:%.o=$(DHCP_CMNDIR)/%.c)
+NFSOBJ=	$(NFS_LOCALOBJ) $(DHCP_CMNOBJ)
+
+$(NFSOBJ:%=objs/%) :=	LOC_CPP = -I$(NFSDIR) -I$(DHCP_CMNDIR)
+$(NFSOBJ_L:%=objs/%) :=	LOC_CPP = -I$(NFSDIR) -I$(DHCP_CMNDIR)
+$(LIBNFS_L) :=		LINT.inc = -I$(NFSDIR) -I$(DHCP_CMNDIR)
+
+# Turn on DHCP client functionality
+$(NFSOBJ:%=objs/%) $(NFSOBJ_L:%=objs/%) := CPPFLAGS += -DDHCP_CLIENT
+$(NFSOBJ_L:%=objs/%) := LINTFLAGS += -DDHCP_CLIENT
+$(LIBNFS_L) :=	CPPFLAGS += -DDHCP_CLIENT
+
+$(LIBNFS) :=	FS_OBJECTS=	$(NFSOBJ)
+$(LIBNFS_L) :=	FS_OBJECTS_L=	$(NFSOBJ_L)
+$(LIBNFS_L) :=	FS_SOURCES=	$(NFSSRC)
+
+.PARALLEL:	$(NFSOBJ:%=objs/%) $(NFSOBJ_L:%=objs/%)
+.PARALLEL:	$(NFSOBJ:%=kadbobjs/%)
+

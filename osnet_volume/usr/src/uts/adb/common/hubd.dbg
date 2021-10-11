@@ -1,0 +1,68 @@
+\
+\ Copyright (c) 1999 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)hubd.dbg	1.6	99/09/24 SMI"
+
+#include <sys/usb/usba.h>
+#include <sys/usb/usba/usba_types.h>
+#include <sys/usb/usba/usba_impl.h>
+#include <sys/usb/hubd/hub.h>
+#include <sys/usb/hubd/hubdvar.h>
+#include "dummy.h"
+
+\
+\
+
+hubd	h_	
+{adb_inline_begin}
+.>x
+<x+{OFFSET, h_instance}=""
+{adb_inline_end}
+	instance		hex
+	init_state		hex
+	dev_state		hex
+	hubpm			hex	hubpm
+	dip			hex
+	mutex			.mutex
+	usb_device		hex	device
+	hubdi_ops		hex	hubdi_ops
+	softstate		hex	state
+	default_pipe		hex	default_pipe
+	cv_default_pipe		hex	cv_default
+	ep1_ph			hex	ep1_ph
+	ep1_descr		.usb_endpoint_descr
+{adb_inline_begin}
+<x+{OFFSET, h_pipe_policy}=""
+{adb_inline_end}
+	pipe_policy		.usb_pipe_policy
+{adb_inline_begin}
+<x+{OFFSET, h_intr_pipe_state}=""
+{adb_inline_end}
+	intr_pipe_state		hex	intr_pipe_state
+	hub_descr		.usb_hub_descr
+{adb_inline_begin}
+<x+{OFFSET, h_hotplug_thread}=""
+{adb_inline_end}
+	hotplug_thread		hex	thread
+	children_dips		hex	dips
+	cd_list_length		hex	len
+	usb_devices		hex	devices
+	port_change		hex	change
+	port_connected		hex	connected
+	port_powered		hex	powered
+	port_enabled		hex	enabled
+	port_reset_wait		hex	reset_wait
+	cv_reset_port		hex	cv_reset
+	cv_reset_intrpipe	hex	cv_reset_intrpipe
+	intr_completion_reason  hex	completion_reason
+	dump_ops		hex	dump_ops
+	log_handle		hex	log_handle
+	ndi_event_hdl		hex	event_hdl
+	remove_cookie		hex	remove_cookie
+	insert_cookie		hex	insert_cookie
+	total_hotplug_success	decimal	"hotplug_success/d"
+	total_hotplug_failure	decimal	"hotplug_failure/d"
+{adb_inline_begin}
+<x+{SIZEOF}=""
+{adb_inline_end}

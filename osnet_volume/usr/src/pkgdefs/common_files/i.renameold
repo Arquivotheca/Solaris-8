@@ -1,0 +1,24 @@
+#!/bin/sh
+#
+#ident  "@(#)i.renameold 1.2     97/01/17 SMI"
+#
+# Copyright (c) 1996 by Sun Microsystems, Inc.
+#
+TAG=old
+CLEANUP_FILE=/tmp/CLEANUP
+
+while read src dest
+do
+	if [ ! -f $dest ] ; then
+		cp $src $dest
+	else
+		cmp -s $src $dest
+		if [ $? != 0 ] ; then
+			cp $dest $dest.${TAG}
+			cp $src $dest
+			echo "EXISTING_FILE_SAVED_TO_OLD: ${dest} ${dest}.${TAG}" \
+			>> ${CLEANUP_FILE}
+		fi
+	fi
+done
+exit 0

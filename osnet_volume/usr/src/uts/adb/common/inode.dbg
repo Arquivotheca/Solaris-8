@@ -1,0 +1,68 @@
+\
+\ Copyright (c) 1997-1998 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)inode.dbg	1.15	98/07/19 SMI"
+
+#include <sys/types.h>
+#include <sys/t_lock.h>
+#include <sys/time.h>
+#include <sys/vnode.h>
+#include <vm/seg.h>
+#include <sys/fs/ufs_inode.h>
+#include "dummy.h"
+
+\
+\
+inode                   i_
+{adb_inline_begin}
+.>z
+<z+{OFFSET, i_chain}=""
+{adb_inline_end}
+        chain                   hex
+        ic                      .dino
+{adb_inline_begin}
+<z+{OFFSET, i_vnode}=""
+{adb_inline_end}
+        vnode                   .vnode
+{adb_inline_begin}
+<z+{OFFSET, i_devvp}=""
+{adb_inline_end}
+        devvp                   hex
+        flag                    hex
+{adb_inline_begin}
+*(<z+{OFFSET, i_dev})>d
+#ifdef _LP64
+<d>/i/d
+#else
+<d%0x40000>d
+#endif
+<d=n"dev"nX
+<z+{OFFSET, i_number}=""
+{adb_inline_end}
+        number                  sdecimal
+        diroff                  hex
+        ufsvfs                  hex
+        dquot                   hex
+        rwlock                  .rwlock
+{adb_inline_begin}
+<z+{OFFSET, i_contents}=""
+{adb_inline_end}
+        contents                .rwlock
+{adb_inline_begin}
+<z+{OFFSET, i_nextr}=""
+{adb_inline_end}
+        nextr                   hex
+        freef                   hex
+        freeb                   hex
+        vcode                   sdecimal
+        mapcnt                  sdecimal
+        map                     hex
+        rdev                    hex
+        delaylen                sdecimal
+        delayoff                hex
+        nextrio                 hex
+        writes                  sdecimal
+        wrcv                    hex
+        doff                    hex
+        ufs_acl                 hex

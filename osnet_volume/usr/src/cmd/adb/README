@@ -1,0 +1,15 @@
+
+Copyright (c) 1999 by Sun Microsystems, Inc.
+All rights reserved.
+
+#ident	"@(#)README	1.2	99/08/11 SMI"
+
+The adb(1) utility will be implemented as a link to the mdb(1) utility in
+versions of Solaris after Solaris 8.  The adb and mdb utilities are both low-
+level debuggers that can be used to examine user processes as well and the
+live operating system or operating system crash dumps.  The new mdb utility
+provides complete backwards compatibility with the existing syntax and
+features of adb, including support for processing adb macro files.  Refer
+to usr/src/cmd/mdb/README and mdb(1) for more information.  This source
+code must be maintained until it is removed, but no new features should
+be added and no existing documented behavior should be changed from now on.

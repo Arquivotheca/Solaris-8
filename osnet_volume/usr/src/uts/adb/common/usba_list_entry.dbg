@@ -1,0 +1,25 @@
+\
+\ Copyright (c) 1999 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)usba_list_entry.dbg	1.1	99/09/24 SMI"
+
+#include <sys/usb/usba.h>
+#include <sys/usb/usba/usba_types.h>
+#include <sys/usb/usba/usba_impl.h>
+#include "dummy.h"
+
+\
+\
+
+list_entry	""	usba_list_entry
+{adb_inline_begin}
+.>z
+<z+{OFFSET, next}=""
+{adb_inline_end}
+	next		hex
+	prev		hex
+	list_mutex	.mutex
+{adb_inline_begin}
+<z+{SIZEOF}=""
+{adb_inline_end}

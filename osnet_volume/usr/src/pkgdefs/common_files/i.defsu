@@ -1,0 +1,40 @@
+#!/bin/sh
+#
+#ident	"@(#)i.defsu	1.1	93/08/23 SMI"
+#
+# Copyright (c) 1993, by Sun Microsystems, Inc.
+#
+
+PATH="/usr/bin:/usr/sbin:${PATH}"
+export PATH
+
+while read src dest
+do
+	if [ ! -f $dest ] ; then
+		cp $src $dest
+	else
+		wk1=/tmp/dfl.$$
+		wk2=$wk1.1
+		cp $src $wk1
+		for word in SULOG CONSOLE PATH SUPATH SYSLOG; do
+
+			oldline=`grep "^${word}=" $dest 2> /dev/null`
+			if [ $? = 0 ]; then
+				sed -e "s|^#* *${word}=.*|$oldline|" \
+				    -e "s|^${word}=.*|$oldline|" $wk1 > $wk2
+				mv -f $wk2 $wk1
+			fi
+
+			oldline=`grep "^#* *${word}=" $dest 2> /dev/null`
+			if [ $? = 0 ]; then
+				sed -e "s|^#* *${word}=.*|$oldline|" \
+				    -e "s|^${word}=.*|$oldline|" $wk1 > $wk2
+				mv -f $wk2 $wk1
+			fi
+		done
+		cp $wk1 $dest
+		rm -f $wk1 $wk2
+	fi
+done
+
+exit 0

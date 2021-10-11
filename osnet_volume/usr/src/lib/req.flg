@@ -1,0 +1,16 @@
+#!/bin/sh
+#
+# Copyright (c) 1992,1997-1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#pragma ident	"@(#)req.flg	1.7	99/04/01 SMI"
+
+
+echo_file usr/src/lib/Makefile.lib
+echo_file usr/src/lib/Makefile.targ
+echo_file usr/src/lib/Makefile.mach
+echo_file usr/src/lib/Makefile.lib.64
+echo_file usr/src/lib/Makefile.spec
+echo_file usr/src/lib/Makefile.spec.arch
+echo_file usr/src/lib/common/mapfile_pga_i386
+echo_file usr/src/lib/common/mapfile_pga_sparc

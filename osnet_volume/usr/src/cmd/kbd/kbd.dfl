@@ -1,0 +1,31 @@
+#pragma ident	"@(#)kbd.dfl	1.3	99/05/04 SMI"
+#
+# Copyright 1996, 1999 by Sun Microsystems, Inc.
+# All Rights Reserved.
+#
+# /etc/default/kbd
+#
+# kbd default settings processed via kbd(1).
+#
+# KEYBOARD_ABORT affects the default behavior of the keyboard abort
+# sequence, see kbd(1) for details.  The default value is "enable". The
+# optional values are "disable" or "alternate". Any other value is ignored.
+# If you choose "alternate" it will affect the serial console drivers  ONLY.
+# The keyboard BREAK (sequence and plug/unplug) won't be affected by this.
+# If "alternate" is in effect any protocol (PPP, SLIP... etc) should not be
+# run over the serial console port.
+#
+# KEYCLICK affects the default keyclick behavior. Possible values are
+# 'on' and 'off'.  Any other value is ignored. The default behavior is
+# to leave the current keyclick setting unchanged.
+#
+# Uncomment the following line to disable keyboard or serial device
+# abort sequences:
+#KEYBOARD_ABORT=disable
+
+# Uncomment the following line to enable a non-BREAK alternate
+# serial input device abort sequence:
+#KEYBOARD_ABORT=alternate
+
+# Uncomment the following line to change the keyclick behavior:
+#KEYCLICK=off

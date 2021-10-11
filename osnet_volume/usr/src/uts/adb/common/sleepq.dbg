@@ -1,0 +1,21 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)sleepq.dbg	1.4	98/01/14 SMI"
+
+\ arg             : address of sleepq struct
+\ uses            :
+\ registers       :
+\ description     : prints the contents of sleepq structure. currently
+\		    this is only the addr of a thread. you can use
+\		    thread.link to view the whole queue
+
+#include <sys/types.h>
+#include <sys/t_lock.h>
+#include <sys/sleepq.h>
+#include "dummy.h"
+
+\
+\
+sleepq

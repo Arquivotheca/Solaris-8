@@ -1,0 +1,80 @@
+\
+\ Copyright (c) 1998, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)ufsvfs.dbg	1.11	98/06/24 SMI"
+
+#include <sys/types.h>
+#include <sys/t_lock.h>
+#include <sys/time.h>
+#include <sys/vnode.h>
+#include <vm/seg.h>
+#include <sys/fs/ufs_inode.h>
+#include "dummy.h"
+
+\
+\
+ufsvfs			vfs_
+{adb_inline_begin}
+.>z
+<z+{OFFSET, vfs_vfs}=""
+{adb_inline_end}
+	vfs			hex
+	next			hex
+	wnext			hex
+	root			hex
+	bufp			hex
+	devvp			hex
+	lfflags			hex
+	qflags			hex
+	qinod			hex
+	btimelimit		hex
+	ftimelimit		hex
+        dqrwlock		.rwlock
+{adb_inline_begin}
+<z+{OFFSET, vfs_delete}=""
+{adb_inline_end}
+	delete			.ufsq
+{adb_inline_begin}
+<z+{OFFSET, vfs_reclaim}=""
+{adb_inline_end}
+	reclaim			.ufsq
+{adb_inline_begin}
+<z+{OFFSET, vfs_nrpos}=""
+{adb_inline_end}
+	nrpos			hex
+	npsect			hex
+	interleave		hex
+	trackskew		hex
+	lock			.mutex
+{adb_inline_begin}
+<z+{OFFSET, vfs_ulockfs}=""
+{adb_inline_end}
+	ulockfs			.ulockfs
+{adb_inline_begin}
+<z+{OFFSET, vfs_dio}=""
+{adb_inline_end}
+	dio			hex
+	nointr			hex
+	nosetsec		hex
+	syncdir			hex
+	dontblock		hex
+	trans			hex
+	domatamap		hex
+	maxacl			hex
+	dirsize			hex
+	avgbfree		hex
+	nindirshift		hex
+	nindiroffset		hex
+	rdclustsz		hex
+	wrclustsz		hex
+	rename_lock		.mutex
+{adb_inline_begin}
+<z+{OFFSET, vfs_minfrags}=""
+{adb_inline_end}
+	minfrags		hex
+	forcedirectio		hex
+	iotstamp		hex
+	dfritime		hex
+	dev			hex		mnt_from_dev
+	log			hex		logp

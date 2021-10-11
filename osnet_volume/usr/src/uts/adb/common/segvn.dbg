@@ -1,0 +1,39 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)segvn.dbg	1.5	98/01/19 SMI"
+
+#include <sys/param.h>
+#include <sys/types.h>
+#include <sys/t_lock.h>
+#include <vm/seg_vn.h>
+#include "dummy.h"
+
+\
+\
+segvn_data              ""              segvn
+{adb_inline_begin}
+.>z
+<z+{OFFSET, lock}=""
+{adb_inline_end}
+        lock                    .rwlock
+{adb_inline_begin}
+<z+{OFFSET, pageprot}=""
+{adb_inline_end}
+        pageprot                octal
+        prot                    octal
+        maxprot                 octal
+        type                    octal
+        offset                  hex
+        vp                      hex
+        anon_index              hex
+        amp                     hex
+        vpage                   hex
+        cred                    hex
+        swresv                  hex
+        advice                  octal
+        pageadvice              octal
+{adb_inline_begin}
+<z+{SIZEOF}=""
+{adb_inline_end}

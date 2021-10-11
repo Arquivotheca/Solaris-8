@@ -1,0 +1,31 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)callbparams.dbg	1.4	98/01/19 SMI"
+
+\ arg             : address of callbparams struct
+\ uses            :
+\ registers       : z
+\ description     : prints the contents of callbparams structure
+
+#include <sys/types.h>
+#include <sys/strsubr.h>
+#include "dummy.h"
+
+\
+\
+callbparams             cbp_
+{adb_inline_begin}
+.>z
+<z+{OFFSET, cbp_sq}=""
+{adb_inline_end}
+        sq                      hex
+        func                    symbolic
+        arg                     hex
+        id                      sdecimal
+        flags                   hex
+        next                    hex
+{adb_inline_begin}
+<z+{SIZEOF}=""
+{adb_inline_end}

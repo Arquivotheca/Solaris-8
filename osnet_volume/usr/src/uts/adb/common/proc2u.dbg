@@ -1,0 +1,17 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)proc2u.dbg	1.6	98/01/19 SMI"
+
+#include <sys/param.h>
+#include <sys/types.h>
+#include <sys/proc.h>
+#include "dummy.h"
+
+\
+\
+proc    ""      proc2u
+{adb_inline_begin}
+.+{OFFSET, p_user}$<u
+{adb_inline_end}

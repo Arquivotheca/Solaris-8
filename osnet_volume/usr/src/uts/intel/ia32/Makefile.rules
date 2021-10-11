@@ -1,0 +1,281 @@
+#
+# uts/intel/ia32/Makefile.rules
+# Copyright (c) 1991-1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#pragma ident	"@(#)Makefile.rules	1.82	00/09/14 SMI"
+#
+#	This Makefile defines all file modules and build rules for the
+# directory uts/ia32/intel and it's children. These are the source files
+# which are specific to the intel ia32 processor.
+#
+
+#
+#	C object build rules
+#
+#	The following are alphabetized by source file path. Please maintain
+# this ordering.
+#
+$(OBJS_DIR)/prmachdep.o:	$(UTSBASE)/intel/ia32/fs/proc/prmachdep.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/intel/ia32/fs/proc/prmachdep.c
+
+$(OBJS_DIR)/seg_xmem.o:		$(UTSBASE)/intel/ia32/fs/xmemfs/seg_xmem.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/intel/ia32/fs/xmemfs/seg_xmem.c
+
+$(OBJS_DIR)/xmem_dir.o:		$(UTSBASE)/intel/ia32/fs/xmemfs/xmem_dir.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/intel/ia32/fs/xmemfs/xmem_dir.c
+
+$(OBJS_DIR)/xmem_subr.o:	$(UTSBASE)/intel/ia32/fs/xmemfs/xmem_subr.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/intel/ia32/fs/xmemfs/xmem_subr.c
+
+$(OBJS_DIR)/xmem_vfsops.o:	$(UTSBASE)/intel/ia32/fs/xmemfs/xmem_vfsops.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/intel/ia32/fs/xmemfs/xmem_vfsops.c
+
+$(OBJS_DIR)/xmem_vnops.o:	$(UTSBASE)/intel/ia32/fs/xmemfs/xmem_vnops.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/intel/ia32/fs/xmemfs/xmem_vnops.c
+
+$(OBJS_DIR)/doreloc.o:		$(UTSBASE)/intel/ia32/krtld/doreloc.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/intel/ia32/krtld/doreloc.c
+
+$(OBJS_DIR)/kobj_boot.o:	$(UTSBASE)/intel/ia32/krtld/kobj_boot.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/intel/ia32/krtld/kobj_boot.c
+
+$(OBJS_DIR)/kobj_convrelstr.o:	$(UTSBASE)/intel/ia32/krtld/kobj_convrelstr.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/intel/ia32/krtld/kobj_convrelstr.c
+
+$(OBJS_DIR)/kobj_crt.o:		$(UTSBASE)/intel/ia32/krtld/kobj_crt.s
+	$(COMPILE.s) -o $@ $(UTSBASE)/intel/ia32/krtld/kobj_crt.s
+
+$(OBJS_DIR)/kobj_reloc.o:	$(UTSBASE)/intel/ia32/krtld/kobj_reloc.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/intel/ia32/krtld/kobj_reloc.c
+
+$(OBJS_DIR)/kobj_isa.o:		$(UTSBASE)/intel/ia32/krtld/kobj_isa.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/intel/ia32/krtld/kobj_isa.c
+
+
+$(OBJS_DIR)/arith.o:		$(UTSBASE)/intel/ia32/ml/emul_80387/arith.s
+	$(COMPILE.s) -o $@ $(UTSBASE)/intel/ia32/ml/emul_80387/arith.s
+
+$(OBJS_DIR)/dcode.o:		$(UTSBASE)/intel/ia32/ml/emul_80387/dcode.s
+	$(COMPILE.s) -o $@ $(UTSBASE)/intel/ia32/ml/emul_80387/dcode.s
+
+$(OBJS_DIR)/divmul.o:		$(UTSBASE)/intel/ia32/ml/emul_80387/divmul.s
+	$(COMPILE.s) -o $@ $(UTSBASE)/intel/ia32/ml/emul_80387/divmul.s
+
+$(OBJS_DIR)/emul_init.o:	$(UTSBASE)/intel/ia32/ml/emul_80387/emul_init.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/intel/ia32/ml/emul_80387/emul_init.c
+
+$(OBJS_DIR)/glue.o:		$(UTSBASE)/intel/ia32/ml/emul_80387/glue.s
+	$(COMPILE.s) -o $@ $(UTSBASE)/intel/ia32/ml/emul_80387/glue.s
+
+$(OBJS_DIR)/lipsq.o:		$(UTSBASE)/intel/ia32/ml/emul_80387/lipsq.s
+	$(COMPILE.s) -o $@ $(UTSBASE)/intel/ia32/ml/emul_80387/lipsq.s
+
+$(OBJS_DIR)/reg.o:		$(UTSBASE)/intel/ia32/ml/emul_80387/reg.s
+	$(COMPILE.s) -o $@ $(UTSBASE)/intel/ia32/ml/emul_80387/reg.s
+
+$(OBJS_DIR)/remsc.o:		$(UTSBASE)/intel/ia32/ml/emul_80387/remsc.s
+	$(COMPILE.s) -o $@ $(UTSBASE)/intel/ia32/ml/emul_80387/remsc.s
+
+$(OBJS_DIR)/round.o:		$(UTSBASE)/intel/ia32/ml/emul_80387/round.s
+	$(COMPILE.s) -o $@ $(UTSBASE)/intel/ia32/ml/emul_80387/round.s
+
+$(OBJS_DIR)/status.o:		$(UTSBASE)/intel/ia32/ml/emul_80387/status.s
+	$(COMPILE.s) -o $@ $(UTSBASE)/intel/ia32/ml/emul_80387/status.s
+
+$(OBJS_DIR)/store.o:		$(UTSBASE)/intel/ia32/ml/emul_80387/store.s
+	$(COMPILE.s) -o $@ $(UTSBASE)/intel/ia32/ml/emul_80387/store.s
+
+$(OBJS_DIR)/subadd.o:		$(UTSBASE)/intel/ia32/ml/emul_80387/subadd.s
+	$(COMPILE.s) -o $@ $(UTSBASE)/intel/ia32/ml/emul_80387/subadd.s
+
+$(OBJS_DIR)/trans.o:		$(UTSBASE)/intel/ia32/ml/emul_80387/trans.s
+	$(COMPILE.s) -o $@ $(UTSBASE)/intel/ia32/ml/emul_80387/trans.s
+
+
+$(OBJS_DIR)/ddi_i86_asm.o:	$(UTSBASE)/intel/ia32/ml/ddi_i86_asm.s
+	$(COMPILE.s) -o $@ $(UTSBASE)/intel/ia32/ml/ddi_i86_asm.s
+
+
+$(OBJS_DIR)/lock_prim.o:	$(UTSBASE)/intel/ia32/ml/lock_prim.s
+	$(COMPILE.s) -o $@ $(UTSBASE)/intel/ia32/ml/lock_prim.s
+
+$(OBJS_DIR)/swtch.o:		$(UTSBASE)/intel/ia32/ml/swtch.s
+	$(COMPILE.s) -o $@ $(UTSBASE)/intel/ia32/ml/swtch.s
+
+
+$(OBJS_DIR)/archdep.o:		$(UTSBASE)/intel/ia32/os/archdep.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/intel/ia32/os/archdep.c
+
+$(OBJS_DIR)/bootdev.o:		$(UTSBASE)/intel/ia32/os/bootdev.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/intel/ia32/os/bootdev.c
+
+$(OBJS_DIR)/cpc_subr.o:		$(UTSBASE)/intel/ia32/os/cpc_subr.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/intel/ia32/os/cpc_subr.c
+
+$(OBJS_DIR)/ddi_i86.o:		$(UTSBASE)/intel/ia32/os/ddi_i86.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/intel/ia32/os/ddi_i86.c
+
+
+$(OBJS_DIR)/i86_vtrace.o:	$(UTSBASE)/intel/ia32/os/i86_vtrace.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/intel/ia32/os/i86_vtrace.c
+
+$(OBJS_DIR)/sundep.o:		$(UTSBASE)/intel/ia32/os/sundep.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/intel/ia32/os/sundep.c
+
+$(OBJS_DIR)/syscall.o:		$(UTSBASE)/intel/ia32/os/syscall.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/intel/ia32/os/syscall.c
+
+
+$(OBJS_DIR)/prom_alloc.o:	$(UTSBASE)/intel/ia32/promif/prom_alloc.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/intel/ia32/promif/prom_alloc.c
+
+$(OBJS_DIR)/prom_enter.o:	$(UTSBASE)/intel/ia32/promif/prom_enter.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/intel/ia32/promif/prom_enter.c
+
+$(OBJS_DIR)/prom_exit.o:	$(UTSBASE)/intel/ia32/promif/prom_exit.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/intel/ia32/promif/prom_exit.c
+
+$(OBJS_DIR)/prom_panic.o:	$(UTSBASE)/intel/ia32/promif/prom_panic.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/intel/ia32/promif/prom_panic.c
+
+$(OBJS_DIR)/getcontext.o:	$(UTSBASE)/intel/ia32/syscall/getcontext.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/intel/ia32/syscall/getcontext.c
+
+#
+#	Lint `object' build rules.
+#
+#	The following are alphabetized by source file path. Please maintain
+# this ordering.
+#
+$(LINTS_DIR)/prmachdep.ln:	$(UTSBASE)/intel/ia32/fs/proc/prmachdep.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/intel/ia32/fs/proc/prmachdep.c $(LTAIL))
+
+$(LINTS_DIR)/seg_xmem.ln:	$(UTSBASE)/intel/ia32/fs/xmemfs/seg_xmem.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/intel/ia32/fs/xmemfs/seg_xmem.c \
+	$(LTAIL))
+
+$(LINTS_DIR)/xmem_dir.ln:	$(UTSBASE)/intel/ia32/fs/xmemfs/xmem_dir.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/intel/ia32/fs/xmemfs/xmem_dir.c \
+	$(LTAIL))
+
+$(LINTS_DIR)/xmem_subr.ln:	$(UTSBASE)/intel/ia32/fs/xmemfs/xmem_subr.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/intel/ia32/fs/xmemfs/xmem_subr.c \
+	$(LTAIL))
+
+$(LINTS_DIR)/xmem_vfsops.ln:	$(UTSBASE)/intel/ia32/fs/xmemfs/xmem_vfsops.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/intel/ia32/fs/xmemfs/xmem_vfsops.c \
+	$(LTAIL))
+
+$(LINTS_DIR)/xmem_vnops.ln:	$(UTSBASE)/intel/ia32/fs/xmemfs/xmem_vnops.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/intel/ia32/fs/xmemfs/xmem_vnops.c \
+	$(LTAIL))
+
+$(LINTS_DIR)/doreloc.ln:	$(UTSBASE)/intel/ia32/krtld/doreloc.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/intel/ia32/krtld/doreloc.c $(LTAIL))
+
+$(LINTS_DIR)/kobj_boot.ln:	$(UTSBASE)/intel/ia32/krtld/kobj_boot.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/intel/ia32/krtld/kobj_boot.c $(LTAIL))
+
+$(LINTS_DIR)/kobj_convrelstr.ln: $(UTSBASE)/intel/ia32/krtld/kobj_convrelstr.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/intel/ia32/krtld/kobj_convrelstr.c $(LTAIL))
+
+$(LINTS_DIR)/kobj_crt.ln:	$(UTSBASE)/intel/ia32/krtld/kobj_crt.s
+	@($(LHEAD) $(LINT.s) $(UTSBASE)/intel/ia32/krtld/kobj_crt.s $(LTAIL))
+
+$(LINTS_DIR)/kobj_reloc.ln:	$(UTSBASE)/intel/ia32/krtld/kobj_reloc.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/intel/ia32/krtld/kobj_reloc.c $(LTAIL))
+
+$(LINTS_DIR)/kobj_isa.ln:	$(UTSBASE)/intel/ia32/krtld/kobj_isa.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/intel/ia32/krtld/kobj_isa.c $(LTAIL))
+
+
+$(LINTS_DIR)/arith.ln:		$(UTSBASE)/intel/ia32/ml/emul_80387/arith.s
+	@($(LHEAD) $(LINT.s) $(UTSBASE)/intel/ia32/ml/emul_80387/arith.s $(LTAIL))
+
+$(LINTS_DIR)/dcode.ln:		$(UTSBASE)/intel/ia32/ml/emul_80387/dcode.s
+	@($(LHEAD) $(LINT.s) $(UTSBASE)/intel/ia32/ml/emul_80387/dcode.s $(LTAIL))
+
+$(LINTS_DIR)/divmul.ln:		$(UTSBASE)/intel/ia32/ml/emul_80387/divmul.s
+	@($(LHEAD) $(LINT.s) $(UTSBASE)/intel/ia32/ml/emul_80387/divmul.s $(LTAIL))
+
+$(LINTS_DIR)/emul_init.ln:	$(UTSBASE)/intel/ia32/ml/emul_80387/emul_init.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/intel/ia32/ml/emul_80387/emul_init.c $(LTAIL))
+
+$(LINTS_DIR)/glue.ln:		$(UTSBASE)/intel/ia32/ml/emul_80387/glue.s
+	@($(LHEAD) $(LINT.s) $(UTSBASE)/intel/ia32/ml/emul_80387/glue.s $(LTAIL))
+
+$(LINTS_DIR)/lipsq.ln:		$(UTSBASE)/intel/ia32/ml/emul_80387/lipsq.s
+	@($(LHEAD) $(LINT.s) $(UTSBASE)/intel/ia32/ml/emul_80387/lipsq.s $(LTAIL))
+
+$(LINTS_DIR)/reg.ln:		$(UTSBASE)/intel/ia32/ml/emul_80387/reg.s
+	@($(LHEAD) $(LINT.s) $(UTSBASE)/intel/ia32/ml/emul_80387/reg.s $(LTAIL))
+
+$(LINTS_DIR)/remsc.ln:		$(UTSBASE)/intel/ia32/ml/emul_80387/remsc.s
+	@($(LHEAD) $(LINT.s) $(UTSBASE)/intel/ia32/ml/emul_80387/remsc.s $(LTAIL))
+
+$(LINTS_DIR)/round.ln:		$(UTSBASE)/intel/ia32/ml/emul_80387/round.s
+	@($(LHEAD) $(LINT.s) $(UTSBASE)/intel/ia32/ml/emul_80387/round.s $(LTAIL))
+
+$(LINTS_DIR)/status.ln:		$(UTSBASE)/intel/ia32/ml/emul_80387/status.s
+	@($(LHEAD) $(LINT.s) $(UTSBASE)/intel/ia32/ml/emul_80387/status.s $(LTAIL))
+
+$(LINTS_DIR)/store.ln:		$(UTSBASE)/intel/ia32/ml/emul_80387/store.s
+	@($(LHEAD) $(LINT.s) $(UTSBASE)/intel/ia32/ml/emul_80387/store.s $(LTAIL))
+
+$(LINTS_DIR)/subadd.ln:		$(UTSBASE)/intel/ia32/ml/emul_80387/subadd.s
+	@($(LHEAD) $(LINT.s) $(UTSBASE)/intel/ia32/ml/emul_80387/subadd.s $(LTAIL))
+
+$(LINTS_DIR)/trans.ln:		$(UTSBASE)/intel/ia32/ml/emul_80387/trans.s
+	@($(LHEAD) $(LINT.s) $(UTSBASE)/intel/ia32/ml/emul_80387/trans.s $(LTAIL))
+
+
+$(LINTS_DIR)/ddi_i86_asm.ln:	$(UTSBASE)/intel/ia32/ml/ddi_i86_asm.s
+	@($(LHEAD) $(LINT.s) $(UTSBASE)/intel/ia32/ml/ddi_i86_asm.s $(LTAIL))
+
+
+$(LINTS_DIR)/lock_prim.ln:	$(UTSBASE)/intel/ia32/ml/lock_prim.s
+	@($(LHEAD) $(LINT.s) $(UTSBASE)/intel/ia32/ml/lock_prim.s $(LTAIL))
+
+$(LINTS_DIR)/swtch.ln:		$(UTSBASE)/intel/ia32/ml/swtch.s
+	@($(LHEAD) $(LINT.s) $(UTSBASE)/intel/ia32/ml/swtch.s $(LTAIL))
+
+
+$(LINTS_DIR)/archdep.ln:	$(UTSBASE)/intel/ia32/os/archdep.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/intel/ia32/os/archdep.c $(LTAIL))
+
+$(LINTS_DIR)/bootdev.ln:	$(UTSBASE)/intel/ia32/os/bootdev.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/intel/ia32/os/bootdev.c $(LTAIL))
+
+$(LINTS_DIR)/cpc_subr.ln:	$(UTSBASE)/intel/ia32/os/cpc_subr.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/intel/ia32/os/cpc_subr.c $(LTAIL))
+
+$(LINTS_DIR)/ddi_i86.ln:	$(UTSBASE)/intel/ia32/os/ddi_i86.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/intel/ia32/os/ddi_i86.c $(LTAIL))
+
+
+$(LINTS_DIR)/i86_vtrace.ln:	$(UTSBASE)/intel/ia32/os/i86_vtrace.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/intel/ia32/os/i86_vtrace.c $(LTAIL))
+
+$(LINTS_DIR)/sundep.ln:		$(UTSBASE)/intel/ia32/os/sundep.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/intel/ia32/os/sundep.c $(LTAIL))
+
+$(LINTS_DIR)/syscall.ln:	$(UTSBASE)/intel/ia32/os/syscall.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/intel/ia32/os/syscall.c $(LTAIL))
+
+
+$(LINTS_DIR)/prom_alloc.ln:	$(UTSBASE)/intel/ia32/promif/prom_alloc.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/intel/ia32/promif/prom_alloc.c $(LTAIL))
+
+$(LINTS_DIR)/prom_enter.ln:	$(UTSBASE)/intel/ia32/promif/prom_enter.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/intel/ia32/promif/prom_enter.c $(LTAIL))
+
+$(LINTS_DIR)/prom_exit.ln:	$(UTSBASE)/intel/ia32/promif/prom_exit.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/intel/ia32/promif/prom_exit.c $(LTAIL))
+
+$(LINTS_DIR)/prom_panic.ln:	$(UTSBASE)/intel/ia32/promif/prom_panic.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/intel/ia32/promif/prom_panic.c $(LTAIL))
+
+$(LINTS_DIR)/getcontext.ln:	$(UTSBASE)/intel/ia32/syscall/getcontext.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/intel/ia32/syscall/getcontext.c $(LTAIL))
+

@@ -1,0 +1,24 @@
+\
+\ Copyright (c) 1997-1999 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)pt_ttys.dbg	1.1	99/09/21 SMI"
+
+#include <sys/types.h>
+#include <sys/stream.h>
+#include <sys/sunddi.h>
+#include <sys/ptms.h>
+#include "dummy.h"
+
+\
+\
+pt_ttys	
+	ptm_rdq			hex
+	pts_rdq			hex
+	pt_nullmsg		hex
+	pt_pid			decimal
+	pt_minor		decimal
+	pt_refcnt		decimal
+	pt_state		hex
+	pt_cv			hex
+	pt_lock			.mutex

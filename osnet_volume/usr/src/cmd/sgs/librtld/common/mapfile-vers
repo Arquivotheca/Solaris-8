@@ -1,0 +1,24 @@
+#
+#ident	"@(#)mapfile-vers	1.6	99/09/14 SMI"
+#
+# Copyright (c) 1999 by Sun Microsystems, Inc.
+# All rights reserved.
+
+SUNWprivate_1.1 {
+	global:
+		rt_dldump;
+};
+
+{
+	global:
+		do_reloc =	FUNCTION parent;
+		elf_plt_write =	FUNCTION parent;
+		eprintf =	FUNCTION parent;
+		is_so_loaded =	FUNCTION parent;
+		lookup_sym =	FUNCTION parent;
+		reloc_table =	FUNCTION parent;
+
+		lml_main =	DATA parent;
+	local:
+		*;
+};

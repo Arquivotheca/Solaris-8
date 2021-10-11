@@ -1,0 +1,19 @@
+#
+# Copyright (c) 1995 Sun Microsystems, Inc.
+# All Rights Reserved.
+#
+# preinstall script for SUNWpsdir package.
+#
+#ident "@(#)preinstall 1.1 95/03/23"
+#
+
+#
+# If the file exists on the system in it's pre-KBI location, move it
+# to the post-KBI location so that upgrade will work.
+#
+if [ -f ${BASEDIR}/kernel/drv/sbpro.conf ]; then
+	mv ${BASEDIR}/kernel/drv/sbpro.conf \
+	   ${BASEDIR}/platform/i86pc/kernel/drv
+fi
+
+exit 0

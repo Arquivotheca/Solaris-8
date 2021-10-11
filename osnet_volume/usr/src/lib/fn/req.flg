@@ -1,0 +1,7 @@
+#!/bin/sh
+#
+# "@(#)req.flg	1.2 94/08/11 SMI"
+#
+
+echo_file usr/src/lib/fn/Makefile.targ
+echo_file usr/src/lib/fn/Makefile.libfn

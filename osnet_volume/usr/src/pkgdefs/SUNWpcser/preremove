@@ -1,0 +1,100 @@
+#! /bin/sh
+#
+# ident "@(#)preremove 1.9	99/06/08 SMI"
+#
+# Copyright (c) 1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+
+PATH="/bin:/usr/bin:/usr/sbin:${PATH}"
+export PATH
+
+TMP=/tmp/$$
+
+#
+# this function removes the PCMCIA serial port entries
+#	from the $BASEDIR/etc/remote file
+#
+cleanup_etc_remote()
+{
+
+	cp $BASEDIR/etc/remote $TMP.remote
+
+	if egrep -s "PCMCIA" $TMP.remote
+	    then
+		( echo "/PCMCIA"
+		  echo "d" ; echo "d"
+		  echo "." ; echo "w" ; echo "q"
+		) | ed -s $TMP.remote > /dev/null
+	    fi
+	if egrep -s '^pc0:' $TMP.remote
+	    then
+		( echo "/^pc0:"
+		  echo "d" ; echo "d"
+		  echo "." ; echo "w" ; echo "q"
+		) | ed -s $TMP.remote > /dev/null
+	    fi
+	if egrep -s '^pc1:' $TMP.remote
+	    then
+		( echo "/^pc1:"
+		  echo "d" ; echo "d"
+		  echo "." ; echo "w" ; echo "q"
+		) | ed -s $TMP.remote > /dev/null
+	    fi
+	if egrep -s '^pc2:' $TMP.remote
+	    then
+		( echo "/^pc2:"
+		  echo "d" ; echo "d"
+		  echo "." ; echo "w" ; echo "q"
+		) | ed -s $TMP.remote > /dev/null
+	    fi
+	if egrep -s '^pc3:' $TMP.remote
+	    then
+		( echo "/^pc3:"
+		  echo "d" ; echo "d"
+		  echo "." ; echo "w" ; echo "q"
+		) | ed -s $TMP.remote > /dev/null
+	    fi
+	if egrep -s '^pc4:' $TMP.remote
+	    then
+		( echo "/^pc4:"
+		  echo "d" ; echo "d"
+		  echo "." ; echo "w" ; echo "q"
+		) | ed -s $TMP.remote > /dev/null
+	    fi
+	if egrep -s '^pc5:' $TMP.remote
+	    then
+		( echo "/^pc5:"
+		  echo "d" ; echo "d"
+		  echo "." ; echo "w" ; echo "q"
+		) | ed -s $TMP.remote > /dev/null
+	    fi
+	if egrep -s '^pc6:' $TMP.remote
+	    then
+		( echo "/^pc6:"
+		  echo "d" ; echo "d"
+		  echo "." ; echo "w" ; echo "q"
+		) | ed -s $TMP.remote > /dev/null
+	    fi
+	if egrep -s '^pc7:' $TMP.remote
+	    then
+		( echo "/^pc7:"
+		  echo "d" ; echo "d"
+		  echo "." ; echo "w" ; echo "q"
+		) | ed -s $TMP.remote > /dev/null
+	    fi
+
+	cp $TMP.remote $BASEDIR/etc/remote
+	rm -f $TMP.remote
+}
+
+rem_drv -b ${BASEDIR} pcser
+
+#
+# cleanup the $BASEDIR/etc/remote file
+#
+cleanup_etc_remote
+
+rm -f ${BASEDIR}/dev/term/pc* ${BASEDIR}/dev/cua/pc*
+
+exit 0

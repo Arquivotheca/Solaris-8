@@ -1,0 +1,74 @@
+#
+#pragma ident	"@(#)Makefile.targ	1.13	99/08/01 SMI"
+#
+# Copyright (c) 1998-1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+# lib/storage/Makefile.targ
+#
+
+# basic target directories
+$(ROOT)/usr:	FRC
+	$(INS.dir)
+$(ROOT)/usr/include:	FRC
+	$(INS.dir)
+$(ROOTLIBDIR):	FRC
+	$(INS.dir)
+$(ROOTHDRDIR):	FRC
+	$(INS.dir)
+
+# documentation (C & Java) target directories
+$(DOCROOT):	FRC
+	$(INS.dir)
+$(CDOCROOT):	FRC
+	$(INS.dir)
+$(JDOCROOT):	FRC
+	$(INS.dir)
+
+$(ROOTCLASSD):	FRC
+	$(INS.dir)
+
+debug	:=	COPTFLAG = -g
+debug	:=	COPTFLAG64 = -g
+debug	:=	DYNFLAGS += -g
+browser	:= 	CFLAGS += -xsb
+debug_browser   := CFLAGS += -xsb
+debug_browser	:=	COPTFLAG = -g
+debug_browser	:=	COPTFLAG64 = -g
+debug_browser	:=	DYNFLAGS += -g
+
+objs/%.o profs/%.o pics/%.o:	../common/%.c
+	$(COMPILE.c) -o $@ $<
+
+CSTYLE_SRCS	=	$(SRCS:%=../common/%)
+
+cstyle: $(CSTYLE_SRCS)
+	cstyle -pP $(CSTYLE_SRCS)
+
+LINT_SRCS	=	$(SRCS:%=../common/%)
+
+$(LINTLIB): $$(LINT_SRCS)
+	$(LINT.c) -o $(LIBNAME) $(LINT_SRCS)
+
+lint : $$(LINT_SRCS)
+	$(LINT.c) -o $(LIBNAME) $(LINT_SRCS)
+
+# the following rules are for delivering source code
+${SRCROOT}:
+	$(INS.dir)
+
+${SRCROOT}/%.jar: ${SRCROOT} FRC
+	(cd ${SRC}; jar cf $@ ${JARSRCFILES:sh})
+
+${SRCROOT}/%.Z: ${SRCROOT} FRC
+	(cd ${SRC}; tar cf - ${JARSRCFILES:sh} | compress > $@)
+
+${SRCROOT}/%.zip: ${SRCROOT} FRC
+	(cd ${SRC}; zip $@ ${JARSRCFILES:sh})
+
+$(GENCAT_PROG_DIR)/$(GENCAT_PROG): $(GENMSG_PROG)
+	$(GENCAT) $@ $(GENMSG_PROG)
+
+docs:
+
+FRC:

@@ -1,0 +1,29 @@
+#
+#ident	"@(#)Makefile.targ	1.7	00/09/14 SMI"
+#
+# Copyright (c) 1994, 1999 by Sun Microsystems, Inc.
+#
+
+pkginfo: pkginfo.tmpl ../awk_pkginfo
+	$(RM) $@; nawk -f ../awk_pkginfo $@.tmpl > $@
+
+pkg: $(PKGARCHIVE) FRC
+	pkgmk -f prototype_$(MACH) -d $(PKGARCHIVE) -r $(ROOT) -o $(PACKAGE)
+
+$(PKGARCHIVE):
+	[ -d $(PKGARCHIVE) ] || mkdir -p $(PKGARCHIVE)
+
+$(DATAFILES): ../common_files/$$@
+	$(RM) $@; cp ../common_files/$@ $@
+
+$(MACHDATAFILES): ../common_files/$$@_$(MACH)
+	$(RM) $@; cp ../common_files/$@_$(MACH) $@
+
+$(EXPORT_COPYRIGHT_FILE): ../common_files/$$@_export
+	$(RM) $@; cp ../common_files/$@_export $@
+
+clobber clean:
+	-$(RM) $(CLOBBERFILES) $(CLEANFILES)
+
+
+FRC:

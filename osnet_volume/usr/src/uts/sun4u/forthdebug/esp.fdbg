@@ -1,0 +1,19 @@
+
+#ident	"@(#)esp.fdbg	1.1	95/06/13 SMI"
+
+#include <sys/scsi/scsi.h>
+#include <sys/scsi/adapters/espcmd.h>
+#include <sys/scsi/adapters/espvar.h>
+
+\
+\ hba driver structures
+
+\ esp driver
+esp
+
+callback_info
+
+esp_cmd
+
+t_slots
+

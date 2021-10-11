@@ -1,0 +1,47 @@
+#!/sbin/sh
+#
+# Copyright (c) 1995, 1997 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#ident	"@(#)cachefs.daemon	1.4	99/05/21 SMI"
+
+# If /usr is a cachefs file system then start up the
+# cachefsd for it and any other cachefs file system.
+
+if [ "x`/usr/lib/fs/cachefs/cfsfstype /usr/lib 2>/dev/null`" != xcachefs ]; then
+	exit 0
+fi
+
+cachefsd=/usr/lib/fs/cachefs/cachefsd
+inetconf=/etc/inet/inetd.conf
+svcfound=no
+
+rpcsvc=`/usr/bin/grep -v '^#' $inetconf | \
+    /usr/bin/awk '$6 == DAEMON {print $1}' DAEMON=$cachefsd`
+
+if [ -z "$rpcsvc" ]; then
+	echo "WARNING: cachefsd is not configured in $inetconf" >& 2
+	exit 1
+fi
+
+set -- `echo "$rpcsvc" | tr '/' ' '`
+
+for i in 1 2 3 4 5; do
+	if /usr/bin/rpcinfo -l 127.0.0.1 $1 $2 2>/dev/null | \
+	    /usr/bin/grep $1 >/dev/null 2>&1; then
+
+		svcfound=yes
+		break
+	fi
+
+	sleep 1
+done
+
+if [ $svcfound = no ]; then
+	echo "WARNING: Timed out waiting for cachefs service to register" >&2
+fi
+
+/usr/lib/fs/cachefs/cfsadmin -C /dev/null 2>/dev/null
+
+/usr/lib/fs/cachefs/cachefspack /usr/lib/fs/cachefs \
+    /etc/netconfig /etc/vfstab /etc/inittab /etc/cachefstab

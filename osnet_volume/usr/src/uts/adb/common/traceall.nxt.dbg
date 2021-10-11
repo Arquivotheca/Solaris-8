@@ -1,0 +1,30 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)traceall.nxt.dbg	1.7	98/07/19 SMI"
+
+#include <sys/param.h>
+#include <sys/time.h>
+#include <sys/types.h>
+#include <sys/proc.h>
+#include "dummy.h"
+
+
+\ p_stat is a single-byte access; p_flag is a 32-bit access.
+\
+\
+proc		""	traceall.nxt
+{adb_inline_begin}
+,#(<f-<e)$<
+<f>t
+<f+{SIZEOF}>f
+*(<t+{OFFSET, p_stat})>/c/P
+,#(<P)$<traceall.nxt
+*(<t+{OFFSET, p_pidp})$<<pid.print
+<t$p
+*(<t+{OFFSET, p_flag})>/i/P
+,#(<P&1)$<traceall.nxt
+$c
+$<traceall.nxt
+{adb_inline_end}

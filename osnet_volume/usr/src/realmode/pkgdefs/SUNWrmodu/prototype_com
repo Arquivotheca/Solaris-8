@@ -1,0 +1,31 @@
+#
+# Copyright (c) 1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#ident	"@(#)prototype_com	1.4	99/04/28 SMI"
+#
+# This required package information file contains a list of package contents.
+# The 'pkgmk' command uses this file to identify the contents of a package
+# and their location on the development machine when building the package.
+# Can be created via a text editor or through use of the 'pkgproto' command.
+
+#!search <pathname pathname ...>        # where to find pkg objects
+#!include <filename>                    # include another 'prototype' file
+#!default <mode> <owner> <group>        # default used if not specified on entry
+#!<param>=<value>                       # puts parameter in pkg environment
+
+# packaging files
+i copyright
+i depend
+i pkginfo
+#
+# source locations relative to the prototype file
+#
+# SUNWrmodu
+#
+# mboot is not platform-specific (so it can be shared between SPARC and x86)
+d none usr 0755 root sys
+d none usr/lib 0755 root bin
+d none usr/lib/fs 0755 root sys
+d none usr/lib/fs/ufs 0755 root sys
+f none usr/lib/fs/ufs/mboot 0444 bin bin

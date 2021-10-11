@@ -1,0 +1,149 @@
+<!--
+  -- ident	"@(#)dhcp_solaris_about.html	1.1	99/03/22 SMI"
+  --
+  -- Copyright (c) 1998-1999 by Sun Microsystems, Inc.
+  -- All rights reserved.
+  -->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+
+<head>
+<title>DHCP Manager Help: About Solaris DHCP</title>
+<meta NAME="AUTHOR" CONTENT="Electra Coumou">
+<meta NAME="KEYWORDS" CONTENT="DHCP">
+
+</head>
+
+<body bgcolor="#FFFFFF">
+
+<a name="top"></a>
+
+<table border=0 cellspacing=0 cellpadding=0 width=625>
+
+<!-- Start navigation banner -->
+
+<tr><td colspan=4  WIDTH="615" align="center" valign="top"><IMG SRC="art/bannersmc.gif" WIDTH=615 BORDER=0 ALIGN="LEFT" ALT="DHCP Manager Help">
+
+	</td>
+	</tr>
+
+<!-- End navigation banner -->
+
+
+<tr>
+
+<!-- Start contents block -->
+
+	<td colspan=1 valign="top" width=105>
+	<P>&nbsp;</P>
+	<A HREF="dhcp_main_top.html"><STRONG>Overview</STRONG></A><BR>
+	<IMG SRC="art/tip2.gif" WIDTH=12 HEIGHT=10 BORDER=0 ALT="">Solaris DHCP<BR>
+	&nbsp;&nbsp;<A HREF="dhcp_macros_about.html">About Macros</A><BR>
+	&nbsp;&nbsp;<A HREF="dhcp_main_hlp.html">Getting Help</A><P>
+	<A HREF="dhcp_relay_ref.html"><STRONG>Servers and Relays</STRONG></A><P>
+	<A HREF="dhcp_addr_ref.html"><STRONG>Addresses</STRONG></A><P>
+	<A HREF="dhcp_macro_ref.html"><STRONG>Macros</STRONG></A><P>
+	<A HREF="dhcp_option_ref.html"><STRONG>Options</STRONG></A><P>		
+	<A HREF="dhcp_main_how.html"><STRONG>How To..</STRONG></A><P>
+	<A HREF="dhcp_main_menus.html"><STRONG>Menus</STRONG></A><P>
+	<A HREF="dhcp_main_idx.html"><STRONG>Index</STRONG></A>
+	
+		</td>
+	
+<!-- End contents block -->
+
+<!-- Start column rule -->
+
+	<td colspan=1 width=5 bgcolor="#CCCCCC">&nbsp;</td>
+
+<!-- End column spacer -->
+
+<!-- Start column spacer -->
+
+	<td colspan=1 width=10 bgcolor="#FFFFFF">&nbsp;</td>
+
+<!-- End column spacer -->
+
+
+
+<!-- Start topic block -->
+
+<td colspan=1 valign="top" bgcolor="#ffffff" width=495>
+
+
+	
+<P>&nbsp;</P>
+
+
+<H1>About Solaris DHCP</H1>
+
+The Solaris<FONT SIZE="-1"><sup>TM</sup></FONT> DHCP server (<tt>in.dhcpd</tt>) provides robust DHCP services for DHCP and BOOTP clients. One of the most significant strengths of the Solaris DHCP implementation is the flexibility it allows in the assignment of <a href="dhcp_macros_about.html">macros and option definitions</a> to every phase of dynamic client configuration.<p>
+
+The following illustration provides a high-level description of the DHCP/BOOTP client boot process, including macro processing, under Solaris DHCP.<p>
+
+<center>
+<a href="dhcp_macro_ref.html#about"><img src="art/macroflow.gif" border=0></a>
+</center>
+
+<p>In the illustration:<p>
+
+	<ol type=1>
+
+	<li>A DHCP/BOOTP client initiates a DHCP request.<p></li>
+
+	<li>An available DHCP server accepts the request and initiates the DHCP 
+	allocation process:<p>
+
+		<ol type=a>
+
+		<li>An available <A NAME="addr"><strong>IP address</strong></A> is found in the 
+		<A NAME="dhcpnetwrk"><tt>dhcp_network</tt></A> database and assigned to the 
+		client.<p></li>
+
+		<li> Option values in the <A NAME="class"><strong>Client Class</strong></A> macro 
+		(platform/operating system), located in the server's <tt>dhcptab</tt> 
+		database, are bundled and passed to the next stage.<p></li>
+
+		<li>Option values in the <A NAME="ntwrk"><strong>Network</strong></A> macro (client 
+		network), located in the server's <A NAME="dhcptab"><tt>dhcptab</tt></A>, are bundled and passed to
+		the next stage.<p></li>
+
+		<li>Option values in the <A NAME="ip"><strong>IP Address</strong></A> macro 
+		(server-specific), located in the server's <tt>dhcptab</tt>, are bundled and
+		passed to the next stage.<p></li>
+
+		<li> Option values in the <A NAME="cid"><strong>Client ID</strong></A> macro 
+		(unique to client, for example, Ethernet/MAC ID), located in the
+		server's <tt>dhcptab</tt>, are bundled and passed to the next stage.<p></li>
+		</ol>
+
+	<p></li>
+
+	<li>All option values are bundled together, along with the IP address 
+	assigned by the DHCP server, and passed back to the DHCP client.<p></li>
+
+	<li>The client completes the boot process, using the IP address and 
+	 values passed from the DHCP server.<p></li>
+	</ol>
+
+Refer to the help pages for more information about <A HREF="dhcp_macro_ref.html">
+macros</A> and <A HREF="dhcp_option_ref.html">options</A>.
+
+<p>&nbsp;</p>
+&nbsp;&nbsp;&nbsp;<A HREF="#top"><FONT SIZE="2">return to top</FONT></A>
+
+<!-- Don't go past this line! -->
+
+
+	</td>
+
+<!-- End topic block -->
+
+</tr>
+
+</table>
+
+<!-- End topic table -->
+
+</body>
+</html>

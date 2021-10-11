@@ -1,0 +1,22 @@
+#
+#ident	"@(#)Makefile.export	1.1	99/09/24 SMI"
+#
+# Copyright (c) 1999 by Sun Microsystems, Inc.
+#
+
+#
+# Identical to Makefile.com but for use by packages under export control
+# This pulls in the copyright from common_files/copyright_export
+#
+
+include $(SRC)/Makefile.master
+
+PKGARCHIVE=$(SRC)/../../pkgarchive
+PKGDEFS=$(SRC)/pkgdefs
+DATAFILES=
+EXPORT_COPYRIGHT_FILE=copyright
+FILES=$(DATAFILES) $(EXPORT_COPYRIGHT_FILE) pkginfo
+
+PACKAGE:sh= basename `pwd`
+
+CLOBBERFILES= $(FILES)

@@ -1,0 +1,35 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)segdev.dbg	1.11	98/01/19 SMI"
+
+#include <sys/param.h>
+#include <sys/types.h>
+#include <sys/t_lock.h>
+#include <vm/seg.h>
+#include <vm/seg_dev.h>
+#include "dummy.h"
+
+\
+\
+segdev_data             ""              segdev
+{adb_inline_begin}
+.>z
+<z+{OFFSET, lock}=""
+{adb_inline_end}
+        lock                    .mutex
+{adb_inline_begin}
+<z+{OFFSET, mapfunc}=""
+{adb_inline_end}
+        mapfunc                 symbolic
+        offset                  hex
+        vp                      hex
+        pageprot                octal
+        prot                    octal
+        maxprot                 octal
+        type                    octal
+        vpage                   hex
+        hat_flags               hex
+        softlockcnt             hex
+        devmap_data             hex

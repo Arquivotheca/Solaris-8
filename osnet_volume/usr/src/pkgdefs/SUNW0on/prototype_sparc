@@ -1,0 +1,28 @@
+#	Copyright (c) 1994 Sun Microsystems, Inc.
+#		All Rights Reserved
+#
+#	@(#)prototype_sparc	1.2	99/08/07 (c) Sun Microsystems, Inc.
+#
+# This required package information file contains a list of package contents.
+# The 'pkgmk' command uses this file to identify the contents of a package
+# and their location on the development machine when building the package.
+# Can be created via a text editor or through use of the 'pkgproto' command.
+
+#
+# Include ISA independent files (prototype_com)
+#
+!include prototype_com
+#
+#
+# source locations relative to the prototype file
+#
+# SUNW0on
+#
+#
+# OCF Messages
+#
+f none usr/lib/locale/C/LC_MESSAGES/pam_smartcard.msg    644 root sys
+f none usr/lib/locale/C/LC_MESSAGES/libsmartcard.msg    644 root sys
+d none usr/share/lib/locale/com/sun/opencard                 755 root bin
+d none usr/share/lib/locale/com/sun/opencard/cmd		755 root bin
+f none usr/share/lib/locale/com/sun/opencard/cmd/OCFMessages.properties 644 root sys

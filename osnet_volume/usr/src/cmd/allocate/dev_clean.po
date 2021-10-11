@@ -1,0 +1,23 @@
+#	/*
+#	 * TRANSLATION_NOTE:
+#	 *	These are messages of
+#	 *	st_clean, sr_clean and fd_clean commands.
+#	 */
+msgid  "%s [-s|-f|-i] device info_label"
+msgstr
+msgid  "%s [-s|-f|-i] device"
+msgstr
+msgid  "%s: Media in %s is ready.  Please, label and store safely."
+msgstr
+msgid  "%s: Error cleaning up device %s."
+msgstr
+msgid  "Please inform system administrator.\n"
+msgstr
+msgid  "%s error: %s."
+msgstr
+msgid  "Please remove the floppy from %s."
+msgstr
+msgid  "Please remove the caddy from %s."
+msgstr
+msgid  "Please remove the tape from the %s."
+msgstr

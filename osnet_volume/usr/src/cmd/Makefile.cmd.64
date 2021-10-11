@@ -1,0 +1,15 @@
+#
+# Copyright (c) 1996-1998 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#ident	"@(#)Makefile.cmd.64	1.5	98/06/30 SMI"
+#
+# cmd/Makefile.cmd.64
+#
+#	This makefile contains the compiler fiddling needed to build
+#	64-bit utilities.
+#
+
+include $(SRC)/Makefile.master.64
+
+sparcv9_CFLAGS += -xcode=abs44

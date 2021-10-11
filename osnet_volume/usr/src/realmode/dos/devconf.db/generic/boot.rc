@@ -1,0 +1,101 @@
+#ident "@(#)boot.rc 1.13 98/03/12 SMI"
+#
+# Copyright (c) 1998, by Sun Microsystems, Inc.
+# All rights reserved.
+#
+echo '
+
+             Solaris Intel Platform Edition Booting System
+
+'
+
+#
+# get environment variables the first time through only
+#
+cd /options
+
+#
+# The configuration assistant has two goals.  The first is to create
+# a property tree of device resource usage.  The second is to mount
+# a root filesystem.  Both are necessary in order to successfully boot
+# Solaris.  If the configuration assistant succeeds in both tasks it will
+# update the property we initialize below.
+#
+setprop root-is-mounted false
+
+if .streq ( ${beenhere}X , X )
+	source /boot/solaris/bootenv.rc
+	source /boot/solaris/bootargs.rc
+	set beenhere true
+endif
+
+#
+# let user type to boot interpreter before bootconf runs
+# if the variable "bshfirst" is set to "true".
+#
+if .streq ( ${bshfirst}X , trueX )
+	echo 'Entering boot interpreter - type ctrl-d to resume boot'
+	console
+endif
+
+#
+# Save the boot args in a property so that bootconf can add 
+# the reconfiguration boot flag ("-r"),  if not autobooting.
+#
+cd /chosen
+if ! .streq ( "${rb_args}"X , X )
+	setprop boot-args "${rb_args}"
+endif
+
+echo '
+Running Configuration Assistant...'
+
+run /boot/solaris/bootconf.exe ${confflags}
+
+#
+#  Confirm success or failure of configuration assistant and behave
+#  appropriately.
+#
+cd /options
+if .streq ( ${root-is-mounted}X , falseX )
+	echo
+	echo 'The root filesystem is not mounted and the configuration'
+	echo 'assistant has exited prematurely.  Booting is unlikely to'
+	echo 'succeed.  CTL-ALT-DEL may be used to reset the machine.'
+	echo 
+	echo 'Failover to boot interpreter - type ctrl-d to resume boot'
+	console
+endif
+
+#
+#  Run the second phase of ITU which will assign name-to-major numbers
+#  for any drivers just delivered via the ITU mechanism.  If no ITUs
+#  were delivered this will exit quietly.
+#
+echo 
+run /boot/solaris/itup2.exe
+
+#
+#  Set up default boot file, based on /options property "boot-file"
+#
+cd /options
+if .streq ( "${boot-file}"X , X )
+	set def_bootfile kernel/unix	# emergency fallback case
+else
+	set def_bootfile "${boot-file}"
+endif
+
+#
+#  If a boot file name was supplied at reboot, it overrides the
+#  default boot file.
+#
+if ! .streq ( "${rb_file}"X , X )
+	set def_bootfile "${rb_file}"
+endif
+
+cd /chosen
+echo ''
+#
+# Control now passes back to the boot shell,
+# which has been prewired to source the /etc/bootrc file.
+#

@@ -1,0 +1,34 @@
+#
+# Copyright (c) 1990-1993,1998 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#ident	"@(#)prototype_com	1.17	99/03/30 SMI"
+#
+# This required package information file contains a list of package contents.
+# The 'pkgmk' command uses this file to identify the contents of a package
+# and their location on the development machine when building the package.
+# Can be created via a text editor or through use of the 'pkgproto' command.
+
+#!search <pathname pathname ...>	# where to find pkg objects
+#!include <filename>			# include another 'prototype' file
+#!default <mode> <owner> <group>	# default used if not specified on entry
+#!<param>=<value>			# puts parameter in pkg environment
+
+# packaging files
+i pkginfo
+i copyright
+i depend
+i i.preserve
+i i.renameold
+i r.preserve
+#
+# source locations relative to the prototype file
+#
+# SUNWypr
+#
+d none var 0755 root sys
+d none var/yp 0755 root bin
+e renameold var/yp/Makefile 0555 root bin
+d none var/yp/binding 0755 root bin
+f none var/yp/updaters 0500 root bin
+d none etc 0755 root sys

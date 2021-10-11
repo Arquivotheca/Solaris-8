@@ -1,0 +1,58 @@
+#
+# Copyright 1995 Sun Microsystems, Inc.
+# All Rights Reserved.
+#
+#ident "@(#)solaris.map 1.52 95/12/04"
+# 
+#   Composite filesystem mapping file
+#   Each line (other than comments) in this mapping file must be of the form:
+#	ufs pathname	DOS pathname	flags
+#   where
+#	ufs pathname specifies the file on the Solaris boot device that is
+#	    to be replaced or augmented;
+#	DOS pathname specifies the file on the MDB diskette that replaces
+#	    or is concatenated with the file on the boot device;
+#	optional flags are the letter "c" for file concatenation (rather than
+#	    file replacement), and/or the letter "t" for text files to ensure
+#	    that the unix end-of-line convention is enforced.
+#   There is no maximum line length.
+#
+#   New device drivers can be loaded during the MDB / Solaris sequence
+#   by specifying the DOS pathnames for the equivalent ufs pathnames
+#   (where "device" and "vendor" are replaced with the appropriate
+#   strings):
+#
+#	/kernel/drv/device	\vendor\device
+#	/kernel/drv/device.conf	\vendor\device.cnf	t
+#
+##############################################################################
+# These files will be mapped to files on the diskette
+#
+# Standard system files
+#
+
+#
+# 9/1/95  Keep the path to system.add as a relative path. Do NOT
+# make it an absolute path.
+#
+etc/system				\solaris\system.add	ct
+/etc/name_to_major                      \solaris\nam_maj.txt    ct
+/etc/driver_classes                     \solaris\classes.txt    t
+/etc/driver_aliases                     \solaris\alias.add      ct
+
+# New SCSI HBA & Network drivers
+/platform/i86pc/kernel/drv/mscsi                \drv\mscsi
+/platform/i86pc/kernel/drv/mscsi.conf           \drv\mscsi.cnf
+
+# Fixed drivers
+/platform/i86pc/kernel/drv/ata		\drv\ata		
+/platform/i86pc/kernel/drv/kd		\drv\kd		
+/platform/i86pc/kernel/drv/mlx		\drv\mlx		
+/platform/i86pc/kernel/drv/mlx.conf		\drv\mlx.cnf		
+/kernel/drv/dnet			\drv\dnet
+
+# fixed kernel modules
+/kernel/mach/pcplusmp			\mach\pcplusmp
+/kernel/mach/syspro			\mach\syspro 
+
+# New kernel modules

@@ -1,0 +1,20 @@
+#ident "@(#)bootenv.rc 1.17 99/12/06 SMI"
+#
+#	bootenv.rc -- boot "environment variables"
+#
+setprop boottimeout 0
+setprop confflags "-f"
+setprop bshfirst false
+setprop output-device screen
+setprop input-device keyboard
+setprop boot-file kernel/unix
+setprop kbd-type US-English
+setprop target-driver-for-scsi sd
+setprop target-driver-for-direct cmdk
+setprop target-driver-for-csa cmdk
+setprop target-driver-for-dsa cmdk
+setprop target-driver-for-smartii cmdk
+setprop pciide true
+setprop net-config-strategy rarp
+setprop prealloc-chunk-size 0x2000
+setprop ata-dma-enabled 0

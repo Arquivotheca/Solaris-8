@@ -1,0 +1,33 @@
+\
+\ Copyright (c) 1999 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)usb_pipe_async_request.dbg        1.1     99/10/22 SMI"
+
+#include <sys/usb/usba.h>
+#include <sys/usb/usba/usba_types.h>
+#include <sys/usb/usba/usba_impl.h>
+
+#include <sys/stropts.h>
+
+#include "dummy.h"
+
+\
+\
+
+usb_pipe_async_request
+{adb_inline_begin}
+.>z
+<z+{OFFSET, pipe_handle}=""
+{adb_inline_end}
+	pipe_handle	hex
+	callback	symbolic
+	callback_arg	hex
+	sync_func	symbolic
+{adb_inline_begin}
+<z+{SIZEOF}=""
+{adb_inline_end}
+
+\
+\
+

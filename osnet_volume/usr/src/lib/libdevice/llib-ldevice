@@ -1,0 +1,37 @@
+/* LINTLIBRARY */
+/* PROTOLIB1 */
+
+/*
+ * Copyright (c) 1997-1999 by Sun Microsystems, Inc.
+ * All rights reserved.
+ */
+#pragma ident	"@(#)llib-ldevice	1.3	99/04/16 SMI"
+
+#include <sys/types.h>
+#include "libdevice.h"
+
+/*
+ * usr/src/lib/libdevice
+ */
+
+/* devctl.c */
+devctl_hdl_t devctl_device_acquire(char *devfs_path, uint_t flags);
+devctl_hdl_t devctl_bus_acquire(char *devfs_path, uint_t flags);
+void devctl_release(devctl_hdl_t hdl);
+int devctl_device_offline(devctl_hdl_t hdl);
+int devctl_device_online(devctl_hdl_t hdl);
+int devctl_device_reset(devctl_hdl_t hdl);
+int devctl_device_getstate(devctl_hdl_t hdl, uint_t *statep);
+int devctl_bus_quiesce(devctl_hdl_t hdl);
+int devctl_bus_unquiesce(devctl_hdl_t hdl);
+int devctl_bus_reset(devctl_hdl_t hdl);
+int devctl_bus_resetall(devctl_hdl_t hdl);
+int devctl_bus_getstate(devctl_hdl_t hdl, uint_t *statep);
+devctl_hdl_t devctl_ap_acquire(char *devfs_path, uint_t flags);
+int devctl_ap_insert(devctl_hdl_t hdl);
+int devctl_ap_remove(devctl_hdl_t hdl);
+int devctl_ap_connect(devctl_hdl_t hdl);
+int devctl_ap_disconnect(devctl_hdl_t hdl);
+int devctl_ap_configure(devctl_hdl_t hdl);
+int devctl_ap_unconfigure(devctl_hdl_t hdl);
+int devctl_ap_getstate(devctl_hdl_t hdl, devctl_ap_state_t *statep);

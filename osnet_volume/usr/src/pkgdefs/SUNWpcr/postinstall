@@ -1,0 +1,88 @@
+#/bin/sh
+#
+#ident    "@(#)postinstall    1.2    96/04/22 SMI"
+#
+# Copyright (c) 1996 by Sun Microsystems, Inc.
+# All Rights Reserved
+#
+#
+
+#    Deconfigure the old SAF Listeners
+#
+PMTAB=$BASEDIR/etc/saf/tcp/_pmtab
+if [ -f $PMTAB ] ; then
+    sed -e '/^lp:/D' -e '/^lpd:/D' -e '/^0:/D' $PMTAB >/tmp/t.$$
+    cp /tmp/t.$$ $PMTAB
+fi
+
+#    Convert the old LP configuration for Client use
+#
+PCONF=$BASEDIR/etc/printers.conf
+LP_DIR=$BASEDIR/etc/lp
+
+egrep -v -c -e "^#" ${PCONF} 2>/dev/null 1>/dev/null
+STATUS=$?
+
+if [ -d ${LP_DIR} -a ${STATUS} -ne 0 ] ; then
+    # get the default printer
+    if [ -f ${LP_DIR}/default ] ; then
+        DEFAULT=`cat ${LP_DIR}/default`
+        #echo "Default: ${DEFAULT}"
+    fi    
+
+    cat <<EOF >/tmp/p.$$
+#
+#        Printers.conf derived from converted LP configuration data
+#        during package installation.  All future updates should be
+#        performed using lpadmin(1M) or lpset(1M)
+#
+EOF
+
+    if [ -d ${LP_DIR}/printers ] ; then
+        cd ${LP_DIR}/printers
+        for PRINTER in * ; do
+            if [ "${PRINTER}" = "*" ] ; then
+                continue
+            fi
+
+            #echo "Convert: ${PRINTER}"
+    
+            DEVICE=`grep Device: ${PRINTER}/configuration 2>/dev/null`
+            STATUS=$?
+            DEVICE=`echo ${DEVICE} | sed -e "s/^Device: //"`
+            if [ $STATUS -eq 0 ] ; then
+                ADDR="`uname -n`,${PRINTER},Solaris:"
+                #echo "	is local (${ADDR})"
+            fi
+    
+    
+            REMOTE=`grep Remote: ${PRINTER}/configuration 2>/dev/null`
+            STATUS=$?
+            REMOTE=`echo ${REMOTE} | sed -e "s/^Remote: //"`
+            if [ $STATUS -eq 0 ] ; then
+                if [ `echo ${REMOTE} | grep -c \!` -ne 0 ] ; then
+                    ADDR=`echo $REMOTE | sed -e 's/\!/,/g'`
+                else
+                    ADDR="${REMOTE},${PRINTER}"
+                fi
+                #echo "	is remote (${ADDR})"
+                # remove the remote printer config directory, there is no going
+                # back
+                rm -rf ${PRINTER} 2>/dev/null
+            fi
+        
+            if [ -n "${ADDR}" ] ; then
+                if [ -n "${DEFAULT}" -a "${DEFAULT}" = "${PRINTER}" ]; then
+                    echo "${PRINTER}|_default:\\" >>/tmp/p.$$
+                else
+                    echo "${PRINTER}:\\" >>/tmp/p.$$
+                fi
+                echo "	:bsdaddr=${ADDR}:" >>/tmp/p.$$
+            fi
+        done
+    fi
+    cp /tmp/p.$$ ${PCONF}
+fi
+
+
+exit 0

@@ -1,0 +1,793 @@
+#ident "@(#)nmake_al.sid 1.2 94/07/22"
+	md proto
+exe2bin.c
+Object Modules [.obj]: /nologo exe2bin.obj 
+Run File [exe2bin.exe]: "exe2bin.exe" /noi
+List File [nul.map]: NUL
+Libraries [.lib]: 
+Definitions File [nul.def]: ;
+	cd extbios
+	NMAKE                all
+	cd common
+	NMAKE                all
+	ml /Cp /Cx /nologo /c /Fl /Sa /Talow.s
+ Assembling: low.s
+	ml /Cp /Cx /nologo /c /Fl /Sa /Tautil.s
+ Assembling: util.s
+	ml /Cp /Cx /nologo /c /Fl /Sa /Takbchar.s
+ Assembling: kbchar.s
+	ml /Cp /Cx /nologo /c /Fl /Sa /Tasetup.s
+ Assembling: setup.s
+	ml /Cp /Cx /nologo /c /Fl /Sa /Ta__ntohs.s
+ Assembling: __ntohs.s
+	ml /Cp /Cx /nologo /c /Fl /Sa /DFARCODE=0 /Dmodel=SMALL /Taget_conf.s
+ Assembling: get_conf.s
+	cl /Fc /nologo /c /AS /Gs /G2 /X iutil.c
+iutil.c
+	cl /Fc /nologo /c /AS /Gs /G2 /X is_eisa.c
+is_eisa.c
+	cl /Fc /nologo /c /AS /Gs /G2 /X is_mc.c
+is_mc.c
+	cl /Fc /nologo /c /AS /Gs /G2 /X putnum.c
+putnum.c
+	cl /Fc /nologo /c /AS /Gs /G2 /X setvect.c
+setvect.c
+	cd ..
+	cd network
+	NMAKE                all
+	masm dssubs.s
+Microsoft (R) MASM Compatibility Driver
+Copyright (C) Microsoft Corp 1991.  All rights reserved.
+
+ Invoking: ML.EXE /I. /Zm /c /Ta dssubs.s 
+
+ Assembling: dssubs.s
+	cl /Fm /Fc /c /AS /Gs /G2 /X /I..\common /I..\..\inc network.c
+network.c
+	cd ..
+	cd onepiece
+	NMAKE                all
+	cl /O /Fm /Fc /c /AS /Gs /G2 /X /DMSC60 /DRINGBUFFER /I..\..\inc\common /I..\..\inc\i86 /I..\..\inc /I..\common rplagent.c
+rplagent.c
+	cd pe
+	NMAKE                all
+	cd ddk6s
+	NMAKE                -f msc.mk all
+	mkdir objs
+	cd host\ppc
+	NMAKE                -f msc.mk all
+	cl /O /Fm /Fc /c /AS /Gs /G2 /X -I..\..\include -I.. -DDOS -Dinportb=inb -Doutportb=outb pp.c
+pp.c
+pga.c(268) : warning C4033: 'Setup_Delay' must return a value
+	copy pp.obj ..\..\objs
+        1 file(s) copied
+	cl /O /Fm /Fc /c /AS /Gs /G2 /X -I..\..\include -I.. -DDOS -Dinportb=inb -Doutportb=outb unixglue.c
+unixglue.c
+unixglue.c(28) : warning C4049: '=' : indirection to different types
+	copy unixglue.obj ..\..\objs
+        1 file(s) copied
+	cl /O /Fm /Fc /c /AS /Gs /G2 /X -I..\..\include -I.. -DDOS -Dinportb=inb -Doutportb=outb epp.c
+epp.c
+	copy epp.obj ..\..\objs
+        1 file(s) copied
+	cd ..\..
+	cd media\pe2
+	NMAKE                -f msc.mk all
+	cl /O /Fm /Fc /c /AS /Gs /G2 /X -I..\..\include -I.. -DDOS -Dinportb=inb -Doutportb=outb pe2.c
+pe2.c
+pe2.c(63) : warning C4005: 'ADAPTER_NAME' : macro redefinition
+../8390/eth.c(1107) : warning C4049: '=' : indirection to different types
+	copy pe2.obj ..\..\objs
+        1 file(s) copied
+	cd ..\..
+	cd media\pe3
+	NMAKE                -f msc.mk all
+	cl /O /Fm /Fc /c /AS /Gs /G2 /X -I..\..\include -I.. -DDOS -Dinportb=inb -Doutportb=outb pe3.c
+pe3.c
+compaq.c(9) : warning C4005: 'CPQ_READ_ENB' : macro redefinition
+../nice/eth.c(947) : warning C4049: '=' : indirection to different types
+	copy pe3.obj ..\..\objs
+        1 file(s) copied
+	cd ..\..
+	cd ..
+	cd pe3
+	NMAKE                all
+	cl /O /Fm /Fc /c /AS /Gs /G2 /X /DMSC60 /I..\..\..\..\inc\common /I..\..\..\..\inc\i86 /I..\..\..\common /I..\.. /I.. pe3.c
+pe3.c
+	link /M @link.dat,,,,,
+
+Microsoft (R) Segmented Executable Linker  Version 5.60
+Copyright (C) Microsoft Corp 1984-1993.  All rights reserved.
+
+Object Modules [.obj]: /M ..\..\..\common\low.obj  ..\..\..\network\dssubs.obj  ..\..\..\common\util.obj  ..\..\..\common\kbchar.obj  ..\..\..\common\putnum.obj  ..\..\rplagent.obj  ..\..\..\common\get_conf.obj+
+Object Modules [.obj]: ..\ddk6s\objs\pe3.obj  ..\ddk6s\objs\pp.obj  ..\ddk6s\objs\epp.obj  ..\ddk6s\objs\unixglue.obj  pe3.obj+
+Object Modules [.obj]: ..\..\..\common\is_mc.obj  ..\..\..\common\is_eisa.obj  ..\..\..\common\iutil.obj+
+Object Modules [.obj]: ..\..\..\common\__ntohs.obj  ..\..\..\common\setvect.obj  ..\..\..\network\network.obj  ..\..\..\common\setup.obj
+Run File [low.exe]: pe3.bef
+LINK : warning L4021: no stack segment
+	copy pe3.bef ..\..\..\..\proto
+        1 file(s) copied
+	cd ..
+	cd ..
+	cd el
+	NMAKE                all
+	cl /O /Fm /Fc /c /AS /Gs /G2 /X /Oi /DMSC60 /DBEF /I..\..\..\inc\common /I..\..\..\inc\i86 /I..\..\common el.c
+el.c
+el.c(160) : warning C4761: integral size mismatch in argument; conversion supplied
+el.c(161) : warning C4761: integral size mismatch in argument; conversion supplied
+el.c(162) : warning C4761: integral size mismatch in argument; conversion supplied
+el.c(163) : warning C4761: integral size mismatch in argument; conversion supplied
+el.c(167) : warning C4761: integral size mismatch in argument; conversion supplied
+el.c(185) : warning C4761: integral size mismatch in argument; conversion supplied
+el.c(188) : warning C4761: integral size mismatch in argument; conversion supplied
+el.c(189) : warning C4761: integral size mismatch in argument; conversion supplied
+el.c(197) : warning C4761: integral size mismatch in argument; conversion supplied
+el.c(321) : warning C4761: integral size mismatch in argument; conversion supplied
+el.c(332) : warning C4761: integral size mismatch in argument; conversion supplied
+el.c(356) : warning C4761: integral size mismatch in argument; conversion supplied
+el.c(383) : warning C4761: integral size mismatch in argument; conversion supplied
+el.c(389) : warning C4761: integral size mismatch in argument; conversion supplied
+el.c(392) : warning C4761: integral size mismatch in argument; conversion supplied
+el.c(393) : warning C4761: integral size mismatch in argument; conversion supplied
+el.c(394) : warning C4761: integral size mismatch in argument; conversion supplied
+el.c(451) : warning C4761: integral size mismatch in argument; conversion supplied
+el.c(452) : warning C4761: integral size mismatch in argument; conversion supplied
+el.c(453) : warning C4761: integral size mismatch in argument; conversion supplied
+el.c(471) : warning C4761: integral size mismatch in argument; conversion supplied
+el.c(472) : warning C4761: integral size mismatch in argument; conversion supplied
+el.c(489) : warning C4761: integral size mismatch in argument; conversion supplied
+el.c(525) : warning C4761: integral size mismatch in argument; conversion supplied
+el.c(577) : warning C4761: integral size mismatch in argument; conversion supplied
+el.c(581) : warning C4761: integral size mismatch in argument; conversion supplied
+el.c(582) : warning C4761: integral size mismatch in argument; conversion supplied
+el.c(604) : warning C4761: integral size mismatch in argument; conversion supplied
+el.c(608) : warning C4761: integral size mismatch in argument; conversion supplied
+el.c(609) : warning C4761: integral size mismatch in argument; conversion supplied
+el.c(640) : warning C4761: integral size mismatch in argument; conversion supplied
+el.c(644) : warning C4761: integral size mismatch in argument; conversion supplied
+el.c(645) : warning C4761: integral size mismatch in argument; conversion supplied
+el.c(652) : warning C4761: integral size mismatch in argument; conversion supplied
+el.c(662) : warning C4761: integral size mismatch in argument; conversion supplied
+el.c(673) : warning C4761: integral size mismatch in argument; conversion supplied
+	link /M @link.dat
+
+Microsoft (R) Segmented Executable Linker  Version 5.60
+Copyright (C) Microsoft Corp 1984-1993.  All rights reserved.
+
+Object Modules [.obj]: /M ..\..\common\low.obj  ..\..\network\dssubs.obj  ..\..\common\util.obj  ..\..\common\kbchar.obj  ..\..\common\putnum.obj  ..\rplagent.obj   ..\..\common\get_conf.obj+
+Object Modules [.obj]: ..\..\common\iutil.obj  el.obj  ..\..\common\__ntohs.obj  ..\..\common\setvect.obj  ..\..\network\network.obj  ..\..\common\setup.obj
+Run File [low.exe]: el.bef;
+LINK : warning L4021: no stack segment
+	copy el.bef ..\..\..\proto\el.bef;
+        1 file(s) copied
+	cd ..
+	cd elx
+	NMAKE                all
+	masm eisa_slo.s
+Microsoft (R) MASM Compatibility Driver
+Copyright (C) Microsoft Corp 1991.  All rights reserved.
+
+ Invoking: ML.EXE /I. /Zm /c /Ta eisa_slo.s 
+
+ Assembling: eisa_slo.s
+	masm repio.s
+Microsoft (R) MASM Compatibility Driver
+Copyright (C) Microsoft Corp 1991.  All rights reserved.
+
+ Invoking: ML.EXE /I. /Zm /c /Ta repio.s 
+
+ Assembling: repio.s
+	cl /O /Fm /Fc /c /AS /Gs /G2 /X /DMSC60 /DBEF is_eisa.c
+is_eisa.c
+	cl /O /Fm /Fc /c /AS /Gs /G2 /X is_mc.c
+is_mc.c
+	cl /O /Fm /Fc /c /AS /Gs /G2 /X ntohs.c
+ntohs.c
+	cl /O /Fm /Fc /c /AS /Gs /G2 /X /DMSC60 /DBEF /I..\..\..\inc\common /I..\..\..\inc\i86 elx.c
+elx.c
+elx.c(675) : warning C4761: integral size mismatch in argument; conversion supplied
+	link /M @link.dat
+
+Microsoft (R) Segmented Executable Linker  Version 5.60
+Copyright (C) Microsoft Corp 1984-1993.  All rights reserved.
+
+Object Modules [.obj]: /M ..\..\common\low.obj  ..\..\network\dssubs.obj  ..\..\common\util.obj  ..\..\common\kbchar.obj  ..\rplagent.obj  eisa_slo.obj  repio.obj+
+Object Modules [.obj]: is_eisa.obj  is_mc.obj  ntohs.obj  ..\..\common\get_conf.obj  ..\..\common\iutil.obj  elx.obj  ..\..\network\network.obj  ..\..\common\setup.obj
+Run File [low.exe]: elx.bef;
+LINK : warning L4021: no stack segment
+	copy elx.bef ..\..\..\proto\elx.bef;
+        1 file(s) copied
+	cd ..
+	cd smc
+	NMAKE                all
+	cl /O /Fm /Fc /c /AS /Gs /G2 /X is_mc.c
+is_mc.c
+	cl /O /Fm /Fc /c /AS /Gs /G2 /X /DMSC60 /DBEF /I..\..\..\inc\common /I..\..\..\inc\i86 /I..\..\common smc.c
+smc.c
+smc.c(152) : warning C4761: integral size mismatch in argument; conversion supplied
+smc.c(155) : warning C4761: integral size mismatch in argument; conversion supplied
+smc.c(165) : warning C4761: integral size mismatch in argument; conversion supplied
+smc.c(166) : warning C4761: integral size mismatch in argument; conversion supplied
+smc.c(171) : warning C4761: integral size mismatch in argument; conversion supplied
+smc.c(175) : warning C4761: integral size mismatch in argument; conversion supplied
+smc.c(203) : warning C4761: integral size mismatch in argument; conversion supplied
+smc.c(218) : warning C4761: integral size mismatch in argument; conversion supplied
+smc.c(224) : warning C4761: integral size mismatch in argument; conversion supplied
+smc.c(232) : warning C4761: integral size mismatch in argument; conversion supplied
+smc.c(243) : warning C4761: integral size mismatch in argument; conversion supplied
+smc.c(249) : warning C4761: integral size mismatch in argument; conversion supplied
+smc.c(498) : warning C4761: integral size mismatch in argument; conversion supplied
+smc.c(546) : warning C4761: integral size mismatch in argument; conversion supplied
+smc.c(551) : warning C4761: integral size mismatch in argument; conversion supplied
+smc.c(553) : warning C4761: integral size mismatch in argument; conversion supplied
+smc.c(566) : warning C4761: integral size mismatch in argument; conversion supplied
+smc.c(577) : warning C4761: integral size mismatch in argument; conversion supplied
+smc.c(583) : warning C4761: integral size mismatch in argument; conversion supplied
+smc.c(653) : warning C4761: integral size mismatch in argument; conversion supplied
+smc.c(655) : warning C4761: integral size mismatch in argument; conversion supplied
+smc.c(657) : warning C4761: integral size mismatch in argument; conversion supplied
+smc.c(681) : warning C4761: integral size mismatch in argument; conversion supplied
+smc.c(686) : warning C4761: integral size mismatch in argument; conversion supplied
+smc.c(689) : warning C4761: integral size mismatch in argument; conversion supplied
+smc.c(700) : warning C4761: integral size mismatch in argument; conversion supplied
+smc.c(708) : warning C4761: integral size mismatch in argument; conversion supplied
+smc.c(728) : warning C4761: integral size mismatch in argument; conversion supplied
+smc.c(730) : warning C4761: integral size mismatch in argument; conversion supplied
+smc.c(732) : warning C4761: integral size mismatch in argument; conversion supplied
+smc.c(736) : warning C4761: integral size mismatch in argument; conversion supplied
+smc.c(743) : warning C4761: integral size mismatch in argument; conversion supplied
+smc.c(781) : warning C4761: integral size mismatch in argument; conversion supplied
+smc.c(813) : warning C4761: integral size mismatch in argument; conversion supplied
+smc.c(819) : warning C4761: integral size mismatch in argument; conversion supplied
+smc.c(831) : warning C4761: integral size mismatch in argument; conversion supplied
+smc.c(836) : warning C4761: integral size mismatch in argument; conversion supplied
+smc.c(888) : warning C4761: integral size mismatch in argument; conversion supplied
+smc.c(966) : warning C4761: integral size mismatch in argument; conversion supplied
+smc.c(1028) : warning C4761: integral size mismatch in argument; conversion supplied
+	cl /O /Fm /Fc /c /AS /Gs /G2 /X board_id.c
+board_id.c
+	link /M @link.dat
+
+Microsoft (R) Segmented Executable Linker  Version 5.60
+Copyright (C) Microsoft Corp 1984-1993.  All rights reserved.
+
+Object Modules [.obj]: /M ..\..\common\low.obj  ..\..\network\dssubs.obj  ..\..\common\util.obj  ..\..\common\kbchar.obj  ..\..\common\putnum.obj  ..\rplagent.obj  is_mc.obj+
+Object Modules [.obj]: ..\..\common\get_conf.obj  ..\..\common\iutil.obj  smc.obj  board_id.obj  ..\..\common\__ntohs.obj  ..\..\common\setvect.obj  ..\..\network\network.obj  ..\..\common\setup.obj
+Run File [low.exe]: smc.bef;
+LINK : warning L4021: no stack segment
+	copy smc.bef ..\..\..\proto\smc.bef;
+        1 file(s) copied
+	cd ..
+	cd tr
+	NMAKE                all
+	cl /O /Fm /Fc /c /AS /Gs /G2 /X /DMSC60 /I..\..\..\inc\common /I..\..\..\inc\i86 /I..\..\common /I.. tr.c
+tr.c
+	cl /O /Fm /Fc /c /AS /Gs /G2 /X /DMSC60 /I..\..\..\inc\common /I..\..\..\inc\i86 /I..\..\common /I.. tr_sr.c
+tr_sr.c
+	link /M @link.dat
+
+Microsoft (R) Segmented Executable Linker  Version 5.60
+Copyright (C) Microsoft Corp 1984-1993.  All rights reserved.
+
+Object Modules [.obj]: /M ..\..\common\low.obj  ..\..\network\dssubs.obj  ..\..\common\util.obj  ..\..\common\kbchar.obj  ..\..\common\putnum.obj  ..\rplagent.obj  ..\..\common\get_conf.obj+
+Object Modules [.obj]: ..\..\common\is_mc.obj  ..\..\common\is_eisa.obj  ..\..\common\iutil.obj  tr.obj  tr_sr.obj  ..\..\common\__ntohs.obj  ..\..\common\setvect.obj  ..\..\network\network.obj  ..\..\common\setup.obj
+Run File [low.exe]: tr.bef;
+LINK : warning L4021: no stack segment
+	copy tr.bef ..\..\..\proto
+        1 file(s) copied
+	cd ..
+	cd smce
+	NMAKE                all
+	cl /nologo /O /Fm /Fc /c /AS /Gs /G0 /X /DMSC60  /I..\..\..\inc\common /I..\..\..\inc\i86 smce.c
+smce.c
+	cl /nologo /O /Fm /Fc /c /AS /Gs /G0 /X /DMSC60  /I..\..\..\inc\common /I..\..\..\inc\i86 lm.c
+lm.c
+	masm repio.s
+Microsoft (R) MASM Compatibility Driver
+Copyright (C) Microsoft Corp 1991.  All rights reserved.
+
+ Invoking: ML.EXE /I. /Zm /c /Ta repio.s 
+
+ Assembling: repio.s
+	link /M @link.dat
+
+Microsoft (R) Segmented Executable Linker  Version 5.60
+Copyright (C) Microsoft Corp 1984-1993.  All rights reserved.
+
+Object Modules [.obj]: /M ..\..\common\low.obj  ..\..\network\dssubs.obj  ..\..\common\util.obj  ..\..\common\kbchar.obj  ..\..\common\putnum.obj  ..\rplagent.obj  ..\..\common\get_conf.obj+
+Object Modules [.obj]: ..\..\common\is_mc.obj  ..\..\common\is_eisa.obj  ..\..\common\iutil.obj  smce.obj  lm.obj  repio.obj  ..\..\common\__ntohs.obj  ..\..\common\setvect.obj  ..\..\network\network.obj  ..\..\common\setup.obj
+Run File [low.exe]: smce.bef;
+LINK : warning L4021: no stack segment
+	copy smce.bef ..\..\..\proto
+        1 file(s) copied
+	cd ..
+	cd iee
+	NMAKE                all
+	cl /O /Fm /Fc /c /AS /Gs /G2 /X /DMSC60 /I..\..\..\inc\common /I..\..\..\inc\i86 /I..\..\common /I.. iee.c
+iee.c
+	link /M @link.dat
+
+Microsoft (R) Segmented Executable Linker  Version 5.60
+Copyright (C) Microsoft Corp 1984-1993.  All rights reserved.
+
+Object Modules [.obj]: /M ..\..\common\low.obj  ..\..\network\dssubs.obj  ..\..\common\util.obj  ..\..\common\kbchar.obj  ..\..\common\putnum.obj  ..\rplagent.obj  ..\..\common\get_conf.obj+
+Object Modules [.obj]: ..\..\common\is_mc.obj  ..\..\common\is_eisa.obj  ..\..\common\iutil.obj  iee.obj  ..\..\common\__ntohs.obj  ..\..\common\setvect.obj  ..\..\network\network.obj  ..\..\common\setup.obj
+Run File [low.exe]: iee.bef;
+LINK : warning L4021: no stack segment
+	copy iee.bef ..\..\..\proto
+        1 file(s) copied
+	cd ..
+	cd elink
+	NMAKE                all
+	cl /O /Fm /Fc /c /AS /Gs /G2 /X /DMSC60 /I..\..\..\inc\common /I..\..\..\inc\i86 /I..\..\common /I.. elink.c
+elink.c
+	link /M @link.dat
+
+Microsoft (R) Segmented Executable Linker  Version 5.60
+Copyright (C) Microsoft Corp 1984-1993.  All rights reserved.
+
+Object Modules [.obj]: /M ..\..\common\low.obj  ..\..\network\dssubs.obj  ..\..\common\util.obj  ..\..\common\kbchar.obj  ..\..\common\putnum.obj  ..\rplagent.obj  ..\..\common\get_conf.obj+
+Object Modules [.obj]: ..\..\common\is_mc.obj  ..\..\common\is_eisa.obj  ..\..\common\iutil.obj  elink.obj  ..\..\common\__ntohs.obj  ..\..\common\setvect.obj  ..\..\network\network.obj  ..\..\common\setup.obj
+Run File [low.exe]: elink.bef;
+LINK : warning L4021: no stack segment
+	copy elink.bef ..\..\..\proto
+        1 file(s) copied
+	cd ..
+	cd ieef
+	NMAKE                all
+	ml  /Taoutl.s
+ Assembling: outl.s
+
+Microsoft (R) Segmented Executable Linker  Version 5.60
+Copyright (C) Microsoft Corp 1984-1993.  All rights reserved.
+
+LINK : warning L4017: /r : unrecognized option name; option ignored
+Object Modules [.obj]: /r outl.obj 
+Run File [outl.exe]: "outl.exe"
+List File [nul.map]: NUL
+Libraries [.lib]: 
+Definitions File [nul.def]: 
+LINK : warning L4021: no stack segment
+LINK : warning L4038: program has no starting address
+	cl /O /Fm /Fc /c /AS /Gs /G2 /X /DMSC60 /I..\..\..\inc\common /I..\..\..\inc\i86 /I..\..\common /I.. ieef.c
+ieef.c
+ieef.c(1052) : warning C4047: '==' : different levels of indirection
+	ml  /Taspl.s
+ Assembling: spl.s
+
+Microsoft (R) Segmented Executable Linker  Version 5.60
+Copyright (C) Microsoft Corp 1984-1993.  All rights reserved.
+
+LINK : warning L4017: /r : unrecognized option name; option ignored
+Object Modules [.obj]: /r spl.obj 
+Run File [spl.exe]: "spl.exe"
+List File [nul.map]: NUL
+Libraries [.lib]: 
+Definitions File [nul.def]: 
+LINK : warning L4021: no stack segment
+LINK : warning L4038: program has no starting address
+	link /M @link.dat
+
+Microsoft (R) Segmented Executable Linker  Version 5.60
+Copyright (C) Microsoft Corp 1984-1993.  All rights reserved.
+
+Object Modules [.obj]: /M ..\..\common\low.obj  ..\..\network\dssubs.obj  ..\..\common\util.obj  ..\..\common\kbchar.obj  ..\..\common\putnum.obj  ..\rplagent.obj  ..\..\common\get_conf.obj+
+Object Modules [.obj]: ..\..\common\is_mc.obj  ..\..\common\is_eisa.obj  ..\..\common\iutil.obj  outl.obj  ieef.obj  spl.obj  ..\..\common\__ntohs.obj  ..\..\common\setvect.obj  ..\..\network\network.obj  ..\..\common\setup.obj
+Run File [low.exe]: ieef.bef;
+LINK : warning L4021: no stack segment
+	copy ieef.bef ..\..\..\proto
+        1 file(s) copied
+	cd ..
+	cd ..
+	cd scsi
+	NMAKE                all
+	cl /O /Gs /Fc /c /AS /G2 /X /I..\common /I..\..\inc scsi.c
+scsi.c
+	cd aha1540
+	NMAKE                all
+	cl /O /Gs /Fm /Fc /c /AS /G2 /X /I..\..\common /I..\..\..\inc aha1540.c
+aha1540.c
+	link /M /NOD /NOI /PACKC @link.dat
+
+Microsoft (R) Segmented Executable Linker  Version 5.60
+Copyright (C) Microsoft Corp 1984-1993.  All rights reserved.
+
+Object Modules [.obj]: /M /NOD /NOI /PACKC ..\..\common\low.obj  ..\..\common\util.obj  ..\..\common\kbchar.obj  ..\..\common\is_mc.obj  ..\..\common\get_conf.obj  aha1540.obj  ..\scsi.obj  ..\..\common\setup.obj  ..\..\common\iutil.obj 
+Run File [low.exe]: aha1540.bef;
+LINK : warning L4021: no stack segment
+	copy aha1540.bef ..\..\..\proto
+        1 file(s) copied
+	cd ..
+	cd aha1740
+	NMAKE                all
+	cl /O /Gs /Fm /Fc /c /AS /G2 /X /I..\..\common /I..\..\..\inc aha1740.c
+aha1740.c
+aha1740.c(24) : warning C4103: 'aha1740.h' : used #pragma pack to change alignment
+	link /M /NOI /PACKC @link.dat
+
+Microsoft (R) Segmented Executable Linker  Version 5.60
+Copyright (C) Microsoft Corp 1984-1993.  All rights reserved.
+
+Object Modules [.obj]: /M /NOI /PACKC ..\..\common\low.obj  ..\..\common\util.obj  ..\..\common\kbchar.obj  aha1740.obj  ..\scsi.obj  ..\..\common\is_eisa.obj  ..\..\common\setup.obj ..\..\common\iutil.obj 
+Run File [low.exe]: aha1740.bef;
+LINK : warning L4021: no stack segment
+	copy aha1740.bef ..\..\..\proto
+        1 file(s) copied
+	cd ..
+	cd blogic
+	NMAKE                all
+	cl /O /Gs /Fm /Fc /c /AS /G2 /X /I..\..\common /I..\..\..\inc blogic.c
+blogic.c
+	link /M /NOD /NOI /PACKC @link.dat
+
+Microsoft (R) Segmented Executable Linker  Version 5.60
+Copyright (C) Microsoft Corp 1984-1993.  All rights reserved.
+
+Object Modules [.obj]: /M /NOD /NOI /PACKC ..\..\common\low.obj  ..\..\common\util.obj  ..\..\common\kbchar.obj  ..\..\common\is_mc.obj  ..\..\common\get_conf.obj  blogic.obj  ..\scsi.obj  ..\..\common\setup.obj  ..\..\common\iutil.obj 
+Run File [low.exe]: blogic.bef;
+LINK : warning L4021: no stack segment
+	copy blogic.bef ..\..\..\proto
+        1 file(s) copied
+	cd ..
+	cd dpt
+	NMAKE                all
+	cl /O /Gs /Fm /Fc /c /AS /G2 /X /I..\..\common /I..\..\..\inc dptcmd.c
+dptcmd.c
+	link /NOD /NOI /M /PACKC @link.dat
+
+Microsoft (R) Segmented Executable Linker  Version 5.60
+Copyright (C) Microsoft Corp 1984-1993.  All rights reserved.
+
+Object Modules [.obj]: /NOD /NOI /M /PACKC ..\..\common\low.obj  ..\..\common\util.obj  ..\..\common\kbchar.obj  dptcmd.obj  ..\scsi.obj  ..\..\common\setup.obj  ..\..\common\iutil.obj 
+Run File [low.exe]: dpt.bef;
+LINK : warning L4021: no stack segment
+	copy dpt.bef ..\..\..\proto
+        1 file(s) copied
+	cd ..
+	cd mcis
+	NMAKE                all
+	cl /Gs /O /Fm /Fc /c /AS /G2 /X /I..\..\common /I..\..\..\inc mcis.c
+mcis.c
+	link /M /NOD /NOI /PACKC @link.dat
+
+Microsoft (R) Segmented Executable Linker  Version 5.60
+Copyright (C) Microsoft Corp 1984-1993.  All rights reserved.
+
+Object Modules [.obj]: /M /NOD /NOI /PACKC ..\..\common\low.obj  ..\..\common\util.obj  ..\..\common\kbchar.obj  mcis.obj  ..\scsi.obj  ..\..\common\setup.obj  ..\..\common\iutil.obj  ..\..\common\get_conf.obj 
+Run File [low.exe]: mcis.bef
+List File [d:mcis.map]: mcis.map;
+LINK : warning L4021: no stack segment
+	copy mcis.bef ..\..\..\proto
+        1 file(s) copied
+	cd ..
+	cd mlx
+	NMAKE                all
+	cl /O /Gs /Fm /Fc /c /AS /G2 /X /I..\..\common /I..\..\..\inc mlx.c
+mlx.c
+	link /NOD /NOI /M /PACKC @link.dat
+
+Microsoft (R) Segmented Executable Linker  Version 5.60
+Copyright (C) Microsoft Corp 1984-1993.  All rights reserved.
+
+Object Modules [.obj]: /NOD /NOI /M /PACKC ..\..\common\low.obj  ..\..\common\util.obj  ..\..\common\kbchar.obj  mlx.obj  ..\scsi.obj  ..\..\common\setup.obj  ..\..\common\iutil.obj 
+Run File [low.exe]: mlx.bef;
+LINK : warning L4021: no stack segment
+	copy mlx.bef ..\..\..\proto
+        1 file(s) copied
+	cd ..
+	cd tmc
+	NMAKE                all
+	ml /I. /Zm /c /Cx bcopy.asm
+ Assembling: bcopy.asm
+	cl /O /Gs /Fm /Fc /c /AS /G2 /X /I..\..\common /I..\..\..\inc tmc850.c
+tmc850.c
+	link /M /NOD /NOI /PACKC @link.dat
+
+Microsoft (R) Segmented Executable Linker  Version 5.60
+Copyright (C) Microsoft Corp 1984-1993.  All rights reserved.
+
+Object Modules [.obj]: /M /NOD /NOI /PACKC ..\..\common\low.obj  ..\..\common\util.obj  ..\..\common\kbchar.obj  ..\..\common\is_mc.obj  ..\..\common\get_conf.obj  .\bcopy.obj  .\tmc850.obj  ..\scsi.obj  ..\..\common\setup.obj  ..\..\common\iutil.obj 
+Run File [low.exe]: tmc.bef;
+LINK : warning L4021: no stack segment
+	copy tmc.bef ..\..\..\proto
+        1 file(s) copied
+	cd ..
+	cd esa
+	NMAKE                all
+	cl /O /Gs /Fm /Fc /c /AS /G2 /X /I..\..\common /I..\..\..\inc esa.c
+esa.c
+	cl /O /Gs /Fm /Fc /c /AS /G2 /X him.c
+him.c
+	cl /O /Gs /Fm /Fc /c /AS /G2 /X him_init.c
+him_init.c
+	link /M /NOI /PACKC @link.dat
+
+Microsoft (R) Segmented Executable Linker  Version 5.60
+Copyright (C) Microsoft Corp 1984-1993.  All rights reserved.
+
+Object Modules [.obj]: /M /NOI /PACKC ..\..\common\low.obj  ..\..\common\util.obj  ..\..\common\kbchar.obj  esa.obj  him.obj  him_init.obj  ..\scsi.obj  ..\..\common\is_eisa.obj  ..\..\common\setup.obj  ..\..\common\iutil.obj 
+Run File [low.exe]: esa.bef;
+LINK : warning L4021: no stack segment
+	copy esa.bef ..\..\..\proto
+        1 file(s) copied
+	cd ..
+	cd usc
+	NMAKE                all
+	copy usc.bef ..\..\..\proto
+        1 file(s) copied
+	cd ..
+	cd ncrs
+	NMAKE                all
+	cl /O /Gs /Fm /Fc /c /AS /G2 /X /I..\..\common /I..\..\..\inc 53c710.c
+53c710.c
+	cl /O /Gs /Fm /Fc /c /AS /G2 /X /I..\..\common /I..\..\..\inc 53c810.c
+53c810.c
+	cl /O /Gs /Fm /Fc /c /AS /G2 /X /I..\..\common /I..\..\..\inc init.c
+init.c
+	cl /O /Gs /Fm /Fc /c /AS /G2 /X /I..\..\common /I..\..\..\inc intr.c
+intr.c
+	cl /O /Gs /Fm /Fc /c /AS /G2 /X /I..\..\common /I..\..\..\inc ncr.c
+ncr.c
+	ml /Cp /Cx /nologo /c /Fl /Sa /DFARCODE=0 /Dmodel=SMALL /Tapciconf.s
+ Assembling: pciconf.s
+	ml /Cp /Cx /nologo /c /Fl /Sa /Taiol.s
+ Assembling: iol.s
+	cl /O /Gs /Fm /Fc /c /AS /G2 /X /I..\..\common /I..\..\..\inc -I.. scsi.c
+scsi.c
+	link /M /NOI /PACKC @link.dat
+
+Microsoft (R) Segmented Executable Linker  Version 5.60
+Copyright (C) Microsoft Corp 1984-1993.  All rights reserved.
+
+Object Modules [.obj]: /M /NOI /PACKC ..\..\common\low.obj  ..\..\common\util.obj  ..\..\common\kbchar.obj  53c710.obj  53c810.obj  init.obj  intr.obj  ncr.obj  pciconf.obj  iol.obj  scsi.obj  ..\..\common\is_eisa.obj  ..\..\common\setup.obj ..\..\common\iutil.obj 
+Run File [low.exe]: ncrs.bef;
+LINK : warning L4021: no stack segment
+	copy ncrs.bef ..\..\..\proto
+        1 file(s) copied
+	cd ..
+	cd ..
+	cd ..
+	cd lib
+	NMAKE                all
+	cd tinyobj
+	NMAKE                all
+ Assembling: ..\src\ask_disk.s
+ Assembling: ..\src\ask_time.s
+ Assembling: ..\src\ask_page.s
+ Assembling: ..\src\clrscr_c.s
+ Assembling: ..\src\clrscrn.s
+ Assembling: ..\src\farbcopy.s
+ Assembling: ..\src\ll_shift.s
+ Assembling: ..\src\ls_shift.s
+ Assembling: ..\src\flush_kb.s
+ Assembling: ..\src\nwrd_key.s
+ Assembling: ..\src\pause_ms.s
+ Assembling: ..\src\putchar.s
+ Assembling: ..\src\rd_cursr.s
+ Assembling: ..\src\prtstr_p.s
+ Assembling: ..\src\readkey.s
+ Assembling: ..\src\rd_disk.s
+ Assembling: ..\src\prtstr_a.s
+ Assembling: ..\src\rs_shift.s
+ Assembling: ..\src\set_page.s
+ Assembling: ..\src\rsetdisk.s
+ Assembling: ..\src\st_cursr.s
+ Assembling: ..\src\rl_shift.s
+ Assembling: ..\src\ul_mul.s
+ Assembling: ..\src\us_div.s
+ Assembling: ..\src\waitkey.s
+ Assembling: ..\src\us_mod.s
+..\src\_ctype.c
+..\src\atoi.c
+..\src\atox.c
+..\src\bcopy.c
+..\src\itoa.c
+..\src\farbzero.c
+..\src\memset.c
+..\src\printf.c
+..\src\putstr.c
+..\src\strcspn.c
+..\src\strcpy.c
+..\src\strcmp.c
+..\src\strcat.c
+..\src\strlen.c
+..\src\strncmp.c
+..\src\strncat.c
+..\src\testpt.c
+..\src\strncpy.c
+..\src\xtoa.c
+	del tiny.lib
+	lib @tinylib.rsp
+
+Microsoft (R) Library Manager  Version 3.40
+Copyright (C) Microsoft Corp 1983-1993.  All rights reserved.
+
+Library name: tiny.lib +ask_page +ask_time +pause_ms +clrscrn +clrscr_c +farbcopy &
+Operations: 	+putchar +putstr +prtstr_p +prtstr_a +printf &
+Operations: 	+rd_cursr +set_page +st_cursr +bcopy &
+Operations: 	+rd_disk +rsetdisk +readkey +waitkey +nwrd_key +flush_kb & 
+Operations: 	+strcmp +strlen +strncpy +strcat +strncat +strncmp +strcspn +strcpy &
+Operations: 	+itoa +xtoa +memset +_ctype +atoi +atox &
+Operations: 	+rs_shift +rl_shift +ls_shift +ll_shift +us_div +us_mod +ul_mul &
+Operations: 	+testpt, tiny.lst
+
+	cd ..
+	cd smallobj
+	NMAKE                all
+ Assembling: ..\src\ask_disk.s
+ Assembling: ..\src\ask_time.s
+ Assembling: ..\src\ask_page.s
+ Assembling: ..\src\clrscr_c.s
+ Assembling: ..\src\clrscrn.s
+ Assembling: ..\src\farbcopy.s
+ Assembling: ..\src\ll_shift.s
+ Assembling: ..\src\ls_shift.s
+ Assembling: ..\src\flush_kb.s
+ Assembling: ..\src\nwrd_key.s
+ Assembling: ..\src\pause_ms.s
+ Assembling: ..\src\putchar.s
+ Assembling: ..\src\rd_cursr.s
+ Assembling: ..\src\prtstr_p.s
+ Assembling: ..\src\readkey.s
+ Assembling: ..\src\rd_disk.s
+ Assembling: ..\src\prtstr_a.s
+ Assembling: ..\src\rs_shift.s
+ Assembling: ..\src\set_page.s
+ Assembling: ..\src\rsetdisk.s
+ Assembling: ..\src\st_cursr.s
+ Assembling: ..\src\rl_shift.s
+ Assembling: ..\src\ul_mul.s
+ Assembling: ..\src\us_div.s
+ Assembling: ..\src\waitkey.s
+ Assembling: ..\src\us_mod.s
+..\src\_ctype.c
+..\src\atoi.c
+..\src\atox.c
+..\src\bcopy.c
+..\src\itoa.c
+..\src\farbzero.c
+..\src\memset.c
+..\src\printf.c
+..\src\putstr.c
+..\src\strcspn.c
+..\src\strcpy.c
+..\src\strcmp.c
+..\src\strcat.c
+..\src\strlen.c
+..\src\strncmp.c
+..\src\strncat.c
+..\src\testpt.c
+..\src\strncpy.c
+..\src\xtoa.c
+	del small.lib
+	lib @smalllib.rsp
+
+Microsoft (R) Library Manager  Version 3.40
+Copyright (C) Microsoft Corp 1983-1993.  All rights reserved.
+
+Library name: small.lib +ask_page +ask_time +pause_ms +clrscrn +clrscr_c +farbcopy &
+Operations: 	+putchar +putstr +prtstr_p +prtstr_a +printf &
+Operations: 	+rd_cursr +set_page +st_cursr +bcopy &
+Operations: 	+rd_disk +rsetdisk +readkey +waitkey +nwrd_key +flush_kb & 
+Operations: 	+strcmp +strlen +strncpy +strcat +strncat +strncmp +strcspn +strcpy &
+Operations: 	+itoa +xtoa +memset +_ctype +atoi +atox &
+Operations: 	+rs_shift +rl_shift +ls_shift +ll_shift +us_div +us_mod +ul_mul &
+Operations: 	+testpt, small.lst
+
+	cd ..
+	cd ..
+	cd fd
+	NMAKE                all
+	cd mdexec
+	NMAKE                all
+	ml /nologo /c /Cp /Cx /Fl /Sa  /Sg /Tacallmdx.s
+ Assembling: callmdx.s
+	cl /nologo /AT /Oscegl /c /X /Gs /G2 /Fc /Zp4 /I..\..\inc /I..\..\inc\i86 /I..\..\inc\common mdexec.c
+mdexec.c
+	cl /nologo /AT /Oscegl /c /X /Gs /G2 /Fc /Zp4 /I..\..\inc /I..\..\inc\i86 /I..\..\inc\common blueboot.c
+blueboot.c
+	cl /nologo /AT /Oscegl /c /X /Gs /G2 /Fc /Zp4 /I..\..\inc /I..\..\inc\i86 /I..\..\inc\common reboot.c
+reboot.c
+	cl /nologo /AT /Oscegl /c /X /Gs /G2 /Fc /I..\..\inc /I..\..\inc\i86 /I..\..\inc\common devio.c
+devio.c
+devio.c(36) : warning C4103: '../../inc\bpb.h' : used #pragma pack to change alignment
+	cl /nologo /AT /Oscegl /c /X /Gs /G2 /Fc /I..\..\inc /I..\..\inc\i86 /I..\..\inc\common dosfs.c
+dosfs.c
+dosfs.c(43) : warning C4103: '../../inc\bpb.h' : used #pragma pack to change alignment
+	cl /nologo /AT /Oscegl /c /X /Gs /G2 /Fc /I..\..\inc /I..\..\inc\i86 /I..\..\inc\common ata.c
+ata.c
+	link  /M /NOI /NOD /PACKC @mdexec.lnk
+
+Microsoft (R) Segmented Executable Linker  Version 5.60
+Copyright (C) Microsoft Corp 1984-1993.  All rights reserved.
+
+Object Modules [.obj]: /M /NOI /NOD /PACKC callmdx.obj mdexec.obj blueboot.obj reboot.obj devio.obj dosfs.obj ata.obj 
+Run File [callmdx.exe]: mdexec.exe
+List File [d:mdexec.map]: mdexec.map
+Libraries [.lib]: ..\..\lib\tinyobj\tiny.lib slibce.lib;
+LINK : warning L4021: no stack segment
+	..\..\exe2bin mdexec.exe ..\..\proto\mdexec
+	cd ..
+	cd mdboot
+	NMAKE                all
+	ml /c /Cp /Cx /Fl /Sa  /Tacallmdb.s
+ Assembling: callmdb.s
+	cl /AT /Osgcel /c /X  /Gs /G2 /Fc /I..\..\inc /I..\..\inc\common /I..\..\inc\i86 mdboot.c
+mdboot.c
+mdboot.c(52) : warning C4103: '../../inc\bpb.h' : used #pragma pack to change alignment
+	link  /M /NOD /NOE /PACKC callmdb mdboot, mdboot.exe, mdboot.map, ..\..\lib\tinyobj\tiny.lib,;
+
+Microsoft (R) Segmented Executable Linker  Version 5.60
+Copyright (C) Microsoft Corp 1984-1993.  All rights reserved.
+
+LINK : warning L4021: no stack segment
+	..\..\exe2bin -strip_to_entry mdboot.exe ..\..\proto\mdboot
+	cd ..
+	cd ..
+	cd hd
+	NMAKE                all
+	cd blueboot
+	NMAKE                all
+ Assembling: callblue.s
+blueboot.c
+reboot.c
+ix_alts.c
+devio.c
+ufs.c
+Object Modules [.obj]: /nologo /M /NOE callblue blueboot reboot ix_alts devio ufs 
+Run File [callblue.exe]: blueboot.exe
+List File [d:blueboot.map]: blueboot.map
+Libraries [.lib]: ..\..\lib\smallobj\small.lib slibce.lib;
+LINK : warning L4021: no stack segment
+	..\..\exe2bin -strip_to_entry blueboot.exe blueboot
+	copy blueboot ..\..\proto
+        1 file(s) copied
+	cd ..
+	cd mastboot
+	NMAKE                all
+	ml /DFARDATA=1 /c /Cp /Cx /Fl /Sa /Zf /Zp1 /Sg /Tamastboot.s
+ Assembling: mastboot.s
+	link /M /NOD /nog /NOE /PACKC mastboot, mastboot.exe, mastboot.map,,;
+
+Microsoft (R) Segmented Executable Linker  Version 5.60
+Copyright (C) Microsoft Corp 1984-1993.  All rights reserved.
+
+LINK : warning L4021: no stack segment
+	..\..\exe2bin -strip_to_entry mastboot.exe mastboot
+	copy mastboot ..\..\proto
+        1 file(s) copied
+	cd ..
+	cd partboot
+	NMAKE                all
+	ml /DFARDATA= /c /Cp /Cx /Fl /Sa /Zf /Zd /Zi /Sg /Tapartboot.s
+ Assembling: partboot.s
+	link /nologo /M /NOD /NOE /PACKC partboot, partboot.exe, partboot.map,,;
+LINK : warning L4021: no stack segment
+	..\..\exe2bin -strip_to_entry partboot.exe partboot
+	copy partboot ..\..\proto
+        1 file(s) copied
+	cd ..
+	cd ..
+	cd net
+	NMAKE                all
+	cd loader
+	NMAKE                all
+	ml /c /nologo loader.s
+ Assembling: loader.s
+	link /nologo loader;
+LINK : warning L4021: no stack segment
+	..\..\exe2bin loader.exe loader.bin
+	cd ..
+	cd gluecode
+	NMAKE                all
+	cl /nologo /Fm /Fc /c /AS /Gs /G2 /X /DMSC60 gluecode.c
+gluecode.c
+	ml /c /nologo startup.s
+ Assembling: startup.s
+	link /nologo /M gluecode.obj+startup.obj,gluecode.exe;
+	copy /b ..\loader\loader.bin+gluecode.exe ..\..\proto\gluecode.com
+..\LOADER\LOADER.BIN
+GLUECODE.EXE
+        1 file(s) copied
+	cd ..
+	cd ..

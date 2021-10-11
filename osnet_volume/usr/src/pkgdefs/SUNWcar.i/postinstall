@@ -1,0 +1,24 @@
+#ident  "@(#)postinstall 1.1     98/03/12 SMI"
+#
+# Copyright (c) 1998 by Sun Microsystems, Inc.
+# All rights reserved.
+
+OLDBOOTBIN=/platform/i86pc/boot/solaris/boot.bin
+BOOTSYMLINK=${BASEDIR}/platform/i86pc/boot/solaris
+#
+# if upgrade from an old boot system, then remove it and clean up the
+# package database
+# 
+if [ ! -h ${BOOTSYMLINK} -a -f ${BASEDIR}${OLDBOOTBIN} ] ;
+then
+	removef $PKGINST $OLDBOOTBIN |
+	while read pathname
+	do
+		rm $pathname > /dev/null 2>&1	
+	done
+	removef $PKGINST /platform/i86pc/boot/solaris > /dev/null 2>&1
+	removef $PKGINST /platform/i86pc/boot > /dev/null 2>&1
+	removef -f $PKGINST > /dev/null 2>&1
+fi
+
+exit 0

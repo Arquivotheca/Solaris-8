@@ -1,0 +1,23 @@
+#
+#ident	"@(#)versions	1.2	99/03/21 SMI"
+#
+# Copyright (c) 1998-1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+# vers file for libresolv2
+#
+i386 {
+	SUNW_2.1;
+	SUNWprivate_2.2:	{SUNWprivate_2.1};	
+	SUNWprivate_2.1;
+}
+sparcv9 {
+	SUNW_2.1;
+	SUNWprivate_2.2:	{SUNWprivate_2.1};
+	SUNWprivate_2.1;
+}
+sparc {
+	SUNW_2.1;
+	SUNWprivate_2.2:	{SUNWprivate_2.1};
+	SUNWprivate_2.1;
+}

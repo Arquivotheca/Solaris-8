@@ -1,0 +1,25 @@
+/* LINTLIBRARY */
+/* PROTOLIB1 */
+
+/*
+ * Copyright (c) 1997 by Sun Microsystems, Inc. 
+ * All rights reserved. 
+ */ 
+#pragma ident	"@(#)llib-lkstat	1.1	97/04/21 SMI"
+
+#include <stdlib.h>
+#include <stdio.h>
+#include <kstat.h>
+
+/*
+ * usr/src/lib/libkstat
+ */
+
+/* kstat.c */
+kstat_ctl_t *kstat_open(void);
+int kstat_close(kstat_ctl_t *);
+kid_t kstat_read(kstat_ctl_t *, kstat_t *, void *);
+kid_t kstat_write(kstat_ctl_t *, kstat_t *, void *);
+kid_t kstat_chain_update(kstat_ctl_t *);
+kstat_t *kstat_lookup(kstat_ctl_t *, char *, int, char *);
+void *kstat_data_lookup(kstat_t *, char *);

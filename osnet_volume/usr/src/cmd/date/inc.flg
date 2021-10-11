@@ -1,0 +1,4 @@
+#!/bin/sh
+#ident	"@(#)inc.flg	1.1	94/08/15 SMI"
+
+echo_file usr/src/lib/libc/port/gen/values-xpg4.c

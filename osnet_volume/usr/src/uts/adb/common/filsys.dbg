@@ -1,0 +1,42 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)filsys.dbg	1.7	98/01/19 SMI"
+
+#include <sys/param.h>
+#include <sys/types.h>
+#include <sys/t_lock.h>
+#include <sys/fs/ufs_fs.h>
+#include "dummy.h"
+
+\
+\
+fs      	fs_     	filsys
+{adb_inline_begin}
+.>z
+<z+{OFFSET, fs_link}=""
+{adb_inline_end}
+        link            hex
+        rlink           hex
+        sblkno          sdecimal
+        cblkno          sdecimal
+        iblkno          sdecimal
+        dblkno          sdecimal
+        cgoffset        sdecimal
+        cgmask          hex
+        time            date
+        size            sdecimal
+        dsize           sdecimal
+        ncg             sdecimal
+        bsize           hex
+        fsize           hex
+        frag            hex
+        fmod            hex
+        clean           hex
+        ronly           hex
+        fsmnt           echar
+        cgrotor         sdecimal
+{adb_inline_begin}
+<z+{SIZEOF}=""
+{adb_inline_end}

@@ -1,0 +1,5 @@
+* Note that intrgrph machines must also disable the elink driver
+exclude: drv/elink
+exclude: drv/esa
+* Note that this variable keep ncrs from unloading at forceload time
+set ncrs:ncr_forceload = 2

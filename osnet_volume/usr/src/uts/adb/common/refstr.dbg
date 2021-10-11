@@ -1,0 +1,19 @@
+\
+\ Copyright (c) 1999 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\ ident	"@(#)refstr.dbg	1.1	99/04/01 SMI"
+
+#include <sys/refstr_impl.h>
+#include "dummy.h"
+
+\
+\
+refstr     	rs_
+	size		decimal
+	refcnt		decimal
+{adb_inline_begin}
++/"string"n
+.>p
+<p/s
+{adb_inline_end}

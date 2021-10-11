@@ -1,0 +1,39 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)semid.dbg	1.6	98/07/19 SMI"
+
+\	arg		: address of a struct semid_ds
+\	uses		: ipc_perm, sem.nxt
+\	registers	: b, e, n, s
+\	description	: prints all members of structure semid_ds as
+\			  well as the semaphores in the set
+
+#include <sys/types.h>
+#include <sys/cred.h>
+#include <sys/proc.h>
+#include <sys/ipc.h>
+#include <sys/sem.h>
+#include "dummy.h"
+
+\ sem_nsems is a 'short' fetch.
+\
+\
+semid_ds		sem_		semid
+{adb_inline_begin}
+.>s
+*(<s+{OFFSET, sem_base})>b
+*(<s+{OFFSET, sem_nsems})>e
+<e>/s/e
+<s$<<ipc_perm
+<s+{OFFSET, sem_base}=""
+{adb_inline_end}
+	base		hex
+	nsems		decimal
+	otime		date
+	ctime		date
+{adb_inline_begin}
+0>n
+<b,#(#<e)$<sem.nxt
+{adb_inline_end}

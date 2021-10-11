@@ -1,0 +1,40 @@
+/* LINTLIBRARY */
+/* PROTOLIB1 */
+
+/*
+ * Copyright (c) 1997 by Sun Microsystems, Inc. 
+ * All rights reserved. 
+ */ 
+#pragma ident	"@(#)llib-lcmd	1.1	97/03/12 SMI"
+
+#include <stdlib.h>
+#include <stdio.h>
+#include <ctype.h>
+#include <string.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <std.h>
+#include <sum.h>
+
+/*
+ * usr/src/lib/libcmd
+ */
+
+/* deflt.c */
+int defopen(char *fn);
+char *defread(char *cp);
+int defcntl(int cmd, int newflags);
+
+/* getterm.c */
+int getterm(char *tname, char *buffer, char *filename, char *deftype);
+
+/* magic.c */
+int mkmtab(char *magfile, int cflg);
+int ckmtab(char *buf, int bufsize, int silent);
+void prtmtab(void);
+
+/* sum.c */
+int sumpro(struct suminfo *sip);
+int sumupd(struct suminfo *sip, char *buf, int cnt);
+int sumepi(struct suminfo *sip);
+int sumout(FILE *fp, struct suminfo *sip);

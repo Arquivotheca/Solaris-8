@@ -1,0 +1,15 @@
+#
+# Copyright (c) 1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#pragma ident "@(#)Makefile.targ 1.1	99/10/04 SMI"
+#
+# ucblib/libcurses/spec/Makefile.targ
+
+LIBRARY	=	libcurses.a
+VERS	=	.1
+
+OBJECTS	=	curses.o
+
+TRANSCPP =
+SPECCPP =	-I$(ROOT)/usr/ucbinclude

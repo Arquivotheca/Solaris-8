@@ -1,0 +1,62 @@
+\
+\ Copyright (c) 1999 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)usb_pipe_handle_impl.dbg	1.6	99/09/24 SMI"
+
+#include <sys/usb/usba.h>
+#include <sys/usb/usba/usba_types.h>
+#include <sys/usb/usba/usba_impl.h>
+#include "dummy.h"
+
+\
+\
+
+usb_pipe_handle_impl	p_
+{adb_inline_begin}
+.>x
+<x+{OFFSET, p_pipe_handle_list}=""
+{adb_inline_end}
+	pipe_handle_list	.usba_list_entry	ph_list
+{adb_inline_begin}
+<x+{OFFSET, p_pipe_flag}=""
+{adb_inline_end}
+	pipe_flag		hex	flag
+	pipe_handle_size	hex	size
+	usb_device		hex	device
+	state			hex	state
+	last_state		hex	last_state
+	policy			hex	policy
+	endpoint		hex	ep
+	mutex			.mutex
+{adb_inline_begin}
+<x+{OFFSET, p_cv_access}=""
+{adb_inline_end}
+	cv_access		hex
+	busy			hex
+	hcd_private		hex	hcd
+	client_private		hex	client
+	usba_private		hex	usba
+{adb_inline_begin}
+<x+{OFFSET, p_sync_result.p_done}="sync_result"n
+{adb_inline_end}
+	sync_result.p_done	hex	done
+	sync_result.p_cv_sync	hex	cv_sync
+	sync_result.p_rval	hex	rval
+	sync_result.p_data	hex	data
+	sync_result.p_completion_reason	hex	cr
+	sync_result.p_flag	hex	flag
+{adb_inline_begin}
++/n
+<x+{OFFSET, p_hcd_bandwidth}=""
+{adb_inline_end}
+	hcd_bandwidth		hex	bw
+	async_requests_count	hex	async_rq
+	callers_pipe_handle_p   hex     callers_ph
+	n_pending_async_cbs	hex	#async_cbs
+	max_time_waiting	hex	max_time
+	max_callback_time	hex	max_cb_time
+	max_callback		hex	max_cb
+{adb_inline_begin}
+<x+{SIZEOF}=""
+{adb_inline_end}

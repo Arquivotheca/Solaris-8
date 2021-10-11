@@ -1,0 +1,37 @@
+\
+\ Copyright (c) 1997-1998 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)prcommon.dbg	1.5	98/03/10 SMI"
+
+#include <sys/procfs.h>
+#include <sys/vnode.h>
+#include <fs/proc/prdata.h>
+#include "dummy.h"
+
+\
+\
+prcommon                prc_
+{adb_inline_begin}
+.>z
+<_>D;1>_
+<z+{OFFSET, prc_mutex}=""
+{adb_inline_end}
+        mutex                   hex
+        wait                    hex
+        flags                   hex
+        writers                 sdecimal
+        selfopens               sdecimal
+        pid                     sdecimal
+	datamodel		hex
+        proc                    hex
+        thread                  hex
+        slot                    sdecimal
+        tid                     sdecimal
+        tslot                   sdecimal
+	refcnt			sdecimal
+        pollhead                .pollhead
+{adb_inline_begin}
+<D>_
+<z+{SIZEOF}=""
+{adb_inline_end}

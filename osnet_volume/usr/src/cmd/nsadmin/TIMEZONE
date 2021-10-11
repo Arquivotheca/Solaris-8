@@ -1,0 +1,4 @@
+#ident	"@(#)TIMEZONE	1.5	92/07/14 SMI"	/* SVr4.0 1.1	*/
+#	Set timezone environment to default for the machine
+TZ=PST8PDT
+export TZ

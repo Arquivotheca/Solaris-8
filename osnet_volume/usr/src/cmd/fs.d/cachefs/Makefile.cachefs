@@ -1,0 +1,49 @@
+#
+#ident	"@(#)Makefile.cachefs	1.9	96/03/21 SMI"
+#
+# Copyright (c) 1989 by Sun Microsystems, Inc.
+#
+
+CACHEFSDIR=	$(SRC)/cmd/fs.d/$(FSTYPE)/common
+
+#
+# This next line is only enabled if you are NOT doing a RELEASE_BUILD.  It
+# causes changes to header files in $(SRC)/uts/common to cause a rebuild.
+#
+#$(NOT_RELEASE_BUILD)CPPFLAGS	= $(CPPFLAGS.master)
+
+#
+# The next line can be uncommented to turn on debugging when not doing a 
+# RELEASE_BUILD.
+#
+#$(NOT_RELEASE_BUILD)CFLAGS	+= -g	
+
+#
+# Uncomment the next line if you want ZIP extensions.
+#
+#$(NOT_RELEASE_BUILD)CPPFLAGS	+= -DZIP
+
+OBJS=		$(PROGOBJS)
+SRCS=		$(OBJS:%.o=%.c)
+LIBRARY=	libcachefs.a
+CFSLIB=		$(CACHEFSDIR)/$(LIBRARY)
+LDLIBS		+= $(CFSLIB) -lnsl
+
+$(LIBPROG):	$(OBJS)
+		$(LINK.c) -o $@ $(OBJS) $(LDLIBS)
+		$(POST_PROCESS)
+
+$(CFSLIB):
+		cd $(@D); pwd; $(MAKE) $(TARGET);
+		@pwd
+
+$(CACHEFSDIR)/cachefsd.h:
+		cd $(@D); pwd; $(MAKE) $(TARGET);
+		@pwd
+
+lint:	lint_SRCS
+
+clean:     
+	$(RM) $(PROGOBJS) $(CLEANFILES)
+
+FRC:

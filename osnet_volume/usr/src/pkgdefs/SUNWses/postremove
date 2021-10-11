@@ -1,0 +1,55 @@
+#! /bin/sh
+#	Copyright (c) 1997 Sun Microsystems, Inc.
+#		All Rights Reserved
+
+# ident "@(#)postremove	1.1	97/02/18 SMI"
+# SUNWses postremove script
+
+PATH="/usr/bin:/usr/sbin:${PATH}"
+export PATH
+
+EXIT=0
+
+REMDRV=/usr/sbin/rem_drv
+
+DEVLINKTB="$BASEDIR/etc/devlink.tab"
+
+if test ! -f ${DEVLINKTB} -o ! -w ${DEVLINKTB}; then
+	echo "SUNWses: file ${DEVLINKTB} is missing/inacessible." >&2
+	exit 1
+fi
+
+trap "rm -f /tmp/$$.*;exit" 0 1 2 3 13 15
+TMP=/tmp/$$
+
+#
+# rem_devlink - removes an entry from ${DEVLINKTB}
+#
+rem_devlink()
+{
+	PATTERN="$1"
+	LINK="$2"
+
+	grep -v "^$PATTERN	$LINK$" ${DEVLINKTB} >$TMP.devlink
+	mv $TMP.devlink ${DEVLINKTB}
+}
+
+#
+# remove_minor - removes minor node in /dev for passed driver
+#
+#    Usage:	remove_minor {driver_name}
+#
+remove_minor()
+{
+	DRIVER="$1"
+	DEVNODE="${BASEDIR}/dev/es/${DRIVER}"
+	rm -f $DEVNODE*
+}
+
+${REMDRV} -b ${BASEDIR} ses
+rem_devlink 'type=ddi_pseudo;name=ses' 'es/ses\\N0'
+remove_minor ses
+
+touch ${BASEDIR}/reconfigure
+
+exit ${EXIT}

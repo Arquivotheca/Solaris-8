@@ -1,0 +1,38 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)door_data.dbg	1.3	98/01/19 SMI"
+
+#include <sys/door_data.h>
+#include "dummy.h"
+
+\
+\
+door_data       d_
+{adb_inline_begin}
+.>z
+<z+{OFFSET, d_args}=""
+{adb_inline_end}
+        args                    .door_arg
+{adb_inline_begin}
+<z+{OFFSET, d_caller}=""
+{adb_inline_end}
+        caller                  hex
+        servers                 hex
+        active                  hex
+        pool                    hex
+        sp                      hex
+        buf                     hex
+        bufsize                 sdecimal
+        error                   sdecimal
+        fpp_size                sdecimal
+        fpp                     hex
+        upcall                  octal
+        noresults               octal
+        overflow                octal
+        flag                    octal
+        cv                      hex
+{adb_inline_begin}
+<z+{SIZEOF}=""
+{adb_inline_end}

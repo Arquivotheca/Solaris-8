@@ -1,0 +1,47 @@
+#!/bin/sh
+#
+#ident  "@(#)i.sock2path 1.5 99/03/22 SMI"
+#
+# Copyright (c) 1996,1998-1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+
+while read src dest
+do
+	if [ ! -f $dest ] ; then
+		cp $src $dest
+	else
+		# Remove AF_INET-specific /dev/rts entry introduced in 2.6
+		grep -v "[ 	]*24[ 	]\{1,\}4[ 	]\{1,\}2[ 	]\{1,\}/dev/rts" \
+			$dest > /tmp/d.$$
+		cp /tmp/d.$$ $dest
+		rm -f /tmp/d.$$
+		grep '/dev/rts' $dest > /dev/null 2>&1
+		if [ $? != 0 ] ; then
+			echo >> $dest
+			grep '/dev/rts' $src >> $dest
+		fi
+		grep '/dev/tcp6' $dest > /dev/null 2>&1
+		if [ $? != 0 ] ; then
+			echo >> $dest
+			grep '/dev/tcp6' $src >> $dest
+		fi
+		grep '/dev/udp6' $dest > /dev/null 2>&1
+		if [ $? != 0 ] ; then
+			echo >> $dest
+			grep '/dev/udp6' $src >> $dest
+		fi
+		grep '/dev/rawip6' $dest > /dev/null 2>&1
+		if [ $? != 0 ] ; then
+			echo >> $dest
+			grep '/dev/rawip6' $src >> $dest
+		fi
+		grep '/dev/keysock' $dest > /dev/null 2>&1
+		if [ $? != 0 ] ; then
+			echo >> $dest
+			grep '/dev/keysock' $src >> $dest
+		fi
+	fi
+done
+
+exit 0

@@ -1,0 +1,5 @@
+#!/bin/sh
+#pragma ident	"@(#)inc.flg	1.3	92/07/14 SMI" 
+
+echo_file usr/src/lib/Makefile.lib
+echo_file usr/src/lib/Makefile.targ

@@ -1,0 +1,46 @@
+#ident	"@(#)profile	1.18	98/10/03 SMI"	/* SVr4.0 1.3	*/
+
+# The profile that all logins get before using their own .profile.
+
+trap ""  2 3
+export LOGNAME PATH
+
+if [ "$TERM" = "" ]
+then
+	if /bin/i386
+	then
+		TERM=sun-color
+	else
+		TERM=sun
+	fi
+	export TERM
+fi
+
+#	Login and -su shells get /etc/profile services.
+#	-rsh is given its environment in its .profile.
+
+case "$0" in
+-sh | -ksh | -jsh)
+
+	if [ ! -f .hushlogin ]
+	then
+		/usr/sbin/quota
+		#	Allow the user to break the Message-Of-The-Day only.
+		trap "trap '' 2"  2
+		/bin/cat -s /etc/motd
+		trap "" 2
+
+		/bin/mail -E
+		case $? in
+		0) 
+			echo "You have new mail."
+		  	;;
+		2) 
+			echo "You have mail."
+		   	;;
+		esac
+	fi
+esac
+
+umask 022
+trap  2 3

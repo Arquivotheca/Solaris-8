@@ -1,0 +1,30 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)mount.nxt.dbg	1.3	98/01/19 SMI"
+
+\ arg             : address of a struct vfs
+\ uses            : mount.nxt (recursive call)
+\ registers       : n, v
+\ description     : prints a brief view of the vfs, then recurses
+\                   to print the next
+#include <sys/types.h>
+#include <sys/vfs.h>
+#include "dummy.h"
+
+\
+\
+vfs     ""      mount.nxt
+{adb_inline_begin}
+.>v
+*(<v+{OFFSET, vfs_next})>n
+(<v+{OFFSET, vfs_fstype})=""
+{adb_inline_end}
+        vfs_fstype      sdecimal        fstype
+        vfs_flag        hex             flag
+        vfs_data        hex             data
+        vfs_op          symbolic        op
+{adb_inline_begin}
+<n,#(#<n)$<mount.nxt
+{adb_inline_end}

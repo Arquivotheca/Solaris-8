@@ -1,0 +1,82 @@
+#
+#
+# Copyright (c) 1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#ident	"@(#)prototype_com	1.1	99/10/08 SMI"
+#
+# This required package information file contains a list of package contents.
+# The 'pkgmk' command uses this file to identify the contents of a package
+# and their location on the development machine when building the package.
+# Can be created via a text editor or through use of the 'pkgproto' command.
+
+#!search <pathname pathname ...>	# where to find pkg objects
+#!include <filename>			# include another 'prototype' file
+#!default <mode> <owner> <group>	# default used if not specified on entry
+#!<param>=<value>			# puts parameter in pkg environment
+
+# packaging files
+i pkginfo
+i copyright
+i depend
+#
+# source locations relative to the prototype file
+#
+# SUNWmkcdS
+#
+d none usr 755 root sys
+d none usr/share 755 root sys
+d none usr/share/src 755 root sys
+d none usr/share/src/mkisofs 755 root bin
+f none usr/share/src/mkisofs/COPYING 444 root bin
+f none usr/share/src/mkisofs/ChangeLog 444 root bin
+f none usr/share/src/mkisofs/Makefile.in 444 root bin
+f none usr/share/src/mkisofs/README 444 root bin
+f none usr/share/src/mkisofs/README.eltorito 444 root bin
+f none usr/share/src/mkisofs/README.session 444 root bin
+f none usr/share/src/mkisofs/TODO 444 root bin
+f none usr/share/src/mkisofs/acconfig.h 444 root bin
+f none usr/share/src/mkisofs/config.h.in 444 root bin
+f none usr/share/src/mkisofs/configure 555 root bin
+f none usr/share/src/mkisofs/configure.in 444 root bin
+f none usr/share/src/mkisofs/defaults.h 444 root bin
+f none usr/share/src/mkisofs/eltorito.c 444 root bin
+f none usr/share/src/mkisofs/exclude.c 444 root bin
+f none usr/share/src/mkisofs/exclude.h 444 root bin
+f none usr/share/src/mkisofs/files.c 444 root bin
+f none usr/share/src/mkisofs/fnmatch.c 444 root bin
+f none usr/share/src/mkisofs/fnmatch.h 444 root bin
+f none usr/share/src/mkisofs/getopt.c 444 root bin
+f none usr/share/src/mkisofs/getopt.h 444 root bin
+f none usr/share/src/mkisofs/getopt1.c 444 root bin
+f none usr/share/src/mkisofs/hash.c 444 root bin
+f none usr/share/src/mkisofs/install-sh 444 root bin
+f none usr/share/src/mkisofs/iso9660.h 444 root bin
+f none usr/share/src/mkisofs/joliet.c 444 root bin
+f none usr/share/src/mkisofs/make.com 444 root bin
+f none usr/share/src/mkisofs/match.c 444 root bin
+f none usr/share/src/mkisofs/match.h 444 root bin
+f none usr/share/src/mkisofs/mkisofs.8 444 root bin
+f none usr/share/src/mkisofs/mkisofs.c 444 root bin
+f none usr/share/src/mkisofs/mkisofs.h 444 root bin
+f none usr/share/src/mkisofs/mkisofs.spec 444 root bin
+f none usr/share/src/mkisofs/multi.c 444 root bin
+f none usr/share/src/mkisofs/name.c 444 root bin
+f none usr/share/src/mkisofs/rock.c 444 root bin
+f none usr/share/src/mkisofs/tree.c 444 root bin
+f none usr/share/src/mkisofs/vms.c 444 root bin
+f none usr/share/src/mkisofs/vms.h 444 root bin
+f none usr/share/src/mkisofs/write.c 444 root bin
+d none usr/share/src/mkisofs/diag 755 root bin
+f none usr/share/src/mkisofs/diag/Makefile.in 444 root bin
+f none usr/share/src/mkisofs/diag/README 444 root bin
+f none usr/share/src/mkisofs/diag/dump.c 444 root bin
+f none usr/share/src/mkisofs/diag/isodump.c 444 root bin
+f none usr/share/src/mkisofs/diag/isoinfo.8 444 root bin
+f none usr/share/src/mkisofs/diag/isoinfo.c 444 root bin
+f none usr/share/src/mkisofs/diag/isovfy.c 444 root bin
+d none usr/share/src/mkisofs/include 755 root bin
+f none usr/share/src/mkisofs/include/fctldefs.h 444 root bin
+f none usr/share/src/mkisofs/include/mconfig.h 444 root bin
+f none usr/share/src/mkisofs/include/prototyp.h 444 root bin
+f none usr/share/src/mkisofs/include/statdefs.h 444 root bin

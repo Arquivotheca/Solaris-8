@@ -1,0 +1,26 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)tsproc.dbg	1.4	98/01/14 SMI"
+
+#include <sys/param.h>
+#include <sys/types.h>
+#include <sys/ts.h>
+#include "dummy.h"
+
+\
+\
+tsproc                  ts_
+        timeleft                sdecimal
+        dispwait                sdecimal
+        cpupri                  sdecimal
+        uprilim                 sdecimal
+        upri                    sdecimal
+        umdpri                  sdecimal
+        nice                    hex
+        boost                   hex
+        flags                   hex
+        tp                      hex
+        next                    hex
+        prev                    hex

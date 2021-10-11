@@ -1,0 +1,27 @@
+#! /bin/sh
+#
+# ident	"@(#)postremove	1.4	98/12/19 SMI"
+#
+# Copyright (c) 1998 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+
+#
+# remove the DR daemon entry from /etc/inetd.conf.
+#
+
+PATH="/usr/bin:/usr/sbin:${PATH}"
+export PATH
+
+#
+# Remove the dr_daemon RPC entry from the inetd.conf file.
+#
+conf=$BASEDIR/etc/inet/inetd.conf
+entry='300326.*dr_daemon'
+
+if grep "$entry" $conf >/dev/null 2>&1; then
+	sed "/$entry/d" $conf >/tmp/dr.$$ && cat /tmp/dr.$$ >$conf
+	rm -f /tmp/dr.$$
+fi
+
+exit 0

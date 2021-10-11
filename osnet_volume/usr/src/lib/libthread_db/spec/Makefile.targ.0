@@ -1,0 +1,14 @@
+#ident	"@(#)Makefile.targ.0	1.1	99/01/25 SMI"
+#
+# Copyright (c) 1998-1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+# lib/libthread_db/spec/Makefile.targ.0
+
+LIBRARY	=	libthread_db.a
+VERS	=	.0
+
+OBJECTS	=	thread_db0.o
+
+SPECVERS =	$(VERS)
+SPECCPP =

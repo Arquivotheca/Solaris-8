@@ -1,0 +1,20 @@
+#
+#pragma ident	"@(#)versions	1.2	99/05/04 SMI"
+#
+# Copyright (c) 1998-1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+# vers file for straddr.so
+
+i386 {
+	SUNWprivate_2.1;
+}
+sparc {
+	SUNWprivate_2.1;
+}
+sparcv9 {
+	SUNWprivate_2.1;
+}
+ia64 {
+	SUNWprivate_2.1;
+}

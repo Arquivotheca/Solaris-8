@@ -1,0 +1,44 @@
+#
+# Copyright (c) 1990-1995,1998 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#ident	"@(#)prototype_sparc	1.8	99/03/30 SMI"
+#
+# This required package information file contains a list of package contents.
+# The 'pkgmk' command uses this file to identify the contents of a package
+# and their location on the development machine when building the package.
+# Can be created via a text editor or through use of the 'pkgproto' command.
+
+#!search <pathname pathname ...>	# where to find pkg objects
+#!include <filename>			# include another 'prototype' file
+#!default <mode> <owner> <group>	# default used if not specified on entry
+#!<param>=<value>			# puts parameter in pkg environment
+
+#
+# Include ISA independent files (prototype_com)
+#
+!include prototype_com
+#
+#
+#
+# List files which are SPARC specific here
+#
+# source locations relative to the prototype file
+#
+#
+# SUNWpdu
+#
+d none usr 755 root sys
+d none usr/include 755 root bin
+d none usr/include/sys 755 root bin
+d none usr/include/sys/scsi 755 root bin
+d none usr/include/sys/scsi/adapters 755 root bin
+f none usr/include/sys/scsi/adapters/glmvar.h 644 root bin
+f none usr/include/sys/scsi/adapters/glmreg.h 644 root bin
+d none usr/lib 755 root bin
+d none usr/lib/adb 755 root sys
+f none usr/lib/adb/glm 644 root sys
+f none usr/lib/adb/glm_cmd 644 root sys
+f none usr/lib/adb/glm_dsa 644 root sys
+f none usr/lib/adb/glm_unit 644 root sys
+f none usr/lib/adb/glm_tagQ 644 root sys

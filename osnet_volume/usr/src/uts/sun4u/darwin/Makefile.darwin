@@ -1,0 +1,45 @@
+#
+# uts/sun4u/darwin/Makefile.darwin
+# Copyright (c) 1999 by Sun Microsystems, Inc.
+#
+#ident	"@(#)Makefile.darwin 1.2     99/07/12 SMI"
+#
+#	Global definitions for sun4u implementation specific modules.
+#
+
+#
+#	Define directories.
+#
+ROOT_DARWIN_DIR		= $(ROOT_PLAT_DIR)/SUNW,Ultra-5_10
+ROOT_DARWIN_MOD_DIR	= $(ROOT_DARWIN_DIR)/kernel
+
+ROOT_DARWIN_KERN_DIR_32	= $(ROOT_DARWIN_MOD_DIR)
+ROOT_DARWIN_KERN_DIR_64	= $(ROOT_DARWIN_MOD_DIR)/$(SUBDIR64)
+ROOT_DARWIN_MISC_DIR_32	= $(ROOT_DARWIN_MOD_DIR)/misc
+ROOT_DARWIN_MISC_DIR_64	= $(ROOT_DARWIN_MOD_DIR)/misc/$(SUBDIR64)
+
+ROOT_DARWIN_KERN_DIR	= $(ROOT_DARWIN_KERN_DIR_$(CLASS))
+ROOT_DARWIN_MISC_DIR	= $(ROOT_DARWIN_MISC_DIR_$(CLASS))
+
+ROOT_PLAT_MOD_DIRS	+= $(ROOT_DARWIN_MOD_DIR)
+ROOT_PLAT_MISC_DIRS	+= $(ROOT_DARWIN_MISC_DIR)
+ROOT_PLAT_MISC_DIRS_32	+= $(ROOT_DARWIN_MISC_DIR_32)
+
+USR_DARWIN_DIR		= $(USR_PLAT_DIR)/SUNW,Ultra-5_10
+
+DARWIN_LINT_LIB_DIR= $(UTSBASE)/$(PLATFORM)/darwin/lint-libs/$(OBJS_DIR)
+
+#
+# Define objects.
+#
+DARWIN_OBJS	= darwin.o
+
+#
+#	Define modules.
+#
+DARWIN_KMODS	= platmod
+
+#
+#	Include common rules.
+#
+include $(UTSBASE)/sun4u/Makefile.sun4u

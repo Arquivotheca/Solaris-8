@@ -1,0 +1,45 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)shmid.dbg	1.4	99/07/14 SMI"
+
+\       arg             : address of a struct shmid_ds
+\       uses            : ipc_perm
+\       registers       : z
+\       description     : prints the contents of shmid_ds structure
+
+#include <sys/types.h>
+#include <sys/cred.h>
+#include <sys/proc.h>
+#include <sys/ipc.h>
+#include <sys/shm.h>
+#include "dummy.h"
+
+\
+\
+shmid_ds                shm_            shmid
+{adb_inline_begin}
+.>z
+<z+{OFFSET, shm_perm}=""
+{adb_inline_end}
+        perm                    .ipc_perm
+{adb_inline_begin}
+<z+{OFFSET, shm_segsz}=""
+{adb_inline_end}
+        segsz                   sdecimal
+        amp                     hex
+        lkcnt                   sdecimal
+        lpid                    sdecimal
+        cpid                    sdecimal
+        nattch                  decimal
+        cnattch                 decimal
+        atime                   date
+        dtime                   date
+        ctime                   date
+        cv                      hex
+        sptinfo                 hex
+        sptseg                  hex
+{adb_inline_begin}
+<z+{SIZEOF}=""
+{adb_inline_end}

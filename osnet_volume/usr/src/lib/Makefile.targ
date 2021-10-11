@@ -1,0 +1,86 @@
+#
+#ident	"@(#)Makefile.targ	1.37	98/05/01 SMI"
+#
+# Copyright (c) 1995, by Sun Microsystems, Inc.
+# All rights reserved.
+#
+# lib/Makefile.targ
+#
+# included to define local library targets
+#
+
+# conditional assignment of default permissions for the installed
+# DYNLIB/DYNLIBCCC.  Set here and in Makefile.mach, instead of Makefile.lib,
+# because ROOTLIBDIR may be changed in the including makefile after it has
+# included Makefile.lib.
+#
+$(ROOTLIBDIR)/$(DYNLIB) :=	FILEMODE= 755
+$(ROOTLIBDIR)/$(DYNLIBCCC) :=	FILEMODE= 755
+
+$(ROOTLIBDIR64)/$(DYNLIB) :=	FILEMODE= 755
+$(ROOTLIBDIR64)/$(DYNLIBCCC) :=	FILEMODE= 755
+$(ROOTLIBDIR)/libp/$(MACH64)/$(DYNLIB) := FILEMODE= 755
+
+# install rules
+$(ROOTLIBDIR)/%: %
+	$(INS.file)
+$(ROOTLIBDIR64)/%: %
+	$(INS.file)	
+
+$(ROOTLIBDIR)/libp/%: libp/%
+	$(INS.file)
+$(ROOTLIBDIR64)/libp/%: libp/%
+	$(INS.file)
+
+$(ROOTLIBDIR)/$(LIBLINKS): $(ROOTLIBDIR)/$(LIBLINKS)$(VERS)
+	$(INS.liblink)
+$(ROOTLIBDIR64)/$(LIBLINKS): $(ROOTLIBDIR64)/$(LIBLINKS)$(VERS)
+	$(INS.liblink64)
+
+$(ROOTLIBDIR)/$(LIBLINKSCCC): $(ROOTLIBDIR)/$(LIBLINKSCCC)$(VERS)
+	$(INS.liblinkccc)
+$(ROOTLIBDIR64)/$(LIBLINKSCCC): $(ROOTLIBDIR64)/$(LIBLINKSCCC)$(VERS)
+	$(INS.liblinkccc64)
+
+$(ROOTLIBDIR)/$(PLIB): $(ROOTLIBDIR)/libp
+
+$(ROOTLIBDIR64)/$(PLIB): $(ROOTLIBDIR64)/libp
+
+# Targetdirs installs libp -- don't re-install it
+#$(ROOTLIBDIR)/libp:
+#	$(INS.dir)
+
+objs profs pic_profs pics libp:
+	-@mkdir -p $@
+
+$(LIBRARY): objs .WAIT $$(OBJS)
+	$(BUILD.AR)
+	$(POST_PROCESS_A)
+
+$(DYNLIB): pics .WAIT $$(PICS)
+	$(BUILD.SO)
+	$(POST_PROCESS_SO)
+
+$(DYNLIBCCC): pics .WAIT $$(PICS)
+	$(BUILDCCC.SO)
+	$(POST_PROCESS_SO)
+
+$(PLIB): profs libp .WAIT $$(PROFS)
+	$(BUILD.AR)
+	$(POST_PROCESS_A)
+
+$(PIC_PLIB): pic_profs libp .WAIT $$(PIC_PROFS)
+	$(BUILD.SO)
+	$(POST_PROCESS_SO)
+
+$(LINTLIB): $$(SRCS)
+	$(LINT.c) -o $(LIBNAME) $(SRCS) > $(LINTOUT) 2>&1
+
+clobber: clean
+	-$(RM) $(LIBS) $(DYNLIB) $(PLIB) $(PIC_PLIB) $(CLOBBERFILES)
+
+clean:
+	-$(RM) $(OBJS)
+	-$(RM) $(PROFS)
+	-$(RM) $(PIC_PROFS)
+	-$(RM) $(PICS) $(CLEANFILES) $(DUPLICATE_SRC)

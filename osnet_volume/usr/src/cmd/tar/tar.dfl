@@ -1,0 +1,14 @@
+#ident	"@(#)tar.dfl	1.5	92/07/14 SMI"	/* SVr4.0 1.1	*/
+# The block size and the number of blocks are put for completion 
+# purpose. The tape size is infinite and is defined at usage time
+# directly from tape.  Tape size should be non-zero for non-tape devices
+# (e.g., floppy).
+#	   device     		block    size
+archive0=/dev/rmt/0		20	0
+archive1=/dev/rmt/0n		20	0
+archive2=/dev/rmt/1		20	0
+archive3=/dev/rmt/1n		20	0
+archive4=/dev/rmt/0		126	0
+archive5=/dev/rmt/0n		126	0
+archive6=/dev/rmt/1		126	0
+archive7=/dev/rmt/1n		126	0

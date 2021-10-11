@@ -1,0 +1,30 @@
+#
+# Copyright (c) 1995 Sun Microsystems, Inc.
+#
+#pragma ident "@(#)classes.txt 1.25 95/11/06 - Solaris Driver Update"
+
+adp	scsi
+aha	scsi
+aic     scsi
+ata	scsi
+blogic  scsi
+corvette scsi
+csa	scsi
+dpt	scsi
+dsa	scsi
+eha	scsi
+esa	scsi
+iss	scsi
+mcis	scsi
+mscsi	scsi
+mlx	scsi
+ncrs    scsi
+pcscsi	scsi
+trantor scsi
+
+isa	sysbus
+eisa	sysbus
+mc	sysbus
+
+pci     pci
+pci_pci pci

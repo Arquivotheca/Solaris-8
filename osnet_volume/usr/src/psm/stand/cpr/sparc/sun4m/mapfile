@@ -1,0 +1,15 @@
+#
+# Copyright (c) 1995 - 1996, by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#ident	"@(#)mapfile	1.3	96/04/16 SMI"
+ 
+text    = LOAD ?RX V0xfdb00000;
+text    : $PROGBITS ?A!W;
+ 
+data    = LOAD ?RWX;
+data    : $PROGBITS ?AW;
+data    : $NOBITS ?AW;
+ 
+note    = NOTE;
+note    : $NOTE;

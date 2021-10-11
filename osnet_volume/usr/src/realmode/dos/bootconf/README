@@ -1,0 +1,308 @@
+#
+# Copyright (c) 1999 by Sun Microsystems, Inc.
+# All Rights Reserved.
+#
+# README file for bootconf
+#
+#ident	"<@(#)README	1.6	99/01/20 SMI>"
+#
+
+this directory contains the source for the "bootconf" program, which
+runs on DOS (i.e. under our booting system).
+
+BUILDING
+
+	to build this under DOS:
+
+		make  or
+		nmake -f makefile.dos	(produces the binary "bootconf.exe")
+
+INDEX OF SOURCE
+
+	the printf variants behave as expected, but you'll probably never
+	use them (unless you need to sprintf something).  instead, you'll
+	probably do all i/o via the menu routines.  they are built on top
+	of the gettext, *_tty and *printf routines like this:
+
+		+------------------------------------------------+
+		|  *_menu routines to provide menus              |
+		+------------------------------------------------+
+					|
+					|
+					V
+		+------------------------------------------------+
+		|  gettext routine to translate strings          |
+		+------------------------------------------------+
+					|
+					|
+					V
+		+------------------------------------------------+
+		|  *_tty routines to optimize output & get input |
+		+------------------------------------------------+
+					|
+					|
+					V
+		+------------------------------------------------+
+		|  *printf routines to produce formatted output  |
+		+------------------------------------------------+
+
+	there are five types of menus provides by the five menu routines.
+	notice that these routines call gettext for you so you don't have to.
+
+		status_menu
+
+			this is really just a screen for "please wait..."
+			type messages.  this routine doesn't wait for input.
+
+		enter_menu
+
+			this displays a message and tells the user to hit
+			enter.  good for error messages & simple help.
+
+		text_menu
+
+			this displays a block of scrolling text.
+
+		select_menu
+
+			this gives the user a list from which selections
+			are made.
+
+		input_menu
+
+			this puts an input field on the screen.
+
+		option_menu
+
+			does the bottom-line (Function key menu) stuff only
+
+	program termination is only allowed via one of two calls:
+
+		fatal
+
+			this prints the fatal error message to the screen.
+
+		done
+
+			this is the "normal" program termination.
+
+	the file "main.c" contains the main program as well as the main
+	menu.  from the main menu, the user can:
+
+		1. boot solaris (file "boot.c")
+		2. edit preferences (file "bootpref.c")
+		3. configure devices (file "config.c")
+
+	bus enumerators are routines contained in the files:
+
+		eisa.c
+		pci.c
+		pnp.c
+		pcmcia.c
+
+	the file "escd.c" deals with the escd itself.
+	the file "boards.c" deals with the data structures in "boards.h".
+
+STYLE GUIDELINES WHICH MUST BE FOLLOWED
+
+	1. most files must pass cstyle
+	   exceptions are asm files, and includes we inherited.
+
+STYLE GUIDELINES WHICH I'D LIKE TO FOLLOW
+
+	1. minimize "asm" statements by using library routines where possible
+	2. little or no "far" keywords
+	3. build modules like this:
+		- put in file named <module>.c and put prototypes and any
+		  exported data structures in a <module>.h file.  the <module>
+		  part should conform to DOS filename restrictions.
+		- name the routines
+			init_<module>	for init function (if applicable)
+			fini_<module>	for finalize function (if applicable)
+			*_<module>	for other functions
+
+STYLE GUIDELINES I FOLLOW BUT DON'T CARE IF YOU FOLLOW
+
+	1. all routines have "plauger-style" comment at top:
+
+		/*
+		 * routine_name -- short description that fits in one line
+		 */
+
+	2. global variables have first letter capitalized
+	3. the string "XXX" marks areas that still need attention
+	4. my include files don't have nested includes (maybe they should!)
+
+TO DO LIST
+
+	1. flesh out code marked with XXX
+
+-------------------------------------------------------------------------------
+
+PLAYBACK MODE:
+
+    Although normally an interactive program, bootconf is able to take input
+    from a script file.  When reading input from a script, bootconf is said
+    to be running in "playback" mode.  To enable playback mode, use:
+
+			bootconf -p<script-file>
+
+				OR
+
+			bootconf -P<script-file>
+
+    where "<script-file>" is the name of an ASCII text file containing a series
+    of input commands as described below.  When the "-p" switch is used, boot-
+    conf does NOT update the video display as it progresses through the script
+    whereas using "-P" will cause the display to be updated (although it tends
+    to flash by rather quickly).
+
+    Another difference between the "-p" and "-P" switch is what happens upon
+    reaching the end of the script file.  When "-p" is used, bootconf term-
+    inates execution at EOF on the script file.  When "-P" is used, bootconf
+    exits playback mode and returns to manual input.
+
+Script commands:
+----------------
+
+    The following commands are valid in bootconf script files.  All keywords
+    are case insensitive.
+
+    Cursor movement commands:
+
+	TAB:      Generates a tab character
+	BACKTAB:  Generates a backtab keystroke
+	UP:       Generates an up-arrow keystroke
+	DOWN:	  Generates a down-arrow keystroke
+	LEFT:	  Generates a left-arrow keystroke
+	RIGHT:	  Generates a right-arrow keystroke
+	PAGEUP:   Generates a page-up keystroke
+	PAGEDOWN: Generates a page-down keystroke
+	HOME:     Generates a "home" keystroke
+	END:	  Generates an "end" keystroke
+
+    Other keystroke commands:
+
+	ENTER:	  Generates a carriage return
+	SPACE:    Generates an ASCII space character
+	F1-F12:   Generate the corresponding function keystroke
+
+	" ... ":  Characters enclosed in double quotes are passed directly
+		  to bootconf's input routines.  C-like backslash escapes
+		  are supported.
+
+	SELECT <item>:
+
+		  This command only works from "selection" menus.  It gen-
+		  erates enough UP or DOWN commands to position the cursor
+		  at the indicated "item", then generates a SPACE to select
+		  said item.  The "<item>" may be specified in one of two
+		  ways ...
+
+		    1.  As a zero-based integer index, N.  This indicates
+			that the Nth item in the list is to be selected.
+
+		    2.  As a quoted string containing a shell-like pattern
+			(i.e, the "*", "?", and "[...]" meta characters are
+			supported).  This indicates that the first item in
+			the list that matches this pattern is to be selected.
+
+
+    Conditional commands:
+
+	ASSSERT <expression>:
+
+		  Causes bootconf to fail with an appropriate error message
+		  if the given "expression" is false.
+
+ 	IF <expression> THEN <commands> [ ELSE <commands> ] FI:
+
+		  Conditionally executes the "commands" in the THEN or ELSE
+		  clause depending on whether or not the given "expression"
+		  is true.
+
+
+	For both of these commands, <expression> is a string comparison
+	of the form:
+
+		<string> <relational-op> <string>
+
+	where <string> is either:
+
+	    1.  A string of ASCII characters enclosed in double quotes
+		(with optional C-like backslash escapes).
+
+	    2.  A screen position of the form <row>,<column>.  Where "row"
+		and "column" may be decimal numbers, an asterisk ("*") to
+		indicate the current row/column of the cursor, or combinations
+		of these separated by "+" or "-".
+
+	and <relastional-op> is one of:
+
+	    "=" or "=="  ...  True if strings compare equal
+	    "!="	 ...  True if strings are not equal
+	    "<"		 ...  True if fisrt string is less than second
+	    "<="	 ...  True if first string is less than or equal
+	    ">"		 ...  True if first string is greater than second
+	    ">="	 ...  True if first string is greater than or equal
+
+	The comparison length is taken to be the length of the shortest quoted
+	string in the expression, or (if there is no quoted string) the length
+	of the shorter string taken from the screen.  Strings taken from the
+	screen buffer are assumed to be terminated by white space.
+
+    Miscellaneous commands:
+
+	#:	  Comment indicator; text up to the next newline is ignored.
+	DONE:	  Interpreted as a CTL-C
+	PRINT:	  Dumps the current screen contents to the "debug.txt" file.
+	WAIT:	  Holds screen until user presses ENTER ("-P" only).
+
+Example:
+--------
+
+    This one works.  Try it yorself!
+
+	#  @(#)example.script  --  You can use comments for SCCS IDs
+
+	#  The first bootconf screen gives a list of options, and defaults to
+	#  (i.e, positions the cursor at) "Boot Solaris".  Note use of cursor
+	#  relative screen position in the assertion ...
+
+	assert *,*+4 = "Boot Solaris"
+
+	if 13,8 = "Boot Solarix" then
+		#  "Boot Solarix" is not equal to "Boot Solaris" so we won't
+		#  do this ...
+
+  		print
+	else
+		#  Select the "Device Configuration" option on the main
+		#  menu and press F2
+
+		select "Dev*" f2
+
+		#  F4 selets the "Add Device" screen, F3 gives the device type
+		#  sort options.
+
+  		f4 f3 # comments work here, too!
+
+		#  If statements may be nested up to 16 levels deep!
+  		if "xxx" != "yyy" then
+
+			#  Select the 3rd item from the list.  We could also
+			#  use "select 2" for this!
+
+			down
+			down
+			space
+	
+     			print 	# Screen is written to "debug.txt"
+			f2	# Now do it!
+
+  		else
+			#  We should never get here.  If we do, bootconf will
+			#  blow up!
+     			assert "a" = "b"
+  		fi
+	fi

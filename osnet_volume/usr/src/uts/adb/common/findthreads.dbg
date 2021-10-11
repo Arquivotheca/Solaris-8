@@ -1,0 +1,30 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)findthreads.dbg	1.3	98/01/19 SMI"
+
+\ arg             : address of a struct proc
+\ uses            : findthreads
+\ registers       : a, p
+\ description     : finds all threads belonging to a particular
+\                   proc. this is useful when ps reports a process
+\                   as a zombie, but it isn't really one yet.
+\                   changed from using allthreads to t0, 'cos
+\                   allthreads seems to be inaccessible by kadb
+\                   in 2.7.
+\ comments        : doesn't need any structure, so using __dummy
+\                   as the structure name in the structure
+\                   specification line.
+\
+#include "dummy.h"
+
+\
+\
+__dummy         ""      findthreads
+{adb_inline_begin}
+.>p
+t0>a
+<a$<<findthreads.nxt
+.=nn"DONE"
+{adb_inline_end}

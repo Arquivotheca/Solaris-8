@@ -1,0 +1,42 @@
+\
+\ Copyright (c) 1998, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)ifp_request.dbg	1.2	98/07/20 SMI"
+
+#include <sys/types.h>
+#include <sys/dditypes.h>
+#include <sys/mutex.h>
+#include <sys/scsi/scsi.h>
+#include <sys/scsi/adapters/ifpmail.h>
+#include <sys/fc4/fcp.h>
+#include <sys/fc4/fcal_linkapp.h>
+#include <sys/scsi/adapters/ifpio.h>
+#include <sys/scsi/adapters/ifpvar.h>
+#include <sys/scsi/adapters/ifpcmd.h>
+#include <sys/scsi/adapters/ifpmail.h>
+#include "dummy.h"
+
+\ Print the request structure.
+\ This is passed the the Qlogic firmware in the input queue.
+ifp_request             req_
+{adb_inline_begin}
+.>z
+<z+{OFFSET, req_header.cq_entry_count}=""
+{adb_inline_end}
+        header.cq_entry_count	hex
+        header.cq_entry_type	hex
+        header.cq_flags		hex
+        header.cq_seqno		hex
+        token                   hex
+        target		      	hex
+        lun_trn     		hex
+        cdblen                  hex
+        flags                   hex
+        time                    hex
+        seg_count               hex
+        cdb                     hex
+{adb_inline_begin}
+<z+{OFFSET, req_dataseg}/n"req_dataseg"n6Xn
+<z+{SIZEOF}=""
+{adb_inline_end}

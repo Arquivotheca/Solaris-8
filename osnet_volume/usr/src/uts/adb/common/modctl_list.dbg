@@ -1,0 +1,20 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)modctl_list.dbg	1.3	98/01/19 SMI"
+
+#include <sys/modctl.h>
+#include "dummy.h"
+
+\
+\
+modctl_list
+{adb_inline_begin}
+.>l
+*(<l+{OFFSET, modl_modp})>m
+<m$<<modctl
+*(<l+{OFFSET, modl_next})>l
+,#(#(<l))$<modctl_list
+,#(<l)$<
+{adb_inline_end}

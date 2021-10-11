@@ -1,0 +1,12 @@
+#
+# ident	"@(#)versions-sun4u	1.1	99/07/02 SMI"
+#
+# Copyright (c) 1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+# lib/libmd5_psr/spec/sparcv9/versions-sun4u
+#
+
+sparcv9 {
+	SUNWprivate_1.1;
+}

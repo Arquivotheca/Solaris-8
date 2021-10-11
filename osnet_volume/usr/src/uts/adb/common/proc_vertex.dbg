@@ -1,0 +1,17 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)proc_vertex.dbg	1.2	98/01/14 SMI"
+
+#include <sys/flock_impl.h>
+#include "dummy.h"
+
+\
+\
+proc_vertex
+        pid                     hex
+        sysid                   hex
+        edge                    hex             "proc edge"
+        incount                 hex
+        index                   hex

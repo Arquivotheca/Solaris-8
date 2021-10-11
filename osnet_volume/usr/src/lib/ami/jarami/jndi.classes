@@ -1,0 +1,96 @@
+#
+# Copyright (c) 1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#pragma ident "@(#)jndi.classes	1.1 99/07/11 SMI"
+#
+#	Java source files for AMI
+#
+
+JNDIPKGDIR=	javax/naming
+LDAPPKGDIR=	com/sun/jndi
+
+NAMEINGSRCS=	AuthenticationException AuthenticationNotSupportedException \
+	BinaryRefAddr Binding CannotProceedException CommunicationException \
+	CompositeName CompoundName ConfigurationException Context \
+	ContextNotEmptyException InitialContext InsufficientResourcesException \
+	InterruptedNamingException InvalidNameException LimitExceededException \
+	LinkException LinkLoopException LinkRef MalformedLinkException Name \
+	NameAlreadyBoundException NameClassPair NameImpl NameNotFoundException \
+	NameParser NamingEnumeration NamingException NamingSecurityException \
+	NoInitialContextException NoPermissionException NotContextException \
+	OperationNotSupportedException PartialResultException RefAddr \
+	Reference Referenceable ReferralException ServiceUnavailableException \
+	SizeLimitExceededException StringRefAddr TimeLimitExceededException
+
+DIRECTORYSRCS=	Attribute AttributeInUseException \
+	AttributeModificationException Attributes BasicAttribute \
+	BasicAttributes DirContext InitialDirContext \
+	InvalidAttributeIdentifierException InvalidAttributeValueException \
+	InvalidAttributesException InvalidSearchControlsException \
+	InvalidSearchFilterException ModificationItem NoSuchAttributeException \
+	SchemaViolationException SearchControls SearchResult
+
+DERIVEDDIRECTORYSRCS=	BasicAttribute*ValuesEnumImpl \
+	BasicAttributes*AttrEnumImpl BasicAttributes*IDEnumImpl
+
+EVENTSRCS=	EventContext EventDirContext NamespaceChangeListener \
+	NamingEvent NamingExceptionEvent NamingListener ObjectChangeListener
+
+LDAPSRCS=	Control ControlFactory ExtendedRequest ExtendedResponse \
+	HasControls InitialLdapContext LdapContext LdapReferralException \
+	UnsolicitedNotification UnsolicitedNotificationEvent \
+	UnsolicitedNotificationListener
+
+SPISRCS=	ContinuationContext ContinuationDirContext DirObjectFactory \
+	DirStateFactory DirectoryManager InitialContextFactory \
+	InitialContextFactoryBuilder NamingManager ObjectFactory \
+	ObjectFactoryBuilder ResolveResult Resolver StateFactory
+
+DERIVEDSPISRCS=	DirStateFactory*Result
+
+NAMEINGINTERNALSRCS=	FactoryEnumeration ResourceManager VersionHelper \
+	VersionHelper12
+
+DERIVEDNAMEINGINTERNALSRCS=	ResourceManager*FactoryKey \
+	VersionHelper12*1 VersionHelper12*2 VersionHelper12*3 \
+	VersionHelper12*4 VersionHelper12*5 VersionHelper12*6 \
+	VersionHelper12*InputStreamEnumeration
+
+LDAPPSRCS=	BasicControl LdapReferralContext Ber LdapReferralException \
+	BerDecoder LdapRequest BerEncoder LdapResult BindingWithControls \
+	LdapSchemaCtx Connection LdapSchemaParser LdapURL \
+	DefaultResponseControlFactory LdapSearchEnumeration \
+	EntryChangeResponseControl EventQueue ManageReferralControl \
+	EventSupport NameClassPairWithControls Filter NamingEventNotifier \
+	LdapAttribute NotifierArgs LdapBindingEnumeration Obj \
+	LdapClient PersistentSearchControl LdapCtx ReferralEnumeration \
+	LdapCtxFactory SearchResultWithControls LdapEntry \
+	UnsolicitedResponseImpl LdapName VersionHelper LdapNameParser \
+	VersionHelper12 LdapNamingEnumeration
+# jndiprovider.properties
+
+TOOLKITSRCS=	ctx/AtomicContext ctx/HeadTail ctx/AtomicDirContext \
+	ctx/PartialCompositeContext ctx/ComponentContext \
+	ctx/PartialCompositeDirContext ctx/ComponentDirContext \
+	ctx/StringHeadTail ctx/Continuation dir/AttrFilter \
+	dir/HierMemDirCtx dir/ContainmentFilter \
+	dir/LazySearchEnumerationImpl dir/ContextEnumerator \
+	dir/SearchFilter dir/DirSearch url/GenericURLContext \
+	url/UrlUtil url/GenericURLDirContext
+
+URLSRCS=	ldap/ldapURLContext ldap/ldapURLContextFactory
+
+JNDICLASSES=	$(NAMEINGSRCS:%=$(JNDIPKGDIR)/%) \
+	$(DIRECTORYSRCS:%=$(JNDIPKGDIR)/directory/%) \
+	$(NAMEINGINTERNALSRCS:%=com/sun/naming/internal/%) \
+	$(EVENTSRCS:%=$(JNDIPKGDIR)/event/%) \
+	$(LDAPSRCS:%=$(JNDIPKGDIR)/ldap/%) \
+	$(SPISRCS:%=$(JNDIPKGDIR)/spi/%) \
+	$(LDAPPSRCS:%=$(LDAPPKGDIR)/ldap/%) \
+	$(TOOLKITSRCS:%=$(LDAPPKGDIR)/toolkit/%) \
+	$(URLSRCS:%=$(LDAPPKGDIR)/url/%)
+
+JNDIDERIVEDCLASSES=	$(DERIVEDDIRECTORYSRCS:%=$(JNDIPKGDIR)/directory/%) \
+	$(DERIVEDNAMEINGINTERNALSRCS:%=com/sun/naming/internal/%) \
+	$(DERIVEDSPISRCS:%=$(JNDIPKGDIR)/spi/%)

@@ -1,0 +1,70 @@
+#
+#pragma ident	"@(#)mapfile	1.3	99/08/27 SMI"
+#
+# Copyright (c) 1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#
+# Generic interface definition for usr/src/lib/storage/liba5k.
+#
+# For information regarding the establishment of versioned definitions see:
+#       The Linker and Libraries Manual (version 2.5 or greater)
+# This is part of the Developers Guide in the Answerbook.  Specifically refer
+# to Chapter 2 under section "Defining Additional Symbols" through section
+# "Reducing Symbol Scope", and Chapter 5 "Versioning".
+#
+# For Sun's specific rules for the modification (evolution) of these version
+# definitions see:
+#    "Policy for Shared Library Version Names and Interface Definitions"
+#    in /shared/ON/general_docs/scoping_rules.ps
+#
+SUNWprivate_a5k_2.0 {
+	global:
+		l_chk_null_wwn;
+		l_convert_name;
+		l_dev_pwr_up_down;
+		l_device_present;
+		l_download;
+		l_duplicate_names;
+		l_encl_status_page_funcs;
+		l_format_fc_status_msg;
+		l_format_ifp_status_msg;
+		l_free_box_list;
+		l_free_lstate;
+		l_get_allses;
+		l_get_box_list;
+		l_get_disk_element_index;
+		l_get_disk_port_status;
+		l_get_disk_status;
+		l_get_drive_name;
+		l_get_envsen;
+		l_get_envsen_page;
+		l_get_ib_status;
+		l_get_individual_state;
+		l_get_port;
+		l_get_ses_path;
+		l_get_slot;
+		l_get_status;
+		l_led;
+		l_pho_pwr_up_down;
+		l_make_node;
+		l_new_name;
+		l_offline_photon;
+	local:
+		*;
+};
+
+SUNWprivate_a5kp_2.0 {
+	global:
+		d_bp_bypass_enable;
+		d_dev_bypass_enable;
+		d_p_bypass;
+		d_p_enable;
+		l_check_file;
+		l_element_msg_string;
+		l_get_conflict;
+		l_get_mode_pg;
+		l_new_password;
+} SUNWprivate_a5k_2.0;
+
+				

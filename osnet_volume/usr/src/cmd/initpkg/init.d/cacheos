@@ -1,0 +1,245 @@
+#!/sbin/sh
+#
+# Copyright (c) 1996-1997 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#ident	"@(#)cacheos	1.33	99/08/07 SMI"
+
+cocdevconfig() {
+	#
+	# configure devices before setting up cache disk
+	#
+
+	exec < $vfstab; readvfstab /proc
+	if [ -n "$mountp" -a -d /proc ]; then
+		/sbin/mount /proc >/dev/null 2>&1
+	fi
+
+	_INIT_RECONFIG="set"; export _INIT_RECONFIG
+	/sbin/sh /etc/init.d/drvconfig
+	/sbin/sh /etc/init.d/devlinks
+	_INIT_RECONFIG=""; export _INIT_RECONFIG
+
+	/sbin/umount /proc >/dev/null 2>&1
+	[ -f /reconfigure ] && /usr/bin/rm -f /reconfigure
+}
+
+dodots() {
+	echo "Configuring cache and swap:\c"
+	(
+		while :; do
+			/usr/bin/sleep 6
+			echo ".\c"
+		done
+	) &
+	dotpid=$!
+}
+
+coc_runprofile() {
+	# Process the disk configuration profile
+
+	if [ -f /.autoinstall/preinstall ]; then
+		/usr/bin/mv /.autoinstall/preinstall \
+		    /.autoinstall/preinstall.done
+		/sbin/sh /.autoinstall/preinstall.done
+	fi
+
+	if [ -f /.autoinstall/profile ]; then
+		exec < $vfstab; readvfstab /dev/fd
+		if [ "$mountp" -a -d /dev/fd ]; then
+			/sbin/mount /dev/fd >/dev/null 2>&1
+		fi
+
+		SWAPSIZE=`/sbin/bpgetfile swapsize | \
+			(read junk size junk; echo $size)`
+
+		[ $SWAPSIZE -eq 0 ] && SWAPSIZE=32
+		SYS_SWAPSIZE=$SWAPSIZE; export SYS_SWAPSIZE
+
+		/usr/sbin/install.d/cosinstall -c none \
+			/.autoinstall/profile >/dev/null
+
+		[ $? -ne 0 ] && fatal_err "Error in disk configuration."
+		/sbin/umount /dev/fd >/dev/null 2>&1
+	fi
+}
+
+get_cachedev() {
+	# Get cache device from vfstab
+
+	exec < $vfstab; readvfstab "$CACHEMNT"
+	CACHEDEV=$special
+	RCACHEDEV=$fsckdev
+
+	if [ -z "$CACHEDEV" -o -z "$RCACHEDEV" ]; then
+
+		# This is either a bug in cosinstall or the user made a bad
+		# modification to vfstab.  Not much we can do here.
+
+		fatal_err "Could not find $CACHEMNT entry in vfstab!"
+	fi
+
+	/usr/lib/fs/cachefs/cfstagchk $RCACHEDEV >/dev/null 2>&1
+
+	if [ $? -ne 0 ]; then
+		if [ $newcache -ne 0 ]; then
+			fatal_reboot "Improperly tagged cache device!"
+		else
+			fatal_reboot \
+			    "Improper cache device -- rebooting with -f flag"
+		fi
+	fi
+}
+
+make_cachefsinfo() {
+	CACHEFSINFO="${CACHEMNT}/.cachefsinfo"
+	BACKFS=`/usr/lib/fs/cachefs/cfsfstype -b`
+	bfserr=$?
+	BACKFSDEV=`/usr/lib/fs/cachefs/cfsfstype -d -b`
+	bfsderr=$?
+	if [ $bfserr -eq 0 -a $bfsderr -eq 0 ]; then
+		echo "backfs=${BACKFS}" > $CACHEFSINFO
+		echo "backfsdev=${BACKFSDEV}" >> $CACHEFSINFO
+	fi
+}
+
+add_booter() {
+	ROOTPFDIR=/platform/${_INIT_UTS_MACHINE:=`/usr/bin/uname -m`}
+	USRPFDIR=/usr/platform/${_INIT_UTS_PLATFORM:=`/usr/bin/uname -i`}
+
+	if [ ! -d $CACHEMNT/$ROOTPFDIR ]; then
+		/usr/bin/mkdir -p -m 0755 $CACHEMNT/$ROOTPFDIR
+	fi
+
+	if [ $_INIT_UTS_MACHINE != $_INIT_UTS_PLATFORM ]; then
+		/usr/bin/ln -s $_INIT_UTS_MACHINE \
+		    $CACHEMNT/platform/$_INIT_UTS_PLATFORM
+	fi
+
+	for BOOTF in $ROOTPFDIR/ufsboot $ROOTPFDIR/boot/solaris/boot.bin; do
+		if [ -f $BOOTF ]; then
+			BOOTFDIR=`/usr/bin/dirname $BOOTF`
+			[ -d $CACHEMNT/$BOOTFDIR ] || \
+			    /usr/bin/mkdir -m 0755 -p $CACHEMNT/$BOOTFDIR
+			cp -p $BOOTF $CACHEMNT/$BOOTF
+		fi
+	done
+
+	if [ $_INIT_UTS_MACHINE = i86pc ]; then
+		/usr/sbin/installboot $USRPFDIR/lib/fs/ufs/pboot \
+		    $USRPFDIR/lib/fs/ufs/bootblk $RCACHEDEV
+	else
+		/usr/sbin/installboot $USRPFDIR/lib/fs/ufs/bootblk $RCACHEDEV
+	fi
+}
+
+fatal_reboot() {
+	if [ $dotpid -ne 0 ]; then
+		kill $dotpid >/dev/null 2>&1
+		kill $dotpid >/dev/null 2>&1
+	fi
+
+	echo "\nFATAL: $1"
+
+	if [ -f /.cachefs-reboot ]; then
+		/usr/bin/rm -f /.cachefs-reboot
+		/usr/sbin/sync
+
+		echo \
+		   "\nTried to auto reboot with -f and there was still an error"
+
+		/usr/sbin/halt
+	else
+		echo "cacheos" > /.cachefs-reboot
+		/usr/sbin/sync
+		echo "\nrebooting"
+		/usr/sbin/reboot -- -f
+	fi
+}
+
+fatal_err() {
+	if [ $dotpid -ne 0 ]; then
+		kill $dotpid >/dev/null 2>&1
+		kill $dotpid >/dev/null 2>&1
+	fi
+
+	echo "\nFATAL: $1"
+	/usr/sbin/halt
+}
+
+# See if the root file system type is "cachefs".  If so, we do the
+# work necessary for caching root and /usr on a "cache-only-client".
+# We either create a new cache or validate an existing cache, and
+# get the cache "front file system" mounted so that everything is
+# in place when S40standardmounts runs and does (re)mounts using cachefs.
+
+ROOTFS=`/usr/lib/fs/cachefs/cfsfstype -r 2>/dev/null`
+
+if [ "x$ROOTFS" = xcachefs ]; then
+	dotpid=0
+	CACHEMNT=/.cache
+	CACHEDIR=$CACHEMNT/rootcache
+	IMARK=/COSINSTALL
+	RMARK=/reconfigure
+	newcache=0
+	cfsfsckflags="-o nonoclean"
+	
+	if [ -f $IMARK -o "$_CACHEFS_FLUSHCACHE" = YES -o -f $RMARK ]; then
+		newcache=1
+	fi
+	
+	if [ $newcache -ne 0 ]; then
+		cocdevconfig
+		dodots
+		coc_runprofile
+		get_cachedev
+		make_cachefsinfo
+		add_booter
+		/usr/bin/rm -f $IMARK
+	else
+		dodots
+		get_cachedev
+	
+		# Check and mount the cache
+	
+		/usr/sbin/fsck -o p $RCACHEDEV >/dev/null 2>&1
+		fsckerr=$?
+	
+		if [ $fsckerr -ne 0 ]; then
+			/usr/lib/fs/cachefs/cfsfstype -n
+			/usr/sbin/fsck -y $RCACHEDEV >/dev/null 2>&1
+			fsckerr=$?
+			cfsfsckflags="${cfsfsckflags},noclean"
+		fi
+	
+		if [ $fsckerr -ne 0 ]; then
+			> $IMARK
+			fatal_reboot "Could not fsck $RCACHEDEV."
+		fi
+	
+		FRONTFS=`/usr/lib/fs/cachefs/cfsfstype -f 2>/dev/null`
+		if [ -z "$FRONTFS" ]; then
+			/usr/sbin/mount $CACHEDEV $CACHEMNT || \
+			    fatal_err "Could not mount cache device $CACHEDEV."
+		else
+			/usr/lib/fs/cachefs/cfsfstype -c $CACHEMNT || \
+			    fatal_err "Could not convert $CACHEDEV."
+		fi
+	fi
+	
+	[ -f /.cachefs-reboot ] && /usr/bin/rm -f /.cachefs-reboot
+	
+	if [ -d $CACHEDIR ]; then
+		/usr/sbin/fsck -F cachefs $cfsfsckflags $CACHEDIR || \
+		    /usr/bin/rm -rf $CACHEDIR
+	fi
+	
+	if [ ! -d $CACHEDIR ]; then
+		/usr/lib/fs/cachefs/cfsadmin -c $CACHEDIR || \
+		    fatal_err "Could not create cache in $CACHEDIR."
+	
+		kill $dotpid >/dev/null 2>&1
+		kill $dotpid >/dev/null 2>&1
+		echo "done."
+	fi
+fi

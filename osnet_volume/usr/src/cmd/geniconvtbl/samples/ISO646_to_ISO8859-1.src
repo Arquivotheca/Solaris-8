@@ -1,0 +1,16 @@
+// Copyright (c) 1999 by Sun Microsystems, Inc.
+// All rights reserved.
+//
+// ident	"@(#)ISO646_to_ISO8859-1.src 1.3	99/05/27 SMI"
+
+//
+// from ISO646 to ISO8859-1
+//
+
+ISO646%ISO8859_1 {
+	map {
+		0x00...0x7f	0x00
+		// default error
+		// if no input sequence match, it occur EILSEQ.
+	};
+}

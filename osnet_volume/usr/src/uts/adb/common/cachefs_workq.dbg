@@ -1,0 +1,38 @@
+\
+\ Copyright (c) 1997-1998 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)cachefs_workq.dbg	1.6	98/02/09 SMI"
+
+\ arg             : address of cachefs_workq struct
+\ uses            : mutex
+\ registers       : z
+\ description     : prints the contents of cachefs_workq structure
+
+#include <sys/fs/cachefs_fs.h>
+#include "dummy.h"
+ 
+\
+\
+cachefs_workq           wq_
+{adb_inline_begin}
+.>z
+<z+{OFFSET, wq_head}=""
+{adb_inline_end}
+        head                    hex
+        tail                    hex
+        length                  sdecimal
+        thread_count            sdecimal
+        max_len                 sdecimal
+	halt_request		hex
+{adb_inline_begin}
++/n"flags"nx
+<z+{OFFSET, wq_req_cv}=""
+{adb_inline_end}
+        req_cv                  hex
+        halt_cv                 hex
+        queue_lock              .mutex
+{adb_inline_begin}
+<z+{OFFSET, wq_cachep}=""
+{adb_inline_end}
+        cachep                  hex

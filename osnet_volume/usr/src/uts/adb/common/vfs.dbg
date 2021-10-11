@@ -1,0 +1,28 @@
+\
+\ Copyright (c) 1997-1999 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)vfs.dbg	1.10	99/05/31 SMI"
+
+#include <sys/types.h>
+#include <sys/vfs.h>
+#include "dummy.h"
+
+\
+\
+vfs                     vfs_
+        next                    hex
+        op                      symbolic
+        vnodecovered            hex
+        flag                    hex
+        bsize                   sdecimal
+        fstype                  sdecimal
+        fsid                    hex
+        data                    hex
+        dev                     hex
+        bcount                  sdecimal
+        nsubmounts              sdecimal
+        list                    hex
+        hash                    hex
+        reflock                 .sema
+        count                   decimal

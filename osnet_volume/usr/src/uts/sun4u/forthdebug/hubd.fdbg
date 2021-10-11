@@ -1,0 +1,16 @@
+\ Copyright 1999 Sun Microsystems, Inc.
+\ All rights reserved.
+
+#ident	"@(#)hubd.fdbg	1.2	99/09/24 SMI"
+
+#include <sys/usb/usba.h>
+#include <sys/usb/usba/usba_types.h>
+#include <sys/usb/hubd/hub.h>
+#include <sys/usb/hubd/hubdvar.h>
+
+hub_power_t
+
+hubd
+
+usb_hub_descr
+

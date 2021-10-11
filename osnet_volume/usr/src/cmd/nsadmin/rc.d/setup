@@ -1,0 +1,12 @@
+#ident	"@(#)setup	1.6	92/07/14 SMI"	/* SVr4.0 1.1	*/
+#	Reminder on how to setup up the machine the first time.
+
+# commented out - 'sysadm' - (setup) is not available.
+
+#echo '
+#        Welcome!
+#This machine has to be set up by you.  When you see the "login" message type
+#                                setup
+#followed by the RETURN key.  This will start a procedure that leads you through
+#those things that should be done the "first time" the machine is used.
+#'

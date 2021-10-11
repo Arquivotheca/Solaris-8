@@ -1,0 +1,565 @@
+#
+# Copyright (c) 1989-1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#ident	"@(#)Targetdirs	1.95	99/11/24 SMI"
+#
+# The list is built of owner-group combinations.  ROOT.SYS occurs twice
+# because some directories owned by root and in group sys are subdirectories
+# of directories having other owner-group attributes.
+#
+# It is easier to think in terms of directory names without the ROOT macro
+# prefix.  ROOTDIRS is TARGETDIRS with ROOT prefixes.  It is necessary
+# to work with ROOT prefixes when controlling conditional assignments.
+#
+# Symbolic links are added to the end of the list when IFNOTPROTO is not
+# '#', as when the superuser is doing a full build with ownerships and
+# output is going to a ROOT which is not /proto.  SYMLINKS are omitted
+# otherwise, because the NSE stumbles over them too often.  Hence the
+# use of IFNOTPROTO before the incremental assignment of SYMLINKS to
+# TARGETDIRS.
+#
+# The macro SYM.ROOT.SYS means symlinks with owner root and group sys.
+
+IFNOTPROTO:sh=	echo \\043
+$(CH) IFNOTPROTO=
+
+SYMLINKS=	$(SYM.ROOT.SYS) $(SYM.ROOT.BIN) $(SYM.OTHERS)
+
+TARGETDIRS=	$(ROOT.SYS) $(ROOT.BIN) $(ROOT.SYS2) \
+		$(UUCP.UUCP) $(BIN.BIN) $(OTHERS) $(SYM.USRCCSLIB)
+
+$(BUILD64)	TARGETDIRS += $(ROOT.BIN64) $(SYM.USRCCSLIB64)
+$(BUILD64)	SYMLINKS += $(SYM.ROOT.BIN64)
+
+$(IFNOTPROTO)	TARGETDIRS += $(SYMLINKS)
+
+ROOT.SYS=  \
+	/dev  \
+	/dev/dsk \
+	/dev/fd \
+	/dev/rdsk \
+	/dev/rmt \
+	/dev/pts \
+	/dev/sad \
+	/dev/swap \
+	/devices  \
+	/devices/pseudo \
+	/etc  \
+	/etc/cron.d  \
+	/etc/default  \
+	/etc/dfs  \
+	/etc/fs  \
+	/etc/fs/nfs  \
+	/etc/fs/proc  \
+	/etc/rpcsec	\
+	/etc/gss	\
+	/etc/init.d  \
+	/etc/lib  \
+	/etc/opt  \
+	/etc/rcS.d  \
+	/etc/rc0.d  \
+	/etc/rc1.d  \
+	/etc/rc2.d  \
+	/etc/rc3.d  \
+	/etc/tm  \
+	/export  \
+	/home  \
+	/kernel  \
+	/mnt  \
+	/opt  \
+	/platform  \
+	/proc  \
+	/sbin  \
+	/usr  \
+	/usr/kernel  \
+	/usr/platform  \
+	/usr/share  \
+	/var  \
+	/var/adm  \
+	/var/adm/sm.bin  \
+	/var/adm/streams  \
+	/var/cron  \
+	/var/log \
+	/var/opt  \
+	/var/run  \
+	/var/sadm
+
+ROOT.BIN=  \
+	/etc/saf  \
+	/etc/apache \
+	/usr/4lib  \
+	/usr/apache \
+	/usr/apache/bin \
+	/usr/apache/htdocs \
+	/usr/apache/include \
+	/usr/apache/libexec \
+	/usr/apache/man/man1 \
+	/usr/apache/man/man3 \
+	/usr/apache/man/man8 \
+	/usr/apache/perl5 \
+	/usr/bin  \
+	/usr/bin/$(MACH32) \
+	/usr/ccs  \
+	/usr/ccs/bin  \
+	/usr/ccs/lib \
+	/usr/demo \
+	/usr/games \
+	/usr/include  \
+	/usr/kvm \
+	/usr/include/gssapi  \
+	/usr/include/kerberosv5  \
+	/usr/lib  \
+	/usr/lib/abi \
+	/usr/lib/class  \
+	/usr/lib/class/IA  \
+	/usr/lib/class/RT  \
+	/usr/lib/class/TS  \
+	/usr/lib/font  \
+	/usr/lib/fp  \
+	/usr/lib/fp/libp  \
+	/usr/lib/krb5 \
+	/usr/lib/libp  \
+	/usr/lib/localedef \
+	/usr/lib/localedef/extensions \
+	/usr/lib/localedef/src \
+	/usr/lib/lwp \
+	/usr/lib/lwp/abi \
+	/usr/lib/saf  \
+	/usr/lib/secure  \
+	/usr/lib/term  \
+	/usr/old \
+	/usr/openwin \
+	/usr/proc  \
+	/usr/proc/bin  \
+	/usr/sadm  \
+	/usr/sadm/sysadm  \
+	/usr/sadm/sysadm/add-ons  \
+	/usr/sbin  \
+	/usr/sbin/$(MACH32)	\
+	/usr/sbin/static  \
+	/usr/share/man  \
+	/usr/ucb  \
+	/usr/ucb/$(MACH32)  \
+	/usr/ucblib \
+	/usr/ucblib/abi \
+	/usr/xpg4 \
+	/usr/xpg4/bin \
+	/usr/xpg4/bin/$(MACH32) \
+	/usr/xpg4/include \
+	/usr/xpg4/lib \
+	/usr/xpg4/lib/abi \
+	/var/apache \
+	/var/apache/cgi-bin \
+	/var/apache/htdocs \
+	/var/apache/icons \
+	/var/ld \
+	/var/news  \
+	/var/preserve  \
+	/var/saf  \
+	/var/spool \
+	/var/spool/pkg
+
+ROOT.BIN64= \
+	/usr/bin/$(MACH64) \
+	/usr/ucblib/abi/$(MACH64)	\
+	/usr/ccs/bin/$(MACH64)  \
+	/usr/ccs/lib/$(MACH64) \
+	/usr/lib/$(MACH64) \
+	/usr/lib/fp/libp/$(MACH64) \
+	/usr/lib/libp/$(MACH64) \
+	/usr/lib/lwp/$(MACH64) \
+	/usr/lib/lwp/abi/$(MACH64) \
+	/usr/lib/secure/$(MACH64) \
+	/usr/lib/abi/$(MACH64) \
+	/usr/sbin/$(MACH64) \
+	/usr/ucb/$(MACH64) \
+	/usr/ucblib/$(MACH64)	\
+	/usr/xpg4/bin/$(MACH64) \
+	/usr/xpg4/lib/$(MACH64) \
+	/usr/xpg4/lib/abi/$(MACH64) \
+	/var/ld/$(MACH64)
+
+ROOT.SYS2=  \
+	/usr/lib/fs  \
+	/usr/lib/fs/nfs  \
+	/usr/lib/fs/proc  \
+	/usr/lib/nfs  \
+	/usr/net  \
+	/usr/net/servers  \
+	/usr/share/lib  \
+	/usr/share/src  \
+	/var/spool/cron  \
+	/var/spool/cron/atjobs  \
+	/var/spool/cron/crontabs
+
+UUCP.UUCP=  \
+	/var/spool/uucp  \
+	/var/spool/uucppublic  \
+	/var/uucp
+
+OTHERS=  \
+	/dev/term  \
+	/tmp  \
+	/etc/mail  \
+	/usr/lib/mail  \
+	/usr/lib/mail/cf  \
+	/usr/lib/mail/domain  \
+	/usr/lib/mail/feature  \
+	/usr/lib/mail/m4  \
+	/usr/lib/mail/mailer  \
+	/usr/lib/mail/ostype  \
+	/usr/lib/mail/sh  \
+	/usr/lib/sa  \
+	/usr/share/lib/tmac  \
+	/var/adm/log  \
+	/var/adm/passwd  \
+	/var/adm/sa  \
+	/var/mail  \
+	/var/spool/lp  \
+	/var/tmp
+
+BIN.BIN=  \
+	/usr/share/man/man1  \
+	/usr/share/man/man1m  \
+	/usr/share/man/man3
+
+# /var/mail/:saved is built directly by the rootdirs target in
+# /usr/src/Makefile because of the colon in its name.
+
+# macros for symbolic links
+
+SYM.ROOT.SYS=	\
+	/dev/stdin \
+	/dev/stdout \
+	/dev/stderr \
+	/usr/adm  \
+	/usr/lib/cron  \
+	/usr/man  \
+	/usr/pub
+
+SYM.ROOT.BIN=  \
+	/bin  \
+	/lib  \
+	/usr/spool \
+	/usr/lib/tmac  \
+	/usr/ccs/lib/fp \
+	/usr/ccs/lib/link_audit \
+	/usr/news  \
+	/usr/preserve \
+	/usr/src \
+	/usr/lib/32 \
+	/var/ld/32
+
+SYM.ROOT.BIN64= \
+	/usr/lib/64 \
+	/usr/xpg4/lib/64 \
+	/var/ld/64
+
+SYM.OTHERS=  \
+	/etc/log  \
+	/usr/mail  \
+	/usr/tmp
+
+# prepend the ROOT prefix
+
+ROOTDIRS=	$(TARGETDIRS:%=$(ROOT)%)
+
+# conditional assignments
+#
+# Target directories with non-default values for owner and group must
+# be referenced here, using their fully-prefixed names, and the non-
+# default values assigned.  If a directory is mentioned above and not
+# mentioned below, it has default values for attributes.
+#
+# The default values for OWNER, GROUP, and DIRMODE are specified in
+# /usr/src/Makefile.master.
+#
+
+$(ROOT)/tmp  \
+$(ROOT)/usr/tmp  \
+$(ROOT)/var/tmp  \
+$(ROOT)/var/adm/sa  \
+$(ROOT.SYS:%=$(ROOT)%) \
+$(ROOT.SYS2:%=$(ROOT)%) \
+$(SYM.ROOT.SYS:%=$(ROOT)%):=	GROUP= sys
+
+$(ROOT)/var/adm \
+$(ROOT)/var/adm/sa :=		DIRMODE= 775
+
+$(ROOT)/dev/term:=		GROUP= root
+
+$(UUCP.UUCP:%=$(ROOT)%):=	OWNER= uucp
+$(UUCP.UUCP:%=$(ROOT)%):=	GROUP= uucp
+
+$(BIN.BIN:%=$(ROOT)%) :=	OWNER= bin
+$(BIN.BIN:%=$(ROOT)%) :=	GROUP= bin
+$(BIN.BIN:%=$(ROOT)%) :=	DIRMODE= 755
+
+$(ROOT)/etc/log  \
+$(ROOT)/usr/lib/sa  \
+$(ROOT)/var/adm/log  \
+$(ROOT)/var/adm/passwd  \
+$(ROOT)/var/adm/sa:=		OWNER= adm
+
+$(ROOT)/etc/log  \
+$(ROOT)/var/adm/log  \
+$(ROOT)/var/adm/passwd:=	GROUP= adm
+
+$(ROOT)/etc/mail  \
+$(ROOT)/usr/mail  \
+$(ROOT)/usr/lib/mail  \
+$(ROOT)/usr/lib/mail/cf  \
+$(ROOT)/usr/lib/mail/domain  \
+$(ROOT)/usr/lib/mail/feature  \
+$(ROOT)/usr/lib/mail/m4  \
+$(ROOT)/usr/lib/mail/mailer  \
+$(ROOT)/usr/lib/mail/ostype  \
+$(ROOT)/usr/lib/mail/sh  \
+$(ROOT)/var/mail  :=	GROUP= mail
+
+$(ROOT)/var/spool/lp:=		OWNER= lp
+$(ROOT)/var/spool/lp:=		GROUP= lp
+$(ROOT)/var/spool/lp:=		DIRMODE= 775
+
+# file mode
+#
+$(ROOT)/tmp \
+$(ROOT)/var/preserve \
+$(ROOT)/var/spool/pkg \
+$(ROOT)/var/spool/uucppublic \
+$(ROOT)/var/tmp:=	DIRMODE= 1777
+
+#
+# These permissions must match the ones set
+# internally by fdfs and autofs.
+#
+$(ROOT)/dev/fd \
+$(ROOT)/home:=		DIRMODE= 555
+
+$(ROOT)/dev/fd \
+$(ROOT)/home:=		GROUP= root
+
+$(ROOT)/var/mail:=	DIRMODE=1777
+
+$(ROOT)/proc:=		GROUP= root
+$(ROOT)/proc:=		DIRMODE= 555
+
+# symlink assignments, LINKDEST is the value of the symlink
+#
+$(ROOT)/usr/lib/cron:=	LINKDEST=../../etc/cron.d
+$(ROOT)/bin:=		LINKDEST=usr/bin
+$(ROOT)/lib:=		LINKDEST=usr/lib
+$(ROOT)/dev/stdin:=	LINKDEST=fd/0
+$(ROOT)/dev/stdout:=	LINKDEST=fd/1
+$(ROOT)/dev/stderr:=	LINKDEST=fd/2
+$(ROOT)/usr/pub:=	LINKDEST=share/lib/pub
+$(ROOT)/usr/man:=	LINKDEST=share/man
+$(ROOT)/usr/src:=	LINKDEST=share/src
+$(ROOT)/usr/adm:=	LINKDEST=../var/adm
+$(ROOT)/etc/log:=	LINKDEST=../var/adm/log
+$(ROOT)/usr/mail:=	LINKDEST=../var/mail
+$(ROOT)/usr/news:=	LINKDEST=../var/news
+$(ROOT)/usr/preserve:=	LINKDEST=../var/preserve
+$(ROOT)/usr/spool:=	LINKDEST=../var/spool
+$(ROOT)/usr/tmp:=	LINKDEST=../var/tmp
+$(ROOT)/usr/lib/tmac:=	LINKDEST=../share/lib/tmac
+$(ROOT)/usr/lib/32:=	LINKDEST=.
+$(ROOT)/usr/ccs/lib/fp:=		LINKDEST=../../lib/fp
+$(ROOT)/usr/ccs/lib/link_audit:=	LINKDEST=../../lib/link_audit
+$(ROOT)/var/ld/32:=	LINKDEST=.
+
+
+$(BUILD64) $(ROOT)/usr/lib/64:=		LINKDEST=$(MACH64)
+$(BUILD64) $(ROOT)/usr/xpg4/lib/64:=	LINKDEST=$(MACH64)
+$(BUILD64) $(ROOT)/var/ld/64:=		LINKDEST=$(MACH64)
+
+# Installing a directory symlink calls for overriding INS.dir to install
+# a symlink.
+#
+$(SYMLINKS:%=$(ROOT)%):=  \
+   INS.dir= -$(RM) -r $@; $(SYMLINK) $(LINKDEST) $@; \
+	     $(CHOWN) $(OWNER) $@; $(CHGRP) $(GROUP) $@
+
+
+# Special symlinks to populate usr/ccs/lib, whose objects
+# have actually been moved to usr/lib
+$(ROOT)/usr/ccs/lib/libcurses.a:= 	REALPATH=../../lib/libcurses.a
+$(ROOT)/usr/ccs/lib/libcurses.so:= 	REALPATH=../../lib/libcurses.so.1
+$(ROOT)/usr/ccs/lib/llib-lcurses:= 	REALPATH=../../lib/llib-lcurses
+$(ROOT)/usr/ccs/lib/llib-lcurses.ln:= 	REALPATH=../../lib/llib-lcurses.ln
+$(ROOT)/usr/ccs/lib/libform.a:=		REALPATH=../../lib/libform.a
+$(ROOT)/usr/ccs/lib/libform.so:=	REALPATH=../../lib/libform.so.1
+$(ROOT)/usr/ccs/lib/llib-lform:= 	REALPATH=../../lib/llib-lform
+$(ROOT)/usr/ccs/lib/llib-lform.ln:= 	REALPATH=../../lib/llib-lform.ln
+$(ROOT)/usr/ccs/lib/libgen.a:=		REALPATH=../../lib/libgen.a
+$(ROOT)/usr/ccs/lib/libgen.so:=		REALPATH=../../lib/libgen.so.1
+$(ROOT)/usr/ccs/lib/llib-lgen:= 	REALPATH=../../lib/llib-lgen
+$(ROOT)/usr/ccs/lib/llib-lgen.ln:= 	REALPATH=../../lib/llib-lgen.ln
+$(ROOT)/usr/ccs/lib/libmalloc.a:=	REALPATH=../../lib/libmalloc.a
+$(ROOT)/usr/ccs/lib/libmalloc.so:=	REALPATH=../../lib/libmalloc.so.1
+$(ROOT)/usr/ccs/lib/libmenu.a:=		REALPATH=../../lib/libmenu.a
+$(ROOT)/usr/ccs/lib/libmenu.so:=	REALPATH=../../lib/libmenu.so.1
+$(ROOT)/usr/ccs/lib/llib-lmenu:= 	REALPATH=../../lib/llib-lmenu
+$(ROOT)/usr/ccs/lib/llib-lmenu.ln:= 	REALPATH=../../lib/llib-lmenu.ln
+$(ROOT)/usr/ccs/lib/libpanel.a:=	REALPATH=../../lib/libpanel.a
+$(ROOT)/usr/ccs/lib/libpanel.so:=	REALPATH=../../lib/libpanel.so.1
+$(ROOT)/usr/ccs/lib/llib-lpanel:= 	REALPATH=../../lib/llib-lpanel
+$(ROOT)/usr/ccs/lib/llib-lpanel.ln:= 	REALPATH=../../lib/llib-lpanel.ln
+$(ROOT)/usr/ccs/lib/libtermlib.a:=	REALPATH=../../lib/libcurses.a
+$(ROOT)/usr/ccs/lib/libtermlib.so:=	REALPATH=../../lib/libcurses.so.1
+$(ROOT)/usr/ccs/lib/llib-ltermlib:= 	REALPATH=../../lib/llib-lcurses
+$(ROOT)/usr/ccs/lib/llib-ltermlib.ln:= 	REALPATH=../../lib/llib-lcurses.ln
+$(ROOT)/usr/ccs/lib/libtermcap.a:=	REALPATH=../../lib/libcurses.a
+$(ROOT)/usr/ccs/lib/libtermcap.so:=	REALPATH=../../lib/libcurses.so.1
+$(ROOT)/usr/ccs/lib/llib-ltermcap:= 	REALPATH=../../lib/llib-lcurses
+$(ROOT)/usr/ccs/lib/llib-ltermcap.ln:= 	REALPATH=../../lib/llib-lcurses.ln
+$(ROOT)/usr/ccs/lib/values-Xa.o:=	REALPATH=../../lib/values-Xa.o
+$(ROOT)/usr/ccs/lib/values-Xc.o:=	REALPATH=../../lib/values-Xc.o
+$(ROOT)/usr/ccs/lib/values-Xs.o:=	REALPATH=../../lib/values-Xs.o
+$(ROOT)/usr/ccs/lib/values-Xt.o:=	REALPATH=../../lib/values-Xt.o
+$(ROOT)/usr/ccs/lib/values-xpg4.o:=	REALPATH=../../lib/values-xpg4.o
+$(ROOT)/usr/ccs/lib/libl.a:=		REALPATH=../../lib/libl.a
+$(ROOT)/usr/ccs/lib/libl.so:=		REALPATH=../../lib/libl.so.1
+$(ROOT)/usr/ccs/lib/llib-ll.ln:= 	REALPATH=../../lib/llib-ll.ln
+$(ROOT)/usr/ccs/lib/liby.a:=		REALPATH=../../lib/liby.a
+$(ROOT)/usr/ccs/lib/liby.so:=		REALPATH=../../lib/liby.so.1
+$(ROOT)/usr/ccs/lib/llib-ly.ln:= 	REALPATH=../../lib/llib-ly.ln
+$(ROOT)/usr/ccs/lib/libld.so.2:=	REALPATH=../../lib/libld.so.2
+$(ROOT)/usr/ccs/lib/libld.so.3:=	REALPATH=../../lib/libld.so.3
+
+# symlinks to populate usr/ccs/lib/$(MACH64)
+$(ROOT)/usr/ccs/lib/$(MACH64)/libcurses.so:=	\
+	REALPATH=../../../lib/$(MACH64)/libcurses.so.1
+$(ROOT)/usr/ccs/lib/$(MACH64)/llib-lcurses.ln:=	\
+	REALPATH=../../../lib/$(MACH64)/llib-lcurses.ln
+$(ROOT)/usr/ccs/lib/$(MACH64)/libform.so:=	\
+	REALPATH=../../../lib/$(MACH64)/libform.so.1
+$(ROOT)/usr/ccs/lib/$(MACH64)/llib-lform.ln:=	\
+	REALPATH=../../../lib/$(MACH64)/llib-lform.ln
+$(ROOT)/usr/ccs/lib/$(MACH64)/libgen.so:=	\
+	REALPATH=../../../lib/$(MACH64)/libgen.so.1
+$(ROOT)/usr/ccs/lib/$(MACH64)/llib-lgen.ln:=	\
+	REALPATH=../../../lib/$(MACH64)/llib-lgen.ln
+$(ROOT)/usr/ccs/lib/$(MACH64)/libmalloc.so:=	\
+	REALPATH=../../../lib/$(MACH64)/libmalloc.so.1
+$(ROOT)/usr/ccs/lib/$(MACH64)/libmenu.so:=	\
+	REALPATH=../../../lib/$(MACH64)/libmenu.so.1
+$(ROOT)/usr/ccs/lib/$(MACH64)/llib-lmenu.ln:=	\
+	REALPATH=../../../lib/$(MACH64)/llib-lmenu.ln
+$(ROOT)/usr/ccs/lib/$(MACH64)/libpanel.so:=	\
+	REALPATH=../../../lib/$(MACH64)/libpanel.so.1
+$(ROOT)/usr/ccs/lib/$(MACH64)/llib-lpanel.ln:=	\
+	REALPATH=../../../lib/$(MACH64)/llib-lpanel.ln
+$(ROOT)/usr/ccs/lib/$(MACH64)/libtermlib.so:=	\
+	REALPATH=../../../lib/$(MACH64)/libcurses.so.1
+$(ROOT)/usr/ccs/lib/$(MACH64)/llib-ltermlib.ln:=	\
+	REALPATH=../../../lib/$(MACH64)/llib-lcurses.ln
+$(ROOT)/usr/ccs/lib/$(MACH64)/libtermcap.so:=	\
+	REALPATH=../../../lib/$(MACH64)/libcurses.so.1
+$(ROOT)/usr/ccs/lib/$(MACH64)/llib-ltermcap.ln:=	\
+	REALPATH=../../../lib/$(MACH64)/llib-lcurses.ln
+$(ROOT)/usr/ccs/lib/$(MACH64)/values-Xa.o:=	\
+	REALPATH=../../../lib/$(MACH64)/values-Xa.o
+$(ROOT)/usr/ccs/lib/$(MACH64)/values-Xc.o:=	\
+	REALPATH=../../../lib/$(MACH64)/values-Xc.o
+$(ROOT)/usr/ccs/lib/$(MACH64)/values-Xs.o:=	\
+	REALPATH=../../../lib/$(MACH64)/values-Xs.o
+$(ROOT)/usr/ccs/lib/$(MACH64)/values-Xt.o:=	\
+	REALPATH=../../../lib/$(MACH64)/values-Xt.o
+$(ROOT)/usr/ccs/lib/$(MACH64)/values-xpg4.o:=	\
+	REALPATH=../../../lib/$(MACH64)/values-xpg4.o
+$(ROOT)/usr/ccs/lib/$(MACH64)/libl.so:=	\
+	REALPATH=../../../lib/$(MACH64)/libl.so.1
+$(ROOT)/usr/ccs/lib/$(MACH64)/llib-ll.ln:=	\
+	REALPATH=../../../lib/$(MACH64)/llib-ll.ln
+$(ROOT)/usr/ccs/lib/$(MACH64)/liby.so:=	\
+	REALPATH=../../../lib/$(MACH64)/liby.so.1
+$(ROOT)/usr/ccs/lib/$(MACH64)/llib-ly.ln:=	\
+	REALPATH=../../../lib/$(MACH64)/llib-ly.ln
+$(ROOT)/usr/ccs/lib/$(MACH64)/libld.so.2:=	\
+	REALPATH=../../../lib/$(MACH64)/libld.so.2
+$(ROOT)/usr/ccs/lib/$(MACH64)/libld.so.3:=	\
+	REALPATH=../../../lib/$(MACH64)/libld.so.3
+
+SYM.USRCCSLIB=	\
+	/usr/ccs/lib/libcurses.a	\
+	/usr/ccs/lib/libcurses.so	\
+	/usr/ccs/lib/llib-lcurses	\
+	/usr/ccs/lib/llib-lcurses.ln	\
+	/usr/ccs/lib/libform.a		\
+	/usr/ccs/lib/libform.so		\
+	/usr/ccs/lib/llib-lform		\
+	/usr/ccs/lib/llib-lform.ln	\
+	/usr/ccs/lib/libgen.a		\
+	/usr/ccs/lib/libgen.so		\
+	/usr/ccs/lib/llib-lgen		\
+	/usr/ccs/lib/llib-lgen.ln	\
+	/usr/ccs/lib/libmalloc.a	\
+	/usr/ccs/lib/libmalloc.so	\
+	/usr/ccs/lib/libmenu.a		\
+	/usr/ccs/lib/libmenu.so		\
+	/usr/ccs/lib/llib-lmenu		\
+	/usr/ccs/lib/llib-lmenu.ln	\
+	/usr/ccs/lib/libpanel.a		\
+	/usr/ccs/lib/libpanel.so	\
+	/usr/ccs/lib/llib-lpanel	\
+	/usr/ccs/lib/llib-lpanel.ln	\
+	/usr/ccs/lib/libtermlib.a	\
+	/usr/ccs/lib/libtermlib.so	\
+	/usr/ccs/lib/llib-ltermlib	\
+	/usr/ccs/lib/llib-ltermlib.ln	\
+	/usr/ccs/lib/libtermcap.a	\
+	/usr/ccs/lib/libtermcap.so	\
+	/usr/ccs/lib/llib-ltermcap	\
+	/usr/ccs/lib/llib-ltermcap.ln	\
+	/usr/ccs/lib/values-Xa.o	\
+	/usr/ccs/lib/values-Xc.o	\
+	/usr/ccs/lib/values-Xs.o	\
+	/usr/ccs/lib/values-Xt.o	\
+	/usr/ccs/lib/values-xpg4.o	\
+	/usr/ccs/lib/libl.a		\
+	/usr/ccs/lib/libl.so		\
+	/usr/ccs/lib/llib-ll.ln		\
+	/usr/ccs/lib/liby.a		\
+	/usr/ccs/lib/liby.so		\
+	/usr/ccs/lib/llib-ly.ln		\
+	/usr/ccs/lib/libld.so.2	
+
+SYM.USRCCSLIB64= \
+	/usr/ccs/lib/$(MACH64)/libcurses.so	\
+	/usr/ccs/lib/$(MACH64)/llib-lcurses.ln	\
+	/usr/ccs/lib/$(MACH64)/libform.so	\
+	/usr/ccs/lib/$(MACH64)/llib-lform.ln	\
+	/usr/ccs/lib/$(MACH64)/libgen.so	\
+	/usr/ccs/lib/$(MACH64)/llib-lgen.ln	\
+	/usr/ccs/lib/$(MACH64)/libmalloc.so	\
+	/usr/ccs/lib/$(MACH64)/libmenu.so	\
+	/usr/ccs/lib/$(MACH64)/llib-lmenu.ln	\
+	/usr/ccs/lib/$(MACH64)/libpanel.so	\
+	/usr/ccs/lib/$(MACH64)/llib-lpanel.ln	\
+	/usr/ccs/lib/$(MACH64)/libtermlib.so	\
+	/usr/ccs/lib/$(MACH64)/llib-ltermlib.ln	\
+	/usr/ccs/lib/$(MACH64)/libtermcap.so	\
+	/usr/ccs/lib/$(MACH64)/llib-ltermcap.ln	\
+	/usr/ccs/lib/$(MACH64)/values-Xa.o	\
+	/usr/ccs/lib/$(MACH64)/values-Xc.o	\
+	/usr/ccs/lib/$(MACH64)/values-Xs.o	\
+	/usr/ccs/lib/$(MACH64)/values-Xt.o	\
+	/usr/ccs/lib/$(MACH64)/values-xpg4.o	\
+	/usr/ccs/lib/$(MACH64)/libl.so		\
+	/usr/ccs/lib/$(MACH64)/llib-ll.ln	\
+	/usr/ccs/lib/$(MACH64)/liby.so		\
+	/usr/ccs/lib/$(MACH64)/llib-ly.ln	\
+	/usr/ccs/lib/$(MACH64)/libld.so.2	\
+	/usr/ccs/lib/$(MACH64)/libld.so.3	\
+	/usr/ccs/lib/libld.so.3		
+
+
+$(SYM.USRCCSLIB:%=$(ROOT)%):= 	\
+    INS.dir= -$(RM) $@; $(SYMLINK) $(REALPATH) $@; \
+	       $(CHOWN) $(OWNER) $@; $(CHGRP) $(GROUP) $@
+
+$(SYM.USRCCSLIB64:%=$(ROOT)%):= 	\
+    INS.dir= -$(RM) $@; $(SYMLINK) $(REALPATH) $@; \
+	       $(CHOWN) $(OWNER) $@; $(CHGRP) $(GROUP) $@

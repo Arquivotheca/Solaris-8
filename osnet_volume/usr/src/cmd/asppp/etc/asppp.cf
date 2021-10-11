@@ -1,0 +1,16 @@
+#ident	"@(#)asppp.cf	1.10	93/07/07 SMI"
+#
+# Copyright (c) 1993 by Sun Microsystems, Inc.
+#
+# Sample asynchronous PPP /etc/asppp.cf file
+#
+#
+#ifconfig ipdptp0 plumb mojave gobi up
+#
+#path
+#       inactivity_timeout 120     # Approx. 2 minutes
+#	interface ipdptp0	   
+#	peer_system_name Pgobi     # The name we log in with (also in
+#				   # /etc/uucp/Systems
+
+

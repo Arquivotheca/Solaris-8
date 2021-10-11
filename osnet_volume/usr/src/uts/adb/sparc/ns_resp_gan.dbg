@@ -1,0 +1,47 @@
+\
+\ Copyright (c) 1999 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)ns_resp_gan.dbg	1.1	99/07/21 SMI"
+\
+#include <sys/isa_defs.h>
+#include <sys/types.h>
+#include <sys/dditypes.h>
+#include <sys/ddidmareq.h>
+#include <sys/mutex.h>
+#include <sys/semaphore.h>
+#include <sys/condvar.h>
+#include <sys/thread.h>
+#include <sys/devops.h>
+#include <sys/fibre-channel/fc.h>
+#include "dummy.h"
+\
+\
+ns_resp_gan		gan_
+{adb_inline_begin}
+.>d
+<d+{OFFSET, gan_type_id}=""
+{adb_inline_end}
+	type_id		.port_type
+{adb_inline_begin}
+<d+{OFFSET, gan_pwwn}=""
+{adb_inline_end}
+	pwwn		.la_wwn
+{adb_inline_begin}
+<d+{OFFSET, gan_spnlen}=""
+{adb_inline_end}
+	spnlen		hex
+	spname		hex
+	nwwn		.la_wwn	
+{adb_inline_begin}
+<d+{OFFSET, gan_snnlen}=""
+{adb_inline_end}
+	snnlen		hex
+	snname		hex
+	ipa		hex
+	ip		hex
+	cos		hex
+	fc4types	hex
+{adb_inline_begin}
+<d+{SIZEOF}=""
+{adb_inline_end}

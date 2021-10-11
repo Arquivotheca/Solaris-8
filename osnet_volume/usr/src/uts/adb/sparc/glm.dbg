@@ -1,0 +1,90 @@
+\
+\ Copyright (c) 1997-1998 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)glm.dbg	1.17	99/08/09 SMI"
+
+#include <sys/note.h>
+#include <sys/scsi/scsi.h>
+#include <sys/scsi/adapters/glmreg.h>
+#include <sys/scsi/adapters/glmvar.h>
+#include "dummy.h"
+
+\
+\
+glm			g_
+{adb_inline_begin}
+.>z
+<z+{OFFSET, g_instance}=""
+{adb_inline_end}
+	instance
+	next	
+	tran
+{adb_inline_begin}
++/n"glm mutex:"
+.$<<mutex
+<z+{OFFSET, g_cv}=""
+{adb_inline_end}
+	cv			hex
+	iblock
+	dip
+	softstate
+	units	
+	current
+	forwp
+	backp
+	doneq
+	donetail
+	datap	
+	devaddr
+	devid	
+	revid
+	sync_offset
+	quiesce_timeid		""	"qui tid"
+	scripts_ram		""	ram
+	ram_base_addr		""	base
+	script_acc_handle
+	script_dma_handle
+	glm_scripts		""	scripts
+	do_list_end		""	do_list
+	di_list_end		""	di_list
+	dsa_dma_h		""	"hba hdl"
+	dsa_acc_h		""	"hba acc"
+	dsa	
+	dsa_addr
+	target_scsi_options_defined	""	"opt def"
+	scsi_options		""	options
+	target_scsi_options
+	wide_known
+	nowide
+	wide_enabled
+	wdtr_sent
+	backoff
+	props_update		""	props
+	notag			""	"no tag"
+	scsi_tag_age_limit	""	"tag age lim"
+	reset_notify_listf	""	"reset notify"
+	qfull_retries		""	"qfull retries"
+	qfull_retry_interval	""	"qfull retry interval"
+	restart_cmd_timeid	""	restart
+	scsi_reset_delay	""	"rst delay"
+	reset_delay		""	"rst delay per target"
+	sclock			""	clock
+	speriod			""	period
+	hba_period		""	"hba per"
+	syncstate
+	minperiod
+	scntl3
+	glmid
+	ndisc			""	disc
+	state
+	polled_intr		""	polled
+	suspended
+	kmem_cache
+	options
+	arq_mask
+	in_callback
+	max_lun
+{adb_inline_begin}
+<z+{SIZEOF}=""
+{adb_inline_end}

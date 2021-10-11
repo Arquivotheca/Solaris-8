@@ -1,0 +1,23 @@
+#include <sys/dada/dada.h>
+#include <sys/dkbad.h>
+#include <sys/dklabel.h>
+#include <sys/dkio.h>
+#include <sys/cdio.h>
+#include <sys/vtoc.h>
+#include <sys/dada/targets/daddef.h>
+#include <sys/dada/targets/dadpriv.h>
+
+\  dad driver
+dcd_address
+
+dcd_device
+
+dcd_disk
+
+dcd_cmd
+
+dcd_hba_tran
+
+dcd_identify
+
+dcd_pkt

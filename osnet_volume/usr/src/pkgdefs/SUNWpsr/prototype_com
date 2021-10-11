@@ -1,0 +1,80 @@
+#
+# Copyright (c) 1990-1993, 1998 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#ident	"@(#)prototype_com	1.30	99/03/30 SMI"
+#
+# This required package information file contains a list of package contents.
+# The 'pkgmk' command uses this file to identify the contents of a package
+# and their location on the development machine when building the package.
+# Can be created via a text editor or through use of the 'pkgproto' command.
+
+#!search <pathname pathname ...>	# where to find pkg objects
+#!include <filename>			# include another 'prototype' file
+#!default <mode> <owner> <group>	# default used if not specified on entry
+#!<param>=<value>			# puts parameter in pkg environment
+
+# packaging files
+i pkginfo
+i copyright
+i depend
+i i.renameold
+i i.initd
+#
+# source locations relative to the prototype file
+#
+# SUNWpsr
+#
+#	 System startup/shutdown for lpsched
+d none etc 755 root sys
+d none etc/init.d 755 root sys
+e initd etc/init.d/lp 744 root sys
+d none etc/rc0.d 755 root sys
+l initd etc/rc0.d/K39lp=../../etc/init.d/lp
+d none etc/rc1.d 755 root sys
+l initd etc/rc1.d/K39lp=../../etc/init.d/lp
+d none etc/rc2.d 755 root sys
+l initd etc/rc2.d/S80lp=../../etc/init.d/lp
+d none etc/rcS.d 755 root sys
+l initd etc/rcS.d/K39lp=../../etc/init.d/lp
+#	LP configuation
+d none etc/lp 775 lp lp
+e renameold etc/lp/Systems 664 lp lp
+d none etc/lp/classes 775 lp lp
+d none etc/lp/forms 775 lp lp
+d none etc/lp/interfaces 775 lp lp
+s none etc/lp/logs=../../var/lp/logs
+d none etc/lp/printers 775 lp lp
+d none etc/lp/pwheels 775 lp lp
+#	filter descriptions
+d none etc/lp/fd 755 root lp
+f none etc/lp/fd/download.fd 644 root lp
+f none etc/lp/fd/dpost.fd 644 root lp
+f none etc/lp/fd/postdaisy.fd 644 root lp
+f none etc/lp/fd/postdmd.fd 644 root lp
+f none etc/lp/fd/postio.fd 644 root lp
+f none etc/lp/fd/postior.fd 644 root lp
+f none etc/lp/fd/postmd.fd 644 root lp
+f none etc/lp/fd/postplot.fd 644 root lp
+f none etc/lp/fd/postprint.fd 644 root lp
+f none etc/lp/fd/postreverse.fd 644 root lp
+f none etc/lp/fd/posttek.fd 644 root lp
+f none etc/lp/fd/postpages.fd 644 root lp
+f none etc/lp/fd/pr.fd 644 root lp
+f none etc/lp/fd/catv.fd 644 root lp
+#	LP spooling/status
+d none var 755 root sys
+d none var/lp 775 lp lp
+d none var/lp/logs 775 lp lp
+d none var/spool 755 root bin
+d none var/spool/lp 775 lp lp
+d none var/spool/lp/admins 775 lp lp
+s none var/spool/lp/admins/lp=../../../../etc/lp
+s none var/spool/lp/bin=../../../usr/lib/lp/bin
+d none var/spool/lp/fifos 775 lp lp
+d none var/spool/lp/fifos/private 771 lp lp
+d none var/spool/lp/fifos/public 773 lp lp
+s none var/spool/lp/logs=../../lp/logs
+s none var/spool/lp/model=../../../usr/lib/lp/model
+d none var/spool/lp/requests 775 lp lp
+d none var/spool/lp/system 775 lp lp

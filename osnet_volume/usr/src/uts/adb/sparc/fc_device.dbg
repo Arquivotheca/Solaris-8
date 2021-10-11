@@ -1,0 +1,43 @@
+\
+\ Copyright (c) 1999 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)fc_device.dbg	1.1	99/07/21 SMI"
+\
+#include <sys/isa_defs.h>
+#include <sys/types.h>
+#include <sys/dditypes.h>
+#include <sys/ddidmareq.h>
+#include <sys/mutex.h>
+#include <sys/semaphore.h>
+#include <sys/condvar.h>
+#include <sys/thread.h>
+#include <sys/devops.h>
+#include <sys/fibre-channel/fc.h>
+#include "dummy.h"
+\
+\
+fc_device			fd_
+{adb_inline_begin}
+.>w
+<w+{OFFSET, fd_mutex}=""
+{adb_inline_end}
+	mutex			.mutex
+{adb_inline_begin}
+<w+{OFFSET, fd_node_name}=""
+{adb_inline_end}
+	node_name		.la_wwn	
+{adb_inline_begin}
+<w+{OFFSET, fd_count}=""
+{adb_inline_end}
+	count			hex
+	flags			hex
+	ports			hex
+	state			hex
+	ipa			hex	"initial process associator"
+	vv			hex	"vendor version"
+	snn_len			hex	"symbolic node name length"
+	snn			hex	"symbolic node name"
+{adb_inline_begin}
+<w+{SIZEOF}=""
+{adb_inline_end}

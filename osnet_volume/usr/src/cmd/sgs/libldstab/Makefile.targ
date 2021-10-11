@@ -1,0 +1,45 @@
+#
+#ident	"@(#)Makefile.targ	1.17	99/06/23 SMI"
+#
+# Copyright (c) 1999 by Sun Microsystems, Inc.
+# All rights reserved.
+
+pics/%.o:	../common/%.c
+		$(COMPILE.c) -o $@ $<
+		$(POST_PROCESS_O)
+
+pics/%64.o:	../common/%.c
+		$(COMPILE.c) -o $@ -D_ELF64 $<
+		$(POST_PROCESS_O)
+
+lint:		$(LINTOUT32) $(SGSLINTOUT)
+
+delete:
+		-$(RM) $(DYNLIB)
+
+$(DYNLIB):	$(MAPFILES)
+
+# Special target for native builds (ie. when we need to build a version of ld
+# to build a version of ld :-).
+
+native:		$(SGSPROTO)/$(DYNLIB)
+
+$(SGSPROTO)/$(DYNLIB): \
+		pics .WAIT $$(PICS) $(MAPFILES)
+		$(BUILD.SO)
+		$(POST_PROCESS_SO)
+
+include		$(SRC)/lib/Makefile.targ
+include		$(SRC)/cmd/sgs/Makefile.targ
+
+# Derived source and header files (messaging).
+
+catalog:	$(BLTMESG)
+
+chkmsg:		$(SRCS)
+		-sh $(CHKMSG) $(CHKMSGFLAGS) $(SRCS)
+
+$(BLTDEFS) + \
+$(BLTDATA) + \
+$(BLTMESG) :	$(SGSMSGALL)
+		$(SGSMSG) $(SGSMSGFLAGS) $(SGSMSGALL)

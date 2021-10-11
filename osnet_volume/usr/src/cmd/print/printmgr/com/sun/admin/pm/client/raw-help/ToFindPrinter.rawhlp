@@ -1,0 +1,45 @@
+<TITLE> To Find a Printer </TITLE>
+<!-- Tag=ToFindPrinter -->
+
+<CONTENT>
+
+<p>
+
+Do the following to find a printer in the Solaris Print Manager list
+of printers.
+
+<p>
+
+1. Choose Find Printer from the Tools menu.
+
+<p>
+
+A dialog will be displayed, asking you to enter the name of a printer to find.
+
+<p>
+
+2. Type a printer name in the text field and click Find.
+
+<p>
+
+If the exact printer name is found in the list, it will be selected;
+the list will scroll, if necessary. If the printer is not found, a
+message will be displayed, indicating that the named printer was not
+found in the current list. 
+
+<p>
+
+</CONTENT>
+
+<KEYWORDS>
+find "printer name" tool
+</KEYWORDS>
+
+<p>
+
+<SEEALSO>
+Overview
+MainWindow 
+HelpOnHelp
+</SEEALSO>
+

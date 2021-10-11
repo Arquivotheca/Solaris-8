@@ -1,0 +1,45 @@
+#
+#ident	"@(#)Makefile.bld	1.2	99/10/14 SMI"
+#
+# Copyright (c) 1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+
+PROG:sh = basename `cd ..; pwd`
+
+OBJS = $(PROG).o
+
+SRCS = ../$(PROG).c
+
+FILEMODE = 0555
+GROUP = bin
+
+LDLIBS += -lproc
+
+pstack	:= LDLIBS += -ldl
+pfiles	:= LDLIBS += -lnsl
+
+.KEEP_STATE:
+
+%.o:	../%.c
+	$(COMPILE.c) $<
+
+all: $(PROG) 
+
+ROOTBINPROG=$(ROOTBIN)/$(PROG)
+ROOTPROCBINSYMLINK=$(ROOT)/usr/proc/bin/$(PROG)
+
+$(PROG): $(OBJS)
+	$(LINK.c) $(OBJS) -o $@ $(LDLIBS)
+	$(POST_PROCESS)
+
+install: all $(ROOTISAPROG)
+	-$(RM) $(ROOTBINPROG) $(ROOTPROCBINSYMLINK)
+	-$(LN) $(ISAEXEC) $(ROOTBINPROG)
+	-$(LN) -s ../../bin/$(PROG) $(ROOTPROCBINSYMLINK)
+
+clean:
+	$(RM) $(OBJS)
+
+lint:
+	$(LINT.c) $(SRCS) $(LDLIBS)

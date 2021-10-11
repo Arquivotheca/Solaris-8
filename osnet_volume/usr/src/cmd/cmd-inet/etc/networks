@@ -1,0 +1,17 @@
+#ident	"@(#)networks	1.4	92/07/14 SMI"	/* SVr4.0 1.1	*/
+#
+# The networks file associates Internet Protocol (IP) network numbers
+# with network names.  The format of this file is:
+# 
+# 	network-name	network-number	nicnames . . .
+#
+
+#
+# The loopback network is used only for intra-machine communication
+#
+loopback	127
+
+#
+# Internet networks
+#
+arpanet		10		arpa	# Historical

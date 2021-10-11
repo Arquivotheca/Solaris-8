@@ -1,0 +1,15 @@
+#
+# Copyright (c) 1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#pragma ident "@(#)Makefile.targ 1.1	99/09/20 SMI"
+#
+# ucblib/librpcsoc/spec/Makefile.targ
+
+LIBRARY	=	librpcsoc.a
+VERS	=	.1
+
+OBJECTS	=	rpcsoc.o
+
+TRANSCPP =
+SPECCPP =	-DPORTMAP -I$(ROOT)/usr/ucbinclude

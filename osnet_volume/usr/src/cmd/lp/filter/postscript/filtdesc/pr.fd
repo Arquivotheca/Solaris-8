@@ -1,0 +1,11 @@
+#ident	"@(#)pr.fd	1.4	99/10/01 SunSoft"
+
+Input types: pr
+Output types: simple
+Printer types: any
+Printers: any
+Filter type: slow
+Command: /usr/bin/pr
+Options: MODES prtitle\=\(\'.*\'\) = -h \1
+Options: MODES width\=\(.*\) = -w\1
+Options: MODES indent\=\(.*\) = -o\1

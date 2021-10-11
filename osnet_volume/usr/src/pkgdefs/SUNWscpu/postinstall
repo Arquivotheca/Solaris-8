@@ -1,0 +1,12 @@
+#
+#ident	"@(#)postinstall	1.1	93/12/14 SMI"
+#
+# Copyright (c) 1991 by Sun Microsystems, Inc.
+#
+
+# Remove the "arch" command, we nuked it, but it comes back
+if [ -d $BASEDIR/usr/kvm ] ; then
+	if [ -f $BASEDIR/usr/kvm/arch ] ; then
+		rm $BASEDIR/usr/kvm/arch
+	fi
+fi

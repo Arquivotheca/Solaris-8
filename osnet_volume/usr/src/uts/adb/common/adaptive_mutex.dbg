@@ -1,0 +1,32 @@
+\
+\ Copyright (c) 1997-1998 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)adaptive_mutex.dbg        1.4     98/02/01 SMI"
+
+#include <sys/machtypes.h>
+#include <sys/t_lock.h>
+#include <sys/mutex_impl.h>
+#include "dummy.h"
+
+\
+\
+#if defined(sun4c) || defined(sun4d) || defined(sun4m)
+adaptive_mutex          _m_
+{adb_inline_begin}
+.>f
+<f/"owner"n;*.*20=X
+<f+{OFFSET, _m_waiters}=""
+{adb_inline_end}
+        waiters                 hex
+{adb_inline_begin}
+<f+{SIZEOF}=""
+{adb_inline_end}
+#else
+adaptive_mutex          _m_
+{adb_inline_begin}
+.>f
+<f/"owner/waiters"n{HEX}
+<f+{SIZEOF}=""
+{adb_inline_end}
+#endif

@@ -1,0 +1,261 @@
+#!/sbin/sh
+#
+# Copyright (c) 1995, 1997-1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#ident	"@(#)inetsvc	1.24	99/03/21 SMI"
+
+#
+# This is third phase of TCP/IP startup/configuration.  This script
+# runs after the NIS/NIS+ startup script.  We run things here that may
+# depend on NIS/NIS+ maps.
+#
+
+case "$1" in
+'start')
+	;; # Fall through -- rest of script is the initialization code
+
+'stop')
+	/usr/bin/pkill -x -u 0 'in.named|inetd'
+	exit 0
+	;;
+
+*)
+	echo "Usage: $0 { start | stop }"
+	exit 1
+	;;
+esac
+
+# If boot variables are not set, set variables we use
+[ -z "$_INIT_UTS_NODENAME" ] && _INIT_UTS_NODENAME=`/usr/bin/uname -n`
+
+if [ -z "$_INIT_PREV_LEVEL" ]; then
+	set -- `/usr/bin/who -r`
+	_INIT_PREV_LEVEL="$9"
+fi
+
+#
+# wait_nis
+# Wait up to 5 seconds for ypbind to obtain a binding.
+#
+wait_nis ()
+{
+	for i in 1 2 3 4 5; do
+		server=`/usr/bin/ypwhich 2>/dev/null`
+		[ $? -eq 0 -a -n "$server" ] && return 0 || sleep 1
+	done
+	return 1
+}
+
+#
+# We now need to reset the netmask and broadcast address for our network
+# interfaces.  Since this may result in a name service lookup, we want to
+# now wait for NIS to come up if we previously started it.
+#
+domain=`/usr/bin/domainname 2>/dev/null`
+
+[ -z "$domain" ] || [ ! -d /var/yp/binding/$domain ] || wait_nis || \
+    echo "WARNING: Timed out waiting for NIS to come up" >& 2
+
+#
+# Re-set the netmask and broadcast addr for all IP interfaces.  This ifconfig
+# is run here, after waiting for name services, so that "netmask +" will find
+# the netmask if it lives in a NIS map. The 'D' in -auD tells ifconfig NOT to
+# mess with the interface if it is under DHCP control
+#
+/usr/sbin/ifconfig -auD4 netmask + broadcast +
+
+# Uncomment these lines to print complete network interface configuration
+# echo "network interface configuration:"
+# /usr/sbin/ifconfig -a
+
+#
+# If this machine is configured to be an Internet Domain Name System (DNS)
+# server, run the name daemon.  Start named prior to: route add net host,
+# to avoid dns gethostbyname timout delay for nameserver during boot.
+#
+if [ -f /usr/sbin/in.named -a -f /etc/named.conf ]; then
+	echo 'starting internet domain name server.'
+	/usr/sbin/in.named &
+fi
+
+if [ "$_INIT_NET_STRATEGY" = "dhcp" ]; then
+	dnsdomain=`/sbin/dhcpinfo DNSdmain`
+else
+	dnsdomain=
+fi
+
+if [ -n "$dnsdomain" ]; then
+	dnsservers=`/sbin/dhcpinfo DNSserv`
+	if [ -n "$dnsservers" ]; then
+		if [ -f /etc/resolv.conf ]; then
+			/usr/bin/rm -f /tmp/resolv.conf.$$
+			/usr/bin/sed -e '/^domain/d' -e '/^nameserver/d' \
+			    /etc/resolv.conf >/tmp/resolv.conf.$$
+		fi
+		echo "domain $dnsdomain" >>/tmp/resolv.conf.$$
+		for name in $dnsservers; do
+			echo nameserver $name >>/tmp/resolv.conf.$$
+		done
+	else
+		if [ -f /etc/resolv.conf ]; then
+			/usr/bin/rm -f /tmp/resolv.conf.$$
+			/usr/bin/sed -e '/^domain/d' /etc/resolv.conf \
+			    >/tmp/resolv.conf.$$
+		fi
+		echo "domain $dnsdomain" >>/tmp/resolv.conf.$$
+	fi
+
+	#
+	# Warning: The umask is 000 during boot, which requires explicit
+	# setting of file permission modes when we create files.
+	#
+	/usr/bin/mv /tmp/resolv.conf.$$ /etc/resolv.conf
+	/usr/bin/chmod 644 /etc/resolv.conf
+
+	# Add dns to the nsswitch file, if it isn't already there.
+	/usr/bin/rm -f /tmp/nsswitch.conf.$$
+	/usr/bin/awk ' $1 ~ /^hosts:/ {
+		n = split($0, a);
+		newl = a[1];
+		if ($0 !~ /dns/) {
+			printf("#%s # Commented out by DHCP\n", $0);
+			updated = 0;
+			for (i = 2; i <= n; i++) {
+				if (updated == 0 && index(a[i], "[") == 1) {
+					newl = newl" dns";
+					updated++;
+				}
+				newl = newl" "a[i];
+			}
+			if (updated == 0) {
+				newl = newl" dns";
+				updated++;
+			}
+			if (updated != 0)
+				newl = newl" # Added by DHCP";
+			else
+				newl = $0;
+			printf("%s\n", newl);
+		} else
+			printf("%s\n", $0);
+	} $1 !~ /^hosts:/ { printf("%s\n", $0); }' /etc/nsswitch.conf \
+	    >/tmp/nsswitch.conf.$$
+
+	/usr/bin/mv /tmp/nsswitch.conf.$$ /etc/nsswitch.conf
+	/usr/bin/chmod 644 /etc/nsswitch.conf
+
+elif grep '# Added by DHCP$' /etc/nsswitch.conf >/dev/null 2>&1; then
+
+	# If we added DNS to a hosts line in the nsswitch, remove it.
+	/usr/bin/rm -f /tmp/nsswitch.conf.$$
+	/usr/bin/sed \
+	    -e '/# Added by DHCP$/d' \
+	    -e 's/^\(#hosts:\)\(.*[^#]\)\(#.*\)$/hosts: \2/' \
+	    /etc/nsswitch.conf >/tmp/nsswitch.conf.$$
+
+	/usr/bin/mv /tmp/nsswitch.conf.$$ /etc/nsswitch.conf
+	/usr/bin/chmod 644 /etc/nsswitch.conf
+fi
+
+if [ "$_INIT_NET_STRATEGY" = "dhcp" ]; then
+	#
+	# if DHCP doesn't return a hostname, use "unknown" so
+	# client can resolve IP address into a local hostname.
+	#
+	hostname=`/sbin/dhcpinfo Hostname`
+	if [ -z "$hostname" ]; then
+		hostname="unknown"
+	fi
+
+	ipaddr=`/sbin/dhcpinfo Yiaddr`
+
+	/usr/bin/rm -f /tmp/hosts.$$ /tmp/hosts_clear.$$
+
+	# Delete any old lines added by dhcp.
+	/usr/bin/sed -e '/# Added by DHCP$/d' /etc/inet/hosts \
+	    > /tmp/hosts_clear.$$
+
+	shift $#	# Clear $0-9 first in case grep fails
+	set -- `/usr/bin/grep "^[ 	]*$ipaddr[ 	]" \
+	    /tmp/hosts_clear.$$ 2>/dev/null`
+
+	if [ $# -gt 0 ]; then
+		#
+		# IP address is already in the hosts file. Ensure the
+		# associated hostname is the same as the Hostname
+		# property returned by the DHCP server.
+		#
+		/usr/bin/sed -e "/^[ 	]*${ipaddr}[ 	]/s/${2}/${hostname}/" \
+		    /tmp/hosts_clear.$$ >/tmp/hosts.$$
+	else
+		#
+		# IP address is missing from the hosts file.  Now check
+		# to see if the hostname is present with a different IP.
+		#
+		shift $#	# Clear $0-9 in case grep fails
+		set -- `/usr/bin/grep -s -v '^#' /tmp/hosts_clear.$$ | \
+		    /usr/bin/egrep "[	 ]${hostname}([	 ]|$)"`
+
+		if [ $# -gt 0 ]; then
+			#
+			# Hostname is present in the hosts file. Rewrite this
+			# line to have the new IP address and the DHCP comment.
+			#
+			/usr/bin/sed -e "/^[ 	]*${1}[ 	]/d" \
+			    /tmp/hosts_clear.$$ >/tmp/hosts.$$
+
+			shift	# Shift off $1 (the old IP)
+
+			echo "$ipaddr $*\c" | /usr/bin/tr ' ' '\t' \
+			    >>/tmp/hosts.$$
+
+			echo "\t# Added by DHCP" >>/tmp/hosts.$$
+		else
+			#
+			# Hostname is not present in the hosts file.
+			# Add a new line for the host at the end of
+			# the new hosts file.
+			#
+			/usr/bin/mv /tmp/hosts_clear.$$ /tmp/hosts.$$
+			echo "${ipaddr}\t${hostname}\t# Added by DHCP" \
+			    >>/tmp/hosts.$$
+		fi
+	fi
+
+	# Update loopback transport hosts files
+	for inet in /etc/net/*/hosts; do
+		echo "# RPC hosts" > $inet
+		echo "$hostname\t$hostname" >> $inet
+		/usr/bin/chmod 644 $inet
+	done
+
+	/usr/bin/rm -f /tmp/hosts_clear.$$
+	/usr/bin/mv /tmp/hosts.$$ /etc/inet/hosts
+	/usr/bin/chmod 644 /etc/inet/hosts
+fi
+
+#
+# Add a static route for multicast packets out our default interface.
+# The default interface is the interface that corresponds to the node name.
+# Run in background subshell to avoid waiting for name service.
+#
+
+(
+if [ "$_INIT_NET_STRATEGY" = "dhcp" ]; then
+	mcastif=`/sbin/dhcpinfo Yiaddr` || mcastif=$_INIT_UTS_NODENAME
+else
+	mcastif=$_INIT_UTS_NODENAME
+fi
+
+echo "Setting default IPv4 interface for multicast:" \
+    "add net 224.0/4: gateway $mcastif"
+
+/usr/sbin/route -n add -interface "224.0/4" "$mcastif" >/dev/null
+) &
+
+#
+# Run inetd in "standalone" mode (-s flag) so that it doesn't have
+# to submit to the will of SAF.  Why did we ever let them change inetd?
+#
+/usr/sbin/inetd -s &

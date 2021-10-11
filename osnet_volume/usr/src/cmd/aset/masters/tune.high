@@ -1,0 +1,18 @@
+#
+# Copyright 1990,1991,1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#ident	"@(#)tune.high	1.10	99/04/14 SMI"
+#
+# Tune list for level high
+#
+# The original list was largely obsoleted by the
+# "Safe Default File Permissions" project.
+#
+# Format:
+#	pathname mode owner group type
+
+/.cshrc 0600 root ? file
+/.login  0600 root ? file
+/.profile 0600 root ? file
+/.logout 0600 root ? file

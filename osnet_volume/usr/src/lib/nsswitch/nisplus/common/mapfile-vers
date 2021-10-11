@@ -1,0 +1,45 @@
+#
+#ident	"@(#)mapfile-vers	1.8	99/05/17 SMI"
+#
+# Copyright (c) 1996 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#
+# Generic interface definition for usr/src/lib/nsswitch/nisplus.
+#
+# For information regarding the establishment of versioned definitions see:
+#	The Linker and Libraries Manual (version 2.5 or greater)
+# This is part of the Developers Guide in the Answerbook.  Specifically refer
+# to Chapter 2 under section "Defining Additional Symbols" through section
+# "Reducing Symbol Scope", and Chapter 5 "Versioning".
+#
+# For specific OSNET rules for the modification (evolution) of these version
+# definitions see:
+#	Policy for Shared Library Version Names and Interface Definitions
+
+
+SUNWprivate_1.1 {
+	global:
+		_nss_nisplus_bootparams_constr;
+ 		_nss_nisplus_auth_attr_constr;
+ 		_nss_nisplus_audit_user_constr;
+		_nss_nisplus_ethers_constr;
+ 		_nss_nisplus_exec_attr_constr;
+		_nss_nisplus_group_constr;
+		_nss_nisplus_hosts_constr;
+		_nss_nisplus_ipnodes_constr;
+		_nss_nisplus_netgroup_constr;
+		_nss_nisplus_netmasks_constr;
+		_nss_nisplus_networks_constr;
+		_nss_nisplus_passwd_constr;
+		_nss_nisplus_printers_constr;
+		_nss_nisplus__printers_constr;
+ 		_nss_nisplus_prof_attr_constr;
+		_nss_nisplus_protocols_constr;
+		_nss_nisplus_rpc_constr;
+		_nss_nisplus_services_constr;
+		_nss_nisplus_shadow_constr;
+		_nss_nisplus_user_attr_constr;
+	local:
+		*;
+};

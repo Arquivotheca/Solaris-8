@@ -1,0 +1,105 @@
+# Copyright (c) 1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+
+#pragma ident	"@(#)scsa2usb_with_usba.wlcmd	1.2	99/11/05 SMI"
+
+
+one openhci_state
+one scsa2usb_state
+one usb_device
+
+### specify the root functions
+
+root	usb_ascii_string_descr
+root	usb_console_input_enter
+root	usb_console_input_exit
+root	usb_console_input_fini
+root	usb_console_input_init
+root	usb_console_read
+root	usba_hcdi_soft_intr
+root	hubd_hotplug_thread
+root	usb_pipe_do_async_func
+root	usb_get_dev_descr
+root	usb_get_interface_number
+root	usb_parse_CV_configuration_descr
+root	usb_parse_CV_endpoint_descr
+root	usb_parse_CV_interface_descr
+root	usb_pipe_abort
+root	usb_pipe_device_ctrl_receive
+root	usb_pipe_device_ctrl_send
+root	usb_pipe_get_policy
+root	usb_pipe_get_private
+root	usb_pipe_receive_bulk_data
+root	usb_pipe_reserve
+root	usb_pipe_send_bulk_data
+root	usb_pipe_send_isoc_data
+root	usb_pipe_set_policy
+root	usb_pipe_set_private
+root	usba_bind_driver_to_interface
+root	usba_free_hcdi_ops
+root	ohci_intr
+root	hubd_connect_event_callback
+root	hubd_disconnect_event_callback
+root	usba_dump_all
+root	usb_log
+root	usb_get_hc_dma_attr
+root	usb_pipe_bulk_transfer_size
+root	usb_request_lower_power
+root	usb_request_raise_power
+root	usba_get_hotplug_stats
+root	usba_reset_hotplug_stats
+root	usba_async_request_lower_power
+root	usba_async_request_raise_power
+
+
+add usb_pipe_async_request::sync_func targets usb_pipe_sync_close
+add usb_pipe_async_request::sync_func targets usb_pipe_sync_abort
+add usb_pipe_async_request::sync_func targets usb_pipe_sync_reset
+add usb_pipe_async_request::sync_func targets scsa2usb_close_usb_pipes_cb
+
+add usb_pipe_async_request::callback targets warlock_dummy
+add pm_request::cb targets warlock_dummy
+
+add usba_hcdi_soft_intr/cb targets hubd_read_callback
+add usba_hcdi_soft_intr/cb targets hubd_intr_pipe_reset_callback
+
+add usba_hcdi_soft_intr/cb targets scsa2usb_default_pipe_cb
+add usba_hcdi_soft_intr/cb targets scsa2usb_pipes_reset_cb
+add usba_hcdi_soft_intr/cb targets scsa2usb_bulk_only_cb
+
+add usba_hcdi_soft_intr/exc_cb targets hubd_exception_callback
+add usba_hcdi_callback/exc_cb targets hubd_exception_callback
+
+add usba_hcdi_callback/exc_cb targets scsa2usb_default_pipe_ex_cb
+add usba_hcdi_callback/exc_cb targets scsa2usb_bulk_only_ex_cb
+
+add ohci_trans_wrapper::tw_handle_td targets ohci_handle_bulk_td
+add ohci_trans_wrapper::tw_handle_td targets ohci_handle_intr_td
+add ohci_trans_wrapper::tw_handle_td targets ohci_handle_ctrl_td
+add ohci_trans_wrapper::tw_handle_td targets ohci_handle_isoc_td
+
+
+add scsi_pkt::pkt_comp targets \
+        scsa2usb_scsi_destroy_pkt \
+        scsa2usb_scsi_init_pkt \
+        scsa2usb_scsi_start \
+        scsa2usb_scsi_abort \
+        scsa2usb_scsi_reset \
+        scsa2usb_scsi_setcap \
+        scsa2usb_scsi_getcap 
+
+
+root	scsa2usb_scsi_tgt_init scsa2usb_scsi_tgt_probe scsa2usb_tran_tgt_free
+root	scsa2usb_scsi_start scsa2usb_scsi_abort scsa2usb_scsi_reset
+root	scsa2usb_scsi_getcap scsa2usb_scsi_setcap scsa2usb_scsi_init_pkt
+root	scsa2usb_scsi_destroy_pkt
+root	scsa2usb_scsi_quiesce scsa2usb_scsi_unquiesce
+
+root	scsa2usb_connect_event_callback
+root	scsa2usb_disconnect_event_callback
+
+root	scsa2usb_callback
+root	scsa2usb_panic_callb
+root	scsa2usb_cpr_callb
+root	scsa2usb_dump

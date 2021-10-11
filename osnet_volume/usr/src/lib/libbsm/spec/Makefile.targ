@@ -1,0 +1,28 @@
+#ident	"@(#)Makefile.targ	1.1	99/01/25 SMI"
+#
+# Copyright (c) 1998-1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+# lib/libbsm/spec/Makefile.targ
+
+LIBRARY	=	libbsm.a
+VERS	=	.1
+
+OBJECTS	=	au_open.o		\
+		au_preselect.o		\
+		au_to.o			\
+		au_user_mask.o		\
+		audit.o			\
+		auditon.o		\
+		auditsvc.o		\
+		exceptions.o		\
+		getacinfo.o		\
+		getauclassent.o		\
+		getaudit.o		\
+		getauditflags.o 	\
+		getauevent.o		\
+		getauid.o		\
+		getauusernam.o		\
+		getfauditflags.o	\
+		private.o	
+

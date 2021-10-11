@@ -1,0 +1,25 @@
+#!/bin/sh
+#
+# Copyright (c) 1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+# ident "@(#)postinstall	1.2	99/07/09 SMI"
+#
+# SUNWidn postinstall script
+#
+
+PATH="/usr/bin:/usr/sbin:${PATH}"
+export PATH
+
+not_installed() {
+	driver=$1
+	grep "^${driver} " ${BASEDIR}/etc/name_to_major > /dev/null 2>&1
+	return $?
+}
+
+EXIT=0
+
+not_installed idn || add_drv -b ${BASEDIR} -i 'SUNW,idn' -n idn ||
+EXIT=1
+
+exit $EXIT

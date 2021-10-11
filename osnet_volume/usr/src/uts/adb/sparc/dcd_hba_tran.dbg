@@ -1,0 +1,36 @@
+\
+\ Copyright (c) 1998 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)dcd_hba_tran.dbg	1.2	98/02/07 SMI"
+
+#include <sys/dada/dada.h>
+#include "dummy.h"
+
+dcd_hba_tran	tran_
+{adb_inline_begin}
+.>z
+<z+{OFFSET, version}=""
+{adb_inline_end}
+	version		hex
+	hba_dip		hex
+	hba_private	hex
+	tgt_private	hex
+	sd		hex 	tran_devicep
+	tgt_init	hex
+	tgt_probe	hex
+	tgt_free	hex
+	start		hex
+	reset		hex
+	abort		hex
+	init_pkt	hex
+	destroy_pkt	hex
+	dmafree		hex
+	sync_pkt	hex
+	hba_flags	hex
+	min_xfer	hex
+	min_burst_size	hex
+	max_burst_size	hex
+{adb_inline_begin}
+<z+{SIZEOF}=""
+{adb_inline_end}

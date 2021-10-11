@@ -1,0 +1,80 @@
+#!/bin/sh
+#
+#ident	"@(#)i.cronroot	1.13	98/07/06 SMI"
+#
+# Copyright (c) 1993 - 1998 by Sun Microsystems, Inc.
+#
+
+PATH="/usr/bin:/usr/sbin:${PATH}"
+export PATH
+
+while read src dest
+do
+	if [ ! -f $dest ] ; then
+		cp $src $dest
+	else
+		grep '^#ident[ 	]*\"@(#)root' $src \
+		    > /tmp/newident.$$ 2>/dev/null
+		grep -v '^#ident[ 	]*\"@(#)root' $dest \
+		    > /tmp/rest.$$ 2>/dev/null
+		cat /tmp/newident.$$ /tmp/rest.$$ > $dest
+		#
+		# 2.1 version of this file had a trailing blank line.
+		# Remove it.
+		#
+		sed -e '$s/^[ 	]*$/%%%/' -e '/^%%%$/d' $dest > /tmp/d.$$
+		cp /tmp/d.$$ $dest
+		#
+		# use nfsfind and reduce frequency from everyday to once a week 
+		# without overriding the local admins changes
+		#
+		sed -e 's,find / -name \.nfs\\\* -mtime +7.*,/usr/lib/fs/nfs/nfsfind,' \
+		    -e 's,\* \* \* /usr/lib/fs/nfs/nfsfind,\* \* 0 /usr/lib/fs/nfs/nfsfind,' $dest > /tmp/d.$$
+		cp /tmp/d.$$ $dest
+		#
+		# change time of logchecker & newsyslog without overriding
+		# local changes
+		sed -e 's,0 2 \* \* 0\,4[ 	]/etc/cron.d/logchecker,10 3 \* \* 0\,4 /etc/cron.d/logchecker,' $dest > /tmp/d.$$
+		cp /tmp/d.$$ $dest
+		sed -e 's,5 4 \* \* 6[ 	]/usr/lib/newsyslog,10 3 \* \* 0 /usr/lib/newsyslog,' $dest > /tmp/d.$$
+		cp /tmp/d.$$ $dest
+		#
+		# add rtc command
+		#
+		grep "/usr/sbin/rtc -c" $dest >/dev/null 2>&1
+		if [ $? != 0 ] ; then
+			grep "/usr/sbin/rtc -c" $src >> $dest
+		fi
+#		rm -f /tmp/d.$$ /tmp/newident.$$ /tmp/rest.$$
+		#
+		# take nptdate out of crontab. It was added in Beta 2.6.
+		# Make sure it is gone evermore.
+		#
+		grep "/usr/lib/inet/ntpdate" $dest >/dev/null 2>&1
+		if [ $? -eq 0 ] ; then
+			sed ' 
+				/^.*\/usr\/lib\/inet\/ntpdate.*$/ {
+				d
+				} ' $dest > /tmp/cron.$$
+			mv /tmp/cron.$$ $dest
+		fi
+		#
+		# ftpclean was added in 2.7 (pre-beta) but will
+		# not be shipping in 2.7. Remove cron entry
+		#
+		grep "/usr/lib/inet/ftpclean" $dest >/dev/null 2>&1
+		if [ $? -eq 0 ]; then
+		    sed -e '/^.*\/usr\/lib\/inet\/ftpclean.*$/d' $dest >/tmp/cron.$$
+		    mv /tmp/cron.$$ $dest
+		fi
+		#
+		# add gsscred duplicates clean-up script - SUNWgss
+		#
+		grep "/usr/lib/gss/gsscred_clean" $dest >/dev/null 2>&1
+		if [ $? != 0 ] ; then
+			grep "/usr/lib/gss/gsscred_clean" $src >> $dest
+		fi
+	fi
+done
+
+exit 0

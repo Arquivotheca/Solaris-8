@@ -1,0 +1,15 @@
+
+Copyright (c) 1999 by Sun Microsystems, Inc.
+All rights reserved.
+
+#ident	"@(#)README	1.1	99/08/11 SMI"
+
+The crash(1M) utility will not be present in versions of Solaris after
+Solaris 8.  The crash command is a utility for examining system crash dump
+files, whose functionality is superseded by the new mdb(1) utility.  Refer to
+usr/src/cmd/mdb/README and mdb(1) for more information about MDB.  The crash
+command's interface was structured around implementation details, such as the
+notion of slots, that have no relation to the Solaris operating system
+implementation.  This source code must be maintained until it is removed,
+but no new features should be added and no existing documented behavior should
+be changed from now on.

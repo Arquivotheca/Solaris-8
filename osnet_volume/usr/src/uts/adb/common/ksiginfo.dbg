@@ -1,0 +1,27 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)ksiginfo.dbg	1.4	98/01/19 SMI"
+
+\ this macro is a submacro used by other macros that (possibly)
+\ use the "z" register. Use 'w'.
+\
+
+#include <sys/types.h>
+#include <sys/siginfo.h>
+#include "dummy.h"
+
+\
+\
+k_siginfo               si_     	ksiginfo
+{adb_inline_begin}
+.>w
+<w+{OFFSET, si_signo}=""
+{adb_inline_end}
+        signo                   hex
+        code                    hex
+        errno                   hex
+{adb_inline_begin}
+<w+{SIZEOF}=""
+{adb_inline_end}

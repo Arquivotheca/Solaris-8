@@ -1,0 +1,65 @@
+#
+# Copyright (c) 1997,1998 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#ident	"@(#)prototype_sparc	1.3	99/03/30 SMI"
+#
+# This required package information file contains a list of package contents.
+# The 'pkgmk' command uses this file to identify the contents of a package
+# and their location on the development machine when building the package.
+# Can be created via a text editor or through use of the 'pkgproto' command.
+
+#!search <pathname pathname ...>	# where to find pkg objects
+#!include <filename>			# include another 'prototype' file
+#!default <mode> <owner> <group>	# default used if not specified on entry
+#!<param>=<value>			# puts parameter in pkg environment
+
+#
+# Include ISA independent files (prototype_com)
+#
+!include prototype_com
+#
+#
+#
+# List files which are SPARC specific here
+#
+# source locations relative to the prototype file
+#
+#
+# SUNWfnsx
+#
+d none usr/lib/sparcv9 0755 root bin
+f none usr/lib/sparcv9/libxfn.so.1 0755 root bin
+f none usr/lib/sparcv9/libxfn.so.2 0755 root bin
+s none usr/lib/sparcv9/libxfn.so=libxfn.so.2
+f none usr/lib/sparcv9/libfn_spf.so.1 0755 root bin
+s none usr/lib/sparcv9/libfn_spf.so=libfn_spf.so.1
+d none usr/lib/fn/sparcv9 0755 root bin
+s none usr/lib/fn/sparcv9/fn_compound_name_standard.so.1=../../sparcv9/libfn_spf.so.1
+f none usr/lib/fn/sparcv9/fn_ctx_initial.so.1 0755 root bin
+f none usr/lib/fn/sparcv9/libfnsp.so.1 0755 root bin
+s none usr/lib/fn/sparcv9/libfnsp.so=libfnsp.so.1
+f none usr/lib/fn/sparcv9/fn_ctx_onc_fn_nisplus.so.1 0755 root bin
+s none usr/lib/fn/sparcv9/fn_ctx_onc_fn_printer_nisplus.so.1=fn_ctx_onc_fn_nisplus.so.1
+f none usr/lib/fn/sparcv9/fn_ctx_onc_fn_nis.so.1 0755 root bin
+s none usr/lib/fn/sparcv9/fn_ctx_onc_fn_printer_nis.so.1=fn_ctx_onc_fn_nis.so.1
+s none usr/lib/fn/sparcv9/fn_ctx_onc_fn_nis_root.so.1=fn_ctx_onc_fn_nis.so.1
+f none usr/lib/fn/sparcv9/fn_ctx_onc_fn_files.so.1 0755 root bin
+s none usr/lib/fn/sparcv9/fn_ctx_onc_fn_printer_files.so.1=fn_ctx_onc_fn_files.so.1
+f none usr/lib/fn/sparcv9/fn_ctx_onc_fn_fs_host.so.1 0755 root bin
+f none usr/lib/fn/sparcv9/fn_ctx_onc_fn_nisplus_root.so.1 0755 root bin
+f none usr/lib/fn/sparcv9/fn_ref_addr_onc_fn_nisplus.so.1 0755 root bin
+f none usr/lib/fn/sparcv9/fn_ref_addr_onc_fn_nis.so.1 0755 root bin
+f none usr/lib/fn/sparcv9/fn_ref_addr_onc_fn_files.so.1 0755 root bin
+f none usr/lib/fn/sparcv9/fn_ref_addr_onc_fn_nisplus_root.so.1 0755 root bin
+s none usr/lib/fn/sparcv9/fn_inet_nisplus.so.1=fn_ref_addr_onc_fn_nisplus_root.so.1
+f none usr/lib/fn/sparcv9/fn_ref_addr_onc_fn_nis_root.so.1 0755 root bin
+s none usr/lib/fn/sparcv9/fn_inet_nis.so.1=fn_ref_addr_onc_fn_nis_root.so.1
+f none usr/lib/fn/sparcv9/fn_ref_addr_inet_ipaddr_string.so.1 0755 root bin
+f none usr/lib/fn/sparcv9/fn_ref_addr_fn_link_addr.so.1 0755 root bin
+f none usr/lib/fn/sparcv9/fn_ref_addr_onc_fn_printer_files.so.1 0755 root bin
+f none usr/lib/fn/sparcv9/fn_ref_addr_onc_fn_printer_nis.so.1 0755 root bin
+f none usr/lib/fn/sparcv9/fn_ref_addr_onc_fn_printer_nisplus.so.1 0755 root bin
+f none usr/lib/fn/sparcv9/fn_ctx_inet_domain.so.1 0755 root bin
+f none usr/lib/sparcv9/libfn_p.so.1 0755 root bin
+s none usr/lib/sparcv9/libfn_p.so=libfn_p.so.1

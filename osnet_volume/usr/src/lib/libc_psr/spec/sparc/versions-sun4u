@@ -1,0 +1,11 @@
+#
+# Copyright (c) 1998-1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#pragma ident	"@(#)versions-sun4u	1.1	99/01/25 SMI"
+#
+# vers file for libc_psr/sparc
+#
+sparc {
+	SUNWprivate_1.1;
+}

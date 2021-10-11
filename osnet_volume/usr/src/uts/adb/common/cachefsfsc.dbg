@@ -1,0 +1,74 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)cachefsfsc.dbg	1.10	98/01/19 SMI"
+
+#include <sys/fs/cachefs_fs.h>
+#include <sys/fs/cachefs_fscache.h>
+#include "dummy.h"
+
+\
+\
+fscache		fs_		cachefsfsc
+{adb_inline_begin}
+.>z
+<z+{OFFSET, fs_cfsid}=""
+{adb_inline_end}
+	cfsid			hex
+	flags			hex
+	fscdirvp		hex
+	fsattrdir		hex
+	infovp			hex
+	cache			hex
+	info			hex
+	cfsvfsp			hex
+	backvfsp		hex
+	rootvp			hex
+	ref			sdecimal
+	cnodecnt		sdecimal
+	consttype		hex
+	cfsops			hex
+	acregmin		sdecimal
+	acregmax		hex
+	acdirmin		sdecimal
+	acdirmax		hex
+	next			hex
+	workq.wq_head		hex
+	workq.wq_tail		hex
+	workq.wq_length		hex
+	workq.wq_thread_count	hex
+	workq.wq_max_len	hex
+	dlogfile		hex		dlogvp
+	dlogoff			hex
+	dlogseq			sdecimal
+	dmapfile		hex
+	dmapoff			hex
+	dmapsize		hex
+	dlock			.mutex
+{adb_inline_begin}
+<z+{OFFSET, fs_idlelock}=""
+{adb_inline_end}
+	idlelock		.mutex
+{adb_inline_begin}
+<z+{OFFSET, fs_idlecnt}=""
+{adb_inline_end}
+	idlecnt			sdecimal
+	idleclean		sdecimal
+	idlefront		hex
+	cdlock			.mutex
+{adb_inline_begin}
+<z+{OFFSET, fs_cdconnected}=""
+{adb_inline_end}
+	cdconnected		sdecimal
+	cdtransition		sdecimal
+	cddaemonid		sdecimal
+	cdrefcnt		sdecimal
+	inum_trans		hex
+	inum_size		sdecimal
+	mntpt			hex
+	hostname		hex
+	backfsname		hex
+{adb_inline_begin}
+<z+{SIZEOF}=""
+{adb_inline_end}

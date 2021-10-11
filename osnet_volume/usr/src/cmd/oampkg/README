@@ -1,0 +1,3463 @@
+Since SunOS 5.0 packages are to be installed from a SunOS 4.1
+machine, it is required that the OAM pkg code be ported to
+SunOS 4.1.  All required source code changes have been made
+and are under NSE control.  These changes are identified in the
+code via `#ifdef SUNOS41'.  This file describes what you need 
+to do in order to successfully build under SunOS 4.1.
+
+This process was tested OUTSIDE an NSE environment, typically by
+copying the NSE src to another directory outside of NSE.  It
+shouldn't be a big deal for someone to automate this process,
+or perhaps do it within an NSE environment.
+
+
+Setup the environment
+---------------------
+	
+You need to set certain variables in your environment, which override
+the default environment:
+
+ROOT	This should be set to the destination directory in which
+	the results of the `make -e install' are installed.
+	For example: setenv ROOT /usr/proto4.1
+
+SRC	This should be set the absolute path of the directory in which
+	the file Makefile.master can be found.
+	For example: setenv SRC /usr/4.1/src
+
+CC	/usr/5bin/cc
+
+CFLAGS	normally you don't need to set this, as the default `-O' is
+	in effect.  To use the debugger, you would of course set this
+	to `-g', then addition set LDFLAGS to nothing to override the
+	default setting which is LDFLAGS=-s
+
+LD_LIBRARY_PATH	   $ROOT/usr/lib:/usr/5lib
+
+AR	/usr/5bin/ar
+
+
+Setup your parallel tree
+------------------------
+
+Activate an NSE environment that includes the oampkg component.
+cd /usr/src/lib
+tar cvf <lib archive> ./libadm ./libpkg ./Makefile.lib ./Makefile.targ
+cd /usr/src/cmd
+tar cvf <cmd archive> ./oampkg ./Makefile.cmd ./Makefile.targ
+cd /proto/usr
+tar cvf <hdr archive> ./include
+
+Exit the NSE environment.
+
+mkdir $SRC $SRC/cmd $SRC/lib
+cd $SRC/lib
+tar xvf <lib archive>
+cd $SRC/cmd
+tar xvf <cmd archive>
+cd $SRC
+copy everything between the ######### lines in the following block of text
+into $SRC/Makefile.master:
+#########################################################################
+#
+#ident	"@(#)README	1.6	92/07/14 SMI"
+#
+# Copyright (c) 1989 by Sun Microsystems, Inc.
+#
+# Makefile.master, global definitions for system source
+#
+ROOT=		/proto
+INS=		install
+FILEMODE=	644
+DIRMODE=	755
+OWNER=		bin
+GROUP=		bin
+
+#GROUPFLD=	$(GROUP:%=-g %)
+#OWNERFLD=	$(OWNER:%=-o %)
+#INS.file=	$(INS) $(GROUPFLD) -m $(FILEMODE) $(OWNERFLD)
+#INS.dir=	$(INS) -d $(GROUPFLD) -m $(DIRMODE) $(OWNERFLD) $@
+INS.file=       $(INS) -m $(FILEMODE) -o $(OWNER) -g $(GROUP) $< $@
+INS.dir=        $(INS) -d -m $(DIRMODE) -o $(OWNER) -g $(GROUP) $@
+INSTALL=	$(INS.file)
+
+MACH=	$(TARGET_MACH:-%=%)
+ARCH=	$(TARGET_ARCH:-%=%)
+
+# In most places, assignments to these macros should be appended with +=
+#
+CFLAGS=	-O
+CPPFLAGS.master= -I${ROOT}/usr/include -I/usr/5include -I/usr/include -I/proto/usr/include -DSUNOS41
+CPPFLAGS= $(CPPFLAGS.master)
+# CPPFLAGS.master allows values to be prepended to CPPFLAGS.
+
+# NSE entry-point targets, permitting separate BDI files.
+# Use of these targets triggers an important dynamic assignment.
+# KERNARCH is to be an NSE variant attribute representing
+# the implementation or kernel architecture, a la "arch -k".
+# NSETARGS makes it easier to represent the target lists.
+#
+NSETARGS= all sgs sysheaders uts install_h clean clobber install lint
+$(NSETARGS:%=%-sun4)  :=	KERNARCH= sun4
+$(NSETARGS:%=%-sun4c) :=	KERNARCH= sun4c
+$(NSETARGS:%=%-sun3)  :=	KERNARCH= sun3
+
+# ALL_KERNARCH permits use of a static list of target names.
+# ('$$' cannot appear on the left of a colon in target names
+# but can in pattern-matching rules)
+# Update this list as necessary for support of kernel
+# architecture variants.
+#
+ALL_KERNARCH= sun4 sun4c sun3
+
+# ficticious target dependencies
+#
+$(ALL_KERNARCH:%=all-%):	all
+$(ALL_KERNARCH:%=sgs-%):	sgs
+$(ALL_KERNARCH:%=sysheaders-%):	sysheaders
+$(ALL_KERNARCH:%=uts-%):	uts
+$(ALL_KERNARCH:%=install_h-%):	install_h
+$(ALL_KERNARCH:%=clean-%):	clean
+$(ALL_KERNARCH:%=clobber-%):	clobber
+$(ALL_KERNARCH:%=install-%):	install
+$(ALL_KERNARCH:%=lint-%):	lint
+#########################################################################
+
+
+su root
+cd /
+mkdir proto proto/usr
+cd /proto/usr
+tar xvf <hdr archive>
+#  Alternatively, you can extract and place the include directory anywhere,
+#  if you setup symbolic links for /proto or /proto/usr, or mount (remotely
+#  or loopback) the filesystem containing the header file onto /proto.
+Exit being root
+
+Add the following to Makefile.master:
+INS.file=       $(INS) -m $(FILEMODE) -o $(OWNER) -g $(GROUP) $< $@
+INS.dir=        $(INS) -d -m $(DIRMODE) -o $(OWNER) -g $(GROUP) $@
+CPPFLAGS.master= -I${ROOT}/usr/include -I/usr/5include -I/usr/include -I/proto/usr/include -DSUNOS41
+
+
+
+Setup install directories
+-------------------------
+
+su root
+mkdir $ROOT
+mkdir $ROOT/var $ROOT/var/sadm $ROOT/var/spool $ROOT/var/spool/pkg
+mkdir $ROOT/usr $ROOT/usr/sadm $ROOT/usr/lib $ROOT/usr/sbin $ROOT/usr/bin
+mkdir $ROOT/usr/include $ROOT/usr/include/sys $ROOT/usr/options
+
+
+
+Changes to SunOS4.1 header files
+--------------------------------
+cd $ROOT/usr/include
+cp /usr/include/limits.h .
+cp /proto/usr/include/pkgstrct.h .
+cp /usr/include/unistd.h .
+cp /usr/include/locale.h .
+
+Add the following to limits.h:
+#ifndef PATH_MAX
+#define PATH_MAX        1024            /* max # of characters in a path name */
+#endif
+		
+
+Make these changes to the ainfo structure in pkgstrct.h:
+	change:	mode_t  mode;
+	to    : u_long  mode;
+
+	change: major_t major;
+		minor_t minor;
+	to    : major_t xmajor;
+		minor_t xminor;
+
+Add the following to unistd.h:
+#define _SC_PAGESIZE	11
+
+Add the following to locale.h:
+extern char *setlocale();
+extern struct lconv *localeconv();
+extern char *textdomain();
+extern char *bindtextdomain();
+extern char *gettext();
+extern char *dgettext();
+
+
+cd $ROOT/usr/include/sys
+cp /usr/include/sys/errno.h .
+cp /usr/include/sys/mount.h .
+cp /usr/include/sys/types.h .
+
+Add the following to errno.h:
+#define ENOPKG          91              /* Package not installed */
+
+Add the following to mount.h:
+#define MS_RDONLY       0x01    /* Read-only */
+#define MS_FSS          0x02    /* Old (4-argument) mount (compatibility) */
+
+Add the following to types.h:
+typedef unsigned long   ulong;
+typedef unsigned long   ulong_t;
+typedef ulong_t major_t;
+typedef ulong_t minor_t;
+typedef long    longlong_t;
+typedef unsigned long   u_longlong_t;
+typedef short   pri_t;
+typedef unsigned char   lock_t;
+typedef struct timeval  timestruc_t;
+
+
+
+Build internationalization library
+----------------------------------
+cd $SRC/lib
+mkdir libintl
+cd libintl
+
+Now search for the heading INTERNATIONALIZATION that appears
+later in this file.  Copy everything below the CUT HERE line
+into a file, eg., intl.shar, in the directory $SRC/libintl.
+
+sh intl.shar
+make
+su root
+cp libintl.a $ROOT/usr/lib/libintl.a
+exit being root
+
+
+Build it
+--------
+cd $SRC/lib/libadm
+make -e clobber
+chmod 644 Makefile
+delete rdwr_vtoc.o from the OBJECTS macro defined in Makefile.
+make -e
+ranlib *.a
+make -e install	   (as root)
+
+cd $SRC/lib/libpkg
+make -e clobber
+make -e
+ranlib *.a
+make -e install	   (as root)
+
+cd $SRC/cmd/oampkg
+make -e clobber
+cd $SRC/cmd/oampkg/libinst
+make -e
+ranlib *.a
+
+cd $SRC/cmd/oampkg
+make -e
+make -e install	   (as root)
+
+
+Create archive
+--------------
+create a file (say /tmp/pkglist) with these entries:
+./usr/options
+./var/sadm/pkg
+./var/sadm/install
+./var/sadm/install/admin
+./var/sadm/install/admin/default
+./var/sadm/install/logs
+./var/spool/pkg
+./usr/sadm/install/bin
+./usr/sadm/install/bin/pkginstall
+./usr/sadm/install/bin/pkgremove
+./usr/sadm/install/bin/pkgname
+./usr/sadm/install/scripts
+./usr/sadm/install/scripts/i.build
+./usr/sadm/install/scripts/i.sed
+./usr/sadm/install/scripts/i.awk
+./usr/sadm/install/scripts/r.sed
+./usr/sadm/install/scripts/r.awk
+./usr/sadm/install/scripts/r.build
+./usr/sadm/install/scripts/cmdexec
+./usr/sbin/installf
+./usr/sbin/removef
+./usr/sbin/pkgadd
+./usr/sbin/pkgask
+./usr/bin/pkginfo
+./usr/bin/pkgparam
+./usr/bin/pkgmk
+./usr/bin/pkgproto
+./usr/bin/pkgtrans
+./usr/sbin/pkgchk
+./usr/sbin/pkgrm
+
+su root
+cd $ROOT
+cat /tmp/pkglist | cpio -ovB > <somewhere>/oampkg.ARCH-sunos4.1
+
+
+Install it on a workstation
+---------------------------
+su root
+cd /
+cpio -iudvB < <somewhere>/oampkg.ARCH-sunos4.1
+
+
+
+####################################################################
+	INTERNATIONALIZATION
+
+FROM HERE TO THE END OF THE FILE IS A SHAR FILE CONTAINING
+SOURCE CODE FOR INTERNATIONALIZATION THAT IS COMPATIBLE
+WITH SUNOS/SVR4.  IT IS LIFTED FROM SUNOS 4.1.1.
+#--------------------------------CUT HERE-------------------------------------
+#! /bin/sh
+#
+# This is a shell archive.  Save this into a file, edit it
+# and delete all lines above this comment.  Then give this
+# file to sh by executing the command "sh file".  The files
+# will be extracted into the current directory owned by
+# you with default permissions.
+#
+# The files contained herein are:
+#
+# -rw-r--r--  1 byennaco      340 Feb 14 15:47 Makefile
+# -rw-r--r--  1 byennaco     1641 Jan 18 19:55 README
+# -rw-r--r--  1 byennaco     1496 Jan  4 19:21 ./bindtextdomain.c
+# -rw-r--r--  1 byennaco     2165 Nov 26 18:08 ./catgets.c
+# -rw-r--r--  1 byennaco      968 Sep  5  1990 ./codeset.h
+# -rw-r--r--  1 byennaco     5173 Dec 27 19:30 ./gencat.c
+# -rw-r--r--  1 byennaco    10096 Feb 19 22:00 ./gettext.c
+# -rw-r--r--  1 byennaco      953 Nov 26 18:08 ./gettext.h
+# -rw-r--r--  1 byennaco    23192 Mar  8 15:57 ./installtxt.c
+# -rw-r--r--  1 byennaco      172 Sep  7  1990 ./nl_types.h
+# -rw-r--r--  1 byennaco    19145 Jan  9 19:02 ./setlocale.c
+#
+echo 'x - Makefile'
+if test -f Makefile; then echo 'shar: not overwriting Makefile'; else
+sed 's/^X//' << '________This_Is_The_END________' > Makefile
+X#
+X# @(#)Makefile 1.10.1 89/10/02 SMI 
+X#
+X
+XCFLAGS = -O
+X# CFLAGS = -g -DDEBUG
+X
+Xall: installtxt gencat lib
+X
+Xlib: gettext.o catgets.o bindtextdomain.o
+X	ar rv libintl.a *.o
+X	ranlib libintl.a
+X
+Xinstalltxt: installtxt.c
+X	cc $(CFLAGS) installtxt.c -o installtxt
+X
+Xgencat: gencat.c
+X	cc $(CFLAGS) gencat.c -o gencat
+X
+Xclean:
+X	rm -f installtxt gencat *.o
+________This_Is_The_END________
+if test `wc -l < Makefile` -ne 21; then
+	echo 'shar: Makefile was damaged during transit (should have been 21 bytes)'
+fi
+fi		; : end of overwriting check
+echo 'x - README'
+if test -f README; then echo 'shar: not overwriting README'; else
+sed 's/^X//' << '________This_Is_The_END________' > README
+X
+XThis is a compatibility library so that international software can
+Xhave the same programmatic interface on SunOS 4.1 as on SunOS/SVR4.
+XYou need this stuff if you're writing non-window-based software
+Xto run on SunOS 4.1 or 4.1.1.  You do not need this stuff with
+XOpenWindows 3.0 or SunOS/SVR4, both of which provide equivalent
+Xprogrammatic interfaces.
+X
+XLoad the libintl.a library, or take source code from this directory
+Xas needed.  Nothing here will interfere with libc.  Applications
+Xshould contain local copies of all the routines here, but need not
+Xbe statically compiled or linked.
+X
+XMost source code here was taken from SunOS 4.1.1 /usr/src/xpglib.
+XThe differences are that <nl_types.h> is an include file on 4.1.1,
+Xbut a local file here.  Also, gettext.c has a one-line change to
+Xcall private_locale_dir() from the source file bindtextdomain.c,
+Xinstead of taking PRIVATE_LOCALE_DIR as defined in <locale.h>.
+XFinally, initialization problems in textdomain() and dgettext()
+Xhave been fixed.
+X
+XThe source for bindtextdomain.c was cobbled together in an attempt
+Xto provide the SunOS/SVR4 API for bindtextdomain() on SunOS 4.1
+Xsystems.  The bindtextdomain() routine on OpenWindows version 3
+Ximplements the same API, but requires the new msgfmt(1m) command,
+Xinstead of installtxt.
+X
+XIf you're running SunOS 4.1 and not 4.1.1, make sure to use the
+Xgencat and installtxt programs here to install message databases.
+XThey are the 4.1.1 versions.  The 4.1 versions are very buggy.
+XHere are the files in this directory.
+X
+XMakefile
+XREADME
+Xbindtextdomain.c
+Xcatgets.c
+Xcodeset.h
+Xgencat.c
+Xgettext.c
+Xgettext.h
+Xinstalltxt.c
+Xlibintl.a
+Xnl_types.h
+Xsetlocale.c
+________This_Is_The_END________
+if test `wc -l < README` -ne 44; then
+	echo 'shar: README was damaged during transit (should have been 44 bytes)'
+fi
+fi		; : end of overwriting check
+echo 'x - bindtextdomain.c'
+if test -f bindtextdomain.c; then echo 'shar: not overwriting bindtextdomain.c'; else
+sed 's/^X//' << '________This_Is_The_END________' > bindtextdomain.c
+X/*      Copyright (c) 1988 Sun Microsystems Inc. */
+X/*        All Rights Reserved   		 */
+X
+X#if	!defined(lint) && defined(SCCSIDS)
+Xstatic char *sccsid = "@(#)bindtextdomain.c 1.5 90/10/04 SMI";
+X#endif
+X
+X#include <stdio.h>
+X
+X#define	MAXBDOMAIN 64
+X
+Xstruct bdomains {
+X	char *domain;
+X	char *path;
+X} bdomain[MAXBDOMAIN];
+X	
+X/*
+X * associate a domain name with an appropriate pathname
+X * to do: should dynamically allocate struct bdomains
+X */
+Xbindtextdomain(domain, path)
+Xchar *domain, *path;
+X{
+X	char *malloc();
+X	int i, n = 0;
+X
+X	if (*domain == NULL) {
+X		for (i = 0; i < MAXBDOMAIN; i++)
+X			if ((bdomain[i].path = malloc(strlen(path)+1)) != NULL)
+X				strcpy(bdomain[i].path, path);
+X	} else if (n < MAXBDOMAIN) {
+X		if ((bdomain[n].domain = malloc(strlen(domain)+1)) != NULL)
+X			strcpy(bdomain[n].domain, domain);
+X		if ((bdomain[n].path = malloc(strlen(path)+1)) != NULL)
+X			strcpy(bdomain[n].path, path);
+X#ifdef DEBUG
+X		fprintf(stderr, "btd: %s %s\n", bdomain[n].domain, bdomain[n].path);
+X#endif
+X		n++;
+X	} else {
+X		fprintf(stderr, "Out of domains (limit %d)\n", MAXBDOMAIN);
+X		return(-1);
+X	}
+X	return(0);
+X}
+X
+Xextern char *_current_domain;
+X/*
+X * return the pathname associated with domain name nlocale
+X * work from top down to give later bindtextdomain() calls precedence
+X */
+Xchar *
+Xprivate_locale_dir()
+X{
+X	int i;
+X
+X	for (i = MAXBDOMAIN-1; i >= 0; i--) {
+X		if (bdomain[i].domain == NULL)
+X			continue;
+X		if (strcmp(_current_domain, bdomain[i].domain) == 0)
+X			return(bdomain[i].path);
+X	}
+X	return("/etc/locale");
+X}
+________This_Is_The_END________
+if test `wc -l < bindtextdomain.c` -ne 64; then
+	echo 'shar: bindtextdomain.c was damaged during transit (should have been 64 bytes)'
+fi
+fi		; : end of overwriting check
+echo 'x - catgets.c'
+if test -f catgets.c; then echo 'shar: not overwriting catgets.c'; else
+sed 's/^X//' << '________This_Is_The_END________' > catgets.c
+X/* X/OPEN XPG2 messaging interfaces 
+X *   dumb interfaces to real routines
+X */
+X#if !defined(lint) && defined(SCCSIDS)
+Xstatic  char *sccsid = "@(#)catgets.c 1.3 90/07/30 SMI";
+X#endif
+X
+X#include <stdio.h>
+X#include "nl_types.h"
+X#include <locale.h>
+X#include <memory.h>
+X
+X#define	MAXCATS	10
+X
+X
+Xextern char *dgettext();
+X
+Xextern char *_current_domain;
+X
+Xstatic char _cat2domain[MAXCATS][MAXDOMAIN];
+X
+X
+Xchar *
+Xcatgets(catd, set_num, msg_num, s)
+X	nl_catd catd;
+X	int set_num, msg_num;
+X	char *s;
+X{
+X	char str[MAXDOMAIN];
+X	register char *res;
+X
+X	if ((catd>=MAXCATS) || (_cat2domain[catd][0] == 0))
+X		return s;
+X
+X	sprintf(str,"%d:%d", set_num, msg_num);
+X	res = dgettext(_cat2domain[catd], str); 
+X	
+X	if (strcmp(res, str) == 0) 
+X		return s;
+X	else
+X  		return res;
+X}
+X
+Xchar *catgetmsg(catd,set_id,msg_id,buf,buflen) 
+Xnl_catd catd; int set_id; int msg_id; char *buf; int buflen;
+X{
+X	strncpy (buf, catgets(catd, set_id, msg_id, memset(buf,'\0',buflen)), 
+X		buflen-1);
+X	return (buf);
+X}
+X
+X/* catopen() fakes up to MAXCATS simultaneous catalogue opens.
+X * Note that the real stacking of catalogues is done in gettext, where
+X * the domains are cached. This locale stacking allows
+X * the (bad style) use of multi catalogues in applications.
+X */
+X
+X
+Xnl_catd catopen(name, oflag)
+Xchar *name;
+Xint oflag;
+X{	
+X	register int i;
+X
+X	if (name == NULL)
+X		return((nl_catd) -1);
+X
+X 	if (_current_domain == NULL) {
+X                if ((_current_domain = (char *)malloc(MAXDOMAIN)) == NULL)
+X                        return ((nl_catd) -1);
+X	}
+X	if (*name == '\0')
+X		*name = ' ';
+X
+X	strcpy(_current_domain, name);
+X
+X	/* first look for a re-open of same catalogue. */
+X
+X	for (i=0; i<MAXCATS; i++)  {
+X		if (strcmp(_cat2domain[i], name) == 0)
+X			return((nl_catd) i);
+X	}
+X	
+X	/* Now assign first free catd */
+X
+X	for (i=0; i<MAXCATS; i++)  {
+X		if (_cat2domain[i][0] == 0) {
+X			strcpy(_cat2domain[i], name);
+X			return ((nl_catd) i);
+X		}
+X
+X	}
+X
+X	*_current_domain = 0;
+X	return ((nl_catd) -1);	
+X}
+X
+X
+Xint catclose (catd) 
+Xnl_catd catd;
+X
+X{
+X	if (catd >= MAXCATS)
+X		return -1;
+X	/* Invalidate currently open catalogue */
+X	if (strcmp(_cat2domain[catd],_current_domain) == 0)
+X		*_current_domain = 0;
+X	_cat2domain[catd][0] = 0;
+X	return 0;
+X}        
+________This_Is_The_END________
+if test `wc -l < catgets.c` -ne 110; then
+	echo 'shar: catgets.c was damaged during transit (should have been 110 bytes)'
+fi
+fi		; : end of overwriting check
+echo 'x - codeset.h'
+if test -f codeset.h; then echo 'shar: not overwriting codeset.h'; else
+sed 's/^X//' << '________This_Is_The_END________' > codeset.h
+X/*
+X * codeset information
+X */
+X
+X#ifndef lint
+X/* static  char *sccsid = "@(#)codeset.h 1.3 89/11/09 SMI"; */
+X#endif
+X
+X#include <stdio.h>
+X#define NAME_SIZE 14		/* Length of the code set name */
+X
+Xstruct _code_header {
+X	char code_name[NAME_SIZE+1];	/* code set name */
+X	int code_id;			/* code set id */
+X	int code_info_size;		/* size of code set info */
+X};
+X
+Xstruct _code_set_info {
+X	char code_name[NAME_SIZE+1];	/* code set name */
+X	int code_id;			/* code ID */
+X	char *code_info;		/* code information */
+X	int open_flag;			/* Am I open library ? */
+X};
+X
+X#define EUC_SET		"euc"
+X#define XCCS_SET	"xccs"
+X#define ISO2022_SET	"iso2022"
+X
+X#define CODESET_NONE	0
+X#define CODESET_EUC	2
+X#define CODESET_XCCS	3
+X#define CODESET_ISO2022	4
+X#define CODESET_USER 	100
+X
+X#define ERROR -1
+X#define ERROR_NO_LIB	-2		/* dlopen failed */
+X#define ERROR_NO_SYM	-3		/* dlsym failed */
+X
+X#ifdef DEBUG
+X#define LIBRARY_PATH 	"/tmp/"
+X#else
+X#define LIBRARY_PATH 	"/usr/lib/"
+X#endif
+X
+Xvoid *_ml_open_library();
+________This_Is_The_END________
+if test `wc -l < codeset.h` -ne 45; then
+	echo 'shar: codeset.h was damaged during transit (should have been 45 bytes)'
+fi
+fi		; : end of overwriting check
+echo 'x - gencat.c'
+if test -f gencat.c; then echo 'shar: not overwriting gencat.c'; else
+sed 's/^X//' << '________This_Is_The_END________' > gencat.c
+X/*	@(#)gencat.c 1.4 90/07/30 SMI	*/
+X
+X#include <stdio.h>
+X#include <ctype.h>
+X#include "nl_types.h"
+X#include <locale.h>
+X#include <signal.h>
+X
+X/*
+X * gencat : take a message source file and produce a message catalog.
+X * This generates a tmp file that can be used as input to the 
+X * installtxt utility that really does the work. We always name the 
+X * tmpffile ".Xgencat", so that it can always be merged later
+X *
+X */
+X
+X#define CATNAME	"/tmp/.Xgencat"
+X
+Xchar 	buff[512];
+Xchar 	linebuf[512];
+Xint 	set_no;
+Xchar	tname[2*L_tmpnam];
+X
+XFILE *tempfile;
+X
+Xmain(argc, argv)
+X	int argc;
+X	char **argv;
+X{
+X	char *catf;
+X	FILE *fd;
+X	register int i;
+X	int merge;
+X	int ret;
+X	
+X	if (argc == 1)
+X		usage(argv[0]);
+X		
+X	/*
+X	 * Create a tempfile for installtxt. Call it CATNAME
+X	 */
+X
+X	strcpy(tname, CATNAME);
+X	(void) unlink(CATNAME);
+X	tempfile = fopen(tname,"w+");
+X	if (tempfile == NULL) {
+X		perror(tname);
+X		exit(1);
+X	}
+X	
+X	/*
+X	 * Check to see if catalogue is there, if it is we will merge it
+X	 * later
+X	 */
+X
+X	catf = argv[1];
+X	
+X	if (access(catf, 4) == 0)
+X		merge = 1;
+X
+X	/*
+X	 * Open msgfile(s) or use stdin and call handling proc
+X	 */
+X
+X	if (argc == 2)
+X		make_inter(stdin);
+X	else {
+X		for (i = 2 ; i < argc ; i++){
+X			if ((fd = fopen(argv[i], "r")) == 0){
+X			   perror(argv[i]);
+X			   continue;
+X			}
+X			make_inter(fd);
+X			fclose(fd);
+X		}
+X	}
+X	
+X	/* Do the installtxt cv catd tempfile
+X	 * then close fds
+X	 * need to use merge flag if necc
+X	 */
+X	fclose(tempfile);
+X	i = fork();
+X	if(i == -1) {
+X		perror(NULL);
+X	      	done(1);
+X	}
+X
+X	(void) signal(SIGQUIT, SIG_IGN);
+X	(void) signal(SIGINT, SIG_IGN);
+X	(void) signal(SIGTSTP, SIG_IGN);
+X	(void) signal(SIGHUP, SIG_IGN);
+X
+X	if (i == 0) {
+X	   if (merge) {
+X		execl("/usr/etc/installtxt", "installtxt", "r", catf, tname, (char *) 0);
+X		execl("/etc/installtxt", "installtxt", "r", catf, tname, (char *) 0);
+X	   } else {
+X		execl("/usr/etc/installtxt", "installtxt", "c", catf, tname, (char *) 0);
+X		execl("/etc/installtxt", "installtxt", "c", catf, tname, (char *) 0);
+X	   }	
+X	      fprintf(stderr, "could not exec installtxt\n");
+X	      exit(1);
+X	}
+X	if ((ret = wait((int *) 0))== -1) {
+X		perror(NULL);
+X		done(1);
+X	}
+X	(void) unlink(tname);  
+X	exit(0);
+X
+X}
+X
+X
+Xusage(name)
+X	char *name;
+X{
+X	fprintf(stderr, "Usage: %s object [source]\n", name);
+X	exit(0);
+X}
+X
+X
+X
+Xmake_inter(fd)
+X	FILE *fd;
+X{
+X	char quote = 0;
+X	register int t1, t2;
+X	char c;
+X	int msg_nr;
+X	int line_count;
+X
+X	
+X	fprintf(tempfile, "$quote \"\n");
+X	set_no = 0; line_count=0;
+X	while (fgets(linebuf, BUFSIZ, fd) != 0){
+X		line_count++;
+X		while (strcmp(&linebuf[strlen(linebuf)-2],"\\\n") == 0) {
+X			line_count++;
+X			if (fgets(&linebuf[strlen(linebuf)-2], BUFSIZ, fd) == 0) {
+X				fprintf(stderr, "line continuation expected on line %d\n",
+X					line_count);
+X				done(1);
+X			}
+X
+X
+X			if (strlen(linebuf) > BUFSIZ) {
+X				fprintf(stderr, "line too long: line %d\n", line_count);
+X				done(1);
+X			}
+X		}
+X
+X		if ((t1 = skip_blanks(linebuf, 0)) == -1)
+X			continue;
+X
+X		if (linebuf[t1] == '$'){
+X			t1 += 1;
+X			/*
+X			 * Handle commands or comments
+X			 */
+X			if (strncmp(&linebuf[t1], "set", 3) == 0){
+X				t1 += 3;
+X
+X				/*
+X				 * Change current set
+X				 */
+X				if ((t1 = skip_blanks(linebuf, t1)) == -1){
+X					fprintf(stderr, "Syntax error on line %d\n", line_count);
+X					continue;
+X				}
+X				set_no = atoi(&linebuf[t1]);
+X				continue;
+X			}
+X			if (strncmp(&linebuf[t1], "delset", 6) == 0){
+X				t1 += 6;
+X
+X				/*
+X				 * Delete named set
+X				 */
+X				if ((t1 = skip_blanks(linebuf, t1)) == -1){
+X					fprintf(stderr, "Syntax error on line %d (Ignored)\n", line_count);
+X					continue;
+X				}
+X
+X				/* not implemented */
+X				continue;
+X
+X			}
+X			if (strncmp(&linebuf[t1], "quote", 5) == 0){
+X				t1 += 5;
+X				if ((t1 = skip_blanks(linebuf, t1)) == -1)
+X					quote = 0;
+X				else
+X					quote = linebuf[t1];
+X				continue;
+X			}
+X			/*
+X			 * Everything else is a comment
+X			 */
+X			continue;
+X		}
+X
+X		/* A real message id */
+X
+X		if (isdigit(linebuf[t1])){
+X			msg_nr = 0;
+X			while(isdigit(c = linebuf[t1])){
+X				msg_nr *= 10;
+X				msg_nr += c - '0';
+X				t1++;
+X			}
+X			if ((t1 = skip_blanks(linebuf, t1)) == -1) {
+X				fprintf(stderr, 
+X					"Syntax error on line %d (ignored)\n", 
+X					line_count);
+X				linebuf[0] = 0;
+X			}	
+X			else {
+X				/* null out the trailing newline */
+X				if (linebuf[t1] == quote) {
+X					/* test for unbalanced quote pairs */
+X					if(linebuf[strlen(linebuf)-2] != '\"')
+X					 strcpy(&linebuf[strlen(linebuf)-1],
+X						"\"");
+X					else
+X					  linebuf[strlen(linebuf)-1] = '\0';
+X					fprintf(tempfile,"%d:%d %s\n",
+X						set_no, msg_nr, linebuf+t1);
+X				}
+X				else {
+X					linebuf[strlen(linebuf)-1] = '\0';
+X					if (strcmp(&linebuf[strlen(linebuf)-2],
+X						"\\\"") == 0)
+X					  fprintf(tempfile,"%d:%d \"%s\n", 
+X						set_no, msg_nr, linebuf+t1);
+X					else
+X					  fprintf(tempfile,"%d:%d \"%s\"\n", 
+X						set_no, msg_nr, linebuf+t1);
+X                                                
+X				}
+X			}
+X		}
+X
+X		continue;
+X	}
+X		
+X}
+X
+X  /*
+X   * Skip blanks in the input stream
+X   */
+X
+X
+Xskip_blanks(lineptr, i)
+X  char *lineptr;
+X  int i;
+X{
+X	while (lineptr[i] && isspace(lineptr[i]) && !iscntrl(lineptr[i]))
+X		i++;
+X	if (!lineptr[i] || lineptr[i] == '\n')
+X		return -1;
+X	return i;
+X}
+X
+Xdone(code)
+Xint code;
+X{
+X
+X	(void) fclose(tempfile);
+X	(void) unlink(tname);  
+X	exit(code);
+X
+X}
+________This_Is_The_END________
+if test `wc -l < gencat.c` -ne 273; then
+	echo 'shar: gencat.c was damaged during transit (should have been 273 bytes)'
+fi
+fi		; : end of overwriting check
+echo 'x - gettext.c'
+if test -f gettext.c; then echo 'shar: not overwriting gettext.c'; else
+sed 's/^X//' << '________This_Is_The_END________' > gettext.c
+X/*      Copyright (c) 1988 Sun Microsystems Inc. */
+X/*        All Rights Reserved   		 */
+X
+X#if	!defined(lint) && defined(SCCSIDS)
+Xstatic char *sccsid = "@(#)gettext.c 1.5 90/10/04 SMI";
+X#endif
+X
+X#include <stdio.h>
+X#include <stdlib.h>
+X#include <fcntl.h>
+X#include <string.h>
+X#include <locale.h>
+X#include <sys/param.h>
+X#include <sys/stat.h>
+X#include <sys/types.h>
+X#include "nl_types.h"
+X#include <errno.h>
+X#include "gettext.h"
+X
+X#define	TRUE		1
+X#define	FALSE		0
+X#define	MAXOPENARCH	2
+X#define	MAXPATHNAME	256
+X#define	MAXMEMBERFILE	2048
+X#define	MAXFMT		32
+X
+Xchar 	*lookup();
+Xint  	loadmessages();
+X
+Xextern char _locales[MAXLOCALE - 1][MAXLOCALENAME + 1];
+Xextern void     init_statics();
+Xchar		*_current_domain; 
+X
+Xstatic char 	*saved_locale;
+Xstatic char	*saved_domain = NULL;
+Xstatic char 	*text_start;
+Xstatic long	member_size, total_size;
+Xstatic struct 	msg_header  *cur_hdr;
+Xstatic struct 	index *cur_index;
+Xstatic int 	maxtags;
+Xunsigned char	curr_archive = 0; 
+X
+X/* Pointer to start of the loaded data region that
+X * contains the messages
+X */
+Xchar 		*mstart;
+X
+X
+X
+Xchar *gettext(msgid)
+Xchar *msgid;
+X{
+X	register char *ret;
+X
+X	if (msgid == NULL)
+X		return NULL;
+X	if (_current_domain == NULL) {
+X		if ((_current_domain = (char *) malloc(MAXDOMAIN)) == NULL)
+X			return msgid;
+X		strcpy(_current_domain, "default");
+X	}
+X	if (saved_domain == NULL)
+X		if ((saved_domain = (char *)malloc(MAXDOMAIN)) == NULL)
+X			return msgid;
+X
+X	/* Always leave the first version of saved_locale a null
+X	 * string because we always want to try and load at least one
+X	 * message archive
+X	 */
+X	if (saved_locale == NULL)
+X		if ((saved_locale = (char *)malloc(MAXLOCALENAME+1)) == NULL)
+X			return msgid;
+X
+X	if (_locales[0][0] == '\0')
+X		       init_statics();
+X
+X	if (strcmp(_locales[LC_MESSAGES-1], saved_locale) ||
+X	    strcmp(_current_domain, saved_domain)) {
+X
+X		/* Reload new messages from disk if either of the
+X		 * above two have changed
+X		 */
+X
+X		if (loadmessages() == 0) 
+X			return msgid;
+X		curr_archive++;
+X	}
+X
+X	if ( (curr_archive == 0) || (ret=lookup(msgid)) == NULL)
+X		return msgid;
+X	else
+X		return ret;
+X};
+X
+X/* 	loadmessages() - Will open a disk file from the correct
+X *	category and locale and will allocate the archive to the
+X *	current runtime version of the message archive.
+X *	Caches the last open archive to speed up multi-domain
+X *	accessing, in the case of a process with several textdomain()
+X *	calls.
+X */
+X
+Xstatic loadmessages()
+X{
+X	char *nlocale, *nlspath, *private_locale_dir();
+X	int i;
+X	register int fd, result;
+X	char pathname[MAXPATHLEN];
+X	char tpathname[MAXPATHLEN];
+X	char mbuf[SARMAG];
+X	struct stat statbuf;
+X	char *p, *str;
+X	struct 	ar_hdr  arbuf;
+X
+X	str = NULL; total_size = 0; i = 0;
+X	nlocale = _locales[LC_MESSAGES-1];
+X						  
+X	/* Even if the following code fails to get information
+X	 * we don't want to keep entering this code over and over
+X	 * again until the locale or the domain is really changed.
+X	 */
+X	strcpy(saved_locale, _locales[LC_MESSAGES-1]);
+X	strcpy(saved_domain, _current_domain);
+X
+X	for (p=saved_domain;(*p != '\0') && (*p != '/');++p)
+X		;
+X
+X	if (*p == '/')  {
+X
+X		/* Assume domainname is absolute full pathname */
+X
+X		strcpy(pathname, saved_domain);
+X		fd = open(pathname, O_RDONLY);
+X
+X	} else {
+X		if ( ((nlspath = getenv("NLSPATH")) == 0) || (*nlspath == '\0') ) {
+X	
+X	 		/* Regular single parse in the default locale areas	*/
+X
+X			while (++i < 3) {
+X#ifdef DEBUG
+X				fprintf(stderr, "loadmessages: %s %s\n", nlocale, private_locale_dir(nlocale));
+X#endif
+X				(void) strcpy(pathname, private_locale_dir(nlocale));
+X				(void) strcat(pathname, "/LC_MESSAGES/");
+X				(void) strcat(pathname, nlocale);
+X				(void) strcat(pathname, "/");
+X				(void) strcat(pathname, _current_domain);
+X				if ((fd = open(pathname, O_RDONLY)) < 0 && errno == ENOENT) {
+X					(void) strcpy(pathname, LOCALE_DIR);
+X					(void) strcat(pathname, "LC_MESSAGES/");
+X					(void) strcat(pathname, nlocale);
+X					(void) strcat(pathname, "/");
+X					(void) strcat(pathname, _current_domain);
+X					if ( (fd = open(pathname, O_RDONLY)) >= 0)
+X						break;
+X				}
+X				else
+X					break;
+X				if (i == 1)
+X					if (strcmp(nlocale, "default") == 0)
+X						i++;
+X					else
+X						nlocale = "default";
+X				else if (i == 2)
+X					nlocale = "C";
+X			}
+X		} else {
+X			/* parse the NLSPATH variable including 
+X			 * expansion of the empowered locale settings 
+X			 */
+X			do {
+X				p = nlspath;
+X				i = 0;
+X				while (*p && *p++ != ':') i++;
+X				if (i) {
+X					strncpy(pathname, nlspath, i);
+X					pathname[i] = '\0';
+X				} else
+X					continue;
+X
+X				/* expand % here before calling stat 
+X				 * Do not use built in localename here
+X				 */
+X			        nlocale = getenv("LANG");
+X				for (i=0;pathname[i] != '\0';i++) {
+X					if (pathname[i] != '%')
+X						continue;
+X					switch(pathname[i+1]) {
+X					case 'L':	
+X						strcpy(tpathname, &pathname[i+2]);
+X						memcpy(&pathname[i], nlocale, strlen(nlocale));
+X						strcpy(&pathname[i+strlen(nlocale)],tpathname);
+X						i=0;
+X						continue;
+X					case 'l':	
+X						strcpy(tpathname, &pathname[i+2]);
+X						memcpy(&pathname[i], nlocale, strcspn(nlocale,"_."));
+X						strcpy(&pathname[i+strcspn(nlocale,"_.")],tpathname);
+X						i=0;
+X						continue;
+X					case 'N':
+X						strcpy(tpathname, &pathname[i+2]);
+X						memcpy(&pathname[i], _current_domain, strlen(_current_domain));
+X						strcpy(&pathname[i+strlen(_current_domain)],tpathname);
+X						i=0;
+X						continue;
+X					case '%':
+X						strcpy(tpathname, &pathname[i+2]);
+X						strcpy(&pathname[i],tpathname);
+X						i=0;
+X						continue;
+X					}
+X				}
+X#ifdef DEBUG
+Xfprintf(stderr, "gettext: about to stat file %s\n", pathname);
+X#endif
+X				result = stat(pathname, &statbuf);
+X				if ((result != -1) && (statbuf.st_mode) & S_IFDIR) {
+X                			strcat(pathname, "/");
+X                			fd = open(strcat(pathname, _current_domain), O_RDONLY);
+X				} else
+X					fd = open(pathname, O_RDONLY);
+X
+X			} while ((fd <= 0) && *(nlspath = p));
+X				
+X        	}
+X	}
+X	if (fd < 0)
+X		return 0;
+X
+X#ifdef DEBUG
+Xfprintf(stderr, "gettext: %s opened ok\n", pathname);
+X#endif
+X	/*
+X	 *  We opened a file purporting to be the messages file ...
+X	 */
+X
+X	if (read(fd, mbuf, SARMAG) != SARMAG || strncmp(mbuf, ARMAG, SARMAG)) {
+X#ifdef	DEBUG
+X		fprintf(stderr, "gettxt!!! not in message archive format\n");
+X#endif
+X		return 0;
+X	}
+X
+X	/*
+X	 * This loop reads in each member file of the archive  and
+X	 *  allocates space for each file. Note that one invocation of
+X	 *  setlocale will load all member files contained in the whole
+X	 *  archive
+X	 */
+X
+X	while ((i = read(fd, (char *)&arbuf, sizeof arbuf)) != 0) {
+X		if(i != sizeof arbuf && i > 1) {
+X#ifdef	DEBUG
+X			fprintf(stderr, "gettext!! useless size\n");
+X#endif
+X			close(fd);
+X			return 0 ;
+X		}
+X		if (i <= 1)
+X			break;
+X		if (strncmp((char *)arbuf.ar_fmag, ARFMAG, sizeof(arbuf.ar_fmag))) {
+X#ifdef	DEBUG
+X			fprintf(stderr, "gettext!! malformed message archive (at %ld)\n", lseek(fd, 0L, 1));
+X#endif
+X			close(fd);
+X			return 0 ;
+X		}
+X
+X		/* Now determine the actual size of this
+X		 * member file and prepare to read in each record
+X		 */
+X
+X		sscanf((char *)arbuf.ar_size, "%ld", &member_size);
+X		total_size += member_size;
+X
+X#ifdef	DEBUG
+X		fprintf(stderr,"DEBUG: loading %d bytes from %s\n", member_size, pathname);
+X#endif
+X		if (str == NULL) {
+X			if ((str = (char *) malloc((unsigned)total_size)) == NULL) {
+X				(void) close(fd);
+X				return 0;
+X			}
+X		}
+X		else if ((str = (char *)realloc(str, (unsigned)total_size)) == NULL ) {
+X			(void) close(fd);
+X			return 0;
+X		}
+X		if (read(fd, str, (int)member_size) != member_size ) {
+X#ifdef	DEBUG
+X			fprintf(stderr, "gettxt!!! not in message archive format\n");
+X#endif
+X			(void) close(fd);
+X			return 0;
+X		}
+X	}
+X
+X	close(fd);
+X	if (mstart != NULL) {
+X		/* cacheing goes in here , but its not here yet*/
+X		free(mstart);
+X	}
+X	mstart = str;
+X
+X	/* following structures used during a message dereference */
+X	/* cur_hdr is the start of the member file, including index section */
+X	/* text_start is the address of the real target strings */
+X
+X	(char *) cur_hdr = mstart;
+X	(char *) cur_index = mstart + sizeof(struct msg_header);
+X	text_start = mstart + cur_hdr->ptr;
+X	maxtags = cur_hdr -> maxno;
+X
+X	return 1;
+X
+X
+X}
+X
+X/* Select target string from the current domain and the
+X * current locale.  At present we only have one format per domain
+X */
+X
+Xstatic char *lookup(msgid)
+Xchar *msgid;
+X{
+X	int i, value;
+X	char *msgtag;
+X
+X	if (cur_hdr->format_type == INT) {
+X
+X		/* this section assumes that format of domain
+X		 * indicated some form of integer conversion
+X		 * Simple roll is good enough
+X		 */
+X
+X		sscanf(msgid, cur_hdr->format, &value);
+X#ifdef	DEBUG
+X		fprintf(stderr,"start search for int %d\n", value);
+X#endif
+X		for (i=0; i<maxtags; i++) {
+X			if (cur_index->msgnumber == value) {
+X#ifdef	DEBUG
+X				fprintf(stderr,"Integer lookup found %s\n", (char *)(text_start + cur_index->rel_addr));
+X#endif
+X				return (char *)(text_start + cur_index->rel_addr);
+X			}
+X#ifdef	DEBUG
+X			fprintf(stderr,"Skipped over one index\n");
+X#endif
+X			cur_index++;
+X		}
+X
+X		/* fell off the end of the table and failed */
+X
+X		return NULL;
+X
+X	} else {
+X
+X		/* We have to perform a string search,
+X	    	 * or a fixed width string search
+X		 */
+X
+X		(char *) cur_index = (mstart + sizeof(struct msg_header));
+X
+X		/* simple roll through is good enough */
+X
+X		for (i=0; i<maxtags; i++) {
+X			msgtag = (cur_index->rel_addr)+text_start;
+X			if (strcmp(msgtag, msgid) == 0)
+X				return (char *) msgtag+strlen(msgtag)+1;
+X			cur_index++;
+X		}
+X
+X		/* fell off the end of the table and failed */
+X
+X		return NULL;
+X	}
+X}
+X
+Xchar *textdomain(domain)
+Xchar *domain;
+X{
+X	if (_current_domain == NULL) { 
+X		if ((_current_domain = (char *) malloc(MAXDOMAIN)) == NULL) 
+X			return NULL; 
+X		strcpy(_current_domain, "default"); 
+X	}
+X	if ((strlen(domain) > MAXDOMAIN))
+X		return NULL;
+X	if (domain == NULL)
+X		return _current_domain;
+X	strcpy(_current_domain, domain);
+X	return _current_domain;
+X}
+X
+Xchar *dgettext(domain, msgid)
+Xchar *domain; char *msgid;
+X{
+X	if (_current_domain == NULL) { 
+X		if ((_current_domain = (char *) malloc(MAXDOMAIN)) == NULL) 
+X			return NULL; 
+X		strcpy(_current_domain, "default"); 
+X	}
+X	if ((strlen(domain) > MAXDOMAIN)) 
+X		return msgid;
+X	if ((domain != NULL) && (*domain != 0))
+X		strcpy(_current_domain, domain);
+X	return (gettext(msgid));
+X}
+________This_Is_The_END________
+if test `wc -l < gettext.c` -ne 411; then
+	echo 'shar: gettext.c was damaged during transit (should have been 411 bytes)'
+fi
+fi		; : end of overwriting check
+echo 'x - gettext.h'
+if test -f gettext.h; then echo 'shar: not overwriting gettext.h'; else
+sed 's/^X//' << '________This_Is_The_END________' > gettext.h
+X/* common between installtxt and gettext() */
+X
+X/*	@(#)gettext.h 1.1 89/02/22 SMI; */
+X
+X#define	ARMAG		"!<LC_MESSAGES>\n"
+X#define ARFMAG  	"`\n"
+X#define	SARMAG		15
+X#define INT             0 
+X#define STR             1
+X
+Xstruct ar_hdr {
+X        unsigned char ar_name[16];
+X	unsigned char ar_date[12];
+X        unsigned char ar_uid[6];
+X        unsigned char ar_gid[6];
+X        unsigned char ar_mode[8];
+X        unsigned char ar_size[10];
+X	unsigned char ar_fill;
+X	unsigned char ar_sep;
+X	unsigned char ar_quote;
+X        unsigned char ar_fmag[2];
+X};
+X
+Xstruct msg_header {
+X	int maxno;	/* number of message tags in following 
+X		 	 * domain structure */
+X
+X	int ptr;	/* relative offset from msg_header to start 
+X			 * of target strings block */
+X
+X	short format_type;
+X	char format[MAXFMTS];	/* Format string */
+X
+X};
+X
+Xstruct index {
+X	int msgnumber;	/* The value of mesasge tag expressed as an integer
+X*/
+X	int rel_addr;	/* The relative offset to the real target string
+X*/
+X};
+________This_Is_The_END________
+if test `wc -l < gettext.h` -ne 41; then
+	echo 'shar: gettext.h was damaged during transit (should have been 41 bytes)'
+fi
+fi		; : end of overwriting check
+echo 'x - installtxt.c'
+if test -f installtxt.c; then echo 'shar: not overwriting installtxt.c'; else
+sed 's/^X//' << '________This_Is_The_END________' > installtxt.c
+X/* 
+X * Installtxt - installs and maintains archives of message strings
+X * which are subsequently used by the gettext() utility.
+X * Version of /usr/group proposal 12th Oct 88.
+X *
+X */
+X
+X#ifndef lint
+Xstatic char *sccsid = "@(#)README 1.1 91/12/27 SMI";
+X#endif not lint
+X
+X/*
+X * installtxt. Utility to install and maintain archives of message 
+X * text.
+X * If any of the message archive data structures change here 
+X * then they must change in gettext() also
+X */
+X
+X#include <sys/param.h>
+X#include <sys/stat.h>
+X#include <sys/time.h>
+X#include <locale.h>
+X#include <signal.h>
+X#include <stdio.h>
+X#include <ctype.h>
+X#include <sys/types.h>
+X#include <sys/file.h>
+X#include "gettext.h"
+X
+X#define	ARMAG	"!<LC_MESSAGES>\n"
+X#define ARFMAG  "`\n"
+X#define	SARMAG	15
+X#define SKIP    1
+X#define IODD    2
+X#define OODD    4
+X#define HEAD    8
+X#define	MAXTAGLEN		127
+X#define MAXMSGLEN		1024	/* was 255 */
+X#define CMD_DOMAIN		"domain"
+X#define CMD_DOMAIN_LEN		6
+X#define CMD_SEP			"separator"
+X#define CMD_SEP_LEN		9
+X#define CMD_QUOTE		"quote"
+X#define CMD_QUOTE_LEN		5
+X#define CMD_FORMAT		"format"
+X#define CMD_FORMAT_LEN		6
+X#define BUFSIZE			512
+X
+Xstruct	stat	stbuf;
+Xstruct	ar_hdr	arbuf;
+Xstruct	lar_hdr {
+X	unsigned char	lar_name[16];
+X	long	lar_date;
+X	u_short	lar_uid;
+X	u_short	lar_gid;
+X	u_short	lar_mode;
+X	long	lar_size;
+X	unsigned char lar_sep;
+X	unsigned char lar_quote;
+X} larbuf;
+X
+Xchar	*man	=	{ "cdrtx" };
+Xchar	*opt	=	{ "ouv" };
+X
+Xchar 	linebuf[MAXTAGLEN+MAXMSGLEN+4];
+Xchar 	message_tag[MAXTAGLEN+1];
+Xchar 	message_text[MAXMSGLEN+1];
+Xchar 	domain[MAXDOMAIN+1];
+Xchar 	format[MAXFMTS+1] = "";
+Xshort 	format_type;
+Xint	countofrecords;
+Xlong 	charsleft;
+Xchar 	pattern[15] = "%[^ ]%*c%[^\n]";
+Xint	signum[] = {SIGHUP, SIGINT, SIGQUIT, 0};
+Xint	sigdone();
+Xlong	lseek();
+Xint	rcmd();
+Xint	dcmd();
+Xint	xcmd();
+Xint	tcmd();
+Xint	ccmd();
+Xint	(*comfun)();
+Xchar	flg[26];
+Xchar	**namv;
+Xint	namc;
+Xchar	*arnam;
+Xchar	*tmpfnam	=	{ "/tmp/vXXXXXX" };
+Xchar	*tmp1nam	=	{ "/tmp/v1XXXXXX" };
+Xchar	*tmp2nam	=	{ "/tmp/v2XXXXXX" };
+Xchar	*tfnam;
+Xchar	*tf1nam;
+Xchar	*tf2nam;
+Xchar	*file;
+Xchar	name[16];
+Xint	af;
+Xint	tf;
+Xint	tf1;
+Xint	tf2;
+Xint	qf;
+Xint	bastate;
+Xchar	buf[MAXBSIZE];
+Xint	truncate;			/* ok to truncate argument filenames */
+Xint	cur_address;
+X
+Xchar	*trim();
+Xchar	*mktemp();
+Xchar	*ctime();
+Xchar	*strncpy();
+X
+X
+X/* This routine will fill up the output buffer pointed to by buff
+X * with the escape expanded string, ready for human consumption
+X * TODO : need notion of line length to do backslash-newline sequence
+X *	if necessary on output
+X */
+X
+Xshort expandesc(buff, ch)
+Xchar *buff; unsigned short ch; 
+X{
+X
+X	switch (ch) {
+X	case '\n':
+X	        *buff = '\\';
+X		*(buff+1) = 'n';
+X		return 2;
+X	case '\r':
+X	        *buff = '\\';
+X	        *(buff+1) = 'r';
+X		return 2;
+X	case '\b':
+X	        *buff = '\\';
+X	        *(buff+1) = 'b';
+X		return 2;
+X	case '\t':
+X	        *buff = '\\';
+X	        *(buff+1) = 't';
+X		return 2;
+X	case '\v':
+X	        *buff = '\\';
+X	        *(buff+1) = 'v';
+X		return 2;
+X	case '\f':
+X	        *buff = '\\';
+X	        *(buff+1) = 'f';
+X		return 2;
+X	case '\\':
+X	        *buff = '\\';
+X		*(buff+1) = '\\';
+X		return 2;
+X	case '\'':
+X	        *buff = '\\';
+X		*(buff+1) = '\'';
+X		return 2;
+X	case '\"':
+X	        *buff = '\\';
+X	        *(buff+1) = '\"';
+X		return 2;
+X	default:
+X		*buff = ch;
+X		return 1;
+X	}
+X}
+X
+X
+Xsetcom(fun)
+Xint (*fun)();
+X{
+X
+X	if(comfun != 0) {
+X		fprintf(stderr, "installtxt: only one of [%s] allowed\n", man);
+X		done(1);
+X	}
+X	comfun = fun;
+X}
+X
+Xrcmd()
+X{
+X	register f;
+X
+X	truncate++;
+X	init();
+X	getaf();
+X	while(!getdir()) {
+X		if(namc == 0 || match()) {
+X			f = stats();
+X			if(f < 0) {
+X				if(namc)
+X					fprintf(stderr, "installtxt: cannot open %s\n", file);
+X				goto cp;
+X			}
+X			if(flg['u'-'a'])
+X				if(stbuf.st_mtime <= larbuf.lar_date) {
+X					close(f);
+X					goto cp;
+X				}
+X			mesg('r');
+X			copyfil(af, -1, SKIP);
+X			movefil(f);
+X			continue;
+X		}
+X	cp:
+X		mesg('c');
+X		copyfil(af, tf, HEAD);
+X	}
+X	cleanup();
+X}
+X
+Xccmd() {
+X	rcmd();
+X}
+X
+Xdcmd()
+X{
+X
+X	init();
+X	if(getaf())
+X		noar();
+X	while(!getdir()) {
+X		if(match()) {
+X			mesg('d');
+X			copyfil(af, -1, SKIP);
+X			continue;
+X		}
+X		mesg('c');
+X		copyfil(af, tf, HEAD);
+X	}
+X	install();
+X}
+X
+Xxcmd()
+X{
+X	register f;
+X	register short i;
+X	struct timeval tv[2];
+X	unsigned char buf[10];
+X	FILE *tempf;
+X
+X	if(getaf())
+X		noar();
+X	while(!getdir()) {
+X		if(namc == 0 || match()) {
+X			f = open(file, O_RDWR | O_CREAT, larbuf.lar_mode & 0777);
+X
+X			if(f < 0) {
+X				perror(file); 
+X				goto sk;
+X			}
+X			mesg('x');
+X
+X			msg_extract(f);
+X			close(tf);
+X			close(f);
+X			if (flg['o'-'a']) {
+X				tv[0].tv_sec = tv[1].tv_sec = larbuf.lar_date;
+X				tv[0].tv_usec = tv[1].tv_usec = 0;
+X				utimes(file, tv);
+X			}
+X			continue;
+X		}
+X	sk:
+X		mesg('c');
+X		copyfil(af, -1, SKIP); 
+X		
+X		if (namc > 0  &&  !morefil())
+X			done(0);
+X	}
+X}
+X
+X
+Xtcmd()
+X{
+X
+X	if(getaf())
+X		noar();
+X	while(!getdir()) {
+X		if(namc == 0 || match()) {
+X			if(flg['v'-'a'])
+X				longt();
+X			printf("%s\n", trim(file, 0));
+X		}
+X		copyfil(af, -1, SKIP);
+X	}
+X}
+X
+X
+Xinit()
+X{
+X
+X	tfnam = mktemp(tmpfnam);
+X	close(creat(tfnam, 0600));
+X	tf = open(tfnam, 2);
+X	if(tf < 0) {
+X		fprintf(stderr, "installtxt: cannot create temp file\n");
+X		done(1);
+X	}
+X	if (write(tf, ARMAG, SARMAG) != SARMAG)
+X		wrerr();
+X}
+X
+Xgetaf()
+X{
+X	char mbuf[SARMAG];
+X
+X	af = open(arnam, 0);
+X	if(af < 0)
+X		return(1);
+X	if (read(af, mbuf, SARMAG) != SARMAG || strncmp(mbuf, ARMAG, SARMAG)) {
+X		fprintf(stderr, "installtxt: %s not in message archive format\n", arnam);
+X		done(1);
+X	}
+X	return(0);
+X}
+X
+Xgetqf()
+X{
+X	char mbuf[SARMAG];
+X
+X	if ((qf = open(arnam, 2)) < 0) {
+X		if(!flg['c'-'a'])
+X			fprintf(stderr, "installtxt: creating %s\n", arnam);
+X		if ((qf = creat(arnam, 0666)) < 0) {
+X			fprintf(stderr, "installtxt: cannot create %s\n", arnam);
+X			done(1);
+X		}
+X		if (write(qf, ARMAG, SARMAG) != SARMAG)
+X			wrerr();
+X	} else if (read(qf, mbuf, SARMAG) != SARMAG
+X		|| strncmp(mbuf, ARMAG, SARMAG)) {
+X		fprintf(stderr, "installtxt: %s not in message archive format\n", arnam);
+X		done(1);
+X	}
+X}        
+Xusage()
+X{
+X	fprintf(stderr, "usage: installtxt [%s][%s] source-message-files ...\n", man, opt);
+X	done(1);
+X}
+X
+Xnoar()
+X{
+X
+X	fprintf(stderr, "installtxt: %s does not exist\n", arnam);
+X	done(1);
+X}
+X
+Xsigdone()
+X{
+X	done(100);
+X}
+X
+Xdone(c)
+X{
+X
+X	if(tfnam)
+X		unlink(tfnam);
+X	if(tf1nam)
+X		unlink(tf1nam);
+X	if(tf2nam)
+X		unlink(tf2nam);
+X	exit(c);
+X}
+X
+Xnotfound()
+X{
+X	register i, n;
+X
+X	n = 0;
+X	for(i=0; i<namc; i++)
+X		if(namv[i]) {
+X			fprintf(stderr, "installtxt: %s not found\n", namv[i]);
+X			n++;
+X		}
+X	return(n);
+X}
+X
+Xmorefil()
+X{
+X	register i, n;
+X
+X	n = 0;
+X	for(i=0; i<namc; i++)
+X		if(namv[i])
+X			n++;
+X	return(n);
+X}
+X
+Xcleanup()
+X{
+X	register i, f;
+X
+X	truncate++;
+X	for(i=0; i<namc; i++) {
+X		file = namv[i];
+X		if(file == 0)
+X			continue;
+X		namv[i] = 0;
+X		mesg('a');
+X		f = stats();
+X		if(f < 0) {
+X			fprintf(stderr, "installtxt: %s cannot open\n", file);
+X			continue;
+X		}
+X		movefil(f);
+X	}
+X	install();
+X}
+X
+Xinstall()
+X{
+X	register i;
+X
+X	for(i=0; signum[i]; i++)
+X		signal(signum[i], SIG_IGN);
+X	if(af < 0)
+X		if(!flg['c'-'a'])
+X			fprintf(stderr, "installtxt: creating %s\n", arnam);
+X	close(af);
+X	af = creat(arnam, 0666);
+X	if(af < 0) {
+X		fprintf(stderr, "installtxt: cannot create %s\n", arnam);
+X		done(1);
+X	}
+X	if(tfnam) {
+X		lseek(tf, 0l, 0);
+X		while((i = read(tf, buf, MAXBSIZE)) > 0)
+X			if (write(af, buf, i) != i)
+X				wrerr();
+X	}
+X	if(tf2nam) {
+X		lseek(tf2, 0l, 0);
+X		while((i = read(tf2, buf, MAXBSIZE)) > 0)
+X			if (write(af, buf, i) != i)
+X				wrerr();
+X	}
+X	if(tf1nam) {
+X		lseek(tf1, 0l, 0);
+X		while((i = read(tf1, buf, MAXBSIZE)) > 0)
+X			if (write(af, buf, i) != i)
+X				wrerr();
+X	}
+X}
+X
+X/*
+X * insert the file 'file'
+X * into the archive temporary file
+X */
+Xmovefil(f)
+X{
+X	char buf[sizeof(arbuf)+1];
+X
+X	sprintf(buf, "%-16s%-12ld%-6u%-6u%-8o%-10ld%2c%1c%-2s",
+X	   trim(file, 1),
+X	   stbuf.st_mtime,
+X	   (u_short)stbuf.st_uid,
+X	   (u_short)stbuf.st_gid,
+X	   stbuf.st_mode,
+X	   stbuf.st_size,
+X	   larbuf.lar_sep,
+X	   larbuf.lar_quote,
+X	   ARFMAG);
+X	memcpy((char *)&arbuf, buf, sizeof(arbuf));
+X	larbuf.lar_size = stbuf.st_size;
+X	msg_build(f);
+X
+X	/* Copy the new binary archive format into place in the archive file 
+X	 * keep old statistics as if the source file is being represented.
+X	 */
+X
+X	close(f); 
+X}
+X
+Xstats()
+X{
+X	register f;
+X
+X	f = open(file, 0);
+X	if(f < 0)
+X		return(f);
+X	if(fstat(f, &stbuf) < 0) {
+X		close(f);
+X		return(-1);
+X	}
+X	return(f);
+X}
+X
+X/*
+X * copy next file
+X * size given in arbuf
+X */
+Xcopyfil(fi, fo, flag)
+X{
+X	register i, o;
+X	int pe;
+X
+X	if(flag & HEAD) {
+X		for (i=sizeof(arbuf.ar_name)-1; i>=0; i--) {
+X			if (arbuf.ar_name[i]==' ')
+X				continue;
+X			else if (arbuf.ar_name[i]=='\0')
+X				arbuf.ar_name[i] = ' ';
+X			else
+X				break;
+X		}
+X		if (write(fo, (char *)&arbuf, sizeof arbuf) != sizeof arbuf)
+X			wrerr();
+X	}
+X	pe = 0;
+X	while(larbuf.lar_size > 0) {
+X		i = o = MAXBSIZE;
+X		if(larbuf.lar_size < i) {
+X			i = o = larbuf.lar_size;
+X			if(i&1) {
+X				buf[i] = '\n';
+X				if(flag & IODD)
+X					i++;
+X				if(flag & OODD)
+X					o++;
+X			}
+X		}
+X		if(read(fi, buf, i) != i)
+X			pe++;
+X		if((flag & SKIP) == 0)
+X			if (write(fo, buf, o) != o)
+X				wrerr();
+X		larbuf.lar_size -= MAXBSIZE;
+X	}
+X	if(pe)
+X		phserr();
+X}
+X
+Xgetdir()
+X{
+X	register unsigned char *cp;
+X	register i;
+X
+X	i = read(af, (char *)&arbuf, sizeof arbuf);
+X	if(i != sizeof arbuf) {
+X		if(tf1nam) {
+X			i = tf;
+X			tf = tf1;
+X			tf1 = i;
+X		}
+X		return(1);
+X	}
+X	if (strncmp(arbuf.ar_fmag, ARFMAG, sizeof(arbuf.ar_fmag))) {
+X		fprintf(stderr, "installtxt: malformed message archive (at %ld)\n", lseek(af, 0L, 1));
+X		done(1);
+X	}
+X	cp = arbuf.ar_name + sizeof(arbuf.ar_name);
+X	while (*--cp==' ')
+X		;
+X	if (*cp == '/')
+X		*cp = '\0';
+X	else
+X		*++cp = '\0';
+X	strncpy(name, arbuf.ar_name, sizeof(arbuf.ar_name));
+X	file = name;
+X	strncpy(larbuf.lar_name, name, sizeof(larbuf.lar_name));
+X	sscanf(arbuf.ar_date, "%ld", &larbuf.lar_date);
+X	sscanf(arbuf.ar_uid, "%hd", &larbuf.lar_uid);
+X	sscanf(arbuf.ar_gid, "%hd", &larbuf.lar_gid);
+X	sscanf(arbuf.ar_mode, "%ho", &larbuf.lar_mode);
+X	sscanf(arbuf.ar_size, "%ld", &larbuf.lar_size);
+X	larbuf.lar_sep = arbuf.ar_sep;
+X	larbuf.lar_quote = arbuf.ar_quote;
+X	return(0);
+X}
+X
+X     
+Xmatch()
+X{
+X	register i;
+X
+X	for(i=0; i<namc; i++) {
+X		if(namv[i] == 0)
+X			continue;
+X		if(strcmp(trim(namv[i], 0), file) == 0) {
+X			file = namv[i];
+X			namv[i] = 0;
+X			return(1);
+X		}
+X	}
+X	return(0);
+X}
+X
+X
+Xphserr()
+X{
+X
+X	fprintf(stderr, "installtxt: phase error on %s\n", file);
+X}
+X
+Xmesg(c)
+X{
+X
+X	if(flg['v'-'a'])
+X		if(c != 'c' || flg['v'-'a'] > 1)
+X			printf("%c - %s\n", c, file);
+X}
+X
+Xchar *
+Xtrim(s, verb)
+Xchar *s;
+X{
+X	register char *p1, *p2;
+X	static char trimmedname[sizeof(arbuf.ar_name)];
+X
+X	/* Strip trailing slashes */
+X	for(p1 = s; *p1; p1++)
+X		;
+X	while(p1 > s) {
+X		if(*--p1 != '/')
+X			break;
+X		*p1 = 0;
+X	}
+X
+X	/* Find last component of path; do not zap the path */
+X	p2 = s;
+X	for(p1 = s; *p1; p1++)
+X		if(*p1 == '/')
+X			p2 = p1+1;
+X
+X	/*
+X	 * Truncate name if too long, only if we are doing an 'add'
+X	 * type operation. We only allow 15 cause rest of ar
+X	 * isn't smart enough to deal with non-null terminated
+X	 * names.  Need an exit status convention...
+X	 * Need yet another new archive format...
+X	 */
+X	if (truncate && strlen(p2) > sizeof(arbuf.ar_name) - 1) {
+X		if (verb) fprintf(stderr, "installtxt: filename %s truncated to ", p2);
+X		p2 = strncpy(trimmedname,p2,sizeof(arbuf.ar_name) - 1);
+X		*(p2 + sizeof(arbuf.ar_name) - 1) = '\0';
+X		if (verb) fprintf(stderr, "%s\n", p2);
+X	}
+X	return(p2);
+X}
+X
+X#define	IFMT	060000
+X#define	ISARG	01000
+X#define	SUID	04000
+X#define	SGID	02000
+X#define	ROWN	0400
+X#define	WOWN	0200
+X#define	XOWN	0100
+X#define	RGRP	040
+X#define	WGRP	020
+X#define	XGRP	010
+X#define	ROTH	04
+X#define	WOTH	02
+X#define	XOTH	01
+X#define	STXT	01000
+X
+Xlongt()
+X{
+X	register char *cp;
+X
+X	pmode();
+X	printf("%3d/%1d", larbuf.lar_uid, larbuf.lar_gid);
+X	printf("%7ld", larbuf.lar_size);
+X	cp = ctime(&larbuf.lar_date);
+X	printf(" %-12.12s %-4.4s ", cp+4, cp+20);
+X}
+X
+Xint	m1[] = { 1, ROWN, 'r', '-' };
+Xint	m2[] = { 1, WOWN, 'w', '-' };
+Xint	m3[] = { 2, SUID, 's', XOWN, 'x', '-' };
+Xint	m4[] = { 1, RGRP, 'r', '-' };
+Xint	m5[] = { 1, WGRP, 'w', '-' };
+Xint	m6[] = { 2, SGID, 's', XGRP, 'x', '-' };
+Xint	m7[] = { 1, ROTH, 'r', '-' };
+Xint	m8[] = { 1, WOTH, 'w', '-' };
+Xint	m9[] = { 2, STXT, 't', XOTH, 'x', '-' };
+X
+Xint	*m[] = { m1, m2, m3, m4, m5, m6, m7, m8, m9};
+X
+Xpmode()
+X{
+X	register int **mp;
+X
+X	for (mp = &m[0]; mp < &m[9];)
+X		select(*mp++);
+X}
+X
+Xselect(pairp)
+Xint *pairp;
+X{
+X	register int n, *ap;
+X
+X	ap = pairp;
+X	n = *ap++;
+X	while (--n>=0 && (larbuf.lar_mode&*ap++)==0)
+X		ap++;
+X	putchar(*ap);
+X}
+X
+Xwrerr()
+X{
+X	perror("installtxt: write error");
+X	done(1);
+X}
+X/*
+X * Scan Source message file and output to a temporary file
+X */
+X
+Xmsg_build(fd)
+Xint fd;
+X{
+X	register int i, j;
+X	unsigned char c;
+X	int linecount;
+X	char *obj1name, *obj2name;
+X	FILE *inputf;
+X	char tmparr[1]; 
+X	struct msg_header msg_header;
+X	char buf[BUFSIZE];	
+X	tmparr[0] = '\0';
+X
+X	/* Open up two temporary files. tf1 will contain the member file header 
+X	 * information that gettext() will actually use in its runtime
+X	 * structures. tf2 will contain the concatenated target strings, either 
+X	 * strings or both tag and string depending on current value 
+X	 * of format string. When source file is exhausted we will merge
+X	 * back these two files.
+X	 */
+X
+X	obj1name = mktemp(tmp1nam);
+X	close(creat(obj1name, 0600));
+X	tf1 = open(obj1name, 2);
+X	if(tf1 < 0) {
+X		fprintf(stderr, "installtxt: cannot create temp file\n");
+X	        done(1);
+X	}
+X
+X	/* Put out a blank index header, which is overwritten with real
+X	 * values later one. 
+X	 */
+X
+X	write(tf1, &msg_header, sizeof(struct msg_header)); 
+X
+X	obj2name = mktemp(tmp2nam);
+X	close(creat(obj2name, 0600));
+X	tf2 = open(obj2name, 2);
+X	if(tf2 < 0) {
+X		fprintf(stderr, "installtxt: cannot create temp file\n");
+X	        done(1);
+X	}
+X
+X	cur_address = 0; /* used from index section as relative offset 
+X			  * into target messages
+X			  */
+X	countofrecords = 0; /* output later in msg_header struct */
+X
+X	inputf = fdopen(fd, "r");
+X	linecount = 0;
+X
+X	/* The default separator is a space character */
+X
+X	arbuf.ar_sep = pattern[3] = ' ';
+X
+X	/* The default format of message tag is a regular string */
+X
+X	format_type = STR;
+X	arbuf.ar_quote = 0;
+X	while (fgets(linebuf, MAXTAGLEN+MAXMSGLEN+4, inputf) != 0){
+X		linecount++;
+X		if ((i = skip_blanks(linebuf, 0)) == -1)
+X			continue;
+X	
+X		if (linebuf[i] == '$'){
+X			i++;
+X			/*
+X	       		 * Handle commands or comments
+X	       		 */
+X			if (strncmp(&linebuf[i], CMD_DOMAIN, CMD_DOMAIN_LEN) == 0){
+X				i += CMD_DOMAIN_LEN+1;
+X	
+X				/*
+X	         		 * Change domain
+X	         		 */
+X
+X				strcpy(domain, &linebuf[i]);
+X				continue;
+X			}
+X			if (strncmp(&linebuf[i], CMD_SEP, CMD_SEP_LEN) == 0){
+X				i += CMD_SEP_LEN;
+X	
+X				/*
+X	         		 * Use a new separator character
+X	         		 */
+X	
+X				if ((c =linebuf[i+1]) == '\n')
+X					c = ' ';
+X				arbuf.ar_sep = pattern[3] = c;
+X				continue;
+X			}
+X			if (strncmp(&linebuf[i], CMD_QUOTE, CMD_QUOTE_LEN) == 0){
+X				i += CMD_QUOTE_LEN;
+X	
+X				/*
+X	         		 * Change quote character
+X	         		 */
+X	
+X				if ((i = skip_blanks(linebuf, i)) == -1)
+X					arbuf.ar_quote = 0;
+X				else
+X					arbuf.ar_quote  = linebuf[i];
+X				continue;
+X			}
+X			if (strncmp(&linebuf[i], CMD_FORMAT, CMD_FORMAT_LEN) == 0){
+X				i += CMD_FORMAT_LEN+1;
+X				while(linebuf[i] != '%' && linebuf[i] !=
+X0 )
+X					i++;
+X				
+X				if (linebuf[i] == 0) {
+X					fprintf(stderr, "Format string error on line %d\n", linecount);
+X					done(1);
+X				}
+X	
+X				if (strlen(&linebuf[i]) > MAXFMTS) {
+X					fprintf(stderr, "Format string too long at line %d\n", linecount);
+X					done(1);
+X				}	
+X				strcpy(format, &linebuf[i]);
+X				j=1;
+X				while (isdigit(format[j]))
+X					j++;
+X				if (format[j] != '[' & format[j] != 's')
+X					format_type = INT;
+X				else
+X					format_type = STR;
+X				
+X				continue;
+X			}
+X	
+X			/*
+X	       		 * Everything else is a comment
+X	       		 */
+X			continue;
+X		}
+X		if (linebuf[i] == '\\' && linebuf[i+1] == '$')
+X			/* We are escaping a message tag that actually uses
+X			 * $ as a first character !
+X			 */
+X			i++;
+X
+X      
+X
+X		/* Join up any newline escaped lines */
+X
+X		while (strcmp(&linebuf[strlen(linebuf)-2],"\\\n") == 0) {
+X			linecount++;
+X			if (fgets(&linebuf[strlen(linebuf)-2], MAXTAGLEN+MAXMSGLEN+4, inputf) == 0) {
+X				fprintf(stderr, "line continuation expected on line %d\n",
+X				  	linecount);
+X				done(1);
+X			}
+X
+X
+X			if (strlen(linebuf) > MAXTAGLEN+MAXMSGLEN+4) {
+X				fprintf(stderr, "line too long: line %d\n", linecount);
+X				done(1);
+X			}
+X		}	
+X		if (arbuf.ar_quote != 0) {
+X
+X			/*
+X			 * Quote character is the anchor point 
+X			 * for message text and message tag portion
+X			 */
+X			j=i+1;
+X			if (linebuf[i] == arbuf.ar_quote) {
+X				while(linebuf[j] != arbuf.ar_quote && linebuf[j] != 0) {
+X					if (linebuf[j] == '\\')
+X						j++;
+X					j++;
+X				}
+X			} else {
+X				while(!isspace(linebuf[j]))
+X					j++; 
+X				--i;
+X			}
+X			linebuf[j] = 0;
+X			strcpy(message_tag, &linebuf[i+1]);
+X#ifdef DEBUG
+X			fprintf(stderr,"just copied TAG %s \n", message_tag);
+X#endif
+X			i=j+1;
+X			while(linebuf[i] != arbuf.ar_quote && linebuf[i] !=
+X0)
+X                                i++;
+X                        j=i+1;
+X                        while(linebuf[j] != arbuf.ar_quote && linebuf[j] !=
+X0) {
+X				if (linebuf[j] == '\\')
+X					j++;
+X                                j++;
+X			}
+X			linebuf[j] = 0;
+X                        strcpy(message_text, &linebuf[i+1]);
+X#ifdef DEBUG
+X                        fprintf(stderr,"just copied TEXT %s \n", message_text);	
+X#endif
+X		} else 
+X			if (sscanf(&linebuf[i], pattern, message_tag, message_text) != 2) {
+X				fprintf(stderr, "Bad message-tag syntax at line %d\n", linecount);
+X				done(1);
+X			}
+X	
+X		/* Now do the real work of compiling in the new
+X		 * line into the message archive file. This work is done
+X	 	 * inside a member archive file.
+X		 */
+X		
+X		addentry(tf1, tf2);
+X	}
+X
+X	/*
+X	 * Get the real size of the archive member file in object
+X	 * form and replace this value in the member file header
+X	 */
+X
+X	stbuf.st_size = lseek(tf1, 0, L_INCR) + lseek(tf2, 0, L_INCR);
+X	sprintf(arbuf.ar_size,"%-10ld", stbuf.st_size);
+X	
+X	/* Now reset size to be real, for copyfil */
+X	larbuf.lar_size = lseek(tf1, 0, L_INCR);
+X
+X	/* rewind the object member file, ready for assembly into 
+X	 * the final archive. Copyfil will place this file in the 
+X	 * correct place within the archive
+X	 */
+X
+X	msg_header.maxno = countofrecords;
+X	msg_header.ptr = lseek(tf1, 0, L_INCR);
+X	msg_header.format_type = format_type;
+X	msg_header.format[MAXFMTS-1] = '!';
+X	strcpy(msg_header.format, format);
+X	if (lseek(tf1, 0, L_SET) == -1) {
+X		fprintf("installtxt: Error in reading temp file\n");
+X		done(1);
+X	}
+X	write(tf1, &msg_header, sizeof(struct msg_header)); 
+X	if (lseek(tf1, 0, L_SET) == -1) {
+X		fprintf("installtxt: Error in reading temp file\n");
+X		done(1);
+X	}
+X	if (lseek(tf2, 0, L_SET) == -1) {
+X		fprintf("installtxt: Error in reading temp file\n");
+X		done(1);
+X	}
+X	/* Note this outputs the archive header too */
+X	copyfil(tf1, tf, HEAD);
+X
+X	/* Dont put any fluff between hdr and tail here! */
+X
+X	while ((i = read(tf2, buf, BUFSIZE)) > 0)
+X		write(tf, buf, i);
+X
+X	/* get rid of temp files */
+X
+X	close(tf1); unlink(obj1name);
+X	close(tf2); unlink(obj2name);
+X	fclose(inputf);
+X	
+X}
+X
+X
+X/*
+X * Skip blanks in a line buffer
+X */
+X
+Xskip_blanks(linebuf, i)
+Xchar *linebuf;
+Xint i;
+X{
+X	while (linebuf[i] && isspace(linebuf[i]) && !iscntrl(linebuf[i]))
+X		i++;
+X	if (!linebuf[i] || linebuf[i] == '\n')
+X		return -1;
+X	return i;
+X}
+X
+Xaddentry(hdr, tail)
+Xint hdr, tail;
+X
+X{
+Xchar 	str[MAXTAGLEN+MAXMSGLEN+4];
+Xstruct 	index	index;
+Xshort 	arrays;
+Xchar 	*op, *cp;
+Xunsigned char 	c;
+X
+X/* This is simple flat file, use hashing later */
+X
+Xop=str;
+Xarrays = 0;
+Xfor (cp=message_tag; arrays < 2;cp=message_text) {
+X
+X	arrays++;
+X	while ((c = *(cp++)) != 0) {
+X		switch(c) {
+X		case '\\':
+X			c = *(cp++);
+X			switch(c) {
+X			case 'n':  
+X				c = '\n'; 
+X				break;
+X			case 'r':  
+X				c = '\r'; 
+X				break;
+X			case 'b':  
+X				c = '\b'; 
+X				break;
+X			case 't':  
+X				c = '\t'; 
+X				break;
+X			case 'v':  
+X				c = '\v'; 
+X				break;
+X			case 'f':  
+X				c = '\f'; 
+X				break;
+X			case '\\': 
+X				c = '\\'; 
+X				break;
+X			case '\'': 
+X				c = '\''; 
+X				break;
+X			case '\"': 
+X				c = '\"'; 
+X				break;
+X			default:
+X				if (isdigit(c)) {
+X					c = (int) strtol((cp-1), &cp, 8); 
+X				}
+X			}
+X			
+X		/* a plain 'ole input character */
+X		
+X		default:
+X			*op++ = c;
+X		}
+X	}
+X	
+X	/* A null separates the message tag and message text here */
+X
+X	*op++ = 0;
+X	if (arrays == 1) {
+X		/* output the index */
+X		countofrecords++;
+X		if (format_type == INT)
+X			sscanf(str, format, &index.msgnumber);
+X		else
+X			index.msgnumber = 0;
+X		index.rel_addr = cur_address;
+X#ifdef DEBUG
+X		fprintf(stderr, "writing %d bytes to temp1\n", write(hdr, &index, sizeof (struct index) ));
+X#else
+X		write(hdr, &index, sizeof(struct index));
+X#endif
+X	} else {
+X#ifdef DEBUG
+X		fprintf(stderr, "writing %d bytes to temp2\n", op-str);
+X#endif
+X		if (format_type == STR) {
+X
+X			/* write both tag and target string */
+X
+X			write(tail, str, op-str);
+X			cur_address += op-str;
+X		} else {
+X
+X			/* only write the target string */
+X
+X			op=str+strlen(str) + 1;
+X#ifdef DEBUG
+X			fprintf(stderr,"writing %d bytes for int lookup\n",strlen(op)+1);
+X#endif
+X			write(tail, op, strlen(op) + 1);
+X			cur_address += strlen(op) +1;
+X		}
+X	}
+X}
+X}
+X
+X
+X
+Xmsg_extract(f)
+Xregister int f; 
+X{	
+X	FILE *tempf;
+X	register short i;
+X	register short ch;
+X	
+X	/* here we create a temp file, copy the 
+X	 * whole member file to it. then we remove init();
+X	 */
+X	init();
+X	copyfil(af, tf, 0);
+X	lseek(tf, 0, L_SET);
+X	tempf = fdopen(tf, "r");
+X	if (fseek(tempf, SARMAG, 0) == -1) {
+X		fprintf("installtxt: seek error in tmp file\n");
+X		done(1);
+X	}
+X	if (larbuf.lar_quote != 0) {
+X		sprintf(buf,"$quote %c\n", larbuf.lar_quote);
+X		write(f, buf, 9);
+X	}
+X	if (larbuf.lar_sep != ' ') {
+X		sprintf(buf,"$separator %c\n", larbuf.lar_sep);
+X		write(f, buf, 13);
+X	}
+X	if (domain[0] != 0) {
+X		sprintf(buf, "$domain %s\n\n", domain);
+X		write(f, buf, 11 + strlen(domain));
+X	}
+X	sscanf(arbuf.ar_size, "%ld", &charsleft);
+X
+X	/* There are two spare nulls at end of member file entry in the 
+X	 * archive
+X	 */
+X
+X	while (charsleft > 2) {
+X		i = 0;
+X		while ((ch = getc(tempf)) != 0 && ch != EOF) {
+X			i+= expandesc(message_tag+i, ch);
+X		}
+X		if (ch == -1)
+X			break;
+X		message_tag[i] = 0;
+X		i = 0;
+X		while ((ch = getc(tempf)) != 0 && ch != EOF) {
+X			i+= expandesc(message_text+i, ch);
+X		}
+X		if (ch == -1)
+X			break;
+X		message_text[i] = 0;
+X		sprintf(buf,"%s%c", message_tag, arbuf.ar_sep);
+X		write(f, buf, 1 + strlen(message_tag));
+X		if (larbuf.lar_quote != 0) {
+X			sprintf(buf,"%c%s%c\n", larbuf.lar_quote,
+X				message_text, larbuf.lar_quote);
+X			write(f, buf, 3 + strlen(message_text));
+X		} else {
+X			sprintf(buf,"%s\n", message_text);
+X			write(f, buf, 1 + strlen(message_text));
+X		}
+X	}
+X	fclose(tempf); unlink(tfnam);
+X}
+X
+X
+Xmain(argc, argv)
+Xchar *argv[];
+X{
+X	register i;
+X	register char *cp;
+X
+X	setlocale(LC_CTYPE,""); 
+X	for(i=0; signum[i]; i++)
+X		if(signal(signum[i], SIG_IGN) != SIG_IGN)
+X			signal(signum[i], sigdone);
+X	if(argc < 3)
+X		usage();
+X	cp = argv[1];
+X	if (*cp == '-')	/* skip a '-', make ar more like other commands */
+X		cp++;
+X	for(; *cp; cp++)
+X	switch(*cp) {
+X	case 'o':
+X	case 'v':
+X	case 'u':
+X		flg[*cp - 'a']++;
+X		continue;
+X
+X	case 'r':
+X		setcom(rcmd);
+X		continue;
+X
+X	case 'd':
+X		setcom(dcmd);
+X		continue;
+X
+X	case 'x':
+X		setcom(xcmd);
+X		continue;
+X
+X	case 't':
+X		setcom(tcmd);
+X		continue;
+X
+X	case 'c':
+X		setcom(ccmd);
+X		continue;
+X
+X	default:
+X		fprintf(stderr, "installtxt: bad option `%c'\n", *cp);
+X		done(1);
+X	}
+X	arnam = argv[2];
+X	namv = argv+3;
+X	namc = argc-3;
+X	if(comfun == 0) {
+X		if(flg['u'-'a'] == 0) {
+X			fprintf(stderr, "installtxt: one of [%s] must be specified\n", man);
+X			done(1);
+X		}
+X		setcom(rcmd);
+X	}
+X	(*comfun)();
+X	done(notfound());
+X	/* NOTREACHED */
+X}
+________This_Is_The_END________
+if test `wc -l < installtxt.c` -ne 1216; then
+	echo 'shar: installtxt.c was damaged during transit (should have been 1216 bytes)'
+fi
+fi		; : end of overwriting check
+echo 'x - nl_types.h'
+if test -f nl_types.h; then echo 'shar: not overwriting nl_types.h'; else
+sed 's/^X//' << '________This_Is_The_END________' > nl_types.h
+X/*	@(#)nl_types.h 1.1 89/02/28 SMI; */
+X
+X/*
+X * NLS data types
+X */
+X
+Xtypedef int nl_catd;		/* used by message catalogue */
+Xtypedef int nl_item;		/* identify langinfo data */
+X
+________This_Is_The_END________
+if test `wc -l < nl_types.h` -ne 9; then
+	echo 'shar: nl_types.h was damaged during transit (should have been 9 bytes)'
+fi
+fi		; : end of overwriting check
+echo 'x - setlocale.c'
+if test -f setlocale.c; then echo 'shar: not overwriting setlocale.c'; else
+sed 's/^X//' << '________This_Is_The_END________' > setlocale.c
+X/*	Copyright (c) 1984 AT&T	*/
+X/*	  All Rights Reserved  	*/
+X
+X/*	THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF AT&T	*/
+X/*	The copyright notice above does not evidence any   	*/
+X/*	actual or intended publication of such source code.	*/
+X
+X#if	!defined(lint) && defined(SCCSIDS)
+Xstatic  char *sccsid = "@(#)setlocale.c 1.18 90/01/02 SMI";
+X#endif
+X
+X#include <fcntl.h>
+Xextern int	open();
+X#include <locale.h>
+X#include <stdlib.h>
+X#include "codeset.h"
+X#include <ctype.h>
+X#include <string.h>
+X#include <memory.h>
+X#include <malloc.h>
+X#include <sys/param.h>		/* for MAXPATHLEN */
+X#include <sys/stat.h>
+X#include <errno.h>
+X#include <limits.h>
+X
+X#define	TRAILER ".ci"
+X
+Xextern int	stat();
+Xextern char	*getenv();
+X
+Xstruct	_code_set_info _code_set_info = {
+X	NULL,
+X	CODESET_NONE, 	/* no codeset */
+X	NULL, 		/* not defined */
+X	0,
+X};
+X
+X/* tolower()  and toupper() conversion table 
+X * is hidden here to avoid being placed in the 
+X * extern  .sa file in the dynamic version of libc
+X */	
+X
+Xchar _ctype_ul[] = { 0,
+X
+X/*	 0	 1	 2	 3	 4	 5	 6	 7  */
+X	'\000',	'\001',	'\002',	'\003',	'\004',	'\005',	'\006',	'\007',
+X	'\010',	'\011',	'\012',	'\013',	'\014',	'\015',	'\016',	'\017',
+X	'\020',	'\021',	'\022',	'\023',	'\024',	'\025',	'\026',	'\027',
+X	'\030',	'\031',	'\032',	'\033',	'\034',	'\035',	'\036',	'\037',
+X	' ',	'!',	'"',	'#',	'$',	'%',	'&',	'\'',
+X	'(',	')',	'*',	'+',	',',	'-',	'.',	'/',
+X	'0',	'1',	'2',	'3',	'4',	'5',	'6',	'7',
+X	'8',	'9',	':',	';',	'<',	'=',	'>',	'?',
+X	'@',	'a',	'b',	'c',	'd',	'e',	'f',	'g',
+X	'h',	'i',	'j',	'k',	'l',	'm',	'n',	'o',
+X	'p',	'q',	'r',	's',	't',	'u',	'v',	'w',
+X	'x',	'y',	'z',	'[',	'\\',	']',	'^',	'_',
+X	'`',	'A',	'B',	'C',	'D',	'E',	'F',	'G',
+X	'H',	'I',	'J',	'K',	'L',	'M',	'N',	'O',
+X	'P',	'Q',	'R',	'S',	'T',	'U',	'V',	'W',
+X	'X',	'Y',	'Z',	'{',	'|',	'}',	'~',	'\177',
+X	0,	0,	0,	0,	0,	0,	0,	0,
+X	0,	0,	0,	0,	0,	0,	0,	0,
+X	0,	0,	0,	0,	0,	0,	0,	0,
+X	0,	0,	0,	0,	0,	0,	0,	0,
+X	0,	0,	0,	0,	0,	0,	0,	0,
+X	0,	0,	0,	0,	0,	0,	0,	0,
+X	0,	0,	0,	0,	0,	0,	0,	0,
+X	0,	0,	0,	0,	0,	0,	0,	0,
+X	0,	0,	0,	0,	0,	0,	0,	0,
+X	0,	0,	0,	0,	0,	0,	0,	0,
+X	0,	0,	0,	0,	0,	0,	0,	0,
+X	0,	0,	0,	0,	0,	0,	0,	0,
+X	0,	0,	0,	0,	0,	0,	0,	0,
+X	0,	0,	0,	0,	0,	0,	0,	0,
+X	0,	0,	0,	0,	0,	0,	0,	0,
+X	0,	0,	0,	0,	0,	0,	0,	0,
+X};
+X
+X/* following layout is:
+X * LC_NUMERIC LC_TIME LC_MONETARY LANGINFO LC_COLLATE LC_MESSAGES
+X */
+Xchar _locales[MAXLOCALE - 1][MAXLOCALENAME + 1] ;
+X
+Xchar _my_time[MAXLOCALENAME + 1];
+X
+X/* The array Default holds the systems notion of default locale. It is normally
+X * found in {LOCALE}/.default and moved to here. Note there is only one
+X * default locale spanning all categories
+X */
+X
+Xstatic char Default[MAXLOCALENAME+1];
+X
+Xstruct	langinfo _langinfo;
+Xstruct	dtconv *_dtconv = NULL;
+X
+Xstatic	char *realmonths = NULL;
+Xstatic	char *realdays = NULL;
+Xstatic	char *realfmts = NULL;
+Xstatic  short lang_succ = ON;	/* setlocale success */
+X
+X
+X/* Set the values here to guarantee stdio use of the 
+X   decimal point
+X */
+Xstatic struct lconv lconv_arr = {
+X	".", "", "", "", "", 
+X	"", "", "", "", "",
+X	CHAR_MAX, CHAR_MAX, CHAR_MAX, CHAR_MAX, 
+X	CHAR_MAX, CHAR_MAX, CHAR_MAX, CHAR_MAX
+X};
+X
+X/* lconv is externally defined by ANSI C */
+Xstruct	lconv *lconv = &lconv_arr;
+X
+Xstatic	char *lconv_numeric_str = NULL;
+Xstatic 	char *lconv_monetary_str = NULL;
+X
+Xint	getlocale_ctype(/*char *locale, char *ctypep, char *newlocale*/);
+Xchar	*getlocale_numeric(/*char *locale, struct lconv *lconvp*/);
+Xstatic 	char	*getlocale_monetary();
+Xvoid	init_statics();
+X
+Xstatic	char	*getstr(/*char *p, char **strp*/);
+Xstatic	char	*getgrouping(/*char *p, char **groupingp*/);
+Xstatic	char	*getnum(/*char *p, int *nump*/);
+Xstatic	char	*getbool(/*char *p, int *boolp*/);
+Xint		openlocale(/*char *category, int cat_id, char *locale, char *newlocale */);
+Xstatic int	set_codeinfo(/*char */);
+Xstatic int	set_default();
+X
+Xchar *
+Xsetlocale(category, locale)
+X	int category;
+X	char *locale;
+X{
+X	static char buf[MAXLOCALE*(MAXLOCALENAME + 1) + 1];
+X		/* buffer for current LC_ALL value */
+X	int nonuniform;
+X	short ret;
+X	char my_ctype[CTYPE_SIZE];	/* local copy */
+X	struct lconv my_lconv;		/* local copy */
+X	char *my_lconv_numeric_str;
+X	char *my_lconv_monetary_str;
+X	register int i;
+X	register char *p;
+X
+X	/*
+X	 *  Following code is to avoid static initialisation of
+X	 *  strings which would otherwise blow up "xstr".
+X	 */
+X	if (_locales[0][0] == '\0')
+X		init_statics();
+X
+X	if (locale == NULL) {
+X		if (category == LC_ALL) {
+X			/*
+X			 * Assume all locales are set to the same value.  Then
+X			 * scan through the locales to see if any are
+X			 * different.  If they are the same, return the common
+X			 * value; otherwise, construct a "composite" value.
+X			 */
+X			nonuniform = 0;	/* assume all locales set the same */
+X			for (i = 0; i < MAXLOCALE - 2; i++) {
+X				if (strcmp(_locales[i], _locales[i + 1]) != 0) {
+X					nonuniform = 1;
+X					break;
+X				}
+X			}
+X			if (nonuniform) {
+X				/*
+X				 * They're not all the same.  Construct a list
+X				 * of all the locale values, in order,
+X				 * separated by slashes.  Return that value.
+X				 */
+X				(void) strcpy(buf, _locales[0]);
+X				for (i = 1; i < MAXLOCALE - 1; i++) {
+X					(void) strcat(buf, "/");
+X					(void) strcat(buf, _locales[i]);
+X				}
+X				return (buf);
+X			} else {
+X				/*
+X				 * They're all the same; any one you return is
+X				 * OK.
+X				 */
+X				return (_locales[0]);
+X			}
+X		} else
+X			return (_locales[category - 1]);
+X	}
+X
+X	switch (category) {
+X
+X	case LC_ALL:
+X		if (strchr(locale, '/') != NULL) {
+X			/*
+X			 * Composite value; extract each category.
+X			 */
+X			if (strlen(locale) > sizeof buf - 1)
+X				return (NULL);	/* too long */
+X			(void) strcpy(buf, locale);
+X			p = buf;
+X
+X			/*
+X			 * LC_CTYPE and LC_NUMERIC are set here.
+X			 * Others locales won't be set here,
+X			 * they will be just marked.
+X			 */
+X			for (i = 0; i < MAXLOCALE - 1; i++) {
+X				p = strtok(p, "/");
+X				if (p == NULL)
+X					return (NULL);	/* missing item */
+X				switch (i) {
+X
+X				case LC_CTYPE - 1:
+X					if (setlocale(LC_CTYPE,p) == NULL)
+X						return NULL;
+X					break;
+X				case LC_NUMERIC - 1:
+X					if (setlocale(LC_NUMERIC,p) == NULL)
+X						return NULL;
+X					break;
+X				case LC_TIME - 1:
+X					if (setlocale(LC_TIME,p) == NULL)
+X						return NULL;
+X					break;
+X				case LC_MONETARY - 1:
+X					if (setlocale(LC_MONETARY,p) == NULL)
+X						return NULL;
+X					break;
+X				case LANGINFO - 1:
+X					if (setlocale(LANGINFO,p) == NULL)
+X						return NULL;
+X					break;
+X				case LC_COLLATE - 1:
+X					if (setlocale(LC_COLLATE,p) == NULL)
+X						return NULL;
+X					break;
+X				case LC_MESSAGES - 1:
+X					if (setlocale(LC_MESSAGES,p) == NULL)
+X						return NULL;
+X					break;
+X				}
+X				p = NULL;
+X			}
+X			if (strtok((char *)NULL, "/") != NULL)
+X				return (NULL);	/* extra stuff at end */
+X		}
+X
+X	/* If category = LC_ALL, Drop through to test each individual
+X  	 * category, one at a time. Note default rules where env vars
+X	 * are not set
+X	 */
+X
+X	case LC_CTYPE:
+X		if ((ret = getlocale_ctype(locale , my_ctype,
+X		    _locales[LC_CTYPE - 1])) < 0)
+X			return (NULL);
+X		if (ret) {
+X		      (void) memcpy(_ctype_, my_ctype, CTYPE_SIZE/2);
+X		      (void) memcpy(_ctype_ul, my_ctype+(CTYPE_SIZE/2), CTYPE_SIZE/2); 
+X		}
+X		if (category != LC_ALL)
+X			break;
+X
+X	case LC_NUMERIC:
+X		if ((my_lconv_numeric_str =
+X		    getlocale_numeric(locale, &my_lconv,
+X		      _locales[LC_NUMERIC - 1])) == NULL)
+X			return (NULL);
+X		if (*my_lconv_numeric_str) {
+X			if (lconv_numeric_str != NULL)
+X				free((malloc_t)lconv_numeric_str);
+X			lconv_numeric_str = my_lconv_numeric_str;
+X			memcpy(lconv, my_lconv, sizeof(my_lconv));
+X		}
+X		if (category != LC_ALL)
+X			break;
+X
+X	case LC_TIME:
+X		if ((ret = openlocale("LC_TIME", LC_TIME, locale,
+X		      _locales[LC_TIME -1])) < 0)
+X			return (NULL);
+X		if (ret)
+X			(void) close(ret);
+X		if (category != LC_ALL)
+X			break;
+X
+X	case LC_MONETARY:
+X		if ((my_lconv_monetary_str =
+X		    getlocale_monetary(locale, &my_lconv,
+X		      _locales[LC_MONETARY - 1])) == NULL)
+X			return (NULL);
+X		if (*my_lconv_monetary_str) {
+X			if (lconv_monetary_str != NULL)
+X				free((malloc_t)lconv_monetary_str);
+X			lconv_monetary_str = my_lconv_monetary_str;
+X			memcpy(lconv, &my_lconv, sizeof(my_lconv));
+X		}
+X		if (category != LC_ALL)
+X			break;
+X
+X	case LANGINFO:
+X		if ((ret = openlocale("LANGINFO", LANGINFO, locale,
+X		      _locales[LANGINFO - 1])) < 0) {
+X			lang_succ = OFF;
+X			return (NULL);
+X		}
+X		if (ret) {
+X			lang_succ = OFF;
+X			(void) close(ret);
+X		}
+X		if (category != LC_ALL)
+X			break;
+X
+X	case LC_COLLATE:
+X		if ((ret = openlocale("LC_COLLATE", LC_COLLATE, locale,
+X		      _locales[LC_COLLATE - 1])) < 0)
+X			return (NULL);
+X		if (ret) {
+X			(void) close(ret);
+X		}
+X		if (category != LC_ALL)
+X			break;
+X
+X	case LC_MESSAGES:
+X		if ((ret = openlocale("LC_MESSAGES", LC_MESSAGES, locale,
+X		      _locales[LC_MESSAGES - 1])) < 0)
+X			return (NULL);
+X		if (ret) {
+X			(void) close(ret);
+X		}
+X	}
+X	return (setlocale(category, (char *)NULL));
+X}
+X
+Xint
+Xgetlocale_ctype(locale, ctypep, newlocale)
+X	char *locale;
+X	char *ctypep;
+X	char *newlocale;
+X{
+X	register int fd;
+X
+X	if ((fd = openlocale("LC_CTYPE", LC_CTYPE, locale, newlocale)) > 0) {
+X		if (read(fd, (char *)ctypep, CTYPE_SIZE) != CTYPE_SIZE) {
+X			(void) close(fd);
+X			fd = -1;
+X		}
+X		(void) close(fd);
+X	}
+X	return (fd);
+X}
+X
+X/* open and load the numeric information */
+X
+Xchar *
+Xgetlocale_numeric(locale, lconvp, newlocale)
+X	char *locale;
+X	register struct lconv *lconvp;
+X	char *newlocale;
+X{
+X	register int fd;
+X	struct stat buf;
+X	char *str;
+X	register char *p;
+X
+X	if ((fd = openlocale("LC_NUMERIC", LC_NUMERIC, locale, newlocale)) < 0)
+X		return (NULL);
+X	if (fd == 0)
+X		return "";
+X	if ((fstat(fd, &buf)) != 0)
+X		return (NULL);
+X	if ((str = (char*)malloc((unsigned)buf.st_size + 2)) == NULL)
+X		return (NULL);
+X
+X	if ((read(fd, str, (int)buf.st_size)) != buf.st_size) {
+X		free((malloc_t)str);
+X		return (NULL);
+X	}
+X
+X	/* Set last character of str to '\0' */
+X	p = &str[buf.st_size];
+X	*p++ = '\n';
+X	*p = '\0';
+X
+X	/* p will "walk thru" str */
+X	p = str;
+X
+X	p = getstr(p, &lconvp->decimal_point);
+X	if (p == NULL)
+X		goto fail;
+X	p = getstr(p, &lconvp->thousands_sep);
+X	if (p == NULL)
+X		goto fail;
+X	p = getgrouping(p, &lconvp->grouping);
+X	if (p == NULL)
+X		goto fail;
+X	(void) close(fd);
+X
+X	return (str);
+X
+Xfail:
+X	(void) close(fd);
+X	free((malloc_t)str);
+X	return (NULL);
+X}
+X
+X
+Xstatic char *
+Xgetlocale_monetary(locale, lconvp, newlocale)
+X	char *locale;
+X	register struct lconv *lconvp;
+X	char *newlocale;
+X{
+X	register int fd;
+X	struct stat buf;
+X	char *str;
+X	register char *p;
+X
+X	if ((fd = openlocale("LC_MONETARY", LC_MONETARY, locale, newlocale)) < 0)
+X		return (NULL);
+X	if (fd == 0)
+X		return "";
+X	if ((fstat(fd, &buf)) != 0)
+X		return (NULL);
+X	if ((str = (char*)malloc((unsigned)buf.st_size + 2)) == NULL)
+X		return (NULL);
+X
+X	if ((read(fd, str, (int)buf.st_size)) != buf.st_size) {
+X		free((malloc_t)str);
+X		return (NULL);
+X	}
+X
+X	/* Set last character of str to '\0' */
+X	p = &str[buf.st_size];
+X	*p++ = '\n';
+X	*p = '\0';
+X
+X	/* p will "walk thru" str */
+X	p = str;
+X
+X	p = getstr(p, &lconvp->int_curr_symbol);
+X	if (p == NULL)
+X		goto fail;
+X	p = getstr(p, &lconvp->currency_symbol);
+X	if (p == NULL)
+X		goto fail;
+X	p = getstr(p, &lconvp->mon_decimal_point);
+X	if (p == NULL)
+X		goto fail;
+X	p = getstr(p, &lconvp->mon_thousands_sep);
+X	if (p == NULL)
+X		goto fail;
+X	p = getgrouping(p, &lconvp->mon_grouping);
+X	if (p == NULL)
+X		goto fail;
+X	p = getstr(p, &lconvp->positive_sign);
+X	if (p == NULL)
+X		goto fail;
+X	p = getstr(p, &lconvp->negative_sign);
+X	if (p == NULL)
+X		goto fail;
+X	p = getnum(p, &lconvp->frac_digits);
+X	if (p == NULL)
+X		goto fail;
+X	p = getbool(p, &lconvp->p_cs_precedes);
+X	if (p == NULL)
+X		goto fail;
+X	p = getbool(p, &lconvp->p_sep_by_space);
+X	if (p == NULL)
+X		goto fail;
+X	p = getbool(p, &lconvp->n_cs_precedes);
+X	if (p == NULL)
+X		goto fail;
+X	p = getbool(p, &lconvp->n_sep_by_space);
+X	if (p == NULL)
+X		goto fail;
+X	p = getnum(p, &lconvp->p_sign_posn);
+X	if (p == NULL)
+X		goto fail;
+X	p = getnum(p, &lconvp->n_sign_posn);
+X	if (p == NULL)
+X		goto fail;
+X	(void) close(fd);
+X
+X	return _locales[LC_MONETARY-1];
+X
+Xfail:
+X	(void) close(fd);
+X	free((malloc_t)str);
+X	return NULL;
+X}
+X
+Xstatic char *
+Xgetstr(p, strp)
+X	register char *p;
+X	char **strp;
+X{
+X	*strp = p;
+X	p = strchr(p, '\n');
+X	if (p == NULL)
+X		return (NULL);	/* no end-of-line */
+X	*p++ = '\0';
+X	return (p);
+X}
+X
+Xstatic char *
+Xgetgrouping(p, groupingp)
+X	register char *p;
+X	char **groupingp;
+X{
+X	register int c;
+X
+X	if (*p == '\0')
+X		return (NULL);	/* no grouping */
+X	*groupingp = p;
+X	while ((c = *p) != '\n') {
+X		if (c == '\0')
+X			return (NULL);	/* no end-of-line */
+X		if (c >= '0' && c <= '9')
+X			*p++ = c - '0';
+X		else
+X			*p++ = '\177';
+X	}
+X	*p++ = '\0';
+X	return (p);
+X}
+X
+Xstatic char *
+Xgetnum(p, nump)
+X	register char *p;
+X	char *nump;
+X{
+X	register int num;
+X	register int c;
+X
+X	if (*p == '\0')
+X		return (NULL);	/* no number */
+X	if (*p == '\n')
+X		*nump = '\177';	/* blank line - no value */
+X	else {
+X		num = 0;
+X		while ((c = *p) != '\n') {
+X			if (c < '0' || c > '9')
+X				return (NULL);	/* bad number */
+X			num = num*10 + c - '0';
+X			p++;
+X		}
+X		*nump = num;
+X	}
+X	*p++ = '\0';
+X	return (p);
+X}
+X
+Xstatic char *
+Xgetbool(p, boolp)
+X	register char *p;
+X	char *boolp;
+X{
+X
+X	if (*p == '\0')
+X		return (NULL);	/* no number */
+X	if (*p == '\n')
+X		*boolp = '\177';	/* blank line - no value */
+X	else {
+X		switch (*p++) {
+X
+X		case 'y':
+X		case 'Y':
+X		case 't':
+X		case 'T':
+X			*boolp = 1;	/* true */
+X			break;
+X
+X		case 'n':
+X		case 'N':
+X		case 'f':
+X		case 'F':
+X			*boolp = 0;	/* false */
+X			break;
+X
+X		default:
+X			return (NULL);	/* bad boolean */
+X		}
+X		if (*p != '\n')
+X			return (NULL);	/* noise at end of line */
+X	}
+X	*p++ = '\0';
+X	return (p);
+X}
+X
+X/*
+X * Open a locale file.  First, check the value of "locale"; if it's a null
+X * string, first check the environment variable with the same name as the
+X * category, and then check the environment variable "LANG".  If neither of
+X * them are set to non-null strings, use the LC_default env.var and if this
+X * has no meaning then assume we are running in the C locale. It is expected
+X * That LC_default is set across the whole system. If the resulting locale is
+X * longer than MAXLOCALENAME characters, reject it.  Then, try looking in the
+X * per-machine locale directory for the file in question; if it's not found
+X * there, try looking in the shared locale directory.
+X * If there is no work to do, that is, the last setting of locales is equal
+X * to the current request, then we don't do anything, and exit with value 0.
+X * Copy the name of the locale used into "newlocale".
+X * Exit with positive value if we opened a file
+X * Exit with -1 if an error occured (invalid locale).
+X * Exit with 0 if there is no need to look at the disk file.
+X * (Assumption - there is always at least one fd open before setlocale
+X *  is called)
+X */
+Xint
+Xopenlocale(category, cat_id, locale, newlocale)
+X	char *category;
+X	register int cat_id;
+X	register char *locale;
+X	char *newlocale;
+X{
+X	char pathname[MAXPATHLEN], *defp;
+X	int fd, fd2;
+X	struct _code_header code_header;
+X	char *my_info;
+X
+X	if (*locale == '\0') {
+X		locale = getenv(category);
+X		if (locale == NULL || *locale == '\0') {
+X			locale = getenv("LANG");
+X			if (locale == NULL || *locale == '\0') {
+X				if (*Default == '\0') {
+X					defp = getenv("LC_default");
+X					if (defp == NULL || *defp == '\0')
+X						strcpy(Default,"C");
+X					else
+X						strcpy(Default, defp);
+X				}
+X				locale = Default;
+X			}
+X		}
+X	}
+X	if (strcmp(locale,_locales[cat_id-1]) == 0) {
+X		(void) strcpy(newlocale, locale);
+X		return 0;
+X	}
+X	if (strlen(locale) > MAXLOCALENAME)
+X		return -1;
+X
+X	(void) strcpy(pathname, PRIVATE_LOCALE_DIR);
+X	(void) strcat(pathname, category);
+X	(void) strcat(pathname, "/");
+X	(void) strcat(pathname, locale);
+X	if ((fd = open(pathname, O_RDONLY)) < 0 && errno == ENOENT) {
+X		(void) strcpy(pathname, LOCALE_DIR);
+X		(void) strcat(pathname, category);
+X		(void) strcat(pathname, "/");
+X		(void) strcat(pathname, locale);
+X		fd = open(pathname, O_RDONLY);
+X	}
+X	if (fd >= 0)
+X		(void) strcpy(newlocale, locale);
+X	if (cat_id == LC_CTYPE) {
+X
+X		/* Go and get the trailer file */
+X
+X		(void) strcat(pathname, TRAILER);
+X		fd2 = open(pathname, O_RDONLY);
+X		if (fd2 == -1)  {
+X			set_default();
+X			return fd;
+X		}
+X
+X		/*
+X		 * ctype trailer file  exists - read it
+X		 */
+X
+X		if (read (fd2, (char *)&code_header, sizeof (code_header)) !=
+X						    sizeof (code_header)) {
+X			/*
+X			 * File format not correct
+X			 */
+X			 set_default();
+X			 close(fd2);
+X			 return -1;
+X		}
+X		/*
+X		 * set up trailer file
+X		 */
+X		 strcpy(_code_set_info.code_name, code_header.code_name);
+X		 _code_set_info.code_id = code_header.code_id;
+X		 if (_code_set_info.code_info != NULL)
+X			free (_code_set_info.code_info);
+X		 if (code_header.code_info_size > 0)  {
+X			my_info = malloc(code_header.code_info_size);
+X			if (read (fd2, (char *)my_info, 
+X			 code_header.code_info_size) != 
+X		 	 code_header.code_info_size) { 
+X					close(fd2);
+X					set_default();
+X					return -1;
+X				}
+X			_code_set_info.code_info = my_info;
+X		 }
+X		 else {
+X		 /* 
+X		  * We have a corrupted file too 
+X		  */
+X			_code_set_info.code_info = NULL;
+X			close(fd2);
+X			set_default();
+X			return -1;
+X		 }
+X		 close (fd2);
+X	}
+X	return fd;
+X}
+X
+Xstruct	lconv *
+Xlocaleconv()
+X{
+X	return (lconv);
+X}
+X
+Xstruct	dtconv *
+Xlocaldtconv()
+X{
+X	register char *p;
+X	register short i;
+X
+X	char *rawmonths = "Jan\nFeb\nMar\nApr\nMay\nJun\nJul\nAug\nSep\nOct\nNov\nDec\nJanuary\nFebruary\nMarch\nApril\nMay\nJune\nJuly\nAugust\nSeptember\nOctober\nNovember\nDecember";
+X
+X	char *rawdays = "Sun\nMon\nTue\nWed\nThu\nFri\nSat\nSunday\nMonday\nTuesday\nWednesday\nThursday\nFriday\nSaturday";
+X
+Xchar *rawfmts = "%H:%M:%S\n%m/%d/%y\n%a %b %e %T %Z %Y\nAM\nPM\n%A, %B %e, %Y\n";
+X
+X	if (_dtconv == NULL) {
+X
+X		/* We malloc both the space for the dtconv struct and the
+X		 * copy of the strings above because this program is later run
+X		 * through xstr and the resultant strings are put in read-only
+X		 * text segment. Therefore we cannot write to the original
+X		 * raw strings but we can to their copies.
+X		 */
+X
+X		_dtconv = (struct dtconv*)malloc(sizeof (struct dtconv));
+X		if (_dtconv == NULL)
+X			return (NULL);
+X		if ((realmonths = malloc(strlen(rawmonths)+1)) == NULL)
+X			return (NULL);
+X		strcpy(realmonths, rawmonths);
+X		if ((realdays = malloc(strlen(rawdays)+1)) == NULL)
+X			return (NULL);
+X		strcpy(realdays, rawdays);
+X		if ((realfmts = malloc(strlen(rawfmts)+1)) == NULL)
+X			return (NULL);
+X		strcpy(realfmts, rawfmts);
+X
+X		/* p will "walk thru" str */
+X
+X		p = realmonths;
+X
+X		for (i = 0; i < 12; i++)
+X			p = getstr(p, &(_dtconv->abbrev_month_names[i]));
+X
+X		for (i = 0; i < 12; i++)
+X			p = getstr(p, &(_dtconv->month_names[i]));
+X		p = realdays;
+X		for (i= 0; i < 7; i++)
+X			p = getstr(p, &(_dtconv->abbrev_weekday_names[i]));
+X		for (i = 0; i < 7; i++)
+X			p = getstr(p, &(_dtconv->weekday_names[i]));
+X		p = realfmts;
+X		p = getstr(p, &_dtconv->time_format);
+X		p = getstr(p, &_dtconv->sdate_format);
+X		p = getstr(p, &_dtconv->dtime_format);
+X		p = getstr(p, &_dtconv->am_string);
+X		p = getstr(p, &_dtconv->pm_string);
+X		p = getstr(p, &_dtconv->ldate_format);
+X	}
+X
+X	return (_dtconv);
+X}
+X
+X
+Xstatic int
+Xset_default()
+X{
+X
+X	strcpy(_code_set_info.code_name, Default);
+X	_code_set_info.code_id = CODESET_NONE;
+X	if (_code_set_info.code_info != NULL)
+X		free (_code_set_info.code_info);
+X	_code_set_info.code_info = NULL;
+X	_code_set_info.open_flag = 0;
+X}
+X
+Xvoid init_statics() {
+X
+X		short i;
+X
+X		for (i=0; i<MAXLOCALE-1;i++)
+X			strcpy(_locales[i],"C");
+X		strcpy(_code_set_info.code_name, "default");
+X		strcpy(_my_time,"C");
+X		_langinfo.yesstr = "yes";
+X		_langinfo.nostr = "no";
+X}
+________This_Is_The_END________
+if test `wc -l < setlocale.c` -ne 806; then
+	echo 'shar: setlocale.c was damaged during transit (should have been 806 bytes)'
+fi
+fi		; : end of overwriting check
+exit 0

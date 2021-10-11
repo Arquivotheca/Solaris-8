@@ -1,0 +1,158 @@
+#
+# Copyright (c) 1999 by Sun Microsystems, Inc.
+# ALl rights reserved.
+#
+#ident	"@(#)prototype_com	1.4	99/12/06 SMI"
+#
+# SUNWapchr
+#
+# packaging files
+i pkginfo
+i i.preserve
+i i.initd
+i depend
+i copyright
+#
+d none etc 755 root sys
+d none var 755 root sys
+d none var/apache 755 root bin
+d none var/apache/cgi-bin 755 root bin
+d none var/apache/htdocs 755 root bin
+d none var/apache/icons 755 root bin
+d none var/apache/icons/small 755 root bin
+d none var/apache/logs 755 nobody bin
+v none var/apache/logs/access_log 644 nobody bin
+v none var/apache/logs/error_log 644 nobody bin
+v none var/apache/logs/suexec_log 644 nobody bin
+d none var/apache/proxy 755 nobody nobody
+f none var/apache/cgi-bin/printenv 555 root bin
+f none var/apache/cgi-bin/test-cgi 555 root bin
+f none var/apache/htdocs/apache_pb.gif 644 root bin
+e preserve var/apache/htdocs/index.html 644 root bin
+f none var/apache/icons/README 644 root bin
+f none var/apache/icons/a.gif 644 root bin
+f none var/apache/icons/alert.black.gif 644 root bin
+f none var/apache/icons/alert.red.gif 644 root bin
+f none var/apache/icons/apache_pb.gif 644 root bin
+f none var/apache/icons/back.gif 644 root bin
+f none var/apache/icons/ball.gray.gif 644 root bin
+f none var/apache/icons/ball.red.gif 644 root bin
+f none var/apache/icons/binary.gif 644 root bin
+f none var/apache/icons/binhex.gif 644 root bin
+f none var/apache/icons/blank.gif 644 root bin
+f none var/apache/icons/bomb.gif 644 root bin
+f none var/apache/icons/box1.gif 644 root bin
+f none var/apache/icons/box2.gif 644 root bin
+f none var/apache/icons/broken.gif 644 root bin
+f none var/apache/icons/burst.gif 644 root bin
+f none var/apache/icons/c.gif 644 root bin
+f none var/apache/icons/comp.blue.gif 644 root bin
+f none var/apache/icons/comp.gray.gif 644 root bin
+f none var/apache/icons/compressed.gif 644 root bin
+f none var/apache/icons/continued.gif 644 root bin
+f none var/apache/icons/dir.gif 644 root bin
+f none var/apache/icons/down.gif 644 root bin
+f none var/apache/icons/dvi.gif 644 root bin
+f none var/apache/icons/f.gif 644 root bin
+f none var/apache/icons/folder.gif 644 root bin
+f none var/apache/icons/folder.open.gif 644 root bin
+f none var/apache/icons/folder.sec.gif 644 root bin
+f none var/apache/icons/forward.gif 644 root bin
+f none var/apache/icons/generic.gif 644 root bin
+f none var/apache/icons/generic.red.gif 644 root bin
+f none var/apache/icons/generic.sec.gif 644 root bin
+f none var/apache/icons/hand.right.gif 644 root bin
+f none var/apache/icons/hand.up.gif 644 root bin
+f none var/apache/icons/icon.sheet.gif 644 root bin
+f none var/apache/icons/image1.gif 644 root bin
+f none var/apache/icons/image2.gif 644 root bin
+f none var/apache/icons/image3.gif 644 root bin
+f none var/apache/icons/index.gif 644 root bin
+f none var/apache/icons/layout.gif 644 root bin
+f none var/apache/icons/left.gif 644 root bin
+f none var/apache/icons/link.gif 644 root bin
+f none var/apache/icons/movie.gif 644 root bin
+f none var/apache/icons/p.gif 644 root bin
+f none var/apache/icons/patch.gif 644 root bin
+f none var/apache/icons/pdf.gif 644 root bin
+f none var/apache/icons/pie0.gif 644 root bin
+f none var/apache/icons/pie1.gif 644 root bin
+f none var/apache/icons/pie2.gif 644 root bin
+f none var/apache/icons/pie3.gif 644 root bin
+f none var/apache/icons/pie4.gif 644 root bin
+f none var/apache/icons/pie5.gif 644 root bin
+f none var/apache/icons/pie6.gif 644 root bin
+f none var/apache/icons/pie7.gif 644 root bin
+f none var/apache/icons/pie8.gif 644 root bin
+f none var/apache/icons/portal.gif 644 root bin
+f none var/apache/icons/ps.gif 644 root bin
+f none var/apache/icons/quill.gif 644 root bin
+f none var/apache/icons/right.gif 644 root bin
+f none var/apache/icons/screw1.gif 644 root bin
+f none var/apache/icons/screw2.gif 644 root bin
+f none var/apache/icons/script.gif 644 root bin
+f none var/apache/icons/sound1.gif 644 root bin
+f none var/apache/icons/sound2.gif 644 root bin
+f none var/apache/icons/sphere1.gif 644 root bin
+f none var/apache/icons/sphere2.gif 644 root bin
+f none var/apache/icons/tar.gif 644 root bin
+f none var/apache/icons/tex.gif 644 root bin
+f none var/apache/icons/text.gif 644 root bin
+f none var/apache/icons/transfer.gif 644 root bin
+f none var/apache/icons/unknown.gif 644 root bin
+f none var/apache/icons/up.gif 644 root bin
+f none var/apache/icons/uu.gif 644 root bin
+f none var/apache/icons/uuencoded.gif 644 root bin
+f none var/apache/icons/world1.gif 644 root bin
+f none var/apache/icons/world2.gif 644 root bin
+f none var/apache/icons/small/README.txt 644 root bin
+f none var/apache/icons/small/back.gif 644 root bin
+f none var/apache/icons/small/binary.gif 644 root bin
+f none var/apache/icons/small/binhex.gif 644 root bin
+f none var/apache/icons/small/blank.gif 644 root bin
+f none var/apache/icons/small/broken.gif 644 root bin
+f none var/apache/icons/small/burst.gif 644 root bin
+f none var/apache/icons/small/comp1.gif 644 root bin
+f none var/apache/icons/small/comp2.gif 644 root bin
+f none var/apache/icons/small/compressed.gif 644 root bin
+f none var/apache/icons/small/continued.gif 644 root bin
+f none var/apache/icons/small/dir.gif 644 root bin
+f none var/apache/icons/small/dir2.gif 644 root bin
+f none var/apache/icons/small/doc.gif 644 root bin
+f none var/apache/icons/small/forward.gif 644 root bin
+f none var/apache/icons/small/generic.gif 644 root bin
+f none var/apache/icons/small/generic2.gif 644 root bin
+f none var/apache/icons/small/generic3.gif 644 root bin
+f none var/apache/icons/small/image.gif 644 root bin
+f none var/apache/icons/small/image2.gif 644 root bin
+f none var/apache/icons/small/index.gif 644 root bin
+f none var/apache/icons/small/key.gif 644 root bin
+f none var/apache/icons/small/movie.gif 644 root bin
+f none var/apache/icons/small/patch.gif 644 root bin
+f none var/apache/icons/small/ps.gif 644 root bin
+f none var/apache/icons/small/rainbow.gif 644 root bin
+f none var/apache/icons/small/sound.gif 644 root bin
+f none var/apache/icons/small/sound2.gif 644 root bin
+f none var/apache/icons/small/tar.gif 644 root bin
+f none var/apache/icons/small/text.gif 644 root bin
+f none var/apache/icons/small/transfer.gif 644 root bin
+f none var/apache/icons/small/unknown.gif 644 root bin
+f none var/apache/icons/small/uu.gif 644 root bin
+d none etc/init.d 755 root sys
+d none etc/apache 755 root bin
+d none etc/rc3.d 755 root sys
+d none etc/rc2.d 755 root sys
+d none etc/rc1.d 755 root sys
+d none etc/rc0.d 755 root sys
+d none etc/rcS.d 755 root sys
+e initd etc/init.d/apache 744 root sys
+l initd etc/rc3.d/S50apache=../../etc/init.d/apache
+l initd etc/rc2.d/K16apache=../../etc/init.d/apache
+l initd etc/rc1.d/K16apache=../../etc/init.d/apache
+l initd etc/rc0.d/K16apache=../../etc/init.d/apache
+l initd etc/rcS.d/K16apache=../../etc/init.d/apache
+f none etc/apache/httpd.conf-example 644 root bin
+e preserve etc/apache/access.conf 644 root bin
+e preserve etc/apache/magic 644 root bin
+e preserve etc/apache/mime.types 644 root bin
+e preserve etc/apache/srm.conf 644 root bin

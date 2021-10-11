@@ -1,0 +1,28 @@
+#!/bin/sh
+#
+# ident "@(#)postinstall	1.2	96/04/10 SMI"
+# SUNWx86bt postinstall script
+
+PATH="/usr/bin:/usr/sbin:${PATH}"
+export PATH
+EXIT=0
+
+PLATPATH="platform/i86pc"
+
+#
+#  Make a copy of ufsboot and put it in the boot area as boot.bin.
+#  In the future we may want to remove the ufsboot file.
+#
+OLDBOOTER="ufsboot"
+NEWBOOTER="boot/solaris/boot.bin"
+BOOTERSRC=${BASEDIR}"/"${PLATPATH}"/"${OLDBOOTER}
+BOOTERDST=${BASEDIR}"/"${PLATPATH}"/"${NEWBOOTER}
+
+if test -f ${BOOTERSRC}; then
+	cp ${BOOTERSRC} ${BOOTERDST}
+        chown root ${BOOTERDST} > /dev/null 2>&1
+        chgrp sys ${BOOTERDST} > /dev/null 2>&1
+        chmod 755 ${BOOTERDST} > /dev/null 2>&1
+fi
+
+exit ${EXIT}

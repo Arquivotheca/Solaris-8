@@ -1,0 +1,28 @@
+#!/bin/sh
+#
+#pragma ident	"@(#)inc.flg	1.7	99/10/04 SMI" 
+#
+
+#
+#               # Get required header files
+#
+find_files "s.*.h"\
+        usr/src/uts/sun4m\
+        usr/src/uts/sun4d\
+        usr/src/uts/sparc\
+        usr/src/uts/sun\
+        usr/src/uts/common/sys\
+        usr/src/uts/common/vm\
+        usr/src/uts/common/os\
+        usr/src/uts/common/rpc\
+        usr/src/uts/common/nfs\
+        usr/src/stand/sys\
+        usr/src/stand/i386
+#
+# Get required directories
+#
+find_files "s.*"\
+        usr/src/psm/promif\
+        usr/src/stand/lib
+
+echo_file usr/src/lib/Makefile.lib

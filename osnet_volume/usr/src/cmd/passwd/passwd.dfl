@@ -1,0 +1,4 @@
+#ident	"@(#)passwd.dfl	1.3	92/07/14 SMI"
+MAXWEEKS=
+MINWEEKS=
+PASSLENGTH=6

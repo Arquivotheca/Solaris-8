@@ -1,0 +1,169 @@
+/* LINTLIBRARY */
+/* PROTOLIB1 */
+
+/*
+ * Copyright (c) 1997 by Sun Microsystems, Inc. 
+ * All rights reserved. 
+ */ 
+#pragma ident	"@(#)llib-lc2stubs	1.1	97/03/12 SMI"
+
+#include <stdio.h>
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <sys/sockio.h>
+#include <netinet/in.h>
+#include <pwd.h>
+#include <grp.h>
+
+/*
+ * usr/src/lib/libc2
+ */
+
+/* audit_acct.c */
+void audit_accton_main(int argc, char *argv[]);
+void audit_accton_main1(void);
+void audit_accton_main2(void);
+void audit_accton_main3(void);
+void audit_accton_main4(void);
+void audit_accton_main5(void);
+void audit_accton_ckfile(char *admfile);
+void audit_accton_ckfile1(char *admfile);
+void audit_accton_ckfile2(char *admfile);
+
+/* audit_clri.c */
+void audit_clri_main(int argc, char *argv[]);
+
+/* audit_fsck.c */
+void audit_fsck_main(int argc, char *argv[]);
+
+/* audit_fsdb.c */
+void audit_fsdb_main(int argc, char *argv[]);
+
+/* audit_ftpd.c */
+int audit_ftpd_no_anon(void);
+int audit_ftpd_sav_data(struct sockaddr_in *sin, long port);
+int audit_ftpd_bad_pw(char *uname);
+int audit_ftpd_failure(char *uname);
+int audit_ftpd_success(char *uname);
+int audit_ftpd_unknown(char *uname);
+int audit_ftpd_excluded(char *uname);
+
+/* audit_halt.c */
+void audit_halt_main(int argc, char *argv[]);
+void audit_halt_main1(char *ttyn);
+void audit_halt_main2(char *user);
+void audit_halt_main3(void);
+void audit_halt_reboot(void);
+void audit_halt_reboot1(void);
+void audit_halt_success(void);
+
+/* audit_init.c */
+void audit_init_userinit(int argc, char *argv[]);
+void audit_init_userinit1(void);
+void audit_init_userinit2(char *n);
+void audit_init_userinit3(char *ln, char *n);
+void audit_init_userinit4(void);
+void audit_init_userinit5(void);
+void audit_init_userinit6(void);
+
+/* audit_login.c */
+int audit_login_save_flags(int rflag, int hflag);
+int audit_login_save_host(char *host);
+int audit_login_save_ttyn(char *ttyn);
+int audit_login_save_port(void);
+int audit_login_success(void);
+int audit_login_save_machine(void);
+int audit_login_save_pw(struct passwd *pwd);
+int audit_login_maxtrys(void);
+int audit_login_not_console(void);
+int audit_login_bad_pw(void);
+int audit_login_bad_dialup(void);
+int audit_cron_session(char *nam, uid_t uid);
+int audit_inetd_service(char *service_name, struct in_addr *in_addr,
+			ushort_t iport);
+int audit_inetd_config(void);
+int audit_mountd_setup(void);
+int audit_mountd_mount(char *clname, char *path, int success);
+int audit_mountd_umount(char *clname, char *path);
+int audit_rexd_setup(void);
+int audit_rexd_fail(char *msg, char *hostname, char *user, char *cmdbuf);
+int audit_rexd_success(char *hostname, char *user, char *cmdbuf);
+int audit_rexecd_setup(void);
+int audit_rexecd_fail(char *msg, char *hostname, char *user, char *cmdbuf);
+int audit_rexecd_success(char *hostname, char *user, char *cmdbuf);
+int audit_rshd_setup(void);
+int audit_rshd_fail(char *msg, char *hostname, char *remuser, char *locuser,
+			char *cmdbuf);
+int audit_rshd_success(char *hostname, char *remuser, char *locuser,
+			char *cmdbuf);
+
+/* audit_logins.c */
+void audit_logins_main(int argc, char *argv[]);
+
+/* audit_ncheck.c */
+void audit_ncheck_main(int argc, char *argv[]);
+
+/* audit_newgrp.c */
+void audit_newgrp_main(int argc, char *argv[]);
+void audit_newgrp_main1(void);
+void audit_newgrp_main2(struct passwd *p);
+void audit_newgrp_chkgrp(struct group *g);
+void audit_newgrp_chkgrp1(void);
+
+/* audit_passwd.c */
+void audit_passwd_sorf(int retval);
+void audit_passwd_attributes_sorf(int retval);
+void audit_passwd_init_id(void);
+int audit_passwd(char *s, int r);
+
+/* audit_pmadm.c */
+void audit_pmadm_main(int argc, char *argv[]);
+void audit_pmadm_main1(int flag);
+void audit_pmadm_main2(int flag);
+void audit_pmadm_main3(int flag);
+void audit_pmadm_main4(int flag);
+
+/* audit_priocntl.c */
+void audit_priocntl_main(int argc, char *argv[]);
+
+/* audit_pt_chmod.c */
+void audit_pt_chmod_main(int argc, char *argv[]);
+
+/* audit_reboot.c */
+void audit_reboot_main(int argc, char *argv[]);
+void audit_reboot_main1(char *user);
+void audit_reboot_main2(void);
+void audit_reboot_reboot(void);
+void audit_reboot_reboot1(int howto);
+void audit_reboot_success(void);
+
+/* audit_sacadm.c */
+void audit_sacadm_main(int argc, char *argv[]);
+void audit_sacadm_main1(int flag);
+void audit_sacadm_main2(int flag);
+void audit_sacadm_main3(int flag);
+void audit_sacadm_main4(int flag);
+
+/* audit_su.c */
+void audit_su_init_info(char *username, char *ttyn);
+void audit_su_init_user(char *username);
+void audit_su_init_ttyn(char *ttyn);
+void audit_su_init_expired(char *username);
+void audit_su_init_ai(void);
+void audit_su_init_id(void);
+void audit_su_reset_ai(void);
+void audit_su_success(void);
+void audit_su_bad_username(void);
+void audit_su_bad_authentication(void);
+void audit_su_bad_uid(uid_t uid);
+void audit_su_unknown_failure(void);
+int audit_su(char *s, int r);
+
+/* audit_sulogin.c */
+void audit_sulogin_main(void);
+void audit_sulogin_main1(void);
+void audit_sulogin_main2(void);
+void audit_sulogin_main3(void);
+void audit_sulogin_main4(void);
+void audit_sulogin_main5(void);
+void audit_sulogin_main6(void);

@@ -1,0 +1,105 @@
+#
+#ident	"@(#)preinstall	1.26	99/10/13 SMI"
+#
+# Copyright (c) 1999 by Sun Microsystems, Inc.
+# All rights reserved.
+
+LINKERALIAS=linker_install@eng.sun.com
+
+files="\
+	etc/lib/ld.so.1 \
+	usr/bin/crle \
+	usr/bin/ldd \
+	usr/bin/pvs \
+	usr/include/dlfcn.h \
+	usr/include/gelf.h \
+	usr/include/libelf.h \
+	usr/include/link.h \
+	usr/include/proc_service.h \
+	usr/include/sys/elf_386.h \
+	usr/include/sys/elf_SPARC.h \
+	usr/include/sys/elf_ppc.h \
+	usr/include/sys/elf.h \
+	usr/include/sys/link.h \
+	usr/include/sys/rtld_db.h \
+	usr/ccs/bin/ar \
+	usr/ccs/bin/dump \
+	usr/ccs/bin/elfdump \
+	usr/ccs/bin/ld \
+	usr/ccs/bin/lorder \
+	usr/ccs/bin/mcs \
+	usr/ccs/bin/nm \
+	usr/ccs/bin/size \
+	usr/ccs/bin/sparcv9/ld \
+	usr/ccs/bin/strip \
+	usr/lib/ld.so.1 \
+	usr/lib/libcrle.so.1 \
+	usr/lib/libelf.so.1 \
+	usr/lib/libelf.a \
+	usr/lib/libld.so.2 \
+        usr/lib/libld.so.3 \
+	usr/lib/liblddbg.so.4 \
+	usr/lib/libldstab.so.1 \
+	usr/lib/librtld.so.1 \
+	usr/lib/librtld_db.so.1 \
+        usr/lib/lddstub \
+	usr/lib/link_audit/ldprof.so.1 \
+        usr/lib/link_audit/sparcv9/ldprof.so.1 \
+	usr/lib/link_audit/sparcv9/truss.so.1 \
+	usr/lib/link_audit/sparcv9/who.so.1 \
+	usr/lib/link_audit/truss.so.1 \
+	usr/lib/link_audit/who.so.1 \
+        usr/lib/sparcv9/ld.so.1 \
+        usr/lib/sparcv9/libcrle.so.1 \
+        usr/lib/sparcv9/libdl.so.1 \
+        usr/lib/sparcv9/libelf.so.1 \
+        usr/lib/sparcv9/libld.so.2 \
+        usr/lib/sparcv9/libld.so.3 \
+        usr/lib/sparcv9/liblddbg.so.4 \
+        usr/lib/sparcv9/libldstab.so.1 \
+        usr/lib/sparcv9/librtld.so.1 \
+        usr/lib/sparcv9/librtld_db.so.1 \
+        usr/lib/sparcv9/lddstub \
+	"
+
+
+for F in $files
+do
+	if [ ! -f ${BASEDIR}/$F.orig ]
+	then
+		if [ -f ${BASEDIR}/$F ]
+		then
+			cp ${BASEDIR}/$F ${BASEDIR}/$F.orig
+		fi
+	fi
+done
+
+#
+# E-mail sent to track installations of SUNWonld package.
+# purely for statistical purposes.
+#
+if [ -f /usr/lib/sendmail ]
+then
+	HOSTINFO=`uname -a`
+	DATE=`date`
+	ENVLIST=`env`
+	/usr/lib/sendmail $LINKERALIAS << EOF
+To: $LINKERALIASE
+Subject: SUNWonld Linker Package Installation
+Content-type: text/plain
+Precedence: junk
+--------
+
+Package Installation
+uname: $HOSTINFO
+date: $DATE
+VERSION: $VERSION
+ENV:
+$ENVLIST
+$ENV
+
+.
+EOF
+fi
+
+exit 0

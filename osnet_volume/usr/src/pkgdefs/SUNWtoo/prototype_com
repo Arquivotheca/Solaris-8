@@ -1,0 +1,61 @@
+#
+# Copyright (c) 1990-1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#pragma ident	"@(#)prototype_com	1.37	99/05/14 SMI"
+#
+# This required package information file contains a list of package contents.
+# The 'pkgmk' command uses this file to identify the contents of a package
+# and their location on the development machine when building the package.
+# Can be created via a text editor or through use of the 'pkgproto' command.
+
+#!search <pathname pathname ...>	# where to find pkg objects
+#!include <filename>			# include another 'prototype' file
+#!default <mode> <owner> <group>	# default used if not specified on entry
+#!<param>=<value>			# puts parameter in pkg environment
+
+# packaging files
+i pkginfo
+i copyright
+i postinstall
+i depend
+#
+# source locations relative to the prototype file
+#
+# SUNWtoo
+#
+d none usr 755 root sys
+d none usr/bin 755 root bin
+f none usr/bin/ctags 555 root bin
+f none usr/bin/exstr 555 root bin
+l none usr/bin/gcore=../../usr/lib/isaexec
+f none usr/bin/ldd 555 root bin
+f none usr/bin/od 555 root bin
+l none usr/bin/plimit=../../usr/lib/isaexec
+f none usr/bin/pvs 555 root bin
+f none usr/bin/sotruss 755 root bin
+f none usr/bin/strings 555 root bin
+l none usr/bin/truss=../../usr/lib/isaexec
+f none usr/bin/whocalls 755 root bin
+d none usr/ccs 755 root bin
+d none usr/ccs/bin 755 root bin
+f none usr/ccs/bin/ld 755 root bin
+f none usr/ccs/bin/regcmp 555 root bin
+d none usr/ccs/lib 755 root bin
+s none usr/ccs/lib/libld.so.2=../../lib/libld.so.2
+s none usr/ccs/lib/link_audit=../../lib/link_audit
+d none usr/lib 755 root bin
+d none usr/lib/ld 755 root bin
+f none usr/lib/lddstub 555 root bin
+f none usr/lib/libld.so.2 755 root bin
+f none usr/lib/libld.so.3 755 root bin
+f none usr/lib/libldfeature.a 644 root bin
+f none usr/lib/libldstab.so.1 755 root bin
+d none usr/lib/link_audit 755 root bin
+f none usr/lib/link_audit/ldprof.so.1 755 root bin
+f none usr/lib/link_audit/truss.so.1 755 root bin
+f none usr/lib/link_audit/who.so.1 755 root bin
+d none usr/lib/abi 755 root bin
+f none usr/lib/abi/spec2map 755 root bin
+f none usr/lib/abi/spec2trace 755 root bin
+f none usr/lib/abi/ldcullstabs.so.1 755 root bin

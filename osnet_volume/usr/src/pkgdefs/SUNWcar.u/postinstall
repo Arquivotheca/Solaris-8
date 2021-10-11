@@ -1,0 +1,16 @@
+#!/bin/sh
+#
+#ident	"@(#)postinstall	1.2	99/07/16 SMI"
+#
+# Copyright (c) 1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+
+#
+# /dev/power has been replaced by /dev/power_button
+#
+if [ -h $BASEDIR/dev/power ]; then
+	rm -f $BASEDIR/dev/power
+fi
+
+exit 0

@@ -1,0 +1,52 @@
+\
+\ Copyright (c) 1999 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)job_request.dbg	1.1	99/07/21 SMI"
+\
+#include <sys/isa_defs.h>
+#include <sys/types.h>
+#include <sys/dditypes.h>
+#include <sys/ddidmareq.h>
+#include <sys/mutex.h>
+#include <sys/semaphore.h>
+#include <sys/condvar.h>
+#include <sys/thread.h>
+#include <sys/devops.h>
+#include <sys/fibre-channel/fc.h>
+#include <sys/fibre-channel/impl/fc_ulpif.h>
+#include <sys/fibre-channel/impl/fc_portif.h>
+#include "dummy.h"
+\
+\
+job_request		job_
+{adb_inline_begin}
+.>x
+<x+{OFFSET, job_code}=""
+{adb_inline_end}
+	code			hex
+	result			hex
+	flags			hex
+	counter			hex
+	cb_arg			hex
+	mutex			.mutex	
+{adb_inline_begin}
+<x+{OFFSET, job_fctl_sema}=""
+{adb_inline_end}
+	fctl_sema		.sema
+{adb_inline_begin}
+<x+{OFFSET, job_port_sema}=""
+{adb_inline_end}
+	port_sema		.sema
+{adb_inline_begin}
+<x+{OFFSET, job_comp}=""
+{adb_inline_end}
+	comp			hex
+	ulp_pkts		hex
+	ulp_listlen		hex
+	private			hex
+	arg			hex
+	next			hex
+{adb_inline_begin}
+<x+{SIZEOF}=""
+{adb_inline_end}

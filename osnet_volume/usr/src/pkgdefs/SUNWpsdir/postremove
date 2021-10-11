@@ -1,0 +1,23 @@
+#
+# postremove script for SUNWpsdir package.
+#
+# Copyright (c) 1997 by Sun Microsystems, Inc.
+# All Rights Reserved.
+#
+#ident "@(#)postremove 1.3 97/12/19"
+#
+
+# 
+# Unload and remove nolonger present drivers
+#
+
+# Platform-specific drivers
+case "${ARCH}" in
+i386)
+	rem_drv -b "${BASEDIR}" sbpro
+	rem_drv -b "${BASEDIR}" ata
+	rem_drv -b "${BASEDIR}" pci-ide
+	;;
+ppc)
+	;;
+esac

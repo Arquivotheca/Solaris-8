@@ -1,0 +1,735 @@
+#
+# Copyright (c) 1997-1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#pragma ident	"@(#)exception_list_i386	1.74	99/12/06 SMI"
+#
+# Exception List for protocmp
+#
+###########################################
+#
+# ENTRIES FILTERED OUT OF THE protolist
+#
+###########################################
+#
+# these are just a funky entries - they are fixed up
+# via a post install scripts.
+#
+usr/lib/libcrypt.a		i386
+usr/lib/libcrypt.so		i386
+usr/lib/libcrypt.so.1		i386
+usr/lib/font/devpost/charlib/~ 	i386
+usr/lib/font/devpost/charlib/~=	i386
+#
+# The following entries are built in the /proto area
+# but not included in any packages - this is:
+#	bugid 1173280 for gcrt1.o
+#	bugid 1173281 for /dev/spx
+#	bugid 1173281 has been fixed removed /dev/spx
+#
+usr/ccs/bin/gcrt1.o		i386
+#
+# The following entries are built in the /proto area
+# but not included in any packages - this is intentional.
+#
+usr/include/auth_list.h		i386
+usr/lib/libsecdb.a		i386
+usr/include/getxby_door.h	i386
+usr/include/floatingpoint.h	i386
+usr/include/math.h		i386
+usr/include/sys/ieeefp.h	i386
+usr/include/sys/winlockio.h	i386
+usr/lib/libthread_db.a		i386
+usr/lib/libkstat.a		i386
+etc/fs/s5fs			i386
+etc/fs/s5fs/mount		i386
+usr/include/security/pam_impl.h	i386
+usr/lib/security/libunixpasswd.a	i386
+usr/lib/libpam.a		i386
+#
+# The following files are used by libdhcp, the DHCP daemon, the
+# standalone's DHCP implementation, and the kernel (nfs_dlboot).
+# They contain interfaces which are currently private.
+#
+usr/include/dhcdata.h		i386
+usr/include/dhcp_defaults.h	i386
+usr/include/netinet/dhcp.h	i386
+usr/include/sys/sunos_dhcp_class.h	i386
+#
+usr/include/sys/devfs_log_event.h	i386
+usr/include/libdevfsevent.h	i386
+usr/include/inet/ip6.h		i386
+usr/include/inet/ip_ndp.h	i386
+usr/include/inet/tun.h		i386
+usr/include/protocols/ripngd.h	i386
+usr/include/libmail.h	i386
+usr/include/s_string.h	i386
+usr/include/sys/vgareg.h	i386
+#Some IPsec headers can't be shipped lest we hit export controls...
+usr/include/inet/ipsec_conf.h	i386
+usr/include/inet/ipsec_info.h	i386
+usr/include/inet/ipsecah.h	i386
+usr/include/inet/ipsecesp.h	i386
+usr/include/inet/keysock.h	i386
+usr/include/inet/sadb.h		i386
+usr/include/inet/sha1.h		i386
+usr/include/inet/sha1_consts.h	i386
+usr/include/inet/tun.h		i386
+#
+###########################################
+#
+# ENTRIES FILTERED OUT OF THE protodirs
+#
+###########################################
+#
+# Filtering out directories not shipped
+#
+usr/4lib	i386
+#
+# Timezone files not packaged in on28.  These files should be added early in
+# the 2.9 release cycle, in sync with changes to the installation code.
+#
+usr/share/lib/zoneinfo/Africa	i386
+usr/share/lib/zoneinfo/Africa/Abidjan	i386
+usr/share/lib/zoneinfo/Africa/Accra	i386
+usr/share/lib/zoneinfo/Africa/Addis_Ababa	i386
+usr/share/lib/zoneinfo/Africa/Algiers	i386
+usr/share/lib/zoneinfo/Africa/Asmera	i386
+usr/share/lib/zoneinfo/Africa/Bamako	i386
+usr/share/lib/zoneinfo/Africa/Bangui	i386
+usr/share/lib/zoneinfo/Africa/Banjul	i386
+usr/share/lib/zoneinfo/Africa/Bissau	i386
+usr/share/lib/zoneinfo/Africa/Blantyre	i386
+usr/share/lib/zoneinfo/Africa/Brazzaville	i386
+usr/share/lib/zoneinfo/Africa/Bujumbura	i386
+usr/share/lib/zoneinfo/Africa/Cairo	i386
+usr/share/lib/zoneinfo/Africa/Casablanca	i386
+usr/share/lib/zoneinfo/Africa/Ceuta	i386
+usr/share/lib/zoneinfo/Africa/Conakry	i386
+usr/share/lib/zoneinfo/Africa/Dakar	i386
+usr/share/lib/zoneinfo/Africa/Dar_es_Salaam	i386
+usr/share/lib/zoneinfo/Africa/Djibouti	i386
+usr/share/lib/zoneinfo/Africa/Douala	i386
+usr/share/lib/zoneinfo/Africa/El_Aaiun	i386
+usr/share/lib/zoneinfo/Africa/Freetown	i386
+usr/share/lib/zoneinfo/Africa/Gaborone	i386
+usr/share/lib/zoneinfo/Africa/Harare	i386
+usr/share/lib/zoneinfo/Africa/Johannesburg	i386
+usr/share/lib/zoneinfo/Africa/Kampala	i386
+usr/share/lib/zoneinfo/Africa/Khartoum	i386
+usr/share/lib/zoneinfo/Africa/Kigali	i386
+usr/share/lib/zoneinfo/Africa/Kinshasa	i386
+usr/share/lib/zoneinfo/Africa/Lagos	i386
+usr/share/lib/zoneinfo/Africa/Libreville	i386
+usr/share/lib/zoneinfo/Africa/Lome	i386
+usr/share/lib/zoneinfo/Africa/Luanda	i386
+usr/share/lib/zoneinfo/Africa/Lubumbashi	i386
+usr/share/lib/zoneinfo/Africa/Lusaka	i386
+usr/share/lib/zoneinfo/Africa/Malabo	i386
+usr/share/lib/zoneinfo/Africa/Maputo	i386
+usr/share/lib/zoneinfo/Africa/Maseru	i386
+usr/share/lib/zoneinfo/Africa/Mbabane	i386
+usr/share/lib/zoneinfo/Africa/Mogadishu	i386
+usr/share/lib/zoneinfo/Africa/Monrovia	i386
+usr/share/lib/zoneinfo/Africa/Nairobi	i386
+usr/share/lib/zoneinfo/Africa/Ndjamena	i386
+usr/share/lib/zoneinfo/Africa/Niamey	i386
+usr/share/lib/zoneinfo/Africa/Nouakchott	i386
+usr/share/lib/zoneinfo/Africa/Ouagadougou	i386
+usr/share/lib/zoneinfo/Africa/Porto-Novo	i386
+usr/share/lib/zoneinfo/Africa/Sao_Tome	i386
+usr/share/lib/zoneinfo/Africa/Timbuktu	i386
+usr/share/lib/zoneinfo/Africa/Tripoli	i386
+usr/share/lib/zoneinfo/Africa/Tunis	i386
+usr/share/lib/zoneinfo/Africa/Windhoek	i386
+usr/share/lib/zoneinfo/America	i386
+usr/share/lib/zoneinfo/America/Adak	i386
+usr/share/lib/zoneinfo/America/Anchorage	i386
+usr/share/lib/zoneinfo/America/Anguilla	i386
+usr/share/lib/zoneinfo/America/Antigua	i386
+usr/share/lib/zoneinfo/America/Araguaina	i386
+usr/share/lib/zoneinfo/America/Aruba	i386
+usr/share/lib/zoneinfo/America/Asuncion	i386
+usr/share/lib/zoneinfo/America/Atka	i386
+usr/share/lib/zoneinfo/America/Barbados	i386
+usr/share/lib/zoneinfo/America/Belem	i386
+usr/share/lib/zoneinfo/America/Belize	i386
+usr/share/lib/zoneinfo/America/Bogota	i386
+usr/share/lib/zoneinfo/America/Boise	i386
+usr/share/lib/zoneinfo/America/Buenos_Aires	i386
+usr/share/lib/zoneinfo/America/Cancun	i386
+usr/share/lib/zoneinfo/America/Caracas	i386
+usr/share/lib/zoneinfo/America/Catamarca	i386
+usr/share/lib/zoneinfo/America/Cayenne	i386
+usr/share/lib/zoneinfo/America/Cayman	i386
+usr/share/lib/zoneinfo/America/Chicago	i386
+usr/share/lib/zoneinfo/America/Chihuahua	i386
+usr/share/lib/zoneinfo/America/Cordoba	i386
+usr/share/lib/zoneinfo/America/Costa_Rica	i386
+usr/share/lib/zoneinfo/America/Cuiaba	i386
+usr/share/lib/zoneinfo/America/Curacao	i386
+usr/share/lib/zoneinfo/America/Dawson	i386
+usr/share/lib/zoneinfo/America/Dawson_Creek	i386
+usr/share/lib/zoneinfo/America/Denver	i386
+usr/share/lib/zoneinfo/America/Detroit	i386
+usr/share/lib/zoneinfo/America/Dominica	i386
+usr/share/lib/zoneinfo/America/Edmonton	i386
+usr/share/lib/zoneinfo/America/El_Salvador	i386
+usr/share/lib/zoneinfo/America/Ensenada	i386
+usr/share/lib/zoneinfo/America/Fort_Wayne	i386
+usr/share/lib/zoneinfo/America/Fortaleza	i386
+usr/share/lib/zoneinfo/America/Glace_Bay	i386
+usr/share/lib/zoneinfo/America/Godthab	i386
+usr/share/lib/zoneinfo/America/Goose_Bay	i386
+usr/share/lib/zoneinfo/America/Grand_Turk	i386
+usr/share/lib/zoneinfo/America/Grenada	i386
+usr/share/lib/zoneinfo/America/Guadeloupe	i386
+usr/share/lib/zoneinfo/America/Guatemala	i386
+usr/share/lib/zoneinfo/America/Guayaquil	i386
+usr/share/lib/zoneinfo/America/Guyana	i386
+usr/share/lib/zoneinfo/America/Halifax	i386
+usr/share/lib/zoneinfo/America/Havana	i386
+usr/share/lib/zoneinfo/America/Indiana	i386
+usr/share/lib/zoneinfo/America/Indiana/Indianapolis	i386
+usr/share/lib/zoneinfo/America/Indiana/Knox	i386
+usr/share/lib/zoneinfo/America/Indiana/Marengo	i386
+usr/share/lib/zoneinfo/America/Indiana/Vevay	i386
+usr/share/lib/zoneinfo/America/Indianapolis	i386
+usr/share/lib/zoneinfo/America/Inuvik	i386
+usr/share/lib/zoneinfo/America/Iqaluit	i386
+usr/share/lib/zoneinfo/America/Jamaica	i386
+usr/share/lib/zoneinfo/America/Jujuy	i386
+usr/share/lib/zoneinfo/America/Juneau	i386
+usr/share/lib/zoneinfo/America/Knox_IN	i386
+usr/share/lib/zoneinfo/America/La_Paz	i386
+usr/share/lib/zoneinfo/America/Lima	i386
+usr/share/lib/zoneinfo/America/Los_Angeles	i386
+usr/share/lib/zoneinfo/America/Louisville	i386
+usr/share/lib/zoneinfo/America/Maceio	i386
+usr/share/lib/zoneinfo/America/Managua	i386
+usr/share/lib/zoneinfo/America/Manaus	i386
+usr/share/lib/zoneinfo/America/Martinique	i386
+usr/share/lib/zoneinfo/America/Mazatlan	i386
+usr/share/lib/zoneinfo/America/Mendoza	i386
+usr/share/lib/zoneinfo/America/Menominee	i386
+usr/share/lib/zoneinfo/America/Mexico_City	i386
+usr/share/lib/zoneinfo/America/Miquelon	i386
+usr/share/lib/zoneinfo/America/Montevideo	i386
+usr/share/lib/zoneinfo/America/Montreal	i386
+usr/share/lib/zoneinfo/America/Montserrat	i386
+usr/share/lib/zoneinfo/America/Nassau	i386
+usr/share/lib/zoneinfo/America/New_York	i386
+usr/share/lib/zoneinfo/America/Nipigon	i386
+usr/share/lib/zoneinfo/America/Nome	i386
+usr/share/lib/zoneinfo/America/Noronha	i386
+usr/share/lib/zoneinfo/America/Panama	i386
+usr/share/lib/zoneinfo/America/Pangnirtung	i386
+usr/share/lib/zoneinfo/America/Paramaribo	i386
+usr/share/lib/zoneinfo/America/Phoenix	i386
+usr/share/lib/zoneinfo/America/Port-au-Prince	i386
+usr/share/lib/zoneinfo/America/Port_of_Spain	i386
+usr/share/lib/zoneinfo/America/Porto_Acre	i386
+usr/share/lib/zoneinfo/America/Porto_Velho	i386
+usr/share/lib/zoneinfo/America/Puerto_Rico	i386
+usr/share/lib/zoneinfo/America/Rainy_River	i386
+usr/share/lib/zoneinfo/America/Rankin_Inlet	i386
+usr/share/lib/zoneinfo/America/Regina	i386
+usr/share/lib/zoneinfo/America/Rosario	i386
+usr/share/lib/zoneinfo/America/Santiago	i386
+usr/share/lib/zoneinfo/America/Santo_Domingo	i386
+usr/share/lib/zoneinfo/America/Sao_Paulo	i386
+usr/share/lib/zoneinfo/America/Scoresbysund	i386
+usr/share/lib/zoneinfo/America/Shiprock	i386
+usr/share/lib/zoneinfo/America/St_Johns	i386
+usr/share/lib/zoneinfo/America/St_Kitts	i386
+usr/share/lib/zoneinfo/America/St_Lucia	i386
+usr/share/lib/zoneinfo/America/St_Thomas	i386
+usr/share/lib/zoneinfo/America/St_Vincent	i386
+usr/share/lib/zoneinfo/America/Swift_Current	i386
+usr/share/lib/zoneinfo/America/Tegucigalpa	i386
+usr/share/lib/zoneinfo/America/Thule	i386
+usr/share/lib/zoneinfo/America/Thunder_Bay	i386
+usr/share/lib/zoneinfo/America/Tijuana	i386
+usr/share/lib/zoneinfo/America/Tortola	i386
+usr/share/lib/zoneinfo/America/Vancouver	i386
+usr/share/lib/zoneinfo/America/Virgin	i386
+usr/share/lib/zoneinfo/America/Whitehorse	i386
+usr/share/lib/zoneinfo/America/Winnipeg	i386
+usr/share/lib/zoneinfo/America/Yakutat	i386
+usr/share/lib/zoneinfo/America/Yellowknife	i386
+usr/share/lib/zoneinfo/Antarctica	i386
+usr/share/lib/zoneinfo/Antarctica/Casey	i386
+usr/share/lib/zoneinfo/Antarctica/Davis	i386
+usr/share/lib/zoneinfo/Antarctica/DumontDUrville	i386
+usr/share/lib/zoneinfo/Antarctica/Mawson	i386
+usr/share/lib/zoneinfo/Antarctica/McMurdo	i386
+usr/share/lib/zoneinfo/Antarctica/Palmer	i386
+usr/share/lib/zoneinfo/Antarctica/South_Pole	i386
+usr/share/lib/zoneinfo/Antarctica/Syowa	i386
+usr/share/lib/zoneinfo/Arctic	i386
+usr/share/lib/zoneinfo/Arctic/Longyearbyen	i386
+usr/share/lib/zoneinfo/Asia	i386
+usr/share/lib/zoneinfo/Asia/Aden	i386
+usr/share/lib/zoneinfo/Asia/Almaty	i386
+usr/share/lib/zoneinfo/Asia/Amman	i386
+usr/share/lib/zoneinfo/Asia/Anadyr	i386
+usr/share/lib/zoneinfo/Asia/Aqtau	i386
+usr/share/lib/zoneinfo/Asia/Aqtobe	i386
+usr/share/lib/zoneinfo/Asia/Ashkhabad	i386
+usr/share/lib/zoneinfo/Asia/Baghdad	i386
+usr/share/lib/zoneinfo/Asia/Bahrain	i386
+usr/share/lib/zoneinfo/Asia/Baku	i386
+usr/share/lib/zoneinfo/Asia/Bangkok	i386
+usr/share/lib/zoneinfo/Asia/Beirut	i386
+usr/share/lib/zoneinfo/Asia/Bishkek	i386
+usr/share/lib/zoneinfo/Asia/Brunei	i386
+usr/share/lib/zoneinfo/Asia/Calcutta	i386
+usr/share/lib/zoneinfo/Asia/Chungking	i386
+usr/share/lib/zoneinfo/Asia/Colombo	i386
+usr/share/lib/zoneinfo/Asia/Dacca	i386
+usr/share/lib/zoneinfo/Asia/Damascus	i386
+usr/share/lib/zoneinfo/Asia/Dubai	i386
+usr/share/lib/zoneinfo/Asia/Dushanbe	i386
+usr/share/lib/zoneinfo/Asia/Gaza	i386
+usr/share/lib/zoneinfo/Asia/Harbin	i386
+usr/share/lib/zoneinfo/Asia/Hong_Kong	i386
+usr/share/lib/zoneinfo/Asia/Irkutsk	i386
+usr/share/lib/zoneinfo/Asia/Istanbul	i386
+usr/share/lib/zoneinfo/Asia/Jakarta	i386
+usr/share/lib/zoneinfo/Asia/Jayapura	i386
+usr/share/lib/zoneinfo/Asia/Jerusalem	i386
+usr/share/lib/zoneinfo/Asia/Kabul	i386
+usr/share/lib/zoneinfo/Asia/Kamchatka	i386
+usr/share/lib/zoneinfo/Asia/Karachi	i386
+usr/share/lib/zoneinfo/Asia/Kashgar	i386
+usr/share/lib/zoneinfo/Asia/Katmandu	i386
+usr/share/lib/zoneinfo/Asia/Krasnoyarsk	i386
+usr/share/lib/zoneinfo/Asia/Kuala_Lumpur	i386
+usr/share/lib/zoneinfo/Asia/Kuching	i386
+usr/share/lib/zoneinfo/Asia/Kuwait	i386
+usr/share/lib/zoneinfo/Asia/Macao	i386
+usr/share/lib/zoneinfo/Asia/Magadan	i386
+usr/share/lib/zoneinfo/Asia/Manila	i386
+usr/share/lib/zoneinfo/Asia/Muscat	i386
+usr/share/lib/zoneinfo/Asia/Nicosia	i386
+usr/share/lib/zoneinfo/Asia/Novosibirsk	i386
+usr/share/lib/zoneinfo/Asia/Omsk	i386
+usr/share/lib/zoneinfo/Asia/Phnom_Penh	i386
+usr/share/lib/zoneinfo/Asia/Pyongyang	i386
+usr/share/lib/zoneinfo/Asia/Qatar	i386
+usr/share/lib/zoneinfo/Asia/Rangoon	i386
+usr/share/lib/zoneinfo/Asia/Riyadh	i386
+usr/share/lib/zoneinfo/Asia/Riyadh87	i386
+usr/share/lib/zoneinfo/Asia/Riyadh88	i386
+usr/share/lib/zoneinfo/Asia/Riyadh89	i386
+usr/share/lib/zoneinfo/Asia/Saigon	i386
+usr/share/lib/zoneinfo/Asia/Samarkand	i386
+usr/share/lib/zoneinfo/Asia/Seoul	i386
+usr/share/lib/zoneinfo/Asia/Shanghai	i386
+usr/share/lib/zoneinfo/Asia/Singapore	i386
+usr/share/lib/zoneinfo/Asia/Taipei	i386
+usr/share/lib/zoneinfo/Asia/Tashkent	i386
+usr/share/lib/zoneinfo/Asia/Tbilisi	i386
+usr/share/lib/zoneinfo/Asia/Tehran	i386
+usr/share/lib/zoneinfo/Asia/Tel_Aviv	i386
+usr/share/lib/zoneinfo/Asia/Thimbu	i386
+usr/share/lib/zoneinfo/Asia/Tokyo	i386
+usr/share/lib/zoneinfo/Asia/Ujung_Pandang	i386
+usr/share/lib/zoneinfo/Asia/Ulan_Bator	i386
+usr/share/lib/zoneinfo/Asia/Urumqi	i386
+usr/share/lib/zoneinfo/Asia/Vientiane	i386
+usr/share/lib/zoneinfo/Asia/Vladivostok	i386
+usr/share/lib/zoneinfo/Asia/Yakutsk	i386
+usr/share/lib/zoneinfo/Asia/Yekaterinburg	i386
+usr/share/lib/zoneinfo/Asia/Yerevan	i386
+usr/share/lib/zoneinfo/Atlantic	i386
+usr/share/lib/zoneinfo/Atlantic/Azores	i386
+usr/share/lib/zoneinfo/Atlantic/Bermuda	i386
+usr/share/lib/zoneinfo/Atlantic/Canary	i386
+usr/share/lib/zoneinfo/Atlantic/Cape_Verde	i386
+usr/share/lib/zoneinfo/Atlantic/Faeroe	i386
+usr/share/lib/zoneinfo/Atlantic/Jan_Mayen	i386
+usr/share/lib/zoneinfo/Atlantic/Madeira	i386
+usr/share/lib/zoneinfo/Atlantic/Reykjavik	i386
+usr/share/lib/zoneinfo/Atlantic/South_Georgia	i386
+usr/share/lib/zoneinfo/Atlantic/St_Helena	i386
+usr/share/lib/zoneinfo/Atlantic/Stanley	i386
+usr/share/lib/zoneinfo/Australia/Adelaide	i386
+usr/share/lib/zoneinfo/Australia/Brisbane	i386
+usr/share/lib/zoneinfo/Australia/Canberra	i386
+usr/share/lib/zoneinfo/Australia/Darwin	i386
+usr/share/lib/zoneinfo/Australia/Hobart	i386
+usr/share/lib/zoneinfo/Australia/Lindeman	i386
+usr/share/lib/zoneinfo/Australia/Lord_Howe	i386
+usr/share/lib/zoneinfo/Australia/Melbourne	i386
+usr/share/lib/zoneinfo/Australia/Perth	i386
+usr/share/lib/zoneinfo/Australia/Sydney	i386
+usr/share/lib/zoneinfo/Canada/Saskatchewan	i386
+usr/share/lib/zoneinfo/Etc/GMT-14	i386
+usr/share/lib/zoneinfo/Etc/GMT0	i386
+usr/share/lib/zoneinfo/Etc/Greenwich	i386
+usr/share/lib/zoneinfo/Etc/UCT	i386
+usr/share/lib/zoneinfo/Etc/UTC	i386
+usr/share/lib/zoneinfo/Etc/Universal	i386
+usr/share/lib/zoneinfo/Etc/Zulu	i386
+usr/share/lib/zoneinfo/Europe	i386
+usr/share/lib/zoneinfo/Europe/Amsterdam	i386
+usr/share/lib/zoneinfo/Europe/Andorra	i386
+usr/share/lib/zoneinfo/Europe/Athens	i386
+usr/share/lib/zoneinfo/Europe/Belfast	i386
+usr/share/lib/zoneinfo/Europe/Belgrade	i386
+usr/share/lib/zoneinfo/Europe/Berlin	i386
+usr/share/lib/zoneinfo/Europe/Bratislava	i386
+usr/share/lib/zoneinfo/Europe/Brussels	i386
+usr/share/lib/zoneinfo/Europe/Bucharest	i386
+usr/share/lib/zoneinfo/Europe/Budapest	i386
+usr/share/lib/zoneinfo/Europe/Chisinau	i386
+usr/share/lib/zoneinfo/Europe/Copenhagen	i386
+usr/share/lib/zoneinfo/Europe/Dublin	i386
+usr/share/lib/zoneinfo/Europe/Gibraltar	i386
+usr/share/lib/zoneinfo/Europe/Helsinki	i386
+usr/share/lib/zoneinfo/Europe/Istanbul	i386
+usr/share/lib/zoneinfo/Europe/Kaliningrad	i386
+usr/share/lib/zoneinfo/Europe/Kiev	i386
+usr/share/lib/zoneinfo/Europe/Lisbon	i386
+usr/share/lib/zoneinfo/Europe/Ljubljana	i386
+usr/share/lib/zoneinfo/Europe/London	i386
+usr/share/lib/zoneinfo/Europe/Luxembourg	i386
+usr/share/lib/zoneinfo/Europe/Madrid	i386
+usr/share/lib/zoneinfo/Europe/Malta	i386
+usr/share/lib/zoneinfo/Europe/Minsk	i386
+usr/share/lib/zoneinfo/Europe/Monaco	i386
+usr/share/lib/zoneinfo/Europe/Moscow	i386
+usr/share/lib/zoneinfo/Europe/Oslo	i386
+usr/share/lib/zoneinfo/Europe/Paris	i386
+usr/share/lib/zoneinfo/Europe/Prague	i386
+usr/share/lib/zoneinfo/Europe/Riga	i386
+usr/share/lib/zoneinfo/Europe/Rome	i386
+usr/share/lib/zoneinfo/Europe/Samara	i386
+usr/share/lib/zoneinfo/Europe/San_Marino	i386
+usr/share/lib/zoneinfo/Europe/Sarajevo	i386
+usr/share/lib/zoneinfo/Europe/Simferopol	i386
+usr/share/lib/zoneinfo/Europe/Skopje	i386
+usr/share/lib/zoneinfo/Europe/Sofia	i386
+usr/share/lib/zoneinfo/Europe/Stockholm	i386
+usr/share/lib/zoneinfo/Europe/Tallinn	i386
+usr/share/lib/zoneinfo/Europe/Tirane	i386
+usr/share/lib/zoneinfo/Europe/Vaduz	i386
+usr/share/lib/zoneinfo/Europe/Vatican	i386
+usr/share/lib/zoneinfo/Europe/Vienna	i386
+usr/share/lib/zoneinfo/Europe/Vilnius	i386
+usr/share/lib/zoneinfo/Europe/Warsaw	i386
+usr/share/lib/zoneinfo/Europe/Zagreb	i386
+usr/share/lib/zoneinfo/Europe/Zurich	i386
+usr/share/lib/zoneinfo/GMT0	i386
+usr/share/lib/zoneinfo/Indian	i386
+usr/share/lib/zoneinfo/Indian/Antananarivo	i386
+usr/share/lib/zoneinfo/Indian/Chagos	i386
+usr/share/lib/zoneinfo/Indian/Christmas	i386
+usr/share/lib/zoneinfo/Indian/Cocos	i386
+usr/share/lib/zoneinfo/Indian/Comoro	i386
+usr/share/lib/zoneinfo/Indian/Kerguelen	i386
+usr/share/lib/zoneinfo/Indian/Mahe	i386
+usr/share/lib/zoneinfo/Indian/Maldives	i386
+usr/share/lib/zoneinfo/Indian/Mauritius	i386
+usr/share/lib/zoneinfo/Indian/Mayotte	i386
+usr/share/lib/zoneinfo/Indian/Reunion	i386
+usr/share/lib/zoneinfo/Pacific	i386
+usr/share/lib/zoneinfo/Pacific/Apia	i386
+usr/share/lib/zoneinfo/Pacific/Auckland	i386
+usr/share/lib/zoneinfo/Pacific/Chatham	i386
+usr/share/lib/zoneinfo/Pacific/Easter	i386
+usr/share/lib/zoneinfo/Pacific/Efate	i386
+usr/share/lib/zoneinfo/Pacific/Enderbury	i386
+usr/share/lib/zoneinfo/Pacific/Fakaofo	i386
+usr/share/lib/zoneinfo/Pacific/Fiji	i386
+usr/share/lib/zoneinfo/Pacific/Funafuti	i386
+usr/share/lib/zoneinfo/Pacific/Galapagos	i386
+usr/share/lib/zoneinfo/Pacific/Gambier	i386
+usr/share/lib/zoneinfo/Pacific/Guadalcanal	i386
+usr/share/lib/zoneinfo/Pacific/Guam	i386
+usr/share/lib/zoneinfo/Pacific/Honolulu	i386
+usr/share/lib/zoneinfo/Pacific/Johnston	i386
+usr/share/lib/zoneinfo/Pacific/Kiritimati	i386
+usr/share/lib/zoneinfo/Pacific/Kosrae	i386
+usr/share/lib/zoneinfo/Pacific/Kwajalein	i386
+usr/share/lib/zoneinfo/Pacific/Majuro	i386
+usr/share/lib/zoneinfo/Pacific/Marquesas	i386
+usr/share/lib/zoneinfo/Pacific/Midway	i386
+usr/share/lib/zoneinfo/Pacific/Nauru	i386
+usr/share/lib/zoneinfo/Pacific/Niue	i386
+usr/share/lib/zoneinfo/Pacific/Norfolk	i386
+usr/share/lib/zoneinfo/Pacific/Noumea	i386
+usr/share/lib/zoneinfo/Pacific/Pago_Pago	i386
+usr/share/lib/zoneinfo/Pacific/Palau	i386
+usr/share/lib/zoneinfo/Pacific/Pitcairn	i386
+usr/share/lib/zoneinfo/Pacific/Ponape	i386
+usr/share/lib/zoneinfo/Pacific/Port_Moresby	i386
+usr/share/lib/zoneinfo/Pacific/Rarotonga	i386
+usr/share/lib/zoneinfo/Pacific/Saipan	i386
+usr/share/lib/zoneinfo/Pacific/Samoa	i386
+usr/share/lib/zoneinfo/Pacific/Tahiti	i386
+usr/share/lib/zoneinfo/Pacific/Tarawa	i386
+usr/share/lib/zoneinfo/Pacific/Tongatapu	i386
+usr/share/lib/zoneinfo/Pacific/Truk	i386
+usr/share/lib/zoneinfo/Pacific/Wake	i386
+usr/share/lib/zoneinfo/Pacific/Wallis	i386
+usr/share/lib/zoneinfo/Pacific/Yap	i386
+usr/share/lib/zoneinfo/SystemV	i386
+usr/share/lib/zoneinfo/SystemV/AST4	i386
+usr/share/lib/zoneinfo/SystemV/AST4ADT	i386
+usr/share/lib/zoneinfo/SystemV/CST6	i386
+usr/share/lib/zoneinfo/SystemV/CST6CDT	i386
+usr/share/lib/zoneinfo/SystemV/EST5	i386
+usr/share/lib/zoneinfo/SystemV/EST5EDT	i386
+usr/share/lib/zoneinfo/SystemV/HST10	i386
+usr/share/lib/zoneinfo/SystemV/MST7	i386
+usr/share/lib/zoneinfo/SystemV/MST7MDT	i386
+usr/share/lib/zoneinfo/SystemV/PST8	i386
+usr/share/lib/zoneinfo/SystemV/PST8PDT	i386
+usr/share/lib/zoneinfo/SystemV/YST9	i386
+usr/share/lib/zoneinfo/SystemV/YST9YDT	i386
+usr/share/lib/zoneinfo/US/Indiana-Starke	i386
+#
+# Timezone files packaged in on28, but added to this file to avoid ref_cnt
+# build errors (due to only some of the links being installed).  
+#
+usr/share/lib/zoneinfo/ROC	i386
+usr/share/lib/zoneinfo/UTC	i386
+usr/share/lib/zoneinfo/Universal	i386
+usr/share/lib/zoneinfo/Zulu	i386
+usr/share/lib/zoneinfo/Australia/ACT	i386
+usr/share/lib/zoneinfo/Australia/NSW	i386
+usr/share/lib/zoneinfo/Iran	i386
+usr/share/lib/zoneinfo/Cuba	i386
+usr/share/lib/zoneinfo/UCT	i386
+usr/share/lib/zoneinfo/MST	i386
+usr/share/lib/zoneinfo/US/Arizona	i386
+usr/share/lib/zoneinfo/Eire	i386
+usr/share/lib/zoneinfo/GB	i386
+usr/share/lib/zoneinfo/GB-Eire	i386
+usr/share/lib/zoneinfo/Portugal	i386
+usr/share/lib/zoneinfo/Etc/GMT	i386
+usr/share/lib/zoneinfo/GMT	i386
+usr/share/lib/zoneinfo/Etc/GMT-0	i386
+usr/share/lib/zoneinfo/Etc/GMT+0	i386
+usr/share/lib/zoneinfo/GMT-0	i386
+usr/share/lib/zoneinfo/GMT+0	i386
+usr/share/lib/zoneinfo/Greenwich	i386
+usr/share/lib/zoneinfo/PST8PDT	i386
+usr/share/lib/zoneinfo/US/Pacific	i386
+usr/share/lib/zoneinfo/US/Pacific-New	i386
+usr/share/lib/zoneinfo/CST6CDT	i386
+usr/share/lib/zoneinfo/US/Central	i386
+usr/share/lib/zoneinfo/Iceland	i386
+usr/share/lib/zoneinfo/Singapore	i386
+usr/share/lib/zoneinfo/US/Aleutian	i386
+usr/share/lib/zoneinfo/Australia/LHI	i386
+usr/share/lib/zoneinfo/Brazil/East	i386
+usr/share/lib/zoneinfo/EST	i386
+usr/share/lib/zoneinfo/US/East-Indiana	i386
+usr/share/lib/zoneinfo/Canada/Atlantic	i386
+usr/share/lib/zoneinfo/Kwajalein	i386
+usr/share/lib/zoneinfo/Mideast/Riyadh87	i386
+usr/share/lib/zoneinfo/Australia/North	i386
+usr/share/lib/zoneinfo/Poland	i386
+usr/share/lib/zoneinfo/Mexico/BajaSur	i386
+usr/share/lib/zoneinfo/Hongkong	i386
+usr/share/lib/zoneinfo/Brazil/West	i386
+usr/share/lib/zoneinfo/Canada/Central	i386
+usr/share/lib/zoneinfo/Canada/Yukon	i386
+usr/share/lib/zoneinfo/US/Eastern	i386
+usr/share/lib/zoneinfo/Canada/Newfoundland	i386
+usr/share/lib/zoneinfo/Mexico/BajaNorte	i386
+usr/share/lib/zoneinfo/Canada/Mountain	i386
+usr/share/lib/zoneinfo/Canada/East-Saskatchewan	i386
+usr/share/lib/zoneinfo/ROK	i386
+usr/share/lib/zoneinfo/Turkey	i386
+usr/share/lib/zoneinfo/Israel	i386
+usr/share/lib/zoneinfo/Australia/West	i386
+usr/share/lib/zoneinfo/MST7MDT	i386
+usr/share/lib/zoneinfo/Navajo	i386
+usr/share/lib/zoneinfo/US/Mountain	i386
+usr/share/lib/zoneinfo/EST5EDT	i386
+usr/share/lib/zoneinfo/US/Eastern	i386
+usr/share/lib/zoneinfo/W-SU	i386
+usr/share/lib/zoneinfo/US/Samoa	i386
+usr/share/lib/zoneinfo/NZ	i386
+usr/share/lib/zoneinfo/HST	i386
+usr/share/lib/zoneinfo/US/Hawaii	i386
+usr/share/lib/zoneinfo/Mideast/Riyadh88	i386
+usr/share/lib/zoneinfo/US/Alaska	i386
+usr/share/lib/zoneinfo/Brazil/DeNoronha	i386
+usr/share/lib/zoneinfo/Australia/Queensland	i386
+usr/share/lib/zoneinfo/Australia/Tasmania	i386
+usr/share/lib/zoneinfo/Australia/Victoria	i386
+usr/share/lib/zoneinfo/Mexico/General	i386
+usr/share/lib/zoneinfo/US/Michigan	i386
+usr/share/lib/zoneinfo/Jamaica	i386
+usr/share/lib/zoneinfo/PRC	i386
+usr/share/lib/zoneinfo/Chile/EasterIsland	i386
+usr/share/lib/zoneinfo/Canada/Pacific	i386
+usr/share/lib/zoneinfo/Mideast/Riyadh89	i386
+usr/share/lib/zoneinfo/Canada/Eastern	i386
+usr/share/lib/zoneinfo/Brazil/Acre	i386
+usr/share/lib/zoneinfo/Chile/Continental	i386
+usr/share/lib/zoneinfo/Australia/South	i386
+usr/share/lib/zoneinfo/Libya	i386
+usr/share/lib/zoneinfo/Egypt	i386
+usr/share/lib/zoneinfo/Japan	i386
+usr/share/lib/zoneinfo/NZ-CHAT	i386
+#
+# Part of the implementation of libthread, there is no reason for synch32.h 
+# to be part of a package that the customer should ever see.  The file
+# is installed to a proto area by the uts build because various libraries
+# are dependent upon its contents, and should not have their own copies.
+#
+usr/include/sys/synch32.h	i386
+#
+# These files are installed in the proto area by the build of libproc for
+# the benefit of the builds of cmd/truss, cmd/gcore and cmd/ptools, which
+# use libproc as their common process-control library.  These are not
+# interfaces for customer use, so the files are excluded from packaging.
+#
+usr/include/libproc.h		i386
+usr/lib/llib-lproc		i386
+usr/lib/llib-lproc.ln		i386
+#
+# These files are installed in the proto area by the build of libdhcpagent
+# and libdhcputil for the benefit of DHCP-related networking commands such
+# as dhcpagent, dhcpinfo, ifconfig, and netstat.  These are not interfaces
+# for customer use, so the files are excluded from packaging.
+#
+usr/include/dhcp_hostconf.h	i386
+usr/include/dhcp_inittab.h	i386
+usr/include/dhcpagent_ipc.h	i386
+usr/include/dhcpagent_util.h	i386
+usr/include/dhcpmsg.h		i386
+usr/lib/libdhcpagent.a		i386
+usr/lib/libdhcputil.a		i386
+usr/lib/llib-ldhcpagent		i386
+usr/lib/llib-ldhcpagent.ln	i386
+usr/lib/llib-ldhcputil		i386
+usr/lib/llib-ldhcputil.ln	i386
+#
+#
+# The header file is installed in the proto area so dumpadm can include it
+# during the build process. It is also used by /dev/dump and kernel crash
+# subroutines.
+#
+usr/include/sys/dumpadm.h	i386
+#
+# The header file is installed in the proto area so consadm can include
+# it during the build process.  We don't want to export the ioctl interfaces
+# to the user at this time.
+#
+usr/include/sys/sysmsg_impl.h	i386
+# ON build tools. Built in usr/src/tools, and there is a package, but
+# not in the normal place since it's internal-only
+#
+opt/onbld			i386
+opt/onbld/bin			i386
+opt/onbld/bin/Install		i386
+opt/onbld/bin/bfu		i386
+opt/onbld/bin/bldenv		i386
+opt/onbld/bin/build_cscope	i386
+opt/onbld/bin/check_rpaths	i386
+opt/onbld/bin/checkproto	i386
+opt/onbld/bin/cstyle		i386
+opt/onbld/bin/elfcmp		i386
+opt/onbld/bin/fastfs		i386
+opt/onbld/bin/hdrchk		i386
+opt/onbld/bin/jstyle		i386
+opt/onbld/bin/keywords		i386
+opt/onbld/bin/makebfu		i386
+opt/onbld/bin/mkbfu		i386
+opt/onbld/bin/nightly		i386
+opt/onbld/bin/protocmp.terse	i386
+opt/onbld/bin/sccscp		i386
+opt/onbld/bin/sccshist		i386
+opt/onbld/bin/sccsmv		i386
+opt/onbld/bin/sccsrm		i386
+opt/onbld/bin/ws		i386
+opt/onbld/bin/wx		i386
+opt/onbld/bin/i386		i386
+opt/onbld/bin/i386/bfuld	i386
+opt/onbld/bin/i386/codereview	i386
+opt/onbld/bin/i386/cscope-fast	i386
+opt/onbld/bin/i386/fastfs	i386
+opt/onbld/bin/i386/install	i386
+opt/onbld/bin/i386/install.bin	i386
+opt/onbld/bin/i386/pmodes	i386
+opt/onbld/bin/i386/protocmp	i386
+opt/onbld/bin/i386/protolist	i386
+opt/onbld/env			i386
+opt/onbld/env/developer		i386
+opt/onbld/env/gatekeeper	i386
+opt/onbld/gk			i386
+opt/onbld/gk/.cshrc		i386
+opt/onbld/gk/.login		i386
+opt/onbld/gk/.make.machines	i386
+opt/onbld/man			i386
+opt/onbld/man/man1		i386
+opt/onbld/man/man1/Install.1	i386
+opt/onbld/man/man1/codereview.1	i386
+opt/onbld/man/man1/nightly.1	i386
+opt/onbld/man/man1/sccscp.1	i386
+opt/onbld/man/man1/sccsmv.1	i386
+opt/onbld/man/man1/sccsrm.1	i386
+opt/onbld/man/man1/ws.1		i386
+#
+# Exception list for AMI project
+#
+usr/lib/libami.so.1		i386
+usr/lib/llib-lami.ln		i386
+usr/share/lib/ami/ami.jar	i386
+#
+# non-public pci header
+#
+usr/include/sys/pci_impl.h      i386
+#
+# Exception list for RCM project, included by librcm and rcm_daemon
+#
+usr/include/librcm_impl.h	i386
+usr/include/librcm_event.h	i386
+#
+# MDB deliverables that are not yet public
+#
+usr/lib/mdb/proc/mdb_test.so	i386
+#
+# SNCA project exception list
+#
+usr/include/inet/nca			i386
+usr/include/inet/nca/bean.h		i386
+usr/include/inet/nca/nca.h		i386
+usr/include/inet/nca/ncadoorhdr.h	i386
+usr/include/inet/nca/ncakmem.h		i386
+usr/include/inet/nca/ncalogd.h		i386
+usr/include/inet/nca/ncandd.h		i386
+usr/include/inet/nca/osvers.h		i386
+#
+# SUNWstatl contents (package removed in source product)
+#
+usr/lib/libdl_stubs.a			i386
+usr/lib/libnss_compat.a			i386
+usr/lib/libnss_dns.a			i386
+usr/lib/libnss_files.a			i386
+usr/lib/libnss_nis.a			i386
+usr/lib/libnss_nisplus.a		i386
+usr/lib/libresolv.a			i386
+usr/lib/libstraddr.a			i386
+usr/lib/libdevinfo.a			i386
+usr/include/device_info.h		i386
+# other contents (packages removed in source product)
+usr/lib/gss/do/mech_krb5.so.1		i386
+usr/lib/libcrypt_d.a			i386
+usr/lib/gss/do				i386
+usr/bin/des				i386
+kernel/strmod/encr3des			i386
+kernel/strmod/encrdes			i386
+usr/include/security/ami.h		i386
+kernel/misc/kgss/do_kmech_krb5		i386
+usr/lib/gss/do/mech_krb5.so		i386
+usr/lib/libcrypt_d.so			i386
+usr/lib/libcrypt_d.so.1			i386
+usr/include/des/desdata.h		i386

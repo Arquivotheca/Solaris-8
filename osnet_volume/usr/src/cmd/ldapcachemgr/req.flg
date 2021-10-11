@@ -1,0 +1,9 @@
+#!/bin/sh
+#
+#pragma ident	"@(#)req.flg	1.1	99/07/07 SMI"
+#
+
+
+echo_file usr/src/lib/libsldap/common/ns_sldap.h
+echo_file usr/src/lib/libsldap/common/ns_internal.h
+echo_file usr/src/lib/libsldap/common/ns_cache_door.h

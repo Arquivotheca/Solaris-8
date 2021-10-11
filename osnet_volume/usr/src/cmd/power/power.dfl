@@ -1,0 +1,33 @@
+# Copyright (c) 1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#pragma ident	"@(#)power.dfl	1.2	99/10/20 SMI"
+#
+# This file contains tunable parameters for Power Management (PM) and
+# Checkpoint-Resume (CPR). See power.conf(4), pmconfig(1M), pm(7D),
+# and cpr(7) for details.
+#
+#
+# 
+# PMCHANGEPERM and CPRCHANGEPERM variables control changing of PM
+# and CPR configurations respectively. Possible values are:
+# 
+# 	all                   any user can change the configuration.
+#
+# 	-                     nobody  except  super-user can change
+#                             the configuration.
+#
+# 	<user1, user2, . . .> a user in this user list or super-user
+#                             can change the configuration. The list of 
+#                             user is a space and/or comma (,) seperated
+#                             list. It is required to enclose the list
+#                             in < and > characters.
+#
+# 	console-owner         a user who owns the system console device
+#                             node or super-user can change the configuration.
+# 
+# The default values are PMCHANGEPERM=console-owner and CPRCHANGEPERM=
+# console-owner.
+# 
+PMCHANGEPERM=console-owner
+CPRCHANGEPERM=console-owner

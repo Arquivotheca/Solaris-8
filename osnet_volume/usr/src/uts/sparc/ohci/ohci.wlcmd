@@ -1,0 +1,72 @@
+# Copyright (c) 1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+
+#pragma ident	"@(#)ohci.wlcmd	1.6	99/09/24 SMI"
+
+one openhci_state
+one usb_device
+
+### specify the root functions 
+
+### hcdi entry points
+root ohci_hcdi_client_init
+root ohci_hcdi_client_free 
+root ohci_hcdi_pipe_open 
+root ohci_hcdi_pipe_close 
+root ohci_hcdi_pipe_start_polling 
+root ohci_hcdi_pipe_stop_polling 
+root ohci_hcdi_pipe_device_ctrl_receive 
+root ohci_hcdi_pipe_device_ctrl_send 
+root ohci_hcdi_pipe_set_policy 
+root ohci_hcdi_pipe_get_policy 
+root ohci_hcdi_pipe_abort 
+root ohci_hcdi_pipe_reset 
+root ohci_hcdi_pipe_receive_bulk_data 
+root ohci_hcdi_bulk_transfer_size
+root ohci_hcdi_pipe_send_bulk_data 
+root ohci_hcdi_pipe_send_isoc_data 
+root ohci_intr
+
+
+root hubdi.c:hubd_hotplug_thread
+root hubdi.c:hubd_exception_callback
+root hubdi.c:hubd_intr_pipe_reset_callback
+root hubdi.c:hubd_read_callback
+root hubdi.c:hubd_dump
+root hcdi.c:usba_hcdi_dump
+root hcdi.c:usba_hcdi_dump_cb_list
+
+
+### POLLED entry points
+root   ohci_hcdi_polled_input_init
+root   ohci_hcdi_polled_input_fini
+root   ohci_hcdi_polled_input_enter
+root   ohci_hcdi_polled_input_exit
+root   ohci_hcdi_polled_read
+ 
+### currently unused functions
+ 
+root ohci_print_ed
+root ohci_print_td
+root ohci_dump
+root ohci_dump_state
+root ohci_dump_ed_list
+root ohci_dump_hcca_list
+root ohci_dump_td_list
+root usba_dump_usb_pipe_handle
+root usba_dump_usb_pipe_policy
+root usba_dump_usb_device
+
+assert order openhci_state::ohci_int_mutex \
+		usb_pipe_handle_impl::p_mutex usb_device::usb_mutex
+
+add ohci_trans_wrapper::tw_handle_td targets ohci_handle_bulk_td
+add ohci_trans_wrapper::tw_handle_td targets ohci_handle_intr_td
+add ohci_trans_wrapper::tw_handle_td targets ohci_handle_ctrl_td
+add ohci_trans_wrapper::tw_handle_td targets ohci_handle_isoc_td
+
+add usba_hcdi_soft_intr/cb targets hubd_read_callback
+add usba_hcdi_soft_intr/exc_cb targets hubd_exception_callback
+add usba_hcdi_soft_intr/cb targets hubd_intr_pipe_reset_callback
+add usba_hcdi_callback/exc_cb targets hubd_exception_callback

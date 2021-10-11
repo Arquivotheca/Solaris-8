@@ -1,0 +1,13 @@
+This directory contains sources to build libldap.so.4.  Please note that
+libldap.so.3 (older version of libldap) relies on sources stored in this
+directory to build the old version (.3).
+
+If you are modifying libldap, you ***MUST*** ensure your modifications do
+not cause any compatibility issues with libldap.so.3 version.  If that is
+the case, you MUST copy unmodified files into usr/src/lib/libldap3 area
+before modifying them in this directory.
+
+For example if you are modifying common/bind.c in an incompatible way (I
+have no idea why one would do this), you need to make a local copy of bind.c
+in usr/src/lib/libldap3/common first.  This would ensure libldap.so.3
+remains compatible.

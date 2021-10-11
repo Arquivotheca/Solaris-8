@@ -1,0 +1,14 @@
+#!/bin/sh
+#
+# pragma ident	"@(#)inc.flg	1.1	96/03/04 SMI"
+#
+# Copyright (c) 1996 by Sun Microsystems, Inc.
+#
+ 
+echo_file usr/src/lib/Makefile.lib
+echo_file usr/src/lib/Makefile.targ
+
+echo_file usr/src/lib/common/mapfile-filter
+
+echo_file usr/src/cmd/sgs/Makefile.sub
+echo_file usr/src/cmd/sgs/Makefile.com

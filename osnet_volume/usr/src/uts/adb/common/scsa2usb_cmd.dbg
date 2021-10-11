@@ -1,0 +1,42 @@
+\
+\ Copyright (c) 1999 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)scsa2usb_cmd.dbg	1.1	99/10/07 SMI"
+
+#include <sys/usb/usba.h>
+#include <sys/usb/usba/usba_types.h>
+#include <sys/usb/usba/usba_impl.h>
+
+#include <sys/scsi/scsi.h>
+#include <sys/callb.h>
+#include <sys/usb/scsa2usb/scsa2usb.h>
+#include "dummy.h"
+
+\
+\
+
+scsa2usb_cmd	cmd_
+{adb_inline_begin}
+.>z
+<z+{OFFSET, cmd_pkt}=""
+{adb_inline_end}
+	pkt			hex
+	xfercount		hex
+	dir			hex
+	cdb			hex
+	actual_len		hex
+	cdblen			hex
+	scblen			hex
+	tag			hex
+	bp			hex
+	timeout			hex
+	scb			hex
+	total_xfercount		hex
+	offset			hex
+	lba			hex
+	done			hex
+	cb			hex
+{adb_inline_begin}
+<z+{SIZEOF}=""
+{adb_inline_end}

@@ -1,0 +1,12 @@
+#!/bin/sh
+#
+# Copyright (c) 1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#pragma ident	"@(#)req.flg	1.2	99/01/27 SMI"
+
+echo_file usr/src/lib/libcurses/screen/curses_inc.h
+echo_file usr/src/lib/libcurses/screen/compiler.h
+echo_file usr/src/lib/libcurses/screen/curshdr.h
+echo_file usr/src/lib/libcurses/screen/curses_wchar.h
+echo_file usr/src/lib/libcurses/screen/object.h

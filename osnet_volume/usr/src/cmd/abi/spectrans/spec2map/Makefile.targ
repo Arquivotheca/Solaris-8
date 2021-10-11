@@ -1,0 +1,18 @@
+#
+#ident	"@(#)Makefile.targ	1.1	99/01/25 SMI"
+#
+# Copyright (c) 1997-1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+# cmd/abi/spectrans/spec2map/Makefile.targ
+
+.KEEP_STATE:
+
+PROG	=	spec2map
+
+OBJECTS	=	xlator.o	\
+		versions.o	\
+		bucket.o	\
+		util.o
+
+include ../../Makefile.cmd

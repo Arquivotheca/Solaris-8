@@ -1,0 +1,15 @@
+/* LINTLIBRARY */
+
+#include	<dbm.h>
+#include	<sys/stat.h>
+#include	<sys/types.h>
+
+/* dbm.c */
+int dbminit(file) char *file; { static int x; return(x); }
+int dbmflush() { static int x; return(x); }
+int dbmclose() { static int x; return(x); }
+datum fetch(key) datum key; { static datum x; return(x); }
+int delete(key) datum key; { static int x; return(x); }
+int store(key, content) datum key; datum content; { static int x; return(x); }
+datum firstkey() { static datum x; return(x); }
+datum nextkey(key) datum key; { static datum x; return(x); }

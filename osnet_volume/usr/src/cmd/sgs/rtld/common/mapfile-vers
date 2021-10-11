@@ -1,0 +1,92 @@
+#
+#pragma ident	"@(#)mapfile-vers	1.34	99/10/07 SMI"
+#
+# Copyright (c) 1998-1999 by Sun Microsystems, Inc.
+# All rights reserved.
+
+
+# Generic interface definition for usr/src/cmd/sgs/rtld.
+#
+# For information regarding the establishment of versioned definitions see:
+#	The Linker and Libraries Manual (version 2.5 or greater)
+# This is part of the Developers Guide in the Answerbook.  Specifically refer
+# to Chapter 2 under section "Defining Additional Symbols" through section
+# "Reducing Symbol Scope", and Chapter 5 "Versioning".
+#
+# For specific OSNET rules for the modification (evolution) of these version
+# definitions see:
+#	Policy for Shared Library Version Names and Interface Definitions
+#
+# All symbols in ld.so.1 are private as no-one should bind to these dirrectly.
+
+SUNWprivate_1.1 {
+	global:
+		_dladdr;		# Standard dlopen(3x) family	
+		 dladdr;
+		_dldump;
+		 dldump;
+		_dlclose;
+		 dlclose;
+		_dlerror;
+		 dlerror;
+		_dlinfo;
+		 dlinfo;
+		_dlopen;
+		 dlopen;
+		_dlmopen;
+		 dlmopen;
+		_dlsym;
+		 dlsym;
+
+		_ld_concurrency;	# Provides libthread initialization
+		_ld_libc;		# provides libc initialization
+
+		_elf_rtbndr;		# dbx expects to find these
+		 elf_rtbndr;
+		_rt_boot;		# Provides basic adb symbol offsets
+
+		 rtld_db_dlactivity;	# Required to support librtld_db
+		 rtld_db_preinit;
+		 rtld_db_priv;
+		 rtld_db_postinit;
+		 r_debug;
+
+		 do_reloc;		# Required to support librtld.so
+		 elf_plt_write;
+		 is_so_loaded;
+		 lml_main;
+		 lookup_sym;
+		 reloc_table;
+
+		 dbg_mask;		# Required to support liblddbg.so 
+		 dbg_print;
+		 eprintf;		# Error message printing
+
+		_dgettext;		# Messaging support
+		 strerror;
+
+		 calloc;		# Memory management (mapmalloc).
+		 malloc;
+		 realloc;
+		 free;
+
+		_environ;		# PLT tracing getenv() support.
+		 environ;
+		 bind_guard;		# needed for ldprof.so.1 
+
+		 exit;			# Some routines are useful for support
+		_open;			# libraries such as liblddbg (this
+memcpy;
+		 sprintf;		# reduces the cost of debugging as the
+		 strcat;		# library doesn't have its own
+		 strcmp;		# dependency on libc).
+		 strcpy;		# Note that some of these functions
+		 strlen;		# (like sprintf) may have reduced
+		 strrchr;		# functionality over libc, as a simpler
+		 strtok;		# implementation is provided in ld.so.1.
+		_write;
+	      ___errno;
+		 qsort;
+	local:
+		*;
+};

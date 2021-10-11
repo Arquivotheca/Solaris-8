@@ -1,0 +1,27 @@
+\
+\ Copyright (c) 1999 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)usb_pipe_policy.dbg	1.3	99/10/07 SMI"
+
+#include <sys/usb/usba.h>
+#include <sys/usb/usba/usba_types.h>
+#include <sys/usb/usba/usba_impl.h>
+#include "dummy.h"
+
+\
+\
+usb_pipe_policy		pp_
+{adb_inline_begin}
+.>z
+<z+{OFFSET, pp_version}=""
+{adb_inline_end}
+	version			hex
+	timeout_value		hex	timeout-value
+	periodic_max_transfer_size hex xfer-size
+	callback_arg		hex	cb-arg
+	callback		hex	cb
+	exception_callback	hex	exc-cb
+{adb_inline_begin}
+<z+{SIZEOF}=""
+{adb_inline_end}

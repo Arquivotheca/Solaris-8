@@ -1,0 +1,31 @@
+#
+# uts/sun4u/darwin/Makefile.rules
+# Copyright (c) 1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#ident	"@(#)Makefile.rules 1.1     99/07/09 SMI"
+#
+#	This Makefile defines the build rules for the directory
+#	uts/sun4u/darwin.
+#
+
+#
+#	C object build rules
+#
+#	The following are alphabetized by source file path. Please maintain
+# this ordering.
+#
+#
+
+$(OBJS_DIR)/darwin.o:		$(UTSBASE)/sun4u/darwin/os/darwin.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun4u/darwin/os/darwin.c
+
+#
+#	Lint `object' build rules
+#
+#	The following are alphabetized by source file path. Please maintain
+# this ordering.
+#
+
+$(LINTS_DIR)/darwin.ln:	$(UTSBASE)/sun4u/darwin/os/darwin.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun4u/darwin/os/darwin.c $(LTAIL))

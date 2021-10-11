@@ -1,0 +1,5 @@
+* ident "@(#)system.add	1.14	96/02/08 - Solaris Corvette Driver"
+* Copyright 1995 Sun Microsystems, Inc.
+* All Rights Reserved.
+*
+exclude: mcis

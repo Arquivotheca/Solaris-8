@@ -1,0 +1,36 @@
+\
+\ Copyright (c) 1999 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)pm_request.dbg        1.1     99/10/22 SMI"
+
+#include <sys/usb/usba.h>
+#include <sys/usb/usba/usba_types.h>
+#include <sys/usb/usba/usba_impl.h>
+
+#include <sys/stropts.h>
+
+#include "dummy.h"
+
+\
+\
+
+pm_request
+{adb_inline_begin}
+.>z
+<z+{OFFSET, dip}=""
+{adb_inline_end}
+	dip		hex
+	comp		hex
+	old_level	hex
+	level		hex
+	cb		symbolic
+	arg		hex
+	flags		hex
+{adb_inline_begin}
+<z+{SIZEOF}=""
+{adb_inline_end}
+
+\
+\
+

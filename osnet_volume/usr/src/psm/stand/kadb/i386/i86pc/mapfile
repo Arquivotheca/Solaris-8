@@ -1,0 +1,11 @@
+#ident "@(#)mapfile	1.1	93/02/04 SMI"
+ 
+text    = LOAD ?RX V0xff800000;
+text    : $PROGBITS ?A!W;
+ 
+data    = LOAD ?RWX;
+data    : $PROGBITS ?AW;
+data    : $NOBITS ?AW;
+ 
+note    = NOTE;
+note    : $NOTE;

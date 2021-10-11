@@ -1,0 +1,196 @@
+/*
+ * Copyright (c) 1999 by Sun Microsystems, Inc.
+ * All rights reserved.
+ */
+
+#pragma ident "@(#)llib-lami	1.5 99/07/23 SMI"
+
+/* LINTLIBRARY */
+/* PROTOLIB1 */
+ 
+#include <security/ami.h>
+
+/* Init and Terminate a AMI session */
+AMI_STATUS ami_init(const char *appName,
+    const char *backend,
+    const char *keypkg_id,
+    const char *host_name,
+    uint_t flags,
+    uint_t crypto_define,
+    const char *ldd,
+    ami_handle_t *amih);
+
+AMI_STATUS ami_end(ami_handle_t);
+
+char *ami_strerror(
+	ami_handle_t,
+	const AMI_STATUS);
+
+/* Key generation */
+AMI_STATUS ami_gen_symmetric_key(
+    const ami_handle_t,		/* IN: AMI handle */
+    ami_mechanism,		/* IN: Secret key type */
+    uint_t,			/* IN: key length */
+    uint_t,			/* IN: effective key size */
+    ami_session_key_t *,	/* OUT: session key */
+    ami_session_key_params_t *);/* OUT: parameters */
+
+/* crypto */
+AMI_STATUS ami_digest(
+	ami_handle_t,			/* IN:	ami handle */
+	const uchar_t *,		/* IN:  input data  */
+	const size_t,			/* IN:  length of data in bytes */
+	const int,			/* IN:  more input data flag */
+	const ami_mechanism,		/* IN:  digest algorithm */
+	uchar_t **,			/* OUT: digest */
+	size_t *);			/* OUT: length of digest */
+
+AMI_STATUS ami_sign(
+	ami_handle_t,			/* IN:	ami handle */
+	const uchar_t *,		/* IN:  data to be signed */
+	size_t,				/* IN:  data length */
+	int,				/* IN:  more input data flag */
+	ami_mechanism,			/* IN:  signature key algorithm */
+	const ami_private_key_t,	/* IN:  signature key */
+	ami_mechanism,			/* IN:  signature algorithm */
+	uchar_t **, 			/* OUT: signature */
+	size_t *);			/* OUT: signature length */
+
+AMI_STATUS ami_verify(
+	ami_handle_t,			/* IN: ami handle */
+	const uchar_t *, 		/* IN: data to be verified */
+	size_t,				/* IN: data length */
+	int,				/* IN: more input data flag */
+	ami_mechanism,			/* IN: verification key algorithm */
+	const ami_public_key_t,		/* IN: verification key */
+	ami_mechanism,			/* IN: verification algorithm */
+	const uchar_t *, 		/* IN: signature */
+	size_t);			/* IN: signature length */
+
+AMI_STATUS ami_encrypt(
+	ami_handle_t,			/* IN:	ami handle */
+	const uchar_t *,		/* IN:  input data */
+	size_t,				/* IN:  input data length */
+	int,				/* IN:	more input data flag */
+	ami_mechanism,			/* IN:  encryption key algorithm */
+	const ami_session_key_t,	/* IN:  encryption key */
+	const ami_session_key_params_t,	/* IN:  encryption key length */
+	uchar_t **,			/* OUT: ciphertext */
+	size_t *);			/* OUT: ciphertext length */
+
+AMI_STATUS ami_decrypt(
+	ami_handle_t,			/* IN:	ami handle */
+	const uchar_t *,		/* IN:  ciphertext */
+	size_t,				/* IN:  ciphertext length */
+	int,				/* IN:  more input data flag */
+	ami_mechanism,			/* IN:  decryption key algorithm */
+	const ami_session_key_t,	/* IN:  decryption key */
+	const ami_session_key_params_t,	/* IN:  decryption key length */
+	uchar_t **,			/* OUT: cleartext */
+	size_t *);			/* OUT: cleartext length */
+
+AMI_STATUS ami_wrap_key(
+	const ami_handle_t,		/* IN:  ami handle */
+	const ami_session_key_t,	/* IN:	key to be wrapped  */
+	ami_mechanism,			/* IN:	wrapping key algorithm */
+	const ami_public_key_t,		/* IN:	wrapping key */
+	ami_mechanism,			/* IN:	wrapping algorithm */
+	uchar_t **,			/* OUT: wrapped key */
+	size_t *);			/* IN/OUT: wrapped key length */
+
+AMI_STATUS ami_unwrap_key(
+	const ami_handle_t,		/* IN:  ami handle */
+	const uchar_t *,		/* IN:  wrapped key */
+	size_t,				/* IN:  wrapped key length */
+	ami_mechanism,			/* IN:  unwrapping key algorithm */
+	const ami_private_key_t,	/* IN:  unwrapping key */
+	ami_mechanism,			/* IN:  unwrapping algorithm */
+	ami_session_key_t *);		/* OUT: unwrapped key */
+
+/* certificate verification */
+AMI_STATUS ami_verify_cert(
+	const ami_handle_t,		/* IN: ami handle */
+	const ami_cert_t, 		/* IN: certificate to be verified */
+	const ami_public_key_t);	/* IN: public verification key */
+
+/* certificate chain establishment */
+AMI_STATUS ami_get_cert_chain(
+	const ami_handle_t,	/* IN: ami handle */
+	const ami_cert_t,	/* IN: user certificate */
+	const char **,		/* IN: CA name list */
+	ami_cert_list_t *);	/* OUT: certificate chain */
+
+/* I/O */
+AMI_STATUS ami_get_private_key(
+	const ami_handle_t,	/* IN:	ami handle */
+	ami_private_key_t *);	/* OUT: keypkg */
+
+AMI_STATUS ami_get_cert(
+	const ami_handle_t,	/* IN:	ami handle */
+	const char *,		/* IN:  certificate filename, rep index, DN */
+	ami_cert_list_t *);	/* OUT: set of certificates */
+
+AMI_STATUS ami_get_trusted_cert_list(
+	const ami_handle_t,	/* IN:	ami handle */
+	ami_cert_list_t *);	/* OUT: set of trusted certificates */
+
+/* generate random bytes */
+AMI_STATUS ami_random(
+	const ushort_t,		/* IN:  requested number of random bytes */
+	uchar_t **);		/* OUT: random byte buffer */
+
+AMI_STATUS ami_get_cert_first(
+    ami_handle_t amih,		/* AMI Handle */
+    ami_cert_list_t certlist,	/* Certificate list object */
+    ami_cert_t *cert		/* OUT: first certificate */
+);
+
+AMI_STATUS ami_get_cert_next(
+    ami_handle_t amih,		/* AMI Handle */
+    ami_cert_list_t certlist,	/* Certificate list object */
+    ami_cert_t *cert		/* OUT: next certificate */
+);
+
+/* Get public key mechanism */
+ami_mechanism ami_get_public_key_mechanism(
+    ami_public_key_t publicKey);
+
+/* function to obtain the key mechanism */
+ami_mechanism ami_get_private_key_mechanism(
+    ami_private_key_t privateKey);
+
+/* Public key object */
+ami_public_key_t ami_get_public_key_from_cert(
+    ami_cert_t cert);
+
+/* Certificate valid from */
+struct tm *ami_get_cert_valid_from(
+    ami_cert_t cert);
+
+/* Certificate valid to */
+struct tm *ami_get_cert_valid_to(
+    ami_cert_t cert);
+
+/* Signature of the certificate */
+AMI_STATUS ami_get_cert_signature(ami_cert_t cert,
+    uchar_t **sign, size_t *signLen);
+
+/* Get subject name */
+char *ami_get_cert_subject(ami_cert_t cert);
+
+/* Get issuer name */
+char *ami_get_cert_issuer(ami_cert_t cert);
+
+/* Get the serial number of the certificate */
+AMI_STATUS ami_get_cert_serial_number(ami_cert_t cert,
+    uchar_t **serialNumber, size_t *length);
+
+/* Free */
+void ami_free_symmetric_key(ami_session_key_t);
+void ami_free_symmetric_key_params(ami_session_key_params_t);
+void ami_free_private_key(ami_private_key_t);
+void ami_free_public_key(ami_public_key_t);
+void ami_free_cert(ami_cert_t);
+void ami_free_cert_list(ami_cert_list_t);
+
+

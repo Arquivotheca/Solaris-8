@@ -1,0 +1,594 @@
+#
+# Copyright (c) 1994-1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#pragma ident	"@(#)Makefile.rules	1.83	99/10/03 SMI"
+#
+#	This Makefile defines the build rules for the directory uts/sun4u
+#	and it's children. These are the source files which sun4u
+#	"implementation architecture" dependent.
+#
+
+#
+#	This was implemented by pattern matching rules of the form:
+#
+# $(OBJS_DIR)/%.o:	 $(UTSBASE)/common/os/%.c
+#	$(COMPILE.c) -o $@ $<
+#
+# $(LINTS_DIR)/%.ln:	$(UTSBASE)/common/os/%.c
+#	@($(LHEAD) $(LINT.c) $< $(LTAIL))
+#
+#	For each directory containing source. This proved to slow under
+#	Nse because it caused a significant additional number of stats
+#	and stats are real slow under TFS. If TFS performance should
+#	improve, one might consider returning to the former implementation.
+#	In the former implementation, this file (Makefile.rules) was not
+#	needed and the pattern matching rules were in Makefile.files.
+#
+
+#
+#	C object build rules
+#
+#	The following are alphabetized by source file path. Please maintain
+# this ordering.
+#
+#
+
+$(OBJS_DIR)/sfmmu_asm.o:	$(UTSBASE)/sfmmu/ml/sfmmu_asm.s
+	$(COMPILE.s) -o $@ $(UTSBASE)/sfmmu/ml/sfmmu_asm.s
+
+$(OBJS_DIR)/hat_sfmmu.o:	$(UTSBASE)/sfmmu/vm/hat_sfmmu.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sfmmu/vm/hat_sfmmu.c
+
+$(OBJS_DIR)/bootdev.o:		$(UTSBASE)/sparc/os/bootdev.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sparc/os/bootdev.c
+ 
+$(OBJS_DIR)/obpsym.o:		$(UTSBASE)/sparc/os/obpsym.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sparc/os/obpsym.c
+ 
+$(OBJS_DIR)/obpsym_1275.o:	$(UTSBASE)/sparc/os/obpsym_1275.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sparc/os/obpsym_1275.c
+
+$(OBJS_DIR)/confunix.o:		$(UTSBASE)/sun4u/conf/confunix.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun4u/conf/confunix.c
+
+$(OBJS_DIR)/genalign.o:		$(UTSBASE)/sun4u/conf/genalign.s
+	$(COMPILE.s) -o $@ $(UTSBASE)/sun4u/conf/genalign.s
+
+$(OBJS_DIR)/common_asm.o:	$(UTSBASE)/sun4u/cpu/common_asm.s
+	$(COMPILE.s) -o $@ $(UTSBASE)/sun4u/cpu/common_asm.s
+
+$(OBJS_DIR)/cpu_module.o:	$(UTSBASE)/sun4u/cpu/cpu_module.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun4u/cpu/cpu_module.c
+
+$(OBJS_DIR)/spitfire.o:		$(UTSBASE)/sun4u/cpu/spitfire.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun4u/cpu/spitfire.c
+
+$(OBJS_DIR)/spitfire_asm.o:	$(UTSBASE)/sun4u/cpu/spitfire_asm.s
+	$(COMPILE.s) -o $@ $(UTSBASE)/sun4u/cpu/spitfire_asm.s
+
+$(OBJS_DIR)/cbe.o:		$(UTSBASE)/sun4u/io/cbe.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun4u/io/cbe.c
+
+$(OBJS_DIR)/consconfig.o:	$(UTSBASE)/sun4u/io/consconfig.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun4u/io/consconfig.c
+
+$(OBJS_DIR)/consconfig_dacf.o:	$(UTSBASE)/sun4u/io/consconfig_dacf.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun4u/io/consconfig_dacf.c
+
+$(OBJS_DIR)/consconfig_util.o:  $(UTSBASE)/sun4u/io/consconfig_util.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun4u/io/consconfig_util.c
+
+$(OBJS_DIR)/consplat.o:		$(UTSBASE)/sun4u/io/consplat.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun4u/io/consplat.c
+
+$(OBJS_DIR)/ebus.o:		$(UTSBASE)/sun4u/io/ebus.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun4u/io/ebus.c
+
+$(OBJS_DIR)/hardclk.o:		$(UTSBASE)/sun4u/io/hardclk.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun4u/io/hardclk.c
+
+$(OBJS_DIR)/iocache.o:		$(UTSBASE)/sun4u/io/iocache.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun4u/io/iocache.c
+
+$(OBJS_DIR)/iommu.o:		$(UTSBASE)/sun4u/io/iommu.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun4u/io/iommu.c
+
+$(OBJS_DIR)/ivintr.o:		$(UTSBASE)/sun4u/io/ivintr.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun4u/io/ivintr.c
+
+$(OBJS_DIR)/pci.o:		$(UTSBASE)/sun4u/io/pci/pci.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun4u/io/pci/pci.c
+
+$(OBJS_DIR)/pci_dma.o:		$(UTSBASE)/sun4u/io/pci/pci_dma.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun4u/io/pci/pci_dma.c
+
+$(OBJS_DIR)/pci_devctl.o:	$(UTSBASE)/sun4u/io/pci/pci_devctl.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun4u/io/pci/pci_devctl.c
+
+$(OBJS_DIR)/pci_fdvma.o:	$(UTSBASE)/sun4u/io/pci/pci_fdvma.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun4u/io/pci/pci_fdvma.c
+
+$(OBJS_DIR)/pci_iommu.o:	$(UTSBASE)/sun4u/io/pci/pci_iommu.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun4u/io/pci/pci_iommu.c
+
+$(OBJS_DIR)/pci_sc.o:		$(UTSBASE)/sun4u/io/pci/pci_sc.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun4u/io/pci/pci_sc.c
+
+$(OBJS_DIR)/pci_debug.o:	$(UTSBASE)/sun4u/io/pci/pci_debug.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun4u/io/pci/pci_debug.c
+
+$(OBJS_DIR)/pci_cb.o:		$(UTSBASE)/sun4u/io/pci/pci_cb.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun4u/io/pci/pci_cb.c
+
+$(OBJS_DIR)/pci_ib.o:		$(UTSBASE)/sun4u/io/pci/pci_ib.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun4u/io/pci/pci_ib.c
+
+$(OBJS_DIR)/pci_ecc.o:		$(UTSBASE)/sun4u/io/pci/pci_ecc.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun4u/io/pci/pci_ecc.c
+
+$(OBJS_DIR)/pci_pbm.o:		$(UTSBASE)/sun4u/io/pci/pci_pbm.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun4u/io/pci/pci_pbm.c
+
+$(OBJS_DIR)/pci_intr.o:		$(UTSBASE)/sun4u/io/pci/pci_intr.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun4u/io/pci/pci_intr.c
+
+$(OBJS_DIR)/pci_util.o:		$(UTSBASE)/sun4u/io/pci/pci_util.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun4u/io/pci/pci_util.c
+
+$(OBJS_DIR)/pci_space.o:	$(UTSBASE)/sun4u/io/pci/pci_space.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun4u/io/pci/pci_space.c
+
+$(OBJS_DIR)/pcipsy.o:		$(UTSBASE)/sun4u/io/pci/pcipsy.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun4u/io/pci/pcipsy.c
+
+$(OBJS_DIR)/simba.o:		$(UTSBASE)/sun4u/io/pci/simba.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun4u/io/pci/simba.c
+
+$(OBJS_DIR)/pci_pci.o:		$(UTSBASE)/sun4u/io/pci/pci_pci.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun4u/io/pci/pci_pci.c
+
+$(OBJS_DIR)/power.o:		$(UTSBASE)/sun4u/io/power.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun4u/io/power.c
+
+$(OBJS_DIR)/rootnex.o:		$(UTSBASE)/sun4u/io/rootnex.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun4u/io/rootnex.c
+
+$(OBJS_DIR)/su_driver.o:	$(UTSBASE)/sun4u/io/su_driver.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun4u/io/su_driver.c
+
+$(OBJS_DIR)/sysioerr.o:		$(UTSBASE)/sun4u/io/sysioerr.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun4u/io/sysioerr.c
+
+$(OBJS_DIR)/sysiosbus.o:	$(UTSBASE)/sun4u/io/sysiosbus.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun4u/io/sysiosbus.c
+
+$(OBJS_DIR)/tod.o:		$(UTSBASE)/sun4u/io/tod.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun4u/io/tod.c
+
+$(OBJS_DIR)/todmostek.o:	$(UTSBASE)/sun4u/io/todmostek.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun4u/io/todmostek.c
+
+$(OBJS_DIR)/todstarfire.o:	$(UTSBASE)/sun4u/io/todstarfire.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun4u/io/todstarfire.c
+
+$(OBJS_DIR)/copy.o:		$(UTSBASE)/sun4u/ml/copy.s
+	$(COMPILE.s) -o $@ $(UTSBASE)/sun4u/ml/copy.s
+
+$(OBJS_DIR)/cpc_hwreg.o:	$(UTSBASE)/sun4u/ml/cpc_hwreg.s
+	$(COMPILE.s) -o $@ $(UTSBASE)/sun4u/ml/cpc_hwreg.s
+
+$(OBJS_DIR)/cpr_resume_setup.o: $(UTSBASE)/sun4u/ml/cpr_resume_setup.s
+	$(COMPILE.s) -o $@ $(UTSBASE)/sun4u/ml/cpr_resume_setup.s
+
+$(OBJS_DIR)/interrupt.o:	$(UTSBASE)/sun4u/ml/interrupt.s
+	$(COMPILE.s) -o $@ $(UTSBASE)/sun4u/ml/interrupt.s
+
+$(OBJS_DIR)/ip_ocsum.o:		$(UTSBASE)/sun4u/ml/ip_ocsum.s
+	$(COMPILE.s) -o $@ $(UTSBASE)/sun4u/ml/ip_ocsum.s
+
+$(OBJS_DIR)/locore.o:		$(UTSBASE)/sun4u/ml/locore.s
+	$(COMPILE.s) -o $@ $(UTSBASE)/sun4u/ml/locore.s
+
+$(OBJS_DIR)/mach_float.o:	$(UTSBASE)/sun4u/ml/mach_float.s
+	$(COMPILE.s) -o $@ $(UTSBASE)/sun4u/ml/mach_float.s
+
+$(OBJS_DIR)/memscrub_asm.o:	$(UTSBASE)/sun4u/ml/memscrub_asm.s
+	$(COMPILE.s) -o $@ $(UTSBASE)/sun4u/ml/memscrub_asm.s
+
+$(OBJS_DIR)/proc_init.o:	$(UTSBASE)/sun4u/ml/proc_init.s
+	$(COMPILE.s) -o $@ $(UTSBASE)/sun4u/ml/proc_init.s
+
+$(OBJS_DIR)/subr_4u.o:		$(UTSBASE)/sun4u/ml/subr_4u.s
+	$(COMPILE.s) -o $@ $(UTSBASE)/sun4u/ml/subr_4u.s
+
+$(OBJS_DIR)/swtch.o:		$(UTSBASE)/sun4u/ml/swtch.s
+	$(COMPILE.s) -o $@ $(UTSBASE)/sun4u/ml/swtch.s
+
+$(OBJS_DIR)/trap_table.o:	$(UTSBASE)/sun4u/ml/trap_table.s
+	$(COMPILE.s) -o $@ $(UTSBASE)/sun4u/ml/trap_table.s
+
+$(OBJS_DIR)/wbuf.o:		$(UTSBASE)/sun4u/ml/wbuf.s
+	$(COMPILE.s) -o $@ $(UTSBASE)/sun4u/ml/wbuf.s
+
+$(OBJS_DIR)/xc.o:		$(UTSBASE)/sun4u/ml/xc.s
+	$(COMPILE.s) -o $@ $(UTSBASE)/sun4u/ml/xc.s
+
+$(OBJS_DIR)/beep.o:		$(UTSBASE)/sun4u/os/beep.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun4u/os/beep.c
+
+$(OBJS_DIR)/cpc_subr.o:		$(UTSBASE)/sun4u/os/cpc_subr.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun4u/os/cpc_subr.c
+
+$(OBJS_DIR)/cpr_impl.o:		$(UTSBASE)/sun4u/os/cpr_impl.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun4u/os/cpr_impl.c
+
+$(OBJS_DIR)/cpu_states.o:	$(UTSBASE)/sun4u/os/cpu_states.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun4u/os/cpu_states.c
+
+$(OBJS_DIR)/ddi_impl.o:		$(UTSBASE)/sun4u/os/ddi_impl.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun4u/os/ddi_impl.c
+
+$(OBJS_DIR)/dmv.o:		$(UTSBASE)/sun4u/os/dmv.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun4u/os/dmv.c
+
+$(OBJS_DIR)/dvma.o:		$(UTSBASE)/sun4u/os/dvma.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun4u/os/dvma.c
+
+$(OBJS_DIR)/ecc.o:		$(UTSBASE)/sun4u/os/ecc.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun4u/os/ecc.c
+
+$(OBJS_DIR)/fillsysinfo.o:	$(UTSBASE)/sun4u/os/fillsysinfo.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun4u/os/fillsysinfo.c
+
+$(OBJS_DIR)/intr.o:		$(UTSBASE)/sun4u/os/intr.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun4u/os/intr.c
+
+$(OBJS_DIR)/mach_sysconfig.o:	$(UTSBASE)/sun4u/os/mach_sysconfig.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun4u/os/mach_sysconfig.c
+
+$(OBJS_DIR)/machdep.o:		$(UTSBASE)/sun4u/os/machdep.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun4u/os/machdep.c
+
+$(OBJS_DIR)/mem_cage.o:		$(UTSBASE)/common/os/mem_cage.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/os/mem_cage.c
+
+$(OBJS_DIR)/mem_config.o:		$(UTSBASE)/common/os/mem_config.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/os/mem_config.c
+
+$(OBJS_DIR)/mem_config_arch.o:		$(UTSBASE)/sun4u/os/mem_config_arch.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun4u/os/mem_config_arch.c
+
+$(OBJS_DIR)/memlist_new.o:		$(UTSBASE)/common/os/memlist_new.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/os/memlist_new.c
+
+$(OBJS_DIR)/memlist.o:		$(UTSBASE)/sun4u/os/memlist.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun4u/os/memlist.c
+
+$(OBJS_DIR)/memscrub.o:		$(UTSBASE)/sun4u/os/memscrub.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun4u/os/memscrub.c
+
+$(OBJS_DIR)/mlsetup.o:		$(UTSBASE)/sun4u/os/mlsetup.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun4u/os/mlsetup.c
+
+$(OBJS_DIR)/mp_call.o:		$(UTSBASE)/sun4u/os/mp_call.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun4u/os/mp_call.c
+
+$(OBJS_DIR)/mp_startup.o:	$(UTSBASE)/sun4u/os/mp_startup.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun4u/os/mp_startup.c
+
+$(OBJS_DIR)/mp_states.o:	$(UTSBASE)/sun4u/os/mp_states.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun4u/os/mp_states.c
+
+$(OBJS_DIR)/polled_io.o:	$(UTSBASE)/sun4u/os/polled_io.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun4u/os/polled_io.c
+
+$(OBJS_DIR)/ppage.o:		$(UTSBASE)/sun4u/os/ppage.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun4u/os/ppage.c
+
+$(OBJS_DIR)/prom_subr.o:	$(UTSBASE)/sun4u/os/prom_subr.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun4u/os/prom_subr.c
+
+$(OBJS_DIR)/startup.o:		$(UTSBASE)/sun4u/os/startup.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun4u/os/startup.c
+
+$(OBJS_DIR)/trap.o:		$(UTSBASE)/sun4u/os/trap.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun4u/os/trap.c
+
+$(OBJS_DIR)/visinstr.o:		$(UTSBASE)/sun4u/os/visinstr.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun4u/os/visinstr.c
+
+$(OBJS_DIR)/x_call.o:		$(UTSBASE)/sun4u/os/x_call.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun4u/os/x_call.c
+
+$(OBJS_DIR)/platmod.o:		$(UTSBASE)/sun4u/os/platmod.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun4u/os/platmod.c
+
+$(OBJS_DIR)/mach_sfmmu.o:	$(UTSBASE)/sun4u/vm/mach_sfmmu.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun4u/vm/mach_sfmmu.c
+
+$(OBJS_DIR)/vm_machdep.o:	$(UTSBASE)/sun4u/vm/vm_machdep.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun4u/vm/vm_machdep.c
+
+#
+#	Lint `object' build rules
+#
+#	The following are alphabetized by source file path. Please maintain
+# this ordering.
+#
+
+$(LINTS_DIR)/sfmmu_asm.ln:	$(UTSBASE)/sfmmu/ml/sfmmu_asm.s
+	@($(LHEAD) $(LINT.s) $(UTSBASE)/sfmmu/ml/sfmmu_asm.s $(LTAIL))
+
+$(LINTS_DIR)/hat_sfmmu.ln:	$(UTSBASE)/sfmmu/vm/hat_sfmmu.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sfmmu/vm/hat_sfmmu.c $(LTAIL))
+
+$(LINTS_DIR)/bootdev.ln:	$(UTSBASE)/sparc/os/bootdev.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sparc/os/bootdev.c $(LTAIL))
+
+$(LINTS_DIR)/obpsym.ln:		$(UTSBASE)/sparc/os/obpsym.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sparc/os/obpsym.c $(LTAIL))
+
+$(LINTS_DIR)/obpsym_1275.ln:	$(UTSBASE)/sparc/os/obpsym_1275.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sparc/os/obpsym_1275.c $(LTAIL))
+
+$(LINTS_DIR)/confunix.ln:	$(UTSBASE)/sun4u/conf/confunix.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun4u/conf/confunix.c $(LTAIL))
+
+$(LINTS_DIR)/genalign.ln:	$(UTSBASE)/sun4u/conf/genalign.s
+	@($(LHEAD) $(LINT.s) $(UTSBASE)/sun4u/conf/genalign.s $(LTAIL))
+
+$(LINTS_DIR)/common_asm.ln: $(UTSBASE)/sun4u/cpu/common_asm.s
+	@($(LHEAD) $(LINT.s) $(UTSBASE)/sun4u/cpu/common_asm.s $(LTAIL))
+
+$(LINTS_DIR)/cpu_module.ln:	$(UTSBASE)/sun4u/cpu/cpu_module.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun4u/cpu/cpu_module.c $(LTAIL))
+
+$(LINTS_DIR)/spitfire.ln:	$(UTSBASE)/sun4u/cpu/spitfire.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun4u/cpu/spitfire.c $(LTAIL))
+
+$(LINTS_DIR)/spitfire_asm.ln: $(UTSBASE)/sun4u/cpu/spitfire_asm.s
+	@($(LHEAD) $(LINT.s) $(UTSBASE)/sun4u/cpu/spitfire_asm.s $(LTAIL))
+
+$(LINTS_DIR)/cbe.ln:		$(UTSBASE)/sun4u/io/cbe.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun4u/io/cbe.c $(LTAIL))
+
+$(LINTS_DIR)/consconfig.ln:	$(UTSBASE)/sun4u/io/consconfig.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun4u/io/consconfig.c $(LTAIL))
+
+$(LINTS_DIR)/consconfig_dacf.ln:	$(UTSBASE)/sun4u/io/consconfig_dacf.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun4u/io/consconfig_dacf.c $(LTAIL))
+
+$(LINTS_DIR)/consconfig_util.ln:	$(UTSBASE)/sun4u/io/consconfig_util.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun4u/io/consconfig_util.c $(LTAIL))
+
+$(LINTS_DIR)/consplat.ln:	$(UTSBASE)/sun4u/io/consplat.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun4u/io/consplat.c $(LTAIL))
+
+$(LINTS_DIR)/ebus.ln:		$(UTSBASE)/sun4u/io/ebus.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun4u/io/ebus.c $(LTAIL))
+
+$(LINTS_DIR)/hardclk.ln:	$(UTSBASE)/sun4u/io/hardclk.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun4u/io/hardclk.c $(LTAIL))
+
+$(LINTS_DIR)/iocache.ln:	$(UTSBASE)/sun4u/io/iocache.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun4u/io/iocache.c $(LTAIL))
+
+$(LINTS_DIR)/iommu.ln:		$(UTSBASE)/sun4u/io/iommu.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun4u/io/iommu.c $(LTAIL))
+
+$(LINTS_DIR)/ivintr.ln:		$(UTSBASE)/sun4u/io/ivintr.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun4u/io/ivintr.c $(LTAIL))
+
+$(LINTS_DIR)/pci.ln:		$(UTSBASE)/sun4u/io/pci/pci.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun4u/io/pci/pci.c $(LTAIL))
+
+$(LINTS_DIR)/pci_dma.ln:	$(UTSBASE)/sun4u/io/pci/pci_dma.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun4u/io/pci/pci_dma.c $(LTAIL))
+
+$(LINTS_DIR)/pci_devctl.ln:	$(UTSBASE)/sun4u/io/pci/pci_devctl.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun4u/io/pci/pci_devctl.c $(LTAIL))
+
+$(LINTS_DIR)/pci_fdvma.ln:	$(UTSBASE)/sun4u/io/pci/pci_fdvma.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun4u/io/pci/pci_fdvma.c $(LTAIL))
+
+$(LINTS_DIR)/pci_iommu.ln:	$(UTSBASE)/sun4u/io/pci/pci_iommu.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun4u/io/pci/pci_iommu.c $(LTAIL))
+
+$(LINTS_DIR)/pci_sc.ln:		$(UTSBASE)/sun4u/io/pci/pci_sc.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun4u/io/pci/pci_sc.c $(LTAIL))
+
+$(LINTS_DIR)/pci_debug.ln:	$(UTSBASE)/sun4u/io/pci/pci_debug.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun4u/io/pci/pci_debug.c $(LTAIL))
+
+$(LINTS_DIR)/pci_cb.ln:		$(UTSBASE)/sun4u/io/pci/pci_cb.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun4u/io/pci/pci_cb.c $(LTAIL))
+
+$(LINTS_DIR)/pci_ib.ln:	$(UTSBASE)/sun4u/io/pci/pci_ib.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun4u/io/pci/pci_ib.c $(LTAIL))
+
+$(LINTS_DIR)/pci_ecc.ln:	$(UTSBASE)/sun4u/io/pci/pci_ecc.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun4u/io/pci/pci_ecc.c $(LTAIL))
+
+$(LINTS_DIR)/pci_pbm.ln:	$(UTSBASE)/sun4u/io/pci/pci_pbm.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun4u/io/pci/pci_pbm.c $(LTAIL))
+
+$(LINTS_DIR)/pci_intr.ln:	$(UTSBASE)/sun4u/io/pci/pci_intr.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun4u/io/pci/pci_intr.c $(LTAIL))
+
+$(LINTS_DIR)/pci_util.ln:	$(UTSBASE)/sun4u/io/pci/pci_util.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun4u/io/pci/pci_util.c $(LTAIL))
+
+$(LINTS_DIR)/pci_space.ln:	$(UTSBASE)/sun4u/io/pci/pci_space.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun4u/io/pci/pci_space.c $(LTAIL))
+
+$(LINTS_DIR)/pcipsy.ln:		$(UTSBASE)/sun4u/io/pci/pcipsy.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun4u/io/pci/pcipsy.c $(LTAIL))
+
+$(LINTS_DIR)/power.ln:		$(UTSBASE)/sun4u/io/power.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun4u/io/power.c $(LTAIL))
+
+$(LINTS_DIR)/rootnex.ln:	$(UTSBASE)/sun4u/io/rootnex.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun4u/io/rootnex.c $(LTAIL))
+
+$(LINTS_DIR)/su_driver.ln:	$(UTSBASE)/sun4u/io/su_driver.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun4u/io/su_driver.c $(LTAIL))
+
+$(LINTS_DIR)/sysioerr.ln:	$(UTSBASE)/sun4u/io/sysioerr.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun4u/io/sysioerr.c $(LTAIL))
+
+$(LINTS_DIR)/sysiosbus.ln:	$(UTSBASE)/sun4u/io/sysiosbus.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun4u/io/sysiosbus.c $(LTAIL))
+
+$(LINTS_DIR)/tod.ln:		$(UTSBASE)/sun4u/io/tod.c
+	@($(LHEAD) $(LINT.s) $(UTSBASE)/sun4u/io/tod.c $(LTAIL))
+
+$(LINTS_DIR)/todmostek.ln:	$(UTSBASE)/sun4u/io/todmostek.c
+	@($(LHEAD) $(LINT.s) $(UTSBASE)/sun4u/io/todmostek.c $(LTAIL))
+
+$(LINTS_DIR)/todstarfire.ln:	$(UTSBASE)/sun4u/io/todstarfire.c
+	@($(LHEAD) $(LINT.s) $(UTSBASE)/sun4u/io/todstarfire.c $(LTAIL))
+
+$(LINTS_DIR)/copy.ln:		$(UTSBASE)/sun4u/ml/copy.s
+	@($(LHEAD) $(LINT.s) $(UTSBASE)/sun4u/ml/copy.s $(LTAIL))
+
+$(LINTS_DIR)/cpc_hwreg.ln:	$(UTSBASE)/sun4u/ml/cpc_hwreg.s
+	@($(LHEAD) $(LINT.s) $(UTSBASE)/sun4u/ml/cpc_hwreg.s $(LTAIL))
+
+$(LINTS_DIR)/cpr_resume_setup.ln:	$(UTSBASE)/sun4u/ml/cpr_resume_setup.s
+	@($(LHEAD) $(LINT.s) $(UTSBASE)/sun4u/ml/cpr_resume_setup.s $(LTAIL))
+
+$(LINTS_DIR)/interrupt.ln:	$(UTSBASE)/sun4u/ml/interrupt.s
+	@($(LHEAD) $(LINT.s) $(UTSBASE)/sun4u/ml/interrupt.s $(LTAIL))
+
+$(LINTS_DIR)/ip_ocsum.ln:	$(UTSBASE)/sun4u/ml/ip_ocsum.s
+	@($(LHEAD) $(LINT.s) $(UTSBASE)/sun4u/ml/ip_ocsum.s $(LTAIL))
+
+$(LINTS_DIR)/locore.ln:		$(UTSBASE)/sun4u/ml/locore.s
+	@($(LHEAD) $(LINT.s) $(UTSBASE)/sun4u/ml/locore.s $(LTAIL))
+
+$(LINTS_DIR)/mach_float.ln:	$(UTSBASE)/sun4u/ml/mach_float.s
+	@($(LHEAD) $(LINT.s) $(UTSBASE)/sun4u/ml/mach_float.s $(LTAIL))
+
+$(LINTS_DIR)/proc_init.ln:	$(UTSBASE)/sun4u/ml/proc_init.s
+	@($(LHEAD) $(LINT.s) $(UTSBASE)/sun4u/ml/proc_init.s $(LTAIL))
+
+$(LINTS_DIR)/subr_4u.ln:	$(UTSBASE)/sun4u/ml/subr_4u.s
+	@($(LHEAD) $(LINT.s) $(UTSBASE)/sun4u/ml/subr_4u.s $(LTAIL))
+
+$(LINTS_DIR)/swtch.ln:		$(UTSBASE)/sun4u/ml/swtch.s
+	@($(LHEAD) $(LINT.s) $(UTSBASE)/sun4u/ml/swtch.s $(LTAIL))
+
+$(LINTS_DIR)/trap_table.ln:	$(UTSBASE)/sun4u/ml/trap_table.s
+	@($(LHEAD) $(LINT.s) $(UTSBASE)/sun4u/ml/trap_table.s $(LTAIL))
+
+$(LINTS_DIR)/wbuf.ln:		$(UTSBASE)/sun4u/ml/wbuf.s
+	@($(LHEAD) $(LINT.s) $(UTSBASE)/sun4u/ml/wbuf.s $(LTAIL))
+
+$(LINTS_DIR)/xc.ln:		$(UTSBASE)/sun4u/ml/xc.s
+	@($(LHEAD) $(LINT.s) $(UTSBASE)/sun4u/ml/xc.s $(LTAIL))
+
+$(LINTS_DIR)/beep.ln:		$(UTSBASE)/sun4u/os/beep.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun4u/os/beep.c $(LTAIL))
+
+$(LINTS_DIR)/cpc_subr.ln:	$(UTSBASE)/sun4u/os/cpc_subr.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun4u/os/cpc_subr.c $(LTAIL))
+
+$(LINTS_DIR)/cpr_impl.ln:	$(UTSBASE)/sun4u/os/cpr_impl.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun4u/os/cpr_impl.c $(LTAIL))
+
+$(LINTS_DIR)/cpu_states.ln:	$(UTSBASE)/sun4u/os/cpu_states.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun4u/os/cpu_states.c $(LTAIL))
+
+$(LINTS_DIR)/ddi_impl.ln:	$(UTSBASE)/sun4u/os/ddi_impl.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun4u/os/ddi_impl.c $(LTAIL))
+
+$(LINTS_DIR)/dmv.ln:		$(UTSBASE)/sun4u/os/dmv.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun4u/os/dmv.c $(LTAIL))
+
+$(LINTS_DIR)/dvma.ln:		$(UTSBASE)/sun4u/os/dvma.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun4u/os/dvma.c $(LTAIL))
+
+$(LINTS_DIR)/ecc.ln:		$(UTSBASE)/sun4u/os/ecc.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun4u/os/ecc.c $(LTAIL))
+
+$(LINTS_DIR)/fillsysinfo.ln:	$(UTSBASE)/sun4u/os/fillsysinfo.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun4u/os/fillsysinfo.c $(LTAIL))
+
+$(LINTS_DIR)/intr.ln:		$(UTSBASE)/sun4u/os/intr.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun4u/os/intr.c $(LTAIL))
+
+$(LINTS_DIR)/mach_sysconfig.ln:	$(UTSBASE)/sun4u/os/mach_sysconfig.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun4u/os/mach_sysconfig.c $(LTAIL))
+
+$(LINTS_DIR)/machdep.ln:	$(UTSBASE)/sun4u/os/machdep.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun4u/os/machdep.c $(LTAIL))
+
+$(LINTS_DIR)/mem_cage.ln:	$(UTSBASE)/common/os/mem_cage.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/os/mem_cage.c $(LTAIL))
+
+$(LINTS_DIR)/mem_config.ln:	$(UTSBASE)/common/os/mem_config.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/os/mem_config.c $(LTAIL))
+
+$(LINTS_DIR)/mem_config_arch.ln:	$(UTSBASE)/sun4u/os/mem_config_arch.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun4u/os/mem_config_arch.c $(LTAIL))
+
+$(LINTS_DIR)/memlist_new.ln:	$(UTSBASE)/common/os/memlist_new.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/os/memlist_new.c $(LTAIL))
+
+$(LINTS_DIR)/memlist.ln:	$(UTSBASE)/sun4u/os/memlist.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun4u/os/memlist.c $(LTAIL))
+
+$(LINTS_DIR)/memscrub.ln:	$(UTSBASE)/sun4u/os/memscrub.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun4u/os/memscrub.c $(LTAIL))
+
+$(LINTS_DIR)/memscrub_asm.ln:	$(UTSBASE)/sun4u/ml/memscrub_asm.s
+	@($(LHEAD) $(LINT.s) $(UTSBASE)/sun4u/ml/memscrub_asm.s $(LTAIL))
+
+$(LINTS_DIR)/mlsetup.ln:	$(UTSBASE)/sun4u/os/mlsetup.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun4u/os/mlsetup.c $(LTAIL))
+
+$(LINTS_DIR)/mp_call.ln:	$(UTSBASE)/sun4u/os/mp_call.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun4u/os/mp_call.c $(LTAIL))
+
+$(LINTS_DIR)/mp_startup.ln:	$(UTSBASE)/sun4u/os/mp_startup.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun4u/os/mp_startup.c $(LTAIL))
+
+$(LINTS_DIR)/mp_states.ln:	$(UTSBASE)/sun4u/os/mp_states.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun4u/os/mp_states.c $(LTAIL))
+
+$(LINTS_DIR)/polled_io.ln:	$(UTSBASE)/sun4u/os/polled_io.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun4u/os/polled_io.c $(LTAIL))
+
+$(LINTS_DIR)/ppage.ln:		$(UTSBASE)/sun4u/os/ppage.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun4u/os/ppage.c $(LTAIL))
+
+$(LINTS_DIR)/prom_subr.ln:	$(UTSBASE)/sun4u/os/prom_subr.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun4u/os/prom_subr.c $(LTAIL))
+
+$(LINTS_DIR)/startup.ln:	$(UTSBASE)/sun4u/os/startup.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun4u/os/startup.c $(LTAIL))
+
+$(LINTS_DIR)/trap.ln:		$(UTSBASE)/sun4u/os/trap.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun4u/os/trap.c $(LTAIL))
+
+$(LINTS_DIR)/visinstr.ln:	$(UTSBASE)/sun4u/os/visinstr.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun4u/os/visinstr.c $(LTAIL))
+
+$(LINTS_DIR)/x_call.ln:		$(UTSBASE)/sun4u/os/x_call.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun4u/os/x_call.c $(LTAIL))
+
+$(LINTS_DIR)/platmod.ln:	$(UTSBASE)/sun4u/os/platmod.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun4u/os/platmod.c $(LTAIL))
+
+$(LINTS_DIR)/mach_sfmmu.ln:	$(UTSBASE)/sun4u/vm/mach_sfmmu.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun4u/vm/mach_sfmmu.c $(LTAIL))
+
+$(LINTS_DIR)/vm_machdep.ln:	$(UTSBASE)/sun4u/vm/vm_machdep.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun4u/vm/vm_machdep.c $(LTAIL))
+
+$(LINTS_DIR)/pci_pci.ln:	$(UTSBASE)/sun4u/io/pci/pci_pci.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun4u/io/pci/pci_pci.c $(LTAIL))
+
+$(LINTS_DIR)/simba.ln:		$(UTSBASE)/sun4u/io/pci/simba.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun4u/io/pci/simba.c $(LTAIL))

@@ -1,0 +1,21 @@
+
+
+#ident	"@(#)fas.fdbg	1.1	95/06/13 SMI"
+
+#include <sys/scsi/scsi.h>
+#include <sys/scsi/adapters/fasreg.h>
+#include <sys/scsi/adapters/fasvar.h>
+#include <sys/scsi/adapters/fascmd.h>
+#include <sys/scsi/adapters/fasdma.h>
+
+\  fas driver
+fas
+
+fasreg
+
+fas_cmd
+
+f_slots
+
+dma
+

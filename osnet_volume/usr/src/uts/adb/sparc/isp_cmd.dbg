@@ -1,0 +1,44 @@
+\
+\ Copyright (c) 1997-1999 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)isp_cmd.dbg	1.13	99/11/23 SMI"
+
+#include <sys/scsi/scsi.h>
+#include <sys/scsi/adapters/ispreg.h>
+#include <sys/scsi/adapters/ispmail.h>
+#include <sys/scsi/adapters/ispvar.h>
+#include <sys/scsi/adapters/ispcmd.h>
+#include "dummy.h"
+
+\
+\
+isp_cmd                 cmd_
+{adb_inline_begin}
+<z+{OFFSET, cmd_isp_request}/n"isp_request"n16X
+<z+{OFFSET, cmd_isp_response}/n"isp_response"n16X
+<z+{OFFSET, cmd_pkt}=""
+{adb_inline_end}
+        pkt                     hex
+        forw                    hex
+        cdbp                    hex
+        scbp                    hex
+	id			hex
+        dmacount                hex
+        dmahandle               hex
+{adb_inline_begin}
+<z+{OFFSET, cmd_dmacookie}/n"dmacookie"nJKX
+<z+{OFFSET, cmd_start_time}=""
+{adb_inline_end}
+        start_time              hex
+        deadline                hex
+        cdb                     hex
+        flags                   hex
+        slot                    hex
+        cdblen                  hex
+        scblen                  hex
+        privlen                 hex
+        pkt_private             hex
+{adb_inline_begin}
+<z+{SIZEOF}=""
+{adb_inline_end}

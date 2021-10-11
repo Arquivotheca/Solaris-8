@@ -1,0 +1,50 @@
+\
+\ Copyright (c) 1999 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)svcmasterxprt.dbg	1.2	99/08/23 SMI"
+
+\       arg             : address of an SVCMASTERXPRT structure
+\       uses            : mutex
+\       registers       : z
+\       description     : prints the contents of SVCMASTERXPRT structure
+\
+
+#include <sys/types.h>
+#include <rpc/types.h>
+#include <rpc/xdr.h>
+#include <rpc/auth.h>
+#include <rpc/svc.h>
+#include "dummy.h"
+
+\
+\
+__svcmasterxprt	xp_	svcmasterxprt
+{adb_inline_begin}
+.>z
+<z+0="=============="
+{adb_inline_end}
+	next			hex
+	prev			hex
+{adb_inline_begin}
+<z+{OFFSET,xp_xpc.xpc_wq}=""
+{adb_inline_end}
+	xpc.xpc_wq		hex	"wq (queue_t)"
+	xpc.xpc_cred		hex	"cred (cred_t)"
+	xpc.xpc_type		decimal	"type (2=T_COTS_ORD. 3=T_CLTS)"
+	xpc.xpc_msg_size	decimal	"msg_size"
+{adb_inline_begin}
+<z+{OFFSET,xp_pool}=""
+{adb_inline_end}
+	pool			hex	"pool (SVCPOOL)"
+	req_head		hex	"req_head (mblk_t)"
+	req_tail		hex	"req_tail (mblk_t)"
+	req_lock		.mutex	"req_lock (mutex)"
+	threads			decimal
+	detached_threads	decimal
+	thread_lock		.mutex	"thread_lock (mutex)"
+	closeproc		hex
+	netid			string
+{adb_inline_begin}
+<z+{SIZEOF}=""
+{adb_inline_end}

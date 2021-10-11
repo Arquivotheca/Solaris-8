@@ -1,0 +1,47 @@
+/* LINTLIBRARY */
+/* PROTOLIB1 */
+
+#pragma ident	"@(#)llib-lbz2	1.1	99/10/08 SMI"
+
+#include <stdlib.h>
+#include <stdio.h>
+#include <stdarg.h>
+#include <bzlib.h>
+
+/*
+ * usr/src/cmd/bzip2
+ */
+
+/*-- Core (low-level) library functions --*/
+
+extern int bzCompressInit(bz_stream *strm, int blockSize100k, int verbosity,
+    int workFactor);
+extern int bzCompress(bz_stream *strm, int action);
+extern int bzCompressEnd(bz_stream *strm);
+extern int bzDecompressInit(bz_stream *strm, int verbosity, int small);
+extern int bzDecompress(bz_stream *strm);
+extern int bzDecompressEnd(bz_stream *strm);
+extern BZFILE *bzReadOpen(int *bzerror, FILE *f, int verbosity, int small,
+    void *unused, int nUnused);
+extern void bzReadClose(int *bzerror, BZFILE *b);
+extern void bzReadGetUnused(int *bzerror, BZFILE *b, void **unused,
+    int *nUnused);
+extern int bzRead(int *bzerror, BZFILE *b, void *buf, int len);
+extern BZFILE *bzWriteOpen(int *bzerror, FILE *f, int blockSize100k,
+    int verbosity, int workFactor);
+extern void bzWrite(int *bzerror, BZFILE *b, void *buf, int len);
+extern void bzWriteClose(int *bzerror, BZFILE *b, int abandon,
+    unsigned int *nbytes_in, unsigned int *nbytes_out);
+extern int bzBuffToBuffCompress(char *dest, unsigned int *destLen,
+    char *source, unsigned int sourceLen, int blockSize100k, int verbosity,
+    int workFactor);
+extern int bzBuffToBuffDecompress(char *dest, unsigned int *destLen,
+    char *source, unsigned int sourceLen, int small, int verbosity);
+extern const char *bzlibVersion(void);
+extern BZFILE *bzopen(const char *path, const char *mode);
+extern BZFILE *bzdopen(int fd, const char *mode);
+extern int bzread(BZFILE *b, void *buf, int len);
+extern int bzwrite(BZFILE *b, void *buf, int len);
+extern int bzflush(BZFILE *b);
+extern void bzclose(BZFILE *b);
+extern const char *bzerror(BZFILE *b, int *errnum);

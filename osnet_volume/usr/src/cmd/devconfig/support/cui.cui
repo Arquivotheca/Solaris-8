@@ -1,0 +1,94 @@
+!*  "@(#)cui.cui 1.1 93/11/24"
+
+!*
+!*    Master color definition file: cui.cui
+!*
+!* This file is loaded by every cui application, to get the basic colors
+!* for application and help screens.
+!*
+!* Copyright (c) 1992 Sun Microsystems, Inc.  All Rights Reserved. Sun
+!* considers its source code as an unpublished, proprietary trade secret, and
+!* it is available only under strict license provisions.  This copyright
+!* notice is placed here only to protect Sun in the event the source is
+!* deemed a published work.  Dissassembly, decompilation, or other means of
+!* reducing the object code to human readable form is prohibited by the
+!* license agreement under which this code is provided to the user or company
+!* in possession of this copy.
+!* 
+!* RESTRICTED RIGHTS LEGEND: Use, duplication, or disclosure by the Government
+!* is subject to restrictions as set forth in subparagraph (c)(1)(ii) of the
+!* Rights in Technical Data and Computer Software clause at DFARS 52.227-7013
+!* and in similar clauses in the FAR and NASA FAR Supplement.
+!*
+! define some custom colors
+! global cui resources
+
+
+! switch TAB and HOME alternates
+
+!CUI.tabKey:	 1
+!CUI.homeKey:	 9
+
+
+! first we redefine the standard colors
+
+! normal is bright white on blue
+
+CUI_normalColor.colorForeground:	white
+CUI_normalColor.colorBackground:	blue 
+CUI_normalColor.colorBold:			true
+CUI_normalColor.monoAttrib: 		normal
+
+! reverse is black on green
+
+CUI_reverseColor.colorForeground:	black
+CUI_reverseColor.colorBackground:	green
+CUI_reverseColor.monoAttrib:		reverse
+
+! now a custom color for titles
+
+Color:								titleColor
+titleColor.colorForeground: 		white
+titleColor.colorBackground: 		red	
+titleColor.colorBlink:				false
+titleColor.colorBold:				true
+titleColor.monoAttrib:				reverse
+titleColor.monoBlink:				false
+titleColor.monoBold:				true
+
+! set default colors for all objects
+
+*.titleColor:						"titleColor"
+*.borderColor:						CUI_normalColor
+*.interiorColor:					CUI_normalColor
+*.normalColor:						CUI_normalColor
+*.activeColor:						CUI_reverseColor
+*.setColor: 						CUI_normalColor
+
+! define some different colors for help window
+
+Color:								helpNormalColor
+helpNormalColor.colorForeground:	black
+helpNormalColor.colorBackground:	white
+helpNormalColor.colorBlink: 		false
+helpNormalColor.colorBold:			false
+helpNormalColor.monoAttrib: 		normal
+helpNormalColor.monoBlink:			false
+helpNormalColor.monoBold:			true
+
+Color:								helpSetColor
+helpSetColor.colorForeground:		blue	
+helpSetColor.colorBackground:		white
+helpSetColor.colorBlink:			false
+helpSetColor.colorBold: 			false
+helpSetColor.monoAttrib:			underline
+helpSetColor.monoBlink: 			false
+helpSetColor.monoBold:				false
+
+CUI_helpWindow.borderColor: 		"helpNormalColor"
+CUI_helpWindow.interiorColor:		"helpNormalColor"
+CUI_helpWindow.normalColor: 		"helpNormalColor"
+CUI_helpWindow.activeColor: 		"CUI_reverseColor"
+CUI_helpWindow.setColor:			"helpSetColor"
+
+

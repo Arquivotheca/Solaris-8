@@ -1,0 +1,46 @@
+#!/sbin/sh
+#
+# Copyright (c) 1997-1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#ident	"@(#)nfs.client	1.15	99/07/30 SMI"
+
+[ ! -d /usr/bin ] && exit
+
+#
+# Start/stop processes required for client NFS
+#
+
+stop_nfsclnt_procs()
+{
+	/usr/bin/pkill -x -u 0,1 '(lockd|statd)'
+	/sbin/umountall -F cachefs
+	/sbin/umountall -F nfs
+}
+
+case "$1" in
+'start')
+	[ ${_INIT_RUN_NPREV:-0} != 0 ] && stop_nfsclnt_procs
+	if [ -x /usr/lib/nfs/statd -a -x /usr/lib/nfs/lockd ]; then
+		/usr/bin/pgrep -x -u 0,1 statd >/dev/null 2>&1 || \
+		    /usr/lib/nfs/statd >/dev/msglog 2>&1 &
+
+		/usr/bin/pgrep -x -u 0 lockd >/dev/null 2>&1 || \
+		    /usr/lib/nfs/lockd >/dev/msglog 2>&1 &
+	fi
+
+	/sbin/mountall -F nfs
+	/sbin/mountall -F cachefs
+	/sbin/swapadd
+	;;
+
+'stop')
+	stop_nfsclnt_procs
+	;;
+
+*)
+	echo "Usage: $0 { start | stop }"
+	exit 1
+	;;
+esac
+exit 0

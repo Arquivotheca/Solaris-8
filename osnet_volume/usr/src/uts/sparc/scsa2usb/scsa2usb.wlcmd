@@ -1,0 +1,38 @@
+# Copyright (c) 1998-1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+
+#pragma ident	"@(#)scsa2usb.wlcmd	1.2	99/11/05 SMI"
+
+one scsa2usb_state
+one usb_device
+
+add scsi_pkt::pkt_comp targets \
+        scsa2usb_scsi_destroy_pkt \
+        scsa2usb_scsi_init_pkt \
+        scsa2usb_scsi_start \
+        scsa2usb_scsi_abort \
+        scsa2usb_scsi_reset \
+        scsa2usb_scsi_setcap \
+        scsa2usb_scsi_getcap 
+
+
+root	scsa2usb_scsi_tgt_init scsa2usb_scsi_tgt_probe scsa2usb_tran_tgt_free
+root	scsa2usb_scsi_start scsa2usb_scsi_abort scsa2usb_scsi_reset
+root	scsa2usb_scsi_getcap scsa2usb_scsi_setcap scsa2usb_scsi_init_pkt
+root	scsa2usb_scsi_destroy_pkt
+root	scsa2usb_scsi_quiesce scsa2usb_scsi_unquiesce
+
+root	scsa2usb_bulk_only_cb scsa2usb_bulk_only_ex_cb
+root	scsa2usb_connect_event_callback
+root	scsa2usb_disconnect_event_callback
+root	scsa2usb_close_usb_pipes_cb
+
+root	scsa2usb_default_pipe_cb
+root	scsa2usb_default_pipe_ex_cb
+root	scsa2usb_pipes_reset_cb
+
+root	scsa2usb_callback
+root	scsa2usb_panic_callb
+root	scsa2usb_cpr_callb
+root	scsa2usb_dump

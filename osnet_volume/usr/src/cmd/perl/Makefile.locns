@@ -1,0 +1,36 @@
+#
+# Copyright (c) 1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#ident	"@(#)Makefile.locns	1.1	99/08/16 SMI"
+#
+# cmd/perl5/Makefile.locns
+#
+# Common locations defined for the Perl installation.
+#
+
+#
+# XXX Watch for Merced architecture naming conflicts with /bin/arch.
+#
+PERL_ARCH:sh= /bin/arch
+PERL_PLAT:sh= /bin/uname -m
+
+PERL_VERSION= 5.005
+PERL_MAINTENANCE_VERSION= 5.00503
+
+PERL_SRC= ../distrib
+
+PERL_REAL_ROOT= /usr/perl5
+PERL_REAL_LIB_DIR = /usr/perl5/$(PERL_MAINTENANCE_VERSION)/$(PERL_ARCH)-solaris/CORE
+
+PERL_ROOT= $(ROOT)/$(PERL_REAL_ROOT)
+PERL_LIB_DIR= $(PERL_ROOT)/$(PERL_MAINTENANCE_VERSION)
+PERL_BIN_DIR= $(PERL_LIB_DIR)/bin
+PERL_CORE_DIR= $(PERL_LIB_DIR)/$(PERL_ARCH)-solaris/CORE
+PERL_SITE_DIR= $(PERL_ROOT)/site-perl/$(PERL_VERSION)
+
+INSTALL_DIRS= \
+        $(PERL_LIB_DIR) \
+        $(PERL_BIN_DIR) \
+        $(PERL_CORE_DIR) \
+        $(PERL_SITE_DIR)

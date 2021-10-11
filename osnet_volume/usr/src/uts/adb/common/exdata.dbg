@@ -1,0 +1,31 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)exdata.dbg	1.4	98/01/19 SMI"
+
+#include <sys/user.h>
+#include "dummy.h"
+
+\
+\       this macro is a submacro used by other macros that (possibly)
+\       use the "z" register. Use 'w'.
+\
+exdata
+{adb_inline_begin}
+.>w
+<w+{OFFSET, vp}=""
+{adb_inline_end}
+        vp                      hex
+        ux_tsize                hex
+        ux_bsize                hex
+        ux_mach                 hex
+        ux_mag                  hex
+        ux_toffset              hex
+        ux_doffset              hex
+        ux_txtorg               hex
+        ux_datorg               hex
+        ux_entloc               hex
+{adb_inline_begin}
+<w+{SIZEOF}=""
+{adb_inline_end}

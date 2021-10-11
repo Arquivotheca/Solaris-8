@@ -1,0 +1,41 @@
+\
+\ Copyright (c) 1999 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)hid_pipe_reset.dbg        1.1     99/02/25 SMI"
+
+#include <sys/usb/usba.h>
+#include <sys/usb/usba/usba_types.h>
+#include <sys/usb/clients/hid/hid.h>
+#include <sys/usb/clients/hidparser/hidparser.h>
+#include <sys/usb/clients/hid/hidvar.h>
+#include <sys/usb/clients/hid/hid_polled.h>
+
+#include <sys/stropts.h>
+
+#include <sys/vuid_event.h>
+#include <sys/termios.h>
+#include <sys/termio.h>
+#include <sys/strtty.h>
+#include <sys/msreg.h>
+#include <sys/msio.h>
+#include "dummy.h"
+
+\
+\
+
+hid_pipe_reset_argument hid_pipe_reset_arg_ hid_pipe_reset
+{adb_inline_begin}
+.>z
+<z+{OFFSET, hid_pipe_reset_arg_hidp}=""
+{adb_inline_end}
+	hidp			hex	hidp
+	defaultp		hex	defaultp
+	exception_cr		hex	exception_cr
+{adb_inline_begin}
+<z+{SIZEOF}=""
+{adb_inline_end}
+
+\
+\
+

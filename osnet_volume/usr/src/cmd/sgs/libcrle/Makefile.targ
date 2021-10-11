@@ -1,0 +1,37 @@
+#
+#ident	"@(#)Makefile.targ	1.1	99/08/13 SMI"
+#
+# Copyright (c) 1999 by Sun Microsystems, Inc.
+# All rights reserved.
+
+pics64/%.o:	../common/%.c
+		$(COMPILE.c) -o $@ -D_ELF64 $<
+		$(POST_PROCESS_O)
+
+pics/%.o:	../common/%.c
+		$(COMPILE.c) -o $@ $<
+		$(POST_PROCESS_O)
+
+$(DYNLIB):	$(MAPFILES)
+ 
+$(LIBLINKS):
+		-$(RM) $@; $(SYMLINK) $(DYNLIB) $@
+
+delete:
+		$(RM) $(DYNLIB)
+
+
+include		$(SRC)/lib/Makefile.targ
+include		$(SRC)/cmd/sgs/Makefile.targ
+
+# Derived source and header files (messaging).
+
+catalog:	$(BLTMESG)
+
+chkmsg:		$(LIBSRCS)
+		-sh $(CHKMSG) $(CHKMSGFLAGS) $(LIBSRCS)
+
+$(BLTDEFS) + \
+$(BLTDATA) + \
+$(BLTMESG) :	$(SGSMSGALL)
+		$(SGSMSG) $(SGSMSGFLAGS) $(SGSMSGALL)

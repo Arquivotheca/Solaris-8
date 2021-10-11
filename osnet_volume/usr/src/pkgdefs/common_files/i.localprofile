@@ -1,0 +1,54 @@
+#!/bin/sh
+#
+#pragma ident	"@(#)i.localprofile	1.4	99/03/27 SMI"
+#
+# Copyright (c) 1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+
+PATH="/usr/bin:/usr/sbin:${PATH}"
+export PATH
+
+while read src dest
+do
+	if [ ! -f $dest ] ; then
+		cp $src $dest
+	else
+		#
+		# change the unadorned `tty` to quoted "`tty`" and
+		# the unadorned $TERM to quoted "$TERM" to avoid
+		# shell syntax errors when run w/o a controlling tty.
+		#
+		sed -e 's/ `tty` / "`tty`" /' \
+		    -e 's/ $TERM / "$TERM" /g' \
+		   $dest > /tmp/d.$$
+		cp /tmp/d.$$ $dest
+		rm -f /tmp/d.$$
+
+		grep "sun-color" $dest > /dev/null
+		if [ $? != 0 ] ; then
+			#
+			# add "sun-color" as a terminal type that should be
+			# recognized as a console
+			#
+			old=' "$TERM" = "sun" '
+			new=' "$TERM" = "sun" -o "$TERM" = "sun-color" '
+			sed -e "s/$old/$new/" \
+			   $dest > /tmp/d.$$
+			cp /tmp/d.$$ $dest
+			rm -f /tmp/d.$$
+		fi
+
+		#
+		# preserve the SCCS id string
+		#
+		(
+			grep '^# @(#)' $src
+			grep -v '^# @(#)local.profile' $dest
+		) > /tmp/d.$$
+		cp /tmp/d.$$ $dest
+		rm -f /tmp/d.$$
+	fi
+done
+
+exit 0

@@ -1,0 +1,20 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)setproc.dbg	1.8	98/07/19 SMI"
+
+#include <sys/proc.h>
+#include "dummy.h"
+
+\	'pid_hashsz' is a 32-bit access.
+\
+__dummy		""	setproc
+{adb_inline_begin}
+.>p
+*pid_hashsz>/i/P
+<P-1>P
+*pidhash+((<p&<P)*{PTRSIZE})>P
+*(<P)>P
+<P,#(#(<P))$<setproc.nxt
+{adb_inline_end}

@@ -1,0 +1,20 @@
+#
+#ident "@(#)Mapfile	1.9	98/06/24 SMI"
+#
+
+text	= LOAD ?RXN V0xFE800000;
+text	| .text;
+text	: $PROGBITS ?A!W;
+
+#
+# start the data segment on a new 4MB page boundary
+# Not all x86 machines support 4MB pages so startup()
+# has to deal with that edge case.
+#
+data	= LOAD ?RWX V0xFEc00000 A0x1000;
+data	| .data;
+data	: $PROGBITS ?AW;
+data	: $NOBITS ?AW;
+
+note	= NOTE;
+note	: $NOTE;

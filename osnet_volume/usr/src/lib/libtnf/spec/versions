@@ -1,0 +1,18 @@
+#
+# Copyright (c) 1998-1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#pragma ident	"@(#)versions	1.1	99/01/25 SMI"
+#
+# vers file for libtnf
+#
+
+i386 {
+	SUNWprivate_1.1;
+}
+sparc {
+	SUNWprivate_1.1;
+}
+sparcv9 {
+	SUNWprivate_1.1;
+}

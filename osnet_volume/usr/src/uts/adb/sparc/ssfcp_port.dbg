@@ -1,0 +1,101 @@
+\
+\ Copyright (c) 1999 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)ssfcp_port.dbg	1.3	99/10/25 SMI"
+\
+#include <sys/isa_defs.h>
+#include <sys/types.h>
+#include <sys/dditypes.h>
+#include <sys/ddidmareq.h>
+#include <sys/mutex.h>
+#include <sys/semaphore.h>
+#include <sys/condvar.h>
+#include <sys/thread.h>
+#include <sys/devops.h>
+#include <sys/scsi/scsi.h>
+#include <sys/fibre-channel/fc.h>
+#include <sys/fibre-channel/impl/fc_ulpif.h>
+#include <sys/fibre-channel/ulp/fcp.h>
+#include <sys/fibre-channel/ulp/fcpvar.h>
+#include "dummy.h"
+\
+\
+ssfcp_port
+{adb_inline_begin}
+.>z
+<z+{OFFSET, ssfcp_mutex}=""
+{adb_inline_end}
+	ssfcp_mutex			.mutex
+{adb_inline_begin}
+<z+{OFFSET, ssfcp_tran}=""
+{adb_inline_end}
+	ssfcp_tran			hex
+	ssfcp_state			hex		fcp_state
+	ssfcpp_dip			hex		dip
+	ssfcpp_top			hex		topology
+	ssfcpp_sid			hex		s_id
+	ssfcpp_state			hex		port_state
+	ssfcpp_nwwn			.la_wwn		node_wwn
+{adb_inline_begin}
+<z+{OFFSET, ssfcpp_pwwn}=""
+{adb_inline_end}
+	ssfcpp_pwwn			.la_wwn		port_wwn
+{adb_inline_begin}
+<z+{OFFSET, ssfcpp_instance}=""
+{adb_inline_end}
+	ssfcpp_instance			hex		instance
+	ssfcpp_max_exch			hex		max_exchanges
+	ssfcpp_cmds_aborted		hex		fca_post_reset_action
+	ssfcpp_linkage			.modlinkage	modlink
+{adb_inline_begin}
+<z+{OFFSET, ssfcpp_priv_pkt_len}=""
+{adb_inline_end}
+	ssfcpp_priv_pkt_len		hex		pkt_priv_len
+	ssfcpp_handle			hex		handle
+	ssfcp_next			hex
+	ssfcp_ncmds			hex
+	ssfcp_dev_cnt			hex
+	ssfcp_link_cnt			hex
+	ssfcp_timer			hex
+	ssfcp_use_lock			hex
+	ssfcp_take_core			hex
+	ssfcp_pkt_cache			hex
+	ssfcp_cmd_mutex			.mutex
+{adb_inline_begin}
+<z+{OFFSET, ssfcp_pkt_head}=""
+{adb_inline_end}
+	ssfcp_pkt_head			hex
+	ssfcp_pkt_tail			hex
+	ssfcp_tgt_head			hex
+	ssfcp_tgt_tail			hex
+	ssfcp_reset_list		hex
+	ssfcp_reset_notify_listf	hex
+	ssfcp_hp_initted		hex
+	ssfcp_ipkt_cnt			hex
+	ssfcp_hp_mutex			.mutex
+{adb_inline_begin}
+<z+{OFFSET, ssfcp_hp_cv}=""
+{adb_inline_end}
+	ssfcp_hp_cv			hex
+	ssfcp_hp_elem_list		hex
+	ssfcp_cr_cv			hex
+	ssfcp_cr_mutex			.mutex
+{adb_inline_begin}
+<z+{OFFSET, ssfcp_cr_pool_cnt}=""
+{adb_inline_end}
+	ssfcp_cr_pool_cnt		hex
+	ssfcp_cr_flag			hex
+	ssfcp_cr_pool			hex
+	ssfcp_tmp_cnt			hex
+	ssfcp_hp_nele			hex
+	ssfcp_ipkt_list			hex
+	ssfcp_event_defs		hex
+	ssfcp_event_hdl 		hex
+{adb_inline_begin}
+<z+{OFFSET, ssfcp_events}=""
++/n"events version"8t"num events"8t"event_set"nxxK
+<z+{OFFSET, ssfcp_wwn_list}=""
++/n"ssfcp_wwn_list"n128K
+<z+{SIZEOF}=""
+{adb_inline_end}

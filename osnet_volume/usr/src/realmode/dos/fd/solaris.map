@@ -1,0 +1,84 @@
+#
+# Copyright 05/13/94 Sun Microsystems, Inc. All Rights Reserved
+#
+#ident "@(#)solaris.map 1.3      94/05/13 SMI"
+#
+#   Composite filesystem mapping file
+#
+#   Each line (other than comments) in this mapping file must be of the form:
+#
+#	ufs pathname	DOS pathname	flags
+#
+#   where
+#	ufs pathname specifies the file on the Solaris boot device that is
+#	    to be replaced or augmented;
+#	DOS pathname specifies the file on the MDB diskette that replaces
+#	    or is concatenated with the file on the boot device;
+#	optional flags are the letter "c" for file concatenation (rather than
+#	    file replacement), and/or the letter "t" for text files to ensure
+#	    that the unix end-of-line convention is enforced.
+#   There is no maximum line length.
+#
+#   New device drivers can be loaded during the MDB / Solaris sequence
+#   by specifying the DOS pathnames for the equivalent ufs pathnames
+#   (where "device" and "vendor" are replaced with the appropriate
+#   strings):
+#
+#	/kernel/drv/device	\vendor\device.dvr
+#	/kernel/drv/device.conf	\vendor\device.cnf	t
+#
+#    The following files (Solaris 2.1 for x86) are opened by ufsboot,
+#     and can be mapped to a file on diskette:
+#
+# /etc/bootrc		\solaris\bootrc.txt	t
+# kadb
+# kernel/unix
+# etc/system		\solaris\system.txt	ct
+# /etc/name_to_major	\solaris\nam2majr.txt	ct
+# /etc/driver_aliases	\solaris\drvalias.txt	ct
+# /etc/name_to_sysnum	\solaris\nam2snum.txt	ct
+# /kernel/drv/classes	\solaris\dclasses.txt   ct
+# /kernel/fs/specfs
+# /kernel/misc/swapgeneric
+# /kernel/sched/TS
+# /kernel/sched/TS_DPTBL
+# /etc/path_to_inst	\solaris\path2ins.txt   t
+# /kernel/drv/kd
+# /kernel/drv/kd.conf
+# /kernel/fs/ufs
+# /kernel/drv/rootnex
+# /kernel/drv/rootnex.conf
+# /usr/kernel/drv/rootnex.conf
+# /kernel/drv/options
+# /kernel/drv/options.conf
+# /kernel/drv/sad
+# /kernel/drv/sad.conf
+# /kernel/drv/pseudo
+# /kernel/drv/pseudo.conf
+# /kernel/drv/objmgr
+# /kernel/drv/objmgr.conf
+# /kernel/drv/cmdk
+# /kernel/misc/snlb
+# /kernel/drv/cmdk.conf
+# /kernel/drv/ata
+# /kernel/misc/dadk
+# /kernel/misc/gda
+# /kernel/misc/strategy
+# /kernel/drv/ata.conf
+# /kernel/drv/isa
+# /kernel/drv/isa.conf
+# /kernel/drv/eisa
+# /kernel/drv/eisa.conf
+# /kernel/drv/mc
+# /kernel/drv/mc.conf
+# /kernel/drv/mcis
+# /kernel/misc/scdk
+# /kernel/misc/scsi
+# /kernel/drv/mcis.conf
+# /kernel/drv/aha
+# /kernel/drv/aha.conf
+# /kernel/drv/eha
+# /kernel/drv/eha.conf
+# /kernel/drv/dpt
+# /kernel/drv/dpt.conf
+

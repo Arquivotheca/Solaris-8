@@ -1,0 +1,6 @@
+#!/bin/sh
+#ident	"@(#)inc.flg	1.1	95/03/21 SMI"
+
+echo_file usr/src/uts/common/tnf/tnf_writer.c
+echo_file usr/src/uts/common/tnf/tnf_types.h
+echo_file usr/src/uts/common/tnf/tnf_probe.c

@@ -1,0 +1,141 @@
+<TITLE> To Install a Network Printer </TITLE>
+<!-- Tag=ToInstallNetwork -->
+
+<CONTENT>
+
+<p>
+
+Once you have physically connected the printer to the network,
+do the following to install the printer, which makes the printer
+available for printing from the network.
+
+<p>
+
+<b> Note:</b> The computer on which you are running Solaris Print
+Manager becomes the printer server for the printer being installed.
+
+<p>
+
+1. Choose New Network Printer from the Printer menu.
+
+<p>
+
+The New Attached Printer dialog will be displayed.
+
+<p> 
+
+2. Enter a name in Printer Name.
+
+<p>
+
+3. [Optional] Enter a description of the printer.
+
+<p>
+This might include the location and the type of printer.
+
+<p>
+4. Select a printer type from the Printer Type pulldown menu.
+
+<p>
+
+Scroll the list if necessary. If the printer type is not in the list,
+select Other; you will be asked to specify a printer type. Enter a
+printer type and click OK.
+
+<p>
+5. Select an item in the File Contents pulldown menu.
+
+<p>
+Choices include PostScript and ASCII; the default is PostScript, which
+will work in most cases. 
+
+<p>
+6. Select an item in the Fault Notification pulldown menu.
+
+<p>
+
+The default is Write to Superuser.
+
+<p>
+7. Enter the network name of the printer in the Destination field,
+followed by a colon and the printer-vendor-supplied queue name.  
+
+<p>
+8. Select either BSD or TCP from the Protocol pulldown menu.
+
+<p>
+9. [Optional] Click Default Printer if you want this printer to be the default
+printer for this server.
+
+<p>
+
+10. [Optional] Click Always Print Banner if you want a banner or
+separator page page to be printed between jobs, even if a user
+specifies "nobanner" in a print command.
+
+<p>
+11. Modify the User Access List, if necessary.
+
+<p>
+
+
+The default value is "all," meaning that anyone can use this printer.
+If you want to restrict its use to individual users, enter a user name
+in the text field below the list and click Add. Other legal constructs
+are system-name!login-ID (user "login-ID" on system "system-name"),
+system-name!all (all users on system "system-name"), and all!login-ID
+(user "login-ID" on all systems). Use the lpadmin(1M) command to deny
+access to users. 
+
+<p>
+
+<b> Note:</b> If you enter "all" or "none" in the text field and click
+Add, all individual user names will be deleted from the list and
+replaced by "all" or "none." 
+
+<p> 
+12. Click OK or Apply to install the printer.
+
+<p>
+The window will remain if you click Apply, allowing you to install
+additional printers. 
+
+<p>
+
+<b> Note:</b> If you are using the NIS naming service, you have to know
+the root password for the NIS master; you will be prompted for the
+password when you click Apply or OK. Enter the password and click OK.
+
+<p> 
+
+<b>OK:</b> Apply changes and dismiss the window.
+<br>
+<b>Apply:</b> Apply the changes and leave the window displayed.
+<br>
+<b>Reset:</b> Reset all fields to last Apply
+<br>
+<b>Cancel:</b> Dismiss the window.
+<br>
+<b>Help:</b> Display help for the current window or dialog. 
+
+<p>
+
+</CONTENT>
+
+<KEYWORDS>
+
+install network "network printer" "printer name" server description
+port "printer type" "file contents" fault "fault notification"
+"default printer" banner destination protocol new bsd tcp 
+
+</KEYWORDS>
+
+<p>
+
+<SEEALSO>
+InstallNetwork
+ToAddAccess
+Overview
+MainWindow 
+HelpOnHelp
+</SEEALSO>

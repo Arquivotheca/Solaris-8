@@ -1,0 +1,9 @@
+
+ident   "@(#)README 1.2     99/08/16 SMI"
+
+cmd/perl/contrib/README
+
+This directory contains SMI-developed Perl modules.  Modules related to Solaris
+should be placed under Sun::Solaris, which has been reserved for SMI development
+by CPAN.  Modules involving Perl installations which do not run on Solaris,
+or which refer to unbundled products, should seek ARC guidance for naming.

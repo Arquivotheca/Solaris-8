@@ -1,0 +1,19 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)prgregset.dbg	1.4	98/07/19 SMI"
+
+#include "dummy.h"
+
+\
+\
+__dummy         ""      prgregset
+{adb_inline_begin}
+./"globals: "n8{HEX}
++/"locals: "n8{HEX}
++/"ins: "n8{HEX}
+#if defined(__sparc) && !defined(__sparcv9)
++/"psr"16t"pc"16t"npc"16t"y"n4X
+#endif
+{adb_inline_end}

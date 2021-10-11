@@ -1,0 +1,147 @@
+#
+#
+# Copyright (c) 1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#ident	"@(#)prototype_com	1.1	99/10/08 SMI"
+#
+# This required package information file contains a list of package contents.
+# The 'pkgmk' command uses this file to identify the contents of a package
+# and their location on the development machine when building the package.
+# Can be created via a text editor or through use of the 'pkgproto' command.
+
+#!search <pathname pathname ...>	# where to find pkg objects
+#!include <filename>			# include another 'prototype' file
+#!default <mode> <owner> <group>	# default used if not specified on entry
+#!<param>=<value>			# puts parameter in pkg environment
+
+# packaging files
+i pkginfo
+i copyright
+i depend
+#
+# source locations relative to the prototype file
+#
+# SUNWzlibS
+#
+d none usr 755 root sys
+d none usr/share 755 root sys
+d none usr/share/src 755 root sys
+d none usr/share/src/zlib 755 root bin
+f none usr/share/src/zlib/README 444 root bin
+f none usr/share/src/zlib/FAQ 444 root bin
+f none usr/share/src/zlib/INDEX 444 root bin
+f none usr/share/src/zlib/ChangeLog 444 root bin
+f none usr/share/src/zlib/configure 555 root bin
+f none usr/share/src/zlib/Make_vms.com 444 root bin
+f none usr/share/src/zlib/Makefile.dist 444 root bin
+f none usr/share/src/zlib/Makefile.in 444 root bin
+f none usr/share/src/zlib/Makefile.riscos 444 root bin
+f none usr/share/src/zlib/adler32.c 444 root bin
+f none usr/share/src/zlib/compress.c 444 root bin
+f none usr/share/src/zlib/crc32.c 444 root bin
+f none usr/share/src/zlib/deflate.c 444 root bin
+f none usr/share/src/zlib/deflate.h 444 root bin
+f none usr/share/src/zlib/example.c 444 root bin
+f none usr/share/src/zlib/gzio.c 444 root bin
+f none usr/share/src/zlib/infblock.c 444 root bin
+f none usr/share/src/zlib/infblock.h 444 root bin
+f none usr/share/src/zlib/infcodes.c 444 root bin
+f none usr/share/src/zlib/infcodes.h 444 root bin
+f none usr/share/src/zlib/inffast.c 444 root bin
+f none usr/share/src/zlib/inffast.h 444 root bin
+f none usr/share/src/zlib/inffixed.h 444 root bin
+f none usr/share/src/zlib/inflate.c 444 root bin
+f none usr/share/src/zlib/inftrees.c 444 root bin
+f none usr/share/src/zlib/inftrees.h 444 root bin
+f none usr/share/src/zlib/infutil.c 444 root bin
+f none usr/share/src/zlib/infutil.h 444 root bin
+f none usr/share/src/zlib/maketree.c 444 root bin
+f none usr/share/src/zlib/minigzip.c 444 root bin
+f none usr/share/src/zlib/trees.c 444 root bin
+f none usr/share/src/zlib/trees.h 444 root bin
+f none usr/share/src/zlib/uncompr.c 444 root bin
+f none usr/share/src/zlib/zconf.h 444 root bin
+f none usr/share/src/zlib/zlib.h 444 root bin
+f none usr/share/src/zlib/zutil.c 444 root bin
+f none usr/share/src/zlib/zutil.h 444 root bin
+f none usr/share/src/zlib/descrip.mms 444 root bin
+f none usr/share/src/zlib/algorithm.txt 444 root bin
+f none usr/share/src/zlib/zlib.3 444 root bin
+d none usr/share/src/zlib/msdos 755 root bin
+f none usr/share/src/zlib/msdos/Makefile.b32 444 root bin
+f none usr/share/src/zlib/msdos/Makefile.bor 444 root bin
+f none usr/share/src/zlib/msdos/Makefile.dj2 444 root bin
+f none usr/share/src/zlib/msdos/Makefile.emx 444 root bin
+f none usr/share/src/zlib/msdos/Makefile.msc 444 root bin
+f none usr/share/src/zlib/msdos/Makefile.tc 444 root bin
+f none usr/share/src/zlib/msdos/Makefile.w32 444 root bin
+f none usr/share/src/zlib/msdos/Makefile.wat 444 root bin
+f none usr/share/src/zlib/msdos/zlib.def 444 root bin
+f none usr/share/src/zlib/msdos/zlib.rc 444 root bin
+d none usr/share/src/zlib/nt 755 root bin
+f none usr/share/src/zlib/nt/Makefile.emx 444 root bin
+f none usr/share/src/zlib/nt/Makefile.gcc 444 root bin
+f none usr/share/src/zlib/nt/Makefile.nt 444 root bin
+f none usr/share/src/zlib/nt/zlib.dnt 444 root bin
+d none usr/share/src/zlib/amiga 755 root bin
+f none usr/share/src/zlib/amiga/Makefile.pup 444 root bin
+f none usr/share/src/zlib/amiga/Makefile.sas 444 root bin
+d none usr/share/src/zlib/os2 755 root bin
+f none usr/share/src/zlib/os2/Makefile.os2 444 root bin
+f none usr/share/src/zlib/os2/zlib.def 444 root bin
+d none usr/share/src/zlib/contrib 755 root bin
+f none usr/share/src/zlib/contrib/README.contrib 444 root bin
+f none usr/share/src/zlib/contrib/visual-basic.txt 444 root bin
+d none usr/share/src/zlib/contrib/asm386 755 root bin
+f none usr/share/src/zlib/contrib/asm386/gvmat32.asm 444 root bin
+f none usr/share/src/zlib/contrib/asm386/gvmat32c.c 444 root bin
+f none usr/share/src/zlib/contrib/asm386/mkgvmt32.bat 444 root bin
+f none usr/share/src/zlib/contrib/asm386/zlibvc.def 444 root bin
+f none usr/share/src/zlib/contrib/asm386/zlibvc.dsp 444 root bin
+f none usr/share/src/zlib/contrib/asm386/zlibvc.dsw 444 root bin
+d none usr/share/src/zlib/contrib/asm586 755 root bin
+f none usr/share/src/zlib/contrib/asm586/README.586 444 root bin
+f none usr/share/src/zlib/contrib/asm586/match.S 444 root bin
+d none usr/share/src/zlib/contrib/asm686 755 root bin
+f none usr/share/src/zlib/contrib/asm686/README.686 444 root bin
+f none usr/share/src/zlib/contrib/asm686/match.S 444 root bin
+d none usr/share/src/zlib/contrib/iostream 755 root bin
+f none usr/share/src/zlib/contrib/iostream/test.cpp 444 root bin
+f none usr/share/src/zlib/contrib/iostream/zfstream.cpp 444 root bin
+f none usr/share/src/zlib/contrib/iostream/zfstream.h 444 root bin
+d none usr/share/src/zlib/contrib/iostream2 755 root bin
+f none usr/share/src/zlib/contrib/iostream2/zstream.h 444 root bin
+f none usr/share/src/zlib/contrib/iostream2/zstream_test.cpp 444 root bin
+d none usr/share/src/zlib/contrib/untgz 755 root bin
+f none usr/share/src/zlib/contrib/untgz/Makefile 444 root bin
+f none usr/share/src/zlib/contrib/untgz/untgz.c 444 root bin
+f none usr/share/src/zlib/contrib/untgz/makefile.w32 444 root bin
+d none usr/share/src/zlib/contrib/minizip 755 root bin
+f none usr/share/src/zlib/contrib/minizip/ChangeLogUnzip 444 root bin
+f none usr/share/src/zlib/contrib/minizip/Makefile 444 root bin
+f none usr/share/src/zlib/contrib/minizip/miniunz.c 444 root bin
+f none usr/share/src/zlib/contrib/minizip/minizip.c 444 root bin
+f none usr/share/src/zlib/contrib/minizip/unzip.c 444 root bin
+f none usr/share/src/zlib/contrib/minizip/unzip.h 444 root bin
+f none usr/share/src/zlib/contrib/minizip/zip.c 444 root bin
+f none usr/share/src/zlib/contrib/minizip/zip.h 444 root bin
+f none usr/share/src/zlib/contrib/minizip/readme.txt 444 root bin
+f none usr/share/src/zlib/contrib/minizip/unzip.def 444 root bin
+f none usr/share/src/zlib/contrib/minizip/zip.def 444 root bin
+f none usr/share/src/zlib/contrib/minizip/zlibvc.def 444 root bin
+f none usr/share/src/zlib/contrib/minizip/zlibvc.dsp 444 root bin
+f none usr/share/src/zlib/contrib/minizip/zlibvc.dsw 444 root bin
+d none usr/share/src/zlib/contrib/delphi 755 root bin
+f none usr/share/src/zlib/contrib/delphi/zlib.mak 444 root bin
+f none usr/share/src/zlib/contrib/delphi/zlibdef.pas 444 root bin
+d none usr/share/src/zlib/contrib/delphi2 755 root bin
+f none usr/share/src/zlib/contrib/delphi2/d_zlib.bpr 444 root bin
+f none usr/share/src/zlib/contrib/delphi2/d_zlib.cpp 444 root bin
+f none usr/share/src/zlib/contrib/delphi2/readme.txt 444 root bin
+f none usr/share/src/zlib/contrib/delphi2/zlib.bpg 444 root bin
+f none usr/share/src/zlib/contrib/delphi2/zlib.bpr 444 root bin
+f none usr/share/src/zlib/contrib/delphi2/zlib.cpp 444 root bin
+f none usr/share/src/zlib/contrib/delphi2/zlib.pas 444 root bin
+f none usr/share/src/zlib/contrib/delphi2/zlib32.bpr 444 root bin
+f none usr/share/src/zlib/contrib/delphi2/zlib32.cpp 444 root bin

@@ -1,0 +1,42 @@
+\
+\ Copyright (c) 1999 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)usoc_priv_cmd.dbg	1.1	99/07/21 SMI"
+#include <sys/isa_defs.h>
+#include <sys/types.h>
+#include <sys/dditypes.h>
+#include <sys/ddidmareq.h>
+#include <sys/mutex.h>
+#include <sys/semaphore.h>
+#include <sys/condvar.h>
+#include <sys/thread.h>
+#include <sys/devops.h>
+#include <sys/taskq.h>
+#include <sys/fibre-channel/fc.h>
+#include <sys/fibre-channel/fca/usoc_cq_defs.h>
+#include <sys/fibre-channel/fca/usocio.h>
+#include <sys/fibre-channel/fca/usocreg.h>
+#include <sys/fibre-channel/fca/usocvar.h>
+#include "dummy.h"
+\
+\
+usoc_priv_cmd
+{adb_inline_begin}
+.>a
+<a+{OFFSET, fapktp}=""
+{adb_inline_end}
+	fapktp				hex
+	flags				hex
+	cmd				hex
+	rsp				hex
+	cmd_handle			hex
+	cmd_acchandle			hex
+	rsp_handle			hex
+	rsp_acchandle			hex
+	callback			hex
+	arg				hex
+	payload				hex	
+{adb_inline_begin}
+<a+{SIZEOF}=""
+{adb_inline_end}

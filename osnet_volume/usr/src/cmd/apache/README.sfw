@@ -1,0 +1,3 @@
+Originally configured with the following command:
+
+CC=cc CFLAGS='-xO3 -xspace' CFLAGS_SHLIB='-G -Kpic'  ./configure --with-layout=Solaris --enable-module=proxy --enable-module=so --enable-module=usertrack --enable-module=unique_id --enable-module=mime_magic --enable-module=rewrite --enable-module=speling --enable-module=auth_dbm --enable-module=auth_anon --enable-module=digest --enable-module=headers --enable-module=cern_meta --enable-module=expires --enable-module=info --enable-shared=max --activate-module=src/modules/perl/libperl.a --enable-shared=perl

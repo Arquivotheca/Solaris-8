@@ -1,0 +1,65 @@
+#
+#ident	"@(#)Makefile.sfw	1.1	99/10/20 SMI"
+#
+# Copyright (c) 1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+
+include ../../Makefile.paths
+include ../../../Makefile.cmd
+
+HDRS= \
+	alloc.h \
+	ap.h \
+	ap_compat.h \
+	ap_config.h \
+	ap_config_auto.h \
+	ap_ctype.h \
+	ap_md5.h \
+	ap_mmn.h \
+	ap_sha1.h \
+	ap_mm.h \
+	ap_hook.h \
+	ap_ctx.h \
+	buff.h \
+	compat.h \
+	conf.h \
+	explain.h \
+	fnmatch.h \
+	hsregex.h \
+	http_conf_globals.h \
+	http_config.h \
+	http_core.h \
+	http_log.h \
+	http_main.h \
+	http_protocol.h \
+	http_request.h \
+	http_vhost.h \
+	httpd.h \
+	multithread.h \
+	rfc1413.h \
+	scoreboard.h \
+	util_date.h \
+	util_md5.h \
+	util_script.h \
+	util_uri.h
+
+ROOTHDRS=$(HDRS:%=$(ROOTHTTPDINCDIR)/%)
+
+.KEEP_STATE:
+
+all clean clobber lint:
+
+install: $(ROOTHTTPDINCDIR) .WAIT $(ROOTHDRS)
+
+$(ROOTHTTPDINCDIR):
+	$(INS.dir)
+
+$(ROOTHTTPDINCDIR)/%:=	FILEMODE=0644
+$(ROOTHTTPDINCDIR)/%: %
+	$(INS.file)
+
+include ../../../Makefile.targ
+
+FRC:
+

@@ -1,0 +1,14 @@
+#
+#ident	"@(#)Makefile.ucbtarg	1.1	90/04/27 SMI"
+#
+# Copyright (c) 1989 by Sun Microsystems, Inc.
+#
+# ucblib/Makefile.ucbtarg
+#
+# included to define local library targets
+#
+
+# install rules
+$(ROOTLIBDIR):
+	$(INS.dir)
+

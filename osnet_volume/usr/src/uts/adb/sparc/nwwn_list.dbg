@@ -1,0 +1,31 @@
+\
+\ Copyright (c) 1999 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)nwwn_list.dbg	1.1	99/07/21 SMI"
+\
+#include <sys/isa_defs.h>
+#include <sys/types.h>
+#include <sys/dditypes.h>
+#include <sys/ddidmareq.h>
+#include <sys/mutex.h>
+#include <sys/semaphore.h>
+#include <sys/condvar.h>
+#include <sys/thread.h>
+#include <sys/devops.h>
+#include <sys/fibre-channel/fc.h>
+#include <sys/fibre-channel/impl/fc_ulpif.h>
+#include <sys/fibre-channel/impl/fctl_private.h>
+#include "dummy.h"
+\
+\
+nwwn_list
+{adb_inline_begin}
+.>w
+<w+{OFFSET, hash_head}=""
+{adb_inline_end}
+	hash_head		hex
+	num_devs		hex
+{adb_inline_begin}
+<w+{SIZEOF}=""
+{adb_inline_end}

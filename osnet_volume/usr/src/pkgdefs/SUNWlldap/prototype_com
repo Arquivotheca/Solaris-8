@@ -1,0 +1,35 @@
+#	Copyright (c) 1990-93,1999 Sun Microsystems, Inc.
+#		All Rights Reserved
+#
+#ident "@(#)prototype_com 1.8     99/07/07 SMI"
+#
+# This required package information file contains a list of package contents.
+# The 'pkgmk' command uses this file to identify the contents of a package
+# and their location on the development machine when building the package.
+# Can be created via a text editor or through use of the 'pkgproto' command.
+
+#!search <pathname pathname ...>	# where to find pkg objects
+#!include <filename>			# include another 'prototype' file
+#!default <mode> <owner> <group>	# default used if not specified on entry
+#!<param>=<value>			# puts parameter in pkg environment
+
+# packaging files
+i pkginfo
+i copyright
+i depend
+#
+# Include ISA independent files (prototype_com)
+#
+d none usr 755 root sys
+d none usr/include 755 root bin
+d none usr/bin 755 root bin
+f none usr/include/ldap.h 644 root bin
+f none usr/include/lber.h 644 root bin
+l none usr/bin/ldapadd=./ldapmodify
+f none usr/bin/ldapmodify 555 root bin
+f none usr/bin/ldapdelete 555 root bin
+f none usr/bin/ldapmodrdn 555 root bin
+f none usr/bin/ldapsearch 555 root bin
+#
+#
+#

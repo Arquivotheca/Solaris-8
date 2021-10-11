@@ -1,0 +1,8 @@
+#!/bin/sh
+#
+#"@(#)req.flg 1.1	%E SMI"
+#
+
+echo_file usr/src/lib/libnsl/nis/cache/cache_entry.h
+echo_file usr/src/lib/libnsl/nis/cache/dircache.h
+echo_file usr/src/lib/fn/context/onc_ns/nisplus/fnsp_nisplus_root.cc

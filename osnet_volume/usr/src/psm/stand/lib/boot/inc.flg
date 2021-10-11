@@ -1,0 +1,9 @@
+#!/bin/sh
+#
+#pragma	ident	"@(#)inc.flg	1.1	97/06/30 SMI"
+#
+#
+# Find all of the header files
+#
+
+echo_file usr/src/uts/sparc/os/bootops.c

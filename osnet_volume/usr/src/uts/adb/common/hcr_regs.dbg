@@ -1,0 +1,49 @@
+\
+\ Copyright (c) 1998-1999 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)hcr_regs.dbg	1.1	99/11/05 SMI"
+
+#include <sys/usb/usba.h>
+#include <sys/usb/usba/usba_types.h>
+#include <sys/usb/hcd/openhci/ohci.h>
+#include "dummy.h"
+
+\
+\
+
+hcr_regs	hcr_	
+{adb_inline_begin}
+.>z
+<z+{OFFSET, hcr_revision}=""
+{adb_inline_end}
+	revision		hex
+	control			hex
+	cmd_status		hex
+	intr_status		hex
+	intr_enable		hex
+	intr_disable		hex
+	HCCA			hex
+	periodic_curr		hex
+	ctrl_head		hex
+	ctrl_curr		hex
+	bulk_head		hex
+	bulk_curr		hex
+	done_head		hex
+	frame_interval		hex
+	frame_remaining		hex
+	frame_number		hex
+	periodic_strt		hex
+	transfer_ls		hex
+	rh_descriptorA		hex
+	rh_descriptorB		hex
+	rh_status		hex
+	rh_portstatus		hex
+	rio_core_ctrl		hex
+	rio_intr_sts		hex
+	rio_preftch_ctrl	hex
+	rio_cache_tag		hex
+	rio_slv_acc_ctrl	hex
+{adb_inline_begin}
+<z+{SIZEOF}=""
+{adb_inline_end}

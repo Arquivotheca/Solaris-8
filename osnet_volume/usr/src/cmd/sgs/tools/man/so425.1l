@@ -1,0 +1,49 @@
+.\" @(#)so425.1l 1.2 95/03/08 SMI
+.\" Copyright (c) 1995 by Sun Microsystems, Inc.
+.\" All rights reserved.
+.\"
+.TH so425 1 "27 Mar 1994"
+.SH NAME
+so425 \- convert shared object from 4.x to 5.x
+.SH SYNOPSIS
+.B so425
+.I 4.x.so
+.SH DESCRIPTION
+.IX "so425" "" "\fLso425\fP \(em convert shared object from 4.x to 5.x"
+.IX "shared objects" "covert" "" "convert shared object from 4.x to 5.x \(em \fLso425\fP"
+.B so425
+takes an
+.I a.out
+format (4.x) shared object and creates from it an
+.I ELF
+format (5.x) shared object suitable for use in the construction of programs 
+on an ELF-based system.  The 5.x shared object is
+.I only
+usable for operations with
+.BR ld .
+Actual execution of the resulting program uses the 4.x shared object.
+.PP
+This utility may ease the migration between the object formats by permitting
+items provided only in 4.x form to continue to be used for construction of
+5.x programs.  The resulting 5.x shared object is constructed so that the
+``normal'' search paths of the dynamic linking operations will be used to
+locate the 4.x shared object.  
+.PP
+For example:
+.PP
+.RS
+.B "% so425 /usr/lib/libpixrect.so.2.5"
+.RE
+.PP
+will create in the current directory a file named
+.IR libpixrect.so .
+Use of this file in link editing operations on 5.x will result in the
+creation of an executable that has a dependency upon
+.I libpixrect.so.2.5
+.SH OPTIONS
+.PP
+None.
+.SH SEE ALSO
+.BR as (1),
+.BR nm (1),
+.BR dump (1),

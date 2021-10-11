@@ -1,0 +1,60 @@
+\
+\ Copyright (c) 1999 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)ipif.dbg	1.2	99/08/19 SMI"
+
+#include <sys/types.h>
+#include <sys/stropts.h>
+#include <sys/socket.h>
+#include <netinet/in_systm.h>
+#include <netinet/in.h>
+#include <netinet/ip.h>
+#include <netinet/ip6.h>
+#include <netinet/icmp6.h>
+#include <net/if.h>
+#include <sys/stream.h>
+#include <inet/common.h>
+#include <inet/led.h>
+#include <inet/ip.h>
+#include <inet/ip6.h>
+#include "dummy.h"
+
+ipif_s                ""              ipif
+{adb_inline_begin}
+.>z
+<z+{OFFSET, ipif_next}=""
+{adb_inline_end}
+	ipif_next		hex	ipif_next
+	ipif_ill		hex	ipif_ill
+	ipif_id			decimal	ipif_id
+	ipif_mtu		decimal	ipif_mtu
+	ipif_v6lcl_addr		.in6_addr
+	ipif_v6src_addr		.in6_addr
+	ipif_v6subnet		.in6_addr
+	ipif_v6net_mask		.in6_addr
+	ipif_v6brd_addr		.in6_addr
+	ipif_v6pp_dst_addr	.in6_addr
+	ipif_flags		hex	ipif_flags
+	ipif_metric		decimal	ipif_metric
+	ipif_ire_type		hex	ipif_ire_type
+	ipif_down_mp		hex	ipif_down_mp
+	ipif_arp_on_mp		hex	ipif_arp_on_mp
+	ipif_saved_ire_mp	hex	ipif_saved_ire_mp
+	ipif_saved_ire_lock	.mutex
+	ipif_ifgrpu.ifgrpu_schednext		hex	ipif_ifgrpschednext
+	ipif_ifgrpnext		hex	ipif_ifgrpnext
+	ipif_fo_pkt_count	decimal	ipif_fo_pkt_count
+	ipif_ib_pkt_count	decimal	ipif_ib_pkt_count
+	ipif_ob_pkt_count	decimal	ipif_ob_pkt_count
+{adb_inline_begin}
+*(<z+{OFFSET, ipif_multicast_up})>/i/t
+#if defined(_BIG_ENDIAN)
+(##(<t&0x80000000))="ipif_multicast_up"8tB
+(##(<t&0x40000000))="ipif_solmcast_up"8tB
+#elif defined(_LITTLE_ENDIAN)
+(##(<t&0x00000001))="ipif_multicast_up"8tB
+(##(<t&0x00000002))="ipif_solmcast_up"8tB
+#endif
+<z+{SIZEOF}=""
+{adb_inline_end}

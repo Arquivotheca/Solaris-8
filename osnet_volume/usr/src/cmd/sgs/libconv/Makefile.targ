@@ -1,0 +1,40 @@
+#
+#ident	"@(#)Makefile.targ	1.11	99/10/12 SMI"
+#
+# Copyright (c) 1999 by Sun Microsystems, Inc.
+# All rights reserved.
+
+pics/%.o:	../common/%.c
+		$(COMPILE.c) -o $@ $<
+		$(POST_PROCESS_O)
+
+../common/%.c:	%_msg.h
+
+%_msg.h:	../common/%.msg
+		$(SGSMSG) $(SGSMSGFLAGS) -l -h $@ -d $@ $<
+
+$(LIBRARY):	pics $$(PICS)
+		@ $(RM) $(LIBRARY)
+		$(AR) $(ARFLAGS) $@ $(PICS)
+		$(POST_PROCESS_A)
+
+chkmsg:		$(LINTSRCS)
+		-sh $(CHKMSG) $(CHKMSGFLAGS) $(LINTSRCS)
+
+lint:		$(LINTLIB) $(LINTOUT32) $(SGSLINTOUT)
+
+$(LINTLIB): $$(SRCS)
+		$(LINT.c) -o $(LIBNAME) $(SRCS) > $(LINTOUT) 2>&1
+
+pics:
+		-@mkdir -p $@
+
+clobber:	clean
+		-$(RM) $(LIBRARY) $(CLOBBERFILES)
+
+clean:
+		-$(RM) $(PICS) $(CLEANFILES)
+
+delete:
+
+include		$(SRC)/cmd/sgs/Makefile.targ

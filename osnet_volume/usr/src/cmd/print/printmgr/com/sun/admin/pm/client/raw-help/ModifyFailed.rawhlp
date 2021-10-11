@@ -1,0 +1,36 @@
+<TITLE> If Modify Printer Fails</TITLE>
+<!-- Tag=ModifyFailed -->
+
+<CONTENT>
+
+<p>
+
+An attempt to modify printer properties failed.  It is possible that
+someone has deleted the printer before this modify operation completed.
+
+<p>
+
+Display the Command-Line Console to help pinpoint where the error
+may have occurred. Choose Show Command-Line Console from the Print
+Manager menu to display the Command-Line Console. See the man page for
+lpadmin(1M) for further information. 
+
+</CONTENT>
+
+<p>
+
+<KEYWORDS>
+modify "modify printer" fail failure
+</KEYWORDS>
+
+<p>
+
+<SEEALSO>
+ToModify
+Modify
+ToShowCommand
+Overview
+MainWindow 
+HelpOnHelp
+</SEEALSO>        
+

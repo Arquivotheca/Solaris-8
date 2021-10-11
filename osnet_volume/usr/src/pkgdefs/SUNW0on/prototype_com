@@ -1,0 +1,136 @@
+#
+# Copyright (c) 1995-1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#ident	"@(#)prototype_com	1.19	99/07/29 SMI"
+#
+# This required package information file contains a list of package contents.
+# The 'pkgmk' command uses this file to identify the contents of a package
+# and their location on the development machine when building the package.
+# Can be created via a text editor or through use of the 'pkgproto' command.
+
+# packaging files
+i pkginfo
+i copyright
+#
+# source locations relative to the prototype file
+#
+# SUNW0on
+#
+d none usr              755 root sys
+d none usr/lib          755 root bin
+d none usr/lib/locale               755 root bin
+d none usr/lib/locale/C             755 root bin
+d none usr/lib/locale/C/LC_MESSAGES 755 root bin
+d none usr/lib/locale/C/LC_TIME     755 root bin
+f none usr/lib/locale/C/LC_MESSAGES/SUNW_OST_ADMIN.po    644 root sys
+f none usr/lib/locale/C/LC_MESSAGES/SUNW_OST_NETRPC.po   644 root sys
+f none usr/lib/locale/C/LC_MESSAGES/SUNW_OST_OSCMD.po    644 root sys
+f none usr/lib/locale/C/LC_MESSAGES/SUNW_OST_OSLIB.po    644 root sys
+f none usr/lib/locale/C/LC_MESSAGES/SUNW_OST_UCBCMD.po   644 root sys
+f none usr/lib/locale/C/LC_MESSAGES/SUNW_OST_SGS.po      644 root sys
+f none usr/lib/locale/C/LC_MESSAGES/SUNW_OST_SYSOSPAM.po 644 root sys
+f none usr/lib/locale/C/LC_MESSAGES/SUNW_OST_LINFO       644 root sys
+f none usr/lib/locale/C/LC_MESSAGES/pam_ldap.msg        644 root sys
+f none usr/lib/locale/C/LC_MESSAGES/libpam.msg           644 root sys
+f none usr/lib/locale/C/LC_MESSAGES/pam_ami.msg         644 root sys
+f none usr/lib/locale/C/LC_MESSAGES/libami.msg		644 root sys
+f none usr/lib/locale/C/LC_MESSAGES/pam_unix.msg         644 root sys
+f none usr/lib/locale/C/LC_MESSAGES/mailx.help           644 root sys
+f none usr/lib/locale/C/LC_MESSAGES/more.help            644 root sys
+f none usr/lib/locale/C/LC_MESSAGES/uxlibc.src           644 root sys
+f none usr/lib/locale/C/LC_TIME/SUNW_OST_OSCMD.po        644 root sys
+#
+# Java locale directories
+#
+d none usr/share				755 root sys
+d none usr/share/lib				755 root sys
+d none usr/share/lib/locale			755 root bin
+d none usr/share/lib/locale/com			755 root bin
+d none usr/share/lib/locale/com/sun		755 root bin
+d none usr/share/lib/locale/com/sun/admin	755 root bin
+#
+# Solaris print manager
+#
+d none usr/share/lib/locale/com/sun/admin/pm 755 root bin
+d none usr/share/lib/locale/com/sun/admin/pm/client 755 root bin
+f none usr/share/lib/locale/com/sun/admin/pm/client/pmResources.java 644 root lp
+f none usr/share/lib/locale/com/sun/admin/pm/client/pmHelpResources.java 644 root lp
+#
+# Service Location Protocol
+#
+d none usr/share/lib/locale/com/sun/slp	755 root bin
+f none usr/share/lib/locale/com/sun/slp/ClientLib_en.properties	644 root sys
+f none usr/share/lib/locale/com/sun/slp/Server_en.properties	644 root sys
+#
+# AMI Messages
+#
+d none usr/share/lib/locale/com/sun/ami                 755 root bin
+f none usr/share/lib/locale/com/sun/ami/AMI_Messages.properties 644 root sys
+f none usr/share/lib/locale/com/sun/ami/AMI_Messages_Log.properties 644 root sys
+#
+# DHCP Manager
+#
+d none usr/share/lib/locale/com/sun/dhcpmgr 755 root bin
+d none usr/share/lib/locale/com/sun/dhcpmgr/client 755 root bin
+f none usr/share/lib/locale/com/sun/dhcpmgr/client/ResourceBundle.properties 644 root bin
+f none usr/share/lib/locale/com/sun/dhcpmgr/client/OptionDescriptions.properties 644 root bin
+d none usr/share/lib/locale/com/sun/dhcpmgr/client/help 755 root bin
+f none usr/share/lib/locale/com/sun/dhcpmgr/client/help/dhcp_addr_create.html 444 root bin
+f none usr/share/lib/locale/com/sun/dhcpmgr/client/help/dhcp_addr_del.html 444 root bin
+f none usr/share/lib/locale/com/sun/dhcpmgr/client/help/dhcp_addr_dup.html 444 root bin
+f none usr/share/lib/locale/com/sun/dhcpmgr/client/help/dhcp_addr_how.html 444 root bin
+f none usr/share/lib/locale/com/sun/dhcpmgr/client/help/dhcp_addr_mod.html 444 root bin
+f none usr/share/lib/locale/com/sun/dhcpmgr/client/help/dhcp_addr_multi.html 444 root bin
+f none usr/share/lib/locale/com/sun/dhcpmgr/client/help/dhcp_addr_ref.html 444 root bin
+f none usr/share/lib/locale/com/sun/dhcpmgr/client/help/dhcp_addr_rel.html 444 root bin
+f none usr/share/lib/locale/com/sun/dhcpmgr/client/help/dhcp_addr_view.html 444 root bin
+f none usr/share/lib/locale/com/sun/dhcpmgr/client/help/dhcp_addr_wiz.html 444 root bin
+f none usr/share/lib/locale/com/sun/dhcpmgr/client/help/dhcp_config_wiz.html 444 root bin
+f none usr/share/lib/locale/com/sun/dhcpmgr/client/help/dhcp_macro_create.html 444 root bin
+f none usr/share/lib/locale/com/sun/dhcpmgr/client/help/dhcp_macro_del.html 444 root bin
+f none usr/share/lib/locale/com/sun/dhcpmgr/client/help/dhcp_macro_dup.html 444 root bin
+f none usr/share/lib/locale/com/sun/dhcpmgr/client/help/dhcp_macro_how.html 444 root bin
+f none usr/share/lib/locale/com/sun/dhcpmgr/client/help/dhcp_macro_mod.html 444 root bin
+f none usr/share/lib/locale/com/sun/dhcpmgr/client/help/dhcp_macro_ref.html 444 root bin
+f none usr/share/lib/locale/com/sun/dhcpmgr/client/help/dhcp_macro_view.html 444 root bin
+f none usr/share/lib/locale/com/sun/dhcpmgr/client/help/dhcp_macros_about.html 444 root bin
+f none usr/share/lib/locale/com/sun/dhcpmgr/client/help/dhcp_main_hlp.html 444 root bin
+f none usr/share/lib/locale/com/sun/dhcpmgr/client/help/dhcp_main_how.html 444 root bin
+f none usr/share/lib/locale/com/sun/dhcpmgr/client/help/dhcp_main_idx.html 444 root bin
+f none usr/share/lib/locale/com/sun/dhcpmgr/client/help/dhcp_main_menus.html 444 root bin
+f none usr/share/lib/locale/com/sun/dhcpmgr/client/help/dhcp_main_top.html 444 root bin
+f none usr/share/lib/locale/com/sun/dhcpmgr/client/help/dhcp_net_del.html 444 root bin
+f none usr/share/lib/locale/com/sun/dhcpmgr/client/help/dhcp_net_ref.html 444 root bin
+f none usr/share/lib/locale/com/sun/dhcpmgr/client/help/dhcp_net_wiz.html 444 root bin
+f none usr/share/lib/locale/com/sun/dhcpmgr/client/help/dhcp_option_create.html 444 root bin
+f none usr/share/lib/locale/com/sun/dhcpmgr/client/help/dhcp_option_del.html 444 root bin
+f none usr/share/lib/locale/com/sun/dhcpmgr/client/help/dhcp_option_dup.html 444 root bin
+f none usr/share/lib/locale/com/sun/dhcpmgr/client/help/dhcp_option_how.html 444 root bin
+f none usr/share/lib/locale/com/sun/dhcpmgr/client/help/dhcp_option_mod.html 444 root bin
+f none usr/share/lib/locale/com/sun/dhcpmgr/client/help/dhcp_option_ref.html 444 root bin
+f none usr/share/lib/locale/com/sun/dhcpmgr/client/help/dhcp_option_tags.html 444 root bin
+f none usr/share/lib/locale/com/sun/dhcpmgr/client/help/dhcp_option_view.html 444 root bin
+f none usr/share/lib/locale/com/sun/dhcpmgr/client/help/dhcp_relay_choose.html 444 root bin
+f none usr/share/lib/locale/com/sun/dhcpmgr/client/help/dhcp_relay_config.html 444 root bin
+f none usr/share/lib/locale/com/sun/dhcpmgr/client/help/dhcp_relay_dis.html 444 root bin
+f none usr/share/lib/locale/com/sun/dhcpmgr/client/help/dhcp_relay_enable.html 444 root bin
+f none usr/share/lib/locale/com/sun/dhcpmgr/client/help/dhcp_relay_how.html 444 root bin
+f none usr/share/lib/locale/com/sun/dhcpmgr/client/help/dhcp_relay_ref.html 444 root bin
+f none usr/share/lib/locale/com/sun/dhcpmgr/client/help/dhcp_relay_serv.html 444 root bin
+f none usr/share/lib/locale/com/sun/dhcpmgr/client/help/dhcp_relay_unconfig.html 444 root bin
+f none usr/share/lib/locale/com/sun/dhcpmgr/client/help/dhcp_server_serv.html 444 root bin
+f none usr/share/lib/locale/com/sun/dhcpmgr/client/help/dhcp_server_unconfig.html 444 root bin
+f none usr/share/lib/locale/com/sun/dhcpmgr/client/help/dhcp_solaris_about.html 444 root bin
+d none usr/share/lib/locale/com/sun/dhcpmgr/client/help/art 755 root bin
+f none usr/share/lib/locale/com/sun/dhcpmgr/client/help/art/bannersmc.gif 444 root bin
+f none usr/share/lib/locale/com/sun/dhcpmgr/client/help/art/dot1.gif 444 root bin
+f none usr/share/lib/locale/com/sun/dhcpmgr/client/help/art/dot2.gif 444 root bin
+f none usr/share/lib/locale/com/sun/dhcpmgr/client/help/art/folder.gif 444 root bin
+f none usr/share/lib/locale/com/sun/dhcpmgr/client/help/art/macro2.gif 444 root bin
+f none usr/share/lib/locale/com/sun/dhcpmgr/client/help/art/macroflow.gif 444 root bin
+f none usr/share/lib/locale/com/sun/dhcpmgr/client/help/art/tip2.gif 444 root bin
+d none usr/share/lib/locale/com/sun/dhcpmgr/data 755 root bin
+f none usr/share/lib/locale/com/sun/dhcpmgr/data/ResourceBundle.properties 644 root bin
+d none usr/share/lib/locale/com/sun/dhcpmgr/ui 755 root bin
+f none usr/share/lib/locale/com/sun/dhcpmgr/ui/ResourceBundle.properties 644 root bin

@@ -1,0 +1,27 @@
+#! /bin/sh
+#
+# Copyright (c) 1993 - 1996, by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#ident	"@(#)postremove	1.3	96/07/02 SMI"
+#
+# SUNWpmr postremove script
+
+
+killproc() {            # kill the named process(es)
+        pid=`/usr/bin/ps -e |
+             /usr/bin/grep $1 |
+             /usr/bin/sed -e 's/^  *//' -e 's/ .*//'`
+        [ "$pid" != "" ] && kill $pid
+}
+
+if [ "$BASEDIR" = "/" ]
+then
+	#
+	# stop "powerd" daemon
+	#
+
+	killproc powerd
+fi
+ 
+exit 0

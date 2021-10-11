@@ -1,0 +1,42 @@
+#	Copyright (c) 1998,1999 by Sun Microsystems, Inc.
+#		All Rights Reserved
+#
+#	@(#)prototype_sparc	1.4	00/09/14 SMI
+#
+# This required package information file contains a list of package contents.
+# The 'pkgmk' command uses this file to identify the contents of a package
+# and their location on the development machine when building the package.
+# Can be created via a text editor or through use of the 'pkgproto' command.
+
+#!search <pathname pathname ...>	# where to find pkg objects
+#!include <filename>			# include another 'prototype' file
+#!default <mode> <owner> <group>	# default used if not specified on entry
+#!<param>=<value>			# puts parameter in pkg environment
+
+#
+# Include ISA independent files (prototype_com)
+#
+!include prototype_com
+#
+#
+#
+# List files which are SPARC specific here
+#
+# source locations relative to the prototype file
+#
+#
+# SUNWonbld
+#
+d none opt/onbld/bin/sparc 755 root bin
+f none opt/onbld/bin/sparc/bfuld 555 root bin
+f none opt/onbld/bin/sparc/codereview 555 root bin
+f none opt/onbld/bin/sparc/fastfs 555 root bin
+f none opt/onbld/bin/sparc/forth 555 root bin
+f none opt/onbld/bin/sparc/install 555 root bin
+l none opt/onbld/bin/sparc/install.bin=./install
+f none opt/onbld/bin/sparc/pmodes 555 root bin
+f none opt/onbld/bin/sparc/protocmp 555 root bin
+f none opt/onbld/bin/sparc/protolist 555 root bin
+f none opt/onbld/bin/sparc/stabs 555 root bin
+f none opt/onbld/bin/sparc/tokenize 555 root bin
+f none opt/onbld/bin/sparc/tokenize.exe 555 root bin

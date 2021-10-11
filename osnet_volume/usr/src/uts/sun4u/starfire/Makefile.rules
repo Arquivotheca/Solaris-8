@@ -1,0 +1,176 @@
+#
+# Copyright (c) 1997-1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#ident	"@(#)Makefile.rules	1.19	99/06/29 SMI"
+#
+#	This Makefile defines the build rules for the directory
+#	uts/sun4u/starfire and its children.
+#
+
+# inline support for DR.
+
+SFDR_IL=$(OBJS_DIR)/sfdr.il
+
+CPP=/usr/ccs/lib/cpp
+IL_CPP=$(CPP) -P -DINLINE -D_ASM $(INC_PATH) \
+	$(CPP_DEFS) $(ALWAYS_DEFS) $(ALL_DEFS) $(CONFIG_DEFS)
+
+#
+# C object build rules
+#
+# Platform module
+#
+
+$(OBJS_DIR)/starfire.o:	$(UTSBASE)/sun4u/starfire/os/starfire.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun4u/starfire/os/starfire.c
+
+$(OBJS_DIR)/cpu_sgnblk.o:	$(UTSBASE)/sun4u/starfire/os/cpu_sgnblk.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun4u/starfire/os/cpu_sgnblk.c
+
+$(OBJS_DIR)/bbus_intr.o:	$(UTSBASE)/sun4u/starfire/os/bbus_intr.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun4u/starfire/os/bbus_intr.c
+
+$(OBJS_DIR)/pda.o:	$(UTSBASE)/sun4u/starfire/os/pda.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun4u/starfire/os/pda.c
+
+$(OBJS_DIR)/portctrl.o:		$(UTSBASE)/sun4u/starfire/io/portctrl.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun4u/starfire/io/portctrl.c
+
+$(OBJS_DIR)/memctrl.o:		$(UTSBASE)/sun4u/starfire/io/memctrl.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun4u/starfire/io/memctrl.c
+
+$(OBJS_DIR)/dr.o:	$(UTSBASE)/sun4u/starfire/io/dr.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun4u/starfire/io/dr.c
+
+#
+# Starfire specific drivers
+#
+
+$(OBJS_DIR)/cvc.o:	$(UTSBASE)/sun4u/starfire/cvc/cvc.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun4u/starfire/cvc/cvc.c
+
+$(OBJS_DIR)/cvcredir.o:	$(UTSBASE)/sun4u/starfire/cvcredir/cvcredir.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun4u/starfire/cvcredir/cvcredir.c
+
+$(OBJS_DIR)/sfdr.o:	$(UTSBASE)/sun4u/starfire/io/sfdr.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun4u/starfire/io/sfdr.c
+
+$(OBJS_DIR)/sfdr_quiesce.o:	$(UTSBASE)/sun4u/starfire/io/sfdr_quiesce.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun4u/starfire/io/sfdr_quiesce.c
+
+$(OBJS_DIR)/sfdr_hw.o:	$(UTSBASE)/sun4u/starfire/io/sfdr_hw.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun4u/starfire/io/sfdr_hw.c
+
+$(OBJS_DIR)/sfdr_mem.o:	$(UTSBASE)/sun4u/starfire/io/sfdr_mem.c $(SFDR_IL)
+	$(COMPILE.c) $(SFDR_IL) -o $@ $(UTSBASE)/sun4u/starfire/io/sfdr_mem.c
+
+$(OBJS_DIR)/sfdr_cpu.o: $(UTSBASE)/sun4u/starfire/io/sfdr_cpu.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun4u/starfire/io/sfdr_cpu.c
+
+$(OBJS_DIR)/sfdr_asm.o:	$(UTSBASE)/sun4u/starfire/ml/sfdr_asm.s
+	$(COMPILE.s) -o $@ $(UTSBASE)/sun4u/starfire/ml/sfdr_asm.s
+
+$(OBJS_DIR)/idn.o:	$(UTSBASE)/sun4u/starfire/io/idn.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun4u/starfire/io/idn.c
+
+$(OBJS_DIR)/idn_proto.o:	$(UTSBASE)/sun4u/starfire/io/idn_proto.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun4u/starfire/io/idn_proto.c
+
+$(OBJS_DIR)/idn_smr.o:	$(UTSBASE)/sun4u/starfire/io/idn_smr.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun4u/starfire/io/idn_smr.c
+
+$(OBJS_DIR)/idn_dlpi.o:	$(UTSBASE)/sun4u/starfire/io/idn_dlpi.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun4u/starfire/io/idn_dlpi.c
+
+$(OBJS_DIR)/idn_xf.o:	$(UTSBASE)/sun4u/starfire/io/idn_xf.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun4u/starfire/io/idn_xf.c
+
+$(OBJS_DIR)/idn_asm.o:	$(UTSBASE)/sun4u/starfire/ml/idn_asm.s
+	$(COMPILE.s) -o $@ $(UTSBASE)/sun4u/starfire/ml/idn_asm.s
+
+# inline stuff
+
+CLEANFILES += $(SFDR_IL)
+
+$(SFDR_IL):	$(UTSBASE)/sun4u/starfire/ml/sfdr.il.cpp
+		$(IL_CPP) $(UTSBASE)/sun4u/starfire/ml/sfdr.il.cpp > $(SFDR_IL)
+
+#
+# inline needs to be compiled v8+ or v9
+#
+$(OBJS_DIR)/sfdr_mem.o := CC_XARCH_32 = -xarch=v8plusa
+
+#
+# Lint object build rules
+#
+# Platform module
+#
+
+$(LINTS_DIR)/starfire.ln:	$(UTSBASE)/sun4u/starfire/os/starfire.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun4u/starfire/os/starfire.c $(LTAIL))
+
+$(LINTS_DIR)/cpu_sgnblk.ln:	$(UTSBASE)/sun4u/starfire/os/cpu_sgnblk.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun4u/starfire/os/cpu_sgnblk.c $(LTAIL))
+
+$(LINTS_DIR)/bbus_intr.ln:	$(UTSBASE)/sun4u/starfire/os/bbus_intr.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun4u/starfire/os/bbus_intr.c $(LTAIL))
+
+$(LINTS_DIR)/pda.ln:		$(UTSBASE)/sun4u/starfire/os/pda.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun4u/starfire/os/pda.c $(LTAIL))
+
+$(LINTS_DIR)/portctrl.ln:	$(UTSBASE)/sun4u/starfire/io/portctrl.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun4u/starfire/io/portctrl.c $(LTAIL))
+
+$(LINTS_DIR)/memctrl.ln:	$(UTSBASE)/sun4u/starfire/io/memctrl.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun4u/starfire/io/memctrl.c $(LTAIL))
+
+$(LINTS_DIR)/dr.ln:		$(UTSBASE)/sun4u/starfire/io/dr.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun4u/starfire/io/dr.c $(LTAIL))
+
+#
+# Starfire specific drivers
+#
+$(LINTS_DIR)/cvc.ln:	$(UTSBASE)/sun4u/starfire/cvc/cvc.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun4u/starfire/cvc/cvc.c $(LTAIL))
+
+$(LINTS_DIR)/cvcredir.ln:	$(UTSBASE)/sun4u/starfire/cvcredir/cvcredir.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun4u/starfire/cvcredir/cvcredir.c \
+		$(LTAIL))
+ 
+$(LINTS_DIR)/sfdr.ln:	$(UTSBASE)/sun4u/starfire/io/sfdr.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun4u/starfire/io/sfdr.c $(LTAIL))
+ 
+$(LINTS_DIR)/sfdr_quiesce.ln:	$(UTSBASE)/sun4u/starfire/io/sfdr_quiesce.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun4u/starfire/io/sfdr_quiesce.c \
+		$(LTAIL))
+
+$(LINTS_DIR)/sfdr_hw.ln:	$(UTSBASE)/sun4u/starfire/io/sfdr_hw.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun4u/starfire/io/sfdr_hw.c $(LTAIL))
+ 
+$(LINTS_DIR)/sfdr_mem.ln:	$(UTSBASE)/sun4u/starfire/io/sfdr_mem.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun4u/starfire/io/sfdr_mem.c $(LTAIL))
+
+$(LINTS_DIR)/sfdr_cpu.ln:	$(UTSBASE)/sun4u/starfire/io/sfdr_cpu.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun4u/starfire/io/sfdr_cpu.c $(LTAIL))
+
+$(LINTS_DIR)/sfdr_asm.ln:	$(UTSBASE)/sun4u/starfire/ml/sfdr_asm.s
+	@($(LHEAD) $(LINT.s) $(UTSBASE)/sun4u/starfire/ml/sfdr_asm.s $(LTAIL))
+
+$(LINTS_DIR)/idn.ln:		$(UTSBASE)/sun4u/starfire/io/idn.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun4u/starfire/io/idn.c $(LTAIL))
+
+$(LINTS_DIR)/idn_proto.ln:	$(UTSBASE)/sun4u/starfire/io/idn_proto.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun4u/starfire/io/idn_proto.c $(LTAIL))
+
+$(LINTS_DIR)/idn_smr.ln:	$(UTSBASE)/sun4u/starfire/io/idn_smr.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun4u/starfire/io/idn_smr.c $(LTAIL))
+
+$(LINTS_DIR)/idn_dlpi.ln:	$(UTSBASE)/sun4u/starfire/io/idn_dlpi.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun4u/starfire/io/idn_dlpi.c $(LTAIL))
+
+$(LINTS_DIR)/idn_xf.ln:		$(UTSBASE)/sun4u/starfire/io/idn_xf.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun4u/starfire/io/idn_xf.c $(LTAIL))
+
+$(LINTS_DIR)/idn_asm.ln:	$(UTSBASE)/sun4u/starfire/ml/idn_asm.s
+	@($(LHEAD) $(LINT.s) $(UTSBASE)/sun4u/starfire/ml/idn_asm.s $(LTAIL))

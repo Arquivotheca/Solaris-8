@@ -1,0 +1,48 @@
+#
+#ident	"@(#)Makefile.targ	1.2	98/02/23 SMI"
+#
+# Copyright (c) 1998 by Sun Microsystems, Inc.
+#
+
+lint:		$(LINTOUT)
+
+$(LINTOUT): $(SRCS)
+	$(LINT.c) $(SRCS) > $(LINTOUT) 2>&1
+
+pics/check_rtld_feature.o:	../common/check_rtld_feature.c \
+				../common/map-feature
+		$(COMPILE.c) -c -o pics/check_rtld_feature.tmp.o \
+			../common/check_rtld_feature.c
+		$(LD) -r pics/check_rtld_feature.tmp.o  -o $@ \
+			-M ../common/map-feature
+		$(RM) -f pics/check_rtld_feature.tmp.o
+		$(POST_PROCESS_O)
+
+pics/%.o:	../common/%.c
+		$(COMPILE.c) -o $@ $<
+		$(POST_PROCESS_O)
+
+%.o:		../common/%.c
+		$(COMPILE.c) -o $@ $<
+		$(POST_PROCESS_O)
+
+$(LIBRARY):	pics $(PICS)
+		$(AR) $(ARFLAGS) $@ $(PICS)
+		$(POST_PROCESS_A)
+
+$(ROOTLIBDIR)/%:	%
+		$(INS.file)
+
+$(ROOTLIBDIR64)/%:	%
+		$(INS.file)
+
+pics:
+		-@mkdir -p $@
+
+clobber:	clean
+		-$(RM) $(LIBRARY) $(CLOBBERFILES)
+
+clean: FRC
+		-$(RM) $(PICS) $(CLEANFILES)
+
+FRC:

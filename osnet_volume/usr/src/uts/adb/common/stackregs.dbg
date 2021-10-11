@@ -1,0 +1,58 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)stackregs.dbg	1.8	98/07/19 SMI"
+
+#ifdef __i386
+#include <sys/reg.h>
+#endif
+#include <sys/frame.h>
+#include "dummy.h"
+
+\
+\	need to add 0t2047 to v9 biased stack value to get the proper
+\	stack address.
+\
+frame   	""      	stackregs
+#if defined(__sparcv9)
+{adb_inline_begin}
+(.+0t2047)>f
+<f+{OFFSET, fr_local}=""
+{adb_inline_end}
+        fr_local        hex             locals
+        fr_arg          hex             ins
+        fr_savfp        hex             fp
+        fr_savpc        symbolic        pc
+{adb_inline_begin}
+,#(*(<f+{OFFSET, fr_savpc}))$<
+*(<f+{OFFSET, fr_savpc})/ninn
+,#(*(<f+{OFFSET, fr_savfp}))$<
+(*(<f+{OFFSET, fr_savfp}))$<stackregs
+{adb_inline_end}
+#elif defined(__sparc)
+{adb_inline_begin}
+.>f
+<f+{OFFSET, fr_local}=""
+{adb_inline_end}
+        fr_local        hex             locals
+        fr_arg          hex             ins
+        fr_savfp        hex             fp
+        fr_savpc        symbolic        pc
+{adb_inline_begin}
+,#(*(<f+{OFFSET, fr_savpc}))$<
+*(<f+{OFFSET, fr_savpc})/ninn
+,#(*(<f+{OFFSET, fr_savfp}))$<
+(*(<f+{OFFSET, fr_savfp}))$<stackregs
+{adb_inline_end}
+#elif defined(__i386)
+{adb_inline_begin}
+.>f
+,#(*(<f+{OFFSET, fr_savpc}))$<
+*(<f+{OFFSET, fr_savpc})/inn
+,#(*(<f+{OFFSET, fr_savfp}))$<
+(*(<f+{OFFSET, fr_savfp}))$<stackregs
+{adb_inline_end}
+#else
+#error "Unknown ISA"
+#endif

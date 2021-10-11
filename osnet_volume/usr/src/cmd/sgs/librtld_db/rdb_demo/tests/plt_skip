@@ -1,0 +1,19 @@
+break main
+cont
+#
+# First it does several steps over the call to small_sub
+echo "==============================================================="
+echo "The following step will step over the PLT's and directly"
+echo "into the functions."
+echo "==============================================================="
+step 30
+#
+# Disable the pltskip routine to see it step through
+# PLT's
+#
+pltskip
+echo "==============================================================="
+echo "Plt skipping has now been disabled and we should see the PLT's"
+echo "as we call into small_sub()"
+echo "==============================================================="
+step 30

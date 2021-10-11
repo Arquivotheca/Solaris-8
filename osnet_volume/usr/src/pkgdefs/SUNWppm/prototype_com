@@ -1,0 +1,37 @@
+#ident	"@(#)prototype_com	1.7	99/04/01 SMI"
+#
+#  Copyright (c) 1999 by Sun Microsystems, Inc.
+#  All rights reserved.
+# 
+# This required package information file contains a list of package contents.
+# The 'pkgmk' command uses this file to identify the contents of a package
+# and their location on the development machine when building the package.
+# Can be created via a text editor or through use of the 'pkgproto' command.
+
+#!search
+#!default 0711 root bin
+
+# packaging files
+i pkginfo
+i copyright
+i depend
+#
+# source locations relative to the prototype file
+#
+# SUNWppm
+#
+d none usr 0755 root sys
+d none usr/sadm 755 root bin
+d none usr/sadm/admin 755 root bin
+d none usr/sadm/admin/bin 755 root bin
+d none usr/sadm/admin/printmgr 755 root bin
+d none usr/sadm/admin/printmgr/lib 755 root bin
+d none usr/sadm/admin/printmgr/classes 755 root bin
+#
+f none usr/sadm/admin/bin/printmgr 555 root lp
+#
+f none usr/sadm/admin/printmgr/lib/libpmgr.so.1 755 root lp
+s none usr/sadm/admin/printmgr/lib/libpmgr.so=./libpmgr.so.1
+#
+f none usr/sadm/admin/printmgr/classes/pmserver.jar 644 root lp
+f none usr/sadm/admin/printmgr/classes/pmclient.jar 644 root lp

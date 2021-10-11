@@ -1,0 +1,5 @@
+#ident	"@(#)mapfile_pga_sparc	1.1	99/03/10 SMI"
+#
+# Copyright (c) 1999 by Sun Microsystems, Inc.
+# All rights reserved.
+data = R0x2000;

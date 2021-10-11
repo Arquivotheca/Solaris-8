@@ -1,0 +1,23 @@
+\ Copyright 1999 Sun Microsystems, Inc.
+\ All rights reserved.
+
+#ident	"@(#)fcp.fdbg	1.2	99/07/29 SMI"
+
+\
+\ FCP ULP driver macros
+\
+
+#include <sys/modctl.h>
+#include <sys/scsi/scsi.h>
+#include <sys/fibre-channel/fc.h>
+#include <sys/fibre-channel/ulp/fcp.h>
+#include <sys/fibre-channel/impl/fc_ulpif.h>
+#include <sys/fibre-channel/ulp/fcpvar.h>
+
+fcp_cmd
+fcp_rsp
+ssfcp_ipkt
+ssfcp_lun
+ssfcp_pkt
+ssfcp_port
+ssfcp_tgt

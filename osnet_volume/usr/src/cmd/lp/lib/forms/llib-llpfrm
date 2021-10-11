@@ -1,0 +1,37 @@
+/* LINTLIBRARY */
+/* PROTOLIB1 */
+
+/*
+ * Copyright (c) 1998 by Sun Microsystems, Inc.
+ * All rights reserved.
+ */
+#pragma ident   "@(#)llib-llpfrm 1.1     98/07/10 SMI"
+
+#include "../../include/lp.h"
+
+typedef struct FORM {
+	SCALED			plen;
+	SCALED			pwid;
+	SCALED			lpi;
+	SCALED			cpi;
+	int			np;
+	char *			chset;
+	short			mandatory;
+	char *			rcolor;
+	char *			comment;
+	char *			conttype;
+	char *			name;
+	char *			paper;
+	short			isDefault;
+}			FORM;
+
+#define err_hndlr	int (*)( int , int , int )
+
+int		delform ( char * );
+int		getform ( char * , FORM * , FALERT * , FILE ** );
+int		putform ( char * , FORM * , FALERT * , FILE ** );
+int		rdform ( char * , FORM * , int , err_hndlr , int * );
+int		wrform ( char * , FORM * , int , err_hndlr , int * );
+
+void		freeform ( FORM * );
+

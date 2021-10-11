@@ -1,0 +1,11 @@
+#!/bin/sh
+#
+#pragma ident	"@(#)inc.flg	1.1	93/06/08 SMI" 
+#
+
+#
+# Find all of the header files
+#
+find_files "s.*.h" \
+	usr/src/lib/libc/sparc/fp
+

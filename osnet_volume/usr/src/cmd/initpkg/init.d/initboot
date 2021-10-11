@@ -1,0 +1,16 @@
+#!/bin/sh
+#
+# Copyright (c) 1996, by Sun Microsystems, Inc.
+# All Rights Reserved.
+#
+#ident	"@(#)initboot	1.1	96/05/17 SMI"
+
+#
+#   Perform delayed writes on behalf of the second level boot.
+#   This operation is only applicable to x86 machines.
+#   It should only be done once, in the early stages of the boot.
+#
+if [ "`uname -m`" = "i86pc" ] && [ -x /usr/sbin/eeprom ]
+then
+	/usr/sbin/eeprom -I
+fi

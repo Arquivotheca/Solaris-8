@@ -1,0 +1,84 @@
+\
+\ Copyright (c) 1999 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)fc_packet.dbg	1.2	99/09/28 SMI"
+\
+#include <sys/isa_defs.h>
+#include <sys/types.h>
+#include <sys/dditypes.h>
+#include <sys/ddidmareq.h>
+#include <sys/mutex.h>
+#include <sys/semaphore.h>
+#include <sys/condvar.h>
+#include <sys/thread.h>
+#include <sys/devops.h>
+#include <sys/fibre-channel/fc.h>
+#include "dummy.h"
+\
+\
+fc_packet			pkt_
+{adb_inline_begin}
+.>w
+<w+{OFFSET, pkt_tran_flags}=""
+{adb_inline_end}
+	tran_flags		hex
+	tran_type		hex
+	timeout			hex
+	cmdlen			hex
+	rsplen			hex
+	datalen			hex
+	cmd			hex
+	resp			hex
+	data			hex
+	ulp_private		hex
+	comp			hex	
+	pd			hex	
+	cmd_dma			hex
+	cmd_acc			hex
+{adb_inline_begin}
+#if defined(sparcv9)
+<w+{OFFSET, pkt_cmd_cookie}/n"cmd dmacookie"nJJXn
+#else
+<w+{OFFSET, pkt_cmd_cookie}/n"cmd dmacookie"n4Xn
+#endif
+<w+{OFFSET, pkt_resp_dma}=""
+{adb_inline_end}
+	resp_dma		hex
+	resp_acc		hex
+{adb_inline_begin}
+#if defined(sparcv9)
+<w+{OFFSET, pkt_resp_cookie}/n"resp dmacookie"nJJXn
+#else
+<w+{OFFSET, pkt_resp_cookie}/n"resp dmacookie"n4Xn
+#endif
+<w+{OFFSET, pkt_data_dma}=""
+{adb_inline_end}
+	data_dma		hex
+	data_acc		hex
+{adb_inline_begin}
+#if defined(sparcv9)
+<w+{OFFSET, pkt_data_cookie}/n"data dmacookie"nJJXn
+#else
+<w+{OFFSET, pkt_data_cookie}/n"data dmacookie"n4Xn
+#endif
+<w+{OFFSET, pkt_cmd_fhdr}=""
+{adb_inline_end}
+	cmd_fhdr		.frame_header
+{adb_inline_begin}
+<w+{OFFSET, pkt_fca_private}=""
+{adb_inline_end}
+	fca_private		hex
+	state			hex
+	action			hex
+	reason			hex
+	expln			hex
+	resp_fhdr		.frame_header
+{adb_inline_begin}
+<w+{OFFSET, pkt_data_resid}=""
+{adb_inline_end}
+	data_resid		hex
+	resp_resid		hex
+{adb_inline_begin}
+<w+{SIZEOF}=""
+{adb_inline_end}

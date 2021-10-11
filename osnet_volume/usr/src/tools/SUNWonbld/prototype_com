@@ -1,0 +1,66 @@
+#
+# Copyright (c) 1998,1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#ident	"@(#)prototype_com	1.5	99/11/01 SMI"
+#
+# This required package information file contains a list of package contents.
+# The 'pkgmk' command uses this file to identify the contents of a package
+# and their location on the development machine when building the package.
+# Can be created via a text editor or through use of the 'pkgproto' command.
+
+#!search <pathname pathname ...>	# where to find pkg objects
+#!include <filename>			# include another 'prototype' file
+#!default <mode> <owner> <group>	# default used if not specified on entry
+#!<param>=<value>			# puts parameter in pkg environment
+
+# packaging files
+i pkginfo
+i copyright
+i postinstall
+i preremove
+#
+# source locations relative to the prototype file
+#
+# SUNWonbld
+#
+d none opt 755 root sys
+d none opt/onbld 755 root bin
+d none opt/onbld/bin 755 root bin
+f none opt/onbld/bin/Install 555 root bin
+f none opt/onbld/bin/bfu 555 root bin
+f none opt/onbld/bin/bldenv 555 root bin
+f none opt/onbld/bin/build_cscope 555 root bin
+f none opt/onbld/bin/check_rpaths 555 root bin
+f none opt/onbld/bin/checkproto 555 root bin
+f none opt/onbld/bin/cstyle 555 root bin
+f none opt/onbld/bin/elfcmp 555 root bin
+f none opt/onbld/bin/hdrchk 555 root bin
+f none opt/onbld/bin/jstyle 555 root bin
+f none opt/onbld/bin/keywords 555 root bin
+f none opt/onbld/bin/makebfu 555 root bin
+f none opt/onbld/bin/mkbfu 555 root bin
+f none opt/onbld/bin/nightly 555 root bin
+f none opt/onbld/bin/protocmp.terse 555 root bin
+f none opt/onbld/bin/sccscp 555 root bin
+f none opt/onbld/bin/sccshist 555 root bin
+f none opt/onbld/bin/sccsmv 555 root bin
+f none opt/onbld/bin/sccsrm 555 root bin
+f none opt/onbld/bin/ws 555 root bin
+f none opt/onbld/bin/wx 555 root bin
+d none opt/onbld/env 755 root bin
+f none opt/onbld/env/developer 644 root bin
+f none opt/onbld/env/gatekeeper 644 root bin
+d none opt/onbld/gk 755 root bin
+f none opt/onbld/gk/.cshrc 644 root bin
+f none opt/onbld/gk/.login 644 root bin
+f none opt/onbld/gk/.make.machines 644 root bin
+d none opt/onbld/man 755 root bin
+d none opt/onbld/man/man1 755 root bin
+f none opt/onbld/man/man1/Install.1 644 root bin
+f none opt/onbld/man/man1/codereview.1 644 root bin
+f none opt/onbld/man/man1/nightly.1 644 root bin
+f none opt/onbld/man/man1/sccscp.1 644 root bin
+f none opt/onbld/man/man1/sccsmv.1 644 root bin
+f none opt/onbld/man/man1/sccsrm.1 644 root bin
+f none opt/onbld/man/man1/ws.1 644 root bin

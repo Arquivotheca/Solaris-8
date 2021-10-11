@@ -1,0 +1,126 @@
+\
+\ Copyright (c) 1999 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)usoc_state.dbg	1.2	99/09/28 SMI"
+#include <sys/isa_defs.h>
+#include <sys/types.h>
+#include <sys/dditypes.h>
+#include <sys/ddidmareq.h>
+#include <sys/mutex.h>
+#include <sys/semaphore.h>
+#include <sys/condvar.h>
+#include <sys/thread.h>
+#include <sys/devops.h>
+#include <sys/taskq.h>
+#include <sys/fibre-channel/fc.h>
+#include <sys/fibre-channel/fca/usoc_cq_defs.h>
+#include <sys/fibre-channel/fca/usocio.h>
+#include <sys/fibre-channel/fca/usocreg.h>
+#include <sys/fibre-channel/fca/usocvar.h>
+#include "dummy.h"
+\
+\
+usoc_state				usoc_
+{adb_inline_begin}
+.>a
+<a+{OFFSET, usoc_dip}=""
+{adb_inline_end}
+	dip				hex
+	eeprom				hex
+	eeprom_acchandle		hex
+	xrp				hex
+	xrp_acchandle			hex
+	xram_reqp			hex
+	xram_rspp			hex
+{adb_inline_begin}
+<a+{OFFSET, usoc_request}="Request Queues"
++$<<usoc_kernel_cq
++$<<usoc_kernel_cq
++$<<usoc_kernel_cq
++$<<usoc_kernel_cq
+<a+{OFFSET, usoc_response}="Response Queues"
++$<<usoc_kernel_cq
++$<<usoc_kernel_cq
++$<<usoc_kernel_cq
++$<<usoc_kernel_cq
+<a+{OFFSET, usoc_alive_time}=""
+{adb_inline_end}
+	alive_time			hex
+	cfg				hex
+	k_imr_mtx
+{adb_inline_begin}
+<a+{OFFSET, usoc_k_imr}=""
+{adb_inline_end}
+	k_imr				hex
+	rp_acchandle			hex
+	rp				hex
+	iblkc				hex
+	fault_mtx			
+{adb_inline_begin}
+<a+{OFFSET, usoc_pool}=""
+{adb_inline_end}
+	pool				hex
+	pool_dhandle			hex
+{adb_inline_begin}
+#if defined(sparcv9)
+<a+{OFFSET, usoc_pool_dcookie}/n"pool dmacookie"nJJXn
+#else
+<a+{OFFSET, usoc_pool_dcookie}/n"pool dmacookie"n4Xn
+#endif
+<a+{OFFSET, usoc_pool_acchandle}=""
+{adb_inline_end}
+	pool_acchandle			hex
+	time_mtx			
+{adb_inline_begin}
+<a+{OFFSET, usoc_timelist}=""
+{adb_inline_end}
+	timelist			hex
+	task_handle			hex
+	watch_tid			hex
+{adb_inline_begin}
+<a+{OFFSET, usoc_port_state}="Usoc Ports"
++$<<usoc_port
++$<<usoc_port
+<a+{OFFSET, usoc_n_wwn}=""
+{adb_inline_end}
+	n_wwn				.la_wwn
+{adb_inline_begin}
+<a+{OFFSET, usoc_service_params}=""
+{adb_inline_end}
+	service_params			hex
+	name				hex
+	ksp				hex
+{adb_inline_begin}
+<a+{OFFSET, usoc_board_mtx}=""
+{adb_inline_end}
+	board_mtx
+{adb_inline_begin}
+<a+{OFFSET, usoc_ncmds}=""
+{adb_inline_end}
+	ncmds				hex
+{adb_inline_begin}
+<a+{OFFSET, usoc_idinfo}=""
+.>b
+/"idinfo"
+#if defined(sparcv9)
+<b=J
+#else
+<b=X
+#endif
+<a+{OFFSET, usoc_throttle}=""
+{adb_inline_end}
+	throttle			hex
+	ticker				hex	
+	reset_rec_time			hex
+	rec_resets			hex
+	intr_added			hex
+	lfd_pending			hex
+	shutdown			hex
+	spurious_sol_intrs		hex
+	spurious_unsol_intrs		hex
+	reload_pending			hex
+	instance			hex
+{adb_inline_begin}
+<a+{SIZEOF}=""
+{adb_inline_end}

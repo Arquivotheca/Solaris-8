@@ -1,0 +1,13 @@
+#!/bin/sh
+#
+#pragma ident	"@(#)req.flg	1.1	98/05/11 SMI"
+#
+
+
+echo_file usr/src/head/Makefile
+echo_file usr/src/head/rpcsvc/nis.x
+echo_file usr/src/head/rpcsvc/nis_object.x
+echo_file usr/src/head/rpcsvc/nis_callback.x
+echo_file usr/src/head/rpcsvc/nis_cache.x
+echo_file usr/src/uts/common/rpc/Makefile
+echo_file usr/src/uts/common/rpc/key_prot.x

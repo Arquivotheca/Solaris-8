@@ -1,0 +1,27 @@
+#!/sbin/sh
+#
+# Copyright (c) 1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#ident	"@(#)dhcpagent	1.2	99/08/26 SMI"
+
+case "$1" in
+'start')
+
+	# The DHCP client is currently started through /etc/init.d/network;
+	# this directive is provided only for completeness.
+
+	[ -x /sbin/dhcpagent ] && /sbin/dhcpagent
+	;;
+
+'stop')
+	set -- `/sbin/netstrategy`
+	[ $? -eq 0 ] && [ "$1" != "nfs" ] && /usr/bin/pkill -x -u 0 dhcpagent
+	;;
+
+*)
+	echo "Usage: $0 { start | stop }"
+	exit 1
+	;;
+esac
+exit 0

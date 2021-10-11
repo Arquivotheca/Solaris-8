@@ -1,0 +1,359 @@
+#
+# uts/intel/Makefile.rules
+# Copyright (c) 1991-1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#pragma ident	"@(#)Makefile.rules	1.7	99/06/06 SMI"
+#
+#	This Makefile defines all file modules and build rules for the
+# directory uts/intel and it's children. These are the source files which
+# are specific to the intel processor.
+#
+
+#
+#	This was implemented by pattern matching rules of the form:
+#
+# $(OBJS_DIR)/%.o:	 $(UTSBASE)/common/os/%.c
+#	$(COMPILE.c) -o $@ $<
+#
+# $(LINTS_DIR)/%.ln:	$(UTSBASE)/common/os/%.c
+#	@($(LHEAD) $(LINT.c) $< $(LTAIL))
+#
+#	For each directory containing source. This proved to slow under
+#	Nse because it caused a significant additional number of stats
+#	and stats are real slow under TFS. If TFS performance should
+#	improve, one might consider returning to the former implementation.
+#	In the former implementation, this file (Makefile.rules) was not
+#	needed and the pattern matching rules were in Makefile.files.
+#
+
+#
+#	C object build rules
+#
+#	The following are alphabetized by source file path. Please maintain
+# this ordering.
+#
+$(OBJS_DIR)/acpi_bst.o:		$(UTSBASE)/intel/os/acpi_intp/acpi_bst.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/intel/os/acpi_intp/acpi_bst.c
+
+$(OBJS_DIR)/acpi_decl.o:	$(UTSBASE)/intel/os/acpi_intp/acpi_decl.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/intel/os/acpi_intp/acpi_decl.c
+
+$(OBJS_DIR)/acpi_exc.o:		$(UTSBASE)/intel/os/acpi_intp/acpi_exc.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/intel/os/acpi_intp/acpi_exc.c
+
+$(OBJS_DIR)/acpi_exe.o:		$(UTSBASE)/intel/os/acpi_intp/acpi_exe.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/intel/os/acpi_intp/acpi_exe.c
+
+$(OBJS_DIR)/acpi_gram.o:	$(UTSBASE)/intel/os/acpi_intp/acpi_gram.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/intel/os/acpi_intp/acpi_gram.c
+
+$(OBJS_DIR)/acpi_inf.o:		$(UTSBASE)/intel/os/acpi_intp/acpi_inf.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/intel/os/acpi_intp/acpi_inf.c
+
+$(OBJS_DIR)/acpi_io.o:		$(UTSBASE)/intel/os/acpi_intp/acpi_io.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/intel/os/acpi_intp/acpi_io.c
+
+$(OBJS_DIR)/acpi_lex.o:		$(UTSBASE)/intel/os/acpi_intp/acpi_lex.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/intel/os/acpi_intp/acpi_lex.c
+
+$(OBJS_DIR)/acpi_ml.o:		$(UTSBASE)/intel/os/acpi_intp/acpi_ml.s
+	$(COMPILE.s) -o $@ $(UTSBASE)/intel/os/acpi_intp/acpi_ml.s
+
+$(OBJS_DIR)/acpi_mod.o:	$(UTSBASE)/intel/os/acpi_intp/acpi_mod.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/intel/os/acpi_intp/acpi_mod.c
+
+$(OBJS_DIR)/acpi_name.o:	$(UTSBASE)/intel/os/acpi_intp/acpi_name.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/intel/os/acpi_intp/acpi_name.c
+
+$(OBJS_DIR)/acpi_node.o:	$(UTSBASE)/intel/os/acpi_intp/acpi_node.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/intel/os/acpi_intp/acpi_node.c
+
+$(OBJS_DIR)/acpi_ns.o:		$(UTSBASE)/intel/os/acpi_intp/acpi_ns.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/intel/os/acpi_intp/acpi_ns.c
+
+$(OBJS_DIR)/acpi_op1.o:		$(UTSBASE)/intel/os/acpi_intp/acpi_op1.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/intel/os/acpi_intp/acpi_op1.c
+
+$(OBJS_DIR)/acpi_op2.o:		$(UTSBASE)/intel/os/acpi_intp/acpi_op2.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/intel/os/acpi_intp/acpi_op2.c
+
+$(OBJS_DIR)/acpi_par.o:		$(UTSBASE)/intel/os/acpi_intp/acpi_par.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/intel/os/acpi_intp/acpi_par.c
+
+$(OBJS_DIR)/acpi_rule.o:	$(UTSBASE)/intel/os/acpi_intp/acpi_rule.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/intel/os/acpi_intp/acpi_rule.c
+
+$(OBJS_DIR)/acpi_stk.o:		$(UTSBASE)/intel/os/acpi_intp/acpi_stk.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/intel/os/acpi_intp/acpi_stk.c
+
+$(OBJS_DIR)/acpi_tab.o:		$(UTSBASE)/intel/os/acpi_intp/acpi_tab.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/intel/os/acpi_intp/acpi_tab.c
+
+$(OBJS_DIR)/acpi_thr.o:		$(UTSBASE)/intel/os/acpi_intp/acpi_thr.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/intel/os/acpi_intp/acpi_thr.c
+
+$(OBJS_DIR)/acpi_val.o:		$(UTSBASE)/intel/os/acpi_intp/acpi_val.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/intel/os/acpi_intp/acpi_val.c
+
+$(OBJS_DIR)/beeper.o:		$(UTSBASE)/intel/io/beeper.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/intel/io/beeper.c
+
+$(OBJS_DIR)/consconfig.o:	$(UTSBASE)/intel/io/consconfig.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/intel/io/consconfig.c
+
+$(OBJS_DIR)/consconfig_dacf.o:	$(UTSBASE)/intel/io/consconfig_dacf.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/intel/io/consconfig_dacf.c
+
+$(OBJS_DIR)/consplat.o:		$(UTSBASE)/intel/io/consplat.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/intel/io/consplat.c
+
+$(OBJS_DIR)/polled_io.o:		$(UTSBASE)/intel/io/polled_io.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/intel/io/polled_io.c
+
+$(OBJS_DIR)/ddi_arch.o:		$(UTSBASE)/intel/os/ddi_arch.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/intel/os/ddi_arch.c
+
+$(OBJS_DIR)/install_utrap.o:	$(UTSBASE)/intel/syscall/install_utrap.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/intel/syscall/install_utrap.c
+
+$(OBJS_DIR)/lwp_private.o:	$(UTSBASE)/intel/syscall/lwp_private.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/intel/syscall/lwp_private.c
+
+$(OBJS_DIR)/mem_config_stubs.o:	$(UTSBASE)/common/os/mem_config_stubs.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/os/mem_config_stubs.c
+
+$(OBJS_DIR)/pci_pci.o:		$(UTSBASE)/common/io/pci_pci/pci_pci.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/common/io/pci_pci/pci_pci.c
+
+$(OBJS_DIR)/prom_boot.o:	$(UTSBASE)/intel/promif/prom_boot.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/intel/promif/prom_boot.c
+
+$(OBJS_DIR)/prom_devname.o:	$(UTSBASE)/intel/promif/prom_devname.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/intel/promif/prom_devname.c
+
+$(OBJS_DIR)/prom_emul.o:	$(UTSBASE)/intel/promif/prom_emul.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/intel/promif/prom_emul.c
+
+$(OBJS_DIR)/prom_fb.o:		$(UTSBASE)/intel/promif/prom_fb.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/intel/promif/prom_fb.c
+
+$(OBJS_DIR)/prom_getchar.o:	$(UTSBASE)/intel/promif/prom_getchar.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/intel/promif/prom_getchar.c
+
+$(OBJS_DIR)/prom_gettime.o:	$(UTSBASE)/intel/promif/prom_gettime.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/intel/promif/prom_gettime.c
+
+$(OBJS_DIR)/prom_init.o:	$(UTSBASE)/intel/promif/prom_init.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/intel/promif/prom_init.c
+
+$(OBJS_DIR)/prom_io.o:		$(UTSBASE)/intel/promif/prom_io.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/intel/promif/prom_io.c
+
+$(OBJS_DIR)/prom_inpath.o:	$(UTSBASE)/intel/promif/prom_inpath.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/intel/promif/prom_inpath.c
+
+$(OBJS_DIR)/prom_kbd.o:		$(UTSBASE)/intel/promif/prom_kbd.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/intel/promif/prom_kbd.c
+
+$(OBJS_DIR)/prom_node.o:	$(UTSBASE)/intel/promif/prom_node.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/intel/promif/prom_node.c
+
+$(OBJS_DIR)/prom_outpath.o:	$(UTSBASE)/intel/promif/prom_outpath.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/intel/promif/prom_outpath.c
+
+$(OBJS_DIR)/prom_path.o:	$(UTSBASE)/intel/promif/prom_path.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/intel/promif/prom_path.c
+
+$(OBJS_DIR)/prom_printf.o:	$(UTSBASE)/intel/promif/prom_printf.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/intel/promif/prom_printf.c
+
+$(OBJS_DIR)/prom_prop.o:	$(UTSBASE)/intel/promif/prom_prop.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/intel/promif/prom_prop.c
+
+$(OBJS_DIR)/prom_putchar.o:	$(UTSBASE)/intel/promif/prom_putchar.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/intel/promif/prom_putchar.c
+
+$(OBJS_DIR)/prom_reboot.o:	$(UTSBASE)/intel/promif/prom_reboot.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/intel/promif/prom_reboot.c
+
+$(OBJS_DIR)/prom_string.o:	$(UTSBASE)/intel/promif/prom_string.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/intel/promif/prom_string.c
+
+$(OBJS_DIR)/prom_version.o:	$(UTSBASE)/intel/promif/prom_version.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/intel/promif/prom_version.c
+
+$(OBJS_DIR)/sd.o:		$(UTSBASE)/intel/io/scsi/targets/sd.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/intel/io/scsi/targets/sd.c
+
+$(OBJS_DIR)/sd_label.o:		$(UTSBASE)/intel/io/scsi/targets/sd_label.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/intel/io/scsi/targets/sd_label.c
+
+$(OBJS_DIR)/vgatext.o:		$(UTSBASE)/intel/io/vgatext/vgatext.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/intel/io/vgatext/vgatext.c
+
+#
+#	Lint `object' build rules.
+#
+#	The following are alphabetized by source file path. Please maintain
+# this ordering.
+#
+$(LINTS_DIR)/acpi_bst.ln:	$(UTSBASE)/intel/os/acpi_intp/acpi_bst.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/intel/os/acpi_intp/acpi_bst.c $(LTAIL))
+
+$(LINTS_DIR)/acpi_decl.ln:	$(UTSBASE)/intel/os/acpi_intp/acpi_decl.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/intel/os/acpi_intp/acpi_decl.c $(LTAIL))
+
+$(LINTS_DIR)/acpi_exc.ln:	$(UTSBASE)/intel/os/acpi_intp/acpi_exc.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/intel/os/acpi_intp/acpi_exc.c $(LTAIL))
+
+$(LINTS_DIR)/acpi_exe.ln:	$(UTSBASE)/intel/os/acpi_intp/acpi_exe.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/intel/os/acpi_intp/acpi_exe.c $(LTAIL))
+
+$(LINTS_DIR)/acpi_gram.ln:	$(UTSBASE)/intel/os/acpi_intp/acpi_gram.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/intel/os/acpi_intp/acpi_gram.c $(LTAIL))
+
+$(LINTS_DIR)/acpi_inf.ln:	$(UTSBASE)/intel/os/acpi_intp/acpi_inf.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/intel/os/acpi_intp/acpi_inf.c $(LTAIL))
+
+$(LINTS_DIR)/acpi_io.ln:	$(UTSBASE)/intel/os/acpi_intp/acpi_io.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/intel/os/acpi_intp/acpi_io.c $(LTAIL))
+
+$(LINTS_DIR)/acpi_lex.ln:	$(UTSBASE)/intel/os/acpi_intp/acpi_lex.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/intel/os/acpi_intp/acpi_lex.c $(LTAIL))
+
+$(LINTS_DIR)/acpi_ml.ln:	$(UTSBASE)/intel/os/acpi_intp/acpi_ml.s
+	@($(LHEAD) $(LINT.s) $(UTSBASE)/intel/os/acpi_intp/acpi_ml.s $(LTAIL))
+
+$(LINTS_DIR)/acpi_mod.ln:	$(UTSBASE)/intel/os/acpi_intp/acpi_mod.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/intel/os/acpi_intp/acpi_mod.c $(LTAIL))
+
+$(LINTS_DIR)/acpi_name.ln:	$(UTSBASE)/intel/os/acpi_intp/acpi_name.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/intel/os/acpi_intp/acpi_name.c $(LTAIL))
+
+$(LINTS_DIR)/acpi_node.ln:	$(UTSBASE)/intel/os/acpi_intp/acpi_node.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/intel/os/acpi_intp/acpi_node.c $(LTAIL))
+
+$(LINTS_DIR)/acpi_ns.ln:	$(UTSBASE)/intel/os/acpi_intp/acpi_ns.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/intel/os/acpi_intp/acpi_ns.c $(LTAIL))
+
+$(LINTS_DIR)/acpi_op1.ln:	$(UTSBASE)/intel/os/acpi_intp/acpi_op1.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/intel/os/acpi_intp/acpi_op1.c $(LTAIL))
+
+$(LINTS_DIR)/acpi_op2.ln:	$(UTSBASE)/intel/os/acpi_intp/acpi_op2.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/intel/os/acpi_intp/acpi_op2.c $(LTAIL))
+
+$(LINTS_DIR)/acpi_par.ln:	$(UTSBASE)/intel/os/acpi_intp/acpi_par.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/intel/os/acpi_intp/acpi_par.c $(LTAIL))
+
+$(LINTS_DIR)/acpi_rule.ln:	$(UTSBASE)/intel/os/acpi_intp/acpi_rule.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/intel/os/acpi_intp/acpi_rule.c $(LTAIL))
+
+$(LINTS_DIR)/acpi_stk.ln:	$(UTSBASE)/intel/os/acpi_intp/acpi_stk.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/intel/os/acpi_intp/acpi_stk.c $(LTAIL))
+
+$(LINTS_DIR)/acpi_tab.ln:	$(UTSBASE)/intel/os/acpi_intp/acpi_tab.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/intel/os/acpi_intp/acpi_tab.c $(LTAIL))
+
+$(LINTS_DIR)/acpi_thr.ln:	$(UTSBASE)/intel/os/acpi_intp/acpi_thr.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/intel/os/acpi_intp/acpi_thr.c $(LTAIL))
+
+$(LINTS_DIR)/acpi_val.ln:	$(UTSBASE)/intel/os/acpi_intp/acpi_val.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/intel/os/acpi_intp/acpi_val.c $(LTAIL))
+
+$(LINTS_DIR)/beeper.ln:		$(UTSBASE)/intel/io/beeper.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/intel/io/beeper.c $(LTAIL))
+
+$(LINTS_DIR)/consconfig.ln:	$(UTSBASE)/intel/io/consconfig.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/intel/io/consconfig.c $(LTAIL))
+
+$(LINTS_DIR)/consconfig_dacf.ln:	$(UTSBASE)/intel/io/consconfig_dacf.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/intel/io/consconfig_dacf.c $(LTAIL))
+
+$(LINTS_DIR)/consplat.ln:	$(UTSBASE)/intel/io/consplat.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/intel/io/consplat.c $(LTAIL))
+
+$(LINTS_DIR)/polled_io.ln:	$(UTSBASE)/intel/io/polled_io.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/intel/io/polled_io.c $(LTAIL))
+
+$(LINTS_DIR)/ddi_arch.ln:	$(UTSBASE)/intel/os/ddi_arch.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/intel/os/ddi_arch.c $(LTAIL))
+
+$(LINTS_DIR)/install_utrap.ln:	$(UTSBASE)/intel/syscall/install_utrap.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/intel/syscall/install_utrap.c $(LTAIL))
+
+$(LINTS_DIR)/lwp_private.ln:	$(UTSBASE)/intel/syscall/lwp_private.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/intel/syscall/lwp_private.c $(LTAIL))
+
+$(LINTS_DIR)/mem_config_stubs.ln:	$(UTSBASE)/common/os/mem_config_stubs.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/os/mem_config_stubs.c $(LTAIL))
+
+$(LINTS_DIR)/pci_pci.ln:	$(UTSBASE)/common/io/pci_pci/pci_pci.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/common/io/pci_pci/pci_pci.c $(LTAIL))
+
+$(LINTS_DIR)/prom_boot.ln:	$(UTSBASE)/intel/promif/prom_boot.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/intel/promif/prom_boot.c $(LTAIL))
+
+$(LINTS_DIR)/prom_devname.ln:	$(UTSBASE)/intel/promif/prom_devname.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/intel/promif/prom_devname.c $(LTAIL))
+
+$(LINTS_DIR)/prom_emul.ln:	$(UTSBASE)/intel/promif/prom_emul.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/intel/promif/prom_emul.c $(LTAIL))
+
+$(LINTS_DIR)/prom_fb.ln:	$(UTSBASE)/intel/promif/prom_fb.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/intel/promif/prom_fb.c $(LTAIL))
+
+$(LINTS_DIR)/prom_getchar.ln:	$(UTSBASE)/intel/promif/prom_getchar.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/intel/promif/prom_getchar.c $(LTAIL))
+
+$(LINTS_DIR)/prom_gettime.ln:	$(UTSBASE)/intel/promif/prom_gettime.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/intel/promif/prom_gettime.c $(LTAIL))
+
+$(LINTS_DIR)/prom_init.ln:	$(UTSBASE)/intel/promif/prom_init.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/intel/promif/prom_init.c $(LTAIL))
+
+$(LINTS_DIR)/prom_io.ln:	$(UTSBASE)/intel/promif/prom_io.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/intel/promif/prom_io.c $(LTAIL))
+
+$(LINTS_DIR)/prom_inpath.ln:	$(UTSBASE)/intel/promif/prom_inpath.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/intel/promif/prom_inpath.c $(LTAIL))
+
+$(LINTS_DIR)/prom_kbd.ln:	$(UTSBASE)/intel/promif/prom_kbd.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/intel/promif/prom_kbd.c $(LTAIL))
+
+$(LINTS_DIR)/prom_node.ln:	$(UTSBASE)/intel/promif/prom_node.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/intel/promif/prom_node.c $(LTAIL))
+
+$(LINTS_DIR)/prom_outpath.ln:	$(UTSBASE)/intel/promif/prom_outpath.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/intel/promif/prom_outpath.c $(LTAIL))
+
+$(LINTS_DIR)/prom_path.ln:	$(UTSBASE)/intel/promif/prom_path.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/intel/promif/prom_path.c $(LTAIL))
+
+$(LINTS_DIR)/prom_printf.ln:	$(UTSBASE)/intel/promif/prom_printf.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/intel/promif/prom_printf.c $(LTAIL))
+
+$(LINTS_DIR)/prom_prop.ln:	$(UTSBASE)/intel/promif/prom_prop.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/intel/promif/prom_prop.c $(LTAIL))
+
+$(LINTS_DIR)/prom_putchar.ln:	$(UTSBASE)/intel/promif/prom_putchar.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/intel/promif/prom_putchar.c $(LTAIL))
+
+$(LINTS_DIR)/prom_reboot.ln:	$(UTSBASE)/intel/promif/prom_reboot.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/intel/promif/prom_reboot.c $(LTAIL))
+
+$(LINTS_DIR)/prom_string.ln:	$(UTSBASE)/intel/promif/prom_string.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/intel/promif/prom_string.c $(LTAIL))
+
+$(LINTS_DIR)/prom_version.ln:	$(UTSBASE)/intel/promif/prom_version.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/intel/promif/prom_version.c $(LTAIL))
+
+$(LINTS_DIR)/sd.ln:		$(UTSBASE)/intel/io/scsi/targets/sd.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/intel/io/scsi/targets/sd.c $(LTAIL))
+
+$(LINTS_DIR)/sd_label.ln:	$(UTSBASE)/intel/io/scsi/targets/sd_label.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/intel/io/scsi/targets/sd_label.c $(LTAIL))
+
+$(LINTS_DIR)/vgatext.ln:	$(UTSBASE)/intel/io/vgatext/vgatext.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/intel/io/vgatext/vgatext.c $(LTAIL))
+

@@ -1,0 +1,72 @@
+#
+# Copyright (c) 1990-1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#ident	"@(#)prototype_com	1.69	99/10/04 SMI"
+#
+# This required package information file contains a list of package contents.
+# The 'pkgmk' command uses this file to identify the contents of a package
+# and their location on the development machine when building the package.
+# Can be created via a text editor or through use of the 'pkgproto' command.
+
+#!search <pathname pathname ...>	# where to find pkg objects
+#!include <filename>			# include another 'prototype' file
+#!default <mode> <owner> <group>	# default used if not specified on entry
+#!<param>=<value>			# puts parameter in pkg environment
+
+# packaging files
+i pkginfo
+i copyright
+#
+# source locations relative to the prototype file
+#
+# SUNWkvm.m
+#
+d none usr 755 root sys
+d none usr/platform 755 root sys
+d none usr/platform/sun4m 755 root sys
+d none usr/platform/sun4m/sbin 755 root bin
+f none usr/platform/sun4m/sbin/eeprom 2555 root sys
+#
+# Following two commands are only for the 10,SX and 20.
+#
+f none usr/platform/sun4m/sbin/cg14config 555 root sys
+f none usr/platform/sun4m/sbin/sxconfig 555 root sys
+d none usr/platform/sun4m/lib 755 root bin
+#
+# platform-dependent adb macros
+#
+d none usr/platform/sun4m/lib/adb 755 root bin
+f none usr/platform/sun4m/lib/adb/adaptive_mutex 644 root sys
+f none usr/platform/sun4m/lib/adb/ctx 644 root sys
+f none usr/platform/sun4m/lib/adb/hme 644 root sys
+f none usr/platform/sun4m/lib/adb/machpcb 644 root sys
+f none usr/platform/sun4m/lib/adb/mutex 644 root sys
+f none usr/platform/sun4m/lib/adb/ptbl 644 root sys
+f none usr/platform/sun4m/lib/adb/regs 644 root sys
+f none usr/platform/sun4m/lib/adb/rwlock 644 root sys
+f none usr/platform/sun4m/lib/adb/sema 644 root sys
+f none usr/platform/sun4m/lib/adb/spin_mutex 644 root sys
+f none usr/platform/sun4m/lib/adb/srhme 644 root sys
+f none usr/platform/sun4m/lib/adb/srmmu 644 root sys
+#
+# platform-dependent boot objects
+#
+d none usr/platform/sun4m/lib/fs 755 root bin
+d none usr/platform/sun4m/lib/fs/ufs 755 root bin
+f none usr/platform/sun4m/lib/fs/ufs/bootblk 444 root sys
+d none usr/platform/sun4m/lib/fs/nfs 755 root bin
+f none usr/platform/sun4m/lib/fs/nfs/inetboot 644 root sys
+#
+# make the links to other machine types
+#
+s none usr/platform/SUNW,SPARCstation-4=sun4m
+s none usr/platform/SUNW,SPARCstation-5=sun4m
+s none usr/platform/SUNW,SPARCstation-10=sun4m
+s none usr/platform/SUNW,SPARCstation-10,SX=sun4m
+s none usr/platform/SUNW,SPARCstation-20=sun4m
+s none usr/platform/SUNW,SPARCstation-LX=sun4m
+s none usr/platform/SUNW,SPARCstation-LX+=sun4m
+s none usr/platform/SUNW,SPARCclassic=sun4m
+s none usr/platform/SUNW,SPARCclassic-X=sun4m
+s none usr/platform/SUNW,SPARCengine-EC-3=sun4m

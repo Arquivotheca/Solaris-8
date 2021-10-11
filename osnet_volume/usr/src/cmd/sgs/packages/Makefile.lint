@@ -1,0 +1,65 @@
+#
+#ident	"@(#)Makefile.lint	1.2	99/10/12 SMI"
+#
+# Copyright (c) 1998 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+# cmd/sgs/packages/Makefile.lint
+
+include		$(SRC)/Makefile.master
+
+MACHS:sh=	if [ "$MACH" = "sparc" ]; \
+		then echo "sparc sparcv9"; \
+		elif [ "$MACH" = "i386" ]; \
+		then echo "i386"; \
+		else echo "unknown"; \
+		fi
+
+RDBDIRS=	$(MACHS:%=../librtld_db/rdb_demo/%)
+LDMAKEDIRS=	$(MACHS:%=../libldmake/%)
+
+
+LSUBDIRS1= 	../libdl \
+		../libelf \
+		../libconv \
+		.WAIT \
+		../liblddbg \
+		../librtld_db \
+		.WAIT \
+		../librtld
+
+LSUBDIRS2 =	../rtld \
+		../libldstab \
+		../ldprof \
+		../link_audit \
+		$(LDMAKEDIRS) \
+		../libldfeature \
+		$(RDBDIRS)
+
+LINTLDIRS=	../libld \
+		../sgsdemangler \
+		../dump \
+		../elfdump \
+		../ar \
+		../ld \
+		../ldd \
+		../mcs \
+		../nm \
+		../pvs \
+		../size
+
+$(LSUBDIRS1) $(LSUBDIRS2) :=	TARGET = lint
+$(LINTLDIRS) :=	TARGET = lint
+
+
+../%:		FRC
+		@ cd $@; pwd; $(MAKE) $(TARGET)
+
+.KEEP_STATE_FILE: .make.state.$(MACH)
+.KEEP_STATE:
+.PARALLEL:	$(LSUBDIRS1) $(LINTLDIRS) $(LSUBDIRS2)
+
+lint:		$(LSUBDIRS1) .WAIT $(LINTLDIRS) .WAIT $(LSUBDIRS2)
+		@ sh ../tools/bld_lint.sh $(LSUBDIRS1) $(LINTLDIRS) $(LSUBDIRS2)
+
+FRC:

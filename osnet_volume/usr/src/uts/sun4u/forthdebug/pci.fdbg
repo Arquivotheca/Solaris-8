@@ -1,0 +1,123 @@
+#ident	"@(#)pci.fdbg	1.7	99/06/30 SMI"
+
+#include <sys/types.h>
+#include <sys/async.h>
+#include <sys/sunddi.h>
+#include <sys/ddi_impldefs.h>
+#include <sys/pci/pci_obj.h>
+
+pci_fault_handle
+
+pci_common
+
+pci
+
+cb
+
+ib
+
+pbm
+
+iommu
+
+sc
+
+config_header
+
+config_header_state
+
+ecc
+
+ib_ino_info
+
+dvma_rec
+
+forth_start
+
+: print8 ( addr -- )
+  dup (.) 8 swap - spaces drop .
+;
+
+: print4 ( addr -- )
+  dup (.) 4 swap - spaces drop .
+;
+
+: .dip_name				( dip -- )
+   [ also dev_info-words ]
+   dup . ." (" devi_binding_name cscount bounds ?do i c@ emit loop ." )"
+   [ previous ]
+;
+
+: dump_dvma ( -- )
+   [ also dev_info-words ]
+   [ also ddi_dma_impl-words ]
+   [ also dvma_rec-words ]
+   ." index    addr   dvma_addr     len       mp     next     dip" cr
+   symbol dvma_active_list p@ 0 = if exit then
+   symbol dvma_active_list p@ symbol dvma_active_count l@ 0 do
+      I print4					\ index
+      dup . " : " type				\ addr :
+      dup dvma_addr .
+      dup len print8
+      dup mp .
+      dup next .
+      dup mp dmai_rdip .dip_name
+      next cr
+   loop
+   drop
+   [ previous ]
+   [ previous ]
+   [ previous ]
+;
+
+: .pci_soft_states		( -- )
+   [ also i_ddi_soft_state-words ]
+   ." instance pci_t*" cr
+   symbol per_pci_state p@ dup	( soft_states soft_states )
+   0 = if drop exit then	( soft_states )
+   dup n_items			( soft_states n_items )
+   dup 0 = if 2drop exit then	( soft_states n_items )
+   swap array swap		( array n_items )
+   0 do
+      I print8
+      dup p@ .
+      ptrsize + cr
+   loop
+   drop
+   ." use <instance#> .pci_soft_state to view individual instances" cr
+   [ previous ]
+;
+
+: .pci_soft_state		( instance -- )
+   [ also i_ddi_soft_state-words ]
+   ptrsize *			( offset -- )
+   symbol per_pci_state p@ 	( offset soft_states )
+   dup 0 = if 2drop exit then	( offset soft_states )
+   array			( offset array )
+   dup 0 = if 2drop exit then	( offset array )
+   + p@ .pci			\ (array + offset)->
+   [ previous ]
+;
+
+: .ib_ino_lst ( pci_p->ib_p->ib_ino_lst -- )
+[ also ib_ino_info-words ]
+begin ?dup while
+   \ dup .ib_ino_info
+   ." ino_ino="          dup ino_ino            .
+   ." ino_slot_no="      dup ino_slot_no        .
+   ." ino_ih_size="	 dup ino_ih_size	.
+   ." ino_next="         dup ino_next           . cr
+   ." ino_ih_head="	 dup ino_ih_head	.
+   ." ino_ih_tail="	 dup ino_ih_tail	. cr
+   ." ino_ih_start="	 dup ino_ih_start	.
+   ." ino_ib_p="         dup ino_ib_p           . cr
+   ." ino_clr_reg="      dup ino_clr_reg dup p@ swap >physical drop . ." =" .
+   ." ino_map_reg="      dup ino_map_reg dup p@ swap >physical drop . ." =" . cr
+   ." ino_map_reg_save=" dup ino_map_reg_save   . cr
+   cr
+   ino_next
+repeat
+[ previous ]
+;
+
+forth_end

@@ -1,0 +1,41 @@
+<TITLE> Specify Printer Port </TITLE>
+<!-- Tag=PrinterPort -->
+
+<CONTENT>
+
+<p>
+
+The printer port is the device name (typically, /dev/term/a,
+/dev/term/b, or /dev/bpp0) corresponding to the port to which a
+locally attached printer is physically connected. You usually connect
+printer cables to a serial port (/dev/term/a or /dev/term/b, for
+example) but in some cases you can use a parallel port (/dev/bpp0, for
+example).  See the printer vendor's documentation and your system's
+installation documentation for information about switch settings and
+cabling requirements.
+
+<p>
+
+Note that the device name must exist and have write permissions
+set.
+
+<p>
+
+</CONTENT>
+
+<KEYWORDS>
+port "printer port" other
+</KEYWORDS>
+
+<p>
+
+<SEEALSO>
+InstallLocal
+ToInstallLocal
+Overview
+MainWindow 
+HelpOnHelp
+</SEEALSO>
+
+
+

@@ -1,0 +1,19 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)sysinfo.dbg	1.4	98/01/14 SMI"
+
+#include <sys/types.h>
+#include <sys/sysinfo.h>
+#include "dummy.h"
+
+\
+\
+sysinfo
+        updates                 sdecimal
+        runque                  sdecimal
+        runocc                  sdecimal
+        swpque                  sdecimal
+        swpocc                  sdecimal
+        waiting                 sdecimal

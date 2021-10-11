@@ -1,0 +1,8 @@
+pam_dial_auth.so.1 {
+	global:
+		# Published PAM Service Module interfaces
+		pam_sm_authenticate;
+		pam_sm_setcred;
+	local:
+		*;
+};

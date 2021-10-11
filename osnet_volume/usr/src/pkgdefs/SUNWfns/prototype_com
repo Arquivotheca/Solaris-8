@@ -1,0 +1,100 @@
+#
+# Copyright (c) 1994-1998 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#ident	"@(#)prototype_com	1.17	99/03/30 SMI"
+#
+# This required package information file contains a list of package contents.
+# The 'pkgmk' command uses this file to identify the contents of a package
+# and their location on the development machine when building the package.
+# Can be created via a text editor or through use of the 'pkgproto' command.
+
+#!search <pathname pathname ...>	# where to find pkg objects
+#!include <filename>			# include another 'prototype' file
+#!default <mode> <owner> <group>	# default used if not specified on entry
+#!<param>=<value>			# puts parameter in pkg environment
+
+# packaging files
+i pkginfo
+i copyright
+i depend
+#
+# source locations relative to the prototype file
+#
+# SUNWfns
+#
+d none usr 0755 root sys
+d none usr/include 0755 root bin
+d none usr/include/xfn 0755 root bin
+f none usr/include/xfn/xfn.h 0644 root bin
+f none usr/include/xfn/misc_codes.h 0644 root bin
+f none usr/include/xfn/FN_ctx.h 0644 root bin
+f none usr/include/xfn/FN_composite_name.h 0644 root bin
+f none usr/include/xfn/FN_string.h 0644 root bin
+f none usr/include/xfn/FN_ref.h 0644 root bin
+f none usr/include/xfn/FN_ref_addr.h 0644 root bin
+f none usr/include/xfn/FN_attribute.h 0644 root bin
+f none usr/include/xfn/FN_attrset.h 0644 root bin
+f none usr/include/xfn/FN_attrmodlist.h 0644 root bin
+f none usr/include/xfn/FN_compound_name.h 0644 root bin
+f none usr/include/xfn/FN_status.h 0644 root bin
+f none usr/include/xfn/FN_identifier.h 0644 root bin
+f none usr/include/xfn/FN_attrvalue.h 0644 root bin
+f none usr/include/xfn/FN_nameset.h 0644 root bin
+f none usr/include/xfn/FN_bindingset.h 0644 root bin
+f none usr/include/xfn/FN_search_control.h 0644 root bin
+f none usr/include/xfn/FN_search_filter.h 0644 root bin
+f none usr/include/xfn/FN_syntax_standard.h 0644 root bin
+f none usr/include/xfn/fn_spi.h 0644 root bin
+d none usr/lib 0755 root bin
+f none usr/lib/libxfn.so.1 0755 root bin
+f none usr/lib/libxfn.so.2 0755 root bin
+s none usr/lib/libxfn.so=libxfn.so.2
+f none usr/lib/libfn_spf.so.1 0755 root bin
+s none usr/lib/libfn_spf.so=libfn_spf.so.1
+d none usr/lib/fn 0755 root bin
+s none usr/lib/fn/fn_compound_name_standard.so.1=../libfn_spf.so.1
+f none usr/lib/fn/fn_ctx_initial.so.1 0755 root bin
+f none usr/lib/fn/libfnsp.so.1 0755 root bin
+s none usr/lib/fn/libfnsp.so=libfnsp.so.1
+f none usr/lib/fn/fn_ctx_onc_fn_nisplus.so.1 0755 root bin
+s none usr/lib/fn/fn_ctx_onc_fn_printer_nisplus.so.1=fn_ctx_onc_fn_nisplus.so.1
+f none usr/lib/fn/fn_ctx_onc_fn_nis.so.1 0755 root bin
+s none usr/lib/fn/fn_ctx_onc_fn_printer_nis.so.1=fn_ctx_onc_fn_nis.so.1
+s none usr/lib/fn/fn_ctx_onc_fn_nis_root.so.1=fn_ctx_onc_fn_nis.so.1
+f none usr/lib/fn/fn_ctx_onc_fn_files.so.1 0755 root bin
+s none usr/lib/fn/fn_ctx_onc_fn_printer_files.so.1=fn_ctx_onc_fn_files.so.1
+f none usr/lib/fn/fn_ctx_onc_fn_fs_host.so.1 0755 root bin
+f none usr/lib/fn/fn_ctx_onc_fn_nisplus_root.so.1 0755 root bin
+f none usr/lib/fn/fn_ref_addr_onc_fn_nisplus.so.1 0755 root bin
+f none usr/lib/fn/fn_ref_addr_onc_fn_nis.so.1 0755 root bin
+f none usr/lib/fn/fn_ref_addr_onc_fn_files.so.1 0755 root bin
+f none usr/lib/fn/fn_ref_addr_onc_fn_nisplus_root.so.1 0755 root bin
+s none usr/lib/fn/fn_inet_nisplus.so.1=fn_ref_addr_onc_fn_nisplus_root.so.1
+f none usr/lib/fn/fn_ref_addr_onc_fn_nis_root.so.1 0755 root bin
+s none usr/lib/fn/fn_inet_nis.so.1=fn_ref_addr_onc_fn_nis_root.so.1
+f none usr/lib/fn/fn_ref_addr_inet_ipaddr_string.so.1 0755 root bin
+f none usr/lib/fn/fn_ref_addr_fn_link_addr.so.1 0755 root bin
+f none usr/lib/fn/fn_ref_addr_onc_fn_printer_files.so.1 0755 root bin
+f none usr/lib/fn/fn_ref_addr_onc_fn_printer_nis.so.1 0755 root bin
+f none usr/lib/fn/fn_ref_addr_onc_fn_printer_nisplus.so.1 0755 root bin
+f none usr/lib/fn/fn_ctx_inet_domain.so.1 0755 root bin
+f none usr/lib/libfn_p.so.1 0755 root bin
+s none usr/lib/libfn_p.so=libfn_p.so.1
+d none usr/bin 0755 root bin
+f none usr/bin/fnbind 0555 root bin
+f none usr/bin/fnunbind 0555 root bin
+f none usr/bin/fnlookup 0555 root bin
+f none usr/bin/fnlist 0555 root bin
+f none usr/bin/fnattr 0555 root bin
+f none usr/bin/fnrename 0555 root bin
+f none usr/bin/fncreate_printer 0555 root bin
+f none usr/bin/fnsearch 0555 root bin
+d none usr/sbin 0755 root bin
+f none usr/sbin/fncheck 0555 root bin
+f none usr/sbin/fncreate 0555 root bin
+f none usr/sbin/fnsypd 0555 root bin
+f none usr/sbin/fncopy 0555 root bin
+f none usr/sbin/fncreate_fs 0555 root bin
+f none usr/sbin/fndestroy 0555 root bin
+f none usr/sbin/fnselect 0555 root bin

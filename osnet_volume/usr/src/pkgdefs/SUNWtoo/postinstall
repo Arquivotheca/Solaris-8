@@ -1,0 +1,10 @@
+#
+#ident	"@(#)postinstall	1.1	93/12/14 SMI"
+#
+# Copyright (c) 1991 by Sun Microsystems, Inc.
+#
+if [ -d $BASEDIR/usr/kvm ] ; then
+	if [ -f $BASEDIR/usr/kvm/adb ] ; then
+		rm $BASEDIR/usr/kvm/adb
+	fi
+fi

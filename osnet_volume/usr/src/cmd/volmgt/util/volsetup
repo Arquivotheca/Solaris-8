@@ -1,0 +1,8 @@
+# @(#)volsetup 1.3     99/10/13 SMI
+# Setup nis+ directory and group.
+
+nisgrpadm -c volmgt.foo.bar.sun.com.
+nismkdir volmgt.foo.bar.sun.com.
+nischmod n=r,w=r,g=rmcd,o=rmcd volmgt.foo.bar.sun.com.
+nischgrp volmgt volmgt
+

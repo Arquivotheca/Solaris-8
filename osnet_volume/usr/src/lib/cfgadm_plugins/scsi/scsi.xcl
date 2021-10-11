@@ -1,0 +1,28 @@
+#
+# Copyright (c) 1999 by Sun Microsystems, Inc.
+# All rights reserved. 
+#
+#pragma ident   "@(#)scsi.xcl 1.2     99/08/10 SMI"
+#
+# lib/cfgadm_plugins/scsi/scsi.xcl
+#
+msgid  "insert_device"
+msgid  "remove_device"
+msgid  "replace_device"
+msgid  "\t-x insert_device ap_id [ap_id... ]\n"
+       "\t-x remove_device ap_id [ap_id... ]\n"
+       "\t-x replace_device ap_id [ap_id... ]\n"
+       "\t-x reset_device ap_id [ap_id... ]\n"
+       "\t-x reset_bus ap_id [ap_id... ]\n"
+       "\t-x reset_all ap_id [ap_id... ]\n"
+msgid  "%s/"
+msgid  "."
+msgid  ".."
+msgid  "%s"
+msgid  ": "
+msgid  "\n"
+msgid  "%s%s"
+msgid  " "
+msgid  "  "
+msgid  "-"
+msgid  "%%-%ds  %%-%ds"

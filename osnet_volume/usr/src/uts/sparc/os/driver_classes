@@ -1,0 +1,20 @@
+#
+# Copyright (c) 1992-1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#ident   "@(#)driver_classes 1.23     99/07/29 SMI"
+
+esp	scsi
+isp	scsi
+fas	scsi
+sbus	sbus
+sbi	sbus
+xbox	sbus
+pcipsy	pci
+simba	pci
+pci_pci	pci
+ebus	ebus
+glm	scsi
+uata	dada
+uata	scsi
+usoc	fibre-channel

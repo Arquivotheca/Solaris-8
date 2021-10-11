@@ -1,0 +1,34 @@
+#!/bin/sh
+#
+#ident	"@(#)i.publickey	1.1	93/05/19 SMI"
+#
+# Copyright (c) 1993 by Sun Microsystems, Inc.
+#
+
+PATH="/usr/bin:/usr/sbin:${PATH}"
+export PATH
+
+while read src dest
+do
+	if [ ! -f $dest ] ; then
+		cp $src $dest
+	else
+		#
+		# determine whether existing etc/system file is based on
+		# the same one being installed.  If so, no need to update it.
+		#
+		newrev=`sed -n 's/^.*\(@(#)publickey.*\)\".*/\1/p' $src`
+		oldrev=`sed -n 's/^.*\(@(#)publickey.*\)\".*/\1/p' $dest`
+		if [ "$oldrev" != "$newrev" ] ; then
+			grep '^[ 	]*#' $src > /tmp/newcomment.$$ \
+			   2>/dev/null
+			sed '1,/# a new one/d' $dest > /tmp/oldcontent.$$ \
+			   2>/dev/null
+			cat /tmp/newcomment.$$ /tmp/oldcontent.$$ > $dest
+			rm -f /tmp/newcomment.$$ /tmp/oldcontent.$$
+		fi
+	fi
+done
+
+exit 0
+

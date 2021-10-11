@@ -1,0 +1,141 @@
+#!/bin/sh
+#
+#ident  "@(#)i.rmmconf 1.10 00/01/05 SMI"
+#
+# Copyright (c) 1997 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+
+PATH="/usr/bin:/usr/sbin:${PATH}"
+export PATH
+
+#
+# update_action_line:
+#
+# takes three params:
+#	1. dest file name;
+#	2. new line to after last 'action ...' line;
+#	3. old line to delete;
+#
+# algorithm:
+#	if the "$new" line is already in the file "$d", then return, else
+#	find the line number of the last "action ..." line in the "$d" file
+#	add the supplied "$new" line after the current last "action ..." line
+#	if the "$old" line is in the file, remove it
+#
+update_action_line()
+{
+
+	d="$1"
+	new="$2"
+	old="$3"
+
+	# check for the "$new line"
+	if fgrep "$new" $d >/dev/null 2>&1 ; then
+		return		# no work needs to be done
+	fi
+
+	# find last '^action ...' line
+	line_no="`grep -n '^action' $d|tail -1|awk -F: '{print $1}'`"
+
+	# add new line after last '^action ...' line
+	sed -e "$line_no a\\
+$new" $d > /tmp/tmp.$$
+
+	# copy temp file back to dest file, removing old line (if present)
+	grep -v "^$old" /tmp/tmp.$$ > $d
+}
+
+update_ufs_ident_line()
+{
+        d="$1"
+
+        # get the line and check if up to date
+        if grep '^ident ufs .* rmscsi' $d >/dev/null 2>&1 ; then
+                :
+        else
+                #edit ident ufs line
+                sed -e '/^ident ufs ident_ufs/ s/$/ rmscsi/' \
+                        $dest >/tmp/tmp.$$
+                cp /tmp/tmp.$$ $dest
+
+                # clean up
+                rm -f /tmp/*.$$
+        fi
+}
+
+update_pcfs_ident_line()
+{
+        d="$1"
+
+        # check for the "$new line"
+        if grep '^ident pcfs .* rmscsi' $d >/dev/null 2>&1 ; then
+                :
+        else
+                #edit ident pcfs line
+                sed -e '/^ident pcfs ident_pcfs/ s/$/ rmscsi/' \
+                        $dest >/tmp/tmp.$$
+                cp /tmp/tmp.$$ $dest
+
+                # clean up
+                rm -f /tmp/*.$$
+        fi
+}
+
+add_udfs_ident_line()
+{
+	d="$1"
+	new="$2"
+
+	if grep '^ident udfs' $d >/dev/null 2>&1 ; then
+		:
+	else
+		# find last '^ident ...' line
+		line_no="`grep -n '^ident' $d|tail -1|awk -F: '{print $1}'`"
+
+		# add new line after last '^ident ...' line
+		sed -e "$line_no a\\
+$new" $d > /tmp/tmp.$$
+                cp /tmp/tmp.$$ $dest
+
+                # clean up
+                rm -f /tmp/*.$$
+	fi
+}
+
+while read src dest
+do
+	if [ ! -f $dest ] ; then
+		cp $src $dest
+	else
+		# save the 'ident' line from the 'new' file
+		grep '@(#)rmmount.conf' $src \
+		    > /tmp/newident.$$ 2>/dev/null
+
+		# save all but the 'ident' line from the old (orig) file
+		grep -v '@(#)rmmount.conf' $dest \
+		    > /tmp/rest.$$ 2>/dev/null
+
+		# concatenate the new ident and the old data, replacing old
+		cat /tmp/newident.$$ /tmp/rest.$$ > $dest
+
+		# get the new 'action rmscsi ...' line
+		new_action_line="`grep '^action rmscsi action_filemgr' $src`"
+
+		# ensure that default rmscsi line is up to date
+		update_action_line $dest "$new_action_line" \
+		    '# there is no old action line to remove'
+
+                # ensure that default rmscsi line is up to date
+                update_ufs_ident_line $dest 
+                update_pcfs_ident_line $dest
+		add_udfs_ident_line $dest \
+			"ident udfs ident_udfs.so cdrom floppy"
+
+		# restore permissions if they changed
+		chmod 0444 $dest
+		chgrp bin $dest
+	fi
+done
+
+exit 0

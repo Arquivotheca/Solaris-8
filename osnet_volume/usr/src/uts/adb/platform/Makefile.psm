@@ -1,0 +1,39 @@
+#
+#ident	"@(#)Makefile.psm	1.6	99/10/04 SMI"
+#
+# Copyright (c) 1990-1998 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+# uts/adb/platform/Makefile.psm
+#
+
+ADB_BASE_DIR	= $(ADB_PLAT_DIR)/..
+COMMONDIR	= $(ADB_BASE_DIR)/common
+ISADIR		= $(ADB_BASE_DIR)/${MACH}
+SYSDIR		= $(ADB_BASE_DIR)/..
+MACTMP		= ./.tmp
+
+include $(SYSDIR)/Makefile.uts
+include $(SRC)/Makefile.psm
+
+NATIVEDEFS	= -D${KARCH} -D${MACH} -D__${MACH} -D_KERNEL -D_MACHDEP
+INCDIR		= ${SYSDIR}/common
+SCRIPTS		= $(SRCS:.dbg=)
+
+USR_PSM_ADB_DIR = $(USR_PSM_LIB_DIR)/adb
+USR_PSM_ADB_DIR_64 = $(USR_PSM_ADB_DIR)/$(MACH64)
+
+ROOTSCRIPTS= $(SCRIPTS:%=$(USR_PSM_ADB_DIR)/%)
+ROOTSCRIPTS64= $(SCRIPTS:%=$(USR_PSM_ADB_DIR_64)/%)
+
+$(ROOTSCRIPTS) := FILEMODE = 644
+$(ROOTSCRIPTS64) := FILEMODE = 644
+
+# for some architectures, we need to generate dummy scripts
+# (like ctx)
+#
+ROOTDUMMIES= $(DUMMIES:%=$(USR_PSM_ADB_DIR)/%)
+ROOTDUMMIES64= $(DUMMIES:%=$(USR_PSM_ADB_DIR_64)/%)
+
+$(ROOTDUMMIES) := FILEMODE = 644
+$(ROOTDUMMIES64) := FILEMODE = 644

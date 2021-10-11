@@ -1,0 +1,35 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)cpu_stat.dbg	1.3	98/01/19 SMI"
+
+\       arg             : address of cpu_stat struct
+\       uses            : mutex, cpu_sysinfo, cpu_syswait, cpu_vminfo
+\       registers       : z
+\       description     : prints the contents of cpu_stat structure
+
+#include <sys/types.h>
+#include <sys/sysinfo.h>
+#include "dummy.h"
+
+\
+\
+cpu_stat
+{adb_inline_begin}
+.>z
+<z+{OFFSET, __cpu_stat_lock}=""
+{adb_inline_end}
+        __cpu_stat_lock         .mutex          stat_lock
+{adb_inline_begin}
+<z+{OFFSET, cpu_sysinfo}=""
+{adb_inline_end}
+        cpu_sysinfo             .cpu_sysinfo    sysinfo
+{adb_inline_begin}
+<z+{OFFSET, cpu_syswait}=""
+{adb_inline_end}
+        cpu_syswait             .cpu_syswait    syswait
+{adb_inline_begin}
+<z+{OFFSET, cpu_vminfo}=""
+{adb_inline_end}
+        cpu_vminfo              .cpu_vminfo     vminfo

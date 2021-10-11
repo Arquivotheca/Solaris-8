@@ -1,0 +1,17 @@
+#
+# Copyright (c) 1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#pragma ident "@(#)versions 1.2	99/09/23 SMI"
+#
+# vers file for ucblib/libtermcap
+#
+sparc {
+	SUNW_1.1;
+}
+sparcv9 {
+	SUNW_1.1;
+}
+i386 {
+	SUNW_1.1;
+}

@@ -1,0 +1,15 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)putbuf.wrap.dbg	1.3	98/01/19 SMI"
+
+#include "dummy.h"
+
+\
+\
+__dummy         ""      putbuf.wrap
+{adb_inline_begin}
+*putbuf+(*putbufrpos),(*putbufsz-*putbufrpos)/c
+*putbuf,(*putbufwpos)/c
+{adb_inline_end}

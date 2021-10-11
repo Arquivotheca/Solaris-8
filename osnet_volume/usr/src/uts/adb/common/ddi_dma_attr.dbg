@@ -1,0 +1,37 @@
+\
+\ Copyright (c) 1999 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)ddi_dma_attr.dbg        1.1     99/09/24 SMI"
+
+#include <sys/types.h>
+#include <sys/ddidmareq.h>
+#include "dummy.h"
+
+\
+\
+
+ddi_dma_attr	dma_attr_
+{adb_inline_begin}
+.>z
+<z+{OFFSET, dma_attr_version}=""
+{adb_inline_end}
+	version		hex	version
+	addr_lo		hex	addr_lo
+	addr_hi		hex	addr_hi
+	count_max	hex	count_max
+	align		hex	align
+	burstsizes	hex	burst
+	minxfer		hex	minxfer
+	maxxfer		hex	maxxfer
+	seg		hex	seg
+	sgllen		hex	sgllen
+	granular	hex	granular
+	flags		hex	flags
+{adb_inline_begin}
+<z+{SIZEOF}=""
+{adb_inline_end}
+
+\
+\
+

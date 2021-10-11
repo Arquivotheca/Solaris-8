@@ -1,0 +1,23 @@
+#
+# uts/sun4u/tazmo/Makefile.files
+# Copyright (c) 1994, 1995, 1996 - 1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#ident	"@(#)Makefile.files	1.1	99/02/09 SMI"
+#
+#	This Makefile defines all file modules for the directory
+#	ust/sun4u/tazmo and it's children. These are the source files
+#	which are sun4u "implementation architecture" dependent.
+#
+
+#
+#	object lists
+#
+# Tazmo specific driver related modules
+#
+ENVCTRL_OBJS	= envctrl.o
+
+#
+# Miscellaneous
+#
+INC_PATH	+= -I$(UTSBASE)/sun4u/tazmo

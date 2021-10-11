@@ -1,0 +1,55 @@
+#!/bin/sh
+#
+#ident	"@(#)i.group	1.3	97/06/12 SMI"
+#
+# Copyright (c) 1993-1995, by Sun Microsystems, Inc.
+#
+
+PATH="/usr/bin:/usr/sbin:${PATH}"
+export PATH
+
+while read src dest
+do
+	if [ ! -f $dest ] ; then
+		cp $src $dest
+	else
+		#
+		# Strip off any leading "/a"
+		#
+		dest_file=`echo $dest | sed "s=^/a/=/="`
+
+		#
+		# Add the sysadmin group (gid 14) to support admintool
+		#
+		grep '^sysadmin:.*:14:.*' $dest 2>&1 >/dev/null
+		if [ $? = 0 ] ; then
+			/usr/bin/true
+		elif grep '^sysadmin:' $dest 2>&1 >/dev/null; then
+			cur_name="sysadmin"
+			echo "SYSADMIN_NOT_14 $dest_file none" >> /tmp/CLEANUP
+			echo "sysadmin::14:" >> $dest
+
+		elif grep ':14:' $dest 2>&1 >/dev/null; then
+			cur_name=`grep ':14:' $dest | awk -F: '{print $1}'`
+			echo "GROUP14_IN_USE $dest_file none" >> /tmp/CLEANUP
+			echo "sysadmin::14:" >> $dest
+
+		else		# add the group
+			echo "sysadmin::14:" >> $dest
+		fi
+
+		#
+		# Add the 'nogroup' group from 4.x so that people don't
+		# assign it to a regular user and confuse themselves
+		#
+		NOGROUP_LINE="nogroup::65534:"
+		if grep "$NOGROUP_LINE" $dest 2>&1 >/dev/null; then
+			:
+		else
+			printf '/^noaccess::60002:\na\n%s\n.\nw\nq\n' \
+				"$NOGROUP_LINE" | ed -s $dest > /dev/null
+		fi
+	fi
+done
+
+exit 0

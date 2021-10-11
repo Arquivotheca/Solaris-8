@@ -1,0 +1,79 @@
+#
+# Copyright (c) 1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#ident	"@(#)Makefile.lib	1.2	99/08/16 SMI"
+#
+# cmd/perl/Makefile.lib
+#
+
+include ../Makefile.locns
+
+LIBRARY = 	libperl.a
+VERS =		.1
+
+OBJECTS = \
+	av.o \
+	byterun.o \
+	deb.o \
+	doio.o \
+	doop.o \
+	dump.o \
+	globals.o \
+	gv.o \
+	hv.o \
+	mg.o \
+	op.o \
+	perlio.o \
+	perly.o \
+	perl.o \
+	pp.o \
+	pp_ctl.o \
+	pp_hot.o \
+	pp_sys.o \
+	regcomp.o \
+	regexec.o \
+	run.o \
+	scope.o \
+	sv.o \
+	taint.o \
+	toke.o \
+	universal.o \
+	util.o
+
+include ../../../lib/Makefile.lib
+
+SRCS=           $(OBJECTS:%.o=%.c)
+
+LIBS =          $(DYNLIB)
+
+ROOTLIBDIR=	$(PERL_CORE_DIR)
+
+OBJS=	$(OBJECTS:%.o=objs/%.o)
+PROFS=	$(OBJECTS:%.o=profs/%.o)
+PICS=	$(OBJECTS:%.o=pics/%.o)
+
+#
+# See ./Makefile for comments regarding Large Files and Perl 5.
+#
+LDLIBS +=       -lsocket -lnsl -lm -ldl -lc
+
+.KEEP_STATE:
+
+all : $(LIBS) $(LIBLINKS)
+
+install: all
+
+install_lib:
+	$(RM) -f $(PERL_CORE_DIR)/$(DYNLIB)
+	$(MV) $(PERL_CORE_DIR)/$(LIBLINKS) $(PERL_CORE_DIR)/$(DYNLIB)
+	$(LN) -s ./$(DYNLIB) $(PERL_CORE_DIR)/$(LIBLINKS)
+
+$(LIBLINKS):
+	$(RM) -f $@
+	$(LN) -s ./$(DYNLIB) $@
+
+# include library targets
+include ../../../lib/Makefile.targ
+
+$(DYNLIB) : $(SRCS)

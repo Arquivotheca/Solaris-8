@@ -1,0 +1,89 @@
+\
+\ Copyright (c) 1998-1999 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)openhci_state.dbg	1.8	99/11/18 SMI"
+
+#include <sys/usb/usba.h>
+#include <sys/usb/usba/usba_types.h>
+#include <sys/usb/usba/usba_impl.h>
+#include <sys/usb/hcd/openhci/ohci.h>
+#include <sys/usb/hcd/openhci/ohcid.h>
+#include "dummy.h"
+
+\
+\
+
+openhci_state	ohci_	
+{adb_inline_begin}
+.>w
+<w+{OFFSET, ohci_dip}=""
+{adb_inline_end}
+	dip			hex
+	instance		hex
+	hcdi_ops		hex
+	flags			hex
+	vendor_id		hex
+	device_id		hex
+	regsp			hex
+	regs_handle		hex	rhandle
+	config_handle		hex	cfghdl
+	frame_interval		hex	finterval
+	dma_attr		.ddi_dma_attr
+{adb_inline_begin}
+<w+{OFFSET, ohci_iblk_cookie}=""
+{adb_inline_end}
+	iblk_cookie		hex
+	int_mutex		.mutex
+{adb_inline_begin}
+<w+{OFFSET, ohci_hccap}=""
+{adb_inline_end}
+	hccap			hex
+	hcca_cookie		.ddi_dma_cookie
+{adb_inline_begin}
+<w+{OFFSET, ohci_hcca_dma_handle}=""
+{adb_inline_end}
+	hcca_dma_handle		hex	dmahdl
+	hcca_mem_handle		hex	memhdl
+	td_pool_addr		hex
+	td_pool_cookie		.ddi_dma_cookie
+{adb_inline_begin}
+<w+{OFFSET, ohci_td_pool_dma_handle}=""
+{adb_inline_end}
+	td_pool_dma_handle	hex	td_pool_dma_hdl
+	td_pool_mem_handle	hex	td_pool_mem_hdl
+	ed_pool_addr		hex
+	ed_pool_cookie		.ddi_dma_cookie
+{adb_inline_begin}
+<w+{OFFSET, ohci_ed_pool_dma_handle}=""
+{adb_inline_end}
+	ed_pool_dma_handle	hex	ed_pool_dma_hdl
+	ed_pool_mem_handle	hex	ed_pool_mem_hdl
+	dma_addr_bind_flag	hex	bind_flag
+	SOF_cv			hex
+	xfer_cmpl_cv		hex
+	ocsem			.sema
+{adb_inline_begin}
+<w+{OFFSET, ohci_bandwidth}=""
+{adb_inline_end}
+	bandwidth		hex
+	bandwidth_isoch_sum	hex	bw_isoc_sum
+	bandwidth_intr_min	hex	intr_min
+	open_pipe_count		hex	open_pipe#
+	reclaim_list		hex	reclaim
+	root_hub		.root_hub
+{adb_inline_begin}
+<w+{OFFSET, ohci_log_hdl}=""
+{adb_inline_end}
+	log_hdl			hex	log_hdl
+	dump_ops		hex	dump_ops
+	save_intr_status	.ohci_save_intr_status
+{adb_inline_begin}
+<w+{OFFSET, ohci_timeout_list}=""
+{adb_inline_end}
+	timeout_list		hex	timeout_list
+	timer_id		hex	timer_id
+	intrs_stats		hex	intrs_stats
+{adb_inline_begin}
+<w+{SIZEOF}=""
+{adb_inline_end}

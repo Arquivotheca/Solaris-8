@@ -1,0 +1,56 @@
+#
+# Copyright (c) 1998 Sun Microsystems, Inc.
+# All rights reserved.
+#
+#ident	"@(#)prototype_com	1.4	99/09/15 SMI"
+#
+# This required package information file contains a list of package contents.
+# The 'pkgmk' command uses this file to identify the contents of a package
+# and their location on the development machine when building the package.
+# Can be created via a text editor or through use of the 'pkgproto' command.
+
+#!search <pathname pathname ...>	# where to find pkg objects
+#!include <filename>			# include another 'prototype' file
+#!default <mode> <owner> <group>	# default used if not specified on entry
+#!<param>=<value>			# puts parameter in pkg environment
+
+# packaging files
+i depend
+i pkginfo
+i copyright
+#
+# source locations relative to the prototype file
+#
+# SUNWuxfl1
+#
+d none usr 755 root sys
+d none usr/platform 755 root sys
+d none usr/platform/sun4u 755 root sys
+d none usr/platform/sun4u/lib 755 root bin
+#
+# create other sun4u platform directories
+#
+d none usr/platform/SUNW,Ultra-1 755 root sys
+d none usr/platform/SUNW,Ultra-250 755 root sys
+d none usr/platform/SUNW,Ultra-4 755 root sys
+d none usr/platform/SUNW,Ultra-Enterprise 755 root sys
+d none usr/platform/SUNW,Ultra-Enterprise-10000 755 root sys
+#
+# create other sun4u platform/lib directories
+#
+d none usr/platform/SUNW,Ultra-1/lib 755 root bin
+d none usr/platform/SUNW,Ultra-250/lib 755 root bin
+d none usr/platform/SUNW,Ultra-4/lib 755 root bin
+d none usr/platform/SUNW,Ultra-Enterprise/lib 755 root bin
+d none usr/platform/SUNW,Ultra-Enterprise-10000/lib 755 root bin
+#
+# create sun4u/lib/prom and links to it for each sun4u platform
+#
+d none usr/platform/sun4u/lib/prom 755 root bin
+s none usr/platform/SUNW,Ultra-1/lib/prom=../../sun4u/lib/prom
+s none usr/platform/SUNW,Ultra-250/lib/prom=../../sun4u/lib/prom
+s none usr/platform/SUNW,Ultra-4/lib/prom=../../sun4u/lib/prom
+s none usr/platform/SUNW,Ultra-Enterprise/lib/prom=../../sun4u/lib/prom
+s none usr/platform/SUNW,Ultra-Enterprise-10000/lib/prom=../../sun4u/lib/prom
+#
+f none usr/platform/sun4u/lib/prom/SUNW,Ultra-1 444 root sys

@@ -1,0 +1,28 @@
+#
+#ident	"@(#)versions	1.1	99/01/25 SMI"
+#
+# Copyright (c) 1998-1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+# vers file for libresolv
+#
+# Note: Even though the SUNW_1.1 version now contains no symbols
+# beyond what was present at Solaris 2.3, the SUNW_1.1 version MUST be 
+# present.  This is because applications built on 2.6 Beta 
+# (when it did contain symbols explicitly) may depend on it.
+#
+i386 {
+	SUNW_1.1:	{SUNW_0.7};
+	SUNW_0.7;
+	SUNWprivate_1.1;
+}
+sparcv9 {
+	SUNW_1.1:	{SUNW_0.7};
+	SUNW_0.7;
+	SUNWprivate_1.1;
+}
+sparc {
+	SUNW_1.1:	{SUNW_0.7};
+	SUNW_0.7;
+	SUNWprivate_1.1;
+}

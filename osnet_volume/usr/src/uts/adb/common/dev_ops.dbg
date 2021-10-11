@@ -1,0 +1,35 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)dev_ops.dbg	1.3	98/01/19 SMI"
+
+\       arg             : address of dev_ops struct
+\       uses            :
+\       registers       : z
+\       description     : prints the contents of dev_ops structure
+
+#include <sys/devops.h>
+#include "dummy.h"
+
+\
+\
+dev_ops                 devo_
+{adb_inline_begin}
+.>z
+<z+{OFFSET, devo_rev}=""
+{adb_inline_end}
+        rev                     sdecimal
+        refcnt                  sdecimal
+        getinfo                 symbolic
+        identify                symbolic
+        probe                   symbolic
+        attach                  symbolic
+        detach                  symbolic
+        reset                   symbolic
+        cb_ops                  symbolic
+        bus_ops                 symbolic
+        power                   symbolic
+{adb_inline_begin}
+<z+{SIZEOF}=""
+{adb_inline_end}

@@ -1,0 +1,9 @@
+#!/bin/sh
+#
+# Copyright (c) 1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#pragma ident	"@(#)req.flg	1.2	99/08/24 SMI"
+
+echo_file	usr/src/cmd/sh/sh_policy.h
+echo_file	usr/src/cmd/sh/sh_policy.c

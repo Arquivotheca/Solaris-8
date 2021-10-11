@@ -1,0 +1,48 @@
+#
+# Copyright (c) 1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#pragma ident	"@(#)versions	1.2	99/11/02 SMI"
+#
+# Note (re: SUNW_1.2 .. SUNW_1.3):
+# 	Even though the SUNW_1.2 and SUNW_1.3 versions now contain no 
+#	symbols these versions MUST be present.  This is because applications 
+#	built on 2.6 Beta (when they did contain symbols explicitly) may 
+#	depend on them. 
+#
+#	All symbol content for Solaris2.6 is now contained in SUNW_1.1,
+#	and (the now empty) versions SUNW_1.2 and SUNW_1.3 must be kept.
+#
+i386 {
+	SUNW_1.5:	{SUNW_1.4};
+	SUNW_1.4:	{SUNW_1.3};
+	SUNW_1.3:	{SUNW_1.2};
+	SUNW_1.2:	{SUNW_1.1};
+	SUNW_1.1:	{SUNW_0.9};
+	SUNW_0.9:	{SUNW_0.7};
+	SUNW_0.7;
+	SUNWprivate_1.1;
+}
+sparc {
+	SUNW_1.5:	{SUNW_1.4};
+	SUNW_1.4:	{SUNW_1.3};
+	SUNW_1.3:	{SUNW_1.2};
+	SUNW_1.2:	{SUNW_1.1};
+	SUNW_1.1:	{SUNW_0.9};
+	SUNW_0.9:	{SUNW_0.7, SISCD_2.3b};
+	SUNW_0.7:	{SISCD_2.3a};
+	SISCD_2.3a;
+	SISCD_2.3b;
+	SUNWprivate_1.1;
+	SISCD_2.3:	{SISCD_2.3a, SISCD_2.3b};
+}
+sparcv9 {
+	SUNW_1.5:	{SUNW_1.4};
+	SUNW_1.4:	{SUNW_1.3};
+	SUNW_1.3:	{SUNW_1.2};
+	SUNW_1.2:	{SUNW_1.1};
+	SUNW_1.1:	{SUNW_0.9};
+	SUNW_0.9:	{SUNW_0.7};
+	SUNW_0.7;
+	SUNWprivate_1.1;
+}

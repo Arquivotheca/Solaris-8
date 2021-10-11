@@ -1,0 +1,75 @@
+#
+#ident	"@(#)postremove	1.23	99/09/14 SMI"
+#
+# Copyright (c) 1999 by Sun Microsystems, Inc.
+# All rights reserved.
+
+files="\
+	etc/lib/ld.so.1 \
+	usr/bin/crle \
+	usr/bin/ldd \
+	usr/bin/pvs \
+	usr/include/dlfcn.h \
+	usr/include/gelf.h \
+	usr/include/libelf.h \
+	usr/include/link.h \
+	usr/include/proc_service.h \
+	usr/include/sys/elf_386.h \
+	usr/include/sys/elf_SPARC.h \
+	usr/include/sys/elf_ppc.h \
+	usr/include/sys/elf.h \
+	usr/include/sys/link.h \
+	usr/include/sys/rtld_db.h \
+	usr/ccs/bin/ar \
+	usr/ccs/bin/dump \
+	usr/ccs/bin/elfdump \
+	usr/ccs/bin/ld \
+	usr/ccs/bin/lorder \
+	usr/ccs/bin/mcs \
+	usr/ccs/bin/nm \
+	usr/ccs/bin/size \
+	usr/ccs/bin/sparcv9/ld \
+	usr/ccs/bin/strip \
+	usr/lib/ld.so.1 \
+	usr/lib/libcrle.so.1 \
+	usr/lib/libelf.so.1 \
+	usr/lib/libelf.a \
+	usr/lib/libld.so.2 \
+        usr/lib/libld.so.3 \
+	usr/lib/liblddbg.so.4 \
+	usr/lib/libldstab.so.1 \
+	usr/lib/librtld.so.1 \
+	usr/lib/librtld_db.so.1 \
+        usr/lib/lddstub \
+	usr/lib/link_audit/ldprof.so.1 \
+        usr/lib/link_audit/sparcv9/ldprof.so.1 \
+	usr/lib/link_audit/sparcv9/truss.so.1 \
+	usr/lib/link_audit/sparcv9/who.so.1 \
+	usr/lib/link_audit/truss.so.1 \
+	usr/lib/link_audit/who.so.1 \
+        usr/lib/sparcv9/ld.so.1 \
+        usr/lib/sparcv9/libcrle.so.1 \
+        usr/lib/sparcv9/libld.so.2 \
+        usr/lib/sparcv9/libld.so.3 \
+        usr/lib/sparcv9/liblddbg.so.4 \
+        usr/lib/sparcv9/libldstab.so.1 \
+        usr/lib/sparcv9/libdl.so.1 \
+        usr/lib/sparcv9/libelf.so.1 \
+        usr/lib/sparcv9/librtld.so.1 \
+        usr/lib/sparcv9/librtld_db.so.1 \
+        usr/lib/sparcv9/lddstub \
+	"
+
+MV="/usr/sbin/static/mv"
+RM="/usr/bin/rm -f"
+
+for F in $files
+do
+	if [ -f ${BASEDIR}/$F.orig ]
+	then
+		${MV} ${BASEDIR}/$F.orig ${BASEDIR}/$F
+		chown bin ${BASEDIR}/$F
+		chgrp bin ${BASEDIR}/$F
+	fi
+done
+

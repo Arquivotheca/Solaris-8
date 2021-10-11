@@ -1,0 +1,56 @@
+#
+# Copyright (c) 1997,1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#ident	"@(#)Makefile.target 1.11	99/05/14 SMI"
+#
+
+$(ROOTDIRS) $(ROOTDIRS64):
+	-$(INS.dir)
+
+$(ROOTISOSRCDIR):
+	-$(INS.dir)
+
+$(ROOTPOSIX):
+	cd $(ROOTLOCALE); $(RM) POSIX; $(SYMLINK) ./$(CLOCALE) $(POSIXLOCALE)
+
+$(ROOTISO)/% $(ROOTISO64)/%:	%
+	$(INS.file)
+
+$(ROOTISOSRCDIR)/%:	$(ISOLOCALE).%
+	$(INS.rename)
+
+$(ROOTISOSRCDIR)/%:	../$(ISOLOCALE).%
+	$(INS.rename)
+
+locale_description:	C.locale_description
+	sed -e '/^#/d' -e '/^[ 	]*$$/d' C.locale_description > $@
+
+$(ROOTC)/%:	%
+	$(INS.file)
+
+$(ROOTC):	$(ROOTLOCALE)
+
+$(ROOTISO):	$(ROOTLOCALE)
+
+$(ROOTISO64):	$(ROOTISO)
+
+$(ROOTSYMLN):	$(ROOTLOCALE)
+
+$(ROOTC)/LC_CTYPE:	$(ROOTC)
+
+$(ROOTC)/LC_COLLATE:	$(ROOTC)
+
+$(ROOTC)/LC_NUMERIC:	$(ROOTC)
+
+$(ROOTC)/LC_TIME:	$(ROOTC)
+
+$(ROOTC)/LC_MONETARY:	$(ROOTC)
+
+$(ROOTC)/LC_MESSAGES:	$(ROOTC)
+
+$(ROOTISO)/LC_CTYPE:	$(ROOTISO)
+
+$(ROOTISOOBJECT):	$(ROOTISO)
+
+$(ROOTISOOBJECT64):	$(ROOTISO64)

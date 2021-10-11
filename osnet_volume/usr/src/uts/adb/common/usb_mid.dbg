@@ -1,0 +1,42 @@
+\
+\ Copyright (c) 1998-1999 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)usb_mid.dbg	1.4	99/09/24 SMI"
+
+#include <sys/usb/usba.h>
+#include <sys/usb/usba/usba_types.h>
+#include <sys/usb/usba/usba_impl.h>
+#include <sys/usb/usb_mid/usb_midvar.h>
+#include "dummy.h"
+
+\
+\
+
+usb_mid		mi_	
+{adb_inline_begin}
+.>z
+<z+{OFFSET, mi_instance}=""
+{adb_inline_end}
+	instance		hex
+	init_state		hex
+	mutex			.mutex
+{adb_inline_begin}
+<z+{OFFSET, mi_dip}=""
+{adb_inline_end}
+	dip		hex
+	pm		hex
+	usb_device	hex	device
+	softstate	hex	softstate
+	dev_state	hex	dev_state
+	n_interfaces	hex	#interfaces
+	children_dips	hex	dips
+	cd_list_length	hex	len
+	dump_ops	hex	dump_ops
+	log_handle	hex
+	ndi_event_hdl	hex	event_hdl
+	remove_cookie	hex
+	insert_cookie	hex
+{adb_inline_begin}
+<z+{SIZEOF}=""
+{adb_inline_end}

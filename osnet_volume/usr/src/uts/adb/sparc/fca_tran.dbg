@@ -1,0 +1,51 @@
+\
+\ Copyright (c) 1999 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)fca_tran.dbg	1.2	99/10/18 SMI"
+\
+#include <sys/isa_defs.h>
+#include <sys/types.h>
+#include <sys/dditypes.h>
+#include <sys/ddidmareq.h>
+#include <sys/mutex.h>
+#include <sys/semaphore.h>
+#include <sys/condvar.h>
+#include <sys/thread.h>
+#include <sys/devops.h>
+#include <sys/fibre-channel/fc.h>
+#include <sys/fibre-channel/impl/fc_fcaif.h>
+#include "dummy.h"
+\
+\
+fca_tran	fca_
+{adb_inline_begin}
+.>w
+<w+{OFFSET, fca_numports}=""
+{adb_inline_end}
+	version			hex
+	numports		hex
+	pkt_size		hex
+	cmd_max			hex
+	dma_lim			hex
+	iblock			hex
+	dma_attr		hex
+	acc_attr		hex
+	bind_port		hex
+	unbind_port		hex
+	init_pkt		hex
+	un_init_pkt		hex
+	els_send		hex
+	get_cap			hex
+	set_cap			hex
+	getmap			hex
+	transport		hex
+	ub_alloc		hex
+	ub_free			hex
+	ub_release		hex
+	abort			hex
+	reset			hex
+	port_manage		hex			
+{adb_inline_begin}
+<w+{SIZEOF}=""
+{adb_inline_end}

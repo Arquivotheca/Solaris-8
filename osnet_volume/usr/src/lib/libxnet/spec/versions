@@ -1,0 +1,30 @@
+#
+#pragma ident	"@(#)versions	1.2	99/05/04 SMI"
+#
+# Copyright (c) 1998-1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+# vers file for libxnet
+#
+# SUNW_1.2: X/Open Networking Services (Issue 5)
+# SUNW_1.1: Sockets (X/Open CAE Specification (1994), page 6):
+# SUNW_1.1: X/Open Networking Services, Issue 4, page 6 XTI interfaces
+# SUNW_1.1: IP Address Resolution: (X/Open CAE Specification (1994), page 6)
+#
+
+i386 {
+	SUNW_1.2:	{SUNW_1.1};
+	SUNW_1.1;
+}
+sparc {
+	SUNW_1.2:	{SUNW_1.1};
+	SUNW_1.1;
+}
+sparcv9 {
+	SUNW_1.2:	{SUNW_1.1};
+	SUNW_1.1;
+}
+ia64 {
+	SUNW_1.2:	{SUNW_1.1};
+	SUNW_1.1;
+}

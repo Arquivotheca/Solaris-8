@@ -1,0 +1,36 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)dquot.dbg	1.5	98/09/02 SMI"
+
+#include <sys/types.h>
+#include <sys/t_lock.h>
+#include <sys/time.h>
+#include <sys/vnode.h>
+#include <vm/seg.h>
+#include <sys/fs/ufs_inode.h>
+#include <sys/fs/ufs_quota.h>
+#include "dummy.h"
+
+\
+\
+dquot           dq_
+{adb_inline_begin}
+.>z
+<z+{OFFSET, dq_forw}=""
+{adb_inline_end}
+        forw                    hex
+        back                    hex
+        freef                   hex
+        freeb                   hex
+        flags                   hex
+        cnt                     sdecimal
+        uid                     sdecimal
+        ufsvfsp                 hex
+        mof                     hex
+        dqb                     .dqblk
+{adb_inline_begin}
+<z+{OFFSET, dq_lock}=""
+{adb_inline_end}
+        lock                    .mutex

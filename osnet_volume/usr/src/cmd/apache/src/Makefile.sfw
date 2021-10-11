@@ -1,0 +1,263 @@
+#
+#ident	"@(#)Makefile.sfw	1.3	99/11/10 SMI"
+#
+# Copyright (c) 1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+
+include ../Makefile.paths
+
+PROG= httpd
+LIBRARY=libap.a
+LIBEXPAT=libexpat.a
+LIBPROXY=libproxy.so
+
+ROOTHTTPDPROG=$(PROG:%=$(ROOTHTTPDBINDIR)/%)
+
+SUBDIRS=support include lib/expat-lite os/unix modules/perl
+
+include ../../Makefile.cmd
+
+MAINOBJS= \
+	alloc.o		\
+	buff.o		\
+	http_config.o	\
+	http_core.o	\
+	http_log.o	\
+	http_main.o	\
+	http_protocol.o	\
+	http_request.o	\
+	http_vhost.o	\
+	util.o		\
+	util_date.o	\
+	util_script.o	\
+	util_uri.o	\
+	util_md5.o	\
+	rfc1413.o
+
+MAINSRCS=$(MAINOBJS:%.o=main/%.c)
+
+MAINHDRS = test_char.h uri_delims.h
+
+OSOBJS= \
+	os.o		\
+	os-inline.o
+
+OSSRCS=$(OSOBJS:%.o=os/unix/%.c)
+
+PROXYOBJS= \
+	mod_proxy.o	\
+	proxy_cache.o	\
+	proxy_connect.o	\
+	proxy_ftp.o	\
+	proxy_http.o	\
+	proxy_util.o
+
+PROXYSRCS=$(PROXYOBJS:%.o=modules/proxy/%.c)
+
+STDMODSOBJS= \
+	mod_vhost_alias.so \
+	mod_env.so	\
+	mod_log_config.so \
+	mod_mime_magic.so \
+	mod_mime.so	\
+	mod_negotiation.so	\
+	mod_status.so	\
+	mod_info.so	\
+	mod_include.so	\
+	mod_autoindex.so	\
+	mod_dir.so	\
+	mod_cgi.so	\
+	mod_asis.so	\
+	mod_imap.so	\
+	mod_actions.so	\
+	mod_speling.so	\
+	mod_userdir.so	\
+	mod_alias.so	\
+	mod_rewrite.so	\
+	mod_access.so	\
+	mod_auth.so	\
+	mod_auth_anon.so	\
+	mod_auth_dbm.so	\
+	mod_digest.so	\
+	mod_cern_meta.so \
+	mod_expires.so	\
+	mod_headers.so	\
+	mod_usertrack.so	\
+	mod_unique_id.so	\
+	mod_setenvif.so
+
+STDMODOBJS=$(STDMODSOBJS:%.so=%.o)
+
+STDMODSRCS=$(STDMODOBJS:%.o=modules/standard/%.c)
+
+MOD_SO_OBJ= mod_so.o
+
+MOD_SO_SRC=$(MOD_SO_OBJ:%.o=modules/standard/%.c)
+
+APOBJS= \
+	ap_execve.o	\
+	ap_cpystrn.o	\
+	ap_signal.o	\
+	ap_slack.o	\
+	ap_snprintf.o	\
+	ap_fnmatch.o	\
+	ap_md5c.o	\
+	ap_getpass.o	\
+	ap_sha1.o	\
+	ap_checkpass.o	\
+	ap_base64.o	\
+	ap_hook.o	\
+	ap_ctx.o	\
+	ap_mm.o
+
+APSRCS=$(APOBJS:%.o=ap/%.c)
+
+EXPATOBJS= \
+	xmltok.o	\
+	xmlrole.o	\
+	xmlparse.o	\
+	hashtable.o
+
+EXPATSRCS=$(EXPATOBJS:%.o=lib/expat-lite/%.c)
+
+OBJS= \
+	modules.o	\
+	buildmark.o	\
+	$(MAINOBJS)	\
+	$(MOD_SO_OBJ)	\
+	$(OSOBJS)	\
+	$(APOBJS) 	\
+	$(EXPATOBJS)
+
+SHARED_OBJS=$(STDMODSOBJS) $(LIBPROXY)
+
+ROOT_SHARED_OBJS=$(SHARED_OBJS:%=$(ROOTHTTPDLIBEXECDIR)/%)
+
+SRCDIR=.
+OSDIR=$(SRCDIR)/os/unix
+
+CPPFLAGS = `$(SRCDIR)/apaci` -I$(SRCDIR)/include -I$(OSDIR)
+CPPFLAGS += -I./lib/expat-lite -I. -DUSE_EXPAT
+CPPFLAGS += $(CPPFLAGS.master)
+
+$(EXPATOBJS):=	CPPFLAGS += -I./lib/expat-lite -DAPACHE
+
+$(STDMODOBJS):= CFLAGS += -G -Kpic
+$(PROXYOBJS):= CFLAGS += -G -Kpic
+
+# this is vile, but we don't own the code, and it generates
+# warnings otherwise...
+mod_include.o:= CPPFLAGS += -errtags=yes \
+	-erroff=E_END_OF_LOOP_CODE_NOT_REACHED \
+	-erroff=E_NON_CONST_INIT
+
+LDLIBS += -lsocket -lnsl -ldl
+
+CLOBBERFILES += apaci $(LIBRARY) $(LIBEXPAT) $(MAINHDRS) $(OBJS) \
+		$(STDMODOBJS) $(PROXYOBJS) $(SHARED_OBJS) gen_test_char \
+		gen_uri_delims gen_test_char.o gen_uri_delims.o
+
+all:=		TARGET=all
+install:=	TARGET=install
+clean:=		TARGET=clean
+lint:=		TARGET=lint
+clobber:=	TARGET=clobber
+
+.KEEP_STATE:
+
+.PARALLEL: $(OBJS) $(STDMODOBJS) $(PROXYOBJS)
+
+all:	$(MAINHDRS) $(LIBRARY) $(LIBEXPAT) $(SHARED_OBJS) \
+		.WAIT $(PROG) $(SUBDIRS)
+
+install: all .WAIT $(ROOTPREFIXDIR) $(ROOTHTTPDBINDIR) \
+		$(ROOTHTTPDLIBEXECDIR) $(ROOTHTTPDPROG) \
+		$(ROOT_SHARED_OBJS) $(SUBDIRS)
+
+$(PROG): apaci $(OBJS)
+	$(LINK.c) $(OBJS) -o $@ $(LDLIBS)
+	$(POST_PROCESS)
+
+$(LIBRARY): apaci $(APOBJS)
+	$(AR) $(ARFLAGS) $@ $(APOBJS)
+
+$(LIBEXPAT): apaci $(EXPATOBJS)
+	$(AR) $(ARFLAGS) $@ $(EXPATOBJS)
+
+$(LIBPROXY): apaci $(PROXYOBJS)
+	$(LINK.c) -G -o $@ $(PROXYOBJS)
+
+apaci:	apaci.template
+	@sed 	-e 's;@@HTTPD_ROOT;/$(PREFIX);' \
+		-e 's;@@SUEXEC_BIN;/$(BINDIR)/suexec;' \
+		-e 's;@@SHARED_CORE_DIR;/$(LIBEXECDIR);' \
+		-e 's;@@DEFAULT_PIDLOG;/$(RUNTIMEDIR)/httpd.pid;' \
+		-e 's;@@DEFAULT_SCOREBOARD;/$(RUNTIMEDIR)/httpd.scoreboard;' \
+		-e 's;@@DEFAULT_LOCKFILE;/$(RUNTIMEDIR)/httpd.lock;' \
+		-e 's;@@DEFAULT_XFERLOG;/$(LOGFILEDIR)/access_log;' \
+		-e 's;@@DEFAULT_ERRORLOG;/$(LOGFILEDIR)/error_log;' \
+		-e 's;@@TYPES_CONFIG_FILE;/$(SYSCONFDIR)/mime.types;' \
+		-e 's;@@SERVER_CONFIG_FILE;/$(SYSCONFDIR)/httpd.conf;' \
+		-e 's;@@ACCESS_CONFIG_FILE;/$(SYSCONFDIR)/access.conf;' \
+		-e 's;@@RESOURCE_CONFIG_FILE;/$(SYSCONFDIR)/srm.conf;' \
+		 apaci.template  >$@
+	@$(CHMOD) +x $@
+
+$(ROOTPREFIXDIR) $(ROOTHTTPDBINDIR) $(ROOTHTTPDLIBEXECDIR):
+	$(INS.dir)
+
+$(ROOTHTTPDBINDIR)/%: %
+	$(INS.file)
+
+$(ROOTHTTPDLIBEXECDIR)/%: %
+	$(INS.file)
+
+%.o:	main/%.c
+	$(COMPILE.c) $<
+
+%.o:	os/unix/%.c
+	$(COMPILE.c) $<
+
+%.o:	modules/proxy/%.c
+	$(COMPILE.c) $<
+
+%.o:	modules/standard/%.c
+	$(COMPILE.c) $<
+
+%.so:	%.o
+	$(LD) -G -o $@ $<
+
+%.o:	ap/%.c
+	$(COMPILE.c) $<
+
+%.o:	lib/expat-lite/%.c
+	$(COMPILE.c) $<
+
+test_char.h:	gen_test_char
+	$(RM) $@
+	./gen_test_char > $@
+
+gen_test_char:	apaci gen_test_char.o 
+	$(LINK.c) -o $@ gen_test_char.o
+
+uri_delims.h:	gen_uri_delims
+	$(RM) $@
+	./gen_uri_delims > $@
+
+gen_uri_delims:	apaci gen_uri_delims.o
+	$(LINK.c) -o $@ gen_uri_delims.o
+
+clean:	$(SUBDIRS)
+	-$(RM) $(OBJS)
+
+clobber: $(SUBDIRS)
+
+lint: lint_SRCS
+
+$(SUBDIRS):
+	@cd $@; pwd; $(MAKE) $(MFLAGS) -f Makefile.sfw $(TARGET)
+
+include ../../Makefile.targ
+
+FRC:

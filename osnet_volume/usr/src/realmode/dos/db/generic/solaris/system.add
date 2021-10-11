@@ -1,0 +1,9 @@
+* ident "@(#)system.add 1.46     96/02/08 - Solaris Driver Update"
+* Copyright 1996 Sun Microsystems, Inc.
+* All Rights Reserved.
+*
+forceload: drv/ata
+forceload: drv/kd
+forceload: drv/mlx
+forceload: drv/mscsi
+forceload: drv/dnet

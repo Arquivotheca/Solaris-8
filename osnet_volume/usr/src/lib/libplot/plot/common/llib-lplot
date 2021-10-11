@@ -1,0 +1,27 @@
+/*
+ * Copyright (c) 1997 by Sun Microsystems, Inc.
+ * All rights reserved
+ */
+
+#pragma ident	"@(#)llib-lplot	1.1	97/10/07 SMI" 
+
+/*LINTLIBRARY*/
+/*PROTOLIB1*/
+
+#include <stdio.h>
+
+void 	arc(short, short, short, short, short, short);
+void 	box(short, short, short, short);
+void 	circle(short, short, short);
+void 	closelp(void);
+void 	closevt(void);
+void 	cont(short, short);
+void 	erase(void);
+void 	label(char *);
+void 	line(short, short);
+void 	linemod(char *);
+void 	move(short, short);
+void 	openpt();
+void 	openvt();
+void 	point(short, short);
+void 	space(short, short, short, short);

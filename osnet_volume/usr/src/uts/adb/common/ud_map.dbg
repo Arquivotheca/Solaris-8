@@ -1,0 +1,38 @@
+\
+\ Copyright (c) 1998, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)ud_map.dbg	1.6	98/11/13 SMI"
+
+#include <sys/types.h>
+#include <sys/mutex.h>
+#include <sys/vnode.h>
+#include <vm/page.h>
+#include <sys/fbuf.h>
+#include <sys/fs/udf_volume.h>
+#include <sys/fs/udf_inode.h>
+#include "dummy.h"
+
+\
+\
+ud_map		udm_	ud_map
+{adb_inline_begin}
+.>x
+{adb_inline_end}
+	flags		hex
+	vsn		hex
+	pn		hex
+	vat_icb		hex
+	nent		hex
+	count		hex
+	bp		hex
+	addr		hex
+	plen		hex
+	nspm		hex
+	spsz		hex
+	loc		hex
+	sbp		hex
+	spaddr		hex
+{adb_inline_begin}
+<x+{SIZEOF}=""
+{adb_inline_end}

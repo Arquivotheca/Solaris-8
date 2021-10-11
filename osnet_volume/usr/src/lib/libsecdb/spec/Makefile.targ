@@ -1,0 +1,19 @@
+#
+# Copyright (c) 1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#"@(#)Makefile.targ	1.1	99/04/07 SMI"
+#
+# lib/libsecdb/spec/Makefile.targ
+#
+
+LIBRARY	=	libsecdb.a
+VERS	=	.1
+
+OBJECTS	=	chkauthattr.o	\
+		getauthattr.o	\
+		getexecattr.o	\
+		getprofattr.o	\
+		getuserattr.o	\
+		secdb.o		\
+		private.o

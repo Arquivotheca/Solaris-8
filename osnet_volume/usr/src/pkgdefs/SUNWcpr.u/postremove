@@ -1,0 +1,36 @@
+#!/bin/sh
+#
+# Copyright (c) 1995 - 1996, by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#ident	"@(#)postremove	1.9	96/09/19 SMI"
+#
+# SUNWcpr postremove script
+
+#
+# Unload old copy of cpr from system
+#
+
+CPRLOWER="/.cpr_generic_info /.cpr_turbo_info /.cpr_defaultboot_info \
+		/.cpr_config /.cpr_default"
+CPRFILES="${CPRLOWER} /.CPR_TB /.CPR"
+
+if [ "$BASEDIR" = "/" ] ; then
+	old_cpr=`/usr/sbin/modinfo | grep -w "cpr" | awk '{print $1}'`
+	if [ "X${old_cpr}" != "X" ] ; then
+		/usr/sbin/modunload -i ${old_cpr}
+	fi
+	
+	if [ -s /etc/power.conf ]; then
+		state_filesystem=`/usr/bin/grep "^[	 ]*statefile[ 	]" \
+					/etc/power.conf`
+		if [ "X${state_filesystem}" != "X" ] ; then
+			set - ${state_filesystem}
+			CPRSF="$2" 
+		fi
+	fi
+
+	rm -f ${CPRFILES} ${CPRSF}
+fi
+
+exit 0

@@ -1,0 +1,12 @@
+#
+#ident  "@(#)map.default 1.2     98/05/18 SMI"
+#
+# Copyright (c) 1998 by Sun Microsystems, Inc.
+#
+# Linker mapfile that shows how 32-bit SPARC programs are loaded by default.
+# The linker does not use this file automatically, so one must use the -M 
+# option to cc or ld:
+#
+#	cc -M /usr/lib/ld/map.default myprogram.c
+#
+text = V0x10000;

@@ -1,0 +1,106 @@
+#
+# Copyright (c) 1998-1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#pragma ident	"@(#)versions	1.5	99/07/29 SMI"
+#
+# vers file for libc
+#
+i386 {
+	SUNW_1.20:	{SUNW_1.19};
+	SUNW_1.19:	{SUNW_1.18.1};
+	SUNW_1.18.1:	{SUNW_1.18};
+	SUNW_1.18:	{SUNW_1.17};
+	SUNW_1.17:	{SUNW_1.16};
+	SUNW_1.16:	{SUNW_1.15};
+	SUNW_1.15:	{SUNW_1.14};
+	SUNW_1.14:	{SUNW_1.13};
+	SUNW_1.13:	{SUNW_1.12};
+	SUNW_1.12:	{SUNW_1.11};
+	SUNW_1.11:	{SUNW_1.10};
+	SUNW_1.10:	{SUNW_1.9};
+	SUNW_1.9:	{SUNW_1.8};
+	SUNW_1.8:	{SUNW_1.7};
+	SUNW_1.7:	{SUNW_1.6};
+	SUNW_1.6:	{SUNW_1.5};
+	SUNW_1.5:	{SUNW_1.4};
+	SUNW_1.4:	{SUNW_1.3};
+	SUNW_1.3:	{SUNW_1.2};
+	SUNW_1.2:	{SUNW_1.1};
+	SUNW_1.1:	{SUNW_0.9};
+	SUNW_0.9:	{SUNW_0.8};
+	SUNW_0.8:	{SUNW_0.7};
+	SUNW_0.7:	{SYSVABI_1.3};
+	SYSVABI_1.3;
+	SUNWprivate_1.2:	{SUNWprivate_1.1};
+	SUNWprivate_1.1;
+}
+ia64 {
+	SUNW_1.20:	{SUNW_1.19};
+	SUNW_1.19:	{SUNW_1.18.1};
+	SUNW_1.18.1:	{SUNW_1.18};
+	SUNW_1.18:	{SUNW_1.1};
+	SUNW_1.1:	{SUNW_0.9};
+	SUNW_0.9:	{SUNW_0.8};
+	SUNW_0.8:	{SUNW_0.7};
+	SUNW_0.7;
+	SUNWprivate_1.1;
+}
+sparc {
+	SUNW_1.20:	{SUNW_1.19};
+	SUNW_1.19:	{SUNW_1.18.1};
+	SUNW_1.18.1:	{SUNW_1.18};
+	SUNW_1.18:	{SUNW_1.17};
+	SUNW_1.17:	{SUNW_1.16};
+	SUNW_1.16:	{SUNW_1.15};
+	SUNW_1.15:	{SUNW_1.14};
+	SUNW_1.14:	{SUNW_1.13};
+	SUNW_1.13:	{SUNW_1.12};
+	SUNW_1.12:	{SUNW_1.11};
+	SUNW_1.11:	{SUNW_1.10};
+	SUNW_1.10:	{SUNW_1.9};
+	SUNW_1.9:	{SUNW_1.8};
+	SUNW_1.8:	{SUNW_1.7};
+	SUNW_1.7:	{SUNW_1.6};
+	SUNW_1.6:	{SUNW_1.5};
+	SUNW_1.5:	{SUNW_1.4};
+	SUNW_1.4:	{SUNW_1.3};
+	SUNW_1.3:	{SUNW_1.2};
+	SUNW_1.2:	{SUNW_1.1};
+	SUNW_1.1:	{SUNW_0.9};
+	SUNW_0.9:	{SUNW_0.8};
+	SUNW_0.8:	{SUNW_0.7};
+	SUNW_0.7:	{SISCD_2.3};
+	SISCD_2.3:	{SYSVABI_1.3};
+	SYSVABI_1.3;
+	SUNWprivate_1.2:	{SUNWprivate_1.1};
+	SUNWprivate_1.1;
+}
+sparcv9 {
+	SUNW_1.20:	{SUNW_1.19};
+	SUNW_1.19:	{SUNW_1.18.1};
+	SUNW_1.18.1:	{SUNW_1.18};
+	SUNW_1.18:	{SUNW_1.17};
+	SUNW_1.17:	{SUNW_1.16};
+	SUNW_1.16:	{SUNW_1.15};
+	SUNW_1.15:	{SUNW_1.14};
+	SUNW_1.14:	{SUNW_1.13};
+	SUNW_1.13:	{SUNW_1.12};
+	SUNW_1.12:	{SUNW_1.11};
+	SUNW_1.11:	{SUNW_1.10};
+	SUNW_1.10:	{SUNW_1.9};
+	SUNW_1.9:	{SUNW_1.8};
+	SUNW_1.8:	{SUNW_1.7};
+	SUNW_1.7:	{SUNW_1.6};
+	SUNW_1.6:	{SUNW_1.5};
+	SUNW_1.5:	{SUNW_1.4};
+	SUNW_1.4:	{SUNW_1.3};
+	SUNW_1.3:	{SUNW_1.2};
+	SUNW_1.2:	{SUNW_1.1};
+	SUNW_1.1:	{SUNW_0.9};
+	SUNW_0.9:	{SUNW_0.8};
+	SUNW_0.8:	{SUNW_0.7};
+	SUNW_0.7;
+	SUNWprivate_1.2:	{SUNWprivate_1.1};
+	SUNWprivate_1.1;
+}

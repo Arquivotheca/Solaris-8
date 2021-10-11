@@ -1,0 +1,30 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)threadlist.nxt.dbg	1.7	99/09/27 SMI"
+
+\ arg             : address of a struct _kthread
+\ uses            : thread.brief, threadlist.nxt (recursive call)
+\ registers       : e, n, s, t
+\ description     : prints info about the specified thread, then
+\                   continues to the next thread until all active
+\                   threads have been done
+
+#include <sys/thread.h>
+#include "dummy.h"
+
+\
+\
+_kthread        ""      threadlist.nxt
+{adb_inline_begin}
+.>t
+*(<t+{OFFSET, t_next})>n
+*(<t+{OFFSET, t_state})>/i/s
+<n,(#(<s))&(#(#(<n)))&(#(#(<n-<e)))$<threadlist.nxt
+<t$<<thread.brief
+(*(<t+{OFFSET, t_pcb.val[1]}))$c
+,#(<n-<e)$<
+<n>t
+<t$<threadlist.nxt
+{adb_inline_end}

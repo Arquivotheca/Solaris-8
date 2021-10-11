@@ -1,0 +1,8 @@
+#!/bin/sh
+#pragma ident   "@(#)req.flg 1.1     99/03/21 SMI"
+
+echo_file usr/src/cmd/cmd-inet/Makefile.cmd-inet
+echo_file usr/src/cmd/cmd-inet/common/Makefile
+echo_file usr/src/cmd/cmd-inet/common/ifaddrlist.c
+echo_file usr/src/cmd/cmd-inet/common/ifaddrlist.h
+

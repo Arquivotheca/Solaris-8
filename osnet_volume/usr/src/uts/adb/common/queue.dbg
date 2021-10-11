@@ -1,0 +1,55 @@
+\
+\ Copyright (c) 1997-1999 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)queue.dbg	1.10	99/10/15 SMI"
+
+#include <sys/types.h>
+#include <sys/stream.h>
+#include "dummy.h"
+
+\
+\
+queue           q_
+{adb_inline_begin}
+.>z
+<z+{OFFSET, q_qinfo}=""
+{adb_inline_end}
+        qinfo                   hex
+        first                   hex
+        last                    hex
+        next                    hex
+        link                    hex
+        ptr                     hex
+        count                   decimal
+        flag                    hex
+        minpsz                  hex
+        maxpsz                  hex
+        hiwat                   hex
+        lowat                   hex
+        bandp                   hex
+        lock                    .mutex
+{adb_inline_begin}
+<z+{OFFSET, q_stream}=""
+{adb_inline_end}
+        stream                  hex
+        syncq                   hex
+        nband                   hex
+        wait                    hex
+        sync                    hex
+        nfsrv                   hex
+        nbsrv                   hex
+        draining                decimal
+        struiot                 sdecimal
+        syncqmsgs               decimal
+        mblkcnt                 decimal
+	sqhead			hex
+	sqtail			hex
+	sqflags			hex
+	refcnt			decimal
+	sqnext			hex
+	sqprev			hex
+	spri			decimal
+{adb_inline_begin}
+<z+{SIZEOF}=""
+{adb_inline_end}

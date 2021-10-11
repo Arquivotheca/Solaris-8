@@ -1,0 +1,7 @@
+#
+#ident	"@(#)Systems	1.8	97/06/09 SMI"	/* SVr4.0 1.2	*/
+# This file previously contained an LP private interface.  It's
+# contents are no longer used by the printing system and therefore
+# obsolete.  Expect the file to be removed in a subsequent release
+# of Solaris, along with the lpsystem(1M) command.
++:x:-:bsd:-:n:10:-:-:Allow all connections

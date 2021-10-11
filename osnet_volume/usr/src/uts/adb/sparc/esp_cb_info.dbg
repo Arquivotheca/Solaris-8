@@ -1,0 +1,38 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)esp_cb_info.dbg	1.6	98/01/19 SMI"
+
+#include <sys/kmem.h>
+#include <sys/kmem_impl.h>
+#include <sys/scsi/adapters/espvar.h>
+#include "dummy.h"
+
+\
+\
+callback_info   c_      esp_cb_info
+{adb_inline_begin}
+.>z
+<z+{OFFSET, c_next}=""
+{adb_inline_end}
+        next                    hex
+        qf                      hex
+        qb                      hex
+        mutex                   .mutex
+{adb_inline_begin}
+<z+{OFFSET, c_cv}=""
+{adb_inline_end}
+        cv                      hex
+        thread                  hex
+        qlen                    hex
+        id                      hex
+        cb_now_qlen             hex     "now ql"
+        spawned                 hex     spawn
+        count                   hex
+        signal_needed           hex     "signal needed"
+        exit                    hex
+        cvd                     hex
+{adb_inline_begin}
+<z+{SIZEOF}=""
+{adb_inline_end}

@@ -1,0 +1,13 @@
+#
+# Copyright (c) 1997, by Sun Microsystems, Inc.
+# All rights reserved.
+#
+# ident  "@(#)dummy_mech 1.7     97/11/09 SMI"
+#
+# This file contains the GSS-API based security mechanism names,
+# its object identifier (OID) and a shared library that implements 
+# the services for that mechanism under GSS-API.
+#
+# Mechanism Name	Object Identifier	Shared Library	Kernel Module
+#
+dummy                   1.3.6.1.4.1.42.2.26.1.2	mech_dummy.so	kmech_dummy

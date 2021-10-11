@@ -1,0 +1,41 @@
+/*
+ * Copyright (c) 1999 by Sun Microsystems, Inc.
+ * All rights reserved.
+ */
+
+#pragma ident	"@(#)llib-ldhcpagent	1.2	99/08/18 SMI"
+
+/* LINTLIBRARY */
+/* PROTOLIB1 */
+
+#include <dhcp_hostconf.h>
+#include <dhcpagent_ipc.h>
+#include <dhcpagent_util.h>
+
+/* dhcp_hostconf.c */
+char			*ifname_to_hostconf(const char *);
+int			remove_hostconf(const char *);
+int			read_hostconf(const char *, PKT_LIST **);
+int			write_hostconf(const char *, PKT_LIST *, time_t);
+
+/* dhcpagent_ipc.c */
+const char		*dhcp_ipc_strerror(int);
+dhcp_ipc_request_t	*dhcp_ipc_alloc_request(dhcp_ipc_type_t, const char *,
+			    void *, uint32_t, dhcp_data_type_t);
+void			*dhcp_ipc_get_data(dhcp_ipc_reply_t *, size_t *,
+			    dhcp_data_type_t *);
+int			dhcp_ipc_make_request(dhcp_ipc_request_t *,
+			    dhcp_ipc_reply_t **, int32_t);
+int			dhcp_ipc_getinfo(dhcp_optnum_t *, DHCP_OPT **, int32_t);
+int			dhcp_ipc_init(int *);
+int			dhcp_ipc_accept(int, int *, int *);
+int			dhcp_ipc_recv_request(int, dhcp_ipc_request_t **, int);
+dhcp_ipc_reply_t	*dhcp_ipc_alloc_reply(dhcp_ipc_request_t *, int, void *,
+			    uint32_t, dhcp_data_type_t);
+int			dhcp_ipc_send_reply(int, dhcp_ipc_reply_t *);
+int			dhcp_ipc_close(int);
+
+/* dhcpagent_util.c */
+const char		*dhcp_state_to_string(DHCPSTATE);
+dhcp_ipc_type_t 	dhcp_string_to_request(const char *);
+int			dhcp_start_agent(int);

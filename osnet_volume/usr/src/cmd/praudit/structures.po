@@ -1,0 +1,79 @@
+#	/*
+#	 * TRANSLATION_NOTE:
+#	 *	These are name of different type of audit tokens.
+#	 *	To gain a better understanding of each token, you
+#	 *	might want to read the BSM manual, part no. 800-8933-05.
+#	 *
+#	 *	Also, keep the translation short, or use an abbreviated form.
+#	 *	The praudit program is most often used to print one token
+#	 *	per line, and it will be easy to read if the line remains
+#	 *	below 80 characters.
+#	 */
+msgid  "argument"
+msgstr
+msgid  "acl"
+msgstr
+msgid  "attribute"
+msgstr
+msgid  "arbitrary"
+msgstr
+msgid  "exit"
+msgstr
+msgid  "group"
+msgstr
+msgid  "header"
+msgstr
+msgid  "ip address"
+msgstr
+msgid  "ip"
+msgstr
+msgid  "IPC"
+msgstr
+msgid  "IPC perm"
+msgstr
+msgid  "ip port"
+msgstr
+msgid  "opaque"
+msgstr
+msgid  "file"
+msgstr
+msgid  "path"
+msgstr
+msgid  "process"
+msgstr
+msgid  "return"
+msgstr
+msgid  "sequence"
+msgstr
+msgid  "server"
+msgstr
+msgid  "socket"
+msgstr
+msgid  "subject"
+msgstr
+msgid  "text"
+msgstr
+msgid  "trailer"
+msgstr
+#	/*
+#	 * TRANSLATION_NOTE:
+#	 *	End names of audit token types.
+#	 */
+#	/*
+#	 * TRANSLATION_NOTE:
+#	 *	Begin names of fundamental datatypes.
+#	 *	These are used when displaying the arbitrary data token type.
+#	 */
+msgid  "binary"
+msgstr
+msgid  "octal"
+msgstr
+msgid  "decimal"
+msgstr
+msgid  "hexadecimal"
+msgstr
+msgid  "string"
+msgstr
+#	/*
+#	 * End name of fundamental datatypes.
+#	 */

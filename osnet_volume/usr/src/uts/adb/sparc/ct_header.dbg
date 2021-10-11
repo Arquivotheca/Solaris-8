@@ -1,0 +1,39 @@
+\
+\ Copyright (c) 1999 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)ct_header.dbg	1.1	99/07/21 SMI"
+\
+#include <sys/isa_defs.h>
+#include <sys/types.h>
+#include <sys/dditypes.h>
+#include <sys/ddidmareq.h>
+#include <sys/mutex.h>
+#include <sys/semaphore.h>
+#include <sys/condvar.h>
+#include <sys/thread.h>
+#include <sys/devops.h>
+#include <sys/fibre-channel/fc.h>
+#include "dummy.h"
+\
+\
+ct_header       ct_
+{adb_inline_begin}
+.>o
+#if defined(i386)
+<o+{OFFSET, ct_inid}=""
++/n"inid"16t"rev"n3BBn
++/n"reserved1"16t"options"16t"fc_subtype"16t"fcstype"nBBBBn
++/n"aiusize"16t"cmdrsp"nxxn
++/n"vendor"16t"expln"16t"reason"16t"reserved2"nBBBBn
+#elif defined(sparc)
+<o+{OFFSET, ct_rev}=""
++/n"rev"16t"inid"nB3Bn
++/n"fcstype"16t"fc_subtype"16t"options"16t"reserved1"nBBBBn
++/n"cmdrsp"16t"aiusize"nxxn
++/n"reserved2"16t"reason"16t"expln"16t"vendor"nBBBBn
+#else
+#endif
+<o+{SIZEOF}=""
+{adb_inline_end}
+

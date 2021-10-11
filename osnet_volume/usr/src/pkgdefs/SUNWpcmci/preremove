@@ -1,0 +1,49 @@
+#! /bin/sh
+#
+#pragma ident	"@(#)preremove	1.14	99/10/24 SMI"
+#
+# Copyright (c) 1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+
+PATH="/usr/bin:/usr/sbin:${PATH}"
+export PATH
+
+DEVLINKTB="$BASEDIR/etc/devlink.tab"
+
+TMP=/tmp/$$
+
+#
+# rem_devlink - removes an entry from ${DEVLINKTB}
+#
+rem_devlink()
+{
+	PATTERN="$1"
+	LINK="$2"
+	PLINK="`echo $LINK | sed 's/[$*^|\]/\\\&/g'`"
+	grep -v "^$PATTERN	$PLINK$" ${DEVLINKTB} >$TMP.devlink
+	mv $TMP.devlink ${DEVLINKTB}
+}
+
+case "${ARCH}" in
+sparc)
+	rem_drv -b ${BASEDIR} pcs
+	rem_drv -b ${BASEDIR} stp4020
+	rem_drv -b ${BASEDIR} pcic
+	rem_drv -b ${BASEDIR} pem
+	rm -f ${BASEDIR}/dev/stp4020
+	rm -f ${BASEDIR}/dev/pcic
+	;;
+i386)
+	rem_drv -b ${BASEDIR} pcs
+	rem_drv -b ${BASEDIR} pcic
+	rem_drv -b ${BASEDIR} pem
+	rm -f ${BASEDIR}/dev/pcic
+	;;
+esac
+
+rem_devlink 'type=pcmcia:event;name=pem' 'pem'
+rem_devlink 'type=ddi_ctl:devctl;minor=initpcmcia' 'pcmcia/\N0'
+rem_devlink 'type=ddi_ctl:devctl;minor=probepcmcia' 'pcmcia/probe_\N0'
+
+exit 0

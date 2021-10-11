@@ -1,0 +1,15 @@
+#!/sbin/sh
+#
+# Copyright (c) 1997 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#ident	"@(#)uucp	1.9	97/12/08 SMI"
+
+if [ -z "$_INIT_PREV_LEVEL" ]; then
+	set -- `/usr/bin/who -r`
+	_INIT_PREV_LEVEL="$9"
+fi
+
+if [ $_INIT_PREV_LEVEL = S -o $_INIT_PREV_LEVEL = 1 ]; then
+	/usr/bin/rm -rf /usr/spool/locks/* >/dev/null 2>&1 &
+fi

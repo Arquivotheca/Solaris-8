@@ -1,0 +1,31 @@
+\
+\ Copyright (c) 1998-1999 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)hc_gtd.dbg	1.1	99/11/05 SMI"
+
+#include <sys/usb/usba.h>
+#include <sys/usb/usba/usba_types.h>
+#include <sys/usb/hcd/openhci/ohci.h>
+#include "dummy.h"
+
+\
+\
+
+hc_gtd	hcgtd_	
+{adb_inline_begin}
+.>z
+<z+{OFFSET, hcgtd_trans_wrapper}=""
+{adb_inline_end}
+	trans_wrapper		hex
+	td_state		hex
+	next_td			hex
+	pad			hex
+	ctrl			hex
+	cbp			hex
+	next			hex
+	buf_end			hex
+	offsets			hex
+{adb_inline_begin}
+<z+{SIZEOF}=""
+{adb_inline_end}

@@ -1,0 +1,208 @@
+#!/bin/sh
+#
+#ident  "@(#)i.voldconf 1.12 99/04/07 SMI"
+#
+# Copyright (c) 1996-1997 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+
+PATH="/usr/bin:/usr/sbin:${PATH}"
+export PATH
+
+#
+# update_use_line:
+#
+# takes three params:
+#	1. dest file name;
+#	2. new line to go after last 'use ...' line;
+#	3. old line to delete;
+#
+# algorithm:
+#	if the "$new" line is already in the file "$d", then return, else
+#	find the line number of the last "use ..." line in the "$d" file
+#	add the supplied "$new" line after the current last "use ..." line
+#	if the "$old" line is in the file, remove it
+#
+update_use_line()
+{
+
+	d="$1"
+	new="$2"
+	old="$3"
+
+	# check for the "$new line"
+	if fgrep "$new" $d >/dev/null 2>&1 ; then
+		return		# no work needs to be done
+	fi
+
+	# find last '^use ...' line
+	line_no="`grep -n '^use' $d|tail -1|awk -F: '{print $1}'`"
+
+	# add new line after last '^use ...' line
+	sed -e "$line_no a\\
+$new" $d > /tmp/tmp.$$
+
+	# copy temp file back to dest file, removing old line (if present)
+	grep -v "^$old" /tmp/tmp.$$ > $d
+}
+
+#
+# update_notify_line
+#
+# takes one param:
+#	1. dest file name;
+#
+# algorithm:
+#	- find the current "notify ..." line
+#	- if the current line ends with "-c" and the line has no 'use='
+#	  clause, then
+#		- change the "-c" to a "-p", and
+#		- add a 'user=root' clause
+#
+update_notify_line()
+{
+
+	d="$1"
+
+
+	# get the current notify line
+	nl="`grep '^notify' $d`"
+
+	# check for "-c"
+	echo "$nl" | grep ' -c$' >/dev/null 2>&1
+	if [ $? != 0 ] ; then
+		# '-c' not found
+		return		# not an orig line -- just leave it alone
+	fi
+
+	# check for not having a 'user=' clause
+	echo "$nl" | grep ' user=' >/dev/null 2>&1
+	if [ $? = 0 ] ; then
+		# 'user=' found
+		return		# not an orig line -- just leave it alone
+	fi
+
+	# update the notify line to have a 'user=root' and a '-p'
+	sed -e "/^notify/s~/usr/lib~user=root /usr/lib~" \
+	    -e "/^notify/s~-c~-p~" $d > /tmp/tmp.$$
+
+	# move result back
+	mv /tmp/tmp.$$ $d
+}
+
+update_label_sun_line()
+{
+        d="$1"
+
+        # get the line and check if up to date
+        if grep '^label sun .* rmscsi' $d >/dev/null 2>&1 ; then
+                :
+        else
+                #edit label sun line
+                sed -e '/^label sun label_sun/ s/$/ rmscsi/' \
+                        $dest >/tmp/tmp.$$
+                cp /tmp/tmp.$$ $dest
+
+                # clean up
+                rm -f /tmp/*.$$
+        fi
+}
+
+update_label_dos_line()
+{
+        d="$1"
+
+        # get the line and check if up to date
+        if grep '^label dos .* rmscsi' $d >/dev/null 2>&1 ; then
+                :
+        else
+                #edit label dos line
+                sed -e '/^label dos label_dos/ s/$/ rmscsi/' \
+                        $dest >/tmp/tmp.$$
+                cp /tmp/tmp.$$ $dest
+
+                # clean up
+                rm -f /tmp/*.$$
+        fi
+}
+
+update_unsafe_udfs_line()
+{
+        d="$1"
+
+	LINE=`grep '^unsafe' $d`
+	for word in $LINE
+	do
+		if [ $word = "udfs" ]
+		then
+			return
+		fi
+	done
+	LINE="$LINE udfs"
+	grep -v '^unsafe' $d >/tmp/tmp.$$
+	echo $LINE >>/tmp/tmp.$$
+	cp /tmp/tmp.$$ $d
+}
+
+while read src dest
+do
+	if [ ! -f $dest ] ; then
+		cp $src $dest
+	else
+		# save the 'ident' line from the 'new' file
+		grep '@(#)vold.conf' $src \
+		    > /tmp/newident.$$ 2>/dev/null
+
+		# save all but the 'ident' line from the old (orig) file
+		grep -v '@(#)vold.conf' $dest \
+		    > /tmp/rest.$$ 2>/dev/null
+
+		# concatenate the new ident and the old data, replacing old
+		cat /tmp/newident.$$ /tmp/rest.$$ > $dest
+
+		# convert '/dev/fd' to '/dev/diskette' wherever found
+		sed -e 's,/dev/fd\[,/dev/diskette[,' $dest > /tmp/tmp.$$
+		cp /tmp/tmp.$$ $dest
+
+		# get the new 'use cdrom ...' line
+		new_use_line="`grep '^use cdrom drive' $src`"
+
+		# ensure that default cdrom line is up to date
+		update_use_line $dest "$new_use_line" \
+		    'use cdrom drive /dev/dsk/c0t6 dev_cdrom.so cdrom0'
+
+		# get the new 'use floppy ...' line
+		new_use_line="`grep '^use floppy drive' $src`"
+
+		# ensure that default floppy line is up to date
+		update_use_line $dest "$new_use_line" \
+		    'use floppy drive /dev/diskette dev_floppy.so floppy0'
+
+		# get the new 'use rmscsi ...' line
+		new_use_line="`grep '^# use rmscsi drive' $src`"
+
+		# ensure that default floppy line is up to date
+		update_use_line $dest "$new_use_line" \
+		    '# there is no old rmscsi line'
+
+		# update the volmissing line (if it hasn't changed)
+		update_notify_line $dest
+
+		# update the action lines
+		sed -e '/^# Action/,/^$/ s,/vol\*/,,' $dest >/tmp/tmp.$$
+		cp /tmp/tmp.$$ $dest
+
+                # ensure that the label_dos and label_sun lines are current
+                update_label_sun_line $dest 
+                update_label_dos_line $dest
+
+		# ensure unsafe line has udfs
+		update_unsafe_udfs_line $dest
+
+		# restore permissions if they changed
+		chmod 0444 $dest
+		chgrp bin $dest
+	fi
+done
+
+exit 0

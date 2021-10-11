@@ -1,0 +1,91 @@
+#! /usr/bin/sh
+#
+# ident	"@(#)set_keyboard_layout	1.1	99/04/27 SMI"
+#
+# Copyright (c) 1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+
+KBD_TYPE=`/usr/bin/kbd -t`
+
+# (Really,  should pick this up from the keyboard device node keyboard-type
+# value, or the 1275 PC keyboard binding "layout" property.)
+KBD_LAYOUT_NAME="`/usr/sbin/eeprom kbd-type | /usr/bin/sed -n s/kbd-type=//p`"
+
+case "$KBD_TYPE" in
+"USB keyboard")
+	case "$KBD_LAYOUT_NAME" in
+	"")			LAYOUT= ;;
+	"Czech" )		LAYOUT= ;;
+	"Danish" )		LAYOUT=6 ;;
+	"Dutch" )		LAYOUT=18 ;;
+	"French" )		LAYOUT=8 ;;
+	"French-Canadian" ) 	LAYOUT= ;;
+	"German" )		LAYOUT=9 ;;
+	"Greek" )		LAYOUT= ;;
+	"Hungarian" )		LAYOUT= ;;
+	"Italian" )		LAYOUT=14 ;;
+	"Japanese(106)" ) 	LAYOUT=15 ;;
+	"Japanese(J3100)" ) 	LAYOUT= ;;
+	"Latvian" )		LAYOUT= ;;
+	"Lithuanian" )		LAYOUT= ;;
+	"Polish" )		LAYOUT= ;;
+	"Korean" )		LAYOUT=16 ;;
+	"Norwegian" )		LAYOUT=19 ;;
+	"Russian" )		LAYOUT= ;;
+	"Spanish" )		LAYOUT=25 ;;
+	"Swedish" )		LAYOUT=26 ;;
+	"Swiss-French" ) 	LAYOUT=27 ;;
+	"Swiss-German" ) 	LAYOUT=28 ;;
+	"Taiwanese" )		LAYOUT=30 ;;
+	"Turkish" )		LAYOUT= ;;
+	"UK-English" )		LAYOUT=32 ;;
+	"US-English" )		LAYOUT=33 ;;
+	"US-English(Microsoft-Natural)" ) LAYOUT=33 ;;
+	"US-English(104-Key)" ) LAYOUT=33 ;;
+	*)			LAYOUT= ;;
+	esac
+	;;
+"PC")
+	case "$KBD_LAYOUT_NAME" in
+	"")			LAYOUT= ;;
+	"Czech" )		LAYOUT=53 ;;
+	"Danish" )		LAYOUT=36 ;;
+	"Dutch" )		LAYOUT=39 ;;
+	"French" )		LAYOUT=35 ;;
+	"French-Canadian" ) 	LAYOUT=50 ;;
+	"German" )		LAYOUT=37 ;;
+	"Greek" )		LAYOUT=57 ;;
+	"Hungarian" )		LAYOUT=51 ;;
+	"Italian" )		LAYOUT=38 ;;
+	"Japanese(106)" ) 	LAYOUT=49 ;;
+	"Japanese(J3100)" ) 	LAYOUT=34 ;;
+	"Latvian" )		LAYOUT=55 ;;
+	"Lithuanian" )		LAYOUT=59 ;;
+	"Polish" )		LAYOUT=52 ;;
+	"Korean" )		LAYOUT=47 ;;
+	"Norwegian" )		LAYOUT=40 ;;
+	"Russian" )		LAYOUT=54 ;;
+	"Spanish" )		LAYOUT=42 ;;
+	"Swedish" )		LAYOUT=43 ;;
+	"Swiss-French" ) 	LAYOUT=44 ;;
+	"Swiss-German" ) 	LAYOUT=45 ;;
+	"Taiwanese" )		LAYOUT=48 ;;
+	"Turkish" )		LAYOUT=56 ;;
+	"UK-English" )		LAYOUT=46 ;;
+	"US-English" )		LAYOUT=1 ;;
+	"US-English(Microsoft-Natural)" ) LAYOUT=1001 ;;
+	"US-English(104-Key)" ) LAYOUT=1001 ;;
+	*)			LAYOUT=0 ;;
+	esac
+	;;
+esac
+
+
+if test -n "$LAYOUT"
+then
+	# Set the layout for a non-self-ID keyboard.
+	# loadkeys -s is a project private interface, and subject to change
+	# without notice.
+	/usr/bin/loadkeys -s $LAYOUT
+fi

@@ -1,0 +1,25 @@
+#
+# Copyright (c) 1998 by Sun Microsystems, Inc.
+#
+# All rights reserved.
+#pragma ident	"@(#)sd_with_isp.wlcmd 1.9	98/10/11 SMI"
+
+add scsi_watch_request::swr_callback targets \
+	sd.c:sd_mhd_watch_cb \
+	sd.c:sd_media_watch_cb
+
+add scsi_pkt::pkt_comp targets \
+	sd.c:sd_mhd_watch_cb \
+	sd.c:sd_media_watch_cb \
+	sd.c:sd_mhd_watch_cb \
+	scsi_watch.c:scsi_watch_request_intr \
+	sd.c:sd_restart_unit_callback \
+	sd.c:sdintr
+
+one scsi_device
+one isp 
+
+add notify_entry::callback target  sd_mhd_reset_notify_cb
+
+root isp_kmem_cache_constructor isp_kmem_cache_destructor
+root isp.c:isp_scsi_dmafree isp.c:isp_scsi_sync_pkt

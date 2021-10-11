@@ -1,0 +1,14 @@
+#
+# Copyright (c) 1997-1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#pragma ident	"@(#)Makefile.targ	1.2	99/02/23 SMI"
+#
+# lib/libdhcp/spec/Makefile.targ
+
+LIBRARY	=	libdhcp.a
+VERS	=	.2
+
+OBJECTS	=	dhcp.o
+
+SPECCPP =	-I../.. -I$(SRC)/common/net/dhcp

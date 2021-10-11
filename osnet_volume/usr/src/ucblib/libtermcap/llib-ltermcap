@@ -1,0 +1,18 @@
+/* LINTLIBRARY */
+
+#include <sgtty.h>
+#include <ctype.h>
+#include <sys/ioctl.h>
+
+/* termcap.c */
+int tgetent(bp, name) char *bp; char *name; { static int x; return(x); }
+int tgetnum(id) char *id; { static int x; return(x); }
+int tgetflag(id) char *id; { static int x; return(x); }
+char *tgetstr(id, area) char *id; char **area; { static char *x; return(x); }
+
+/* tgoto.c */
+char *tgoto(cm, destcol, destline) char *cm; int destcol; int destline; { static char *x; return(x); }
+
+/* tputs.c */
+int tputs(cp, affcnt, outc) register char *cp; int affcnt; int (*outc)(); { static int x; return(x); }
+

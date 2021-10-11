@@ -1,0 +1,34 @@
+
+\
+\ Copyright (c) 1999 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)hub_power.dbg        1.2     99/10/22 SMI"
+
+#include <sys/usb/usba.h>
+#include <sys/usb/usba/usba_types.h>
+#include <sys/usb/usba/usba_impl.h>
+#include <sys/usb/hubd/hub.h>
+#include <sys/usb/hubd/hubdvar.h>
+#include "dummy.h"
+
+\
+\
+
+hub_power_struct	hubp_	hub_power
+{adb_inline_begin}
+.>x
+<x+{OFFSET, hubp_hubd}=""
+{adb_inline_end}
+	hubd			hex	hubd
+	wakeup_enabled		hex	wakeup_enabled
+	pwr_states		hex	pwr_states
+	pm_capabilities		hex	pmcap
+	raise_power		hex	raise_power
+	current_power		hex	current_power
+	child_pwrstate		hex	child_pwrstate
+	pmcomp			hex	pmcomp
+	confpwr_descr		.usb_config_pwr_descr
+{adb_inline_begin}
+<x+{SIZEOF}=""
+{adb_inline_end}

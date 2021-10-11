@@ -1,0 +1,22 @@
+
+Copyright (c) 1999 by Sun Microsystems, Inc.
+All rights reserved.
+
+#ident	"@(#)README	1.1	99/08/11 SMI"
+
+mdb(1) is an extensible utility for low-level debugging and editing of the
+live operating system, operating system crash dumps, user processes, user
+process core dumps, and object files.   mdb provides a completely customizable
+environment for debugging complex software systems such as an operating system,
+for programs that are highly optimized, have had their debug information
+removed, or are themselves low-level debugging tools, and for customer
+situations where developers can only access post-mortem information.
+
+Refer to the white paper "A Modular Debugger for Solaris" for information
+on the design, features, and goals of MDB.  See /shared/sac/PSARC/1999/169
+for copies of the paper and related documentation.  More information about
+MDB is available on the internal web at http://mdb.eng/.  This directory
+contains both the source for the MDB debugger, and the supporting debugger
+modules.  Developers are free to modify and enhance these modules to add
+new dcmds and walkers and to create completely new modules.
+

@@ -1,0 +1,24 @@
+#!/sbin/sh
+#
+# Copyright (c) 1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#ident	"@(#)ldap.client	1.1	99/07/07 SMI"
+
+case "$1" in
+start)
+	[ -f /var/ldap/ldap_client_file -a \
+	    -f /usr/lib/ldap/ldap_cachemgr ] || exit 0
+	/usr/lib/ldap/ldap_cachemgr &
+	;;
+
+stop)
+	[ -f /usr/lib/ldap/ldap_cachemgr ] && /usr/lib/ldap/ldap_cachemgr -K
+	;;
+
+*)
+	echo "Usage: $0 { start | stop }"
+	exit 1
+	;;
+esac
+exit 0

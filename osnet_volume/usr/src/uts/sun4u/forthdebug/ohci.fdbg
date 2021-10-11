@@ -1,0 +1,38 @@
+\ Copyright 1998 Sun Microsystems, Inc.
+\ All rights reserved.
+
+#ident	"@(#)ohci.fdbg	1.3	99/11/18 SMI"
+
+#include <sys/usb/usba.h>
+#include <sys/usb/usba/usba_types.h>
+#include <sys/usb/usba/usba_impl.h>
+#include <sys/usb/hcd/openhci/ohci.h>
+#include <sys/usb/hcd/openhci/ohcid.h>
+#include <sys/usb/hcd/openhci/ohci_polled.h>
+#include <sys/stream.h>
+
+openhci_state
+
+usb_dev
+
+ohci_pipe_private
+
+ohci_trans_wrapper
+
+hcr_regs
+
+hcca
+
+hc_ed
+
+hc_gtd
+
+mblk_t
+
+queue_t
+
+root_hub
+
+ohci_polled
+
+ohci_save_intr_status

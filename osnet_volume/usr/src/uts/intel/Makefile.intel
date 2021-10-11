@@ -1,0 +1,332 @@
+#
+#
+# Copyright (c) 1995-1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+# uts/intel/Makefile.intel
+#
+#pragma ident	"@(#)Makefile.intel	1.13	00/09/14 SMI"
+#
+#	This makefile contains the common definitions for all intel
+#	implementation architecture independent modules.
+#
+
+LINTS_DIR	 = $(OBJS_DIR)
+LINT_LIB_DIR	 = $(UTSBASE)/intel/lint-libs/$(OBJS_DIR)
+
+INC_PATH	+= -I$(UTSBASE)/intel
+
+#
+#	Include the makefiles which define build rule templates, the
+#	collection of files per module, and a few specific flags. Note
+#	that order is significant, just as with an include path. The
+#	first build rule template which matches the files name will be
+#	used. By including these in order from most machine dependent
+#	to most machine independent, we allow a machine dependent file
+#	to be used in preference over a machine independent version
+#	(Such as a machine specific optimization, which preserves the
+#	interfaces.)
+#
+include $(UTSBASE)/intel/Makefile.files
+include $(UTSBASE)/common/Makefile.files
+
+#
+#	Include machine independent rules. Note that this does not imply
+#	that the resulting module from rules in Makefile.uts is	machine
+#	independent. Only that the build rules are machine independent.
+#
+include $(UTSBASE)/Makefile.uts
+
+#
+#	Define supported builds
+#
+DEF_BUILDS				= obj32
+$(BUILD64)DEF_BUILDS			= obj32 obj64
+$(NOT_RELEASE_BUILD)DEF_BUILDS		= debug32
+$(BUILD64)$(NOT_RELEASE_BUILD)DEF_BUILDS= debug32 debug64
+ALL_BUILDS				= obj32 debug32
+$(BUILD64)ALL_BUILDS			= obj32 debug32 obj64 debug64
+
+#
+#	ia32 or ia64 inline definitions
+#
+INLINES_32	= $(UTSBASE)/intel/ia32/ml/ia32.il
+INLINES_64	= $(UTSBASE)/intel/ia64/ml/ia64.il
+INLINES		+= $(INLINES_$(CLASS))
+
+#
+#	Define the base directory for installation.
+#
+BASE_INS_DIR	 = $(ROOT)
+
+#
+#	Override CFLAGS based on CLASS (32 or 64)
+#
+# (CFLAGS32 belongs in Makefile.master)
+CFLAGS32	= $(COPTFLAG) $($(MACH)_CFLAGS) $(SPACEFLAG) $(CCMODE)
+CFLAGS32	+= $(INLINES)
+CFLAGS		= $(CFLAGS$(CLASS))
+
+#
+#	Hack since lint doesn't know about ia64 yet
+#
+LDEFS_32	=
+LDEFS_64	= -Ui386 -U__i386 -D__ia64
+LINT_DEFS	+= $(LDEFS_$(CLASS))
+
+#
+#	Debugging level
+#
+#	Special knowledge of which special debugging options affect which
+#	file is used to optimize the build if these flags are changed.
+#
+DEBUG_DEFS_OBJ32	=
+DEBUG_DEFS_DBG32	= -DDEBUG
+DEBUG_DEFS_OBJ64	=
+DEBUG_DEFS_DBG64	= -DDEBUG
+DEBUG_DEFS		= $(DEBUG_DEFS_$(BUILD_TYPE))
+
+DEBUG_COND_OBJ32	:sh = echo \\043
+DEBUG_COND_DBG32	=
+DEBUG_COND_OBJ64	:sh = echo \\043
+DEBUG_COND_DBG64	=
+IF_DEBUG_OBJ		= $(DEBUG_COND_$(BUILD_TYPE))$(OBJS_DIR)/
+
+# workaround(s) for bugs 0018 and 0019 (mcpcom dumps core)
+$(OBJS_DIR)/cachefs_vnops.o	:= COPTFLAG64 = -O -mP3OPT_ecg_pre_schedule=1
+$(OBJS_DIR)/cis_handlers.o	:= COPTFLAG64 = -O -mP3OPT_ecg_pre_schedule=1
+$(OBJS_DIR)/ttcompat.o		:= COPTFLAG64 = -O -mP3OPT_ecg_pre_schedule=1
+$(OBJS_DIR)/icmp.o		:= COPTFLAG64 = -O -mP3OPT_ecg_pre_schedule=1
+
+# workaround for bug 0034 (wrong generated code)
+$(OBJS_DIR)/ufs_subr.o		:= COPTFLAG64 = -O0
+$(OBJS_DIR)/tcp.o		:= COPTFLAG64 = -O0
+
+#
+#	Build `options'. These are mostly historical and the need for these
+#	is largely removed by the module technology. However, the static
+#	build will continue to require these.
+#
+OPTION_DEFS	 = -DSYSACCT -DC2_AUDIT
+
+#
+#	Collect the preprocessor definitions to be associated with *all*
+#	files.
+#
+ALL_DEFS	 = $(DEBUG_DEFS) $(OPTION_DEFS)
+
+#
+# ----- TRANSITIONAL SECTION --------------------------------------------------
+#
+
+#
+#	Not everything which *should* be a module is a module yet. The
+#	following is a list of such objects which are currently part of
+#	the base kernel but should soon become kmods.
+#
+NOT_YET_KMODS	 = $(OLDPTY_OBJS) $(PTY_OBJS) $(MOD_OBJS)
+
+#
+# ----- END OF TRANSITIONAL SECTION -------------------------------------------
+
+#
+#	The kernels modules which are "implementation architecture"
+#	specific for this machine are enumerated below. Note that most
+#	of these modules must exist (in one form or another) for each
+#	architecture.
+#
+#	Common Drivers (usually pseudo drivers) (/kernel/drv):
+#
+DRV_KMODS	+= arp
+DRV_KMODS	+= asy
+DRV_KMODS	+= clone
+DRV_KMODS	+= cmdk
+DRV_KMODS	+= cn
+DRV_KMODS	+= conskbd
+DRV_KMODS	+= consms
+DRV_KMODS	+= devinfo
+DRV_KMODS	+= dump
+DRV_KMODS	+= i8042
+DRV_KMODS	+= icmp
+DRV_KMODS	+= icmp6
+DRV_KMODS	+= ip
+DRV_KMODS	+= ip6
+DRV_KMODS	+= ipd
+DRV_KMODS	+= ipdcm
+DRV_KMODS	+= ipdptp
+DRV_KMODS	+= ipsecah
+DRV_KMODS	+= ipsecesp
+DRV_KMODS	+= iwscn
+DRV_KMODS	+= kb8042
+DRV_KMODS	+= keysock
+DRV_KMODS	+= kstat
+DRV_KMODS	+= ksyms
+DRV_KMODS	+= llc1
+DRV_KMODS	+= llc2
+DRV_KMODS	+= lockstat
+DRV_KMODS	+= lofi
+DRV_KMODS	+= log
+DRV_KMODS	+= logindmux
+DRV_KMODS	+= mm
+DRV_KMODS	+= mouse8042
+DRV_KMODS	+= nca
+DRV_KMODS	+= objmgr
+DRV_KMODS	+= openeepr
+DRV_KMODS	+= pm
+DRV_KMODS	+= poll
+DRV_KMODS	+= pseudo
+DRV_KMODS	+= ptc
+DRV_KMODS	+= ptm
+DRV_KMODS	+= pts
+DRV_KMODS	+= ptsl
+DRV_KMODS	+= rts
+DRV_KMODS	+= sad
+DRV_KMODS	+= sd
+DRV_KMODS	+= sgen
+DRV_KMODS	+= st
+DRV_KMODS	+= sy
+DRV_KMODS	+= sysmsg
+DRV_KMODS	+= tcp
+DRV_KMODS	+= tcp6
+DRV_KMODS	+= tl
+DRV_KMODS	+= tnf
+DRV_KMODS	+= udp
+DRV_KMODS	+= udp6
+DRV_KMODS	+= vgatext
+DRV_KMODS	+= vol
+DRV_KMODS	+= wc
+DRV_KMODS	+= winlock
+
+#
+#	Machine Specific Driver Modules (/kernel/drv):
+#
+DRV_KMODS	+= pci_pci
+DRV_KMODS	+= options
+
+#
+# PCMCIA specific module(s)
+#
+DRV_KMODS	+= pem pcs
+DRV_KMODS	+= pcata pcelx pcmem pcram pcser
+
+#
+# I2O specific module(s)
+#
+DRV_KMODS	+= pci_to_i2o i2o_bs i2o_scsi
+
+#
+# SCSI Enclosure Services driver
+#
+DRV_KMODS	+= ses
+
+#
+# USB specific modules
+#
+DRV_KMODS	+= hid
+DRV_KMODS	+= hubd
+DRV_KMODS	+= uhci
+DRV_KMODS	+= usb_mid
+DRV_KMODS	+= scsa2usb
+
+#
+#	Exec Class Modules (/kernel/exec):
+#
+EXEC_KMODS	+= coffexec elfexec intpexec javaexec
+
+#
+#	Scheduling Class Modules (/kernel/sched):
+#
+SCHED_KMODS	+= IA RT TS RT_DPTBL TS_DPTBL
+
+#
+#	File System Modules (/kernel/fs):
+#
+FS_KMODS	+= autofs cachefs fdfs fifofs hsfs lofs namefs nfs
+FS_KMODS	+= pcfs procfs specfs s5fs tmpfs udfs ufs sockfs mntfs
+
+#
+#	Streams Modules (/kernel/strmod):
+#
+STRMOD_KMODS	+= atun bufmod connld dedump ldterm pckt pfmod pipemod
+STRMOD_KMODS	+= ppp ppp_diag ptem redirmod rpcmod rlmod telmod timod
+STRMOD_KMODS	+= tirdwr ttcompat tun
+STRMOD_KMODS	+= usbkbm
+STRMOD_KMODS	+= usbms
+STRMOD_KMODS	+= authmd5h authsha1 encrdes encr3des
+
+#
+#	'System' Modules (/kernel/sys):
+#
+SYS_KMODS	+= c2audit
+SYS_KMODS	+= doorfs
+SYS_KMODS	+= inst_sync
+SYS_KMODS	+= kaio
+SYS_KMODS	+= msgsys
+SYS_KMODS	+= pipe
+SYS_KMODS	+= pset
+SYS_KMODS	+= semsys
+SYS_KMODS	+= shmsys
+SYS_KMODS	+= sysacct
+
+#
+#	'Misc' Modules (/kernel/misc):
+#
+MISC_KMODS	+= acpi_intp
+MISC_KMODS	+= busra
+MISC_KMODS	+= cis
+MISC_KMODS	+= consconfig
+MISC_KMODS	+= cs
+MISC_KMODS	+= dadk
+MISC_KMODS	+= des
+MISC_KMODS	+= diaudio
+MISC_KMODS	+= gda
+MISC_KMODS	+= gld
+MISC_KMODS	+= hidparser
+MISC_KMODS	+= hpcsvc
+MISC_KMODS	+= i2o_msg
+MISC_KMODS	+= ipc
+MISC_KMODS	+= kbtrans
+MISC_KMODS	+= kgssapi
+MISC_KMODS	+= klmmod klmops
+MISC_KMODS	+= kmech_dummy
+MISC_KMODS	+= md5
+MISC_KMODS	+= nfs_dlboot
+MISC_KMODS	+= nfssrv
+MISC_KMODS	+= pcicfg
+MISC_KMODS	+= pcihp
+MISC_KMODS	+= pcmcia
+MISC_KMODS	+= rpcsec
+MISC_KMODS	+= rpcsec_gss
+MISC_KMODS	+= scsi
+MISC_KMODS	+= seg_drv
+MISC_KMODS	+= seg_mapdev
+MISC_KMODS	+= snlb
+MISC_KMODS	+= strategy
+MISC_KMODS	+= strplumb
+MISC_KMODS	+= swapgeneric
+MISC_KMODS	+= sysinit
+MISC_KMODS	+= terminal-emulator
+MISC_KMODS	+= tlimod
+MISC_KMODS	+= ufs_log
+MISC_KMODS	+= usba
+
+#
+# 'Dacf' modules (/kernel/dacf)
+DACF_KMODS	+= consconfig_dacf
+
+#
+#	SVVS Testing Modules (/kernel/strmod):
+#
+#	These are streams and driver modules which are not to be
+#	delivered with a released system. However, during development
+#	it is convenient to build and install the SVVS kernel modules.
+#
+SVVS_KMODS	+= lmodb lmode lmodr lmodt lo tidg tivc tmux
+
+SVVS		+= svvs
+
+#
+#	Modules eXcluded from the product:
+#
+XMODS		+= gl_kmech_krb5
+XMODS		+= do_kmech_krb5

@@ -1,0 +1,44 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)cachefsmeta.dbg	1.8	98/01/19 SMI"
+
+#include <sys/fs/cachefs_fs.h>
+#include "dummy.h"
+
+\
+\       this macro is a submacro used by other macros that (possibly)
+\       use the "z" register. Use 'w'.
+\
+cachefs_metadata        md_     cachefsmeta
+{adb_inline_begin}
+.>w
+<w+{OFFSET, md_vattr}=""
+{adb_inline_end}
+        vattr                   .vattr
+{adb_inline_begin}
+<w+{OFFSET, md_aclclass}=""
+{adb_inline_end}
+        aclclass                hex
+        cookie.un._fid.len      sdecimal
+{adb_inline_begin}
+<w+{OFFSET, md_cookie.un._fid.data}/n"cookie_data"16tn16X
+<w+{OFFSET, md_flags}=""
+{adb_inline_end}
+        flags                   hex
+        rlno                    sdecimal
+        rltype                  hex
+        fid.un._fid.len         sdecimal
+{adb_inline_begin}
+<w+{OFFSET, md_fid.un._fid.data}/n"fid_data"16tn16X
+<w+{OFFSET, md_frontblks}=""
+{adb_inline_end}
+        frontblks               sdecimal
+        timestamp.tv_sec        hex
+        timestamp.tv_nsec       hex
+        gen                     hex
+        allocents               sdecimal
+{adb_inline_begin}
+<w+{SIZEOF}=""
+{adb_inline_end}

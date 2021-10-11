@@ -1,0 +1,42 @@
+#!/bin/sh
+#
+# Copyright (c) 1994, 1995, 1996 by Sun Microsystems, Inc.
+# All Rights Reserved
+#
+#	@(#)upgrade_fix	1.4	96/04/22  SMI
+#
+# This script will replace the necessary UCB commands that are overwritten at
+# system upgrade time.  
+#
+PATH=/usr/ucb:/bin:/usr/bin:/usr/sbin export PATH
+
+if [ -f /usr/ucb/lpr -a ! -h /usr/ucb/lpr ] ; then
+	echo "Fixing ucb print binaries..."
+	/bin/rm -f /usr/ucb/lpq /usr/ucb/lpr /usr/ucb/lprm
+	/bin/ln -s /usr/bin/lpstat /usr/ucb/lpq
+	/bin/ln -s /usr/bin/lp /usr/ucb/lpr
+	/bin/ln -s /usr/bin/cancel /usr/ucb/lprm
+
+	pkginfo -q SUNWspman 2>/dev/null
+	status=$?
+	if [ $status -eq 0 ] ; then
+		cat <<EOF
+Notice:
+	You may want to reinstall a copy of the SUNWspman package from it's
+	original installation media.  The system upgrade you have performed
+	has overwritten the manual pages: cancel(1), lp(1), lpstat(1), lpq(1b),
+	lpr(1b), lprm(1b).
+EOF
+	fi
+else
+	echo "No ucb print binaries to fix..."
+fi
+
+if [ `uname -r` = "5.4" ] ; then
+		cat <<EOF
+Notice:
+	You may want to reinstall a copy of the SUNWfns and SUNWfnspr packages
+	from the original installation media.  The system upgrade you have
+	performed has not upgraded the FNS software on the system.
+EOF
+fi

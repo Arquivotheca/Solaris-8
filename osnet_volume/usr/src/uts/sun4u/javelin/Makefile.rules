@@ -1,0 +1,31 @@
+#
+# uts/sun4u/javelin/Makefile.rules
+# Copyright (c) 1994 - 1998 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#ident	"@(#)Makefile.rules	1.1	98/02/12 SMI"
+#
+#	This Makefile defines the build rules for the directory 
+#	uts/sun4u/javelin and its children.
+#
+
+#
+#	C object build rules
+#
+#
+
+$(OBJS_DIR)/envctrltwo.o:	$(UTSBASE)/sun4u/javelin/io/envctrltwo.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun4u/javelin/io/envctrltwo.c
+
+$(OBJS_DIR)/javelin.o:		$(UTSBASE)/sun4u/javelin/os/javelin.c
+	$(COMPILE.c) -o $@ $(UTSBASE)/sun4u/javelin/os/javelin.c
+
+#
+#	Lint `object' build rules
+#
+#
+$(LINTS_DIR)/envctrltwo.ln:	$(UTSBASE)/sun4u/javelin/io/envctrltwo.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun4u/javelin/io/envctrltwo.c $(LTAIL))
+
+$(LINTS_DIR)/javelin.ln:	$(UTSBASE)/sun4u/javelin/os/javelin.c
+	@($(LHEAD) $(LINT.c) $(UTSBASE)/sun4u/javelin/os/javelin.c $(LTAIL))

@@ -1,0 +1,58 @@
+\
+\ Copyright (c) 1999 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)segxdata.dbg	1.1	99/08/02 SMI"
+
+#define _MACHDEP
+
+#include <sys/machparam.h>
+#include <sys/machsystm.h>
+#include <sys/mman.h>
+#include <sys/debug.h>
+#include <sys/types.h>
+#include <sys/vtrace.h>
+#include <sys/systm.h>
+#include <sys/cpuvar.h>
+#include <sys/thread.h>
+#include <sys/proc.h>
+
+#include <sys/kmem.h>
+#include <sys/cpu.h>
+#include <sys/cmn_err.h>
+#include <sys/sysmacros.h>
+#include <sys/vmem.h>
+#include <sys/vmsystm.h>
+#include <sys/promif.h>
+
+#include <vm/hat.h>
+#include <vm/hat_i86.h>
+#include <vm/as.h>
+#include <vm/seg.h>
+#include <vm/page.h>
+#include <vm/mach_page.h>
+#include <vm/rm.h>
+#include <vm/seg_kp.h>
+#include <vm/seg_kmem.h>
+#include <vm/seg_spt.h>
+#include <sys/var.h>
+#include <sys/x86_archext.h>
+#include <vm/faultcode.h>
+#include <sys/atomic.h>
+#include <sys/bitmap.h>
+#include <sys/ddidmareq.h>
+#include <sys/ddi_implfuncs.h>                   
+#include <sys/fs/xmem.h>
+#include <sys/fs/seg_xmem.h>
+#include "dummy.h"
+
+\
+\
+segxmem_data	sxd_	segxdata
+	vp		hex
+	offset		hex
+	bsize		hex
+	bshift		hex
+	softlockcnt	hex
+	spc		hex
+	prot		hex

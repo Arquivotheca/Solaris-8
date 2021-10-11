@@ -1,0 +1,39 @@
+#pragma ident	"@(#)00README	1.2	98/03/23 SMI"
+
+This directory contains source code to the rdb debugger.  This debugger
+is distributed as an example client of the librtld_db.so.1 interface.
+As well as offering examples of the proper calling sequence for the
+librtld_db.so.1 interface rdb also offers a sample implementation of the
+proc_services (/usr/include/proc_service.h) that rdb is dependent upon.
+
+The following is an overview of the directory structure and highlight
+of some of the important files contained within:
+
+rdb.man		- man page for the rdb debugger
+Makefile.com
+Makefile.targ	- common Makefiles included by ${MACH)/Makefile
+common/*	- common source code used for all architectures
+sparc/
+sparcv9/
+i386/		- contains architecture specific source files and also
+		  acts as the build directory
+sparc/Makefile
+sparcv9/Makefile
+i386/Makefile	- makefiles to build rdb for each architecture
+test/*		- sample command files which can be used to test rdb
+
+Building rdb
+------------
+Before attempting to build the rdb debugger be sure that you have
+installed the Solaris Developer Cluster and a C compiler (purchased
+serpartly) onto your system.
+
+To build rdb:
+
+% cd {sparc,sparcv9,i386}	- depending on which architecture you are building for
+% make all
+
+To test the demo:
+
+% make test
+

@@ -1,0 +1,114 @@
+.\" @(#)elfdump.1l 1.9 97/09/29 SMI
+.\" Copyright (c) 1995 by Sun Microsystems, Inc.
+.\" All rights reserved.
+.\"
+.TH elfdump 1l "Sept 7 1994"
+.SH NAME
+elfdump \- dump selected parts of an object file
+.SH SYNOPSIS
+.\".nr C 0
+.\".nr D 0
+.\".nr E 0
+.\".nr F 0
+.\".nr G 0
+.\".nr H 0
+.B elfdump
+[
+.B \-cdeihnprsvG
+] [
+.B \-w file
+] [
+.B \-N name
+]
+.IR filename .\|.\|.
+.SH DESCRIPTION
+.LP
+\f4elfdump\f1
+symbolically dumps selected parts of the specified object file(s). 
+The options allow specific portions of the file to be displayed.
+.sp
+The \f4elfdump\f1 utility is similar in function to the dump(1)
+command, which offers an older and less user-friendly interface
+then \f4elfdump\f1; though dump(1) may be more appropriate for
+certain uses such as in shell scripts.
+.sp
+For a complete description of the displayed information refer to the
+appropriate \fBABI\fP manual.
+.SH OPTIONS
+.TP 10
+.B \-c
+Dump section header information.
+.TP
+.B \-d
+Dump the contents of the
+.IR \&.dynamic
+section.
+.TP
+.B \-e
+Dump the elf header.
+.TP
+.B \-i
+Dump the contents of the
+.IR \&.interp
+section.
+.TP
+.B \-G
+Dump the contents of the
+.IR \&.got
+section.
+.TP
+.B \-h
+Dump the contents of the
+.IR \&.hash
+section.
+.TP
+.B \-n
+Dump the contents of the
+.IR \&.note
+section.
+.TP
+.B \-p
+Dump the program headers.
+.TP
+.B \-r
+Dump the contents of the relocation sections (i.e.,
+.IR \&.rel[a]. ).
+.TP
+.B \-s
+Dump the contents of the symbol table sections (i.e.,
+.IR \&.dynsym
+and/or
+.IR \&.symtab ).
+.TP
+.B \-v
+Dump the contents of the version sections (i.e.,
+.IR \&.SUNW_version ).
+If the \f4-s\f1 option is also used then the \f4st_other\fP entry reported for
+symbols from the
+.IR \&.dynsym
+section will be their version index.
+.TP
+.B \-w file
+Write the contents of a specified section to the named file.
+This is useful for extracting an individual sections data
+for additional processing.
+.TP
+.B \-N name
+Qualify an option with a specific name.  For example, in a file
+that contains more than one symbol table, the
+.IR \&.dynsym
+table can be displayed using:
+.IP "" 10
+.B "% elfdump\ \ -s\ \ -N\ \ .dynsym\ \ file"
+.sp
+.SH FILES
+.TP 10
+.B liblddbg.so
+linker debugging library. 
+.PD
+.SH "SEE ALSO" 
+.BR dump (1),
+.BR nm (1),
+.BR pvs (1)
+.LP
+.TZ LLM

@@ -1,0 +1,85 @@
+\
+\ Copyright (c) 1998 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)ata_controller.dbg	1.6	99/06/16 SMI"
+
+#include <sys/dada/dada.h>
+#include <sys/dada/adapters/ata_common.h>
+#include <sys/dada/adapters/ghd/ghd.h>
+#include "dummy.h"
+
+ata_controller	ac_
+{adb_inline_begin}
+.>z
+<z+{OFFSET, ac_dip}=""
+{adb_inline_end}
+	dip			hex
+	next			hex
+	flags			hex
+	simplex			hex
+	actv_chnl		hex
+	pending			hex
+	hba_mutex		.mutex
+{adb_inline_begin}
+<z+{OFFSET, ac_active}=""
+{adb_inline_end}
+	active			hex
+	overlap			hex
+	cccp			hex	
+	iblock			hex
+	drvp			hex
+	max_transfer		hex
+	atapi_tran		hex
+	ata_tran		hex
+	dcd_options		hex
+	ccc			.cmd_ctl
+{adb_inline_begin}
+<z+{OFFSET, ac_ccc}=""
+{adb_inline_end}
+	ccc			.cmd_ctl
+{adb_inline_begin}
+<z+{OFFSET, ata_datap}=""
+{adb_inline_end}
+	ata_datap		hex
+	ata_devaddr		hex
+	ata_datap1		hex
+	ata_devaddr1		hex
+	ata_conf_handle		hex
+	ata_conf_addr		hex
+	ata_cs_handle		hex
+	ata_cs_addr		hex
+	ata_prd_acc_handle	hex
+	ata_prd_dma_handle	hex
+	memp			hex
+	ioaddr1			hex
+	data			hex
+	error			hex
+	feature			hex
+	count			hex
+	sect			hex
+	lcyl			hex
+	hcyl			hex
+	drvhd			hex
+	status			hex
+	cmd			hex
+	ioaddr2			hex
+	altstatus		hex
+	devctl			hex
+	drvaddr			hex
+	vendor_id		hex
+	device_id		hex
+	revision		hex
+	piortable		hex
+	piowtable		hex
+	dmartable		hex
+	dmawtable		hex
+	reset_done		hex
+	suspended		hex
+	saved_dmac_address	hex
+	polled_finish		hex
+	polled_count		hex
+	intr_unclaimed		hex
+{adb_inline_begin}
+<z+{SIZEOF}=""
+{adb_inline_end}

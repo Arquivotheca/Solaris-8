@@ -1,0 +1,47 @@
+\
+\ Copyright (c) 1998 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)ata_pkt.dbg	1.2	98/02/07 SMI"
+
+#include <sys/types.h>
+#include <sys/dada/adapters/ata_common.h>
+#include <sys/dada/adapters/ghd/ghd.h>
+#include "dummy.h"
+
+ata_pkt		ap_
+{adb_inline_begin}
+.>z
+<z+{OFFSET, ap_gcmd}=""
+{adb_inline_end}
+	gcmd	.ghd_cmd
+{adb_inline_begin}
+<z+{OFFSET, ap_flags}=""
+{adb_inline_end}
+	flags		hex
+	v_addr		hex
+	chno		hex
+	targ		hex
+	sec		hex
+	count		hex
+	lwcyl		hex
+	hicyl		hex
+	hd		hex
+	cmd		hex
+	status		hex
+	error		hex
+	addr		hex
+	cnt		hex
+	start		hex
+	intr		hex
+	complete	hex
+	cdb		hex
+	scb		hex
+	bytes_per_block	hex
+	cdb_len		hex
+	cdb_pad		hex
+	count_bytes	hex
+	buf_addr	hex
+{adb_inline_begin}
+<z+{SIZEOF}=""
+{adb_inline_end}

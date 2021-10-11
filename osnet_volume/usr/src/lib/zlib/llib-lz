@@ -1,0 +1,63 @@
+/* LINTLIBRARY */
+/* PROTOLIB1 */
+
+
+#pragma ident	"@(#)llib-lz	1.1	99/10/08 SMI"
+#include <stdlib.h>
+#include <stdio.h>
+#include <stdarg.h>
+#include <zlib.h>
+
+/*
+ * usr/src/lib/zlib
+ */
+
+const char *zlibVersion(void);
+int deflateInit_(z_streamp strm, int level, const char *version,
+    int stream_size);
+int deflateInit2_(z_streamp strm, int  level, int  method, int windowBits,
+    int memLevel, int strategy, const char *version, int stream_size);
+int deflate(z_streamp strm, int flush);
+int deflateSetDictionary(z_streamp strm, const Bytef *dictionary,
+    uInt dictLength);
+int deflateCopy(z_streamp dest, z_streamp source);
+int deflateReset(z_streamp strm);
+int deflateParams(z_streamp strm, int level, int strategy);
+int deflateEnd(z_streamp strm);
+int inflateInit_(z_streamp strm, const char *version, int stream_size);
+int inflateInit2_(z_streamp strm, int  windowBits, const char *version,
+    int stream_size);
+int inflate(z_streamp strm, int flush);
+int inflateSetDictionary(z_streamp strm, const Bytef *dictionary,
+    uInt dictLength);
+int inflateSync(z_streamp strm);
+int inflateReset(z_streamp strm);
+int inflateEnd(z_streamp strm);
+int compress(Bytef *dest, uLongf *destLen, const Bytef *source,
+    uLong sourceLen);
+int compress2(Bytef *dest, uLongf *destLen, const Bytef *source,
+    uLong sourceLen, int level);
+int uncompress(Bytef *dest, uLongf *destLen, const Bytef *source,
+    uLong sourceLen);
+gzFile gzopen(const char *path, const char *mode);
+gzFile gzdopen(int fd, const char *mode);
+int gzsetparams(gzFile file, int level, int strategy);
+int gzread(gzFile file, voidp buf, unsigned len);
+int gzwrite(gzFile file, const voidp buf, unsigned len);
+int gzprintf(gzFile file, const char *format, ...);
+int gzputs(gzFile file, const char *s);
+char *gzgets(gzFile file, char *buf, int len);
+int gzputc(gzFile file, int c);
+int gzgetc(gzFile file);
+int gzflush(gzFile file, int flush);
+z_off_t gzseek(gzFile file, z_off_t offset, int whence);
+int gzrewind(gzFile file);
+z_off_t gztell(gzFile file);
+int gzeof(gzFile file);
+int gzclose(gzFile file);
+const char *gzerror(gzFile file, int *errnum);
+uLong adler32(uLong adler, const Bytef *buf, uInt len);
+uLong crc32(uLong crc, const Bytef *buf, uInt len);
+const char *zError(int err);
+int inflateSyncPoint(z_streamp z);
+const uLongf *get_crc_table(void);

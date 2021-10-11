@@ -1,0 +1,6 @@
+msgid ""
+msgid "%C"
+msgid "%a %b %e %H:%M:%S GMT %Y"
+msgid "-a"
+msgid "-u"
+msgid "/var/adm/wtmp"

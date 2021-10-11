@@ -1,0 +1,17 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)modules.dbg	1.3	98/01/19 SMI"
+
+#include <sys/modctl.h>
+#include "dummy.h"
+
+\
+\
+__dummy         ""      modules
+{adb_inline_begin}
+modules>e
+*modules>m
+<m,#(#(<m-<e))$<modules.nxt
+{adb_inline_end}

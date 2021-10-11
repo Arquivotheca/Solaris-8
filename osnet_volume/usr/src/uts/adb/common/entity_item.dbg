@@ -1,0 +1,47 @@
+\
+\ Copyright (c) 1999 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)entity_item.dbg        1.1     99/02/25 SMI"
+
+#include <sys/usb/usba.h>
+#include <sys/usb/usba/usba_types.h>
+#include <sys/usb/clients/hid/hid.h>
+#include <sys/usb/clients/hidparser/hidparser.h>
+#include <sys/usb/clients/hid/hidvar.h>
+#include <sys/usb/clients/hidparser/hidparser_impl.h>
+
+#include <sys/stropts.h>
+
+#include <sys/vuid_event.h>
+#include <sys/termios.h>
+#include <sys/termio.h>
+#include <sys/strtty.h>
+#include <sys/msreg.h>
+#include <sys/msio.h>
+#include "dummy.h"
+
+\
+\
+
+entity_item entity_item_
+{adb_inline_begin}
+.>z
+<z+{OFFSET, entity_item_type}=""
+{adb_inline_end}
+	type		hex	type
+	params		hex	params
+	params_leng	hex	params_leng
+	attributes	hex	attributes
+	info		hex	info
+{adb_inline_begin}
+<z+{OFFSET, entity_item_right_sibling}=""
+{adb_inline_end}
+	right_sibling	hex	right_sibling
+{adb_inline_begin}
+<z+{SIZEOF}=""
+{adb_inline_end}
+
+\
+\
+

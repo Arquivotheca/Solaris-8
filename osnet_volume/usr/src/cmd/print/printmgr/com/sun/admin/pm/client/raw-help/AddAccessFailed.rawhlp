@@ -1,0 +1,36 @@
+<TITLE> If Add Access Fails</TITLE>
+<!-- Tag=AddAccessFailed -->
+
+<CONTENT>
+
+<p>
+
+You must enter a printer name and a printer server name; the printer
+server must be a remote server (not the current server). See the man
+page for lpadmin(1M) for more information. 
+
+<p>
+
+Display the Command-Line Console to help pinpoint where the error
+may have occurred. Choose Show Command-Line Console from the Print
+Manager menu to display the Command-Line Console. 
+
+</CONTENT>
+
+<p>
+
+<KEYWORDS>
+add access fail failure
+</KEYWORDS>
+
+<p>
+
+<SEEALSO>
+AddAccess
+ToAddAccess
+ToShowCommand
+Overview
+MainWindow 
+HelpOnHelp
+</SEEALSO>        
+

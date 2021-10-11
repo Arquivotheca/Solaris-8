@@ -1,0 +1,28 @@
+#ident  "@(#)README 1.1     93/06/01 SMI"
+
+When the source for prof was delivered to SunSoft from SunPro (for delivery 
+into SunOS 5.3), prof depended on the library libsymint.a.  This library was
+built under the directory lprof/libprof along with the library libprof.a.  
+Both libprof.a and libsymint.a shared some source files, which created a 
+source sharing problem with SunSoft and SunPro, since SunPro was still 
+delivering libprof.a.
+
+Thus to clean up the build, only the object files and headers that prof 
+actually needs where moved directly into the build of prof and the dependency
+on the library libsymint.a was removed.  This leaves SunPro owning the entire
+lprof directory.  The follow source files and headers where copied into the
+prof directory from lprof/libprof (prof is the only utilities inherited from 
+SunPro that uses libsymint.a) to remove prof dependency of libsymint.a:
+
+	symintOpen.c
+	symintClose.c
+	symintErr.c
+	symintLoad.c
+	symintUtil.c
+	symint.h
+	symintHdr.h
+	debug.h
+
+From SunOS 5.3 (aka 1093) on, SunSoft and SunPro will each own their own 
+copies of these files and will fix bugs in them only as they relate to their 
+own products.

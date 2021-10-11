@@ -1,0 +1,95 @@
+/* LINTLIBRARY */
+/* PROTOLIB1 */
+
+/*
+ * Copyright (c) 1998 by Sun Microsystems, Inc.
+ * All rights reserved.
+ */
+#pragma ident   "@(#)llib-llpflt 1.1     98/07/10 SMI"
+
+#include <stdio.h>
+
+typedef enum FILTERTYPE {
+	fl_none,
+	fl_fast,
+	fl_slow,
+	fl_both
+}			FILTERTYPE;
+
+typedef struct FILTER {
+	char *		name;		/* name of filter (redundant) */
+	char *		command;	/* shell command (full path) */
+	FILTERTYPE	type;		/* type of filter (fast/slow) */
+	char **		printer_types;	/* list of valid printer types */
+	char **		printers;	/* list of valid printers */
+	char **		input_types;	/* list of valid input types */
+	char **		output_types;	/* list of valid output types */
+	char **		templates;	/* list of option templates */
+}			FILTER;
+
+
+
+typedef struct TYPE {
+	char *			name;
+	unsigned short		info;	/* 1 iff "name" is in Terminfo */
+}			TYPE;
+
+
+typedef struct TEMPLATE {
+	char *			keyword;
+	char *			pattern;
+	char *			re;
+	char *			result;
+	int			nbra;
+}			TEMPLATE;
+
+typedef struct _FILTER {
+	struct _FILTER *	next;		/* for linking several */
+	char *			name;
+	char *			command;
+	char **			printers;
+	TYPE *			printer_types;
+	TYPE *			input_types;	/* all possible choices */
+	TYPE *			output_types;	/* all possible choices */
+	TYPE *			inputp;		/* the one to be used */
+	TYPE *			outputp;	/* the one to be used */
+	TEMPLATE *		templates;
+	FILTERTYPE		type;
+	unsigned char		mark,
+				level;
+}			_FILTER;
+
+
+FILTER *	getfilter ( char * );
+
+_FILTER *	search_filter ( char * );
+
+FILTERTYPE	insfilter ( char ** , char * , char * , char * , char * , char ** , unsigned short * );
+FILTERTYPE	s_to_filtertype ( char * );
+
+TEMPLATE	s_to_template ( char * );
+
+TEMPLATE *	sl_to_templatel ( char ** );
+
+TYPE		s_to_type ( char * );
+
+TYPE *		sl_to_typel ( char ** );
+
+char *		template_to_s ( TEMPLATE );
+char *		type_to_s ( TYPE );
+
+char **		templatel_to_sl ( TEMPLATE * );
+char **		typel_to_sl ( TYPE * );
+
+int		open_filtertable ( char * , char * );
+
+int		get_and_load ( void );
+int		putfilter ( char * , FILTER * );
+int		delfilter ( char * );
+int		loadfilters ( char * );
+
+void		freetempl ( TEMPLATE * );
+void		freefilter ( FILTER * );
+void		free_filter ( _FILTER * );
+void		trash_filters ( void );
+void		close_filtertable ( FILE * );

@@ -1,0 +1,50 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)callouts.dbg	1.4	98/01/19 SMI"
+
+\ arg		: none
+\ uses		: callout_table
+\ registers	: none
+\ description	: prints the entries in the callout and real-time
+\		  callout tables
+
+#include "dummy.h"
+
+__dummy		""	callouts
+{adb_inline_begin}
+0="---------- Real-Time callouts: table 0 ----------"
+(*(callout_table+0x0))$<<callout_table
+0="---------- Real-Time callouts: table 1 ----------"
+(*(callout_table+{PTRSIZE}))$<<callout_table
+0="---------- Real-Time callouts: table 2 ----------"
+(*(callout_table+(2*{PTRSIZE})))$<<callout_table
+0="---------- Real-Time callouts: table 3 ----------"
+(*(callout_table+(3*{PTRSIZE})))$<<callout_table
+0="---------- Real-Time callouts: table 4 ----------"
+(*(callout_table+(4*{PTRSIZE})))$<<callout_table
+0="---------- Real-Time callouts: table 5 ----------"
+(*(callout_table+(5*{PTRSIZE})))$<<callout_table
+0="---------- Real-Time callouts: table 6 ----------"
+(*(callout_table+(6*{PTRSIZE})))$<<callout_table
+0="---------- Real-Time callouts: table 7 ----------"
+(*(callout_table+(7*{PTRSIZE})))$<<callout_table
+0="---------- Normal callouts: table 8 ----------"
+(*(callout_table+(8*{PTRSIZE})))$<<callout_table
+0="---------- Normal callouts: table 9 ----------"
+(*(callout_table+(9*{PTRSIZE})))$<<callout_table
+0="---------- Normal callouts: table 10 ----------"
+(*(callout_table+(0t10*{PTRSIZE})))$<<callout_table
+0="---------- Normal callouts: table 11 ----------"
+(*(callout_table+(0t11*{PTRSIZE})))$<<callout_table
+0="---------- Normal callouts: table 12 ----------"
+(*(callout_table+(0t12*{PTRSIZE})))$<<callout_table
+0="---------- Normal callouts: table 13 ----------"
+(*(callout_table+(0t13*{PTRSIZE})))$<<callout_table
+0="---------- Normal callouts: table 14 ----------"
+(*(callout_table+(0t14*{PTRSIZE})))$<<callout_table
+0="---------- Normal callouts: table 15 ----------"
+(*(callout_table+(0t15*{PTRSIZE})))$<<callout_table
+0="----------"
+{adb_inline_end}

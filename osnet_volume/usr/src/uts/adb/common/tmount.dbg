@@ -1,0 +1,31 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)tmount.dbg	1.7	98/01/19 SMI"
+
+#include <sys/types.h>
+#include <sys/t_lock.h>
+#include <sys/vnode.h>
+#include <sys/fs/tmp.h>
+#include "dummy.h"
+
+\
+\
+tmount                  tm_
+{adb_inline_begin}
+.>z
+<z+{OFFSET, tm_vfsp}=""
+{adb_inline_end}
+        vfsp                    hex
+        rootnode                hex
+        mntpath                 hex
+        anonmax                 sdecimal
+        anonmem                 sdecimal
+        dev                     hex
+        gen                     sdecimal
+        contents                .mutex
+{adb_inline_begin}
+<z+{OFFSET, tm_renamelck}=""
+{adb_inline_end}
+        renamelck               .mutex

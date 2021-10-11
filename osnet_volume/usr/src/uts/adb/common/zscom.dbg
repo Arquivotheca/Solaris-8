@@ -1,0 +1,55 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)zscom.dbg	1.4	98/01/19 SMI"
+
+\	arg		: address of a struct zscom
+\	uses		:
+\	registers	:
+\	description	: prints the contents of zscom structure
+
+#include <sys/types.h>
+#include <sys/t_lock.h>
+#include <sys/kstat.h>
+#include <sys/zsdev.h>
+#include "dummy.h"
+
+\
+\
+zscom
+{adb_inline_begin}
+.>z
+<z+{OFFSET, zs_txint}=""
+{adb_inline_end}
+	zs_txint		symbolic
+	zs_wr_cur		hex
+	zs_wr_lim		hex
+	zs_rxint		symbolic
+	zs_rd_cur		hex
+	zs_rd_lim		hex
+	zs_addr			hex
+	zs_xsint		symbolic
+	zs_srint		symbolic
+	zs_suspend		symbolic
+	zs_resume		symbolic
+	zs_wreg			hex
+	zs_priv			hex
+	zs_ops			hex
+	zs_dip			hex
+	zs_dtrlow		date
+	zs_unit			sdecimal
+	zs_suspended		hex
+	zs_prog_save		hex
+	zs_next			hex
+	zs_back			hex
+	zs_excl_hi		hex
+	zs_excl			hex
+	zs_ocexcl		hex
+	zs_flags_cv		hex
+	zs_flags_need		hex
+	zs_flags_doing		hex
+	intrstats		hex
+{adb_inline_begin}
+<z+{SIZEOF}=""
+{adb_inline_end}

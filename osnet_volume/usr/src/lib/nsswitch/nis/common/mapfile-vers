@@ -1,0 +1,45 @@
+#
+#ident	"@(#)mapfile-vers	1.9	99/05/17 SMI"
+#
+# Copyright (c) 1996 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#
+# Generic interface definition for usr/src/lib/nsswitch/nis.
+#
+# For information regarding the establishment of versioned definitions see:
+#	The Linker and Libraries Manual (version 2.5 or greater)
+# This is part of the Developers Guide in the Answerbook.  Specifically refer
+# to Chapter 2 under section "Defining Additional Symbols" through section
+# "Reducing Symbol Scope", and Chapter 5 "Versioning".
+#
+# For specific OSNET rules for the modification (evolution) of these version
+# definitions see:
+#	Policy for Shared Library Version Names and Interface Definitions
+
+
+SUNWprivate_1.1 {
+	global:
+		_nss_nis_bootparams_constr;
+		_nss_nis_auth_attr_constr;
+ 		_nss_nis_audit_user_constr;
+		_nss_nis_ethers_constr;
+ 		_nss_nis_exec_attr_constr;
+		_nss_nis_group_constr;
+		_nss_nis_hosts_constr;
+		_nss_nis_ipnodes_constr;
+		_nss_nis_netgroup_constr;
+		_nss_nis_netmasks_constr;
+		_nss_nis_networks_constr;
+		_nss_nis_passwd_constr;
+		_nss_nis_printers_constr;
+		_nss_nis__printers_constr;
+ 		_nss_nis_prof_attr_constr;
+		_nss_nis_protocols_constr;
+		_nss_nis_rpc_constr;
+		_nss_nis_services_constr;
+		_nss_nis_shadow_constr;
+		_nss_nis_user_attr_constr;
+	local:
+		*;
+};

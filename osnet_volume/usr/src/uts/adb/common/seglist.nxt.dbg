@@ -1,0 +1,19 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)seglist.nxt.dbg	1.3	98/01/19 SMI"
+
+#include <vm/seg.h>
+#include "dummy.h"
+
+\
+\
+seg	""	seglist.nxt
+{adb_inline_begin}
+.>s
+<s$<<seg
+*(<s+{OFFSET, s_next})>n
+<n>s
+<s,(#(#(<s))&(#(#(<s-<e))))$<seglist.nxt
+{adb_inline_end}

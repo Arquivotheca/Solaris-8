@@ -1,0 +1,20 @@
+#
+#ident	"@(#)versions.0	1.1	99/01/25 SMI"
+#
+# Copyright (c) 1998-1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+# vers file for libthread_db.so.0
+#
+
+i386 {
+	SUNWprivate_1.1;
+}
+
+sparc {
+	SUNWprivate_1.1;
+}
+
+sparcv9 {
+	SUNWprivate_1.1;
+}

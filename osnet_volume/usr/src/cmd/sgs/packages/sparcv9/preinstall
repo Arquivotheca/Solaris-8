@@ -1,0 +1,29 @@
+#
+#ident	"@(#)preinstall	1.1	97/10/27 SMI"
+#
+# Copyright (c) 1995 by Sun Microsystems, Inc.
+# All rights reserved.
+
+files="\
+	usr/ccs/lib/libld.so.3 \
+	usr/ccs/lib/sparcv9/libld.so.3 \
+	usr/ccs/lib/sparcv9/liblddbg.so.4 \
+	usr/lib/sparcv9/ld.so.1 \
+	usr/lib/sparcv9/libdl.so.1 \
+	usr/lib/sparcv9/libelf.so.1 \
+	usr/lib/sparcv9/librtld.so.1 \
+	usr/lib/sparcv9/librtld_db.so.1 \
+	usr/lib/sparcv9/lddstub
+	"
+
+
+for F in $files
+do
+	if [ ! -f ${BASEDIR}/$F.orig ]
+	then
+		if [ -f ${BASEDIR}/$F ]
+		then
+			cp ${BASEDIR}/$F ${BASEDIR}/$F.orig
+		fi
+	fi
+done

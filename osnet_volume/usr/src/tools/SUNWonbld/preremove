@@ -1,0 +1,20 @@
+#
+# Copyright (c) 1993-1998 by Sun Microsystems, Inc.
+# All rights reserved.
+# 
+#ident	"@(#)preremove	1.1	98/12/10 SMI"
+
+# Remove the 'gk' account
+echo "Removing 'gk' account"
+ed $BASEDIR/etc/passwd <<EOF >/dev/null
+1,\$g/^gk:/d
+1,\$p
+w
+q
+EOF
+ed $BASEDIR/etc/shadow <<EOF >/dev/null
+1,\$g/^gk:/d
+1,\$p
+w
+q
+EOF

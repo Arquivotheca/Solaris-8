@@ -1,0 +1,28 @@
+\
+\ Copyright (c) 1999 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)service_param.dbg	1.1	99/07/21 SMI"
+\
+#include <sys/isa_defs.h>
+#include <sys/types.h>
+#include <sys/dditypes.h>
+#include <sys/ddidmareq.h>
+#include <sys/mutex.h>
+#include <sys/semaphore.h>
+#include <sys/condvar.h>
+#include <sys/thread.h>
+#include <sys/devops.h>
+#include <sys/fibre-channel/fc.h>
+#include "dummy.h"
+\
+\
+service_param
+{adb_inline_begin}
+.>g
+<g+{OFFSET, data}=""
+{adb_inline_end}
+	data		hex
+{adb_inline_begin}
+<g+{SIZEOF}=""
+{adb_inline_end}

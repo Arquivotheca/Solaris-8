@@ -1,0 +1,350 @@
+
+
+Programable Devices:
+--------------------
+
+    The primary advantage of a programable device is, of course, the ability
+    to dynamically configure it at boot time without any input from the user.
+    Right now, the only programable devices we support are PnP ISA cards, but
+    we could support programable PCI cards with very little work.  With a bit
+    more work, we can support most EISA cards as programable devices and --
+    with a lot more work -- certain legacy ISA cards (e.g. 3Com ethernet cards)
+    as well.  Win95 supports PnP, PCI, and EISA cards a programable devices, so
+    we should at least consider doing this much in order to remain competitive.
+
+    Framework (already implemented):
+    --------------------------------
+
+	Bootconf framework support for programable devices includes:
+
+	 *  The "BRDF_PGM" flag:  If this bit is set in a particular board
+ 	    record, the corresponding device is assumed to be programable.
+	    The bus-specific device enumerator is responsible for setting
+	    this bit, but once it's set bootconf assumes that the board
+	    record contains not only the current resource assignments
+	    for the device, but all possible resource asignments as well.
+	    The "RESF_ALT" bit in the resource records contained within
+	    the board record (see "devdb.h") is used to distinquish between
+	    records that indicate the current resource assignments (RESF_ALT
+	    clear) vs. those that represent possable alternate assignments
+	    (RESF_ALT set).
+
+	    Normally, when a bus-specific device enumerator returns a board
+	    record representing a programable device, the RESF_ALT bits will
+	    be set in all of the resource records contained therein (if the
+	    device is not programable -- e.g, the BRDF_PGM bit is clear --
+	    there must be at least on resource record whose RESF_ALT bit is
+	    clear; this becomes the "primary" resource for the corresponding
+	    device).  The framework then searches the ESCD for a DCD entry
+	    that matches the board record (where "match" is a bus-dependent
+	    operation) and makes a default resource assignment by clearing
+	    the RESF_ALT bits in the traget board record that match the
+	    resource usage recorded in the ESCD entry for the device.  If
+	    there is no matching entry in the ESCD, then no default resources
+	    are assigned (which results in the "(***)" port address that
+	    appears in the corresponding entry in the configured device
+	    list).  Similarly, when the user manually adds a legacy ISA
+	    device in conflict with a programable device, all RESF_ALT bits
+	    in the programable board record are re-set.  This returns it
+	    to the "unprogramed" (i.e, "(***)") state.
+
+	 *  Automatic re-configuration:  Configuration of programable devices
+	    is a two-stage process ...
+
+	     1.	When the user enteres the "Boot Solaris" screen, resources
+		are assigned to all programable devices.  The trick is to
+		find a set of resource assignments for the programable devices
+		that doesn't conflict with the resources used by the non-
+		programable devices.  First, we check the default config-
+	        urations (if any) of all programable devices.  If none of
+		the default configurations are in conflict we use them as-is,
+		then try configuring any remaining programable devices (i.e,
+	        those in the "***" state) by permuting the resources that
+		remain available until we find a non-conflictig combination.
+	        If non non-conflicting configuration can be found, we go back
+		and "unprogram" (i.e, reset the RESF_ALT bits in) all pro-
+		gramable devices and try again.  If we are unable to come up
+		with a non-conflicting assignment of resources at this point,
+		we start issuing error messages and dropping devices out of
+		the configuration.
+
+	    2.  Just prior to mounting the new root, all resources assigned
+		to programable devices during stage one are actually pro-
+		grammed into the corresponding cards.  The details of device
+		programming are bus-specific, of course, and are therefor
+		handled by bus-specific routines.
+
+	 *  Reconfiguration of the boot device:  Reprograming the boot device
+	    is problematic because once its resources have been re-assigned,
+	    it is no longer possible to access the device thru the standard
+	    BIOS routines (i.e, via the "int 13/dev 80" interface).  To get
+	    around this problem, the bootconf framework makes sure that the
+	    realmode driver for the boot device (or, more specifically, the
+	    "BIOS primary device" -- we may be booting from a floppy) is
+  	    always the first to be loaded and installed.  Furthermore, once
+	    the driver has been installed and a BIOS device number assigned,
+	    bootconf informs the second level boot that all future "int 13"
+	    references to device x80 should hereafter be redirected to the
+	    new device number.
+
+	    Special care must also be taken when unloading devices after a
+	    mount failure.  In particular, the boot device driver CANNOT
+	    be unloaded at this time (because there would then be no way to
+	    read files on the boot partition).  Instead, the boot driver
+	    remains installed until the next mount attempt.  At this point,
+	    a new boot driver is loaded (possibly by the old driver!), the
+	    old driver is removed, and the new driver is installed in its
+	    place.
+
+	    To make this mechanism work, the following sequence of events
+	    must be followed whenever a driver is installed:
+
+	      -  Load the driver
+	      -  Reprogram the device
+	      -  Install the driver
+
+	    Since there is no way to split the "load" and "install" operations
+	    on older (i.e, MDB) drivers, this mechanism won't work if the
+	    boot device is controlled by a legacy driver.
+	    
+    PnP Devices (already implemented):
+    ----------------------------------
+
+	As noted above, PnP ISA cards are the only programable devices that
+	are currently supported.  The PnP enumerator uses the PnP configu-
+	ration protocol to read the legal resource assignment combinations
+	from the configuration ROM of the device itself and converts this into
+	an appropriate board record.  As it turns out, most PnP cards support
+	many more combinations of resource assignments than do their legacy
+	ISA counterparts.  For example, the legacy version of a particular
+	card might require a strict correspondence between port addresses
+	and IRQs:
+
+		Port 3F8/IRQ 4
+		Port 2F8/IRQ 3
+
+	whereas the PnP version will typically allow independent assignment
+	of each resource type:
+
+		Port 3F8/IRQ 3
+		Port 3F8/IRQ 4
+		Port 2F8/IRQ 3
+		Port 2F8/IRQ 4
+
+	As this (rather simple, but common) example shows, this can lead to a
+	combinitorial explosion of legal resource settings.  Rather than list
+	each combination separately in the board record (which can cause
+	bootconf to run out of memory), special "use-any" resource records
+	are used to encode orthogonal sets of independent resource assignments.
+	Use-any records are indicated by setting the "RESF_ANY" bit in the
+	corresponding resource records.  RESF_ANY records are encoded as one
+	or two "alternate" records (see below) followed by a "place holder"
+	record.  The alternate records specify which values of the resource
+	in question may be legally assigned to the device, while the place
+	holder record specifies which of these legal values are currently
+	assgined to the device.  If the place holder's RESF_ALT flag is set,
+	no resources of the indicated type are currently assigned (the alter-
+	nate records' RESF_ALT flags are always set).
+
+	There are two types of RESF_ANY records:
+
+	  1. Unit Resource Records:  These are used to encode legal IRQ and
+	     DMA settings.  The 32-bit "base" field of the single alternate
+	     record is interpreted as a bit mask:  If the "N"th bit of this
+	     mask is set, the "N"th resource of that type may be legally
+	     programmed into the device.
+
+	  2. Range Resource Records:  These are used to encode legal I/O port
+	     and memory settings.  Range records have two alternate records.
+	     The first record's "base" and "length" fields give the first
+	     legal address that may be assigned and the length of the resource
+	     range, respectively, while the second record's "base" and "length"
+	     fields give the last legal address and the alignment requirements
+	     (i.e, the stride between legal addresses).
+
+    PCI Devices (not yet implemented):
+    ----------------------------------
+
+	The only real problems with supporting PCI cards as programable de-
+	vices are (a) the large number of possible configurations that must
+	be encoded in the board records, and (b) re-configuring the boot
+	device.  Fortunately, both of these problems also arise in PnP ISA
+	cards, and the mechanisms used to deal with them in that context
+	apply equally well to PCI cards.  In fact, all one has to do to
+	support PCI cards as programmable devices is:
+
+	   1. Fix the PCI enumerator to build RESF_ANY resource records rather
+	      than non-RESF_ALT records it currently generates .  This should
+	      be quite easy to do given that resource assignment for PCI cards
+	      is completely orthognal (except for video cards -- see related
+	      notes):  Just read the valid resource ranges out of the config-
+	      uration registers, convert these to RESF_ANY resource records,
+	      and turn on the BRDF_PGM bit in the containing board record.
+
+ 	   2. Move the current PCI device programming code to the stubbed
+	      "program_pci" routine, and remove all calls to the old code.
+
+    EISA devices (not yet implemented):
+    -----------------------------------
+	      
+	Although all EISA cards are software configurable, bootconf currently
+	treats them as non-programmable devices.  This is because there is
+	no standard mechinism for programming an EISA card:  The steps re-
+	quired to assign bus resources can differ on a card-by-card basis
+	(or even a function-by-function basis within the same card!).  The
+	means of programming a particular device are encoded in that device's
+	CFG file, however, so it is theoretically possible to support EISA
+	cards as programmable devices.  Here's what needs to change in order
+	to do so:
+
+	  1. The CFG file parser needs to be modified to build "port initial-
+	     ization records".  These are the entries in the EISA NVRAM that
+	     tell the ECU what values must be written to which ports in order
+	     to force an EISA card into a given configuration.  Right now,
+	     the parser ignores the keyword/value pairs that encode this
+	     information in the CFG file:
+
+		IOADDR(n) = 0zXXX:  Binds the "n"th I/O port to a slot-
+				    relative port addrres ("z" is the
+				    slot number).
+
+		IOINIT(n) = bbbbb:  To configure this "choice", write the
+				    bit pattern "bbbbb" to slot-relative
+				    port "n".
+
+	     NOTE: The current CFG file parser doesn't understand the "0zXXX"
+		   syntax for port addresses.  Evidently, Intel assumes that
+		   the only context where this syntax is valid is after an
+		   "IOADDR(n)" keyword where it's currently ignored.  In fact,
+		   any EISA port address may be specified in this manner,
+		   which causes the CFG file parser to reject valid CFG files.
+		   I haven't fixed this yet, because we're only interested in
+		   CFG files describing ISA devices right now, and slot-
+		   relative addressing is an EISA-only feature.  Still, even
+		   if we never support EISA cards as programmable devices,
+	    	   bootconf shouldn't barf when given a valid EISA CFG file!
+
+	    A new "resource" record type must be invented to hold the
+	    information encoded in these keyword/value pairs.  This is called
+	    a "RESF_Init" record in the discussion below.  Board records
+	    describing programmable EISA devices must contain a RESF_Init
+	    record in every "choice" list (i.e, each string of resource rec-
+	    ords delimited by RESF_FIRST bits).
+				
+	 2. The EISA enumerator needs to be changed to return programmable
+	    (BRDF_PGM) records whenever possible.  To do this, one simply
+	    reads the EISA device ID from the base slot port ("0z000"; this
+	    is the only EISA port whose function has been standardized) and
+	    use it to locate the corresponding device descriptor node (i.e,
+	    the model board record in the configuration database that the
+	    parser built from the CFG file of the same name).  The cor-
+	    responding board record would then be a simple copy of this
+	    record (with its BRDF_PGM bit and "slot" field set accordingly,
+	    of course).
+
+	    Note that there is no need to read the EISA NVRAM.  This is be-
+	    cause the NVRAM only records the current resource assignments
+	    for the device (information which is duplicated in the ESCD),
+	    not all possible configurations (this information must come
+	    from the CFG file).  If, however, one encounters an EISA card
+	    for which no device descriptor node can be found, then the
+	    NVRAM must be read to obtain the current resource settings for
+	    said device and the BRDF_PGM bit must be zero in that device's
+	    board record.  Such devices would then be treated as non-program-
+	    able (currently, the EISA enumerator treats all devices in this
+	    manner).
+	     
+	 3. The "program_eisa" routine (currently a simple stub) needs to be
+	    written.  This routine would simply search thru the target board's
+	    resource list looking for records of type RESF_Init whose RESF_ALT
+	    bits were clear.  For each such record encountered, one simply
+	    writes the indicated bit pattern to the corresponding slot-relative
+	    I/O port.
+
+    Legacy ISA devices (A pipe dream):
+    ----------------------------------
+
+	Many (if not most) legacy ISA devices are, in fact, software con-
+	figurable.  Typically, the manufacturer provides a floppy disk that
+	contains a simple DOS program that can be used to configure the device.
+	If one knows how this program works (i.e, by reading technical specs
+	provided by the manufacturer), one can incorporate the configuration
+	process into a realmode driver, thereby making the device programable
+	in bootconf's eyes.  Note that Win95 doesn't currently do this (altho
+	it could if Microsoft decided it was important enough).
+
+	Here's how bootconf could be made to treat certain ISA cards as pro-
+	gramable devices:
+
+	 1. The current code that loads and runs drivers from the "probe-
+	    always" directories must be converted into a "isa enumerator"
+	    that fits into the framework in the same way that the other
+	    enumerators do.  This means that only devices recognized by
+	    the drivers in the "probe-always" direcotires can be treated
+	    as programmable.
+
+	 2. The mechanism by which bootconf purges the ESCD of entries
+	    associated with probe-always drivers must be changed.  Rather
+	    than simply discarding these records, bootconf must treat
+	    them as if they were DCD entries (i.e, save them for use
+	    during the "default resource match" process described above).
+
+	 3. Once a driver's "legacyprobe" entry determines that a programmable
+	    ISA device under its control exists anywhere on the bus, it must
+	    generate RES_ANY "set_res" calls to the bootconf framework to
+	    identify the possible resource assignments that could be made
+	    to that card (the BEF callback mechanism already provides for this
+	    possiblity, but none of the realmode drivers actually use it).
+
+	    Even if only some subset of the card's resource usage is soft-
+	    ware configurable, there may still be an advantage to generating
+	    RESF_ANY callbacks.  Consider, for example, a card whose base
+	    I/O port is selected via jumper, but whose IRQ, DMA, and/or
+	    memory usage are software configurable (many SCSI adapters work
+	    this way).  The driver would not use the RES_ANY option when
+	    establishing the port reservation, but would build RESF_ANY
+	    records to describe the possible IRQ, DMA, and/or memory settings.
+	    This would give bootconf the freedom to work around any conflicts
+	    that might arise in these areas.  (The "default resource match"
+	    code would have to be made a bit smarter, however; it currently
+	    assumes that if any resource record in a given board is marked
+	    RESF_ANY, then they all are).
+	    
+	    Note that just because a driver is probe-always, doesn't mean
+	    it has to detect programmable cards.  If the driver doesn't use
+	    the RES_ANY option to set resources, the devices under its
+	    control would be considered non-programable just as they are
+	    today.  This is analogous to the EISA enumerator which may return
+	    programmable or non-programable board records depending on
+	    whether or not it was able to locate the corresponding CFG file.
+
+	 4. Some way must be provided for actually programming ISA devices
+	    after resources have been assigned to them.  Such programming
+	    must be done by the driver, as the mechanism uses are completey
+	    device specific.  One option is to incorporate the configuration
+	    phase into "installonly" processing, and have bootconf install
+	    all programable ISA devices just prior to mount.  Of course, only
+	    those drivers that control bootable devices need actually hook
+	    interrupts and remain resident when invoked thru their "installonly"
+	    entry (the others would constitute a new class of realmode driver:
+	    The 3/4-bef!).
+
+	 5. Some method must be devised to distinquish between two programable
+	    ISA devices of the same type in a single configuration (this is
+	    the bus-dependent part of the default resource match process noted
+	    above).  Using serial numbers (as per PnP) won't work because
+	    the serial number isn't necessarily available to the driver.  Using
+	    slot numbers (as per EISA and PCI) won't work either because ISA
+	    slots are "virtual" and bootconf must be free to "move" ISA devices
+	    to keep them out of the way of any EISA cards that might occupy
+	    a physical slot of the same number.  One possibility is to insist
+	    that programable ISA devices identify themselves via their "base
+	    resource" (the number that appears in parens when the card is
+	    displayed on the configured device list).
+
+	This is a lot of work and I'm not suggesting that we support pro-
+	gramable ISA devices right away.  One should keep it in mind when
+	evaluating user complaints after bootconf ships.  If supporting
+	programmable ISA devices appears to solve a real user need, it might
+	be worth implementing it (at least for the most popular and/or
+	troublesome legacy cards) at some later date.

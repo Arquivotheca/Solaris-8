@@ -1,0 +1,50 @@
+/*
+ * Copyright (c) 1997 by Sun Microsystems, Inc.
+ * All rights reserved.
+ */
+
+#pragma ident	"@(#)llib-lrpcsoc	1.2	97/04/21 SMI"
+
+/* LINTLIBRARY */
+
+#include <stdio.h>
+#include <rpc/rpc.h>
+#include <sys/socket.h>
+#include <sys/time.h>
+#include <netdb.h>
+#include <errno.h>
+#include <rpc/pmap_clnt.h>
+#include <sys/syslog.h>
+#include <sys/ioctl.h>
+#include <sys/filio.h>
+#include <sys/types.h>
+#include <sys/errno.h>
+#include <netinet/in.h>
+
+/* clnt_tcp.c */
+CLIENT *clnttcp_create(struct sockaddr_in *, ulong_t, ulong_t,
+    int *, uint_t, uint_t);
+
+/* clnt_udp.c */
+CLIENT *clntudp_bufcreate(struct sockaddr_in *, ulong_t, ulong_t,
+    struct timeval, int *, uint_t, uint_t);
+CLIENT *clntudp_create(struct sockaddr_in *, ulong_t, ulong_t,
+    struct timeval wait, int *);
+
+/* get_myaddress.c */
+int get_myaddress(struct sockaddr_in *);
+
+/* getrpcport.c */
+int getrpcport(char *, int, int, int);
+
+/* rtime.c */
+int rtime(struct sockaddr_in *, struct timeval *, struct timeval *);
+
+/* svc_tcp.c */
+SVCXPRT *svctcp_create(int, uint_t, uint_t);
+SVCXPRT *svcfd_create(int, uint_t, uint_t);
+
+/* svc_udp.c */
+SVCXPRT *svcudp_bufcreate(int, uint_t, uint_t);
+SVCXPRT *svcudp_create(int);
+int svcudp_enablecache(SVCXPRT *, ulong_t);

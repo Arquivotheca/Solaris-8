@@ -1,0 +1,104 @@
+#!/sbin/sh 
+#
+# Copyright (c) 1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#ident	"@(#)ncakmod	1.2	99/11/01 SMI"
+
+# Default config values used by script
+nca=/kernel/drv/nca
+ncakmodconf=/etc/nca/ncakmod.conf
+ncaifconf=/etc/nca/nca.if
+tempdir=/tmp
+default_miss_door=/var/run/nca_httpd_1.door
+
+# Function used to parse the interface names from /etc/hostname.* entries
+readifconf()
+{
+	while read i; do
+		case "$i" in
+		'#'* | '')	# Ignore comments, empty lines
+				continue ;;
+		'*')		configinterfaces="`echo /etc/hostname.*[0-9] \
+				   2>/dev/null`"
+				checkforvirt=false
+				break ;;
+		esac
+		configinterfaces="$configinterfaces $i"
+	done
+}
+
+case "$1" in
+'start')
+
+	if [ ! -f $ncakmodconf ]; then
+		# If configuration file is missing, just exit
+		exit 0
+	fi
+
+	. $ncakmodconf
+
+	# Default is "disabled" so we want to exit
+	[ "x$status" != "xenabled" ] && exit 0
+
+	if [ -f "$ncaifconf" ]; then
+		readifconf < $ncaifconf
+		configinterfaces="`echo $configinterfaces | \
+			/bin/sed 's/.etc.hostname.//g'`"
+		for i in $configinterfaces; do
+			findinterface="`echo $i | /bin/grep '[0-9][0-9]*'`"
+			if [ $? -ne 0 ]; then
+				# Need to expand interface (ie. iprb)
+				interface="`echo /etc/hostname.$i*[0-9] \
+					2>/dev/null | /bin/sed \
+					's/.etc.hostname.//g'`"
+				interfaces="$interfaces $interface"
+			else
+				interfaces="$interfaces $i"
+			fi
+		done
+
+		# If we don't have any interfaces configured, exit
+		[ -z "$interfaces" ] && exit 0
+		
+		interfaces="`echo $interfaces | /bin/tr ' ' '\012' | \
+		    /bin/grep -v :`"
+		if [ -z "`/usr/sbin/modinfo | /bin/awk \
+			'{print $6}' | /bin/grep nca | /bin/sort -u" ]; then
+				# Load NCA if it's not loaded (default case)
+				/usr/sbin/modload $nca
+		else
+			echo "NCA has already been started."
+			exit 1
+		fi
+
+		# Insert NCA into the stream of all the interfaces configured.
+		for i in $interfaces; do
+			pos=`/usr/sbin/ifconfig $i modlist | \
+			    /bin/grep ' ip$' | \
+			    /bin/cut -d' ' -f1`
+			# Always insert NCA just below IP.
+			pos=`/bin/expr $pos + 1`
+			/usr/sbin/ifconfig $i modinsert nca@$pos
+		done
+
+		if [ "$httpd_door_path" != "$default_miss_door" ]; then
+			# Set the default HTTPD door in NCA via ndd
+			/usr/sbin/ndd -set /dev/nca httpd_door_path \
+			    $httpd_door_path
+		fi
+	fi
+	;;
+
+'stop')
+	# Need to reboot the system to stop
+	echo "System reset is required to stop NCA functionality"
+	;;
+
+*)
+
+	echo "Usage: $0 { start | stop }"
+	exit 1
+	;;
+esac
+exit 0

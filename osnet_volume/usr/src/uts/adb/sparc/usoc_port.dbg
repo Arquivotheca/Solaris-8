@@ -1,0 +1,53 @@
+\
+\ Copyright (c) 1999 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)usoc_port.dbg	1.2	99/09/28 SMI"
+#include <sys/isa_defs.h>
+#include <sys/types.h>
+#include <sys/dditypes.h>
+#include <sys/ddidmareq.h>
+#include <sys/mutex.h>
+#include <sys/semaphore.h>
+#include <sys/condvar.h>
+#include <sys/thread.h>
+#include <sys/devops.h>
+#include <sys/taskq.h>
+#include <sys/fibre-channel/fc.h>
+#include <sys/fibre-channel/fca/usoc_cq_defs.h>
+#include <sys/fibre-channel/fca/usocio.h>
+#include <sys/fibre-channel/fca/usocreg.h>
+#include <sys/fibre-channel/fca/usocvar.h>
+#include "dummy.h"
+\
+\
+usoc_port				sp_
+{adb_inline_begin}
+.>m
+<m+{OFFSET, sp_status}=""
+{adb_inline_end}
+	status				hex
+	board				hex
+	src_id				hex
+	port				hex
+	p_wwn				.la_wwn
+{adb_inline_begin}
+<m+{OFFSET, sp_statec_callb}=""
+{adb_inline_end}
+	statec_callb			hex
+	unsol_callb			hex
+	tran_handle			hex
+	open				hex
+	pktinits			hex
+	mtx				.mutex
+{adb_inline_begin}
+<m+{OFFSET, sp_cv}=""
+{adb_inline_end}
+	cv				hex
+	of_ncmds			hex
+	unsol_cv			hex
+	unsol_buf			hex
+	unsol_mtx			.mutex
+{adb_inline_begin}
+<m+{SIZEOF}=""
+{adb_inline_end}

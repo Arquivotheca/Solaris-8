@@ -1,0 +1,512 @@
+#
+#pragma ident	"@(#)Makefile.master	1.110	00/01/03 SMI"
+#
+# Copyright (c) 1993-1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+# Makefile.master, global definitions for system source
+#
+ROOT=		/proto
+
+# CH toggles operations restricted to root. It is normally set to `#'. When
+# running as root, it should be set to `' (null).
+#
+# RELEASE_BUILD should be cleared for final release builds. This is completely
+# independent of CH. NOT_RELEASE_BUILD is exactly what the name implies.
+#
+# INTERNAL_RELEASE_BUILD is a subset of RELEASE_BUILD. It mostly controls
+# identification strings. Enabling RELEASE_BUILD automatically enables
+# INTERNAL_RELEASE_BUILD.
+#
+# STRIP_COMMENTS toggles comment section striping. Generally the same setting
+# as INTERNAL_RELEASE_BUILD.
+#
+# BUILD_PROFS toggles the building of profiled libraries. Again, generally
+# the same setting as INTERNAL_RELEASE_BUILD.
+#
+# STRIPFLAG is similar. It is set to a unique value depending upon the
+# value of CH. It is set here for use in lower level Makefiles to allow
+# a single point change to effect the entire build.
+#
+CH:sh=					echo \\043
+
+NOT_RELEASE_BUILD=
+INTERNAL_RELEASE_BUILD:sh=		echo \\043
+RELEASE_BUILD:sh=			echo \\043
+$(RELEASE_BUILD)NOT_RELEASE_BUILD:sh=	echo \\043
+$(RELEASE_BUILD)INTERNAL_RELEASE_BUILD=
+
+STRIP_COMMENTS=	$(INTERNAL_RELEASE_BUILD)
+BUILD_PROFS=	$(INTERNAL_RELEASE_BUILD)
+
+STRIPFLAG=
+$(CH)STRIPFLAG=	-s
+
+# BUILD_TOOLS is the root of the tools for this release.  Currently
+# it is used in the definitions of STABS and SPRO_ROOT
+
+BUILD_TOOLS=	/ws/on28-tools
+
+JAVA_ROOT=	$(BUILD_TOOLS)/java/1.2
+
+RPCGEN=		/usr/bin/rpcgen
+STABS=		$(BUILD_TOOLS)/misc/bin/stabs
+ECHO=		echo
+INS=		install
+SYMLINK=	/usr/bin/ln -s
+LN=		/usr/bin/ln
+CHMOD=		/usr/bin/chmod
+CHOWN=		$(ECHO)
+$(CH)CHOWN=	/usr/bin/chown -h
+CHGRP=		$(ECHO)
+$(CH)CHGRP=	/usr/bin/chgrp -h
+MV=		/usr/bin/mv -f
+RM=		/usr/bin/rm -f
+GREP=		/usr/bin/grep
+SED=		/usr/bin/sed
+CP=		/usr/bin/cp
+MCS=		/usr/ccs/bin/mcs
+CAT=            /usr/bin/cat
+M4=		/usr/ccs/bin/m4
+STRIP=		/usr/ccs/bin/strip
+JAVAC=		$(JAVA_ROOT)/bin/javac
+JAVAH=		$(JAVA_ROOT)/bin/javah
+JAVADOC=	$(JAVA_ROOT)/bin/javadoc
+RMIC=		$(JAVA_ROOT)/bin/rmic
+JAR=		$(JAVA_ROOT)/bin/jar
+
+FILEMODE=	644
+DIRMODE=	755
+OWNER=		root
+GROUP=		bin
+
+# Declare that nothing should be built in parallel.
+# Individual Makefiles can use the .PARALLEL target to declare otherwise.
+.NO_PARALLEL:
+
+# For stylistic checks
+#
+# Note that the X and C checks are not used at this time and may need
+# modification when they are actually used.
+#
+CSTYLE=		cstyle
+CSTYLE_TAIL=
+HDRCHK=		hdrchk
+HDRCHK_TAIL=
+JSTYLE=		jstyle
+
+DOT_H_CHECK=	\
+	@$(ECHO) "checking $<"; $(CSTYLE) $< $(CSTYLE_TAIL); \
+	$(HDRCHK) $< $(HDRCHK_TAIL)
+
+DOT_X_CHECK=	\
+	@$(ECHO) "checking $<"; $(RPCGEN) -C -h $< | $(CSTYLE) $(CSTYLE_TAIL); \
+	$(RPCGEN) -C -h $< | $(HDRCHK) $< $(HDRCHK_TAIL)
+
+DOT_C_CHECK=	\
+	@$(ECHO) "checking $<"; $(CSTYLE) $< $(CSTYLE_TAIL)
+
+
+# modified for use within NSE environments
+#
+INS.file=	$(RM) $@; $(INS) -s -m $(FILEMODE) -f $(@D) $<
+$(CH)INS.file=	$(INS) -s -m $(FILEMODE) -u $(OWNER) -g $(GROUP) -f $(@D) $<
+INS.dir=	$(INS) -s -d -m $(DIRMODE) $@
+$(CH)INS.dir=	$(INS) -s -d -m $(DIRMODE) -u $(OWNER) -g $(GROUP) $@
+# installs and renames at once
+#
+INS.rename=	$(INS.file); $(MV) $(@D)/$(<F) $@
+
+# MACH must be set in the shell environment per uname -p on the build host
+# More specific architecture variables should be set in lower makefiles.
+#
+# MACH64 is derived from MACH, and BUILD64 is set to `#' for
+# architectures on which we do not build 64-bit versions.
+#
+# Set BUILD64= in the environment to enable ia64 builds on i386 machines
+#
+
+MACH64:sh=	if [ "$MACH" = "sparc" ]; \
+		then echo sparcv9; \
+		elif [ "$MACH" = "i386" ]; \
+		then echo ia64; \
+		else echo unknown; \
+		fi	
+
+MACH32:sh=	if [ "$MACH" = "sparc" ]; \
+		then echo sparcv7; \
+		elif [ "$MACH" = "i386" ]; \
+		then echo i86; \
+		else echo unknown; \
+		fi	
+
+BUILD64:sh=	if [ "$MACH" = "i386" ]; \
+		then echo \\043; \
+		fi
+
+#
+# C compiler mode. Future compilers may change the default on us,
+# so force transition mode globally. Lower level makefiles can
+# override this by setting CCMODE.
+#
+CCMODE=		-Xa
+CCMODE64=	-Xa
+
+#
+# C compiler verbose mode. This is so we can enable it globally,
+# but turn it off in the lower level makefiles of things we cannot
+# (or aren't going to) fix.
+#
+CCVERBOSE=	-v
+
+# set this to the secret flag "-Wc,-Qiselect-v9abiwarn=1" to get warnings
+# from the compiler about places the -xarch=v9 may differ from -xarch=v9c.
+V9ABIWARN=
+
+# set this to the secret flag "-Wc,-Qiselect-regsym=0" to disable register
+# symbols (used to detect conflicts between objects that use global registers)
+# we disable this now for safety, and because genunix doesn't link with
+# this feature (the v9 default) enabled.
+#
+# REGSYM is separate since the C++ driver syntax is different.
+CCREGSYM=	-Wc,-Qiselect-regsym=0
+CCCREGSYM=	-Qoption cg -Qiselect-regsym=0
+
+# generate 32-bit addresses in the v9 kernel. Saves memory.
+CCABS32=	-Wc,-xcode=abs32
+
+#
+# compiler '-xarch' flag. This is here to centralize it and make it
+# overridable for testing.
+sparcv9_XARCH=	-xarch=v9
+ia64_XARCH=
+
+# In most places, assignments to these macros should be appended with +=
+# (CPPFLAGS.master allows values to be prepended to CPPFLAGS).
+sparc_CFLAGS=	-xcg89 -Wa,-cg92
+sparcv9_CFLAGS=	$(sparcv9_XARCH) -dalign $(CCVERBOSE) $(V9ABIWARN) $(CCREGSYM)
+i386_CFLAGS=
+ia64_CFLAGS=	$(ia64_XARCH)
+
+#
+sparc_COPTFLAG=		-xO3
+sparcv9_COPTFLAG=	-xO3
+i386_COPTFLAG=		-O
+ia64_COPTFLAG=		-O
+COPTFLAG= $($(MACH)_COPTFLAG)
+COPTFLAG64= $($(MACH64)_COPTFLAG)
+
+#
+# tradeoff time for space (smaller is better)
+#
+sparc_SPACEFLAG		= -xspace -W0,-Lt
+sparcv9_SPACEFLAG	= -xspace -W0,-Lt
+i386_SPACEFLAG		=
+ia64_SPACEFLAG		=
+SPACEFLAG		= $($(MACH)_SPACEFLAG)
+SPACEFLAG64		= $($(MACH64)_SPACEFLAG)
+
+CFLAGS=         $(COPTFLAG) $($(MACH)_CFLAGS) $(SPACEFLAG) $(CCMODE)
+CFLAGS64=       $(COPTFLAG64) $($(MACH64)_CFLAGS) $(SPACEFLAG64) $(CCMODE64)
+DTEXTDOM=-DTEXT_DOMAIN=\"$(TEXT_DOMAIN)\"	# For messaging.
+CPPFLAGS.master=$(DTEXTDOM) \
+	$(ENVCPPFLAGS1) $(ENVCPPFLAGS2) $(ENVCPPFLAGS3) $(ENVCPPFLAGS4)
+CPPFLAGS=	$(CPPFLAGS.master)
+AS_CPPFLAGS=	$(CPPFLAGS.master)
+JAVAFLAGS=	-deprecation
+
+#
+# For source message catalogue
+#
+.SUFFIXES: $(SUFFIXES) .po
+MSGROOT= $(ROOT)/catalog
+MSGDOMAIN= $(MSGROOT)/$(TEXT_DOMAIN)
+CLOBBERFILES += $(POFILE) $(POFILES)
+COMPILE.cpp= $(CC) -E -C $(CFLAGS) $(CPPFLAGS)
+XGETTEXT= xgettext
+XGETFLAGS= -c TRANSLATION_NOTE
+BUILD.po= $(XGETTEXT) $(XGETFLAGS) $<.i ;\
+	$(RM)	$@ ;\
+	sed "/^domain/d" < messages.po  > $@ ;\
+	$(RM) messages.po $<.i
+#
+# This is overwritten by local Makefile when PROG is a list.
+#
+POFILE= $(PROG).po
+
+sparc_CCFLAGS=		-cg89 -Qoption fbe -cg92 -compat=4 \
+			-Qoption ccfe -messages=no%anachronism
+sparcv9_CCFLAGS=	$(sparcv9_XARCH) -dalign -compat=5 \
+			-Qoption ccfe -messages=no%anachronism \
+			-Qoption ccfe -features=no%conststrings \
+			$(CCCREGSYM)
+i386_CCFLAGS=		-compat=4 \
+			-Qoption ccfe -messages=no%anachronism \
+			-Qoption ccfe -features=no%conststrings
+ia64_CCFLAGS=		$(ia64_XARCH)
+sparc_CCOPTFLAG=	-O
+sparcv9_CCOPTFLAG=	-O
+i386_CCOPTFLAG=		-O
+ia64_CCOPTFLAG=		-O
+
+CCOPTFLAG=	$($(MACH)_CCOPTFLAG)
+CCOPTFLAG64=	$($(MACH64)_CCOPTFLAG)
+CCFLAGS=	$(CCOPTFLAG) $($(MACH)_CCFLAGS)
+CCFLAGS64=	$(CCOPTFLAG64) $($(MACH64)_CCFLAGS)
+#
+# 
+LDLIBS.cmd = 	$(ENVLDLIBS1)  $(ENVLDLIBS2)  $(ENVLDLIBS3)
+LDLIBS.lib=	$(ENVLDLIBS1)  $(ENVLDLIBS2)  $(ENVLDLIBS3)
+#
+# Define compilation macros.
+#
+COMPILE.c=	$(CC) $(CFLAGS) $(CPPFLAGS) -c
+COMPILE64.c=	$(CC) $(CFLAGS64) $(CPPFLAGS) -c
+COMPILE.cc=	$(CCC) $(CCFLAGS) $(CPPFLAGS) -c
+COMPILE64.cc=	$(CCC) $(CCFLAGS64) $(CPPFLAGS) -c
+COMPILE.s=	$(AS) $(ASFLAGS) $(AS_CPPFLAGS)
+
+CLASSPATH=	.
+COMPILE.java=	$(JAVAC) $(JAVAFLAGS) -classpath $(CLASSPATH)
+
+#
+# Link time macros
+#
+CCNEEDED	= -lC -lc
+COMPILE64.s=	$(AS) $(ASFLAGS) $($(MACH64)_XARCH) $(AS_CPPFLAGS)
+LINK.c=		$(CC) $(CFLAGS) $(CPPFLAGS) $(LDFLAGS)
+LINK64.c=	$(CC) $(CFLAGS64) $(CPPFLAGS) $(LDFLAGS)
+LINK.cc=	$(CCC) $(CCFLAGS) $(CPPFLAGS) -norunpath -nolib $(LDFLAGS) $(CCNEEDED)
+LINK64.cc=	$(CCC) $(CCFLAGS64) $(CPPFLAGS) -norunpath -nolib $(LDFLAGS) $(CCNEEDED)
+LINT.c=		$(LINT) $(LINTFLAGS) $(CPPFLAGS)
+LINT64.c=	$(LINT) $(LINTFLAGS64) $(CPPFLAGS)
+
+# For some future builds, NATIVE_MACH and MACH might be different.
+# Therefore, NATIVE_MACH needs to be redefined in the
+# environment as `uname -p` to override this macro.
+#
+# For now at least, we cross-compile ia64 on i386 machines.
+NATIVE_MACH:sh=	if [ "$MACH" = "ia64" ]; \
+		then echo i386; \
+		else echo "$MACH"; \
+		fi
+
+# Define native compilation macros
+#
+
+# Base directory where compilers are loaded.
+# Defined here so it can be overridden by developer.
+#
+SPRO_ROOT=		$(BUILD_TOOLS)/SUNWspro
+INTC_ROOT=		$(BUILD_TOOLS)/INTCia64
+
+# Specify platform compiler versions for languages
+# that we use (currently only c and c++).
+#
+sparc_CC=		$(SPRO_ROOT)/SC5.0/bin/cc
+sparc_CCC=		$(SPRO_ROOT)/SC5.0/bin/CC
+sparc_AS=		/usr/ccs/bin/as -xregsym=no
+sparc_LD=		/usr/ccs/bin/ld
+
+sparcv9_CC=		$(SPRO_ROOT)/SC5.0/bin/cc
+sparcv9_CCC=		$(SPRO_ROOT)/SC5.0/bin/CC
+sparcv9_AS=		/usr/ccs/bin/as -xregsym=no
+sparcv9_LD=		/usr/ccs/bin/ld
+
+i386_CC=		$(SPRO_ROOT)/SC5.0/bin/cc
+i386_CCC=		$(SPRO_ROOT)/SC5.0/bin/CC
+i386_AS=		/usr/ccs/bin/as
+i386_LD=		/usr/ccs/bin/ld
+
+ia64_CC=		$(INTC_ROOT)/bin/xcc
+ia64_CCC=		$(INTC_ROOT)/bin/CC
+ia64_AS=		$(INTC_ROOT)/bin/xas
+ia64_LD=		/usr/ccs/bin/ld
+
+NATIVECC=		$($(NATIVE_MACH)_CC)
+NATIVECCC=		$($(NATIVE_MACH)_CCC)
+NATIVEAS=		$($(NATIVE_MACH)_AS)
+NATIVELD=		$($(NATIVE_MACH)_LD)
+
+#
+# Makefile.master.64 overrides these settings
+#
+CC=			$(NATIVECC)
+CCC=			$(NATIVECCC)
+AS=			$(NATIVEAS)
+LD=			$(NATIVELD)
+
+#
+# Use the same lint as the cc compiler
+#
+sparc_LINT=		$(SPRO_ROOT)/SC5.0/bin/lint
+i386_LINT=		$(SPRO_ROOT)/SC5.0/bin/lint
+ia64_LINT=		$(SPRO_ROOT)/SC5.0/bin/lint
+LINT=			$($(MACH)_LINT)
+
+# Pass -Y flag to cpp (method of which is release-dependent)
+CCYFLAG=	-Y I,
+
+# Rules (normally from make.rules) and macros which are used for post
+# processing files. Normally, these do stripping of the comment section
+# automatically.
+#    RELEASE_CM:	Should be editted to reflect the release.
+#    POST_PROCESS_O:	Post-processing for `.o' files.
+#    POST_PROCESS_A:	Post-processing for `.a' files (currently null).
+#    POST_PROCESS_SO:	Post-processing for `.so' files.
+#    POST_PROCESS:	Post-processing for executable files (no suffix).
+# Note that these macros are not completely generalized as they are to be
+# used with the file name to be processed following.
+#
+# It is left as an exercise to Release Engineering to embellish the generation
+# of the release comment string.
+#
+#	If this is a standard development build:
+#		compress the comment section (mcs -c)
+#		add the standard comment (mcs -a $(RELEASE_CM))
+#		add the development specific comment (mcs -a $(DEV_CM))
+#
+#	If this is an installation build:
+#		delete the comment section (mcs -d)
+#		add the standard comment (mcs -a $(RELEASE_CM))
+#		add the development specific comment (mcs -a $(DEV_CM))
+#
+#	If this is an release build:
+#		delete the comment section (mcs -d)
+#		add the standard comment (mcs -a $(RELEASE_CM))
+#
+#	Sigh,... The declaration POUND_SIGN is always '#'. This is just needed
+#	to get around the make **bug** that '#' is always a comment delimiter,
+#	even when escaped or quoted.
+#
+# The following list of macros are used in the definition of RELEASE_CM
+# which is used to label all binaries in the build:
+#
+# 	RELEASE		Specific release of the build, eg: 5.2
+#	VERSION		Version of the build (alpha, beta, Generic)
+#	PATCHID		If this is a patch this value should contain
+#			the patchid value (eg: "Generic 100832-01"), otherwise
+#			it will be set to $(VERSION)
+#	RELEASE_DATE	Date of the Release Build
+#	PATCH_DATE	Date the patch was created, if this is blank it
+#			will default to the RELEASE_DATE
+#
+POUND_SIGN:sh=	echo \\043
+RELEASE=	5.8
+VERSION=	SunOS Development
+PATCHID=	$(VERSION)
+RELEASE_DATE=	February 2000
+PATCH_DATE=	$(RELEASE_DATE)
+RELEASE_CM=	"@($(POUND_SIGN))SunOS $(RELEASE) $(PATCHID) $(PATCH_DATE)"
+DEV_CM=		"@($(POUND_SIGN))SunOS Internal Development: `$(ECHO) $$LOGNAME` `date +%D` `$(ECHO) [\`basename $$CODEMGR_WS\`]`"
+
+#
+# SMALL_DEV_CM is used by ufsbootblk, because DEV_CM is too long.
+# If you make this much longer, you may break the bootblock.
+#
+SMALL_DEV_CM=	"`date +%D` `$(ECHO) [\`basename $$CODEMGR_WS\`]`"
+
+PROCESS_COMMENT=		   @?${MCS} -c -a $(RELEASE_CM) -a $(DEV_CM)
+$(STRIP_COMMENTS)PROCESS_COMMENT=  @?${MCS} -d -a $(RELEASE_CM) -a $(DEV_CM)
+$(RELEASE_BUILD)PROCESS_COMMENT=   @?${MCS} -d -a $(RELEASE_CM)
+
+POST_PROCESS_O=		$(PROCESS_COMMENT) $@
+POST_PROCESS_A=
+POST_PROCESS_SO=	$(PROCESS_COMMENT) $@
+POST_PROCESS=		$(PROCESS_COMMENT) $@
+
+#	Default build rules which perform comment section post-processing.
+#
+.c:
+	$(LINK.c) -o $@ $< $(LDLIBS)
+	$(POST_PROCESS)
+.c.o:
+	$(COMPILE.c) $(OUTPUT_OPTION) $<
+	$(POST_PROCESS_O)
+.c.a:
+	$(COMPILE.c) -o $% $<
+	$(PROCESS_COMMENT) $%
+	$(AR) $(ARFLAGS) $@ $%
+	$(RM) $%
+.s.o:
+	$(COMPILE.s) -o $@ $<
+	$(POST_PROCESS_O)
+.s.a:
+	$(COMPILE.s) -o $% $<
+	$(PROCESS_COMMENT) $%
+	$(AR) $(ARFLAGS) $@ $%
+	$(RM) $%
+.cc:
+	$(LINK.cc) -o $@ $< $(LDLIBS)
+	$(POST_PROCESS)
+.cc.o:
+	$(COMPILE.cc) $(OUTPUT_OPTION) $<
+	$(POST_PROCESS_O)
+.cc.a:
+	$(COMPILE.cc) -o $% $<
+	$(AR) $(ARFLAGS) $@ $%
+	$(PROCESS_COMMENT) $%
+	$(RM) $%
+.y:
+	$(YACC.y) $<
+	$(LINK.c) -o $@ y.tab.c $(LDLIBS)
+	$(POST_PROCESS)
+	$(RM) y.tab.c
+.y.o:
+	$(YACC.y) $<
+	$(COMPILE.c) -o $@ y.tab.c
+	$(POST_PROCESS_O)
+	$(RM) y.tab.c
+.l:
+	$(RM) $*.c
+	$(LEX.l) $< > $*.c
+	$(LINK.c) -o $@ $*.c -ll $(LDLIBS)
+	$(POST_PROCESS)
+	$(RM) $*.c
+.l.o:
+	$(RM) $*.c
+	$(LEX.l) $< > $*.c
+	$(COMPILE.c) -o $@ $*.c
+	$(POST_PROCESS_O)
+	$(RM) $*.c
+
+.java.class:
+	$(COMPILE.java) $<
+
+#
+# Rules to create message catalogue files from
+#	.c, .y and .l files
+#
+.c.po:
+	$(COMPILE.cpp) $<  > $<.i
+	$(BUILD.po)
+
+.y.po:
+	yacc -d $<
+	$(COMPILE.cpp) y.tab.c  > $<.i
+	$(BUILD.po)
+	$(RM) y.tab.c 
+
+.l.po:
+	lex $<
+	$(COMPILE.cpp) lex.yy.c  > $<.i
+	$(BUILD.po)
+	$(RM) lex.yy.c
+
+#
+# Rules to perform stylistic checks
+#
+.SUFFIXES: $(SUFFIXES) .x .check
+
+.h.check:
+	$(DOT_H_CHECK)
+
+.x.check:
+	$(DOT_X_CHECK)
+
+#
+# Rules to process ONC+ Source partial files
+#
+%_onc_plus:	%
+	@$(ECHO) "extracting code from $< ... "
+	sed -n -e '/ONC_PLUS EXTRACT START/,/ONC_PLUS EXTRACT END/p' $<  > $@

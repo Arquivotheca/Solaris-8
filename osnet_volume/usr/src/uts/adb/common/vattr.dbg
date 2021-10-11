@@ -1,0 +1,32 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)vattr.dbg	1.5	98/01/28 SMI"
+
+#include <sys/types.h>
+#include <sys/vnode.h>
+#include "dummy.h"
+
+\
+\
+vattr                   va_
+        mask                    hex
+        type                    decimal
+        mode                    octal
+        uid                     decimal
+        gid                     decimal
+        fsid                    hex
+        nodeid                  hex
+        nlink                   decimal
+        size                    hex
+        atime.tv_sec            hex		atime_sec
+        atime.tv_nsec           hex		atime_nsec
+        mtime.tv_sec            hex		mtime_sec
+        mtime.tv_nsec           hex		mtime_nsec
+        ctime.tv_sec            hex		ctime_sec
+        ctime.tv_nsec           hex		ctime_nsec
+        rdev                    hex
+        blksize                 hex
+        nblocks                 hex
+        vcode                   hex

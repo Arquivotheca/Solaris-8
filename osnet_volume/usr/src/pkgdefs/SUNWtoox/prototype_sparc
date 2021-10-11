@@ -1,0 +1,54 @@
+#
+# Copyright (c) 1997-1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#ident	"@(#)prototype_sparc	1.10	99/05/14 SMI"
+#
+# This required package information file contains a list of package contents.
+# The 'pkgmk' command uses this file to identify the contents of a package
+# and their location on the development machine when building the package.
+# Can be created via a text editor or through use of the 'pkgproto' command.
+
+#!search <pathname pathname ...>	# where to find pkg objects
+#!include <filename>			# include another 'prototype' file
+#!default <mode> <owner> <group>	# default used if not specified on entry
+#!<param>=<value>			# puts parameter in pkg environment
+
+#
+# Include ISA independent files (prototype_com)
+#
+!include prototype_com
+#
+#
+#
+# List files which are SPARC specific here
+#
+# source locations relative to the prototype file
+#
+#
+# SUNWtoox
+#
+d none usr/bin/sparcv9 755 root bin
+f none usr/bin/sparcv9/gcore 555 root bin
+f none usr/bin/sparcv9/plimit 555 root bin
+f none usr/bin/sparcv9/pvs 555 root bin
+f none usr/bin/sparcv9/truss 555 root bin
+d none usr/ccs/bin/sparcv9 755 root bin
+f none usr/ccs/bin/sparcv9/ld 755 root bin
+d none usr/lib/ld/sparcv9 755 root bin
+f none usr/lib/ld/sparcv9/map.above4G 444 root bin
+f none usr/lib/ld/sparcv9/map.below4G 444 root bin
+s none usr/lib/ld/sparcv9/map.default=./map.above4G
+d none usr/lib/link_audit/sparcv9 755 root bin
+f none usr/lib/link_audit/sparcv9/ldprof.so.1 755 root bin
+f none usr/lib/link_audit/sparcv9/truss.so.1 755 root bin
+f none usr/lib/link_audit/sparcv9/who.so.1 755 root bin
+d none usr/lib/sparcv9 755 root bin
+f none usr/lib/sparcv9/libldfeature.a 644 root bin
+f none usr/lib/sparcv9/libld.so.2 755 root bin
+f none usr/lib/sparcv9/libld.so.3 755 root bin
+f none usr/lib/sparcv9/libldstab.so.1 755 root bin
+f none usr/lib/sparcv9/lddstub 555 root bin
+d none usr/lib/abi 755 root bin
+d none usr/lib/abi/sparcv9 755 root bin
+f none usr/lib/abi/sparcv9/ldcullstabs.so.1 755 root bin

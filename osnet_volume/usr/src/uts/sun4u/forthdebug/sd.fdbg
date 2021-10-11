@@ -1,0 +1,18 @@
+
+#ident	"@(#)sd.fdbg	1.1	95/06/13 SMI"
+
+#include <sys/scsi/scsi.h>
+#include <sys/dkio.h>
+#include <sys/scsi/targets/sddef.h>
+
+\ 
+\ scsi disk 
+
+scsi_disk
+
+dk_geom
+
+dk_label
+
+dk_vtoc
+

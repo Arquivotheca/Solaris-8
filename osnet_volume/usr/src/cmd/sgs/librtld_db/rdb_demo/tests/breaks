@@ -1,0 +1,12 @@
+break
+break _start
+break
+delete _start
+break
+break main
+cont
+break
+break printf
+cont
+delete printf
+cont

@@ -1,0 +1,29 @@
+\
+\ Copyright (c) 1997-1998 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)glm_tagQ.dbg	1.4	98/02/09 SMI"
+
+#include <sys/note.h>
+#include <sys/scsi/scsi.h>
+#include <sys/scsi/adapters/glmreg.h>
+#include <sys/scsi/adapters/glmvar.h>
+#include "dummy.h"
+
+\
+\
+nt_slots		nt_		glm_tagQ
+{adb_inline_begin}
+.>z
+<z+{OFFSET, nt_dups}=""
+{adb_inline_end}
+	dups
+	tags
+	timeout
+	timebase
+	n_slots		hex	nslots
+	size
+	slot		hex	slots
+{adb_inline_begin}
+<z+{SIZEOF}=""
+{adb_inline_end}

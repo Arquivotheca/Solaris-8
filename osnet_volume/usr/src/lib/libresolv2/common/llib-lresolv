@@ -1,0 +1,122 @@
+/* LINTLIBRARY */
+/* PROTOLIB1 */
+
+/*
+ * Copyright (c) 1997 by Sun Microsystems, Inc. 
+ * All rights reserved. 
+ */ 
+/* File broughtover for use in 8.1 on 10/31/97 */
+
+#pragma ident	"@(#)llib-lresolv	1.5	99/03/21 SMI"
+
+#include <stdio.h>
+#include <sys/types.h>
+#include <netinet/in.h>
+#include <netdb.h>
+#include <arpa/nameser.h>
+#include <resolv.h>
+
+/*
+ * /usr/src/lib/libresolv routines
+ */
+
+/* gethnamaddr.c */
+
+struct hostent *res_gethostbyname(const char *name);
+struct hostent *res_gethostbyaddr(const char *addr, int len, int type);
+#ifdef dn_skipname
+#undef dn_skipname
+#endif
+int dn_skipname(const uchar_t *comp_dn, const uchar_t *eom);
+void __res_set_no_hosts_fallback(void);
+struct hostent *res_gethostent(void);
+
+/* getnetbyaddr.c */
+
+/* getnetbyname.c */
+
+/* getnetent.c */
+
+/* getnetnamadr.c */
+
+/* herror.c */
+void herror(const char *s);
+
+/* inet_addr.c */
+int inet_aton(const char *cp, struct in_addr *addr);
+
+/* nsap_addr.c */
+uint_t inet_nsap_addr(const char *ascii, uchar_t *binary, int maxlen);
+char *inet_nsap_ntoa(int binlen, const uchar_t *binary, char *ascii);
+
+/* res_comp.c */
+int dn_expand(const uchar_t *msg, const uchar_t *eomorig,
+			const uchar_t *comp_dn, char *exp_dn, int length);
+int dn_comp(const char *exp_dn, uchar_t *comp_dn, int length, uchar_t **dnptrs,
+			uchar_t **lastdnptr);
+int __dn_skipname(const uchar_t *comp_dn, const uchar_t *eom);
+
+unsigned short _getshort(const uchar_t *msgp);
+unsigned int _getlong(const uchar_t *msgp);
+void __putshort(unsigned short s, uchar_t *msgp);
+void __putlong(unsigned int l, uchar_t *msgp);
+/* really __res_hnok */
+int res_hnok(const char *dn);
+/* really __res_ownok */
+int res_ownok(const char *dn);
+/* really __res_mailok */
+int res_mailok(const char *dn);
+/* really __res_dnok */
+int res_dnok(const char *dn);
+
+/* res_data.c */
+
+/* res_debug.c */
+void __p_query(const uchar_t *msg);
+void __fp_resstat(struct __res_state *statp, FILE *file);
+void __fp_nquery(const uchar_t *msg, int len, FILE *file);
+void __fp_query(const uchar_t *msg, FILE *file);
+const uchar_t *__p_cdname(const uchar_t *cp, const uchar_t *msg, FILE *file);
+const uchar_t *__p_rr(const uchar_t *cp, const uchar_t *msg, FILE *file);
+const char *__p_type(int type);
+const char *__p_class(int class);
+const char *__p_time(unsigned int value);
+/* really __loc_aton */
+int loc_aton(const char *ascii, uchar_t *binary);
+/* really __loc_ntoa */
+const char *loc_ntoa(const uchar_t *binary, char *ascii);
+
+/* res_init.c */
+int res_init(void);
+/* really __res_randomid */
+unsigned int res_randomid(void);
+
+/* res_mkquery.c */
+int res_mkquery(int op, const char *dname, int class, int type,
+		const uchar_t *data, int datalen, const uchar_t *newrr_in,
+		uchar_t *buf, int buflen);
+
+/* res_query.c */
+int res_query(const char *name, int class, int type, uchar_t *answer,
+		int anslen);
+int res_search(const char *name, int class, int type, uchar_t *answer,
+		int anslen);
+int res_querydomain(const char *name, const char *domain, int class, int type,
+		uchar_t *answer, int anslen);
+const char *__hostalias(const char *name);
+
+/* res_send.c */
+int res_send(const uchar_t *buf, int buflen, uchar_t *ans, int anssiz);
+void _res_close(void);
+/* really __res_nameinquery */
+int res_nameinquery(const char *name, int type, int class,
+				const uchar_t *buf, const uchar_t *eom);
+
+/* Newly introduced for Dynamic updates */
+int             res_update(ns_updrec *);
+int             res_mkupdate(ns_updrec *, u_char *, int);
+ns_updrec *     res_mkupdrec(int, const char *, u_int, u_int, u_int);
+
+/* sethostent.c */
+int res_sethostent(int stayopen);
+int res_endhostent(void);

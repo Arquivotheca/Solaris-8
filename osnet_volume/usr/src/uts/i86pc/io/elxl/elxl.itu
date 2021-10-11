@@ -1,0 +1,88 @@
+#
+#  Copyright (c) 1998, by Sun Microsystems, Inc.
+#  All rights reserved.
+#
+#ident  "@(#)elxl.itu 1.4     98/04/20 SMI"
+#
+name=elxl
+itu_type=complete
+interface_version=1.0
+patchid=105674-02
+driverpkg=SUNWos86r
+driverpkgvers="1.1.0,REV=1997.06.13.11.51"
+driverpkgdesc="Platform Support, OS Functionality (Root)"
+driver_path=/kernel/drv
+realmode_path=/platform/i86pc/boot/solaris/drivers/notisa.010
+manpkg=SUNWman
+manpkgdesc="On-Line Manual Pages"
+manpkgvers="39.0,REV=16"
+bef_name=elxl.bef
+dev_type=net
+
+# For devices which were supported by elx at FCS; remove for 2.7
+file_edit=/etc/driver_aliases "/pci10b7,9000/s/elx/elxl/"
+file_edit=/etc/driver_aliases "/pci10b7,9001/s/elx/elxl/"
+file_edit=/etc/driver_aliases "/pci10b7,9050/s/elx/elxl/"
+
+{
+bus_type = pci
+dev_id = pci10b7,9000
+node_name =  pci10b7,9000
+describe_dev = "3Com 3C900-TPO Etherlink XL"
+}
+{
+bus_type = pci
+dev_id = pci10b7,9001
+node_name =  pci10b7,9001
+describe_dev = "3Com 3C900-COMBO Etherlink XL"
+}
+{
+bus_type = pci
+dev_id = pci10b7,9050
+node_name =  pci10b7,9050
+describe_dev = "3Com 3C905-TX Fast Etherlink XL 10/100"
+}
+{
+bus_type = pci
+dev_id = pci10b7,9051
+node_name =  pci10b7,9051
+describe_dev = "3Com 3C905-T4 Fast Etherlink XL 10/100"
+}
+
+# Second-generation adapters follow.
+{
+bus_type = pci
+dev_id = pci10b7,9055
+node_name =  pci10b7,9055
+describe_dev = "3Com 3C905B-TX Fast Etherlink XL 10/100"
+}
+{
+bus_type = pci
+dev_id = pci10b7,9056
+node_name =  pci10b7,9056
+describe_dev = "3Com 3C905B-T4 Fast Etherlink XL 10/100"
+}
+{
+bus_type = pci
+dev_id = pci10b7,9004
+node_name =  pci10b7,9004
+describe_dev = "3Com 3C900B-TPO Etherlink XL"
+}
+{
+bus_type = pci
+dev_id = pci10b7,9005
+node_name =  pci10b7,9005
+describe_dev = "3Com 3C900B-COMBO Etherlink XL"
+}
+{
+bus_type = pci
+dev_id = pci10b7,9006
+node_name =  pci10b7,9006
+describe_dev = "3Com 3C900B-TPC Etherlink XL"
+}
+{
+bus_type = pci
+dev_id = pci1028,6f
+node_name = pci1028,6f
+describe_dev = "3Com 3C905-TX Fast Etherlink XL 10/100"
+}

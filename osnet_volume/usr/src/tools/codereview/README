@@ -1,0 +1,13 @@
+#pragma	ident	"@(#)README	1.1	99/05/17 SMI"
+5/17/99:
+Source code for codereview program, also known as 'lwlp',
+hence the name of the source file, lwlp.c.
+
+The relevant files are:
+	lwlp.c - codereview source code
+	prologue.h - postscript header file
+	codereview.1 - manpage for codereview
+
+The code was originally created/maintained by John Zolnowsky; his
+original source directory contents are in the 'old' directory.
+Robert Hogue is the current owner of codereview.

@@ -1,0 +1,22 @@
+# Copyright 1992, Sun Microsystems
+#
+# Makefile definitions for volume management
+#
+# "@(#)Makefile.volmgt	1.6	93/01/18 SMI"
+#
+# cmd/volmgt/Makefile.volmgt
+
+
+#
+# This is /usr/lib/{vold, rmm} on the target installed system.
+# Libraries and utilities go here.
+#
+VOLLIBDIR= 	${ROOTLIB}/vold
+RMMLIBDIR=	${ROOTLIB}/rmmount
+
+#
+# Lint flags we use for volume management.
+#
+LINTFLAGS=	-uxn
+
+CSTYLE=cstyle

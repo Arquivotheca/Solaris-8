@@ -1,0 +1,28 @@
+#
+#ident "@(#)Makefile.sparc	1.5	96/02/26 SMI"
+#
+# Copyright (c) 1995 by Sun Microsystems, Inc.
+#
+# psm/stand/kadb/sparc/Makefile.sparc
+#
+# kernel debugger (kadb) included common Makefile
+# included by kernel-architecture specific makefiles
+#
+
+TOPDIR=		../../../../..
+COMDIR=  	../../common
+PSMSTANDLIBDIR=	../../../lib
+SYSDIR=  	$(TOPDIR)/uts
+MMUDIR=		$(SYSDIR)/$(MMU)
+SPECIAL= 	locore.o
+
+KADBPROMLIB=	$(PROMDIR)/libprom.a
+
+INCLUDE=  -I$(SYSDIR)/$(ARCH) -I$(SYSDIR)/$(MACH) -I$(MMUDIR) \
+		-I$(SYSDIR)/$(MACH)/$(ARCHVERS)
+
+MACHOBJ=	stubs_$(MACH).o readfile_$(MACH).o support_$(MACH).o fiximp.o
+
+CSPROMSRC=	$(TOPDIR)/psm/promif
+
+MACH_CSDIRS=   $(CSPROM:%=$(CSPROMSRC)/%) ../common

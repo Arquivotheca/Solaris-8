@@ -1,0 +1,25 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)kstat_ui32.dbg	1.3	98/01/19 SMI"
+
+\       arg             : address of a struct kstat_named
+\       uses            :
+\       registers       : z
+\       description     : prints the contents of kstat_named structure
+\                         as a uint32 value
+#include <sys/kstat.h>
+#include "dummy.h"
+
+\
+\
+kstat_named     ""      kstat_ui32
+{adb_inline_begin}
+.>z
+<z+{OFFSET, value.ui32}=""
+{adb_inline_end}
+        value.ui32      decimal         "ui32"
+{adb_inline_begin}
+<z+{SIZEOF}=""
+{adb_inline_end}

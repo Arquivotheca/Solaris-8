@@ -1,0 +1,49 @@
+#
+#ident	"@(#)Makefile.libfn	1.16	97/10/27 SMI"
+#
+# Copyright (c) 1993 - 1996, by Sun Microsystems, Inc.
+# All rights reserverd.
+#
+# lib/fn/Makefile.libfn
+# Definitions common to fn shared libraries.
+#
+
+include $(SRC)/lib/Makefile.lib
+
+# do after lib/Makefile.lib, which also sets ROOTLIBDIR
+
+FNLIBDIR=	$(ROOT)/usr/lib/fn
+FNLIBDIR64=	$(ROOT)/usr/lib/fn/$(MACH64)
+FNINCDIR=	$(SRC)/lib/fn/include
+ROOTLIBDIR=	$(FNLIBDIR)
+ROOTLIBDIR64=	$(FNLIBDIR64)
+ROOTFNLINKS=	$(FNLINKS:%=$(FNLIBDIR)/%)
+ROOTFNLINKS64=	$(FNLINKS64:%=$(FNLIBDIR64)/%)
+FNLINKTARG=	$(DYNLIBCCC)
+FNLINKTARG64=	$(DYNLIBCCC)
+
+# POFILE is improperly added to CLOBBERFILES in Makefile.master
+POFILE=
+
+debug :=	CPPFLAGS += $(DEBUG)
+debug :=	CPPFLAGS64 += $(DEBUG)
+debug :=	COPTFLAG = -g
+debug :=	COPTFLAG64 = -g
+debug :=	CCOPTFLAG = -g
+debug :=	CCOPTFLAG64 = -g
+tcov :=		CFLAGS += -xa
+tcov :=		CFLAGS64 += -xa
+tcov :=		CCFLAGS += -a
+tcov :=		CCFLAGS64 += -a
+
+# make sure -I$(FNINCDIR) precedes other -Is
+
+CPPFLAGS=	-I$(FNINCDIR) $(CPPFLAGS.master) -D_REENTRANT
+CPPFLAGS64=	-I$(FNINCDIR) $(CPPFLAGS64.master) -D_REENTRANT
+
+# Added noex option to CC. This instructs
+# the compiler not to generate code that supports
+# C++ exceptions.
+
+CCFLAGS += -noex 
+CCFLAGS64 += -noex

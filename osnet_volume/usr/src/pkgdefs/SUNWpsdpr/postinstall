@@ -1,0 +1,19 @@
+#! /bin/sh
+#
+# ident "@(#)postinstall 1.6	99/05/27 SMI"
+#
+# Copyright (c) 1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+
+PATH="/usr/bin:/usr/sbin:${PATH}"
+export PATH
+
+EXIT=0
+
+grep '^pcata\>' ${BASEDIR}/etc/name_to_major > /dev/null && \
+rem_drv -b ${BASEDIR} pcata
+add_drv -b ${BASEDIR} -n -i '"pccard,disk"' pcata \
+|| EXIT=1
+
+exit ${EXIT}

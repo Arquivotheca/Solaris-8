@@ -1,0 +1,38 @@
+\
+\ Copyright (c) 1998-1999 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)ohci_polled.dbg	1.2	99/11/18 SMI"
+
+#include <sys/usb/usba.h>
+#include <sys/usb/usba/usba_types.h>
+#include <sys/usb/usba/usba_impl.h>
+#include <sys/usb/hcd/openhci/ohci.h>
+#include <sys/usb/hcd/openhci/ohcid.h>
+#include <sys/usb/hcd/openhci/ohci_polled.h>
+#include "dummy.h"
+
+\
+\
+
+ohci_polled	ohci_polled_	
+{adb_inline_begin}
+.>z
+<z+{OFFSET, ohci_polled_ohcip}=""
+{adb_inline_end}
+	ohcip			hex
+	save_regs		hex
+	save_IntTble		hex
+	input_pipe_handle	hex
+	dummy_ed		hex
+	ed			hex		polled_ed
+	buf			hex		polled_buf
+	flags			hex
+	input_done_head		hex
+	input_done_tail		hex
+	entry			hex		polled_entry
+	usb_dev			hex
+	ep_index		hex
+{adb_inline_begin}
+<z+{SIZEOF}=""
+{adb_inline_end}

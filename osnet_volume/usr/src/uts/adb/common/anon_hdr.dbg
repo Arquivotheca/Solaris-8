@@ -1,0 +1,22 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)anon_hdr.dbg	1.1	98/02/04 SMI"
+
+\       arg             : address of anon_map struct
+\       uses            : mutex
+\       registers       : z
+\       description     : prints the contents of anon_map structure
+\
+
+#include <sys/types.h>
+#include <vm/anon.h>
+#include "dummy.h"
+
+\
+\
+anon_hdr
+        size                    decimal
+        array_chunk		hex
+        flags			hex

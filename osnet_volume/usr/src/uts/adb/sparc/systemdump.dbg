@@ -1,0 +1,15 @@
+\
+\ Copyright (c) 1999 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)systemdump.dbg	1.1	99/03/23 SMI"
+
+#include "dummy.h"
+
+\
+\
+__dummy			""	systemdump
+{adb_inline_begin}
+0="Type 'sync' at the ok prompt to force a crash dump"
+$q
+{adb_inline_end}

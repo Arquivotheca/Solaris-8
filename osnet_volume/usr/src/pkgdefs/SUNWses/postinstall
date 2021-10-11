@@ -1,0 +1,41 @@
+#!/bin/sh
+#	Copyright (c) 1997 Sun Microsystems, Inc.
+#		All Rights Reserved
+
+# ident "@(#)postinstall	1.3	97/02/18 SMI"
+# SUNWses postinstall script
+
+PATH="/usr/bin:/usr/sbin:${PATH}"
+export PATH
+EXIT=0
+
+ADDDRV=/usr/sbin/add_drv
+
+DEVLINKTB="${BASEDIR}/etc/devlink.tab"
+
+if test ! -f ${DEVLINKTB} -o ! -w ${DEVLINKTB}; then
+	echo "SUNWses: file ${DEVLINKTB} is missing/inaccessible." >&2
+	exit 1
+fi
+
+trap "rm -f /tmp/$$.*;exit" 0 1 2 3 13 15
+TMP=/tmp/$$
+
+#
+# add_devlink - adds an entry to ${DEVLINKTB}
+#
+add_devlink()
+{
+	PATTERN="$1"
+	LINK="$2"
+	echo "$PATTERN\t$LINK" >>$TMP.devlink
+	mv $TMP.devlink ${DEVLINKTB}
+}
+
+grep -v "^type=ddi_pseudo;name=ses	es/ses\\\\N0$" ${DEVLINKTB} >$TMP.devlink
+add_devlink 'type=ddi_pseudo;name=ses' 'es/ses\N0'
+${ADDDRV} -b ${BASEDIR} -n -m '* 0666 bin bin' ses
+
+touch ${BASEDIR}/reconfigure
+
+exit ${EXIT}

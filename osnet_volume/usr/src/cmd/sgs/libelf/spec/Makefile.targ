@@ -1,0 +1,19 @@
+#ident	"@(#)Makefile.targ	1.2	99/02/16 SMI"
+#
+# Copyright (c) 1997-1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+# cmd/sgs/libelf/Makefile.targ
+
+LIBRARY	=	libelf.a
+VERS	=	.1
+
+OBJECTS	=	elf.o	\
+		elf32.o	\
+		elf64.o	\
+		gelf.o	\
+		weak.o
+
+SPECCPP =
+
+lint:

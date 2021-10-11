@@ -1,0 +1,41 @@
+#
+# Copyright (c) 1996, by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#ident	"@(#)simple 1.1	96/01/17 SMI"
+#
+
+simple52|Minimum VT52 definitions required for Curses,
+#
+#  These should not be required.  Curses can determine the 
+#  screen dimensions from the stty values or environment
+#  variables LINES and COLUMNS.  
+#
+	cols#80,
+	lines#24,
+#
+#  These functions are required.
+#
+	clear=\EH\EJ$<100>,
+	cud1=\EB,
+	cub1=\ED,
+	cuu1=\EA,
+	cuf1=\EC,
+
+simple100|Minimum VT100 definitions required for Curses,
+#
+#  These should not be required.  Curses can determine the 
+#  screen dimensions from the stty values or environment
+#  variables LINES and COLUMNS.  
+#
+	cols#80,
+	lines#24,
+#
+#  These functions are required.
+#
+	clear=\E[H\E[J$<100>,
+	cud1=\E[B,
+	cub1=\E[D,
+	cuu1=\E[A,
+	cuf1=\E[C,
+

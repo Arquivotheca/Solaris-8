@@ -1,0 +1,41 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)stack.dbg	1.6	98/07/19 SMI"
+
+#ifdef __i386
+#include <sys/reg.h>
+#endif
+#include <sys/frame.h>
+#include "dummy.h"
+
+\
+\       v9 has a biased stack. Add 0t2047 before using stack pointer
+\
+frame                   ""              stack
+#if defined(__sparcv9)
+{adb_inline_begin}
+(.+0t2047)>f
+<f/16{HEX}n
+<f/16pn
+(*(<f+{OFFSET, fr_savpc}))/in
+(*(<f+{OFFSET, fr_savfp})),<9-1$<stack
+{adb_inline_end}
+#elif defined(__sparc)
+{adb_inline_begin}
+.>f
+<f/16{HEX}n
+<f/16pn
+(*(<f+{OFFSET, fr_savpc}))/in
+(*(<f+{OFFSET, fr_savfp})),<9-1$<stack
+{adb_inline_end}
+#elif defined(__386)
+{adb_inline_begin}
+.>f
+(*(<f+{OFFSET, fr_savpc}))/in
+(*(<f+{OFFSET, fr_savfp})),<9-1$<stack
+{adb_inline_end}
+#else
+#error "Unknown ISA"
+#endif

@@ -1,0 +1,1116 @@
+#*  "@(#)devconfig.info 1.2 94/05/25"
+
+#*           Master Help File: devconfig.main
+#*
+#* This main file is a template for the devconfig help system. It is built
+#* in the x86 environment only. It is a collection of the common help
+#* files and the devconfig specific application help files.
+#*
+#* Copyright (c) 1992 Sun Microsystems, Inc.  All Rights Reserved. Sun
+#* considers its source code as an unpublished, proprietary trade secret, and
+#* it is available only under strict license provisions.  This copyright
+#* notice is placed here only to protect Sun in the event the source is
+#* deemed a published work.  Dissassembly, decompilation, or other means of
+#* reducing the object code to human readable form is prohibited by the
+#* license agreement under which this code is provided to the user or company
+#* in possession of this copy.
+#* 
+#* RESTRICTED RIGHTS LEGEND: Use, duplication, or disclosure by the Government
+#* is subject to restrictions as set forth in subparagraph (c)(1)(ii) of the
+#* Rights in Technical Data and Computer Software clause at DFARS 52.227-7013
+#* and in similar clauses in the FAR and NASA FAR Supplement.
+#*
+# This CUI info file provides online help on the CUI user interface
+
+# topic defining all our links
+
+:!LINKS
+
+# ----------------------------------------------------------------
+#                    COMMON LINKS
+#
+#
+# ----------------------------------------------------------------
+# links describing the help system itself
+
+[About Help]                    About Help
+[help system]                   About Help
+[this link]                     test link
+
+# links describing the user interface
+
+[About the User Interface]      About the UI
+
+# links describing the various suninstall controls
+
+[Buttons]                       Buttons
+[Menus]                         Menus
+[Menu Item]                     Menu Item
+[Lists]                         scrolling lists
+[Data Entry Fields]             data entry fields
+[Choice Items]                  choice items
+[controls]                      controls
+[control]                       controls
+[control area]                  control areas
+[control areas]                 control areas
+[action button]                 Buttons
+[menu button]                   Menu Buttons
+[abbreviated menu button]       Abbrevmenu Buttons
+[menu]                          Menus
+[menus]                         Menus
+[menu item]                     Menu Item
+[menu items]                    Menu Item
+[scrolling list]                scrolling lists
+[data entry field]              data entry fields
+[data entry fields]             data entry fields
+[scroll bar]                    scroll bar
+[Context-sensitive help]        Context-sensitive help
+[help button]                   Help Button
+[Help Button]                   Help Button
+[help]                          Context-sensitive help
+[help system]                   Context-sensitive help
+[help text]                     Context-sensitive help
+[status line]                   Footer Status Line
+
+
+# links to do with the keyboard
+
+[navigation]                    navigation
+[accelerate]                    Accelerators
+[navigation]                    navigation
+[navigating]                    navigation
+[navigate]                      navigation
+[Key Assignments]               navigation
+[Tab]                           Tab key
+[BackTab]                       BackTab key
+[Left arrow]                    Left arrow key
+[Right arrow]                   Right arrow key
+[Up arrow]                      Up arrow key
+[Down arrow]                    Down arrow key
+[Home]                          Home key
+[End]                           End key
+[PgUp]                          PgUp key
+[PgDn]                          PgDn key
+[Ins]                           Ins key
+[Delete]                        Delete key
+[BackSpace]                     BackSpace key
+[Cancel]                        Cancel key
+[Help]                          Help key
+[Control-L]                     Refresh key
+[Control-K]                     Kill key
+[F1]                            Help key
+[Return]                        Return key
+
+# a general note on suninstall
+
+[About suninstall]        HelpIntro
+
+
+
+# Application specific links
+
+# ----------------------------------------------------------------
+#                    DEVCONFIG LINKS
+#
+# ----------------------------------------------------------------
+#devconfig
+[Device Configuration]			Devconfig Main Help
+[Device Configuration attribute]	Devconfig Attribute
+[Device Configuration select device]	Devconfig Select device
+[Device Configuration select category]	Devconfig Select category
+[view]					Devconfig View
+[add]					Devconfig Add
+[auto-configuring]			Devconfig Autoconfig
+[automatically detect]			Devconfig Autoconfig
+[modify]				Devconfig Modify
+[SCSI controller]			Devconfig SCSI
+[Ethernet card] 			Devconfig Ethernet
+[Floppy disk controller]		Devconfig Floppy
+[IDE controller]			Devconfig IDE
+[Keyboard]				Devconfig Keyboard
+[Pointing device]			Devconfig Pointing Device
+[Display adaptor]			Devconfig Display Adaptor
+[Audio interface card]			Devconfig Sound
+[Serial communications port]		Devconfig Serial
+[Parallel printer port] 		Devconfig Parallel
+[IRQ]					Devconfig IRQ
+[DMA]					Devconfig DMA
+[DMA Channel]				Devconfig DMA
+[I/O Address]				Devconfig I/O Address
+[Memory Address]			Devconfig Memory Address
+[Device Conflicts]			Devconfig Device Conflicts
+
+
+
+:!INDEX
+CUI Help Index
+
+General Help
+[About Help]
+[About the User Interface]
+[Key Assignments]
+[About CUI Applications]
+
+Devconfig application help
+[Device Configuration]
+)
+
+#
+# Footer entries for application follows
+#
+
+#
+#
+:Done
+Press RETURN to go back to previous screen
+
+:Main help
+Press RETURN for menu
+
+:Show
+This list may only be viewed. 
+
+:Continue install...
+Press RETURN to apply changes and continue with install
+
+:Cancel
+Press RETURN to cancel changes and continue with install
+
+:Add...
+Press RETURN to add a device
+
+:Help...
+Press RETURN for help
+
+:Show attributes
+Press RETURN to show configuration information for this device
+
+:Unconfigure
+Press RETURN to unconfigure this device
+
+:Select category
+Press RETURN to select a category
+
+:Select device
+Press RETURN to select a device in this category
+
+:Modify
+Use arrow keys to select a value and press RETURN to set this attribute
+
+:Apply
+Press RETURN to apply specified attributes
+
+:Reset
+Press RETURN to reset to original configuration
+
+:Cancel changes
+Press RETURN to cancel changes
+
+
+
+#
+#
+:HelpIntro
+[ Introduction to suninstall ]
+
+suninstall is an interactive, keyboard driven program that is used to
+configure installation properties.  Although the user interface is
+similar to an OpenWindows application, suninstall does not support
+mouse input.
+
+suninstall provides extensive online help.	To learn how to use the
+[help system], press Return when the 'help system' link is highlighted.
+
+# When you boot the Solaris 2.2 CD-ROM, suninstall runs in a window
+# under the install OpenWindows environment or directly on a terminal.
+
+:About Help
+[ Using the suninstall help system ]
+
+suninstall provides online help. At any time, you can press the Help
+(or F1) key to pop-up this Window.
+
+The suninstall help system allows you to view many help topics.  These
+topics often contain links to other topics.  These links allow you to
+move from one help topic to other related topics.  They are displayed
+in the Help Window within square brackets. The current link is always
+highlighted.
+
+Pressing Return when the cursor is located within a highlighted link
+follows the link to the related topic. Try this now, by pressing Return
+to follow [this link].
+
+If a help topic contains more information than will fit in the window,
+you can use the PgUp and PgDn keys to page through the text (try this
+now).
+
+The normal cursor keys (up, down, left, and right arrow keys, along
+with the Home and End keys) also allow you to move through the help
+topic.  Whenever the cursor enters a link, it is highlighted.  You can
+follow the link by pressing Return.  Pressing the Tab key highlights
+the next link, or moves to the first button below the help window if
+there is no visible link, and pressing Shift and Tab moves to the
+previous link or button.
+
+Pressing Return when the 'Index' button is highlighted (or pressing
+Help or F1 at any time) displays the help index, which is a high-level
+index of help topics.  Pressing Return when the 'Previous Topic' button
+is highlighted, or pressing the BackSpace key at any time, returns you
+to the previous topic.	Pressing Return when the 'Exit Help' button is
+highlighted, or pressing Esc at any time, removes the Help Window, and
+returns you to the point in the application at which you first requested
+help.
+
+Now press Help (or F1) to display the help index, or Esc to return
+to suninstall. If you choose to return to the help index, you might
+want to select the topic [About the User Interface] to learn more
+about the suninstall user interface.
+
+:test link
+[ Links ]
+
+By pressing Return when a link is highlighted, you follow that link
+to the topic. The suninstall help system remembers all the topics
+you visit, and you can always return to the previous topic by pressing
+the BackSpace key or by pressing the Tab key until the Go Back button
+is highlighted, and then pressing Return.
+
+Now press Return or BackSpace to return to the previous topic.
+
+:About the UI
+[ Interacting with suninstall ]
+
+suninstall is an interactive, keyboard-driven program that is used to
+control the installation process
+
+During installation you will interact with a number of suninstall 
+screens.  The screens are built out of a number of user interface
+components including buttons, lists, text fields, menus, and choice
+items.  These components are explained below:
+
+  * [Buttons] - There are three kinds of buttons, which are displayed
+	like this: ( Button ).
+	  1. Action buttons display a single choice; pressing Return when
+		 the button is highlighted initiates the associated action.
+	  2. Menu buttons are displayed with an arrow following the menu
+		 title, like this: ( Do it => ). This indicates that a popup
+		 menu is associated with the menu button; the popup menu is
+		 displayed when a Return is entered.
+	  3. Abbreviated menu buttons are similar to menu buttons, except
+		 that the current choice is shown to the right of the button.
+
+   * [Menus] - Menus are associated with menu buttons and with some
+	 lists; they are displayed when you enter a Return. Use the up and
+	 down arrow keys to traverse the menu choices.
+
+   * [Lists] - Lists allow you to select one (or sometimes more than
+	 one) item by using the up and down arrow keys to highlight the item
+	 and then pressing Return. You can scroll to additional choices when
+	 a highlighted scroll indicator is drawn on the right side of the
+	 list.
+
+   * [Data Entry Fields] - These fields allow you to enter textual
+	 information such as the name of your host computer. By default,
+	 characters you enter are inserted into the field; press the Insert
+	 key to toggle between insert and overwrite mode.  The left and
+	 right arrow keys, Home, and End move the cursor within the field,
+	 while the Backspace and Delete keys delete the character to the
+	 left of the cursor. Press Return or Tab to leave a data entry
+	 field.
+
+   * [Choice Items] - These are similar to lists.  Use the cursor-
+	 control keys to navigate between items, and Return to select
+	 an item.
+
+For more information on the key assignments used by the suninstall
+program, follow this link: [Key Assignments]
+
+[Context-sensitive help] is always available, and most windows also
+contain a [help button] that supplies more general information that
+explains what you are being asked to do.  Most windows also contain a
+status bar that provides a one-line context-sensitive help message.
+
+:control areas
+[ control areas ]
+
+In some windows, controls are grouped into control areas that are
+separated by horizontal lines across the window.  Control areas are
+usually used to separate groups of menu and action buttons from the
+other controls in the window, like this:
+
+      +-----------------\[ window title \]-------------------+
+      | (File *)  (Edit *)  (View *)            (Help)     |
+      +----------------------------------------------------+
+      |                                                    |
+      |   various controls...                              |
+      |                                                    |
+      +----------------------------------------------------+
+      |          (Apply)          (Dismiss)                |
+      +----------------------------------------------------+
+      | Help message                                       |
+      +----------------------------------------------------+
+
+:controls
+[ Controls ]
+
+suinstall contains the following types of controls:
+
+[action button]             ( Exit )
+
+[menu button]		    ( File => )
+
+[abbreviated menu button]   Color: (=>) Blue
+
+[menu]		            ( File => )
+                            +-------+
+			    | New   |
+			    | Open  |
+			    | Save  |
+		 	    | Exit  |
+                            +-------+
+
+[scrolling list]            +--------+
+                            | White  #
+                            | Blue   |
+                            | Red    |
+                            | Black  |
+                            +--------+
+
+[data entry field]          System Name: _____________
+
+nonexclusive [choice items]
+
+    \[X Save \]  \[X Log changes \]  \[  Notify \]
+
+exclusive [choice items]
+
+    \[X\] Fast  \[ \] Slow
+
+:Context-sensitive help
+[ Context-sensitive help ]
+
+Pressing the Help key always displays a help topic that explains the
+purpose of the current control, and what you are expected to do.  For
+more general help, press the [help button].
+
+:Help Button
+[ Help buttons ]
+
+Most suninstall screens provide a 'Help' [action button] that displays
+general suninstall [help text].
+
+:Footer Status Line
+[ Footer status line ]
+
+suninstall reserves the bottom line of the main screen and significant
+popups for spot-help and status information. This line contains basic
+navigation and configuration hints.
+
+
+:Buttons
+[ suninstall buttons ]
+
+Action Buttons look like this:
+
+    ( Exit )
+
+When a button is highlighted, pressing the Return key activates it and
+initiates the indicated action.  If the action involves popping up
+another window into which you must enter additional information, the
+button looks like this:
+
+    ( Alternate Languages ... ) 
+
+Menu Buttons look like this:
+
+    ( File => )
+ 
+When activated, they display a [menu] from which you can make a
+selection to initiate some kind of action:
+ 
+    ( File => )
+    +-------+
+    | Open  |
+    | New   |
+    | Save  |
+    | Exit  |
+    +-------+
+
+Abbreviated Menu Buttons are similar to regular menu buttons, but
+allow you to select one item from many.  They usually show a label to
+the left of the button (the button itself has no label) and the 
+currently selected item appears to the right of the button:
+
+	Speed: (=>) Fast
+                +--------+
+                | Fast   |
+                | Medium |
+                | Slow   |
+                +--------+
+
+:Menu Buttons
+[ Menu Buttons ]
+
+Menu Buttons are displayed like this:
+
+	( File => )
+
+When activated, they display a [menu] from which you can make a
+selection to initiate some kind of action:
+
+    ( File => )
+    +-------+
+    | Open  |
+    | New   |
+    | Save  |
+    | Exit  |
+    +-------+
+
+:Menu Item
+[ Menu Items ]
+
+Menu items are displayed inside menus, and indicate the actions that
+will be taken when the Return key is pressed.
+
+:Abbrevmenu Buttons
+[ Abbreviated Menu Buttons ]
+
+Abbreviated Menu Buttons are similar to regular menu buttons, but
+allow you to select one item from many.  They usually show a label to
+the left of the button (the button itself has no label) and the
+currently selected item appears to the right of the button:
+
+	Speed: (=>) Fast
+                +--------+
+                | Fast   |
+                | Medium |
+                | Slow   |
+                +--------+
+
+:Menus
+[ Menus ]
+
+Menus may be displayed when you press Return on a [menu button] or an
+[abbreviated menu button].  Sometimes a menu may also be associated
+with a [scrolling list].
+
+One menu item always has the focus and is highlighted.  The Up and
+Down arrow keys scroll through the items; pressing Return initiates the
+action associated with the current item.  When menus have more items
+than can be displayed in the menu window, a [scroll bar] appears on the
+right side of the menu.
+
+Menus items may have the following actions:
+
+  o Selecting a menu item that is followed by a right arrow causes
+    another menu to be displayed. 
+  o Selecting a menu item that has an ellipsis (three trailing dots)
+    causes a popup menu to be displayed.
+  o Selecting other menu items causes the displayed action.
+
+    +---------+
+    | Open... |  <== displays a popup window
+    | New...  |  <== displays a popup window
+    | Save    |  <== performs an action
+    | More => |  <== leads to another menu
+    | Exit    |  <== performs an action
+    +---------+
+
+:scrolling lists
+[ Scrolling lists ]
+
+Scrolling lists appear similar to [menus], but the items in the list do
+not represent actions.	Scrolling lists can be exclusive or
+nonexclusive. Items on the lists are selected by pressing Return when
+the item is highlighted.  Selected items appear with an asterisk.  The
+following is an example of a nonexclusive list.
+
+    Files to save:
+    +----------------+
+    | * memo.txt     |  <== selected
+    |   junk.doc     |
+    | * budget.123   |  <== selected
+    |   budget.bak   |
+    +----------------+
+
+Items are deselected by pressing Return when the item is highlighted.
+
+Some scrolling lists have associated popup menus, which appear when the
+item is highlighted and Return is pressed.  The menu offers actions that
+can be performed on the item.  For example:
+
+    Select a file:
+    +--------------+
+    | memo.txt     |
+    | junk.do +---------+
+    | budget. | delete  |
+    | budget. | back-up |
+    +-------- | copy    |
+              +---------+
+
+As with menus, the window appears with a [scroll bar] on the right side 
+when additional items are available.
+
+:scroll bar
+[ Scroll Bars ]
+
+When a control has more choices or information than can be displayed
+in the space provided, a scroll bar appears on the right side of the
+control area.  The following is an example of a scroll bar on a control.
+
+    +-------+
+    | White |
+    | Blue  |
+    | Red   #  <= scroll bar
+    | Green |
+    +-------+
+
+The position of the scroll bar indicates where the current item is
+located in the list.
+
+:choice items
+[ Choice Items ]
+
+Choice items allow you to selected items from a set of options.
+
+Exclusive choice items allow you to select only a single option.
+Selecting a new option causes the previously selected item to be
+deselected.  Exclusive choice items appear as follows:
+
+    \[X\] Fast  \[ \] Slow
+
+Nonexclusive choice items allow you to select more than one item.
+For example:
+
+    \[X Save \]  \[X Log changes \]  \[  Notify \]
+
+:data entry fields
+[ Data Entry Fields ]
+
+Data entry fields allow you to supply information to suninstall.  Data
+entry fields may scroll horizontally to allow you to enter more
+characters than fit within the field. 
+
+When you first enter a data entry field, the contents are highlighted,
+which indicates that the text you enter will replace the contents of
+the field.  (In this mode an initial Backspace or Delete will erase the
+entire field.)	If you want to edit rather than replace the field
+contents, use the left or right arrow key, or the Home or End key to
+navigate within the field.  Once you have entered editing mode in this
+way (or after your first character input), the characters you type are
+inserted into the field; the Insert key toggles between insert and
+overwrite mode.
+
+When you leave an data entry field by pressing Return or Tab, the
+application checks its contents. If an error is found, a message is
+displayed, and you are returned to the field to correct the problem.
+
+:navigation
+[ The suninstall Keyboard Interface ]
+
+The suninstall program uses the standard console navigation keys (Tab,
+BackTab, the arrow keys, Home, End, PgUp and PgDn) to move between and
+within items on the screen. Since not all of these keys are available on
+some terminals, control-key alternatives are provided.
+
+Although many navigation keys are recognized, the basic rules are
+simple: the Tab and BackTab keys are used to move between controls in a
+window, while the other navigation keys (the arrow keys, PgUp, PgDn,
+Home, and End) are used to navigate within a control such as a menu,
+a data-entry field, or a set of choice items.
+
+The following table explains the suninstall keyboard interface; follow
+the links to learn more about each key:
+
+ Key			  Alternative	Function Performed
+
+ [Help]           Control-W     Displays online help
+ [F1]             Control-W     Display online help
+ [Tab]            Control-I     Moves to next control
+ [BackTab]        Control-R     Moves to previous control
+ [Return]         Control-M     Selects the highlighted item
+ [Left arrow]	  Control-B 	Moves left within a control
+ [Right arrow]	  Control-F 	Moves right within a control
+ [Down arrow]	  Control-N 	Moves down within a control
+ [Up arrow] 	  Control-P 	Moves up within a control
+ [Home]		  Control-A 	Moves to beginning of field or control
+ [End]		  Control-E 	Moves to end of field or control
+ [PgUp]           Control-U     Scrolls contents down
+ [PgDn]           Control-D     Scrolls contents up 
+ [Delete]	  Control-X 	Erases previous character
+ [BackSpace]      Control-H     Erases previous character
+ [Cancel] (Esc)   Control-C 	Exits menus (popup and pulldown)
+ [Control-L]      Control-L     Refresh screen
+ [Control-K]      Control-K     Erases to the beginning of line
+
+Certain keys listed above provide a means to [accelerate] navigation
+between different [control areas] within a window.
+
+:Accelerators
+[ Accelerator Keys ]
+
+When the suninstall screen is divided into different [control areas],
+the PgUp and PgDn keys can be used to move quickly between them.  Their
+functions are:
+
+  o PgUp - Moves focus to the first control in the next control area.
+  o PgDn - Moves to the first control in the previous control area.
+
+The most common example is the use the PgDn key to move the focus from
+a group of controls to the first [action button] at the bottom of the
+screen.
+
+NOTE: These keys may not be used for acceleration if they are necessary
+to move within the current control, for example within a scrolling list.
+
+:Tab key
+[ Tab key ]
+
+The Tab key always moves the focus to the next control in a window.
+
+:BackTab key
+[ BackTab key ]
+
+The BackTab key always moves the focus to the previous control in a
+window. 
+
+NOTE: on some keyboards, the Shift-Tab key generates the same value as
+the Tab key, so the control-key alternative (Control-R) must be used to
+activate this function.
+
+:Left arrow key
+[ Left arrow key ]
+
+In [data entry fields], the Left arrow key moves the cursor within the
+field.	Within a set of [choice items], it moves the focus to the item
+to the left, wrapping around to the right as appropriate.
+
+:Right arrow key
+[ Right arrow key ]
+
+In [data entry fields], the Right arrow key moves the cursor within the
+field.	Within a set of [choice items], it moves the focus to the item
+to the left, wrapping around to the right as appropriate.
+
+:Up arrow key
+[ Up arrow key ]
+
+Within a [menu] or [scrolling list], the Up arrow key moves up one line
+in the control. Within a set of [choice items], it moves the focus to
+the item above, wrapping around to the bottom as appropriate.
+
+:Down arrow key
+[ Down arrow key ]
+
+Within a [menu] or [scrolling list], the Down arrow key moves down one
+line in the control. Within a set of [choice items], it moves the focus
+to the item below, wrapping around to the top as appropriate.
+
+:Home key
+[ Home key ]
+
+Within a [menu] or [scrolling list], the Home key moves to the first
+line in the control. In [data entry fields], this key moves to the
+start of the field.
+
+:End key
+[ End key ]
+
+Within a [menu] or [scrolling list], the End key moves to the last line
+in the control. In [data entry fields], this key moves to the
+end of the field.
+
+:PgUp key
+[ PgUp key ]
+
+Within a [menu] or [scrolling list] that has more items than will fit
+within its window, the PgUp key scrolls the contents down.
+
+Otherwise, these keys may be used to [accelerate], moving the focus to
+the first control in the next [control area].
+
+:PgDn key
+[ PgDn key ]
+
+Within a [menu] or [scrolling list] that has more items than will fit
+within its window, the PgDn key scrolls the contents down.
+
+Otherwise, this key acts as an [accelerator], moving the focus to the
+first control in the previous [control area].
+
+:Ins key
+[ Ins key ]
+
+In [data entry fields], the Ins key toggles between insert and overlay
+text editing modes.
+
+:Delete key
+[ Delete key ]
+
+In [data entry fields], the Delete key deletes the character to the left
+of the cursor. If the field is highlighted, as it is when it first
+receives the focus, the entire contents of the field are erased.
+
+:BackSpace key
+[ BackSpace key ]
+
+In [data entry fields], the BackSpace key deletes the character to the
+left of the cursor. If the field is highlighted, as it is when it first
+receives the focus, the entire contents of the field are erased.
+
+In the [help] system, this key displays the previous help topic.
+
+:Cancel key
+[ Cancel key ]
+
+The Cancel (Esc) key is used to exit from a popup or pulldown menu without
+making any selection.  Within the help system, it dismisses the help and
+returns to the application.
+
+:Help key
+[ Help key ]
+
+The Help key always displays [context-sensitive help], which offers
+information about the current topic.
+
+:Refresh key
+[ Control-L  ]
+
+This control sequence redraws the entire screen.
+
+:Kill key
+[ Control-K ]
+
+In [data entry fields], the Control-K sequence erases the current line.
+
+:Return key
+[ Return key ]
+
+If you are in a [control area], the Return key selects the currently
+highlighted [control].  
+
+If you are in a [scrolling list], Return selects an item or displays a menu. 
+
+If you are in a [data entry field], Return moves the focus to the next
+field.
+
+
+
+#
+# Spothelp pages for application follows
+#
+
+
+#
+#
+
+# << help button on main screen >>
+:Devconfig Main help
+[ Device Configuration Help ]
+
+Due to limitations imposed by the design of some x86 systems, it is not
+always possible for Solaris to [automatically detect] all of the
+peripheral devices installed in your computer.	When Solaris cannot
+automatically detect or configure a device, you must supply the
+information necessary to allow Solaris to access the device.
+
+The device configuration program 'devconfig' lists all of the devices
+that are currently configured in your system, and allows you to [view]
+or [modify] the configuration information for these devices.  You may
+also [add] (configure) additional devices that have not been recognized
+by the system.
+
+The program's main screen lists all of the devices that Solaris has
+detected. If your [SCSI controller] or [Ethernet card] is not listed,
+this means that the device is incorrectly configured, since these
+devices should be automatically detected.  Shut down your system and
+reconfigure the device according to the instructions in the 'Solaris 
+Release Notes for x86' before attempting to continue installing or
+running Solaris.
+
+If you have other devices that are not listed, for example a
+SoundBlaster card, use the [Add] button to tell Solaris about them.
+
+NOTE: you will not be able to run OpenWindows until you have specified
+      the configuration of your [pointing device] and [display adaptor].
+      Neither of these devices can be automatically detected, so you
+      must add them to the system.
+
+For more information about the different types of device, see:
+# make this list match the actual displayed categories...
+
+	[SCSI controller]
+	[Ethernet card]
+	[Floppy disk controller]
+	[IDE controller]
+	[Keyboard]
+	[Pointing device]
+	[Display adaptor]
+	[Audio interface card]
+	[Serial communications port]
+	[Parallel printer port]
+
+# << not associated with a widget >>
+:Devconfig Device Conflicts
+[ Device Conflicts ]
+
+With the exception of [IRQ]s, which can be shared between some devices,
+each device's configuration parameters must be unique. If two devices
+are configured to use the same [DMA] channel, for example, one or both
+of them will fail to operate correctly.
+
+The devconfig program cannot automatically detect or resolve device
+conflicts for you, but it can help you to determine where such conflicts
+exist.
+
+# << not associated with any widget >>
+:Devconfig add
+[ Adding a device ]
+
+If your system contains a device that is not [auto-configuring], you
+will need to specify its configuration to Solaris before it can be used.
+
+Select the 'Add' button from devconfig's main window, to add a device.
+
+# << not associated with a widget >>
+:Devconfig view
+[ Displaying Device Attributes ]
+
+If a device is auto-configuring, devconfig will allow you to view its
+configuration information, but will not allow you to change it.  The
+configuration information you view may help you to identify or resolve
+[device conflicts].
+
+# << associate with the entire 'display-only' window >>
+:Devconfig show
+[ Device Attributes ]
+
+Since this device is auto-configuring, you may view, but not modify,
+its configuration information.	Select the 'Dismiss' button to return
+to the previous screen.
+
+# << not associated with any widget >>
+:Devconfig modify
+[ Modifying device attributes ]
+
+The devconfig program allows you to modify the attributes of devices
+that are not [auto-configuring].  Select the device from the list
+displayed in the main window and press Return.	Then select 'Configure'
+from the pop-up menu.
+
+# << associate with the entire 'modify' window >>
+:Devconfig modify window
+[ Device Attributes ]
+
+This window shows the configuration parameters for the device you
+have selected.	Use the Tab key to move between fields, the arrow
+keys to move within fields, and the Return key to select a particular
+configuration parameter. Select 'Done' when you have finished specifying
+the configuration information.
+
+For more information on specific types of configuration information
+follow the link for the type of device you are modifying:
+
+	[Keyboard]
+	[Pointing device]
+	[Display adaptor]
+	[Audio interface card]
+	[Serial communications port]
+	[Parallel printer port]
+
+# << not associated with a widget >>
+:Devconfig autoconfig
+[ Autoconfiguration ]
+
+Solaris is capable of automatically detecting and configuring the
+following types of device, so long as they have been configured
+according to the instructions given in the 'Solaris  Release Notes
+for x86'.
+
+	[SCSI controller]
+	[Ethernet card]
+	[Floppy disk controller]
+	[IDE controller]
+
+The program will allow you to view, but not to modify, configuration
+information for these types of device.
+
+# << not associated with a widget >>
+:Devconfig IRQ
+[ IRQ ]
+
+This configuration parameter specifies the interrupt number used by the
+device.  Solaris can share IRQs between devices, but it is recommended
+(for performance reasons) that a unique IRQ be assigned to each device.
+Some hardware cards are not able to share IRQ with other cards. Before
+attempting to use a single IRQ for two or more devices, check the
+manufacturer's documentation for that device.
+
+# << not associated with a widget >>
+:Devconfig I/O Address
+[ I/O Address ]
+
+This configuration parameter is sometimes referred to as the 'I/O port'
+or 'port address'.  It specifies the memory address of the device's
+control and/or status registers. Each I/O address must be unique within
+the system.
+
+# << not associated with a widget >>
+:Devconfig DMA
+[ DMA Channel ]
+
+This configuration parameter specifies the channel number that the
+device uses to transfer data directly to the computer's memory without
+accessing the computer's CPU.
+
+# << not associated with a widget >>
+:Devconfig Memory Address
+[ Memory Address ]
+
+Some cards have small memory buffers that are used as transfer areas for
+data to and from the device. This configuration parameter specifies the
+address of this memory on the card.
+
+# << not associated with a widget >>
+:Devconfig Display adaptor
+[ Display Adaptor ]
+
+In order to configure OpenWindows, you must provide the following
+information about your video display adapter:
+
+    o Resolution
+
+	The resolution at which your display adaptor should be run.
+
+    o Screen Size
+
+	The approximate size of your display monitor. Use the following
+	information as a guideline: if you have a laptop computer,select
+	6x4" or 7.5x6"; if you have a 14" diagonal monitor, select 12x9.5";
+	for 17" monitors select 13.5x11", and for 19" or larger monitors
+	select 15x12".
+
+# << not associated with a widget >>
+:Devconfig Pointing Device
+[ Pointing Device ]
+
+In order to configure OpenWindows, you must provide the following
+information about your mouse:
+
+    o Bus Mouse
+
+      The [IRQ] used by your mouse, and the number of buttons it has.
+
+    o Serial Mouse
+
+      The serial port at which your mouse is attached (select /dev/tty00
+      for COM1, /dev/tty01 for COM2, /dev/tty02 for COM3, or /dev/tty03
+      for COM4), and the number of buttons your mouse has.
+
+# << not associated with a widget >>
+:Devconfig Keyboard
+[ Keyboard ]
+
+Devconfig automatically displays the type of keyboard attached to your
+system by examining the contents of the file /etc/defaultkb. See the
+'Solaris  Release Notes for x86' and the pcmapkeys(1) manpage for
+more information.
+
+# << not associated with a widget >>
+:Devconfig IDE
+[ IDE controller ]
+
+Solaris automatically detects any IDE controller attached to your
+system.
+
+NOTE: devconfig does not display IDE controllers in the list of attached
+devices.
+
+# << not associated with a widget >>
+:Devconfig Floppy
+[ Floppy disk controller ]
+
+Solaris automatically detects the floppy disk controller attached to
+your system.
+
+NOTE: devconfig does not display this controller in the list of attached
+devices.
+
+# << not associated with a widget >>
+:Devconfig Sound
+[ Audio Interface controller ]
+
+Solaris cannot automatically detects the presence of a sound card in
+your system. If you have a sound card, you must therefore [add] it.
+You will typically be asked to provide the following information:
+
+	[IRQ]
+	[I/O Address]
+	[DMA Channel]
+
+# << not associated with a widget >>
+:Devconfig Serial
+[ Serial Communications ports ]
+
+You cannot add serial ports with Devconfig though you can view
+currently configured ports.
+
+See the 'Solaris  Release Notes for x86' for information on
+configuring serial ports.
+
+# << not associated with a widget >>
+:Devconfig Parallel
+[ Parallel Printer ports ]
+
+You cannot add parallel ports with Devconfig though you can view
+currently configured ports.
+
+See the 'Solaris  Release Notes for x86' for information on
+configuring parallel ports.
+
+# << not associated with a widget >>
+:Devconfig SCSI
+[ SCSI Controller ]
+
+If you have configured your SCSI controller according to the
+instructions provided in the 'Solaris  Release Notes for x86',
+Solaris will automatically detect it.  If you have booted from the
+network, and your SCSI controller does not appear in the list of
+configured devices, you should immediately exit the installation
+program and reconfigure the device.
+
+# << not associated with a widget >>
+:Devconfig Ethernet
+[ Ethernet Card ]
+
+If you have configured your Ethernet card according to the instructions
+provided in the 'Solaris  Release Notes for x86', Solaris will
+automatically detect it.  If your Ethernet card does not appear in the
+list of configured devices, you should immediately exit the installation
+program and reconfigure the device.
+
+# << associate with entire 'select category' window >>
+:Devconfig select category
+[ Device Category ]
+
+Choose the category that best describes the device you would like to
+add.  For example: to add an SMC ethernet card choose "Network interface
+cards" from this list.
+
+# << associate with entire 'select device' window >>
+:Devconfig select device
+[ Device Selection ]
+
+This screen shows a list of supported devices within the category you
+have selected.	Choose a specific device from this list. You will then
+be shown a property sheet so that you may specify the correct attributes
+for the device.
+
+Note that video display adapters are specified in terms of the type of 
+the card (for example, ATI VGA Wonder XL) and the vertical refresh
+rate at which it should be run (for example, 70 Hz).  For information
+about refresh rates, consult the documentation for your monitor.
+
+
+
+

@@ -1,0 +1,47 @@
+/* LINTLIBRARY */
+/* PROTOLIB1 */
+
+/*
+ * Copyright (c) 1999 by Sun Microsystems, Inc.
+ * All rights reserved.
+ */
+
+#pragma ident	"@(#)llib-lld	1.5	99/05/27 SMI"
+
+#include "libld.h"
+
+/*
+ * Generic interface definition for usr/src/lib/libld.
+ */
+
+char *		add_string(char *, char *);
+uintptr_t	create_outfile(Ofl_desc *);
+uintptr_t	ent_setup(Ofl_desc *);
+uintptr_t	finish_libs(Ofl_desc *);
+void		ld_main(int, char **);
+uintptr_t	ld_support_loadso(const char *);
+Listnode *	list_appendc(List *, const void *);
+Listnode *	list_insertc(List *, const void *, Listnode *);
+Listnode *	list_prependc(List *, const void *);
+Listnode *	list_where(List *, Word);
+uintptr_t	make_sections(Ofl_desc *);
+void		ofl_cleanup(Ofl_desc *);
+uintptr_t	open_outfile(Ofl_desc *);
+Ifl_desc *	process_open(const char *, size_t, int, Ofl_desc *,
+			Half, int *);
+uintptr_t	reloc_init(Ofl_desc *);
+uintptr_t	reloc_process(Ofl_desc *);
+Sdf_desc *	sdf_find(const char *, List *);
+Sdf_desc *	sdf_add(const char *, List *);
+void		sec_validate(Ofl_desc *);
+uintptr_t	sunwmove_preprocess(Ofl_desc *);
+Sym_desc *	sym_add_u(const char *, Ofl_desc *);
+Sym_desc *	sym_enter(const char *, Sym *, Word, Ifl_desc *,
+			Ofl_desc *, Word);
+Sym_desc *	sym_find(const char *, Word, Ofl_desc *);
+uintptr_t	sym_validate(Ofl_desc *);
+uintptr_t	update_outfile(Ofl_desc *);
+Ver_desc *	vers_base(Ofl_desc *);
+uintptr_t	vers_check_defs(Ofl_desc *);
+Ver_desc *	vers_desc(const char *, Word, List *);
+Ver_desc *	vers_find(const char *, Word, List *);

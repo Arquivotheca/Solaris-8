@@ -1,0 +1,14 @@
+#ident	"@(#)Makefile.targ	1.1	99/01/25 SMI"
+#
+# Copyright (c) 1998-1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+# lib/libgen/spec/Makefile.targ
+
+LIBRARY	=	libgen.a
+VERS	=	.1
+
+OBJECTS	=	gen.o		\
+		private.o	\
+		weak.o
+

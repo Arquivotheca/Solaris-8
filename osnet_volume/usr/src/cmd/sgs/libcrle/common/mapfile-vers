@@ -1,0 +1,14 @@
+#
+#ident	"@(#)mapfile-vers	1.1	99/08/13 SMI"
+#
+# Copyright (c) 1999 by Sun Microsystems, Inc.
+# All rights reserved.
+
+SUNWprivate_1.1 {
+	global:
+		la_version;		# Audit interfaces
+		la_objopen;
+		la_preinit;
+	local:
+		*;
+};

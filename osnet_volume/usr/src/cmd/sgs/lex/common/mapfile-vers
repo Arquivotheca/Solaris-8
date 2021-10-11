@@ -1,0 +1,27 @@
+#
+#ident  "@(#)mapfile-vers 1.1     97/12/08 SMI"
+#
+# Copyright (c) 1997 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+# interface definition for lex library
+#
+
+SUNW_1.1 {
+	global:
+		allprint;
+		allprint_w;
+		main;
+		sprint;
+		sprint_w;
+		yyless;
+		yyless_e;
+		yyless_w;
+		yyracc;
+		yyreject;
+		yyreject_e;
+		yyreject_w;
+		yywrap;
+	local:	
+		*;
+};

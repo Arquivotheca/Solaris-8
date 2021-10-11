@@ -1,0 +1,72 @@
+#
+# Copyright (c) 1989-1998 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#ident	"@(#)Makefile.ucbcmd	1.13	98/07/26 SMI"
+#
+# ucbcmd/Makefile.ucbcmd
+#
+# Definitions common to ucb command source.
+#
+# include global definitions; SRC should be defined in the shell.
+# SRC is needed until RFE 1026993 is implemented.
+
+include $(SRC)/Makefile.master
+
+LN=		ln
+CP=		cp
+SH=		sh
+CHMOD=		chmod
+MKDIR=		mkdir
+TOUCH=		touch
+
+LDFLAGS +=	$(STRIPFLAG)
+
+FILEMODE=	0555
+LIBFILEMODE=	0444
+ROOTBIN=	$(ROOT)/usr/ucb
+ROOTLIB=	$(ROOT)/usr/ucblib
+ROOT4LIB=	$(ROOT)/usr/4lib
+ROOTETC=	$(ROOT)/etc
+ROOTSHLIB=	$(ROOT)/usr/share/lib
+ROOTBIN32=	$(ROOTBIN)/$(MACH32)
+ROOTBIN64=	$(ROOTBIN)/$(MACH64)
+
+ROOTPROG=	$(PROG:%=$(ROOTBIN)/%)
+ROOTSHFILES=	$(SHFILES:%=$(ROOTBIN)/%)
+ROOTLIBPROG=	$(PROG:%=$(ROOTLIB)/%)
+ROOT4LIBPROG=	$(PROG:%=$(ROOT4LIB)/%)
+ROOTETCPROG=	$(PROG:%=$(ROOTETC)/%)
+ROOTPROG64=	$(PROG:%=$(ROOTBIN64)/%)
+ROOTPROG32=	$(PROG:%=$(ROOTBIN32)/%)
+
+ISAEXEC=	$(ROOT)/usr/lib/isaexec
+
+# storing LDLIBS in two macros allows reordering of options
+LDLIBS.cmd =    $(ENVLDLIBS1)  $(ENVLDLIBS2)  $(ENVLDLIBS3)
+LDLIBS =        $(LDLIBS.cmd)
+LDFLAGS.cmd =   $(ENVLDFLAGS1) $(ENVLDFLAGS2) $(ENVLDFLAGS3)
+LDFLAGS =       $(STRIPFLAG) $(LDFLAGS.cmd)
+
+SETRUNPATH=	LD_RUN_PATH=/usr/ucblib
+
+$(ROOTBIN)/%: %
+	$(INS.file)
+
+$(ROOTLIB)/%: %
+	$(INS.file)
+
+$(ROOT4LIB)/%: %
+	$(INS.file)
+
+$(ROOTETC)/%: %
+	$(INS.file)
+
+$(ROOTBIN64)/%: %
+	$(INS.file)
+
+$(ROOTBIN32)/%: %
+	$(INS.file)
+
+# Define the majority text domain in this directory
+TEXT_DOMAIN= SUNW_OST_UCBCMD

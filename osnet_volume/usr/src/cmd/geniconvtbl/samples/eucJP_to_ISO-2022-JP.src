@@ -1,0 +1,113 @@
+// Copyright (c) 1999 by Sun Microsystems, Inc.
+// All rights reserved.
+//
+//
+
+// ident	"@(#)eucJP_to_ISO-2022-JP.src 1.2	99/05/27 SMI"
+
+//
+// eucJP to SJIS
+//
+
+
+#include <sys/errno.h>
+#define	SS2	0x008e
+#define	SS3	0x008f
+
+eucJP%SJIS {
+	operation init {
+		cs = 0;
+		offset = 0;
+	};
+
+	direction {
+
+		condition {
+			cs == 2;
+		} operation {
+			output = input[0];
+			cs = 0;
+			discard;
+		};
+
+		condition {
+			cs == 1;
+		} operation {
+			var_input = input[0] & 0x7f;
+			var_input = var_input + offset; 
+			if (var_input >= 0x7f) {
+				var_input = var_input + 0x01; 
+			}
+			output = var_input;
+			cs = 0;
+			discard;
+		};
+
+		condition { 
+			between 0x00 ... 0x7f ;
+		} operation {
+			if ( outputsize < 1 ) {
+				error E2BIG;
+			}
+			output = input[0];
+			discard;
+		};
+
+		condition {
+			between SS2 ... SS2 ;
+		} operation {
+			// Note this, in the .c file check is made
+			// against ileft > 0 ,  but it's since the
+			// ileft is already decremented.
+
+			if ( inputsize > 1 ) {
+				if ( ( input[1] >= 0xa1 ) && ( input[1] <= 0xfe )) {
+					if (outputsize < 1 ) {
+						error E2BIG;
+					}
+					cs = 2;
+				} else {
+					error EILSEQ;
+				}
+			} else {
+				error EINVAL;
+			}
+		};
+
+		condition {
+			between 0xa1 ... 0xfe;
+		} operation {
+			if ( inputsize > 1 ) {
+				if ( ( input[1]   >= 0xa1 ) && (  input[1]  <= 0xfe)) {
+					if ( outputsize < 2 ) {
+						error E2BIG;
+					}
+
+					cs = 1;
+					var_input = input[0] & 0x7f;
+					if ( var_input & 0x01) {
+						offset = 0x1f;
+					} else {
+						offset = 0x7d;
+					}
+					var_input = ((var_input - 0x21 ) >> 1) + 0x81;
+					if ( var_input > 0x9f ) {
+						var_input = var_input + 0x40;
+					}
+					output = var_input;
+					discard;
+
+				} else {
+					error EINVAL;
+				}
+			} else {
+				error EILSEQ;
+			}
+		};
+
+		true operation {
+			error EILSEQ;
+		};
+	};
+	
+}

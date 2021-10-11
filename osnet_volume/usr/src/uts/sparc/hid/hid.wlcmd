@@ -1,0 +1,36 @@
+# Copyright (c) 1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+
+#ident "@(#)hid.wlcmd  1.3     99/09/24 SMI"
+
+
+### specify the root functions
+
+root hid_open
+root hid_close 
+root hid_interrupt_pipe_callback
+root hid_wsrv
+root hid_wput
+root hid_timeout
+root hid_default_pipe_callback
+root hid_async_pipe_close_callback
+root hid_default_pipe_exception_callback
+root hid_default_pipe_reset_callback
+root hid_interrupt_pipe_exception_callback
+root hid_interrupt_pipe_reset_callback 
+root hid_connect_event_callback
+root hid_disconnect_event_callback
+root hid_power
+root hid_power_change_callback
+
+### polled functions
+root hid_polled_input_enter
+root hid_polled_input_exit
+root hid_polled_read
+
+
+add        bus_ops::bus_add_eventcall targets warlock_dummy
+add        bus_ops::bus_get_eventcookie targets warlock_dummy
+add        bus_ops::bus_post_event targets warlock_dummy
+add        bus_ops::bus_remove_eventcall targets warlock_dummy

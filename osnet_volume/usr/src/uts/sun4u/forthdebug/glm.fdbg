@@ -1,0 +1,18 @@
+#ident	"@(#)glm.fdbg	1.2	97/11/17 SMI"
+
+#include <sys/scsi/scsi.h>
+#include <sys/note.h>
+#include <sys/scsi/adapters/glmreg.h>
+#include <sys/scsi/adapters/glmvar.h>
+
+\  glm driver
+glm
+
+glm_scsi_cmd
+
+glm_dsa
+
+glm_unit
+
+nt_slots
+

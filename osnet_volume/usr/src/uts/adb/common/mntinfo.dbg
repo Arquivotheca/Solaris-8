@@ -1,0 +1,84 @@
+\
+\ Copyright (c) 1997, by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)mntinfo.dbg	1.18	99/06/11 SMI"
+
+#include <sys/types.h>
+#include <sys/t_lock.h>
+#include <sys/tiuser.h>
+#include <rpc/types.h>
+#include <rpc/auth.h>
+#include <rpc/clnt.h>
+#include <nfs/nfs.h>
+#include <nfs/nfs_clnt.h>
+#include "dummy.h"
+
+\
+\
+mntinfo		mi_
+{adb_inline_begin}
+.>z
+<z+{OFFSET, mi_lock}=""
+{adb_inline_end}
+	lock			.mutex
+{adb_inline_begin}
+<z+{OFFSET, mi_servers}=""
+{adb_inline_end}
+	servers			hex
+	curr_serv		hex
+	failover_cv		hex
+	readers			hex
+	vfsp			hex
+	type			sdecimal
+	flags			hex
+	tsize			hex
+	stsize			hex
+	timeo			sdecimal
+	retrans			hex
+	acregmin		decimal
+	acregmax		decimal
+	acdirmin		decimal
+	acdirmax		decimal
+	maxfilesize		hex
+{adb_inline_begin}
+<z+{OFFSET, mi_timers}/n"mi_timers"
++$<<rpctimer
++$<<rpctimer
++$<<rpctimer
++$<<rpctimer
+<z+{OFFSET, mi_curread}=""
+{adb_inline_end}
+	curread			sdecimal
+	curwrite		sdecimal
+	async_reqs		hex
+	async_tail		hex
+	async_clusters		sdecimal
+	async_curr		hex
+	async_init_clusters	sdecimal
+	async_reqs_cv		hex
+	threads			sdecimal
+	max_threads		sdecimal
+	async_cv		hex
+	async_count		sdecimal
+	async_lock		.rwlock
+{adb_inline_begin}
+<z+{OFFSET, mi_pathconf}=""
+{adb_inline_end}
+	pathconf		hex
+	prog			sdecimal
+	vers			sdecimal
+	rfsnames		hex
+	reqs			hex
+	call_type		hex
+	ss_call_type		hex
+	timer_type		hex
+	printftime		sdecimal
+	aclnames		hex
+	aclreqs			hex
+	acl_call_type		hex
+	acl_ss_call_type	hex
+	acl_timer_type		hex
+	noresponse		sdecimal
+	failover		sdecimal
+	remap			sdecimal

@@ -1,0 +1,42 @@
+#
+#
+# Copyright (c) 1999 by Sun Microsystems, Inc.
+# All rights reserved.
+#
+#ident	"@(#)prototype_com	1.1	99/10/08 SMI"
+#
+# This required package information file contains a list of package contents.
+# The 'pkgmk' command uses this file to identify the contents of a package
+# and their location on the development machine when building the package.
+# Can be created via a text editor or through use of the 'pkgproto' command.
+
+#!search <pathname pathname ...>	# where to find pkg objects
+#!include <filename>			# include another 'prototype' file
+#!default <mode> <owner> <group>	# default used if not specified on entry
+#!<param>=<value>			# puts parameter in pkg environment
+
+# packaging files
+i pkginfo
+i copyright
+i depend
+#
+# source locations relative to the prototype file
+#
+# SUNWzlib
+#
+d none usr 755 root sys
+d none usr/lib 755 root bin 
+s none usr/lib/libz.so=./libz.so.1
+f none usr/lib/libz.so.1 0755 root bin
+f none usr/lib/llib-lz 644 root bin
+f none usr/lib/llib-lz.ln 644 root bin
+d none usr/lib/abi 755 root bin
+f none usr/lib/abi/abi_libz.so.1 755 root bin
+d none usr/include 755 root bin
+f none usr/include/zconf.h 644 root bin
+f none usr/include/zlib.h 644 root bin
+d none usr/share 755 root sys
+d none usr/share/man 755 root bin
+d none usr/share/man/man3 755 bin bin
+f none usr/share/man/man3/libz.3 444 bin bin
+f none usr/share/man/man3/zlib.3 444 bin bin

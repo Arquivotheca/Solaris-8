@@ -1,0 +1,26 @@
+#
+# ident "@(#)Makefile.sparcv9	1.3	97/12/04 SMI"
+#
+# Copyright (c) 1997 by Sun Microsystems, Inc.
+#
+# psm/stand/kadb/sparcv9/common/Makefile.sparcv9
+#
+# kernel debugger (kadb) included common Makefile
+# included by kernel-architecture specific makefiles
+#
+
+TOPDIR=		$(KADBDIR)/../../..
+COMDIR=  	$(KADBDIR)/common
+PSMSTANDLIBDIR=	$(KADBDIR)/../lib
+SYSDIR=  	$(TOPDIR)/uts
+MMUDIR=		$(SYSDIR)/$(MMU)
+SPECIAL= 	locore.o
+
+INCLUDE=  -I$(SYSDIR)/$(ARCH) -I$(SYSDIR)/$(MACH) -I$(MMUDIR) \
+		-I$(SYSDIR)/$(MACH)/$(ARCHVERS)
+
+MACHOBJ=	stubs_$(TARG_MACH).o readfile_$(TARG_MACH).o support_$(TARG_MACH).o fiximp.o
+
+CSPROMSRC=	$(TOPDIR)/psm/promif
+
+MACH_CSDIRS=   $(CSPROM:%=$(CSPROMSRC)/%) $(KADBDIR)/$(CSMACH)/common

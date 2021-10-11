@@ -1,0 +1,55 @@
+\
+\ Copyright (c) 1999 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\ ident	"@(#)vmem.dbg	1.1	99/04/14 SMI"
+
+#include <sys/vmem_impl.h>
+#include "dummy.h"
+
+vmem			vm_		vmem
+{adb_inline_begin}
+.>v;<_>U;1>_;<v=a
+{adb_inline_end}
+	name			char
+	lock			.mutex
+	cv			hex
+	id			decimal
+	qshift			decimal
+	quantum			decimal
+	qcache_max		decimal
+	source_alloc		symbolic
+	source_free		symbolic
+	source			hex
+	next			hex
+	ksp			hex
+	nsegfree		decimal
+	segfree			hex
+	hash_table		hex
+	hash_mask		hex
+	hash_shift		hex
+	freemap			hex
+{adb_inline_begin}
+<v+{OFFSET, vm_seg0}>t
+<t=na"seg0"
+<t$<<vmem_seg
+<v+{OFFSET, vm_hash0}>t
+<t=na"hash0[64]"
+<t/64K
+<v+{OFFSET, vm_qcache}>t
+0=n"qcache[16]"
+<t/8K
+<v+{OFFSET, vm_freelist}>t
+#ifdef _LP64
+<t=na"freelist[64 + 1]"
+<t,41/na8+3K
+#else
+<t=na"freelist[32 + 1]"
+<t,21/na4+3K
+#endif
+<v+{OFFSET, vm_kstat}>t
+0=n"kstats"
+<t,e/32c16tEEn
+<U>_
+<v+{SIZEOF}=""
+{adb_inline_end}

@@ -1,0 +1,37 @@
+\
+\ Copyright (c) 1999 by Sun Microsystems, Inc.
+\ All rights reserved.
+\
+\"@(#)ulp_port_info.dbg	1.1	99/07/21 SMI"
+\
+#include <sys/isa_defs.h>
+#include <sys/types.h>
+#include <sys/dditypes.h>
+#include <sys/ddidmareq.h>
+#include <sys/mutex.h>
+#include <sys/semaphore.h>
+#include <sys/condvar.h>
+#include <sys/thread.h>
+#include <sys/devops.h>
+#include <sys/fibre-channel/fc.h>
+#include <sys/fibre-channel/impl/fc_ulpif.h>
+#include "dummy.h"
+\
+\
+ulp_port_info		port_
+{adb_inline_begin}
+.>w
+<w+{OFFSET, port_linkage}=""
+{adb_inline_end}
+	linkage			hex
+	dip			hex
+	handle			hex
+	dma_attr		hex
+	acc_attr		hex
+	fca_pkt_size		hex
+	fca_max_exch		hex
+	state			hex
+	flags			hex		
+{adb_inline_begin}
+<w+{SIZEOF}=""
+{adb_inline_end}
